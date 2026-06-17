@@ -7,13 +7,13 @@
   "source_type": "youtube",
   "nodes": {
     "youtube-fetch": "done",
-    "notebooklm-research": "waiting",
-    "youtube-deep-research": "waiting",
+    "notebooklm-research": "done",
+    "youtube-deep-research": "running",
     "wiki-build": "waiting",
     "tg-notify": "waiting",
     "retry": "waiting"
   },
-  "last_run_id": "direct-1781718063630083389",
+  "last_run_id": "direct-notebooklm-research-dQw4w9WgXcQ-20260618T014101-1781718070401272110",
   "started_at": "2026-06-17T17:41:04Z",
-  "updated_at": "2026-06-17T17:41:08Z"
+  "updated_at": "2026-06-17T17:42:16Z"
 }

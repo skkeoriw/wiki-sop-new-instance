@@ -1,0 +1,28 @@
+{
+  "telegram": {
+    "enabled": true,
+    "required": false,
+    "status": "failed",
+    "message_preview": "✅ Stage B 完成  1m05s  [dQw4w9WgXcQ-20260618T014101]\n   🔬 NotebookLM 研究\n   📄 核心承诺与忠诚_Rick_Astley_Never_Gonna_Give_You_1781\n   📦 raw/notebooklm-analysis\n   🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R",
+    "sent_at": "2026-06-17T17:42:16Z",
+    "api_ok": false,
+    "error": "Telegram API rejected or unavailable"
+  },
+  "git": {
+    "enabled": true,
+    "required": false,
+    "status": "done",
+    "repository": "skkeoriw/wiki-sop-new-instance",
+    "commit": "eab17af",
+    "commit_message": "chore: stage-b done [pipe:dQw4w9WgXcQ-20260618T014101] [run:direct-notebooklm-research-dQw4w9WgXcQ-20260618T014101-1781718070401272110]",
+    "pushed": true,
+    "changed_files": [
+      "logs/stage-events/direct-notebooklm-research-dQw4w9WgXcQ-20260618T014101-1781718070401272110.jsonl",
+      "logs/stage-events/direct-youtube-deep-research-dQw4w9WgXcQ-20260618T014101-1781718070422695864.jsonl",
+      "\"raw/notebooklm-analysis/\\346\\240\\270\\345\\277\\203\\346\\211\\277\\350\\257\\272\\344\\270\\216\\345\\277\\240\\350\\257\\232_Rick_Astley_Never_Gonna_Give_You_1781718122--dQw4w9WgXcQ-20260618.md\"",
+      "raw/pipeline-context.json"
+    ],
+    "finished_at": "2026-06-17T17:42:15Z",
+    "error": ""
+  }
+}

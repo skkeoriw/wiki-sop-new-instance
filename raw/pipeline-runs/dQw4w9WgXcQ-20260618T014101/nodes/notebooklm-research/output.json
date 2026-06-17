@@ -1,0 +1,25 @@
+{
+  "declared_outputs": {
+    "reports": {
+      "path": "raw/notebooklm-analysis/*.md",
+      "type": "files"
+    },
+    "mindmaps": {
+      "path": "raw/notebooklm-mindmaps/*.json",
+      "type": "files"
+    }
+  },
+  "actual_outputs": {
+    "reports": [
+      "raw/notebooklm-analysis/核心承诺与忠诚_Rick_Astley_Never_Gonna_Give_You_1781718122--dQw4w9WgXcQ-20260618.md"
+    ],
+    "mindmaps": []
+  },
+  "validation": {
+    "status": "warning",
+    "missing_outputs": [
+      "mindmaps"
+    ],
+    "unexpected_outputs": []
+  }
+}

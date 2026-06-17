@@ -1,0 +1,60 @@
+{
+  "pipeline_id": "dQw4w9WgXcQ-20260618T014101",
+  "node_id": "youtube-deep-research",
+  "run_id": "direct-youtube-deep-research-dQw4w9WgXcQ-20260618T014101-1781718070422695864",
+  "status": "running",
+  "mode": "sidecar",
+  "needs": [
+    "youtube-fetch"
+  ],
+  "started_at": "2026-06-17T17:41:10Z",
+  "finished_at": "",
+  "duration_s": 0,
+  "attempt": 2,
+  "progress": 0,
+  "inputs": {
+    "source_url": "youtube-fetch.outputs.source_url"
+  },
+  "outputs": {
+    "analysis_file": "raw/youtube-deep-research/{pipeline_id}/analysis.md",
+    "transcript_file": "raw/youtube-deep-research/{pipeline_id}/transcript.txt"
+  },
+  "optional_inputs": {},
+  "executor": {
+    "type": "direct-skill",
+    "skill": "sop-youtube-deep-research",
+    "entry": "scripts/run_youtube_deep_research.sh",
+    "webhook_route": "sop-youtube-deep-research"
+  },
+  "declared_inputs": {
+    "source_url": {
+      "from": "youtube-fetch.outputs.source_url",
+      "required": true
+    }
+  },
+  "resolved_inputs": {
+    "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  },
+  "declared_outputs": {
+    "analysis_file": {
+      "path": "raw/youtube-deep-research/{pipeline_id}/analysis.md",
+      "type": "file"
+    },
+    "transcript_file": {
+      "path": "raw/youtube-deep-research/{pipeline_id}/transcript.txt",
+      "type": "file"
+    }
+  },
+  "actual_outputs": {},
+  "artifacts": [],
+  "validation": {
+    "status": "pending",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  },
+  "extra": {
+    "started_by": "youtube-fetch"
+  },
+  "error": "",
+  "updated_at": "2026-06-17T17:41:11Z"
+}
