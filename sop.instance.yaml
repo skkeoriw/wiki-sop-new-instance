@@ -1,9 +1,9 @@
-instance_id: instance-wiki-sop-new-instance-klzyh
-sop_type: youtube-research-wiki
+instance_id: test-instance
+workspace_kind: execution-workspace
+sop_type: workspace
 repo: skkeoriw/wiki-sop-new-instance
 runtime_id: runtime-152-32-214-95
 channel_name: runtime-152-32-214-95
 channel_url: https://runtime-152-32-214-95.chxyka.ccwu.cc
 spi_base_url: https://runtime-152-32-214-95.chxyka.ccwu.cc/api/sop
 language: zh-CN
-stage_c_model: gemini-2.5-flash-lite
