@@ -1,0 +1,16 @@
+{
+  "telegram": {
+    "enabled": true,
+    "required": false,
+    "status": "failed",
+    "message_preview": "✅ Stage A 完成  3s  [dQw4w9WgXcQ-20260618T014101]\n   🔍 YouTube 元数据获取\n   🎬 Rick Astley - Never Gonna Give You Up (Official Vi\n   👤 Rick Astley\n   📦 raw/youtube-metadata\n   🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R",
+    "sent_at": "2026-06-17T17:41:08Z",
+    "api_ok": false,
+    "error": "Telegram API rejected or unavailable"
+  },
+  "git": {
+    "enabled": true,
+    "required": false,
+    "status": "pending"
+  }
+}

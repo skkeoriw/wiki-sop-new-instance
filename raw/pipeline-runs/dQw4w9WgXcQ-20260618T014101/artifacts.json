@@ -1,0 +1,16 @@
+[
+  {
+    "id": "5796d30de218c0bb",
+    "producer": "youtube-fetch",
+    "output": "metadata_file",
+    "type": "file",
+    "format": "json",
+    "path": "raw/youtube-metadata/dQw4w9WgXcQ.json",
+    "title": "dQw4w9WgXcQ.json",
+    "size": 459,
+    "mime_type": "application/json",
+    "tags": [],
+    "metadata": {},
+    "resolution": "context"
+  }
+]
