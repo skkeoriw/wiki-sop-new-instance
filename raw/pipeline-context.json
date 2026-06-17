@@ -13,10 +13,34 @@
     "meta_file": "raw/youtube-metadata/dQw4w9WgXcQ.json"
   },
   "stage_b": {
+    "run_id": "direct-notebooklm-research-dQw4w9WgXcQ-20260618T014101-1781718070401272110",
+    "start_time": "2026-06-17T17:41:10Z",
+    "end_time": "2026-06-17T17:42:14Z",
+    "duration_s": 64,
+    "status": "success",
+    "videos_processed": 1,
+    "reports_generated": 1,
+    "mindmaps_generated": 0,
+    "processed_urls": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "output_files": [
+      "raw/notebooklm-analysis/核心承诺与忠诚_Rick_Astley_Never_Gonna_Give_You_1781718122--dQw4w9WgXcQ-20260618.md"
+    ],
+    "generated_files": [
+      {
+        "type": "report",
+        "path": "/tmp/notebooklm_processor/1781718122_report-1781718117.md"
+      }
+    ],
     "source_metadata": {
+      "video_id": "dQw4w9WgXcQ",
       "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+      "author": "Rick Astley",
+      "published_at": "2009-10-25T06:57:33Z",
       "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      "author": "Rick Astley"
+      "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+      "source_type": "youtube"
     }
   }
 }
