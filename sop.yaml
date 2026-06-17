@@ -1,0 +1,184 @@
+name: youtube-research-wiki
+version: '2.0'
+id: youtube-research-wiki
+title: YouTube Wiki SOP
+wiki_local_path: .
+repo: skkeoriw/wiki-sop-new-instance
+notify:
+  telegram:
+    token_env: YOUTUBE_WIKI_TG_TOKEN
+    chat_id: '6938920500'
+terminal_paths:
+- wiki/**
+- log.md
+- logs/pipeline-runs/**
+nodes:
+  youtube-fetch:
+    title: YouTube 元数据获取
+    skill: sop-youtube-fetch
+    webhook_route: sop-youtube-fetch
+    mode: blocking
+    trigger:
+      type: file
+      path: raw/youtube-links/**
+    inputs:
+      source_url: context.source_url
+    outputs:
+      source_url: context.source_url
+      metadata_file: raw/youtube-metadata/{pipeline_id}.json
+    infra:
+      tg_notify: true
+      log_record: true
+    params: {}
+  notebooklm-research:
+    title: NotebookLM 研究
+    skill: sop-notebooklm-research
+    webhook_route: sop-notebooklm-research
+    mode: blocking
+    needs:
+    - youtube-fetch
+    trigger:
+      type: file
+      path: raw/youtube-metadata/**
+    inputs:
+      source_url: youtube-fetch.outputs.source_url
+      metadata_file: youtube-fetch.outputs.metadata_file
+    outputs:
+      reports: raw/notebooklm-analysis/*.md
+      mindmaps: raw/notebooklm-mindmaps/*.json
+    infra:
+      tg_notify: true
+      log_record: true
+    params:
+      notebooklm: &id001
+        outputs:
+        - report
+        - mindmap
+        language: zh_Hans
+        notebook_title: wiki-sop-new-instance
+        report_prompt: 请深度研究这个视频，提炼技术架构、核心观点、关键论据，以及对行业的影响。生成结构化中文研究报告。
+        mindmap_prompt: 基于视频内容生成清晰的中文思维导图，突出核心概念之间的关系与层级。
+  youtube-deep-research:
+    title: YouTube 深度研究
+    skill: sop-youtube-deep-research
+    webhook_route: sop-youtube-deep-research
+    mode: sidecar
+    needs:
+    - youtube-fetch
+    trigger:
+      type: file
+      path: raw/youtube-metadata/**
+    inputs:
+      source_url: youtube-fetch.outputs.source_url
+    outputs:
+      analysis_file: raw/youtube-deep-research/{pipeline_id}/analysis.md
+      transcript_file: raw/youtube-deep-research/{pipeline_id}/transcript.txt
+    infra:
+      tg_notify: true
+      log_record: true
+    params:
+      workflow:
+        output_dir: raw/youtube-deep-research
+        stage_c_supplement_dir: raw/notebooklm-analysis
+  wiki-build:
+    title: Wiki 知识图谱构建
+    skill: sop-wiki-build
+    webhook_route: sop-wiki-build
+    mode: blocking
+    needs:
+    - notebooklm-research
+    trigger:
+      type: file
+      path: raw/notebooklm-analysis/**
+    inputs:
+      reports: notebooklm-research.outputs.reports
+    optional_inputs:
+      deep_research: youtube-deep-research.outputs.analysis_file
+    outputs:
+      index: index.md
+      pages: wiki/**
+    infra:
+      tg_notify: false
+      log_record: true
+    params:
+      build_mode: incremental
+  tg-notify:
+    title: Telegram 通知
+    skill: sop-tg-notify
+    webhook_route: sop-tg-notify
+    mode: blocking
+    needs:
+    - wiki-build
+    trigger:
+      type: file
+      path: index.md
+    inputs:
+      index: wiki-build.outputs.index
+    outputs:
+      telegram_message: logs/pipeline-runs/pipe-{run_id}.json
+    infra:
+      tg_notify: true
+      log_record: true
+    params:
+      build_mode: notify
+  retry:
+    title: 手动重试
+    skill: sop-retry
+    webhook_route: sop-retry
+    mode: manual
+    trigger:
+      type: file
+      path: raw/retry/**
+    infra:
+      tg_notify: true
+      log_record: true
+    params: {}
+pipeline:
+- stage: youtube-fetch
+  trigger: raw/youtube-links/**
+  webhook_route: sop-youtube-fetch
+  infra:
+    tg_notify: true
+    log_record: true
+  params: {}
+- stage: notebooklm-research
+  trigger: raw/youtube-metadata/**
+  webhook_route: sop-notebooklm-research
+  infra:
+    tg_notify: true
+    log_record: true
+  params:
+    notebooklm: *id001
+- stage: youtube-deep-research
+  trigger: raw/youtube-metadata/**
+  webhook_route: sop-youtube-deep-research
+  infra:
+    tg_notify: true
+    log_record: true
+  params:
+    workflow:
+      output_dir: raw/youtube-deep-research
+      stage_c_supplement_dir: raw/notebooklm-analysis
+- stage: wiki-build
+  trigger: raw/notebooklm-analysis/**
+  webhook_route: sop-wiki-build
+  infra:
+    tg_notify: false
+    log_record: true
+  params:
+    build_mode: incremental
+- stage: tg-notify
+  trigger: index.md
+  webhook_route: sop-tg-notify
+  infra:
+    tg_notify: true
+    log_record: true
+  params:
+    build_mode: notify
+- stage: retry
+  trigger: raw/retry/**
+  webhook_route: sop-retry
+  infra:
+    tg_notify: true
+    log_record: true
+  params: {}
