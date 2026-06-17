@@ -1,2 +1,4 @@
 {"ts": "2026-06-17T17:41:11Z", "event": "tg_notify_failed", "stage": "youtube-deep-research", "trigger": "start", "ok": false}
 {"ts": "2026-06-17T17:41:11Z", "event": "stage_start", "stage": "youtube-deep-research", "pipeline": "youtube-research-wiki"}
+{"ts": "2026-06-17T18:01:23Z", "event": "tg_notify_failed", "stage": "youtube-deep-research", "trigger": "failed", "ok": false}
+{"ts": "2026-06-17T18:01:23Z", "event": "stage_failed", "stage": "youtube-deep-research", "pipeline": "youtube-research-wiki", "error": "youtube_deep_research exited 1"}
