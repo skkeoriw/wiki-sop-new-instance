@@ -1,0 +1,67 @@
+{
+  "pipeline_id": "dQw4w9WgXcQ-20260618T014101",
+  "node_id": "wiki-build",
+  "run_id": "direct-wiki-build-dQw4w9WgXcQ-20260618T014101-1781718138654501731",
+  "status": "failed",
+  "mode": "blocking",
+  "needs": [
+    "notebooklm-research"
+  ],
+  "started_at": "2026-06-17T17:42:18Z",
+  "finished_at": "2026-06-17T17:43:04Z",
+  "duration_s": 0,
+  "attempt": 2,
+  "progress": 0,
+  "inputs": {
+    "reports": "notebooklm-research.outputs.reports"
+  },
+  "outputs": {
+    "index": "index.md",
+    "pages": "wiki/**"
+  },
+  "optional_inputs": {
+    "deep_research": "youtube-deep-research.outputs.analysis_file"
+  },
+  "executor": {
+    "type": "agent-skill",
+    "agent": "hermes",
+    "skill": "sop-wiki-build",
+    "entry": "scripts/run_wiki_build.sh",
+    "model": "gemini-2.5-flash-lite",
+    "webhook_route": "sop-wiki-build"
+  },
+  "declared_inputs": {
+    "reports": {
+      "from": "notebooklm-research.outputs.reports",
+      "required": true
+    }
+  },
+  "resolved_inputs": {
+    "reports": [
+      "raw/notebooklm-analysis/核心承诺与忠诚_Rick_Astley_Never_Gonna_Give_You_1781718122--dQw4w9WgXcQ-20260618.md"
+    ],
+    "deep_research": []
+  },
+  "declared_outputs": {
+    "index": {
+      "path": "index.md",
+      "type": "file"
+    },
+    "pages": {
+      "path": "wiki/**",
+      "type": "files"
+    }
+  },
+  "actual_outputs": {},
+  "artifacts": [],
+  "validation": {
+    "status": "pending",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  },
+  "extra": {
+    "started_by": "notebooklm-research"
+  },
+  "error": "sop_wiki_builder_v3 exited 1",
+  "updated_at": "2026-06-17T17:43:04Z"
+}

@@ -1,0 +1,22 @@
+{
+  "target_pages": 35,
+  "max_pages": 40,
+  "max_entities": 10,
+  "max_concepts": 29,
+  "min_importance_score": 0.65,
+  "pipeline_id": "dQw4w9WgXcQ-20260618T014101",
+  "run_id": "direct-wiki-build-dQw4w9WgXcQ-20260618T014101-1781718138654501731",
+  "selected_sources": [],
+  "selected_entities": [],
+  "selected_concepts": [],
+  "selected_mindmaps": [],
+  "skipped_candidates": [],
+  "estimated_llm_calls": 0,
+  "actual_llm_calls": 0,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "generated_pages": [],
+  "failed_pages": [],
+  "status": "planning",
+  "updated_at": "2026-06-17T17:42:19Z"
+}

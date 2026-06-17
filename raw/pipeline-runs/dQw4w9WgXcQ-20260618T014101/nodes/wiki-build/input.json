@@ -1,0 +1,20 @@
+{
+  "declared_inputs": {
+    "reports": {
+      "from": "notebooklm-research.outputs.reports",
+      "required": true
+    }
+  },
+  "optional_inputs": {
+    "deep_research": {
+      "from": "youtube-deep-research.outputs.analysis_file",
+      "required": false
+    }
+  },
+  "resolved_inputs": {
+    "reports": [
+      "raw/notebooklm-analysis/核心承诺与忠诚_Rick_Astley_Never_Gonna_Give_You_1781718122--dQw4w9WgXcQ-20260618.md"
+    ],
+    "deep_research": []
+  }
+}
