@@ -1,0 +1,2 @@
+{"ts": "2026-06-18T09:05:51Z", "event": "stage_start", "stage": "wiki-build", "pipeline": "youtube-research-wiki"}
+{"ts": "2026-06-18T09:06:36Z", "event": "stage_failed", "stage": "wiki-build", "pipeline": "youtube-research-wiki", "error": "sop_wiki_builder_v3 exited 1"}
