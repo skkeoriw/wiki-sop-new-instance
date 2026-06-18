@@ -7,6 +7,24 @@
   "git": {
     "enabled": true,
     "required": false,
-    "status": "pending"
+    "status": "done",
+    "repository": "skkeoriw/wiki-sop-new-instance",
+    "commit": "e9111da",
+    "commit_message": "chore: stage-c event [run:direct-wiki-build-dQw4w9WgXcQ-20260618T170437-1781773551402792881]",
+    "pushed": true,
+    "changed_files": [
+      "logs/stage-events/direct-wiki-build-dQw4w9WgXcQ-20260618T170437-1781773551402792881.jsonl",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/events.jsonl",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/nodes/wiki-build.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/nodes/wiki-build/artifacts.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/nodes/wiki-build/capabilities.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/nodes/wiki-build/input.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/nodes/wiki-build/output.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/nodes/wiki-build/plan.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/nodes/wiki-build/state.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/run.json"
+    ],
+    "finished_at": "2026-06-18T09:06:37Z",
+    "error": ""
   }
 }

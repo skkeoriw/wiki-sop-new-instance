@@ -3,8 +3,8 @@
     "enabled": true,
     "required": false,
     "status": "failed",
-    "message_preview": "⏳ Stage B2 开始  [dQw4w9WgXcQ-20260618T170437]\n   🧪 YouTube 深度研究\n🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R",
-    "sent_at": "2026-06-18T09:04:47Z",
+    "message_preview": "❌ Stage B2 失败  [dQw4w9WgXcQ-20260618T170437]\n   🧪 YouTube 深度研究\n🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R\n   错误：youtube_deep_research exited 1",
+    "sent_at": "2026-06-18T09:25:01Z",
     "api_ok": false,
     "error": "Telegram API rejected or unavailable"
   },
