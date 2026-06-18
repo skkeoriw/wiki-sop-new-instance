@@ -1,4 +1,4 @@
-instance_id: test-instance
+instance_id: instance-1
 workspace_kind: execution-workspace
 sop_type: workspace
 repo: skkeoriw/wiki-sop-new-instance
