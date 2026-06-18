@@ -1,0 +1,28 @@
+{
+  "telegram": {
+    "enabled": true,
+    "required": false,
+    "status": "failed",
+    "message_preview": "✅ Stage B 完成  1m01s  [dQw4w9WgXcQ-20260618T170437]\n   🔬 NotebookLM 研究\n   📄 长期承诺与人际关系动态_深度简报_1781773534--dQw4w9WgXcQ-2026\n   📦 raw/notebooklm-analysis\n   🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R",
+    "sent_at": "2026-06-18T09:05:49Z",
+    "api_ok": false,
+    "error": "Telegram API rejected or unavailable"
+  },
+  "git": {
+    "enabled": true,
+    "required": false,
+    "status": "done",
+    "repository": "skkeoriw/wiki-sop-new-instance",
+    "commit": "dbcad37",
+    "commit_message": "chore: stage-b done [pipe:dQw4w9WgXcQ-20260618T170437] [run:direct-notebooklm-research-dQw4w9WgXcQ-20260618T170437-1781773486859542982]",
+    "pushed": true,
+    "changed_files": [
+      "logs/stage-events/direct-notebooklm-research-dQw4w9WgXcQ-20260618T170437-1781773486859542982.jsonl",
+      "logs/stage-events/direct-youtube-deep-research-dQw4w9WgXcQ-20260618T170437-1781773486885270182.jsonl",
+      "\"raw/notebooklm-analysis/\\351\\225\\277\\346\\234\\237\\346\\211\\277\\350\\257\\272\\344\\270\\216\\344\\272\\272\\351\\231\\205\\345\\205\\263\\347\\263\\273\\345\\212\\250\\346\\200\\201_\\346\\267\\261\\345\\272\\246\\347\\256\\200\\346\\212\\245_1781773534--dQw4w9WgXcQ-20260618.md\"",
+      "raw/pipeline-context.json"
+    ],
+    "finished_at": "2026-06-18T09:05:48Z",
+    "error": ""
+  }
+}

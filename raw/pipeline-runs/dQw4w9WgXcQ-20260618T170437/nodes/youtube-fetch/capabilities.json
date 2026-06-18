@@ -11,6 +11,26 @@
   "git": {
     "enabled": true,
     "required": false,
-    "status": "pending"
+    "status": "done",
+    "repository": "skkeoriw/wiki-sop-new-instance",
+    "commit": "6882543",
+    "commit_message": "chore: stage-a event [run:direct-1781773480251508159]",
+    "pushed": true,
+    "changed_files": [
+      "logs/stage-events/direct-1781773480251508159.jsonl",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/artifacts.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/context.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/dag.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/events.jsonl",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/nodes/youtube-fetch.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/nodes/youtube-fetch/artifacts.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/nodes/youtube-fetch/capabilities.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/nodes/youtube-fetch/input.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/nodes/youtube-fetch/output.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/nodes/youtube-fetch/state.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260618T170437/run.json"
+    ],
+    "finished_at": "2026-06-18T09:04:46Z",
+    "error": ""
   }
 }

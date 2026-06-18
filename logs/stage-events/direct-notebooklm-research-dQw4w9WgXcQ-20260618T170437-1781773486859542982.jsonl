@@ -1,2 +1,4 @@
 {"ts": "2026-06-18T09:04:47Z", "event": "tg_notify_failed", "stage": "notebooklm-research", "trigger": "start", "ok": false}
 {"ts": "2026-06-18T09:04:47Z", "event": "stage_start", "stage": "notebooklm-research", "pipeline": "youtube-research-wiki"}
+{"ts": "2026-06-18T09:05:49Z", "event": "tg_notify_failed", "stage": "notebooklm-research", "trigger": "done", "ok": false}
+{"ts": "2026-06-18T09:05:49Z", "event": "stage_done", "stage": "notebooklm-research", "pipeline": "youtube-research-wiki", "duration_s": 60, "progress": 100, "fallback_used": false, "fallback_mode": "", "fallback_reason": ""}
