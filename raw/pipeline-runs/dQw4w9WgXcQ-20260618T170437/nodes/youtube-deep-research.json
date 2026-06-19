@@ -1,17 +1,17 @@
 {
   "pipeline_id": "dQw4w9WgXcQ-20260618T170437",
   "node_id": "youtube-deep-research",
-  "run_id": "direct-youtube-deep-research-dQw4w9WgXcQ-20260618T170437-1781773486885270182",
-  "status": "failed",
+  "run_id": "retry-1781870581",
+  "status": "done",
   "mode": "sidecar",
   "needs": [
     "youtube-fetch"
   ],
-  "started_at": "2026-06-18T09:04:46Z",
-  "finished_at": "2026-06-18T09:25:01Z",
-  "duration_s": 0,
-  "attempt": 2,
-  "progress": 0,
+  "started_at": "2026-06-19T12:03:01Z",
+  "finished_at": "2026-06-19T12:04:27Z",
+  "duration_s": 84,
+  "attempt": 3,
+  "progress": 100,
   "inputs": {
     "source_url": "youtube-fetch.outputs.source_url"
   },
@@ -45,16 +45,57 @@
       "type": "file"
     }
   },
-  "actual_outputs": {},
-  "artifacts": [],
+  "actual_outputs": {
+    "analysis_file": [
+      "raw/youtube-deep-research/dQw4w9WgXcQ-20260618T170437/analysis.md"
+    ],
+    "transcript_file": [
+      "raw/youtube-deep-research/dQw4w9WgXcQ-20260618T170437/transcript.txt"
+    ]
+  },
+  "artifacts": [
+    {
+      "id": "b6660fd25edec303",
+      "producer": "youtube-deep-research",
+      "output": "analysis_file",
+      "type": "research.analysis",
+      "format": "markdown",
+      "path": "raw/youtube-deep-research/dQw4w9WgXcQ-20260618T170437/analysis.md",
+      "title": "analysis.md",
+      "size": 11121,
+      "mime_type": "application/octet-stream",
+      "tags": [
+        "wiki-source"
+      ],
+      "metadata": {},
+      "resolution": "recorded"
+    },
+    {
+      "id": "14df6599b06aa424",
+      "producer": "youtube-deep-research",
+      "output": "transcript_file",
+      "type": "research.transcript",
+      "format": "text",
+      "path": "raw/youtube-deep-research/dQw4w9WgXcQ-20260618T170437/transcript.txt",
+      "title": "transcript.txt",
+      "size": 1845,
+      "mime_type": "text/plain",
+      "tags": [
+        "wiki-source"
+      ],
+      "metadata": {},
+      "resolution": "recorded"
+    }
+  ],
   "validation": {
-    "status": "pending",
+    "status": "passed",
     "missing_outputs": [],
     "unexpected_outputs": []
   },
   "extra": {
-    "started_by": "youtube-fetch"
+    "duration_s": 84,
+    "progress": 100
   },
-  "error": "youtube_deep_research exited 1",
-  "updated_at": "2026-06-18T09:25:01Z"
+  "error": "",
+  "updated_at": "2026-06-19T12:04:27Z"
 }
