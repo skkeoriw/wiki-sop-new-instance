@@ -1,0 +1,70 @@
+{
+  "id": "df1f4e91-9c4b-4e55-bf74-741d37997466",
+  "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "video_id": null,
+  "status": "completed",
+  "audio_url": null,
+  "r2_key": null,
+  "model_used": "gateway",
+  "summary": "《Never Gonna Give You Up》是英国歌手Rick Astley于1987年发行的经典舞曲，以承诺主题和上口旋律风靡80年代，登上多国冠军。2008年后因“Rickroll”网络恶作剧翻红，成为全球最具辨识度的迷因——用户常被伪装链接骗至该MV。本视频完整呈现MV，Rick Astley的标志性舞步和真挚嗓音，完美诠释永不放弃的爱，既是怀旧金曲也是网络文化符号。",
+  "key_points": [
+    "Rick Astley于1987年发行的流行舞曲，当年横扫全球排行榜",
+    "副歌“Never gonna give you up”成为爱情承诺的经典表达",
+    "“Rickroll”网络恶作剧使其在21世纪再度爆红，成为文化迷因",
+    "MV中简单易学的舞蹈动作被广泛模仿",
+    "歌曲跨越时代，至今仍在各种场合被引用和恶搞"
+  ],
+  "titles": [
+    "00后也中招！揭秘让全网“上当”的80年代神曲",
+    "Rick Astley永不放弃的承诺：你被Rickroll了吗？",
+    "从舞曲冠军到网络迷因：《Never Gonna Give You Up》的传奇之路"
+  ],
+  "description": "《Never Gonna Give You Up》是英国歌手Rick Astley于1987年发行的经典舞曲，凭借朗朗上口的旋律和深情的诺言迅速走红。2008年，它因“Rickroll”网络恶作剧重生——网友用伪装链接跳转这首歌，成为互联网文化最火的迷因。本视频呈现完整MV，带你重回80年代复古风，感受Rick Astley标志性的嗓音与舞步，体验这份永不放弃的爱情誓言。无论是怀旧爱好者还是网络梗玩家，都能从中找到乐趣。",
+  "tags": "经典老歌, 80年代音乐, Rick Astley, Rickroll, 网络迷因, 流行舞曲",
+  "clip_suggestions": [
+    {
+      "start": "00:00:18",
+      "end": "00:00:42",
+      "reason": "MV开头经典旋律，迅速带入情景，适合作为怀旧引入切片"
+    },
+    {
+      "start": "00:00:42",
+      "end": "00:00:59",
+      "reason": "标志性副歌部分，全球网友最熟悉的Rickroll片段，传播力极强"
+    },
+    {
+      "start": "00:02:57",
+      "end": "00:03:31",
+      "reason": "结尾高潮重复，情感层层递进，配合经典舞蹈，是完美的收尾切片"
+    }
+  ],
+  "detected_lang": "en",
+  "translate_lang": "zh",
+  "tts_url": null,
+  "error": null,
+  "created_at": "2026-06-19 19:20:51",
+  "updated_at": "2026-06-19 19:22:33",
+  "chunks": [
+    {
+      "chunk_index": 0,
+      "start_sec": 0,
+      "r2_key": "audio/dQw4w9WgXcQ_chunk_000.mp4",
+      "url": "https://youtube-audio.hb67egcim4.workers.dev/file/audio/dQw4w9WgXcQ_chunk_000.mp4",
+      "status": "done",
+      "transcript_url": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/df1f4e91-9c4b-4e55-bf74-741d37997466/chunk/0",
+      "translated_url": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/df1f4e91-9c4b-4e55-bf74-741d37997466/chunk/0?translated=1"
+    }
+  ],
+  "files": {
+    "transcript_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/df1f4e91-9c4b-4e55-bf74-741d37997466/transcript",
+    "transcript_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/df1f4e91-9c4b-4e55-bf74-741d37997466/transcript?format=txt",
+    "transcript_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/df1f4e91-9c4b-4e55-bf74-741d37997466/transcript?format=srt",
+    "transcript_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/df1f4e91-9c4b-4e55-bf74-741d37997466/transcript?format=vtt",
+    "transcript_csv": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/df1f4e91-9c4b-4e55-bf74-741d37997466/transcript?format=csv",
+    "analysis_md": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/df1f4e91-9c4b-4e55-bf74-741d37997466/transcript?format=md",
+    "translated_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/df1f4e91-9c4b-4e55-bf74-741d37997466/transcript?translated=1",
+    "translated_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/df1f4e91-9c4b-4e55-bf74-741d37997466/transcript?format=srt&translated=1",
+    "translated_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/df1f4e91-9c4b-4e55-bf74-741d37997466/transcript?format=vtt&translated=1",
+    "translated_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/df1f4e91-9c4b-4e55-bf74-741d37997466/transcript?format=txt&translated=1"
+  }
+}
