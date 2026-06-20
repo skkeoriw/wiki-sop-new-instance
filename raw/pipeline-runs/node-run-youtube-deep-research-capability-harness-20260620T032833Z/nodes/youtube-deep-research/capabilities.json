@@ -11,7 +11,7 @@
   "git": {
     "enabled": true,
     "required": false,
-    "status": "running",
+    "status": "done",
     "managed_by": "runtime-harness",
     "repository": "skkeoriw/wiki-sop-new-instance",
     "managed_paths": [
@@ -24,6 +24,30 @@
       "raw/youtube-deep-research/node-run-youtube-deep-research-capability-harness-20260620T032833Z/transcript.txt"
     ],
     "credential_source": "GITHUB_TOKEN",
-    "started_at": "2026-06-20T03:30:07Z"
+    "started_at": "2026-06-20T03:30:07Z",
+    "commit": "22fd959",
+    "commit_message": "chore: node-youtube-deep-research outputs [pipe:node-run-youtube-deep-research-capability-harness-20260620T032833Z] [run:node-run-youtube-deep-research-capability-harness-20260620T032833Z]",
+    "pushed": true,
+    "changed_files": [
+      "logs/stage-events/node-run-youtube-deep-research-capability-harness-20260620T032833Z.jsonl",
+      "raw/notebooklm-analysis/Rick-Astley---Never-Gonna-Give-You-Up-Official-Video-4K-Remaster-youtube-deep-research.md",
+      "raw/pipeline-context.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-capability-harness-20260620T032833Z/artifacts.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-capability-harness-20260620T032833Z/context.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-capability-harness-20260620T032833Z/dag.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-capability-harness-20260620T032833Z/events.jsonl",
+      "raw/pipeline-runs/node-run-youtube-deep-research-capability-harness-20260620T032833Z/nodes/youtube-deep-research.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-capability-harness-20260620T032833Z/nodes/youtube-deep-research/artifacts.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-capability-harness-20260620T032833Z/nodes/youtube-deep-research/capabilities.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-capability-harness-20260620T032833Z/nodes/youtube-deep-research/input.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-capability-harness-20260620T032833Z/nodes/youtube-deep-research/output.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-capability-harness-20260620T032833Z/nodes/youtube-deep-research/state.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-capability-harness-20260620T032833Z/run.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-capability-harness-20260620T032833Z/analysis.md",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-capability-harness-20260620T032833Z/status.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-capability-harness-20260620T032833Z/transcript.txt"
+    ],
+    "finished_at": "2026-06-20T03:30:08Z",
+    "error": ""
   }
 }
