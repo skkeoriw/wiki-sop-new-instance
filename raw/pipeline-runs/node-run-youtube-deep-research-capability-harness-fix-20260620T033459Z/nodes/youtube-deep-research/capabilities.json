@@ -58,6 +58,16 @@
       "raw/youtube-deep-research/node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z/worker-analysis.md"
     ],
     "finished_at": "2026-06-20T03:36:45Z",
-    "error": ""
+    "error": "",
+    "event_status": "done",
+    "event_commit": "497ce40",
+    "event_commit_message": "chore: stage-b2 event [run:node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z]",
+    "event_pushed": true,
+    "event_changed_files": [
+      "raw/pipeline-runs/node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z/events.jsonl",
+      "raw/pipeline-runs/node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z/nodes/youtube-deep-research/capabilities.json"
+    ],
+    "event_finished_at": "2026-06-20T03:36:47Z",
+    "event_error": ""
   }
 }
