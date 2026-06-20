@@ -1,0 +1,34 @@
+{
+  "telegram": {
+    "enabled": true,
+    "required": false,
+    "status": "failed",
+    "message_preview": "✅ Stage B2 完成  1m42s  [node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z]\n   🧪 YouTube 深度研究\n   🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R",
+    "sent_at": "2026-06-20T03:36:44Z",
+    "api_ok": false,
+    "error": "Forbidden: bot can't initiate conversation with a user"
+  },
+  "git": {
+    "enabled": true,
+    "required": false,
+    "status": "running",
+    "managed_by": "runtime-harness",
+    "repository": "skkeoriw/wiki-sop-new-instance",
+    "managed_paths": [
+      "logs/stage-events/node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z.jsonl",
+      "raw/notebooklm-analysis/Rick-Astley---Never-Gonna-Give-You-Up-Official-Video-4K-Remaster-youtube-deep-research.md",
+      "raw/pipeline-context.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z/analysis.md",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z/start.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z/status.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z/transcript.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z/transcript.srt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z/transcript.txt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z/transcript.vtt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z/worker-analysis.md"
+    ],
+    "credential_source": "GITHUB_TOKEN",
+    "started_at": "2026-06-20T03:36:44Z"
+  }
+}

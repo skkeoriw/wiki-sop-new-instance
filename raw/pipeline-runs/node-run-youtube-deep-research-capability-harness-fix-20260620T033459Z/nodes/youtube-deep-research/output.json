@@ -1,0 +1,25 @@
+{
+  "declared_outputs": {
+    "analysis_file": {
+      "path": "raw/youtube-deep-research/{pipeline_id}/analysis.md",
+      "type": "file"
+    },
+    "transcript_file": {
+      "path": "raw/youtube-deep-research/{pipeline_id}/transcript.txt",
+      "type": "file"
+    }
+  },
+  "actual_outputs": {
+    "analysis_file": [
+      "raw/youtube-deep-research/node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z/analysis.md"
+    ],
+    "transcript_file": [
+      "raw/youtube-deep-research/node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z/transcript.txt"
+    ]
+  },
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  }
+}
