@@ -1,0 +1,101 @@
+{
+  "pipeline_id": "node-run-youtube-deep-research-20260620T211507Z-34122a",
+  "node_id": "youtube-deep-research",
+  "run_id": "node-run-youtube-deep-research-20260620T211507Z-34122a",
+  "status": "done",
+  "mode": "sidecar",
+  "needs": [
+    "youtube-fetch"
+  ],
+  "started_at": "2026-06-20T21:15:11Z",
+  "finished_at": "2026-06-20T21:16:24Z",
+  "duration_s": 73,
+  "attempt": 1,
+  "progress": 100,
+  "inputs": {
+    "source_url": "youtube-fetch.outputs.source_url"
+  },
+  "outputs": {
+    "analysis_file": "raw/youtube-deep-research/{pipeline_id}/analysis.md",
+    "transcript_file": "raw/youtube-deep-research/{pipeline_id}/transcript.txt"
+  },
+  "optional_inputs": {},
+  "executor": {
+    "type": "direct-skill",
+    "skill": "sop-youtube-deep-research",
+    "entry": "scripts/run_youtube_deep_research.sh",
+    "webhook_route": "sop-youtube-deep-research"
+  },
+  "declared_inputs": {
+    "source_url": {
+      "from": "youtube-fetch.outputs.source_url",
+      "required": true
+    }
+  },
+  "resolved_inputs": {
+    "source_url": []
+  },
+  "declared_outputs": {
+    "analysis_file": {
+      "path": "raw/youtube-deep-research/{pipeline_id}/analysis.md",
+      "type": "file"
+    },
+    "transcript_file": {
+      "path": "raw/youtube-deep-research/{pipeline_id}/transcript.txt",
+      "type": "file"
+    }
+  },
+  "actual_outputs": {
+    "analysis_file": [
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260620T211507Z-34122a/analysis.md"
+    ],
+    "transcript_file": [
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260620T211507Z-34122a/transcript.txt"
+    ]
+  },
+  "artifacts": [
+    {
+      "id": "233eba3f43b944a8",
+      "producer": "youtube-deep-research",
+      "output": "analysis_file",
+      "type": "research.analysis",
+      "format": "markdown",
+      "path": "raw/youtube-deep-research/node-run-youtube-deep-research-20260620T211507Z-34122a/analysis.md",
+      "title": "analysis.md",
+      "size": 10805,
+      "mime_type": "application/octet-stream",
+      "tags": [
+        "wiki-source"
+      ],
+      "metadata": {},
+      "resolution": "recorded"
+    },
+    {
+      "id": "5df4bf9420526019",
+      "producer": "youtube-deep-research",
+      "output": "transcript_file",
+      "type": "research.transcript",
+      "format": "text",
+      "path": "raw/youtube-deep-research/node-run-youtube-deep-research-20260620T211507Z-34122a/transcript.txt",
+      "title": "transcript.txt",
+      "size": 1843,
+      "mime_type": "text/plain",
+      "tags": [
+        "wiki-source"
+      ],
+      "metadata": {},
+      "resolution": "recorded"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  },
+  "extra": {
+    "duration_s": 73,
+    "progress": 100
+  },
+  "error": "",
+  "updated_at": "2026-06-20T21:16:24Z"
+}
