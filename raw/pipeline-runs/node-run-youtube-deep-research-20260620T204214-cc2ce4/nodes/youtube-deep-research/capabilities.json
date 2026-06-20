@@ -63,6 +63,16 @@
       "raw/youtube-deep-research/node-run-youtube-deep-research-20260620T204214-cc2ce4/worker-analysis.md"
     ],
     "finished_at": "2026-06-20T20:43:40Z",
-    "error": ""
+    "error": "",
+    "event_status": "done",
+    "event_commit": "d5abfb3",
+    "event_commit_message": "chore: stage-b2 event [run:node-run-youtube-deep-research-20260620T204214-cc2ce4]",
+    "event_pushed": true,
+    "event_changed_files": [
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260620T204214-cc2ce4/events.jsonl",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260620T204214-cc2ce4/nodes/youtube-deep-research/capabilities.json"
+    ],
+    "event_finished_at": "2026-06-20T20:43:41Z",
+    "event_error": ""
   }
 }
