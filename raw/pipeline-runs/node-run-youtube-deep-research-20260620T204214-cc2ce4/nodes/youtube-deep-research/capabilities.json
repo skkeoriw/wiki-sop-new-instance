@@ -1,0 +1,39 @@
+{
+  "telegram": {
+    "enabled": true,
+    "required": false,
+    "status": "done",
+    "message_preview": "✅ Stage B2 完成  1m21s  [node-run-youtube-deep-research-20260620T204214-cc2ce4]\n   🧪 YouTube 深度研究\n   🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R",
+    "sent_at": "2026-06-20T20:43:38Z",
+    "api_ok": true,
+    "error": ""
+  },
+  "git": {
+    "enabled": true,
+    "required": false,
+    "status": "running",
+    "managed_by": "runtime-harness",
+    "repository": "skkeoriw/wiki-sop-new-instance",
+    "managed_paths": [
+      "logs/stage-events/node-run-youtube-deep-research-20260620T204214-cc2ce4.jsonl",
+      "raw/notebooklm-analysis/Rick-Astley---Never-Gonna-Give-You-Up-Official-Video-4K-Remaster-youtube-deep-research.md",
+      "raw/pipeline-context.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260620T204214-cc2ce4",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260620T204214-cc2ce4/analysis.md",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260620T204214-cc2ce4/start.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260620T204214-cc2ce4/status.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260620T204214-cc2ce4/transcript.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260620T204214-cc2ce4/transcript.srt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260620T204214-cc2ce4/transcript.txt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260620T204214-cc2ce4/transcript.vtt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260620T204214-cc2ce4/worker-analysis.md"
+    ],
+    "paths": [
+      "raw/youtube-deep-research/{pipeline_id}/**",
+      "raw/notebooklm-analysis/*-youtube-deep-research.md",
+      "raw/pipeline-context.json"
+    ],
+    "credential_source": "GITHUB_TOKEN",
+    "started_at": "2026-06-20T20:43:38Z"
+  }
+}
