@@ -71,15 +71,39 @@ nodes:
     inputs:
       source_url: youtube-fetch.outputs.source_url
     outputs:
-      analysis_file: raw/youtube-deep-research/{pipeline_id}/analysis.md
-      transcript_file: raw/youtube-deep-research/{pipeline_id}/transcript.txt
+      analysis_file: raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md
+      transcript_file: raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt
+    capabilities:
+      git:
+        enabled: true
+        required: false
+        managed_by: runtime-harness
+        editable: true
+        save_scope: node-definition
+        description: Persist this node's workspace outputs to the current Instance
+          repo.
+        paths:
+        - raw/youtube-deep-research/{pipeline_id}/outputs/**
+        - raw/youtube-deep-research/{pipeline_id}/raw/**
+      telegram:
+        enabled: true
+        required: false
+        managed_by: runtime-harness
+        editable: true
+        save_scope: node-definition
+        description: Send progress notifications through the current Instance Telegram
+          config.
+        trigger: stage-lifecycle
+        triggers:
+        - start
+        - done
+        - failed
     infra:
       tg_notify: true
       log_record: true
     params:
       workflow:
         output_dir: raw/youtube-deep-research
-        stage_c_supplement_dir: raw/notebooklm-analysis
   wiki-build:
     title: Wiki 知识图谱构建
     skill: sop-wiki-build
