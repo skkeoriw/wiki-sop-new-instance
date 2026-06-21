@@ -1,0 +1,107 @@
+{
+  "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "source_type": "youtube",
+  "pipeline_id": "node-run-wiki-build-20260621T180424-03ff23",
+  "stage_b_fetch": {
+    "run_id": "direct-1781773480251508159",
+    "video_id": "dQw4w9WgXcQ",
+    "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+    "author": "Rick Astley",
+    "published_at": "2009-10-25T06:57:33Z",
+    "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+    "meta_file": "raw/youtube-metadata/dQw4w9WgXcQ.json"
+  },
+  "stage_b": {
+    "run_id": "direct-notebooklm-research-dQw4w9WgXcQ-20260618T170437-1781773486859542982",
+    "start_time": "2026-06-18T09:04:46Z",
+    "end_time": "2026-06-18T09:05:46Z",
+    "duration_s": 60,
+    "status": "success",
+    "videos_processed": 1,
+    "reports_generated": 1,
+    "mindmaps_generated": 0,
+    "processed_urls": [
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    ],
+    "output_files": [
+      "raw/notebooklm-analysis/node-test-fixture.md"
+    ],
+    "generated_files": [
+      {
+        "type": "report",
+        "path": "/tmp/notebooklm_processor/1781773534_report-1781773529.md"
+      }
+    ],
+    "source_metadata": {
+      "video_id": "dQw4w9WgXcQ",
+      "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+      "author": "Rick Astley",
+      "published_at": "2009-10-25T06:57:33Z",
+      "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+      "source_type": "youtube"
+    }
+  },
+  "stage_deep_research": {
+    "run_id": "node-run-youtube-deep-research-20260621T151432Z-516f89",
+    "job_id": "ff3c124e-7059-4b12-824c-390af04ce9c7",
+    "status": "completed",
+    "start_time": "",
+    "end_time": "2026-06-21T15:16:05Z",
+    "output_files": [
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T151432Z-516f89/analysis.md",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T151432Z-516f89/status.json",
+      "raw/notebooklm-analysis/Rick-Astley---Never-Gonna-Give-You-Up-Official-Video-4K-Remaster-youtube-deep-research.md"
+    ],
+    "worker_files": {
+      "transcript_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript",
+      "transcript_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=txt",
+      "transcript_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=srt",
+      "transcript_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=vtt",
+      "transcript_csv": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=csv",
+      "analysis_md": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=md",
+      "translated_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?translated=1",
+      "translated_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=srt&translated=1",
+      "translated_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=vtt&translated=1",
+      "translated_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=txt&translated=1"
+    },
+    "chunks_total": 1,
+    "chunks_done": 1
+  },
+  "node_run": {
+    "node_run_id": "node-run-wiki-build-20260621T180424-03ff23",
+    "node_id": "wiki-build",
+    "mode": "real-node",
+    "input_source": "generated-fixture",
+    "base_run_id": "",
+    "capability_overrides": {
+      "git": {
+        "enabled": true,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "paths": []
+      },
+      "telegram": {
+        "enabled": false,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run"
+      }
+    },
+    "definition_scope_reports": {
+      "instance_override": {
+        "status": "unchanged",
+        "changed": {}
+      },
+      "project_default_request": {
+        "status": "skipped"
+      }
+    },
+    "created_at": "2026-06-21T18:04:25.889535+00:00"
+  },
+  "node_run_resolved_inputs": {
+    "reports": "raw/notebooklm-analysis/node-test-fixture.md"
+  }
+}
