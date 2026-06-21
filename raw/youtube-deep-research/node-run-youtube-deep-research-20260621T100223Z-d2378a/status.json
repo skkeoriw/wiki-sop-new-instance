@@ -1,0 +1,70 @@
+{
+  "id": "bf159f1c-1b77-4838-b482-23fe79f77334",
+  "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "video_id": null,
+  "status": "completed",
+  "audio_url": null,
+  "r2_key": null,
+  "model_used": "gateway",
+  "summary": "经典歌曲《Never Gonna Give You Up》MV，由Rick Astley演唱。歌词表达对爱情的坚定承诺，强调永不离弃、永不欺骗。歌曲因其独特的旋律和重复的副歌而风靡全球，更成为网络迷因“瑞克摇”的源头。视频中Rick Astley自信演唱，充满80年代复古风情。",
+  "key_points": [
+    "歌曲主题：对爱情的坚定承诺与真诚告白",
+    "副歌重复强调：永不放弃、不让失望、不离开、不哭泣",
+    "经典旋律与编曲，体现80年代流行风格",
+    "网络迷因“瑞克摇”表情包来源，成为互联网文化象征",
+    "歌词传递专一和守护的爱情观"
+  ],
+  "titles": [
+    "经典老歌《Never Gonna Give You Up》：这就是瑞克摇的由来",
+    "重温80年代神曲：Rick Astley永不放弃的爱",
+    "被欺骗了无数次的网络梗，原曲竟如此深情"
+  ],
+  "description": "《Never Gonna Give You Up》是英国歌手Rick Astley于1987年发行的经典单曲，全球销量超百万。歌曲以轻快舞曲节奏和深情歌词著称，承诺永不放弃、永不离开。其MV在2000年代因网络恶作剧“瑞克摇”而再次爆红，成为互联网上最知名的梗之一。视频中Astley以标志性嗓音和真诚演绎，传递对爱人坚定不移的承诺。无论你是怀念80年代还是想体验网络文化，这首歌都不容错过。视频完整呈现歌曲全貌，包括副歌多次重复及间奏，是欣赏和收藏的佳品。",
+  "tags": "Rick Astley, 瑞克摇, Never Gonna Give You Up, 80年代流行, 经典老歌, 网络迷因",
+  "clip_suggestions": [
+    {
+      "start": "00:00:18",
+      "end": "00:00:59",
+      "reason": "经典开场与首次副歌，瞬间识别，适合引流和短视频传播。"
+    },
+    {
+      "start": "00:01:24",
+      "end": "00:02:15",
+      "reason": "双副歌加标志性重复，情感递进，展现歌曲精髓，适合粉丝重温。"
+    },
+    {
+      "start": "00:02:40",
+      "end": "00:03:31",
+      "reason": "全曲高潮，副歌多次重复强化记忆，情感释放到位，适合作为视频结尾。"
+    }
+  ],
+  "detected_lang": "en",
+  "translate_lang": "zh",
+  "tts_url": null,
+  "error": null,
+  "created_at": "2026-06-21 10:02:27",
+  "updated_at": "2026-06-21 10:04:47",
+  "chunks": [
+    {
+      "chunk_index": 0,
+      "start_sec": 0,
+      "r2_key": "audio/dQw4w9WgXcQ_chunk_000.mp4",
+      "url": "https://youtube-audio.hb67egcim4.workers.dev/file/audio/dQw4w9WgXcQ_chunk_000.mp4",
+      "status": "done",
+      "transcript_url": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/bf159f1c-1b77-4838-b482-23fe79f77334/chunk/0",
+      "translated_url": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/bf159f1c-1b77-4838-b482-23fe79f77334/chunk/0?translated=1"
+    }
+  ],
+  "files": {
+    "transcript_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/bf159f1c-1b77-4838-b482-23fe79f77334/transcript",
+    "transcript_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/bf159f1c-1b77-4838-b482-23fe79f77334/transcript?format=txt",
+    "transcript_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/bf159f1c-1b77-4838-b482-23fe79f77334/transcript?format=srt",
+    "transcript_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/bf159f1c-1b77-4838-b482-23fe79f77334/transcript?format=vtt",
+    "transcript_csv": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/bf159f1c-1b77-4838-b482-23fe79f77334/transcript?format=csv",
+    "analysis_md": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/bf159f1c-1b77-4838-b482-23fe79f77334/transcript?format=md",
+    "translated_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/bf159f1c-1b77-4838-b482-23fe79f77334/transcript?translated=1",
+    "translated_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/bf159f1c-1b77-4838-b482-23fe79f77334/transcript?format=srt&translated=1",
+    "translated_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/bf159f1c-1b77-4838-b482-23fe79f77334/transcript?format=vtt&translated=1",
+    "translated_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/bf159f1c-1b77-4838-b482-23fe79f77334/transcript?format=txt&translated=1"
+  }
+}
