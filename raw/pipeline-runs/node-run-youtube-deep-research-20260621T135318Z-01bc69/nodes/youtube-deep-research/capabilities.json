@@ -1,0 +1,106 @@
+{
+  "telegram": {
+    "enabled": true,
+    "required": false,
+    "status": "done",
+    "trigger": "done",
+    "triggers": [
+      "start",
+      "done",
+      "failed"
+    ],
+    "message_preview": "✅ Stage B2 完成  1m30s  [node-run-youtube-deep-research-20260621T135318Z-01bc69]\n   🧪 YouTube 深度研究\n   🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R",
+    "sent_at": "2026-06-21T13:54:51Z",
+    "api_ok": true,
+    "error": "",
+    "history": [
+      {
+        "capability": "telegram",
+        "status": "done",
+        "recorded_at": "2026-06-21T13:53:21Z",
+        "trigger": "start",
+        "triggers": [
+          "start",
+          "done",
+          "failed"
+        ],
+        "message_preview": "⏳ Stage B2 开始  [node-run-youtube-deep-research-20260621T135318Z-01bc69]\n   🧪 YouTube 深度研究\n🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R",
+        "sent_at": "2026-06-21T13:53:21Z",
+        "api_ok": true,
+        "error": ""
+      },
+      {
+        "capability": "telegram",
+        "status": "done",
+        "recorded_at": "2026-06-21T13:54:51Z",
+        "trigger": "done",
+        "triggers": [
+          "start",
+          "done",
+          "failed"
+        ],
+        "message_preview": "✅ Stage B2 完成  1m30s  [node-run-youtube-deep-research-20260621T135318Z-01bc69]\n   🧪 YouTube 深度研究\n   🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R",
+        "sent_at": "2026-06-21T13:54:51Z",
+        "api_ok": true,
+        "error": ""
+      }
+    ]
+  },
+  "git": {
+    "enabled": true,
+    "required": false,
+    "status": "running",
+    "managed_by": "runtime-harness",
+    "repository": "skkeoriw/wiki-sop-new-instance",
+    "managed_paths": [
+      "logs/stage-events/node-run-youtube-deep-research-20260621T135318Z-01bc69.jsonl",
+      "raw/notebooklm-analysis/Rick-Astley---Never-Gonna-Give-You-Up-Official-Video-4K-Remaster-youtube-deep-research.md",
+      "raw/pipeline-context.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260621T135318Z-01bc69",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T135318Z-01bc69/analysis.md",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T135318Z-01bc69/start.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T135318Z-01bc69/status.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T135318Z-01bc69/transcript.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T135318Z-01bc69/transcript.srt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T135318Z-01bc69/transcript.txt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T135318Z-01bc69/transcript.vtt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T135318Z-01bc69/worker-analysis.md"
+    ],
+    "paths": [
+      "raw/youtube-deep-research/{pipeline_id}/**",
+      "raw/notebooklm-analysis/*-youtube-deep-research.md",
+      "raw/pipeline-context.json"
+    ],
+    "credential_source": "GITHUB_TOKEN",
+    "started_at": "2026-06-21T13:54:52Z",
+    "history": [
+      {
+        "capability": "git",
+        "status": "running",
+        "recorded_at": "2026-06-21T13:54:52Z",
+        "managed_by": "runtime-harness",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "managed_paths": [
+          "logs/stage-events/node-run-youtube-deep-research-20260621T135318Z-01bc69.jsonl",
+          "raw/notebooklm-analysis/Rick-Astley---Never-Gonna-Give-You-Up-Official-Video-4K-Remaster-youtube-deep-research.md",
+          "raw/pipeline-context.json",
+          "raw/pipeline-runs/node-run-youtube-deep-research-20260621T135318Z-01bc69",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T135318Z-01bc69/analysis.md",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T135318Z-01bc69/start.json",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T135318Z-01bc69/status.json",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T135318Z-01bc69/transcript.json",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T135318Z-01bc69/transcript.srt",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T135318Z-01bc69/transcript.txt",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T135318Z-01bc69/transcript.vtt",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T135318Z-01bc69/worker-analysis.md"
+        ],
+        "paths": [
+          "raw/youtube-deep-research/{pipeline_id}/**",
+          "raw/notebooklm-analysis/*-youtube-deep-research.md",
+          "raw/pipeline-context.json"
+        ],
+        "credential_source": "GITHUB_TOKEN"
+      }
+    ]
+  }
+}
