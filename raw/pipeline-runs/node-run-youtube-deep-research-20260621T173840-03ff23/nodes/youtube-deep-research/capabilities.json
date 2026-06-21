@@ -148,6 +148,20 @@
           "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T173840-03ff23/raw/worker-analysis.md"
         ],
         "credential_source": "GITHUB_TOKEN"
+      },
+      {
+        "capability": "git",
+        "status": "done",
+        "recorded_at": "2026-06-21T17:40:16Z",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "event_status": "done",
+        "event_commit": "e4a3b67",
+        "event_commit_message": "chore: stage-b2 event [run:node-run-youtube-deep-research-20260621T173840-03ff23]",
+        "event_pushed": true,
+        "event_changed_files": [
+          "raw/pipeline-runs/node-run-youtube-deep-research-20260621T173840-03ff23/events.jsonl",
+          "raw/pipeline-runs/node-run-youtube-deep-research-20260621T173840-03ff23/nodes/youtube-deep-research/capabilities.json"
+        ]
       }
     ],
     "commit": "96a1aa5",
@@ -177,6 +191,16 @@
       "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T173840-03ff23/raw/worker-analysis.md"
     ],
     "finished_at": "2026-06-21T17:40:14Z",
-    "error": ""
+    "error": "",
+    "event_status": "done",
+    "event_commit": "e4a3b67",
+    "event_commit_message": "chore: stage-b2 event [run:node-run-youtube-deep-research-20260621T173840-03ff23]",
+    "event_pushed": true,
+    "event_changed_files": [
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260621T173840-03ff23/events.jsonl",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260621T173840-03ff23/nodes/youtube-deep-research/capabilities.json"
+    ],
+    "event_finished_at": "2026-06-21T17:40:16Z",
+    "event_error": ""
   }
 }
