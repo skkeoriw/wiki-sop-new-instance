@@ -17,7 +17,7 @@
   "git": {
     "enabled": true,
     "required": false,
-    "status": "running",
+    "status": "done",
     "managed_by": "runtime-harness",
     "repository": "skkeoriw/wiki-sop-new-instance",
     "managed_paths": [
@@ -40,6 +40,35 @@
       "raw/pipeline-context.json"
     ],
     "credential_source": "GITHUB_TOKEN",
-    "started_at": "2026-06-21T10:05:00Z"
+    "started_at": "2026-06-21T10:05:00Z",
+    "commit": "584b42f",
+    "commit_message": "chore: node-youtube-deep-research outputs [pipe:node-run-youtube-deep-research-20260621T100223Z-d2378a] [run:node-run-youtube-deep-research-20260621T100223Z-d2378a]",
+    "pushed": true,
+    "changed_files": [
+      "logs/stage-events/node-run-youtube-deep-research-20260621T100223Z-d2378a.jsonl",
+      "raw/notebooklm-analysis/Rick-Astley---Never-Gonna-Give-You-Up-Official-Video-4K-Remaster-youtube-deep-research.md",
+      "raw/pipeline-context.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260621T100223Z-d2378a/artifacts.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260621T100223Z-d2378a/context.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260621T100223Z-d2378a/dag.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260621T100223Z-d2378a/events.jsonl",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260621T100223Z-d2378a/nodes/youtube-deep-research.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260621T100223Z-d2378a/nodes/youtube-deep-research/artifacts.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260621T100223Z-d2378a/nodes/youtube-deep-research/capabilities.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260621T100223Z-d2378a/nodes/youtube-deep-research/input.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260621T100223Z-d2378a/nodes/youtube-deep-research/output.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260621T100223Z-d2378a/nodes/youtube-deep-research/state.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260621T100223Z-d2378a/run.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T100223Z-d2378a/analysis.md",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T100223Z-d2378a/start.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T100223Z-d2378a/status.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T100223Z-d2378a/transcript.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T100223Z-d2378a/transcript.srt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T100223Z-d2378a/transcript.txt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T100223Z-d2378a/transcript.vtt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T100223Z-d2378a/worker-analysis.md"
+    ],
+    "finished_at": "2026-06-21T10:05:02Z",
+    "error": ""
   }
 }
