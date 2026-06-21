@@ -1,0 +1,41 @@
+{
+  "telegram": {
+    "enabled": true,
+    "required": false,
+    "status": "failed",
+    "trigger": "failed",
+    "triggers": [
+      "start",
+      "done",
+      "failed",
+      "skipped"
+    ],
+    "message_preview": "❌ Stage C 失败  [node-run-youtube-deep-research-20260621T151432Z-516f89]\n   🔨 Wiki 知识图谱构建\n🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R\n   错误：sop_wiki_builder_v3 exited 1",
+    "sent_at": "2026-06-21T18:04:59Z",
+    "api_ok": false,
+    "error": "Forbidden: bot can't initiate conversation with a user",
+    "history": [
+      {
+        "capability": "telegram",
+        "status": "failed",
+        "recorded_at": "2026-06-21T18:04:59Z",
+        "trigger": "failed",
+        "triggers": [
+          "start",
+          "done",
+          "failed",
+          "skipped"
+        ],
+        "message_preview": "❌ Stage C 失败  [node-run-youtube-deep-research-20260621T151432Z-516f89]\n   🔨 Wiki 知识图谱构建\n🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R\n   错误：sop_wiki_builder_v3 exited 1",
+        "sent_at": "2026-06-21T18:04:59Z",
+        "api_ok": false,
+        "error": "Forbidden: bot can't initiate conversation with a user"
+      }
+    ]
+  },
+  "git": {
+    "enabled": true,
+    "required": false,
+    "status": "pending"
+  }
+}
