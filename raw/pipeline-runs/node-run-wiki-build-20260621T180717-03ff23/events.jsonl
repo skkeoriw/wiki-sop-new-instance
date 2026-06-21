@@ -1,0 +1,2 @@
+{"ts": "2026-06-21T18:07:18Z", "event": "node.started", "pipeline_id": "node-run-wiki-build-20260621T180717-03ff23", "node_id": "wiki-build", "run_id": "node-run-wiki-build-20260621T180717-03ff23", "data": {"status": "running", "error": ""}, "sequence": 1}
+{"ts": "2026-06-21T18:08:01Z", "event": "node.failed", "pipeline_id": "node-run-wiki-build-20260621T180717-03ff23", "node_id": "wiki-build", "run_id": "node-run-wiki-build-20260621T180717-03ff23", "data": {"status": "failed", "error": "sop_wiki_builder_v3 exited 1"}, "sequence": 2}
