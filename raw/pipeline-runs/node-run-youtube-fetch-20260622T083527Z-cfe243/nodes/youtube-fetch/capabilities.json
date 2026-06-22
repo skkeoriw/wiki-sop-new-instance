@@ -49,7 +49,7 @@
   "git": {
     "enabled": true,
     "required": false,
-    "status": "running",
+    "status": "done",
     "managed_by": "runtime-harness",
     "repository": "skkeoriw/wiki-sop-new-instance",
     "managed_paths": [
@@ -88,7 +88,71 @@
           "raw/youtube-metadata/**"
         ],
         "credential_source": "GITHUB_TOKEN"
+      },
+      {
+        "capability": "git",
+        "status": "done",
+        "recorded_at": "2026-06-22T08:36:02Z",
+        "error": "",
+        "managed_by": "runtime-harness",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "managed_paths": [
+          "logs/stage-events/node-run-youtube-fetch-20260622T083527Z-cfe243.jsonl",
+          "raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/manifest.json",
+          "raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/metadata.json",
+          "raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/source-url.txt",
+          "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243",
+          "raw/youtube-metadata/.gitkeep",
+          "raw/youtube-metadata/dQw4w9WgXcQ.json"
+        ],
+        "paths": [
+          "raw/node-runs/{pipeline_id}/outputs/files/**",
+          "raw/youtube-metadata/**"
+        ],
+        "commit": "6441ed7",
+        "commit_message": "chore: node-youtube-fetch outputs [pipe:node-run-youtube-fetch-20260622T083527Z-cfe243] [run:node-run-youtube-fetch-20260622T083527Z-cfe243]",
+        "pushed": true,
+        "changed_files": [
+          "logs/stage-events/node-run-youtube-fetch-20260622T083527Z-cfe243.jsonl",
+          "raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/manifest.json",
+          "raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/metadata.json",
+          "raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/source-url.txt",
+          "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/artifacts.json",
+          "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/context.json",
+          "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/dag.json",
+          "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/events.jsonl",
+          "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/nodes/youtube-fetch.json",
+          "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/nodes/youtube-fetch/artifacts.json",
+          "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/nodes/youtube-fetch/capabilities.json",
+          "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/nodes/youtube-fetch/input.json",
+          "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/nodes/youtube-fetch/output.json",
+          "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/nodes/youtube-fetch/state.json",
+          "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/run.json"
+        ],
+        "credential_source": "GITHUB_TOKEN"
       }
-    ]
+    ],
+    "commit": "6441ed7",
+    "commit_message": "chore: node-youtube-fetch outputs [pipe:node-run-youtube-fetch-20260622T083527Z-cfe243] [run:node-run-youtube-fetch-20260622T083527Z-cfe243]",
+    "pushed": true,
+    "changed_files": [
+      "logs/stage-events/node-run-youtube-fetch-20260622T083527Z-cfe243.jsonl",
+      "raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/manifest.json",
+      "raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/metadata.json",
+      "raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/source-url.txt",
+      "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/artifacts.json",
+      "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/context.json",
+      "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/dag.json",
+      "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/events.jsonl",
+      "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/nodes/youtube-fetch.json",
+      "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/nodes/youtube-fetch/artifacts.json",
+      "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/nodes/youtube-fetch/capabilities.json",
+      "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/nodes/youtube-fetch/input.json",
+      "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/nodes/youtube-fetch/output.json",
+      "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/nodes/youtube-fetch/state.json",
+      "raw/pipeline-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/run.json"
+    ],
+    "finished_at": "2026-06-22T08:36:02Z",
+    "error": ""
   }
 }
