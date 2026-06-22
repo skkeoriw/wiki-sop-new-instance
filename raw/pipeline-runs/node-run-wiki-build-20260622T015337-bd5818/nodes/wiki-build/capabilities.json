@@ -1,0 +1,38 @@
+{
+  "telegram": {
+    "enabled": false,
+    "required": false,
+    "status": "disabled",
+    "managed_by": "runtime-harness",
+    "trigger": "failed",
+    "triggers": [
+      "start",
+      "done",
+      "failed",
+      "skipped"
+    ],
+    "reason": "telegram capability disabled",
+    "finished_at": "2026-06-22T01:53:38Z",
+    "history": [
+      {
+        "capability": "telegram",
+        "status": "disabled",
+        "recorded_at": "2026-06-22T01:53:38Z",
+        "trigger": "failed",
+        "triggers": [
+          "start",
+          "done",
+          "failed",
+          "skipped"
+        ],
+        "reason": "telegram capability disabled",
+        "managed_by": "runtime-harness"
+      }
+    ]
+  },
+  "git": {
+    "enabled": true,
+    "required": false,
+    "status": "pending"
+  }
+}
