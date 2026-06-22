@@ -33,7 +33,7 @@
   "git": {
     "enabled": true,
     "required": false,
-    "status": "running",
+    "status": "done",
     "managed_by": "runtime-harness",
     "repository": "skkeoriw/wiki-sop-new-instance",
     "managed_paths": [
@@ -70,7 +70,80 @@
         ],
         "paths": [],
         "credential_source": "GITHUB_TOKEN"
+      },
+      {
+        "capability": "git",
+        "status": "done",
+        "recorded_at": "2026-06-22T13:55:37Z",
+        "error": "",
+        "managed_by": "runtime-harness",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "managed_paths": [
+          "index.md",
+          "logs/stage-events/node-run-wiki-build-20260622T135212-cc0bec.jsonl",
+          "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/index.md",
+          "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/manifest.json",
+          "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/wiki/sources/never-gonna-give-you-up-官方mv-歌词分析报告.md",
+          "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/wiki/sources/youtube深度研究补充-rick-astley-传世神曲-永不放弃的深情告白.md",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec",
+          "wiki/sources/never-gonna-give-you-up-官方mv-歌词分析报告.md",
+          "wiki/sources/youtube深度研究补充-rick-astley-传世神曲-永不放弃的深情告白.md"
+        ],
+        "paths": [],
+        "commit": "6fca068",
+        "commit_message": "chore: node-wiki-build outputs [pipe:node-run-wiki-build-20260622T135212-cc0bec] [run:node-run-wiki-build-20260622T135212-cc0bec]",
+        "pushed": true,
+        "changed_files": [
+          "index.md",
+          "logs/stage-events/node-run-wiki-build-20260622T135212-cc0bec.jsonl",
+          "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/index.md",
+          "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/manifest.json",
+          "\"raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/wiki/sources/never-gonna-give-you-up-\\345\\256\\230\\346\\226\\271mv-\\346\\255\\214\\350\\257\\215\\345\\210\\206\\346\\236\\220\\346\\212\\245\\345\\221\\212.md\"",
+          "\"raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/wiki/sources/youtube\\346\\267\\261\\345\\272\\246\\347\\240\\224\\347\\251\\266\\350\\241\\245\\345\\205\\205-rick-astley-\\344\\274\\240\\344\\270\\226\\347\\245\\236\\346\\233\\262-\\346\\260\\270\\344\\270\\215\\346\\224\\276\\345\\274\\203\\347\\232\\204\\346\\267\\261\\346\\203\\205\\345\\221\\212\\347\\231\\275.md\"",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/artifacts.json",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/context.json",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/dag.json",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/events.jsonl",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/nodes/wiki-build.json",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/nodes/wiki-build/artifacts.json",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/nodes/wiki-build/capabilities.json",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/nodes/wiki-build/input.json",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/nodes/wiki-build/output.json",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/nodes/wiki-build/plan.json",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/nodes/wiki-build/state.json",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/run.json",
+          "\"wiki/sources/never-gonna-give-you-up-\\345\\256\\230\\346\\226\\271mv-\\346\\255\\214\\350\\257\\215\\345\\210\\206\\346\\236\\220\\346\\212\\245\\345\\221\\212.md\"",
+          "\"wiki/sources/youtube\\346\\267\\261\\345\\272\\246\\347\\240\\224\\347\\251\\266\\350\\241\\245\\345\\205\\205-rick-astley-\\344\\274\\240\\344\\270\\226\\347\\245\\236\\346\\233\\262-\\346\\260\\270\\344\\270\\215\\346\\224\\276\\345\\274\\203\\347\\232\\204\\346\\267\\261\\346\\203\\205\\345\\221\\212\\347\\231\\275.md\""
+        ],
+        "credential_source": "GITHUB_TOKEN"
       }
-    ]
+    ],
+    "commit": "6fca068",
+    "commit_message": "chore: node-wiki-build outputs [pipe:node-run-wiki-build-20260622T135212-cc0bec] [run:node-run-wiki-build-20260622T135212-cc0bec]",
+    "pushed": true,
+    "changed_files": [
+      "index.md",
+      "logs/stage-events/node-run-wiki-build-20260622T135212-cc0bec.jsonl",
+      "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/index.md",
+      "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/manifest.json",
+      "\"raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/wiki/sources/never-gonna-give-you-up-\\345\\256\\230\\346\\226\\271mv-\\346\\255\\214\\350\\257\\215\\345\\210\\206\\346\\236\\220\\346\\212\\245\\345\\221\\212.md\"",
+      "\"raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/wiki/sources/youtube\\346\\267\\261\\345\\272\\246\\347\\240\\224\\347\\251\\266\\350\\241\\245\\345\\205\\205-rick-astley-\\344\\274\\240\\344\\270\\226\\347\\245\\236\\346\\233\\262-\\346\\260\\270\\344\\270\\215\\346\\224\\276\\345\\274\\203\\347\\232\\204\\346\\267\\261\\346\\203\\205\\345\\221\\212\\347\\231\\275.md\"",
+      "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/artifacts.json",
+      "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/context.json",
+      "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/dag.json",
+      "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/events.jsonl",
+      "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/nodes/wiki-build.json",
+      "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/nodes/wiki-build/artifacts.json",
+      "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/nodes/wiki-build/capabilities.json",
+      "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/nodes/wiki-build/input.json",
+      "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/nodes/wiki-build/output.json",
+      "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/nodes/wiki-build/plan.json",
+      "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/nodes/wiki-build/state.json",
+      "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec/run.json",
+      "\"wiki/sources/never-gonna-give-you-up-\\345\\256\\230\\346\\226\\271mv-\\346\\255\\214\\350\\257\\215\\345\\210\\206\\346\\236\\220\\346\\212\\245\\345\\221\\212.md\"",
+      "\"wiki/sources/youtube\\346\\267\\261\\345\\272\\246\\347\\240\\224\\347\\251\\266\\350\\241\\245\\345\\205\\205-rick-astley-\\344\\274\\240\\344\\270\\226\\347\\245\\236\\346\\233\\262-\\346\\260\\270\\344\\270\\215\\346\\224\\276\\345\\274\\203\\347\\232\\204\\346\\267\\261\\346\\203\\205\\345\\221\\212\\347\\231\\275.md\""
+    ],
+    "finished_at": "2026-06-22T13:55:37Z",
+    "error": ""
   }
 }
