@@ -1,0 +1,134 @@
+{
+  "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "source_type": "youtube",
+  "node_run_resolved_inputs": {
+    "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  },
+  "stage_b": {
+    "output_files": [
+      "raw/node-runs/node-run-wiki-build-20260622T081128-775577/inputs/sources/0001.md"
+    ],
+    "source_metadata": {
+      "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+      "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "author": "Rick Astley"
+    }
+  },
+  "pipeline_id": "node-run-youtube-deep-research-20260622T102318-ecb0ee",
+  "node_run": {
+    "node_run_id": "node-run-youtube-deep-research-20260622T102318-ecb0ee",
+    "node_id": "youtube-deep-research",
+    "mode": "real-node",
+    "input_source": "existing-node-run",
+    "base_run_id": "",
+    "source_node_run_id": "node-run-youtube-fetch-20260622T083527Z-cfe243",
+    "input_manifest": "raw/node-runs/node-run-youtube-deep-research-20260622T102318-ecb0ee/inputs/sources/manifest.json",
+    "input_directory": "raw/node-runs/node-run-youtube-deep-research-20260622T102318-ecb0ee/inputs/sources",
+    "input_files": [
+      "raw/node-runs/node-run-youtube-deep-research-20260622T102318-ecb0ee/inputs/sources/0001.txt"
+    ],
+    "capability_overrides": {
+      "git": {
+        "enabled": true,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "paths": [
+          "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+          "raw/youtube-deep-research/{pipeline_id}/raw/**"
+        ]
+      },
+      "telegram": {
+        "enabled": true,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run"
+      }
+    },
+    "definition_scope_reports": {
+      "instance_override": {
+        "status": "unchanged",
+        "changed": {}
+      },
+      "project_default_request": {
+        "status": "skipped"
+      }
+    },
+    "created_at": "2026-06-22T10:23:19.689154+00:00"
+  },
+  "stage_c": {
+    "run_id": "node-run-wiki-build-20260622T081128-775577",
+    "start_time": "2026-06-22T08:11:58Z",
+    "end_time": "2026-06-22T08:17:11Z",
+    "duration_s": 313,
+    "llm_calls": 5,
+    "pages_created_total": 11,
+    "pages_new_this_run": 0,
+    "pages_updated_this_run": 0,
+    "file_paths": [
+      "wiki/sources/YouTube深度研究补充-瑞克-阿斯特利-永不放弃你-官方MV.md",
+      "wiki/sources/永不放弃你-歌词.md"
+    ],
+    "sources": 4,
+    "entities": 2,
+    "concepts": 5,
+    "comparisons": 0,
+    "prompt_tokens": 6988,
+    "completion_tokens": 10522,
+    "status": "success"
+  },
+  "node_run_input_manifest": "raw/node-runs/node-run-youtube-deep-research-20260622T102318-ecb0ee/inputs/sources/manifest.json",
+  "node_run_input_files": [
+    "raw/node-runs/node-run-youtube-deep-research-20260622T102318-ecb0ee/inputs/sources/0001.txt"
+  ],
+  "stage_deep_research": {
+    "run_id": "node-run-youtube-deep-research-20260622T102318-ecb0ee",
+    "job_id": "575ae718-7306-4535-b9b0-8eed88ac20cc",
+    "status": "completed",
+    "start_time": "",
+    "end_time": "2026-06-22T10:25:13Z",
+    "output_files": [
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T102318-ecb0ee/outputs/analysis.md",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T102318-ecb0ee/outputs/transcript.txt"
+    ],
+    "raw_files": [
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T102318-ecb0ee/raw/start.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T102318-ecb0ee/raw/status.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T102318-ecb0ee/raw/transcript.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T102318-ecb0ee/raw/transcript.srt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T102318-ecb0ee/raw/transcript.txt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T102318-ecb0ee/raw/transcript.vtt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T102318-ecb0ee/raw/worker-analysis.md"
+    ],
+    "worker_files": {
+      "transcript_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript",
+      "transcript_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?format=txt",
+      "transcript_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?format=srt",
+      "transcript_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?format=vtt",
+      "transcript_csv": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?format=csv",
+      "analysis_md": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?format=md",
+      "translated_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?translated=1",
+      "translated_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?format=srt&translated=1",
+      "translated_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?format=vtt&translated=1",
+      "translated_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?format=txt&translated=1"
+    },
+    "chunks_total": 1,
+    "chunks_done": 1
+  },
+  "stage_b2": {
+    "analysis_file": "raw/node-runs/node-run-wiki-build-20260622T081128-775577/inputs/sources/0001.md",
+    "output_files": [
+      "raw/node-runs/node-run-wiki-build-20260622T081128-775577/inputs/sources/0001.md"
+    ]
+  },
+  "stage_b_fetch": {
+    "run_id": "node-run-youtube-fetch-20260622T083527Z-cfe243",
+    "video_id": "dQw4w9WgXcQ",
+    "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+    "author": "Rick Astley",
+    "published_at": "2009-10-25T06:57:33Z",
+    "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+    "meta_file": "raw/youtube-metadata/dQw4w9WgXcQ.json"
+  }
+}
