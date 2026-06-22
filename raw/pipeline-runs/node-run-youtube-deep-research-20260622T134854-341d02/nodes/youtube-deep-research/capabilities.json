@@ -1,0 +1,108 @@
+{
+  "telegram": {
+    "enabled": true,
+    "required": false,
+    "status": "done",
+    "trigger": "done",
+    "triggers": [
+      "start",
+      "done",
+      "failed"
+    ],
+    "message_preview": "✅ Stage B2 完成  1m40s  [node-run-youtube-deep-research-20260622T134854-341d02]\n   🧪 YouTube 深度研究\n   🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R",
+    "sent_at": "2026-06-22T13:51:09Z",
+    "api_ok": true,
+    "error": "",
+    "history": [
+      {
+        "capability": "telegram",
+        "status": "done",
+        "recorded_at": "2026-06-22T13:49:28Z",
+        "trigger": "start",
+        "triggers": [
+          "start",
+          "done",
+          "failed"
+        ],
+        "message_preview": "⏳ Stage B2 开始  [node-run-youtube-deep-research-20260622T134854-341d02]\n   🧪 YouTube 深度研究\n🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R",
+        "sent_at": "2026-06-22T13:49:28Z",
+        "api_ok": true,
+        "error": ""
+      },
+      {
+        "capability": "telegram",
+        "status": "done",
+        "recorded_at": "2026-06-22T13:51:09Z",
+        "trigger": "done",
+        "triggers": [
+          "start",
+          "done",
+          "failed"
+        ],
+        "message_preview": "✅ Stage B2 完成  1m40s  [node-run-youtube-deep-research-20260622T134854-341d02]\n   🧪 YouTube 深度研究\n   🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R",
+        "sent_at": "2026-06-22T13:51:09Z",
+        "api_ok": true,
+        "error": ""
+      }
+    ]
+  },
+  "git": {
+    "enabled": true,
+    "required": false,
+    "status": "running",
+    "managed_by": "runtime-harness",
+    "repository": "skkeoriw/wiki-sop-new-instance",
+    "managed_paths": [
+      "logs/stage-events/node-run-youtube-deep-research-20260622T134854-341d02.jsonl",
+      "raw/node-runs/node-run-youtube-deep-research-20260622T134854-341d02/outputs/files/analysis.md",
+      "raw/node-runs/node-run-youtube-deep-research-20260622T134854-341d02/outputs/files/manifest.json",
+      "raw/node-runs/node-run-youtube-deep-research-20260622T134854-341d02/outputs/files/transcript.txt",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260622T134854-341d02",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/outputs/analysis.md",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/outputs/transcript.txt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/raw/start.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/raw/status.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/raw/transcript.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/raw/transcript.srt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/raw/transcript.txt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/raw/transcript.vtt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/raw/worker-analysis.md"
+    ],
+    "paths": [
+      "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+      "raw/youtube-deep-research/{pipeline_id}/raw/**"
+    ],
+    "credential_source": "GITHUB_TOKEN",
+    "started_at": "2026-06-22T13:51:09Z",
+    "history": [
+      {
+        "capability": "git",
+        "status": "running",
+        "recorded_at": "2026-06-22T13:51:09Z",
+        "managed_by": "runtime-harness",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "managed_paths": [
+          "logs/stage-events/node-run-youtube-deep-research-20260622T134854-341d02.jsonl",
+          "raw/node-runs/node-run-youtube-deep-research-20260622T134854-341d02/outputs/files/analysis.md",
+          "raw/node-runs/node-run-youtube-deep-research-20260622T134854-341d02/outputs/files/manifest.json",
+          "raw/node-runs/node-run-youtube-deep-research-20260622T134854-341d02/outputs/files/transcript.txt",
+          "raw/pipeline-runs/node-run-youtube-deep-research-20260622T134854-341d02",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/outputs/analysis.md",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/outputs/transcript.txt",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/raw/start.json",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/raw/status.json",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/raw/transcript.json",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/raw/transcript.srt",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/raw/transcript.txt",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/raw/transcript.vtt",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/raw/worker-analysis.md"
+        ],
+        "paths": [
+          "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+          "raw/youtube-deep-research/{pipeline_id}/raw/**"
+        ],
+        "credential_source": "GITHUB_TOKEN"
+      }
+    ]
+  }
+}
