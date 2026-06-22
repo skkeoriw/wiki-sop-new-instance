@@ -1,0 +1,117 @@
+{
+  "pipeline_id": "node-run-wiki-build-20260622T104220-5a3066",
+  "node_id": "wiki-build",
+  "run_id": "node-run-wiki-build-20260622T104220-5a3066",
+  "status": "done",
+  "mode": "blocking",
+  "needs": [
+    "notebooklm-research"
+  ],
+  "started_at": "2026-06-22T10:42:50Z",
+  "finished_at": "2026-06-22T10:45:53Z",
+  "duration_s": 183,
+  "attempt": 1,
+  "progress": 100,
+  "inputs": {
+    "reports": "notebooklm-research.outputs.reports"
+  },
+  "outputs": {
+    "index": "index.md",
+    "pages": "wiki/**"
+  },
+  "optional_inputs": {
+    "deep_research": "youtube-deep-research.outputs.analysis_file"
+  },
+  "executor": {
+    "type": "agent-skill",
+    "agent": "hermes",
+    "skill": "sop-wiki-build",
+    "entry": "scripts/run_wiki_build.sh",
+    "model": "configurable",
+    "webhook_route": "sop-wiki-build"
+  },
+  "declared_inputs": {
+    "reports": {
+      "from": "notebooklm-research.outputs.reports",
+      "required": true
+    }
+  },
+  "resolved_inputs": {
+    "reports": [],
+    "deep_research": []
+  },
+  "declared_outputs": {
+    "index": {
+      "path": "index.md",
+      "type": "file"
+    },
+    "pages": {
+      "path": "wiki/**",
+      "type": "files"
+    }
+  },
+  "actual_outputs": {
+    "index": [
+      "index.md"
+    ],
+    "pages": [
+      "wiki/sources/YouTube深度研究补充-神曲重温-Never-Gonna-Give-You-Up-完整歌词版.md",
+      "wiki/sources/永不放弃你-歌词.md"
+    ]
+  },
+  "artifacts": [
+    {
+      "id": "a909ab8f85846403",
+      "producer": "wiki-build",
+      "output": "index",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "index.md",
+      "title": "index.md",
+      "size": 627,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "context"
+    },
+    {
+      "id": "d77c6dcfbee48ca7",
+      "producer": "wiki-build",
+      "output": "pages",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "wiki/sources/YouTube深度研究补充-神曲重温-Never-Gonna-Give-You-Up-完整歌词版.md",
+      "title": "YouTube深度研究补充-神曲重温-Never-Gonna-Give-You-Up-完整歌词版.md",
+      "size": 4315,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "context"
+    },
+    {
+      "id": "749d94d7024d12c3",
+      "producer": "wiki-build",
+      "output": "pages",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "wiki/sources/永不放弃你-歌词.md",
+      "title": "永不放弃你-歌词.md",
+      "size": 3714,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "context"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  },
+  "extra": {
+    "duration_s": 183,
+    "progress": 100
+  },
+  "error": "",
+  "updated_at": "2026-06-22T10:45:53Z"
+}

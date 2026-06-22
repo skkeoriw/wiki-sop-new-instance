@@ -1,0 +1,86 @@
+{
+  "target_pages": 35,
+  "max_pages": 40,
+  "max_entities": 10,
+  "max_concepts": 29,
+  "min_importance_score": 0.65,
+  "pipeline_id": "node-run-wiki-build-20260622T104220-5a3066",
+  "run_id": "node-run-wiki-build-20260622T104220-5a3066",
+  "selected_sources": [
+    {
+      "title": "YouTube深度研究补充：【神曲重温】Never Gonna Give You Up 完整歌词版",
+      "slug": "YouTube深度研究补充-神曲重温-Never-Gonna-Give-You-Up-完整歌词版"
+    },
+    {
+      "title": "永不放弃你 歌词",
+      "slug": "永不放弃你-歌词"
+    }
+  ],
+  "selected_entities": [],
+  "selected_concepts": [],
+  "selected_mindmaps": [],
+  "skipped_candidates": [
+    {
+      "name": "Rick Astley",
+      "slug": "rick-astley",
+      "action": "merge",
+      "importance_score": 0.9,
+      "merge_target": "rick-astley.md",
+      "reason": "报告核心人物，已有独立实体页",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "Never Gonna Give You Up",
+      "slug": "never-gonna-give-you-up",
+      "action": "merge",
+      "importance_score": 0.9,
+      "merge_target": "never-gonna-give-you-up.md",
+      "reason": "报告分析对象，已有独立实体页",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "瑞克摇",
+      "slug": "瑞克摇",
+      "action": "merge",
+      "importance_score": 0.9,
+      "merge_target": "瑞克摇.md",
+      "reason": "报告明确提及网络文化源头，已有概念页",
+      "kind": "concept",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "洗脑神曲",
+      "slug": "洗脑神曲",
+      "action": "merge",
+      "importance_score": 0.7,
+      "merge_target": "洗脑神曲.md",
+      "reason": "报告称旋律洗脑、朗朗上口，已有概念页",
+      "kind": "concept",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "Never Gonna Give You Up",
+      "slug": "never-gonna-give-you-up",
+      "action": "merge",
+      "importance_score": 1.0,
+      "merge_target": "never-gonna-give-you-up.md",
+      "reason": "歌词中反复出现的歌曲名称，与已有实体完全相同",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    }
+  ],
+  "estimated_llm_calls": 3,
+  "actual_llm_calls": 5,
+  "prompt_tokens": 7124,
+  "completion_tokens": 7477,
+  "generated_pages": [
+    "wiki/sources/YouTube深度研究补充-神曲重温-Never-Gonna-Give-You-Up-完整歌词版.md",
+    "wiki/sources/永不放弃你-歌词.md"
+  ],
+  "failed_pages": [],
+  "status": "done",
+  "updated_at": "2026-06-22T10:45:53Z",
+  "generated_pages_count": 2
+}

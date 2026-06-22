@@ -1,0 +1,76 @@
+{
+  "telegram": {
+    "enabled": false,
+    "required": false,
+    "status": "disabled",
+    "managed_by": "runtime-harness",
+    "trigger": "done",
+    "triggers": [
+      "start",
+      "done",
+      "failed",
+      "skipped"
+    ],
+    "reason": "telegram capability disabled",
+    "finished_at": "2026-06-22T10:45:53Z",
+    "history": [
+      {
+        "capability": "telegram",
+        "status": "disabled",
+        "recorded_at": "2026-06-22T10:45:53Z",
+        "trigger": "done",
+        "triggers": [
+          "start",
+          "done",
+          "failed",
+          "skipped"
+        ],
+        "reason": "telegram capability disabled",
+        "managed_by": "runtime-harness"
+      }
+    ]
+  },
+  "git": {
+    "enabled": true,
+    "required": false,
+    "status": "running",
+    "managed_by": "runtime-harness",
+    "repository": "skkeoriw/wiki-sop-new-instance",
+    "managed_paths": [
+      "index.md",
+      "logs/stage-events/node-run-wiki-build-20260622T104220-5a3066.jsonl",
+      "raw/node-runs/node-run-wiki-build-20260622T104220-5a3066/outputs/files/index.md",
+      "raw/node-runs/node-run-wiki-build-20260622T104220-5a3066/outputs/files/manifest.json",
+      "raw/node-runs/node-run-wiki-build-20260622T104220-5a3066/outputs/files/wiki/sources/YouTube深度研究补充-神曲重温-Never-Gonna-Give-You-Up-完整歌词版.md",
+      "raw/node-runs/node-run-wiki-build-20260622T104220-5a3066/outputs/files/wiki/sources/永不放弃你-歌词.md",
+      "raw/pipeline-runs/node-run-wiki-build-20260622T104220-5a3066",
+      "wiki/sources/YouTube深度研究补充-神曲重温-Never-Gonna-Give-You-Up-完整歌词版.md",
+      "wiki/sources/永不放弃你-歌词.md"
+    ],
+    "paths": [],
+    "credential_source": "GITHUB_TOKEN",
+    "started_at": "2026-06-22T10:45:53Z",
+    "history": [
+      {
+        "capability": "git",
+        "status": "running",
+        "recorded_at": "2026-06-22T10:45:53Z",
+        "managed_by": "runtime-harness",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "managed_paths": [
+          "index.md",
+          "logs/stage-events/node-run-wiki-build-20260622T104220-5a3066.jsonl",
+          "raw/node-runs/node-run-wiki-build-20260622T104220-5a3066/outputs/files/index.md",
+          "raw/node-runs/node-run-wiki-build-20260622T104220-5a3066/outputs/files/manifest.json",
+          "raw/node-runs/node-run-wiki-build-20260622T104220-5a3066/outputs/files/wiki/sources/YouTube深度研究补充-神曲重温-Never-Gonna-Give-You-Up-完整歌词版.md",
+          "raw/node-runs/node-run-wiki-build-20260622T104220-5a3066/outputs/files/wiki/sources/永不放弃你-歌词.md",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T104220-5a3066",
+          "wiki/sources/YouTube深度研究补充-神曲重温-Never-Gonna-Give-You-Up-完整歌词版.md",
+          "wiki/sources/永不放弃你-歌词.md"
+        ],
+        "paths": [],
+        "credential_source": "GITHUB_TOKEN"
+      }
+    ]
+  }
+}
