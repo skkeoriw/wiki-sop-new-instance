@@ -49,7 +49,7 @@
   "git": {
     "enabled": true,
     "required": false,
-    "status": "running",
+    "status": "done",
     "managed_by": "runtime-harness",
     "repository": "skkeoriw/wiki-sop-new-instance",
     "managed_paths": [
@@ -102,7 +102,96 @@
           "raw/youtube-deep-research/{pipeline_id}/raw/**"
         ],
         "credential_source": "GITHUB_TOKEN"
+      },
+      {
+        "capability": "git",
+        "status": "done",
+        "recorded_at": "2026-06-22T08:10:19Z",
+        "error": "",
+        "managed_by": "runtime-harness",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "managed_paths": [
+          "logs/stage-events/node-run-youtube-deep-research-20260622T080753-a589d3.jsonl",
+          "raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/files/analysis.md",
+          "raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/files/manifest.json",
+          "raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/files/transcript.txt",
+          "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/analysis.md",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/transcript.txt",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/start.json",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/status.json",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/transcript.json",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/transcript.srt",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/transcript.txt",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/transcript.vtt",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/worker-analysis.md"
+        ],
+        "paths": [
+          "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+          "raw/youtube-deep-research/{pipeline_id}/raw/**"
+        ],
+        "commit": "f007723",
+        "commit_message": "chore: node-youtube-deep-research outputs [pipe:node-run-youtube-deep-research-20260622T080753-a589d3] [run:node-run-youtube-deep-research-20260622T080753-a589d3]",
+        "pushed": true,
+        "changed_files": [
+          "logs/stage-events/node-run-youtube-deep-research-20260622T080753-a589d3.jsonl",
+          "raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/files/analysis.md",
+          "raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/files/manifest.json",
+          "raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/files/transcript.txt",
+          "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/artifacts.json",
+          "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/context.json",
+          "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/dag.json",
+          "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/events.jsonl",
+          "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/nodes/youtube-deep-research.json",
+          "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/nodes/youtube-deep-research/artifacts.json",
+          "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/nodes/youtube-deep-research/capabilities.json",
+          "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/nodes/youtube-deep-research/input.json",
+          "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/nodes/youtube-deep-research/output.json",
+          "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/nodes/youtube-deep-research/state.json",
+          "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/run.json",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/analysis.md",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/transcript.txt",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/start.json",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/status.json",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/transcript.json",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/transcript.srt",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/transcript.txt",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/transcript.vtt",
+          "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/worker-analysis.md"
+        ],
+        "credential_source": "GITHUB_TOKEN"
       }
-    ]
+    ],
+    "commit": "f007723",
+    "commit_message": "chore: node-youtube-deep-research outputs [pipe:node-run-youtube-deep-research-20260622T080753-a589d3] [run:node-run-youtube-deep-research-20260622T080753-a589d3]",
+    "pushed": true,
+    "changed_files": [
+      "logs/stage-events/node-run-youtube-deep-research-20260622T080753-a589d3.jsonl",
+      "raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/files/analysis.md",
+      "raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/files/manifest.json",
+      "raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/files/transcript.txt",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/artifacts.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/context.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/dag.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/events.jsonl",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/nodes/youtube-deep-research.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/nodes/youtube-deep-research/artifacts.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/nodes/youtube-deep-research/capabilities.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/nodes/youtube-deep-research/input.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/nodes/youtube-deep-research/output.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/nodes/youtube-deep-research/state.json",
+      "raw/pipeline-runs/node-run-youtube-deep-research-20260622T080753-a589d3/run.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/analysis.md",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/transcript.txt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/start.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/status.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/transcript.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/transcript.srt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/transcript.txt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/transcript.vtt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/raw/worker-analysis.md"
+    ],
+    "finished_at": "2026-06-22T08:10:19Z",
+    "error": ""
   }
 }
