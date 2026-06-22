@@ -124,36 +124,30 @@
           "\"wiki/sources/\\347\\221\\236\\345\\205\\213-\\351\\230\\277\\346\\226\\257\\347\\211\\271\\345\\210\\251-\\346\\260\\270\\344\\270\\215\\346\\224\\276\\345\\274\\203\\344\\275\\240-\\345\\256\\230\\346\\226\\271MV-\\345\\210\\206\\346\\236\\220\\346\\212\\245\\345\\221\\212.md\""
         ],
         "credential_source": "GITHUB_TOKEN"
+      },
+      {
+        "capability": "git",
+        "status": "done",
+        "recorded_at": "2026-06-22T03:09:45Z",
+        "error": "",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "commit": "e0401f4",
+        "commit_message": "chore: stage-c event [run:node-run-wiki-build-relay-io-protocol-20260622T030602Z]",
+        "pushed": true,
+        "changed_files": [
+          "raw/pipeline-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/events.jsonl",
+          "raw/pipeline-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/nodes/wiki-build/capabilities.json"
+        ]
       }
     ],
-    "commit": "9d09f44",
-    "commit_message": "chore: node-wiki-build outputs [pipe:node-run-wiki-build-relay-io-protocol-20260622T030602Z] [run:node-run-wiki-build-relay-io-protocol-20260622T030602Z]",
+    "commit": "e0401f4",
+    "commit_message": "chore: stage-c event [run:node-run-wiki-build-relay-io-protocol-20260622T030602Z]",
     "pushed": true,
     "changed_files": [
-      "index.md",
-      "logs/stage-events/node-run-wiki-build-relay-io-protocol-20260622T030602Z.jsonl",
-      "raw/node-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/outputs/files/index.md",
-      "raw/node-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/outputs/files/manifest.json",
-      "\"raw/node-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/outputs/files/wiki/concepts/\\347\\221\\236\\345\\205\\213\\346\\221\\207.md\"",
-      "\"raw/node-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/outputs/files/wiki/sources/\\346\\260\\270\\344\\270\\215\\346\\224\\276\\345\\274\\203\\344\\275\\240-\\346\\255\\214\\350\\257\\215.md\"",
-      "\"raw/node-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/outputs/files/wiki/sources/\\347\\221\\236\\345\\205\\213-\\351\\230\\277\\346\\226\\257\\347\\211\\271\\345\\210\\251-\\346\\260\\270\\344\\270\\215\\346\\224\\276\\345\\274\\203\\344\\275\\240-\\345\\256\\230\\346\\226\\271MV-\\345\\210\\206\\346\\236\\220\\346\\212\\245\\345\\221\\212.md\"",
-      "raw/pipeline-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/artifacts.json",
-      "raw/pipeline-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/context.json",
-      "raw/pipeline-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/dag.json",
       "raw/pipeline-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/events.jsonl",
-      "raw/pipeline-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/nodes/wiki-build.json",
-      "raw/pipeline-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/nodes/wiki-build/artifacts.json",
-      "raw/pipeline-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/nodes/wiki-build/capabilities.json",
-      "raw/pipeline-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/nodes/wiki-build/input.json",
-      "raw/pipeline-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/nodes/wiki-build/output.json",
-      "raw/pipeline-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/nodes/wiki-build/plan.json",
-      "raw/pipeline-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/nodes/wiki-build/state.json",
-      "raw/pipeline-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/run.json",
-      "\"wiki/concepts/\\347\\221\\236\\345\\205\\213\\346\\221\\207.md\"",
-      "\"wiki/sources/\\346\\260\\270\\344\\270\\215\\346\\224\\276\\345\\274\\203\\344\\275\\240-\\346\\255\\214\\350\\257\\215.md\"",
-      "\"wiki/sources/\\347\\221\\236\\345\\205\\213-\\351\\230\\277\\346\\226\\257\\347\\211\\271\\345\\210\\251-\\346\\260\\270\\344\\270\\215\\346\\224\\276\\345\\274\\203\\344\\275\\240-\\345\\256\\230\\346\\226\\271MV-\\345\\210\\206\\346\\236\\220\\346\\212\\245\\345\\221\\212.md\""
+      "raw/pipeline-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/nodes/wiki-build/capabilities.json"
     ],
-    "finished_at": "2026-06-22T03:09:43Z",
+    "finished_at": "2026-06-22T03:09:45Z",
     "error": ""
   }
 }
