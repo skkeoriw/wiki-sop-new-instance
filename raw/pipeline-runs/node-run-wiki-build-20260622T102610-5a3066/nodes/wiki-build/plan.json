@@ -1,0 +1,106 @@
+{
+  "target_pages": 35,
+  "max_pages": 40,
+  "max_entities": 10,
+  "max_concepts": 29,
+  "min_importance_score": 0.65,
+  "pipeline_id": "node-run-wiki-build-20260622T102610-5a3066",
+  "run_id": "node-run-wiki-build-20260622T102610-5a3066",
+  "selected_sources": [
+    {
+      "title": "YouTube深度研究补充：【神曲重温】Never Gonna Give You Up 完整歌词版",
+      "slug": "YouTube深度研究补充-神曲重温-Never-Gonna-Give-You-Up-完整歌词版"
+    },
+    {
+      "title": "瑞克·阿斯特利《永不放弃你》完整歌词",
+      "slug": "瑞克-阿斯特利-永不放弃你-完整歌词"
+    }
+  ],
+  "selected_entities": [],
+  "selected_concepts": [],
+  "selected_mindmaps": [],
+  "skipped_candidates": [
+    {
+      "name": "Rick Astley",
+      "slug": "rick-astley",
+      "action": "merge",
+      "importance_score": 0.9,
+      "merge_target": "rick-astley.md",
+      "reason": "同一位歌手，已有实体页",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "Never Gonna Give You Up",
+      "slug": "never-gonna-give-you-up",
+      "action": "merge",
+      "importance_score": 0.95,
+      "merge_target": "never-gonna-give-you-up.md",
+      "reason": "同一首歌曲，已有实体页",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "瑞克摇",
+      "slug": "瑞克摇",
+      "action": "merge",
+      "importance_score": 0.8,
+      "merge_target": "瑞克摇.md",
+      "reason": "同一网络迷因概念，已有概念页",
+      "kind": "concept",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "洗脑神曲",
+      "slug": "洗脑神曲",
+      "action": "merge",
+      "importance_score": 0.6,
+      "merge_target": "洗脑神曲.md",
+      "reason": "同一概念，已有页面",
+      "kind": "concept",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "歌词版视频",
+      "slug": "歌词版视频",
+      "action": "new",
+      "importance_score": 0.5,
+      "merge_target": null,
+      "reason": "一种显示歌词的音乐视频形式，目前无独立概念页，值得建立以丰富知识图谱",
+      "kind": "concept",
+      "skip_reason": "below_importance_threshold"
+    },
+    {
+      "name": "Rick Astley",
+      "slug": "rick-astley",
+      "action": "merge",
+      "importance_score": 0.9,
+      "merge_target": "rick-astley.md",
+      "reason": "歌手Rick Astley，已有实体页面",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "Never Gonna Give You Up",
+      "slug": "never-gonna-give-you-up",
+      "action": "merge",
+      "importance_score": 0.9,
+      "merge_target": "never-gonna-give-you-up.md",
+      "reason": "歌曲，已有实体页面",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    }
+  ],
+  "estimated_llm_calls": 3,
+  "actual_llm_calls": 5,
+  "prompt_tokens": 7034,
+  "completion_tokens": 8282,
+  "generated_pages": [
+    "wiki/sources/YouTube深度研究补充-神曲重温-Never-Gonna-Give-You-Up-完整歌词版.md",
+    "wiki/sources/瑞克-阿斯特利-永不放弃你-完整歌词.md"
+  ],
+  "failed_pages": [],
+  "status": "done",
+  "updated_at": "2026-06-22T10:28:53Z",
+  "generated_pages_count": 2
+}
