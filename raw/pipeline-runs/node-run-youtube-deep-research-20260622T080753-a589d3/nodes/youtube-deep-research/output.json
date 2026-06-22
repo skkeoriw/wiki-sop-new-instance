@@ -1,0 +1,25 @@
+{
+  "declared_outputs": {
+    "analysis_file": {
+      "path": "raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md",
+      "type": "file"
+    },
+    "transcript_file": {
+      "path": "raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt",
+      "type": "file"
+    }
+  },
+  "actual_outputs": {
+    "analysis_file": [
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/analysis.md"
+    ],
+    "transcript_file": [
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/transcript.txt"
+    ]
+  },
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  }
+}
