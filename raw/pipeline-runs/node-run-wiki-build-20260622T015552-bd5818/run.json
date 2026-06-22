@@ -9,11 +9,11 @@
     "youtube-fetch": "waiting",
     "notebooklm-research": "waiting",
     "youtube-deep-research": "waiting",
-    "wiki-build": "running",
+    "wiki-build": "failed",
     "tg-notify": "waiting",
     "retry": "waiting"
   },
   "last_run_id": "node-run-wiki-build-20260622T015552-bd5818",
   "started_at": "2026-06-22T01:55:53Z",
-  "updated_at": "2026-06-22T01:55:53Z"
+  "updated_at": "2026-06-22T02:00:11Z"
 }

@@ -59,15 +59,16 @@
   "selected_mindmaps": [],
   "skipped_candidates": [],
   "estimated_llm_calls": 7,
-  "actual_llm_calls": 6,
-  "prompt_tokens": 2253,
-  "completion_tokens": 10863,
+  "actual_llm_calls": 7,
+  "prompt_tokens": 2590,
+  "completion_tokens": 12048,
   "generated_pages": [
     "wiki/sources/瑞克-阿斯特利-永不放弃你.md",
     "wiki/entities/rick-astley.md",
     "wiki/entities/never-gonna-give-you-up.md",
     "wiki/concepts/互联网迷因.md",
-    "wiki/concepts/音乐视频传播.md"
+    "wiki/concepts/音乐视频传播.md",
+    "wiki/concepts/流行文化引用.md"
   ],
   "failed_pages": [],
   "status": "running",
