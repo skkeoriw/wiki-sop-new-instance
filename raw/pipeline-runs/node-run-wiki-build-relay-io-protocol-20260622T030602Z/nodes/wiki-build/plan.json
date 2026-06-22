@@ -1,0 +1,106 @@
+{
+  "target_pages": 35,
+  "max_pages": 40,
+  "max_entities": 10,
+  "max_concepts": 29,
+  "min_importance_score": 0.65,
+  "pipeline_id": "node-run-wiki-build-relay-io-protocol-20260622T030602Z",
+  "run_id": "node-run-wiki-build-relay-io-protocol-20260622T030602Z",
+  "selected_sources": [
+    {
+      "title": "瑞克·阿斯特利《Never Gonna Give You Up》官方MV分析报告",
+      "slug": "瑞克-阿斯特利-永不放弃你-官方MV-分析报告"
+    },
+    {
+      "title": "永不放弃你歌词",
+      "slug": "永不放弃你-歌词"
+    }
+  ],
+  "selected_entities": [],
+  "selected_concepts": [
+    {
+      "name": "瑞克摇",
+      "slug": "瑞克摇",
+      "action": "new",
+      "importance_score": 0.9,
+      "merge_target": null,
+      "reason": "Rickroll作为基于该歌曲的特定互联网迷因，值得独立建页"
+    }
+  ],
+  "selected_mindmaps": [],
+  "skipped_candidates": [
+    {
+      "name": "Rick Astley",
+      "slug": "rick-astley",
+      "action": "merge",
+      "importance_score": 1.0,
+      "merge_target": "rick-astley.md",
+      "reason": "与已有艺人页面语义相同",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "Never Gonna Give You Up",
+      "slug": "never-gonna-give-you-up",
+      "action": "merge",
+      "importance_score": 1.0,
+      "merge_target": "never-gonna-give-you-up.md",
+      "reason": "这首歌曲已有独立页面",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "互联网迷因",
+      "slug": "互联网迷因",
+      "action": "merge",
+      "importance_score": 1.0,
+      "merge_target": "互联网迷因.md",
+      "reason": "报告提及该概念，与现有页面高度一致",
+      "kind": "concept",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "Rick Astley",
+      "slug": "rick-astley",
+      "action": "merge",
+      "importance_score": 1.0,
+      "merge_target": "rick-astley.md",
+      "reason": "歌曲演唱者，已有独立人物页面",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "Never Gonna Give You Up",
+      "slug": "never-gonna-give-you-up",
+      "action": "merge",
+      "importance_score": 1.0,
+      "merge_target": "never-gonna-give-you-up.md",
+      "reason": "歌词所属歌曲，已有完整歌曲信息页面",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "瑞克摇",
+      "slug": "瑞克摇",
+      "action": "merge",
+      "importance_score": 0.9,
+      "merge_target": "瑞克摇.md",
+      "reason": "歌词是瑞克摇互联网迷因的基础载体，概念页已存在",
+      "kind": "concept",
+      "skip_reason": "action_merge"
+    }
+  ],
+  "estimated_llm_calls": 4,
+  "actual_llm_calls": 6,
+  "prompt_tokens": 7431,
+  "completion_tokens": 12468,
+  "generated_pages": [
+    "wiki/concepts/瑞克摇.md",
+    "wiki/sources/永不放弃你-歌词.md",
+    "wiki/sources/瑞克-阿斯特利-永不放弃你-官方MV-分析报告.md"
+  ],
+  "failed_pages": [],
+  "status": "done",
+  "updated_at": "2026-06-22T03:09:42Z",
+  "generated_pages_count": 3
+}

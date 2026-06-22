@@ -1,0 +1,34 @@
+{
+  "pipeline_id": "node-run-wiki-build-relay-io-protocol-20260622T030602Z",
+  "node_id": "wiki-build",
+  "run_id": "node-run-wiki-build-relay-io-protocol-20260622T030602Z",
+  "status": "done",
+  "mode": "blocking",
+  "needs": [
+    "notebooklm-research"
+  ],
+  "started_at": "2026-06-22T03:06:04Z",
+  "finished_at": "2026-06-22T03:09:42Z",
+  "duration_s": 218,
+  "attempt": 1,
+  "progress": 100,
+  "executor": {
+    "type": "agent-skill",
+    "agent": "hermes",
+    "skill": "sop-wiki-build",
+    "entry": "scripts/run_wiki_build.sh",
+    "model": "configurable",
+    "webhook_route": "sop-wiki-build"
+  },
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  },
+  "extra": {
+    "duration_s": 218,
+    "progress": 100
+  },
+  "error": "",
+  "updated_at": "2026-06-22T03:09:42Z"
+}

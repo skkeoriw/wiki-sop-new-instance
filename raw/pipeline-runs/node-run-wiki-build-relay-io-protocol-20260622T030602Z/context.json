@@ -1,0 +1,120 @@
+{
+  "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "source_type": "youtube",
+  "node_run_resolved_inputs": {
+    "reports": "raw/node-runs/node-run-youtube-deep-research-io-protocol-20260622T030240Z/outputs/files/manifest.json",
+    "deep_research": "raw/node-runs/node-run-youtube-deep-research-io-protocol-20260622T030240Z/outputs/files/manifest.json"
+  },
+  "stage_b": {
+    "output_files": [
+      "raw/node-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/inputs/sources/0001.md"
+    ]
+  },
+  "pipeline_id": "node-run-wiki-build-relay-io-protocol-20260622T030602Z",
+  "node_run": {
+    "node_run_id": "node-run-wiki-build-relay-io-protocol-20260622T030602Z",
+    "node_id": "wiki-build",
+    "mode": "real-node",
+    "input_source": "existing-node-run",
+    "base_run_id": "",
+    "source_node_run_id": "node-run-youtube-deep-research-io-protocol-20260622T030240Z",
+    "input_manifest": "raw/node-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/inputs/sources/manifest.json",
+    "input_directory": "raw/node-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/inputs/sources",
+    "input_files": [
+      "raw/node-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/inputs/sources/0001.md",
+      "raw/node-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/inputs/sources/0002.txt"
+    ],
+    "capability_overrides": {
+      "git": {
+        "enabled": true,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "paths": []
+      },
+      "telegram": {
+        "enabled": false,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run"
+      }
+    },
+    "definition_scope_reports": {
+      "instance_override": {
+        "status": "unchanged",
+        "changed": {}
+      },
+      "project_default_request": {
+        "status": "skipped"
+      }
+    },
+    "created_at": "2026-06-22T03:06:03.994468+00:00"
+  },
+  "stage_c": {
+    "run_id": "node-run-wiki-build-relay-io-protocol-20260622T030602Z",
+    "start_time": "2026-06-22T03:06:04Z",
+    "end_time": "2026-06-22T03:09:42Z",
+    "duration_s": 217,
+    "llm_calls": 6,
+    "pages_created_total": 9,
+    "pages_new_this_run": 3,
+    "pages_updated_this_run": 0,
+    "file_paths": [
+      "wiki/concepts/瑞克摇.md",
+      "wiki/sources/永不放弃你-歌词.md",
+      "wiki/sources/瑞克-阿斯特利-永不放弃你-官方MV-分析报告.md"
+    ],
+    "sources": 3,
+    "entities": 2,
+    "concepts": 4,
+    "comparisons": 0,
+    "prompt_tokens": 7431,
+    "completion_tokens": 12468,
+    "status": "success"
+  },
+  "node_run_input_manifest": "raw/node-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/inputs/sources/manifest.json",
+  "node_run_input_files": [
+    "raw/node-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/inputs/sources/0001.md",
+    "raw/node-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/inputs/sources/0002.txt"
+  ],
+  "stage_deep_research": {
+    "run_id": "node-run-youtube-deep-research-io-protocol-20260622T030240Z",
+    "job_id": "796f4a0e-f04a-4b62-8c9c-e75cb688690e",
+    "status": "completed",
+    "start_time": "",
+    "end_time": "2026-06-22T03:04:13Z",
+    "output_files": [
+      "raw/youtube-deep-research/node-run-youtube-deep-research-io-protocol-20260622T030240Z/outputs/analysis.md",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-io-protocol-20260622T030240Z/outputs/transcript.txt"
+    ],
+    "raw_files": [
+      "raw/youtube-deep-research/node-run-youtube-deep-research-io-protocol-20260622T030240Z/raw/start.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-io-protocol-20260622T030240Z/raw/status.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-io-protocol-20260622T030240Z/raw/transcript.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-io-protocol-20260622T030240Z/raw/transcript.srt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-io-protocol-20260622T030240Z/raw/transcript.txt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-io-protocol-20260622T030240Z/raw/transcript.vtt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-io-protocol-20260622T030240Z/raw/worker-analysis.md"
+    ],
+    "worker_files": {
+      "transcript_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/796f4a0e-f04a-4b62-8c9c-e75cb688690e/transcript",
+      "transcript_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/796f4a0e-f04a-4b62-8c9c-e75cb688690e/transcript?format=txt",
+      "transcript_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/796f4a0e-f04a-4b62-8c9c-e75cb688690e/transcript?format=srt",
+      "transcript_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/796f4a0e-f04a-4b62-8c9c-e75cb688690e/transcript?format=vtt",
+      "transcript_csv": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/796f4a0e-f04a-4b62-8c9c-e75cb688690e/transcript?format=csv",
+      "analysis_md": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/796f4a0e-f04a-4b62-8c9c-e75cb688690e/transcript?format=md",
+      "translated_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/796f4a0e-f04a-4b62-8c9c-e75cb688690e/transcript?translated=1",
+      "translated_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/796f4a0e-f04a-4b62-8c9c-e75cb688690e/transcript?format=srt&translated=1",
+      "translated_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/796f4a0e-f04a-4b62-8c9c-e75cb688690e/transcript?format=vtt&translated=1",
+      "translated_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/796f4a0e-f04a-4b62-8c9c-e75cb688690e/transcript?format=txt&translated=1"
+    },
+    "chunks_total": 1,
+    "chunks_done": 1
+  },
+  "stage_b2": {
+    "analysis_file": "raw/node-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/inputs/sources/0001.md",
+    "output_files": [
+      "raw/node-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/inputs/sources/0001.md"
+    ]
+  }
+}
