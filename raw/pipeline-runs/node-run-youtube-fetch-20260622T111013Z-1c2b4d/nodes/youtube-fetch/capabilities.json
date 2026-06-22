@@ -130,29 +130,30 @@
           "raw/pipeline-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/run.json"
         ],
         "credential_source": "GITHUB_TOKEN"
+      },
+      {
+        "capability": "git",
+        "status": "done",
+        "recorded_at": "2026-06-22T11:10:57Z",
+        "error": "",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "commit": "8ff16a8",
+        "commit_message": "chore: stage-a event [run:node-run-youtube-fetch-20260622T111013Z-1c2b4d]",
+        "pushed": true,
+        "changed_files": [
+          "raw/pipeline-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/events.jsonl",
+          "raw/pipeline-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/nodes/youtube-fetch/capabilities.json"
+        ]
       }
     ],
-    "commit": "ad2c567",
-    "commit_message": "chore: node-youtube-fetch outputs [pipe:node-run-youtube-fetch-20260622T111013Z-1c2b4d] [run:node-run-youtube-fetch-20260622T111013Z-1c2b4d]",
+    "commit": "8ff16a8",
+    "commit_message": "chore: stage-a event [run:node-run-youtube-fetch-20260622T111013Z-1c2b4d]",
     "pushed": true,
     "changed_files": [
-      "logs/stage-events/node-run-youtube-fetch-20260622T111013Z-1c2b4d.jsonl",
-      "raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/outputs/files/manifest.json",
-      "raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/outputs/files/metadata.json",
-      "raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/outputs/files/source-url.txt",
-      "raw/pipeline-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/artifacts.json",
-      "raw/pipeline-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/context.json",
-      "raw/pipeline-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/dag.json",
       "raw/pipeline-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/events.jsonl",
-      "raw/pipeline-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/nodes/youtube-fetch.json",
-      "raw/pipeline-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/nodes/youtube-fetch/artifacts.json",
-      "raw/pipeline-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/nodes/youtube-fetch/capabilities.json",
-      "raw/pipeline-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/nodes/youtube-fetch/input.json",
-      "raw/pipeline-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/nodes/youtube-fetch/output.json",
-      "raw/pipeline-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/nodes/youtube-fetch/state.json",
-      "raw/pipeline-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/run.json"
+      "raw/pipeline-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/nodes/youtube-fetch/capabilities.json"
     ],
-    "finished_at": "2026-06-22T11:10:55Z",
+    "finished_at": "2026-06-22T11:10:57Z",
     "error": ""
   }
 }
