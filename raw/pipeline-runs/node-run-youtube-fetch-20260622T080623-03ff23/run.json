@@ -1,0 +1,19 @@
+{
+  "pipeline_id": "node-run-youtube-fetch-20260622T080623-03ff23",
+  "sop_id": "youtube-research-wiki",
+  "repo": "skkeoriw/wiki-sop-new-instance",
+  "status": "running",
+  "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "source_type": "youtube",
+  "nodes": {
+    "youtube-fetch": "done",
+    "notebooklm-research": "waiting",
+    "youtube-deep-research": "waiting",
+    "wiki-build": "waiting",
+    "tg-notify": "waiting",
+    "retry": "waiting"
+  },
+  "last_run_id": "node-run-youtube-fetch-20260622T080623-03ff23",
+  "started_at": "2026-06-22T08:06:53Z",
+  "updated_at": "2026-06-22T08:06:57Z"
+}
