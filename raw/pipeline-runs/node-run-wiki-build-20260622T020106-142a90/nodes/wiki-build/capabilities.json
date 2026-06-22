@@ -92,28 +92,30 @@
           "raw/pipeline-runs/node-run-wiki-build-20260622T020106-142a90/run.json"
         ],
         "credential_source": "GITHUB_TOKEN"
+      },
+      {
+        "capability": "git",
+        "status": "done",
+        "recorded_at": "2026-06-22T02:02:20Z",
+        "error": "",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "commit": "c4efa84",
+        "commit_message": "chore: stage-c event [run:node-run-wiki-build-20260622T020106-142a90]",
+        "pushed": true,
+        "changed_files": [
+          "raw/pipeline-runs/node-run-wiki-build-20260622T020106-142a90/events.jsonl",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T020106-142a90/nodes/wiki-build/capabilities.json"
+        ]
       }
     ],
-    "commit": "0e11b20",
-    "commit_message": "chore: node-wiki-build outputs [pipe:node-run-wiki-build-20260622T020106-142a90] [run:node-run-wiki-build-20260622T020106-142a90]",
+    "commit": "c4efa84",
+    "commit_message": "chore: stage-c event [run:node-run-wiki-build-20260622T020106-142a90]",
     "pushed": true,
     "changed_files": [
-      "index.md",
-      "logs/stage-events/node-run-wiki-build-20260622T020106-142a90.jsonl",
-      "raw/pipeline-runs/node-run-wiki-build-20260622T020106-142a90/artifacts.json",
-      "raw/pipeline-runs/node-run-wiki-build-20260622T020106-142a90/context.json",
-      "raw/pipeline-runs/node-run-wiki-build-20260622T020106-142a90/dag.json",
       "raw/pipeline-runs/node-run-wiki-build-20260622T020106-142a90/events.jsonl",
-      "raw/pipeline-runs/node-run-wiki-build-20260622T020106-142a90/nodes/wiki-build.json",
-      "raw/pipeline-runs/node-run-wiki-build-20260622T020106-142a90/nodes/wiki-build/artifacts.json",
-      "raw/pipeline-runs/node-run-wiki-build-20260622T020106-142a90/nodes/wiki-build/capabilities.json",
-      "raw/pipeline-runs/node-run-wiki-build-20260622T020106-142a90/nodes/wiki-build/input.json",
-      "raw/pipeline-runs/node-run-wiki-build-20260622T020106-142a90/nodes/wiki-build/output.json",
-      "raw/pipeline-runs/node-run-wiki-build-20260622T020106-142a90/nodes/wiki-build/plan.json",
-      "raw/pipeline-runs/node-run-wiki-build-20260622T020106-142a90/nodes/wiki-build/state.json",
-      "raw/pipeline-runs/node-run-wiki-build-20260622T020106-142a90/run.json"
+      "raw/pipeline-runs/node-run-wiki-build-20260622T020106-142a90/nodes/wiki-build/capabilities.json"
     ],
-    "finished_at": "2026-06-22T02:02:18Z",
+    "finished_at": "2026-06-22T02:02:20Z",
     "error": ""
   }
 }
