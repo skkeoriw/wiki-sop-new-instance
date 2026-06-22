@@ -14,18 +14,18 @@
       "author": "Rick Astley"
     }
   },
-  "pipeline_id": "node-run-youtube-fetch-20260622T111013Z-1c2b4d",
+  "pipeline_id": "node-run-youtube-fetch-20260622T134710-842f65",
   "node_run": {
-    "node_run_id": "node-run-youtube-fetch-20260622T111013Z-1c2b4d",
+    "node_run_id": "node-run-youtube-fetch-20260622T134710-842f65",
     "node_id": "youtube-fetch",
     "mode": "real-node",
     "input_source": "generated-fixture",
     "base_run_id": "",
     "source_node_run_id": "",
-    "input_manifest": "raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/inputs/sources/manifest.json",
-    "input_directory": "raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/inputs/sources",
+    "input_manifest": "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/inputs/sources/manifest.json",
+    "input_directory": "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/inputs/sources",
     "input_files": [
-      "raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/inputs/sources/0001.txt"
+      "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/inputs/sources/0001.txt"
     ],
     "capability_overrides": {
       "git": {
@@ -39,7 +39,7 @@
         ]
       },
       "telegram": {
-        "enabled": true,
+        "enabled": false,
         "required": false,
         "managed_by": "runtime-harness",
         "save_scope": "run"
@@ -54,7 +54,7 @@
         "status": "skipped"
       }
     },
-    "created_at": "2026-06-22T11:10:16.506765+00:00"
+    "created_at": "2026-06-22T13:47:11.271283+00:00"
   },
   "stage_c": {
     "run_id": "node-run-wiki-build-20260622T104220-5a3066",
@@ -77,40 +77,40 @@
     "completion_tokens": 7477,
     "status": "success"
   },
-  "node_run_input_manifest": "raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/inputs/sources/manifest.json",
+  "node_run_input_manifest": "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/inputs/sources/manifest.json",
   "node_run_input_files": [
-    "raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/inputs/sources/0001.txt"
+    "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/inputs/sources/0001.txt"
   ],
   "stage_deep_research": {
-    "run_id": "node-run-youtube-deep-research-20260622T102318-ecb0ee",
-    "job_id": "575ae718-7306-4535-b9b0-8eed88ac20cc",
+    "run_id": "node-run-youtube-deep-research-20260622T111234Z-a32a89",
+    "job_id": "e4e48cd4-2ec4-4901-af32-19a38a896c7e",
     "status": "completed",
     "start_time": "",
-    "end_time": "2026-06-22T10:25:13Z",
+    "end_time": "2026-06-22T11:14:41Z",
     "output_files": [
-      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T102318-ecb0ee/outputs/analysis.md",
-      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T102318-ecb0ee/outputs/transcript.txt"
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T111234Z-a32a89/outputs/analysis.md",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T111234Z-a32a89/outputs/transcript.txt"
     ],
     "raw_files": [
-      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T102318-ecb0ee/raw/start.json",
-      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T102318-ecb0ee/raw/status.json",
-      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T102318-ecb0ee/raw/transcript.json",
-      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T102318-ecb0ee/raw/transcript.srt",
-      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T102318-ecb0ee/raw/transcript.txt",
-      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T102318-ecb0ee/raw/transcript.vtt",
-      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T102318-ecb0ee/raw/worker-analysis.md"
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T111234Z-a32a89/raw/start.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T111234Z-a32a89/raw/status.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T111234Z-a32a89/raw/transcript.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T111234Z-a32a89/raw/transcript.srt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T111234Z-a32a89/raw/transcript.txt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T111234Z-a32a89/raw/transcript.vtt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T111234Z-a32a89/raw/worker-analysis.md"
     ],
     "worker_files": {
-      "transcript_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript",
-      "transcript_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?format=txt",
-      "transcript_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?format=srt",
-      "transcript_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?format=vtt",
-      "transcript_csv": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?format=csv",
-      "analysis_md": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?format=md",
-      "translated_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?translated=1",
-      "translated_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?format=srt&translated=1",
-      "translated_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?format=vtt&translated=1",
-      "translated_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?format=txt&translated=1"
+      "transcript_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/e4e48cd4-2ec4-4901-af32-19a38a896c7e/transcript",
+      "transcript_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/e4e48cd4-2ec4-4901-af32-19a38a896c7e/transcript?format=txt",
+      "transcript_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/e4e48cd4-2ec4-4901-af32-19a38a896c7e/transcript?format=srt",
+      "transcript_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/e4e48cd4-2ec4-4901-af32-19a38a896c7e/transcript?format=vtt",
+      "transcript_csv": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/e4e48cd4-2ec4-4901-af32-19a38a896c7e/transcript?format=csv",
+      "analysis_md": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/e4e48cd4-2ec4-4901-af32-19a38a896c7e/transcript?format=md",
+      "translated_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/e4e48cd4-2ec4-4901-af32-19a38a896c7e/transcript?translated=1",
+      "translated_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/e4e48cd4-2ec4-4901-af32-19a38a896c7e/transcript?format=srt&translated=1",
+      "translated_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/e4e48cd4-2ec4-4901-af32-19a38a896c7e/transcript?format=vtt&translated=1",
+      "translated_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/e4e48cd4-2ec4-4901-af32-19a38a896c7e/transcript?format=txt&translated=1"
     },
     "chunks_total": 1,
     "chunks_done": 1
@@ -122,7 +122,7 @@
     ]
   },
   "stage_b_fetch": {
-    "run_id": "node-run-youtube-fetch-20260622T111013Z-1c2b4d",
+    "run_id": "node-run-youtube-fetch-20260622T134710-842f65",
     "video_id": "dQw4w9WgXcQ",
     "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
     "author": "Rick Astley",
