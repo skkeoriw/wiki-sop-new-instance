@@ -14,18 +14,18 @@
       "author": "Rick Astley"
     }
   },
-  "pipeline_id": "node-run-youtube-fetch-20260622T080125-03ff23",
+  "pipeline_id": "node-run-youtube-fetch-20260622T080623-03ff23",
   "node_run": {
-    "node_run_id": "node-run-youtube-fetch-20260622T080125-03ff23",
+    "node_run_id": "node-run-youtube-fetch-20260622T080623-03ff23",
     "node_id": "youtube-fetch",
     "mode": "real-node",
     "input_source": "generated-fixture",
     "base_run_id": "",
     "source_node_run_id": "",
-    "input_manifest": "raw/node-runs/node-run-youtube-fetch-20260622T080125-03ff23/inputs/sources/manifest.json",
-    "input_directory": "raw/node-runs/node-run-youtube-fetch-20260622T080125-03ff23/inputs/sources",
+    "input_manifest": "raw/node-runs/node-run-youtube-fetch-20260622T080623-03ff23/inputs/sources/manifest.json",
+    "input_directory": "raw/node-runs/node-run-youtube-fetch-20260622T080623-03ff23/inputs/sources",
     "input_files": [
-      "raw/node-runs/node-run-youtube-fetch-20260622T080125-03ff23/inputs/sources/0001.txt"
+      "raw/node-runs/node-run-youtube-fetch-20260622T080623-03ff23/inputs/sources/0001.txt"
     ],
     "capability_overrides": {
       "git": {
@@ -54,7 +54,7 @@
         "status": "skipped"
       }
     },
-    "created_at": "2026-06-22T08:01:26.782422+00:00"
+    "created_at": "2026-06-22T08:06:24.836568+00:00"
   },
   "stage_c": {
     "run_id": "node-run-wiki-build-20260622T054648Z-9b9c26",
@@ -78,9 +78,9 @@
     "completion_tokens": 11115,
     "status": "success"
   },
-  "node_run_input_manifest": "raw/node-runs/node-run-youtube-fetch-20260622T080125-03ff23/inputs/sources/manifest.json",
+  "node_run_input_manifest": "raw/node-runs/node-run-youtube-fetch-20260622T080623-03ff23/inputs/sources/manifest.json",
   "node_run_input_files": [
-    "raw/node-runs/node-run-youtube-fetch-20260622T080125-03ff23/inputs/sources/0001.txt"
+    "raw/node-runs/node-run-youtube-fetch-20260622T080623-03ff23/inputs/sources/0001.txt"
   ],
   "stage_deep_research": {
     "run_id": "node-run-youtube-deep-research-io-protocol-20260622T030240Z",
@@ -123,7 +123,7 @@
     ]
   },
   "stage_b_fetch": {
-    "run_id": "node-run-youtube-fetch-20260622T080125-03ff23",
+    "run_id": "node-run-youtube-fetch-20260622T080623-03ff23",
     "video_id": "dQw4w9WgXcQ",
     "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
     "author": "Rick Astley",
