@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-youtube-deep-research-20260622T091425Z-6a0670",
+  "node_id": "youtube-deep-research",
+  "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "created_at": "2026-06-22T09:17:28Z",
+  "items": [
+    {
+      "path": "analysis.md",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-20260622T091425Z-6a0670",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T091425Z-6a0670/outputs/analysis.md",
+      "output": "analysis_file",
+      "value_type": "markdown"
+    },
+    {
+      "path": "transcript.txt",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-20260622T091425Z-6a0670",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T091425Z-6a0670/outputs/transcript.txt",
+      "output": "transcript_file",
+      "value_type": "text"
+    }
+  ]
+}

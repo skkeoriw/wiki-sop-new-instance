@@ -1,0 +1,4 @@
+{"ts": "2026-06-22T09:15:25Z", "event": "tg_notify_sent", "stage": "youtube-deep-research", "trigger": "start", "ok": true}
+{"ts": "2026-06-22T09:15:25Z", "event": "stage_start", "stage": "youtube-deep-research", "pipeline": "youtube-research-wiki"}
+{"ts": "2026-06-22T09:17:29Z", "event": "tg_notify_sent", "stage": "youtube-deep-research", "trigger": "done", "ok": true}
+{"ts": "2026-06-22T09:17:29Z", "event": "stage_done", "stage": "youtube-deep-research", "pipeline": "youtube-research-wiki", "duration_s": 124}
