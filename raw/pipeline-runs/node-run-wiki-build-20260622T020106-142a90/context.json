@@ -1,0 +1,63 @@
+{
+  "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "source_type": "youtube",
+  "node_run_resolved_inputs": {
+    "reports": "raw/notebooklm-analysis/node-test-fixture.md"
+  },
+  "stage_b": {
+    "output_files": [
+      "raw/notebooklm-analysis/node-test-fixture.md"
+    ]
+  },
+  "pipeline_id": "node-run-wiki-build-20260622T020106-142a90",
+  "node_run": {
+    "node_run_id": "node-run-wiki-build-20260622T020106-142a90",
+    "node_id": "wiki-build",
+    "mode": "real-node",
+    "input_source": "generated-fixture",
+    "base_run_id": "",
+    "capability_overrides": {
+      "git": {
+        "enabled": true,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "paths": []
+      },
+      "telegram": {
+        "enabled": false,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run"
+      }
+    },
+    "definition_scope_reports": {
+      "instance_override": {
+        "status": "unchanged",
+        "changed": {}
+      },
+      "project_default_request": {
+        "status": "skipped"
+      }
+    },
+    "created_at": "2026-06-22T02:01:07.058499+00:00"
+  },
+  "stage_c": {
+    "run_id": "node-run-wiki-build-20260622T020106-142a90",
+    "start_time": "2026-06-22T02:01:07Z",
+    "end_time": "2026-06-22T02:02:16Z",
+    "duration_s": 69,
+    "llm_calls": 3,
+    "pages_created_total": 6,
+    "pages_new_this_run": 0,
+    "pages_updated_this_run": 0,
+    "file_paths": [],
+    "sources": 1,
+    "entities": 2,
+    "concepts": 3,
+    "comparisons": 0,
+    "prompt_tokens": 1200,
+    "completion_tokens": 5373,
+    "status": "success"
+  }
+}

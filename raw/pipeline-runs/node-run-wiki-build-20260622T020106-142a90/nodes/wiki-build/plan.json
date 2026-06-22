@@ -1,0 +1,79 @@
+{
+  "target_pages": 35,
+  "max_pages": 40,
+  "max_entities": 10,
+  "max_concepts": 29,
+  "min_importance_score": 0.65,
+  "pipeline_id": "node-run-wiki-build-20260622T020106-142a90",
+  "run_id": "node-run-wiki-build-20260622T020106-142a90",
+  "selected_sources": [
+    {
+      "title": "瑞克·阿斯特利 - 永不放弃你",
+      "slug": "瑞克-阿斯特利-永不放弃你"
+    }
+  ],
+  "selected_entities": [],
+  "selected_concepts": [],
+  "selected_mindmaps": [],
+  "skipped_candidates": [
+    {
+      "name": "Rick Astley",
+      "slug": "rick-astley",
+      "action": "merge",
+      "importance_score": 0.9,
+      "merge_target": "rick-astley.md",
+      "reason": "已有同名实体页面",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "Never Gonna Give You Up",
+      "slug": "never-gonna-give-you-up",
+      "action": "merge",
+      "importance_score": 0.9,
+      "merge_target": "never-gonna-give-you-up.md",
+      "reason": "已有同名实体页面",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "音乐视频传播",
+      "slug": "音乐视频传播",
+      "action": "merge",
+      "importance_score": 0.8,
+      "merge_target": "音乐视频传播.md",
+      "reason": "已有对应概念页面",
+      "kind": "concept",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "流行文化引用",
+      "slug": "流行文化引用",
+      "action": "merge",
+      "importance_score": 0.8,
+      "merge_target": "流行文化引用.md",
+      "reason": "已有对应概念页面",
+      "kind": "concept",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "互联网迷因",
+      "slug": "互联网迷因",
+      "action": "merge",
+      "importance_score": 0.85,
+      "merge_target": "互联网迷因.md",
+      "reason": "已有对应概念页面",
+      "kind": "concept",
+      "skip_reason": "action_merge"
+    }
+  ],
+  "estimated_llm_calls": 2,
+  "actual_llm_calls": 3,
+  "prompt_tokens": 1200,
+  "completion_tokens": 5373,
+  "generated_pages": [],
+  "failed_pages": [],
+  "status": "done",
+  "updated_at": "2026-06-22T02:02:16Z",
+  "generated_pages_count": 0
+}

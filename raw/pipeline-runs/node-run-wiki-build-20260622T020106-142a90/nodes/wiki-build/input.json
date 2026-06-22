@@ -1,0 +1,18 @@
+{
+  "declared_inputs": {
+    "reports": {
+      "from": "notebooklm-research.outputs.reports",
+      "required": true
+    }
+  },
+  "optional_inputs": {
+    "deep_research": {
+      "from": "youtube-deep-research.outputs.analysis_file",
+      "required": false
+    }
+  },
+  "resolved_inputs": {
+    "reports": [],
+    "deep_research": []
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "pipeline_id": "node-run-wiki-build-20260622T020106-142a90",
+  "node_id": "wiki-build",
+  "run_id": "node-run-wiki-build-20260622T020106-142a90",
+  "status": "done",
+  "mode": "blocking",
+  "needs": [
+    "notebooklm-research"
+  ],
+  "started_at": "2026-06-22T02:01:07Z",
+  "finished_at": "2026-06-22T02:02:17Z",
+  "duration_s": 70,
+  "attempt": 1,
+  "progress": 100,
+  "inputs": {
+    "reports": "notebooklm-research.outputs.reports"
+  },
+  "outputs": {
+    "index": "index.md",
+    "pages": "wiki/**"
+  },
+  "optional_inputs": {
+    "deep_research": "youtube-deep-research.outputs.analysis_file"
+  },
+  "executor": {
+    "type": "agent-skill",
+    "agent": "hermes",
+    "skill": "sop-wiki-build",
+    "entry": "scripts/run_wiki_build.sh",
+    "model": "configurable",
+    "webhook_route": "sop-wiki-build"
+  },
+  "declared_inputs": {
+    "reports": {
+      "from": "notebooklm-research.outputs.reports",
+      "required": true
+    }
+  },
+  "resolved_inputs": {
+    "reports": [],
+    "deep_research": []
+  },
+  "declared_outputs": {
+    "index": {
+      "path": "index.md",
+      "type": "file"
+    },
+    "pages": {
+      "path": "wiki/**",
+      "type": "files"
+    }
+  },
+  "actual_outputs": {
+    "index": [
+      "index.md"
+    ],
+    "pages": []
+  },
+  "artifacts": [
+    {
+      "id": "a909ab8f85846403",
+      "producer": "wiki-build",
+      "output": "index",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "index.md",
+      "title": "index.md",
+      "size": 282,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "context"
+    }
+  ],
+  "validation": {
+    "status": "warning",
+    "missing_outputs": [
+      "pages"
+    ],
+    "unexpected_outputs": []
+  },
+  "extra": {
+    "duration_s": 70,
+    "progress": 100
+  },
+  "error": "",
+  "updated_at": "2026-06-22T02:02:17Z"
+}

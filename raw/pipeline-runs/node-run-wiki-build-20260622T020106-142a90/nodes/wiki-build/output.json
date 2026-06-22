@@ -1,0 +1,25 @@
+{
+  "declared_outputs": {
+    "index": {
+      "path": "index.md",
+      "type": "file"
+    },
+    "pages": {
+      "path": "wiki/**",
+      "type": "files"
+    }
+  },
+  "actual_outputs": {
+    "index": [
+      "index.md"
+    ],
+    "pages": []
+  },
+  "validation": {
+    "status": "warning",
+    "missing_outputs": [
+      "pages"
+    ],
+    "unexpected_outputs": []
+  }
+}
