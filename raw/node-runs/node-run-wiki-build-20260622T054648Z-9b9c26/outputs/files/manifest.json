@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-wiki-build-20260622T054648Z-9b9c26",
+  "node_id": "wiki-build",
+  "created_at": "2026-06-22T05:49:35Z",
+  "token_summary": {
+    "llm_calls": 6,
+    "prompt_tokens": 7632,
+    "completion_tokens": 11115,
+    "total_tokens": 18747
+  },
+  "items": [
+    {
+      "path": "index.md",
+      "source": "node-run",
+      "source_node": "wiki-build",
+      "source_run_id": "node-run-wiki-build-20260622T054648Z-9b9c26",
+      "source_path": "index.md",
+      "output": "index",
+      "value_type": "markdown"
+    },
+    {
+      "path": "wiki/concepts/洗脑神曲.md",
+      "source": "node-run",
+      "source_node": "wiki-build",
+      "source_run_id": "node-run-wiki-build-20260622T054648Z-9b9c26",
+      "source_path": "wiki/concepts/洗脑神曲.md",
+      "output": "pages",
+      "value_type": "markdown"
+    },
+    {
+      "path": "wiki/sources/YouTube深度研究补充-瑞克-阿斯特利-永不放弃你-官方MV.md",
+      "source": "node-run",
+      "source_node": "wiki-build",
+      "source_run_id": "node-run-wiki-build-20260622T054648Z-9b9c26",
+      "source_path": "wiki/sources/YouTube深度研究补充-瑞克-阿斯特利-永不放弃你-官方MV.md",
+      "output": "pages",
+      "value_type": "markdown"
+    },
+    {
+      "path": "wiki/sources/永不放弃你-歌词.md",
+      "source": "node-run",
+      "source_node": "wiki-build",
+      "source_run_id": "node-run-wiki-build-20260622T054648Z-9b9c26",
+      "source_path": "wiki/sources/永不放弃你-歌词.md",
+      "output": "pages",
+      "value_type": "markdown"
+    }
+  ]
+}

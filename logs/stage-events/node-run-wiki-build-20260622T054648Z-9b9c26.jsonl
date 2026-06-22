@@ -1,0 +1,4 @@
+{"ts": "2026-06-22T05:46:51Z", "event": "tg_notify_failed", "stage": "wiki-build", "trigger": "start", "ok": false}
+{"ts": "2026-06-22T05:46:51Z", "event": "stage_start", "stage": "wiki-build", "pipeline": "youtube-research-wiki"}
+{"ts": "2026-06-22T05:49:36Z", "event": "tg_notify_failed", "stage": "wiki-build", "trigger": "done", "ok": false}
+{"ts": "2026-06-22T05:49:36Z", "event": "stage_done", "stage": "wiki-build", "pipeline": "youtube-research-wiki", "duration_s": 164}

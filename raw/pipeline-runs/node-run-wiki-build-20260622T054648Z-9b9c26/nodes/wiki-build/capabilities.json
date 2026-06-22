@@ -1,0 +1,99 @@
+{
+  "telegram": {
+    "enabled": true,
+    "required": false,
+    "status": "failed",
+    "trigger": "done",
+    "triggers": [
+      "start",
+      "done",
+      "failed",
+      "skipped"
+    ],
+    "message_preview": "✅ Stage C 完成  2m44s  [node-run-wiki-build-20260622T054648Z-9b9c26]\n   🔨 Wiki 知识图谱构建\n   新建 2 页 | 共 11 页 (S4/E2/C5)\n   📦 wiki/concepts + wiki/sources×2\n   🔗 https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "sent_at": "2026-06-22T05:49:36Z",
+    "api_ok": false,
+    "error": "Forbidden: bot can't initiate conversation with a user",
+    "history": [
+      {
+        "capability": "telegram",
+        "status": "failed",
+        "recorded_at": "2026-06-22T05:46:51Z",
+        "trigger": "start",
+        "triggers": [
+          "start",
+          "done",
+          "failed",
+          "skipped"
+        ],
+        "message_preview": "⏳ Stage C 开始  [node-run-wiki-build-20260622T054648Z-9b9c26]\n   🔨 Wiki 知识图谱构建\n🔗 https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "sent_at": "2026-06-22T05:46:51Z",
+        "api_ok": false,
+        "error": "Forbidden: bot can't initiate conversation with a user"
+      },
+      {
+        "capability": "telegram",
+        "status": "failed",
+        "recorded_at": "2026-06-22T05:49:36Z",
+        "trigger": "done",
+        "triggers": [
+          "start",
+          "done",
+          "failed",
+          "skipped"
+        ],
+        "message_preview": "✅ Stage C 完成  2m44s  [node-run-wiki-build-20260622T054648Z-9b9c26]\n   🔨 Wiki 知识图谱构建\n   新建 2 页 | 共 11 页 (S4/E2/C5)\n   📦 wiki/concepts + wiki/sources×2\n   🔗 https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "sent_at": "2026-06-22T05:49:36Z",
+        "api_ok": false,
+        "error": "Forbidden: bot can't initiate conversation with a user"
+      }
+    ]
+  },
+  "git": {
+    "enabled": true,
+    "required": false,
+    "status": "running",
+    "managed_by": "runtime-harness",
+    "repository": "skkeoriw/wiki-sop-new-instance",
+    "managed_paths": [
+      "index.md",
+      "logs/stage-events/node-run-wiki-build-20260622T054648Z-9b9c26.jsonl",
+      "raw/node-runs/node-run-wiki-build-20260622T054648Z-9b9c26/outputs/files/index.md",
+      "raw/node-runs/node-run-wiki-build-20260622T054648Z-9b9c26/outputs/files/manifest.json",
+      "raw/node-runs/node-run-wiki-build-20260622T054648Z-9b9c26/outputs/files/wiki/concepts/洗脑神曲.md",
+      "raw/node-runs/node-run-wiki-build-20260622T054648Z-9b9c26/outputs/files/wiki/sources/YouTube深度研究补充-瑞克-阿斯特利-永不放弃你-官方MV.md",
+      "raw/node-runs/node-run-wiki-build-20260622T054648Z-9b9c26/outputs/files/wiki/sources/永不放弃你-歌词.md",
+      "raw/pipeline-runs/node-run-wiki-build-20260622T054648Z-9b9c26",
+      "wiki/concepts/洗脑神曲.md",
+      "wiki/sources/YouTube深度研究补充-瑞克-阿斯特利-永不放弃你-官方MV.md",
+      "wiki/sources/永不放弃你-歌词.md"
+    ],
+    "paths": [],
+    "credential_source": "GITHUB_TOKEN",
+    "started_at": "2026-06-22T05:49:36Z",
+    "history": [
+      {
+        "capability": "git",
+        "status": "running",
+        "recorded_at": "2026-06-22T05:49:36Z",
+        "managed_by": "runtime-harness",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "managed_paths": [
+          "index.md",
+          "logs/stage-events/node-run-wiki-build-20260622T054648Z-9b9c26.jsonl",
+          "raw/node-runs/node-run-wiki-build-20260622T054648Z-9b9c26/outputs/files/index.md",
+          "raw/node-runs/node-run-wiki-build-20260622T054648Z-9b9c26/outputs/files/manifest.json",
+          "raw/node-runs/node-run-wiki-build-20260622T054648Z-9b9c26/outputs/files/wiki/concepts/洗脑神曲.md",
+          "raw/node-runs/node-run-wiki-build-20260622T054648Z-9b9c26/outputs/files/wiki/sources/YouTube深度研究补充-瑞克-阿斯特利-永不放弃你-官方MV.md",
+          "raw/node-runs/node-run-wiki-build-20260622T054648Z-9b9c26/outputs/files/wiki/sources/永不放弃你-歌词.md",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T054648Z-9b9c26",
+          "wiki/concepts/洗脑神曲.md",
+          "wiki/sources/YouTube深度研究补充-瑞克-阿斯特利-永不放弃你-官方MV.md",
+          "wiki/sources/永不放弃你-歌词.md"
+        ],
+        "paths": [],
+        "credential_source": "GITHUB_TOKEN"
+      }
+    ]
+  }
+}

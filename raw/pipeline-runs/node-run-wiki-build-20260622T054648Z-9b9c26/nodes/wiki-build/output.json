@@ -1,0 +1,27 @@
+{
+  "declared_outputs": {
+    "index": {
+      "path": "index.md",
+      "type": "file"
+    },
+    "pages": {
+      "path": "wiki/**",
+      "type": "files"
+    }
+  },
+  "actual_outputs": {
+    "index": [
+      "index.md"
+    ],
+    "pages": [
+      "wiki/concepts/洗脑神曲.md",
+      "wiki/sources/YouTube深度研究补充-瑞克-阿斯特利-永不放弃你-官方MV.md",
+      "wiki/sources/永不放弃你-歌词.md"
+    ]
+  },
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  }
+}

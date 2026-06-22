@@ -1,0 +1,132 @@
+{
+  "pipeline_id": "node-run-wiki-build-20260622T054648Z-9b9c26",
+  "node_id": "wiki-build",
+  "run_id": "node-run-wiki-build-20260622T054648Z-9b9c26",
+  "status": "done",
+  "mode": "blocking",
+  "needs": [
+    "notebooklm-research"
+  ],
+  "started_at": "2026-06-22T05:46:51Z",
+  "finished_at": "2026-06-22T05:49:36Z",
+  "duration_s": 164,
+  "attempt": 1,
+  "progress": 100,
+  "inputs": {
+    "reports": "notebooklm-research.outputs.reports"
+  },
+  "outputs": {
+    "index": "index.md",
+    "pages": "wiki/**"
+  },
+  "optional_inputs": {
+    "deep_research": "youtube-deep-research.outputs.analysis_file"
+  },
+  "executor": {
+    "type": "agent-skill",
+    "agent": "hermes",
+    "skill": "sop-wiki-build",
+    "entry": "scripts/run_wiki_build.sh",
+    "model": "configurable",
+    "webhook_route": "sop-wiki-build"
+  },
+  "declared_inputs": {
+    "reports": {
+      "from": "notebooklm-research.outputs.reports",
+      "required": true
+    }
+  },
+  "resolved_inputs": {
+    "reports": [],
+    "deep_research": []
+  },
+  "declared_outputs": {
+    "index": {
+      "path": "index.md",
+      "type": "file"
+    },
+    "pages": {
+      "path": "wiki/**",
+      "type": "files"
+    }
+  },
+  "actual_outputs": {
+    "index": [
+      "index.md"
+    ],
+    "pages": [
+      "wiki/concepts/洗脑神曲.md",
+      "wiki/sources/YouTube深度研究补充-瑞克-阿斯特利-永不放弃你-官方MV.md",
+      "wiki/sources/永不放弃你-歌词.md"
+    ]
+  },
+  "artifacts": [
+    {
+      "id": "a909ab8f85846403",
+      "producer": "wiki-build",
+      "output": "index",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "index.md",
+      "title": "index.md",
+      "size": 487,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "context"
+    },
+    {
+      "id": "32642a07db7690b2",
+      "producer": "wiki-build",
+      "output": "pages",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "wiki/concepts/洗脑神曲.md",
+      "title": "洗脑神曲.md",
+      "size": 3960,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "context"
+    },
+    {
+      "id": "0249f19527cbb5f4",
+      "producer": "wiki-build",
+      "output": "pages",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "wiki/sources/YouTube深度研究补充-瑞克-阿斯特利-永不放弃你-官方MV.md",
+      "title": "YouTube深度研究补充-瑞克-阿斯特利-永不放弃你-官方MV.md",
+      "size": 3837,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "context"
+    },
+    {
+      "id": "749d94d7024d12c3",
+      "producer": "wiki-build",
+      "output": "pages",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "wiki/sources/永不放弃你-歌词.md",
+      "title": "永不放弃你-歌词.md",
+      "size": 4187,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "context"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  },
+  "extra": {
+    "duration_s": 164,
+    "progress": 100
+  },
+  "error": "",
+  "updated_at": "2026-06-22T05:49:36Z"
+}
