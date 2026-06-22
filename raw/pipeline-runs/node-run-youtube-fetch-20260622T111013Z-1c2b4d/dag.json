@@ -1,0 +1,226 @@
+{
+  "pipeline_id": "node-run-youtube-fetch-20260622T111013Z-1c2b4d",
+  "sop_id": "youtube-research-wiki",
+  "nodes": {
+    "youtube-fetch": {
+      "title": "YouTube 元数据获取",
+      "skill": "sop-youtube-fetch",
+      "webhook_route": "sop-youtube-fetch",
+      "mode": "blocking",
+      "trigger": {
+        "type": "file",
+        "path": "raw/youtube-links/**"
+      },
+      "inputs": {
+        "source_url": "context.source_url"
+      },
+      "outputs": {
+        "source_url": "context.source_url",
+        "metadata_file": "raw/youtube-metadata/{pipeline_id}.json"
+      },
+      "infra": {
+        "tg_notify": true,
+        "log_record": true
+      },
+      "params": {},
+      "stage": "youtube-fetch",
+      "id": "youtube-fetch",
+      "needs": []
+    },
+    "notebooklm-research": {
+      "title": "NotebookLM 研究",
+      "skill": "sop-notebooklm-research",
+      "webhook_route": "sop-notebooklm-research",
+      "mode": "blocking",
+      "needs": [
+        "youtube-fetch"
+      ],
+      "trigger": {
+        "type": "file",
+        "path": "raw/youtube-metadata/**"
+      },
+      "inputs": {
+        "source_url": "youtube-fetch.outputs.source_url",
+        "metadata_file": "youtube-fetch.outputs.metadata_file"
+      },
+      "outputs": {
+        "reports": "raw/notebooklm-analysis/*.md",
+        "mindmaps": "raw/notebooklm-mindmaps/*.json"
+      },
+      "infra": {
+        "tg_notify": true,
+        "log_record": true
+      },
+      "params": {
+        "notebooklm": {
+          "outputs": [
+            "report",
+            "mindmap"
+          ],
+          "language": "zh_Hans",
+          "notebook_title": "wiki-sop-new-instance",
+          "report_prompt": "请深度研究这个视频，提炼技术架构、核心观点、关键论据，以及对行业的影响。生成结构化中文研究报告。",
+          "mindmap_prompt": "基于视频内容生成清晰的中文思维导图，突出核心概念之间的关系与层级。"
+        }
+      },
+      "stage": "notebooklm-research",
+      "id": "notebooklm-research"
+    },
+    "youtube-deep-research": {
+      "title": "YouTube 深度研究",
+      "skill": "sop-youtube-deep-research",
+      "webhook_route": "sop-youtube-deep-research",
+      "mode": "sidecar",
+      "needs": [
+        "youtube-fetch"
+      ],
+      "trigger": {
+        "type": "file",
+        "path": "raw/youtube-metadata/**"
+      },
+      "inputs": {
+        "source_url": "youtube-fetch.outputs.source_url"
+      },
+      "outputs": {
+        "analysis_file": "raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md",
+        "transcript_file": "raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt"
+      },
+      "capabilities": {
+        "git": {
+          "enabled": true,
+          "required": false,
+          "managed_by": "runtime-harness",
+          "editable": true,
+          "save_scope": "node-definition",
+          "description": "Persist this node's workspace outputs to the current Instance repo.",
+          "paths": [
+            "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+            "raw/youtube-deep-research/{pipeline_id}/raw/**"
+          ]
+        },
+        "telegram": {
+          "enabled": true,
+          "required": false,
+          "managed_by": "runtime-harness",
+          "editable": true,
+          "save_scope": "node-definition",
+          "description": "Send progress notifications through the current Instance Telegram config.",
+          "trigger": "stage-lifecycle",
+          "triggers": [
+            "start",
+            "done",
+            "failed"
+          ]
+        }
+      },
+      "infra": {
+        "tg_notify": true,
+        "log_record": true
+      },
+      "params": {
+        "workflow": {
+          "output_dir": "raw/youtube-deep-research"
+        }
+      },
+      "stage": "youtube-deep-research",
+      "id": "youtube-deep-research"
+    },
+    "wiki-build": {
+      "title": "Wiki 知识图谱构建",
+      "skill": "sop-wiki-build",
+      "webhook_route": "sop-wiki-build",
+      "mode": "blocking",
+      "needs": [
+        "notebooklm-research"
+      ],
+      "trigger": {
+        "type": "file",
+        "path": "raw/notebooklm-analysis/**"
+      },
+      "inputs": {
+        "reports": "notebooklm-research.outputs.reports"
+      },
+      "optional_inputs": {
+        "deep_research": "youtube-deep-research.outputs.analysis_file"
+      },
+      "outputs": {
+        "index": "index.md",
+        "pages": "wiki/**"
+      },
+      "infra": {
+        "tg_notify": false,
+        "log_record": true
+      },
+      "params": {
+        "build_mode": "incremental"
+      },
+      "stage": "wiki-build",
+      "id": "wiki-build"
+    },
+    "tg-notify": {
+      "title": "Telegram 通知",
+      "skill": "sop-tg-notify",
+      "webhook_route": "sop-tg-notify",
+      "mode": "blocking",
+      "needs": [
+        "wiki-build"
+      ],
+      "trigger": {
+        "type": "file",
+        "path": "index.md"
+      },
+      "inputs": {
+        "index": "wiki-build.outputs.index"
+      },
+      "outputs": {
+        "telegram_message": "logs/pipeline-runs/pipe-{run_id}.json"
+      },
+      "infra": {
+        "tg_notify": true,
+        "log_record": true
+      },
+      "params": {
+        "build_mode": "notify"
+      },
+      "stage": "tg-notify",
+      "id": "tg-notify"
+    },
+    "retry": {
+      "title": "手动重试",
+      "skill": "sop-retry",
+      "webhook_route": "sop-retry",
+      "mode": "manual",
+      "trigger": {
+        "type": "file",
+        "path": "raw/retry/**"
+      },
+      "infra": {
+        "tg_notify": true,
+        "log_record": true
+      },
+      "params": {},
+      "stage": "retry",
+      "id": "retry",
+      "needs": []
+    }
+  },
+  "edges": [
+    {
+      "source": "youtube-fetch",
+      "target": "notebooklm-research"
+    },
+    {
+      "source": "youtube-fetch",
+      "target": "youtube-deep-research"
+    },
+    {
+      "source": "notebooklm-research",
+      "target": "wiki-build"
+    },
+    {
+      "source": "wiki-build",
+      "target": "tg-notify"
+    }
+  ],
+  "created_at": "2026-06-22T11:10:50Z"
+}

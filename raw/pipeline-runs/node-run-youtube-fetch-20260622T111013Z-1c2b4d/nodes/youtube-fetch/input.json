@@ -1,0 +1,12 @@
+{
+  "declared_inputs": {
+    "source_url": {
+      "from": "context.source_url",
+      "required": true
+    }
+  },
+  "optional_inputs": {},
+  "resolved_inputs": {
+    "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  }
+}

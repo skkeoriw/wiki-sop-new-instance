@@ -1,0 +1,80 @@
+{
+  "pipeline_id": "node-run-youtube-fetch-20260622T111013Z-1c2b4d",
+  "node_id": "youtube-fetch",
+  "run_id": "node-run-youtube-fetch-20260622T111013Z-1c2b4d",
+  "status": "done",
+  "mode": "blocking",
+  "needs": [],
+  "started_at": "2026-06-22T11:10:50Z",
+  "finished_at": "2026-06-22T11:10:53Z",
+  "duration_s": 2,
+  "attempt": 1,
+  "progress": 100,
+  "inputs": {
+    "source_url": "context.source_url"
+  },
+  "outputs": {
+    "source_url": "context.source_url",
+    "metadata_file": "raw/youtube-metadata/{pipeline_id}.json"
+  },
+  "optional_inputs": {},
+  "executor": {
+    "type": "agent-skill",
+    "agent": "hermes",
+    "skill": "sop-youtube-fetch",
+    "entry": "scripts/run_youtube_fetch.sh",
+    "webhook_route": "sop-youtube-fetch"
+  },
+  "declared_inputs": {
+    "source_url": {
+      "from": "context.source_url",
+      "required": true
+    }
+  },
+  "resolved_inputs": {
+    "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  },
+  "declared_outputs": {
+    "source_url": {
+      "from": "context.source_url",
+      "type": "string"
+    },
+    "metadata_file": {
+      "path": "raw/youtube-metadata/{pipeline_id}.json",
+      "type": "file"
+    }
+  },
+  "actual_outputs": {
+    "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "metadata_file": [
+      "raw/youtube-metadata/dQw4w9WgXcQ.json"
+    ]
+  },
+  "artifacts": [
+    {
+      "id": "5796d30de218c0bb",
+      "producer": "youtube-fetch",
+      "output": "metadata_file",
+      "type": "file",
+      "format": "json",
+      "path": "raw/youtube-metadata/dQw4w9WgXcQ.json",
+      "title": "dQw4w9WgXcQ.json",
+      "size": 479,
+      "mime_type": "application/json",
+      "tags": [],
+      "metadata": {},
+      "resolution": "context"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  },
+  "extra": {
+    "duration_s": 2,
+    "progress": 100
+  },
+  "error": "",
+  "updated_at": "2026-06-22T11:10:53Z"
+}
