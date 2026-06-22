@@ -1,0 +1,75 @@
+{
+  "target_pages": 35,
+  "max_pages": 40,
+  "max_entities": 10,
+  "max_concepts": 29,
+  "min_importance_score": 0.65,
+  "pipeline_id": "node-run-wiki-build-20260622T015552-bd5818",
+  "run_id": "node-run-wiki-build-20260622T015552-bd5818",
+  "selected_sources": [
+    {
+      "title": "瑞克·阿斯特利 - 永不放弃你",
+      "slug": "瑞克-阿斯特利-永不放弃你"
+    }
+  ],
+  "selected_entities": [
+    {
+      "name": "Rick Astley",
+      "slug": "rick-astley",
+      "action": "new",
+      "importance_score": 0.9,
+      "merge_target": null,
+      "reason": "英国知名歌手，互联网迷因核心人物，值得独立建页"
+    },
+    {
+      "name": "Never Gonna Give You Up",
+      "slug": "never-gonna-give-you-up",
+      "action": "new",
+      "importance_score": 0.85,
+      "merge_target": null,
+      "reason": "1987年流行金曲，瑞克摇迷因的核心作品，文化影响力大"
+    }
+  ],
+  "selected_concepts": [
+    {
+      "name": "互联网迷因",
+      "slug": "互联网迷因",
+      "action": "new",
+      "importance_score": 0.8,
+      "merge_target": null,
+      "reason": "核心网络文化概念，瑞克摇是典型代表，适合独立概念页"
+    },
+    {
+      "name": "音乐视频传播",
+      "slug": "音乐视频传播",
+      "action": "new",
+      "importance_score": 0.7,
+      "merge_target": null,
+      "reason": "描述音乐通过视频媒介扩散的现象，值得作为概念页存在"
+    },
+    {
+      "name": "流行文化引用",
+      "slug": "流行文化引用",
+      "action": "new",
+      "importance_score": 0.7,
+      "merge_target": null,
+      "reason": "跨媒介、跨群体的文化引用现象，可构建链接网络"
+    }
+  ],
+  "selected_mindmaps": [],
+  "skipped_candidates": [],
+  "estimated_llm_calls": 7,
+  "actual_llm_calls": 6,
+  "prompt_tokens": 2253,
+  "completion_tokens": 10863,
+  "generated_pages": [
+    "wiki/sources/瑞克-阿斯特利-永不放弃你.md",
+    "wiki/entities/rick-astley.md",
+    "wiki/entities/never-gonna-give-you-up.md",
+    "wiki/concepts/互联网迷因.md",
+    "wiki/concepts/音乐视频传播.md"
+  ],
+  "failed_pages": [],
+  "status": "running",
+  "updated_at": "2026-06-22T01:56:09Z"
+}

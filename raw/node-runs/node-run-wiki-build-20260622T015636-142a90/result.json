@@ -1,0 +1,3582 @@
+{
+  "node_run_id": "node-run-wiki-build-20260622T015636-142a90",
+  "pipeline_id": "node-run-wiki-build-20260622T015636-142a90",
+  "runtime_id": "runtime-152-32-214-95",
+  "instance_id": "test-instance",
+  "workflow_id": "youtube-research-wiki",
+  "node_id": "wiki-build",
+  "node_title": "Wiki 知识图谱构建",
+  "status": "done",
+  "mode": "real-node",
+  "input_source": "generated-fixture",
+  "started_at": "2026-06-22T01:56:36.910392+00:00",
+  "finished_at": "2026-06-22T01:58:35.977735+00:00",
+  "elapsed_ms": 118932,
+  "created_from": "generated-fixture",
+  "retry_of": "",
+  "pending": false,
+  "reason": "",
+  "steps": [
+    {
+      "id": "create-run",
+      "title": "Create node run workspace",
+      "status": "done",
+      "summary": "Node Run record is allocated independently from Workflow Run.",
+      "detail": {
+        "storage": "raw/node-runs/{node_run_id}"
+      },
+      "started_at": "2026-06-22T01:56:36.910392+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-22T01:56:36.945392+00:00"
+    },
+    {
+      "id": "load-definition",
+      "title": "Load node definition",
+      "status": "done",
+      "summary": "Loaded wiki-build from youtube-research-wiki.",
+      "detail": {
+        "workflow_id": "youtube-research-wiki",
+        "node_id": "wiki-build",
+        "node_title": "Wiki 知识图谱构建"
+      },
+      "started_at": "2026-06-22T01:56:36.945392+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-22T01:56:36.980392+00:00"
+    },
+    {
+      "id": "resolve-context",
+      "title": "Resolve Runtime / Instance / Workflow context",
+      "status": "done",
+      "summary": "runtime-152-32-214-95 · test-instance · youtube-research-wiki",
+      "detail": {
+        "runtime": {
+          "runtime_id": "runtime-152-32-214-95",
+          "channel_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc",
+          "spi_base_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc/api/sop",
+          "registry_path": "/root/.sop/registry.json",
+          "health": {
+            "spi": "ok",
+            "registry": "ok",
+            "channel": "ok",
+            "instances": "ok"
+          },
+          "hermes_webhook_url": ""
+        },
+        "instance": {
+          "instance_id": "test-instance",
+          "status": "ready",
+          "repo": "skkeoriw/wiki-sop-new-instance",
+          "repo_branch": "main",
+          "wiki_local_path": "/root/wiki/wiki-sop-new-instance",
+          "workspace_status": "ready",
+          "registry_status": "enabled",
+          "run_index_path": "/root/wiki/wiki-sop-new-instance/.sop/run-index.sqlite",
+          "run_index_status": "ready",
+          "capabilities": {
+            "workspace": "ok",
+            "sop_yaml": "ok",
+            "run_index": "ok",
+            "git": "configured",
+            "telegram": "unknown",
+            "notebooklm": "unknown",
+            "vertex": "unknown",
+            "tunnel": "ok"
+          }
+        },
+        "workflow_id": "youtube-research-wiki"
+      },
+      "started_at": "2026-06-22T01:56:36.980392+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-22T01:56:37.015392+00:00"
+    },
+    {
+      "id": "resolve-inputs",
+      "title": "Resolve node inputs",
+      "status": "done",
+      "summary": "1 resolved, 0 missing.",
+      "detail": {
+        "input_source": "generated-fixture",
+        "base_run_id": "",
+        "resolved_inputs": [
+          {
+            "name": "reports",
+            "source": "notebooklm-research.outputs.reports",
+            "required": true,
+            "resolved": true,
+            "value": "raw/notebooklm-analysis/node-test-fixture.md",
+            "provenance": "generated-fixture",
+            "reason": ""
+          }
+        ],
+        "missing_inputs": []
+      },
+      "started_at": "2026-06-22T01:56:37.015392+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-22T01:56:37.050392+00:00"
+    },
+    {
+      "id": "resolve-config",
+      "title": "Resolve execution config",
+      "status": "done",
+      "summary": "Runtime, Instance and capability config resolved.",
+      "detail": {
+        "resolved_config": {
+          "telegram": {
+            "capability": "telegram",
+            "label": "Telegram progress notification",
+            "enabled": false,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "save_scope": "run",
+            "status": "disabled",
+            "token_env": "YOUTUBE_WIKI_TG_TOKEN",
+            "token": {
+              "key": "YOUTUBE_WIKI_TG_TOKEN",
+              "label": "Telegram Bot Token",
+              "required": false,
+              "present": true,
+              "source": "instance-settings:YOUTUBE_WIKI_TG_TOKEN",
+              "masked_value": "795***qHY",
+              "value": null
+            },
+            "chat_id": {
+              "key": "YOUTUBE_WIKI_TG_CHAT_ID",
+              "label": "Telegram Chat ID",
+              "required": false,
+              "present": true,
+              "source": "instance-settings:YOUTUBE_WIKI_TG_CHAT_ID",
+              "masked_value": "779***193",
+              "value": "7796171193"
+            },
+            "probe": {
+              "enabled": false,
+              "explicit_confirmation_required": true,
+              "side_effect": "sends a Telegram test message"
+            }
+          },
+          "github": {
+            "capability": "git",
+            "label": "GitHub workspace persistence",
+            "enabled": true,
+            "required": false,
+            "status": "ready",
+            "managed_by": "runtime-harness",
+            "save_scope": "run",
+            "paths": [],
+            "token": {
+              "key": "GITHUB_TOKEN",
+              "label": "GitHub Token",
+              "required": false,
+              "present": true,
+              "source": "runtime-env-file:GITHUB_TOKEN",
+              "masked_value": "ghp***qtP",
+              "value": null
+            }
+          },
+          "llm": {
+            "capability": "llm",
+            "label": "Wiki LLM Gateway",
+            "enabled": true,
+            "required": true,
+            "status": "ready",
+            "managed_by": "runtime-harness",
+            "provider": {
+              "key": "WIKI_LLM_PROVIDER",
+              "label": "Wiki LLM Provider",
+              "required": false,
+              "present": true,
+              "source": "instance-settings:WIKI_LLM_PROVIDER",
+              "masked_value": "openai-compatible",
+              "value": "openai-compatible"
+            },
+            "base_url": {
+              "key": "WIKI_LLM_BASE_URL",
+              "label": "Wiki LLM Gateway Base URL",
+              "required": true,
+              "present": true,
+              "source": "instance-settings:WIKI_LLM_BASE_URL",
+              "masked_value": "https://api-proxy.chxyka.ccwu.cc/v1",
+              "value": "https://api-proxy.chxyka.ccwu.cc/v1"
+            },
+            "api_key": {
+              "key": "WIKI_LLM_API_KEY",
+              "label": "Wiki LLM Gateway API Key",
+              "required": true,
+              "present": true,
+              "source": "instance-settings:WIKI_LLM_API_KEY",
+              "masked_value": "ah-***c68",
+              "value": null
+            },
+            "model": {
+              "key": "WIKI_LLM_MODEL",
+              "label": "Wiki LLM Model",
+              "required": true,
+              "present": true,
+              "source": "instance-settings:WIKI_LLM_MODEL",
+              "masked_value": "deepseek-v4-pro",
+              "value": "deepseek-v4-pro"
+            },
+            "missing": []
+          }
+        },
+        "definition_defaults": {
+          "git": {
+            "enabled": true,
+            "required": false
+          },
+          "telegram": {
+            "enabled": false,
+            "required": false
+          }
+        },
+        "capability_overrides": {
+          "git": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "save_scope": "run",
+            "paths": []
+          },
+          "telegram": {
+            "enabled": false,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "save_scope": "run"
+          }
+        },
+        "definition_scope_reports": {
+          "instance_override": {
+            "status": "unchanged",
+            "changed": {}
+          },
+          "project_default_request": {
+            "status": "skipped"
+          }
+        }
+      },
+      "started_at": "2026-06-22T01:56:37.050392+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-22T01:56:37.085392+00:00"
+    },
+    {
+      "id": "probe-capabilities",
+      "title": "Probe attached capabilities",
+      "status": "skipped",
+      "summary": "Capability probes are explicit. Telegram send probes require user confirmation.",
+      "detail": {
+        "telegram": {
+          "capability": "telegram",
+          "label": "Telegram progress notification",
+          "status": "disabled",
+          "required": false,
+          "enabled": false
+        },
+        "github": {
+          "capability": "git",
+          "label": "GitHub workspace persistence",
+          "status": "ready",
+          "required": false,
+          "enabled": true
+        },
+        "llm": {
+          "capability": "llm",
+          "label": "Wiki LLM Gateway",
+          "status": "ready",
+          "required": true,
+          "enabled": true
+        }
+      },
+      "started_at": "2026-06-22T01:56:37.085392+00:00",
+      "elapsed_ms": 24,
+      "finished_at": "2026-06-22T01:56:37.109392+00:00"
+    },
+    {
+      "id": "build-execution-plan",
+      "title": "Build node execution plan",
+      "status": "done",
+      "summary": "Prepared real-node execution plan.",
+      "detail": {
+        "mode": "real-node",
+        "real_execution_enabled": true,
+        "reason": "Real execution will call the existing stage wrapper for this node."
+      },
+      "started_at": "2026-06-22T01:56:37.120392+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-22T01:56:37.155392+00:00"
+    },
+    {
+      "id": "execute-or-dry-run",
+      "title": "Execute or dry-run node",
+      "status": "done",
+      "summary": "Real node execution finished and declared outputs were found.",
+      "detail": {
+        "command": [
+          "bash",
+          "/root/agent-brain-plugins/youtube-wiki/skills/sop-wiki-build/scripts/run_wiki_build.sh",
+          "/root/wiki/wiki-sop-new-instance",
+          "node-run-wiki-build-20260622T015636-142a90",
+          "node-run-wiki-build-20260622T015636-142a90"
+        ],
+        "returncode": 0,
+        "timeout_seconds": 1500,
+        "timed_out": false,
+        "log_path": "/root/wiki/wiki-sop-new-instance/raw/node-runs/node-run-wiki-build-20260622T015636-142a90/executor.log",
+        "context_path": "/root/wiki/wiki-sop-new-instance/raw/pipeline-context.json",
+        "context": {
+          "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "source_type": "youtube",
+          "pipeline_id": "node-run-wiki-build-20260622T015636-142a90",
+          "stage_b_fetch": {
+            "run_id": "direct-1781773480251508159",
+            "video_id": "dQw4w9WgXcQ",
+            "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+            "author": "Rick Astley",
+            "published_at": "2009-10-25T06:57:33Z",
+            "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+            "meta_file": "raw/youtube-metadata/dQw4w9WgXcQ.json"
+          },
+          "stage_b": {
+            "run_id": "direct-notebooklm-research-dQw4w9WgXcQ-20260618T170437-1781773486859542982",
+            "start_time": "2026-06-18T09:04:46Z",
+            "end_time": "2026-06-18T09:05:46Z",
+            "duration_s": 60,
+            "status": "success",
+            "videos_processed": 1,
+            "reports_generated": 1,
+            "mindmaps_generated": 0,
+            "processed_urls": [
+              "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            ],
+            "output_files": [
+              "raw/notebooklm-analysis/node-test-fixture.md"
+            ],
+            "generated_files": [
+              {
+                "type": "report",
+                "path": "/tmp/notebooklm_processor/1781773534_report-1781773529.md"
+              }
+            ],
+            "source_metadata": {
+              "video_id": "dQw4w9WgXcQ",
+              "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+              "author": "Rick Astley",
+              "published_at": "2009-10-25T06:57:33Z",
+              "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+              "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+              "source_type": "youtube"
+            }
+          },
+          "stage_deep_research": {
+            "run_id": "node-run-youtube-deep-research-20260621T151432Z-516f89",
+            "job_id": "ff3c124e-7059-4b12-824c-390af04ce9c7",
+            "status": "completed",
+            "start_time": "",
+            "end_time": "2026-06-21T15:16:05Z",
+            "output_files": [
+              "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T151432Z-516f89/analysis.md",
+              "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T151432Z-516f89/status.json",
+              "raw/notebooklm-analysis/Rick-Astley---Never-Gonna-Give-You-Up-Official-Video-4K-Remaster-youtube-deep-research.md"
+            ],
+            "worker_files": {
+              "transcript_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript",
+              "transcript_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=txt",
+              "transcript_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=srt",
+              "transcript_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=vtt",
+              "transcript_csv": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=csv",
+              "analysis_md": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=md",
+              "translated_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?translated=1",
+              "translated_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=srt&translated=1",
+              "translated_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=vtt&translated=1",
+              "translated_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=txt&translated=1"
+            },
+            "chunks_total": 1,
+            "chunks_done": 1
+          },
+          "node_run": {
+            "node_run_id": "node-run-wiki-build-20260622T015636-142a90",
+            "node_id": "wiki-build",
+            "mode": "real-node",
+            "input_source": "generated-fixture",
+            "base_run_id": "",
+            "capability_overrides": {
+              "git": {
+                "enabled": true,
+                "required": false,
+                "managed_by": "runtime-harness",
+                "save_scope": "run",
+                "paths": []
+              },
+              "telegram": {
+                "enabled": false,
+                "required": false,
+                "managed_by": "runtime-harness",
+                "save_scope": "run"
+              }
+            },
+            "definition_scope_reports": {
+              "instance_override": {
+                "status": "unchanged",
+                "changed": {}
+              },
+              "project_default_request": {
+                "status": "skipped"
+              }
+            },
+            "created_at": "2026-06-22T01:56:37.365882+00:00"
+          },
+          "node_run_resolved_inputs": {
+            "reports": "raw/notebooklm-analysis/node-test-fixture.md"
+          }
+        },
+        "stdout_tail": "[stage_runner] ⏳ wiki-build 开始 (run=node-run-wiki-build-20260622T015636-142a90)\n[wiki-build] node run mode: keep injected context and let runtime harness persist outputs\n[v3] 处理 4 份报告，run_id=node-run-wiki-build-20260622T015636-142a90\n  [契约] 依 pipeline-context output_files 过滤：1/4 份\n  新建: 1 份，更新: 0 份\n\n报告: node-test-fixture.md\n  [Call 1] 提取+去重...\n    → entities: 2 条, concepts: 3 条 | tokens: 562+1651\n  去重后：entities 0 新建, concepts 2 新建\n  [Call 2] 生成 source: 瑞克·阿斯特利 - 永不放弃你\n    → 瑞克-阿斯特利-永不放弃你.md (1880 chars)\n  [Call 2] 生成 concept: 互联网迷因\n    → 互联网迷因.md (1721 chars)\n  [Call 2] 生成 concept: 音乐视频传播\n    → 音乐视频传播.md (1481 chars)\n  [Call 3] 图谱连通性审查...\n    → 0 条补链建议 | tokens: 440+1425\n\n==================================================\n[v3] 完成 | pages=3 | llm_calls=5 | tokens=9515 | 112s\n{\"run_id\": \"node-run-wiki-build-20260622T015636-142a90\", \"stage\": \"stage_c_v3\", \"start_time\": \"2026-06-22T01:56:37Z\", \"end_time\": \"2026-06-22T01:58:30Z\", \"duration_s\": 112, \"llm_calls\": 5, \"prompt_tokens\": 1971, \"completion_tokens\": 7544, \"total_tokens\": 9515, \"pages_created\": 3, \"status\": \"success\"}\nBUILD_EXIT_CODE=0\n[stage_runner] ✅ wiki-build 完成 (1m53s)\n[stage_runner] → started tg-notify locally (run=direct-tg-notify-node-run-wiki-build-20260622T015636-142a90-1782093515925126807, log=/tmp/forward-tg-notify-direct-tg-notify-node-run-wiki-build-20260622T015636-142a90-1782093515925126807.log)\n[stage_runner] forward_next: started 1/1 ready node(s)\n",
+        "stderr_tail": "",
+        "node_state": {
+          "pipeline_id": "node-run-wiki-build-20260622T015636-142a90",
+          "node_id": "wiki-build",
+          "run_id": "node-run-wiki-build-20260622T015636-142a90",
+          "status": "done",
+          "mode": "blocking",
+          "needs": [
+            "notebooklm-research"
+          ],
+          "started_at": "2026-06-22T01:56:37Z",
+          "finished_at": "2026-06-22T01:58:30Z",
+          "duration_s": 113,
+          "attempt": 1,
+          "progress": 100,
+          "inputs": {
+            "reports": "notebooklm-research.outputs.reports"
+          },
+          "outputs": {
+            "index": "index.md",
+            "pages": "wiki/**"
+          },
+          "optional_inputs": {
+            "deep_research": "youtube-deep-research.outputs.analysis_file"
+          },
+          "executor": {
+            "type": "agent-skill",
+            "agent": "hermes",
+            "skill": "sop-wiki-build",
+            "entry": "scripts/run_wiki_build.sh",
+            "model": "configurable",
+            "webhook_route": "sop-wiki-build"
+          },
+          "declared_inputs": {
+            "reports": {
+              "from": "notebooklm-research.outputs.reports",
+              "required": true
+            }
+          },
+          "resolved_inputs": {
+            "reports": [],
+            "deep_research": []
+          },
+          "declared_outputs": {
+            "index": {
+              "path": "index.md",
+              "type": "file"
+            },
+            "pages": {
+              "path": "wiki/**",
+              "type": "files"
+            }
+          },
+          "actual_outputs": {
+            "index": [
+              "index.md"
+            ],
+            "pages": [
+              "wiki/concepts/互联网迷因.md",
+              "wiki/concepts/音乐视频传播.md",
+              "wiki/entities/never-gonna-give-you-up.md",
+              "wiki/entities/rick-astley.md"
+            ]
+          },
+          "artifacts": [
+            {
+              "id": "a909ab8f85846403",
+              "producer": "wiki-build",
+              "output": "index",
+              "type": "wiki.page",
+              "format": "markdown",
+              "path": "index.md",
+              "title": "index.md",
+              "size": 257,
+              "mime_type": "application/octet-stream",
+              "tags": [],
+              "metadata": {},
+              "resolution": "context"
+            },
+            {
+              "id": "ea86fbc6aa327c86",
+              "producer": "wiki-build",
+              "output": "pages",
+              "type": "wiki.page",
+              "format": "markdown",
+              "path": "wiki/concepts/互联网迷因.md",
+              "title": "互联网迷因.md",
+              "size": 3352,
+              "mime_type": "application/octet-stream",
+              "tags": [],
+              "metadata": {},
+              "resolution": "context"
+            },
+            {
+              "id": "c4cac3f87986f6f1",
+              "producer": "wiki-build",
+              "output": "pages",
+              "type": "wiki.page",
+              "format": "markdown",
+              "path": "wiki/concepts/音乐视频传播.md",
+              "title": "音乐视频传播.md",
+              "size": 3804,
+              "mime_type": "application/octet-stream",
+              "tags": [],
+              "metadata": {},
+              "resolution": "context"
+            },
+            {
+              "id": "3d265bbd0e5a7b30",
+              "producer": "wiki-build",
+              "output": "pages",
+              "type": "wiki.page",
+              "format": "markdown",
+              "path": "wiki/entities/never-gonna-give-you-up.md",
+              "title": "never-gonna-give-you-up.md",
+              "size": 2390,
+              "mime_type": "application/octet-stream",
+              "tags": [],
+              "metadata": {},
+              "resolution": "context"
+            },
+            {
+              "id": "d6fbde256498ba60",
+              "producer": "wiki-build",
+              "output": "pages",
+              "type": "wiki.page",
+              "format": "markdown",
+              "path": "wiki/entities/rick-astley.md",
+              "title": "rick-astley.md",
+              "size": 3878,
+              "mime_type": "application/octet-stream",
+              "tags": [],
+              "metadata": {},
+              "resolution": "context"
+            }
+          ],
+          "validation": {
+            "status": "passed",
+            "missing_outputs": [],
+            "unexpected_outputs": []
+          },
+          "extra": {
+            "duration_s": 113,
+            "progress": 100
+          },
+          "error": "",
+          "updated_at": "2026-06-22T01:58:30Z"
+        },
+        "capabilities": {
+          "telegram": {
+            "enabled": false,
+            "required": false,
+            "status": "disabled",
+            "managed_by": "runtime-harness",
+            "trigger": "done",
+            "triggers": [
+              "start",
+              "done",
+              "failed",
+              "skipped"
+            ],
+            "reason": "telegram capability disabled",
+            "finished_at": "2026-06-22T01:58:30Z",
+            "history": [
+              {
+                "capability": "telegram",
+                "status": "disabled",
+                "recorded_at": "2026-06-22T01:58:30Z",
+                "trigger": "done",
+                "triggers": [
+                  "start",
+                  "done",
+                  "failed",
+                  "skipped"
+                ],
+                "reason": "telegram capability disabled",
+                "managed_by": "runtime-harness"
+              }
+            ]
+          },
+          "git": {
+            "enabled": true,
+            "required": false,
+            "status": "done",
+            "managed_by": "runtime-harness",
+            "repository": "skkeoriw/wiki-sop-new-instance",
+            "managed_paths": [
+              "index.md",
+              "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+              "wiki/concepts/互联网迷因.md",
+              "wiki/concepts/音乐视频传播.md",
+              "wiki/entities/never-gonna-give-you-up.md",
+              "wiki/entities/rick-astley.md"
+            ],
+            "paths": [],
+            "credential_source": "GITHUB_TOKEN",
+            "started_at": "2026-06-22T01:58:30Z",
+            "history": [
+              {
+                "capability": "git",
+                "status": "running",
+                "recorded_at": "2026-06-22T01:58:30Z",
+                "managed_by": "runtime-harness",
+                "repository": "skkeoriw/wiki-sop-new-instance",
+                "managed_paths": [
+                  "index.md",
+                  "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+                  "wiki/concepts/互联网迷因.md",
+                  "wiki/concepts/音乐视频传播.md",
+                  "wiki/entities/never-gonna-give-you-up.md",
+                  "wiki/entities/rick-astley.md"
+                ],
+                "paths": [],
+                "credential_source": "GITHUB_TOKEN"
+              },
+              {
+                "capability": "git",
+                "status": "done",
+                "recorded_at": "2026-06-22T01:58:32Z",
+                "error": "",
+                "managed_by": "runtime-harness",
+                "repository": "skkeoriw/wiki-sop-new-instance",
+                "managed_paths": [
+                  "index.md",
+                  "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+                  "wiki/concepts/互联网迷因.md",
+                  "wiki/concepts/音乐视频传播.md",
+                  "wiki/entities/never-gonna-give-you-up.md",
+                  "wiki/entities/rick-astley.md"
+                ],
+                "paths": [],
+                "commit": "f487213",
+                "commit_message": "chore: node-wiki-build outputs [pipe:node-run-wiki-build-20260622T015636-142a90] [run:node-run-wiki-build-20260622T015636-142a90]",
+                "pushed": true,
+                "changed_files": [
+                  "index.md",
+                  "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/artifacts.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/context.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/dag.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/artifacts.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/input.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/output.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/plan.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/state.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/run.json",
+                  "\"wiki/concepts/\\344\\272\\222\\350\\201\\224\\347\\275\\221\\350\\277\\267\\345\\233\\240.md\"",
+                  "\"wiki/concepts/\\351\\237\\263\\344\\271\\220\\350\\247\\206\\351\\242\\221\\344\\274\\240\\346\\222\\255.md\"",
+                  "wiki/entities/never-gonna-give-you-up.md",
+                  "wiki/entities/rick-astley.md"
+                ],
+                "credential_source": "GITHUB_TOKEN"
+              },
+              {
+                "capability": "git",
+                "status": "done",
+                "recorded_at": "2026-06-22T01:58:34Z",
+                "error": "",
+                "repository": "skkeoriw/wiki-sop-new-instance",
+                "commit": "047443a",
+                "commit_message": "chore: stage-c event [run:node-run-wiki-build-20260622T015636-142a90]",
+                "pushed": true,
+                "changed_files": [
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json"
+                ]
+              }
+            ],
+            "commit": "047443a",
+            "commit_message": "chore: stage-c event [run:node-run-wiki-build-20260622T015636-142a90]",
+            "pushed": true,
+            "changed_files": [
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json"
+            ],
+            "finished_at": "2026-06-22T01:58:34Z",
+            "error": ""
+          }
+        },
+        "actual_outputs": {
+          "index": [
+            "index.md"
+          ],
+          "pages": [
+            "wiki/concepts/互联网迷因.md",
+            "wiki/concepts/音乐视频传播.md",
+            "wiki/entities/never-gonna-give-you-up.md",
+            "wiki/entities/rick-astley.md"
+          ]
+        },
+        "output_categories": {
+          "core_outputs": {
+            "title": "核心输出",
+            "description": "节点声明 outputs 对应的业务结果。",
+            "files": [
+              "index.md",
+              "wiki/concepts/互联网迷因.md",
+              "wiki/concepts/音乐视频传播.md",
+              "wiki/entities/never-gonna-give-you-up.md",
+              "wiki/entities/rick-astley.md"
+            ],
+            "count": 5
+          },
+          "raw_files": {
+            "title": "节点原始文件",
+            "description": "节点 Skill/Worker 产生的原始响应、字幕和中间文件。",
+            "files": [],
+            "count": 0
+          },
+          "run_records": {
+            "title": "运行记录",
+            "description": "Node Run 工作台、事件、状态和 capability 记录。",
+            "files": [
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/artifacts.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/context.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/dag.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/artifacts.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/capabilities.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/input.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/output.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/state.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/artifacts.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/input.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/output.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/plan.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/state.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/run.json",
+              "raw/node-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+              "raw/node-runs/node-run-wiki-build-20260622T015636-142a90/executor.log",
+              "raw/node-runs/node-run-wiki-build-20260622T015636-142a90/input.json",
+              "raw/node-runs/node-run-wiki-build-20260622T015636-142a90/result.json",
+              "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl"
+            ],
+            "count": 23
+          }
+        },
+        "validation": {
+          "status": "passed",
+          "missing_outputs": [],
+          "unexpected_outputs": []
+        }
+      },
+      "started_at": "2026-06-22T01:56:37.365584+00:00",
+      "finished_at": "2026-06-22T01:58:35.970583+00:00",
+      "elapsed_ms": 118604
+    },
+    {
+      "id": "validate-outputs",
+      "title": "Validate declared outputs",
+      "status": "done",
+      "summary": "Declared outputs were found.",
+      "detail": {
+        "status": "passed",
+        "missing_outputs": [],
+        "unexpected_outputs": []
+      },
+      "started_at": "2026-06-22T01:56:37.190392+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-22T01:56:37.225392+00:00"
+    },
+    {
+      "id": "persist-to-github",
+      "title": "Persist to GitHub",
+      "status": "done",
+      "summary": "GitHub persistence capability finished.",
+      "detail": {
+        "enabled": true,
+        "required": false,
+        "status": "done",
+        "managed_by": "runtime-harness",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "managed_paths": [
+          "index.md",
+          "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+          "wiki/concepts/互联网迷因.md",
+          "wiki/concepts/音乐视频传播.md",
+          "wiki/entities/never-gonna-give-you-up.md",
+          "wiki/entities/rick-astley.md"
+        ],
+        "paths": [],
+        "credential_source": "GITHUB_TOKEN",
+        "started_at": "2026-06-22T01:58:30Z",
+        "history": [
+          {
+            "capability": "git",
+            "status": "running",
+            "recorded_at": "2026-06-22T01:58:30Z",
+            "managed_by": "runtime-harness",
+            "repository": "skkeoriw/wiki-sop-new-instance",
+            "managed_paths": [
+              "index.md",
+              "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+              "wiki/concepts/互联网迷因.md",
+              "wiki/concepts/音乐视频传播.md",
+              "wiki/entities/never-gonna-give-you-up.md",
+              "wiki/entities/rick-astley.md"
+            ],
+            "paths": [],
+            "credential_source": "GITHUB_TOKEN"
+          },
+          {
+            "capability": "git",
+            "status": "done",
+            "recorded_at": "2026-06-22T01:58:32Z",
+            "error": "",
+            "managed_by": "runtime-harness",
+            "repository": "skkeoriw/wiki-sop-new-instance",
+            "managed_paths": [
+              "index.md",
+              "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+              "wiki/concepts/互联网迷因.md",
+              "wiki/concepts/音乐视频传播.md",
+              "wiki/entities/never-gonna-give-you-up.md",
+              "wiki/entities/rick-astley.md"
+            ],
+            "paths": [],
+            "commit": "f487213",
+            "commit_message": "chore: node-wiki-build outputs [pipe:node-run-wiki-build-20260622T015636-142a90] [run:node-run-wiki-build-20260622T015636-142a90]",
+            "pushed": true,
+            "changed_files": [
+              "index.md",
+              "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/artifacts.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/context.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/dag.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/artifacts.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/input.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/output.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/plan.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/state.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/run.json",
+              "\"wiki/concepts/\\344\\272\\222\\350\\201\\224\\347\\275\\221\\350\\277\\267\\345\\233\\240.md\"",
+              "\"wiki/concepts/\\351\\237\\263\\344\\271\\220\\350\\247\\206\\351\\242\\221\\344\\274\\240\\346\\222\\255.md\"",
+              "wiki/entities/never-gonna-give-you-up.md",
+              "wiki/entities/rick-astley.md"
+            ],
+            "credential_source": "GITHUB_TOKEN"
+          },
+          {
+            "capability": "git",
+            "status": "done",
+            "recorded_at": "2026-06-22T01:58:34Z",
+            "error": "",
+            "repository": "skkeoriw/wiki-sop-new-instance",
+            "commit": "047443a",
+            "commit_message": "chore: stage-c event [run:node-run-wiki-build-20260622T015636-142a90]",
+            "pushed": true,
+            "changed_files": [
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json"
+            ]
+          }
+        ],
+        "commit": "047443a",
+        "commit_message": "chore: stage-c event [run:node-run-wiki-build-20260622T015636-142a90]",
+        "pushed": true,
+        "changed_files": [
+          "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json"
+        ],
+        "finished_at": "2026-06-22T01:58:34Z",
+        "error": ""
+      },
+      "started_at": "2026-06-22T01:56:37.225392+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-22T01:56:37.260392+00:00"
+    },
+    {
+      "id": "send-telegram-notification",
+      "title": "Send Telegram notification",
+      "status": "skipped",
+      "summary": "telegram capability disabled",
+      "detail": {
+        "enabled": false,
+        "required": false,
+        "status": "disabled",
+        "managed_by": "runtime-harness",
+        "trigger": "done",
+        "triggers": [
+          "start",
+          "done",
+          "failed",
+          "skipped"
+        ],
+        "reason": "telegram capability disabled",
+        "finished_at": "2026-06-22T01:58:30Z",
+        "history": [
+          {
+            "capability": "telegram",
+            "status": "disabled",
+            "recorded_at": "2026-06-22T01:58:30Z",
+            "trigger": "done",
+            "triggers": [
+              "start",
+              "done",
+              "failed",
+              "skipped"
+            ],
+            "reason": "telegram capability disabled",
+            "managed_by": "runtime-harness"
+          }
+        ]
+      },
+      "started_at": "2026-06-22T01:56:37.260392+00:00",
+      "elapsed_ms": 24,
+      "finished_at": "2026-06-22T01:56:37.284392+00:00"
+    }
+  ],
+  "inner_steps": [
+    {
+      "id": "pre",
+      "title": "执行前",
+      "status": "done",
+      "summary": "Node Run 上下文、输入和运行配置已准备，并交给 stage runner on_start。",
+      "started_at": "2026-06-22T01:56:36.910392+00:00",
+      "finished_at": "2026-06-22T01:56:37.365584+00:00",
+      "detail": {
+        "mode": "real-node",
+        "input_source": "generated-fixture",
+        "resolved_inputs": [
+          {
+            "name": "reports",
+            "source": "notebooklm-research.outputs.reports",
+            "required": true,
+            "resolved": true,
+            "value": "raw/notebooklm-analysis/node-test-fixture.md",
+            "provenance": "generated-fixture",
+            "reason": ""
+          }
+        ],
+        "missing_inputs": [],
+        "config_status": "done",
+        "command": [
+          "bash",
+          "/root/agent-brain-plugins/youtube-wiki/skills/sop-wiki-build/scripts/run_wiki_build.sh",
+          "/root/wiki/wiki-sop-new-instance",
+          "node-run-wiki-build-20260622T015636-142a90",
+          "node-run-wiki-build-20260622T015636-142a90"
+        ],
+        "stage_hook": "on_start"
+      }
+    },
+    {
+      "id": "doing",
+      "title": "执行中",
+      "status": "done",
+      "summary": "Skill / agent 业务执行完成。",
+      "started_at": "2026-06-22T01:56:37.365584+00:00",
+      "finished_at": "2026-06-22T01:58:35.970583+00:00",
+      "elapsed_ms": 118604,
+      "detail": {
+        "command": [
+          "bash",
+          "/root/agent-brain-plugins/youtube-wiki/skills/sop-wiki-build/scripts/run_wiki_build.sh",
+          "/root/wiki/wiki-sop-new-instance",
+          "node-run-wiki-build-20260622T015636-142a90",
+          "node-run-wiki-build-20260622T015636-142a90"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "log_path": "/root/wiki/wiki-sop-new-instance/raw/node-runs/node-run-wiki-build-20260622T015636-142a90/executor.log",
+        "stdout_tail": "[stage_runner] ⏳ wiki-build 开始 (run=node-run-wiki-build-20260622T015636-142a90)\n[wiki-build] node run mode: keep injected context and let runtime harness persist outputs\n[v3] 处理 4 份报告，run_id=node-run-wiki-build-20260622T015636-142a90\n  [契约] 依 pipeline-context output_files 过滤：1/4 份\n  新建: 1 份，更新: 0 份\n\n报告: node-test-fixture.md\n  [Call 1] 提取+去重...\n    → entities: 2 条, concepts: 3 条 | tokens: 562+1651\n  去重后：entities 0 新建, concepts 2 新建\n  [Call 2] 生成 source: 瑞克·阿斯特利 - 永不放弃你\n    → 瑞克-阿斯特利-永不放弃你.md (1880 chars)\n  [Call 2] 生成 concept: 互联网迷因\n    → 互联网迷因.md (1721 chars)\n  [Call 2] 生成 concept: 音乐视频传播\n    → 音乐视频传播.md (1481 chars)\n  [Call 3] 图谱连通性审查...\n    → 0 条补链建议 | tokens: 440+1425\n\n==================================================\n[v3] 完成 | pages=3 | llm_calls=5 | tokens=9515 | 112s\n{\"run_id\": \"node-run-wiki-build-20260622T015636-142a90\", \"stage\": \"stage_c_v3\", \"start_time\": \"2026-06-22T01:56:37Z\", \"end_time\": \"2026-06-22T01:58:30Z\", \"duration_s\": 112, \"llm_calls\": 5, \"prompt_tokens\": 1971, \"completion_tokens\": 7544, \"total_tokens\": 9515, \"pages_created\": 3, \"status\": \"success\"}\nBUILD_EXIT_CODE=0\n[stage_runner] ✅ wiki-build 完成 (1m53s)\n[stage_runner] → started tg-notify locally (run=direct-tg-notify-node-run-wiki-build-20260622T015636-142a90-1782093515925126807, log=/tmp/forward-tg-notify-direct-tg-notify-node-run-wiki-build-20260622T015636-142a90-1782093515925126807.log)\n[stage_runner] forward_next: started 1/1 ready node(s)\n",
+        "stderr_tail": ""
+      }
+    },
+    {
+      "id": "post",
+      "title": "执行后",
+      "status": "done",
+      "summary": "stage_runner on_done/on_failed、输出校验、Git/TG capability 和 bridge 结果收集已归档。",
+      "started_at": "2026-06-22T01:58:35.970583+00:00",
+      "finished_at": "2026-06-22T01:58:35.977735+00:00",
+      "detail": {
+        "stage_hooks": [
+          "on_done/on_failed",
+          "forward_next"
+        ],
+        "validation": {
+          "status": "passed",
+          "missing_outputs": [],
+          "unexpected_outputs": []
+        },
+        "actual_outputs": {
+          "index": [
+            "index.md"
+          ],
+          "pages": [
+            "wiki/concepts/互联网迷因.md",
+            "wiki/concepts/音乐视频传播.md",
+            "wiki/entities/never-gonna-give-you-up.md",
+            "wiki/entities/rick-astley.md"
+          ]
+        },
+        "business_artifact_count": 5,
+        "capabilities": {
+          "telegram": {
+            "enabled": false,
+            "required": false,
+            "status": "disabled",
+            "managed_by": "runtime-harness",
+            "trigger": "done",
+            "triggers": [
+              "start",
+              "done",
+              "failed",
+              "skipped"
+            ],
+            "reason": "telegram capability disabled",
+            "finished_at": "2026-06-22T01:58:30Z",
+            "history": [
+              {
+                "capability": "telegram",
+                "status": "disabled",
+                "recorded_at": "2026-06-22T01:58:30Z",
+                "trigger": "done",
+                "triggers": [
+                  "start",
+                  "done",
+                  "failed",
+                  "skipped"
+                ],
+                "reason": "telegram capability disabled",
+                "managed_by": "runtime-harness"
+              }
+            ]
+          },
+          "git": {
+            "enabled": true,
+            "required": false,
+            "status": "done",
+            "managed_by": "runtime-harness",
+            "repository": "skkeoriw/wiki-sop-new-instance",
+            "managed_paths": [
+              "index.md",
+              "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+              "wiki/concepts/互联网迷因.md",
+              "wiki/concepts/音乐视频传播.md",
+              "wiki/entities/never-gonna-give-you-up.md",
+              "wiki/entities/rick-astley.md"
+            ],
+            "paths": [],
+            "credential_source": "GITHUB_TOKEN",
+            "started_at": "2026-06-22T01:58:30Z",
+            "history": [
+              {
+                "capability": "git",
+                "status": "running",
+                "recorded_at": "2026-06-22T01:58:30Z",
+                "managed_by": "runtime-harness",
+                "repository": "skkeoriw/wiki-sop-new-instance",
+                "managed_paths": [
+                  "index.md",
+                  "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+                  "wiki/concepts/互联网迷因.md",
+                  "wiki/concepts/音乐视频传播.md",
+                  "wiki/entities/never-gonna-give-you-up.md",
+                  "wiki/entities/rick-astley.md"
+                ],
+                "paths": [],
+                "credential_source": "GITHUB_TOKEN"
+              },
+              {
+                "capability": "git",
+                "status": "done",
+                "recorded_at": "2026-06-22T01:58:32Z",
+                "error": "",
+                "managed_by": "runtime-harness",
+                "repository": "skkeoriw/wiki-sop-new-instance",
+                "managed_paths": [
+                  "index.md",
+                  "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+                  "wiki/concepts/互联网迷因.md",
+                  "wiki/concepts/音乐视频传播.md",
+                  "wiki/entities/never-gonna-give-you-up.md",
+                  "wiki/entities/rick-astley.md"
+                ],
+                "paths": [],
+                "commit": "f487213",
+                "commit_message": "chore: node-wiki-build outputs [pipe:node-run-wiki-build-20260622T015636-142a90] [run:node-run-wiki-build-20260622T015636-142a90]",
+                "pushed": true,
+                "changed_files": [
+                  "index.md",
+                  "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/artifacts.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/context.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/dag.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/artifacts.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/input.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/output.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/plan.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/state.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/run.json",
+                  "\"wiki/concepts/\\344\\272\\222\\350\\201\\224\\347\\275\\221\\350\\277\\267\\345\\233\\240.md\"",
+                  "\"wiki/concepts/\\351\\237\\263\\344\\271\\220\\350\\247\\206\\351\\242\\221\\344\\274\\240\\346\\222\\255.md\"",
+                  "wiki/entities/never-gonna-give-you-up.md",
+                  "wiki/entities/rick-astley.md"
+                ],
+                "credential_source": "GITHUB_TOKEN"
+              },
+              {
+                "capability": "git",
+                "status": "done",
+                "recorded_at": "2026-06-22T01:58:34Z",
+                "error": "",
+                "repository": "skkeoriw/wiki-sop-new-instance",
+                "commit": "047443a",
+                "commit_message": "chore: stage-c event [run:node-run-wiki-build-20260622T015636-142a90]",
+                "pushed": true,
+                "changed_files": [
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json"
+                ]
+              }
+            ],
+            "commit": "047443a",
+            "commit_message": "chore: stage-c event [run:node-run-wiki-build-20260622T015636-142a90]",
+            "pushed": true,
+            "changed_files": [
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json"
+            ],
+            "finished_at": "2026-06-22T01:58:34Z",
+            "error": ""
+          }
+        },
+        "forward_next": "[stage_runner] forward_next: started 1/1 ready node(s)"
+      }
+    }
+  ],
+  "events": [
+    {
+      "sequence": 1,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-wiki-build-20260622T015636-142a90",
+      "node_id": "wiki-build",
+      "step_id": "create-run",
+      "ts": "2026-06-22T01:58:35.977735+00:00",
+      "data": {
+        "title": "Create node run workspace",
+        "summary": "Node Run record is allocated independently from Workflow Run."
+      }
+    },
+    {
+      "sequence": 2,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-wiki-build-20260622T015636-142a90",
+      "node_id": "wiki-build",
+      "step_id": "load-definition",
+      "ts": "2026-06-22T01:58:35.977735+00:00",
+      "data": {
+        "title": "Load node definition",
+        "summary": "Loaded wiki-build from youtube-research-wiki."
+      }
+    },
+    {
+      "sequence": 3,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-wiki-build-20260622T015636-142a90",
+      "node_id": "wiki-build",
+      "step_id": "resolve-context",
+      "ts": "2026-06-22T01:58:35.977735+00:00",
+      "data": {
+        "title": "Resolve Runtime / Instance / Workflow context",
+        "summary": "runtime-152-32-214-95 · test-instance · youtube-research-wiki"
+      }
+    },
+    {
+      "sequence": 4,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-wiki-build-20260622T015636-142a90",
+      "node_id": "wiki-build",
+      "step_id": "resolve-inputs",
+      "ts": "2026-06-22T01:58:35.977735+00:00",
+      "data": {
+        "title": "Resolve node inputs",
+        "summary": "1 resolved, 0 missing."
+      }
+    },
+    {
+      "sequence": 5,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-wiki-build-20260622T015636-142a90",
+      "node_id": "wiki-build",
+      "step_id": "resolve-config",
+      "ts": "2026-06-22T01:58:35.977735+00:00",
+      "data": {
+        "title": "Resolve execution config",
+        "summary": "Runtime, Instance and capability config resolved."
+      }
+    },
+    {
+      "sequence": 6,
+      "event": "node_run.step.skipped",
+      "node_run_id": "node-run-wiki-build-20260622T015636-142a90",
+      "node_id": "wiki-build",
+      "step_id": "probe-capabilities",
+      "ts": "2026-06-22T01:58:35.977735+00:00",
+      "data": {
+        "title": "Probe attached capabilities",
+        "summary": "Capability probes are explicit. Telegram send probes require user confirmation."
+      }
+    },
+    {
+      "sequence": 7,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-wiki-build-20260622T015636-142a90",
+      "node_id": "wiki-build",
+      "step_id": "build-execution-plan",
+      "ts": "2026-06-22T01:58:35.977735+00:00",
+      "data": {
+        "title": "Build node execution plan",
+        "summary": "Prepared real-node execution plan."
+      }
+    },
+    {
+      "sequence": 8,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-wiki-build-20260622T015636-142a90",
+      "node_id": "wiki-build",
+      "step_id": "execute-or-dry-run",
+      "ts": "2026-06-22T01:58:35.977735+00:00",
+      "data": {
+        "title": "Execute or dry-run node",
+        "summary": "Real node execution finished and declared outputs were found."
+      }
+    },
+    {
+      "sequence": 9,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-wiki-build-20260622T015636-142a90",
+      "node_id": "wiki-build",
+      "step_id": "validate-outputs",
+      "ts": "2026-06-22T01:58:35.977735+00:00",
+      "data": {
+        "title": "Validate declared outputs",
+        "summary": "Declared outputs were found."
+      }
+    },
+    {
+      "sequence": 10,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-wiki-build-20260622T015636-142a90",
+      "node_id": "wiki-build",
+      "step_id": "persist-to-github",
+      "ts": "2026-06-22T01:58:35.977735+00:00",
+      "data": {
+        "title": "Persist to GitHub",
+        "summary": "GitHub persistence capability finished."
+      }
+    },
+    {
+      "sequence": 11,
+      "event": "node_run.step.skipped",
+      "node_run_id": "node-run-wiki-build-20260622T015636-142a90",
+      "node_id": "wiki-build",
+      "step_id": "send-telegram-notification",
+      "ts": "2026-06-22T01:58:35.977735+00:00",
+      "data": {
+        "title": "Send Telegram notification",
+        "summary": "telegram capability disabled"
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "node-run-result",
+      "producer": "wiki-build",
+      "type": "node-run.result",
+      "format": "json",
+      "path": "raw/node-runs/node-run-wiki-build-20260622T015636-142a90/result.json",
+      "title": "Node Run diagnostic result",
+      "resolution": "recorded"
+    },
+    {
+      "id": "a909ab8f85846403",
+      "producer": "wiki-build",
+      "output": "index",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "index.md",
+      "title": "index.md",
+      "size": 257,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "recorded",
+      "preview": "# YouTube Video Research Wiki\nLast updated: 2026-06-22\nTotal pages: 3\n\n## Sources\n- [[瑞克-阿斯特利-永不放弃你]]\n\n## Entities\n- [[rick-astley]]\n- [[never-gonna-give-you-up]]\n\n## Concepts\n- [[互联网迷因]]\n- [[音乐视频传播]]\n\n## Mindmaps",
+      "preview_truncated": false
+    },
+    {
+      "id": "ea86fbc6aa327c86",
+      "producer": "wiki-build",
+      "output": "pages",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "wiki/concepts/互联网迷因.md",
+      "title": "互联网迷因.md",
+      "size": 3352,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "recorded",
+      "preview": "---\ntitle: 互联网迷因\ntype: concept\ntags: [互联网迷因, 网络文化, 模因, 病毒传播]\nsummary: 互联网迷因是通过互联网快速复制和传播的文化片段，常以幽默、讽刺或病毒式娱乐形式出现，例如 Rick Astley 的《Never Gonna Give You Up》因 Rickrolling 成为经典迷因案例。\nsources: [\"raw/notebooklm-analysis/node-test-fixture.md\"]\ncreated: 2024-07-23\nupdated: 2024-07-23\nlayer: L1\nconfidence: high\nreasoning: \"直接从NotebookLM思维导图中提取的概念。\"\n---\n\n互联网迷因（Internet meme）是借助互联网环境实现快速复制、变异和扩散的文化单元，其形态覆盖图片、短语、视频、符号、行为挑战等一切可被模仿、混搭并附着情绪或观点的信息片段。迷因概念源自理查德·道金斯《自私的基因》中提出的“meme”，用于解释文化传播与基因类似的复制机制；在数字时代，互联网迷因的传播速度、变异幅度和触达广度被社交平台、即时通讯、论坛和算法推荐急剧放大，使其成为当代数字文化的核心构件。一个有效的互联网迷因往往具有可复用的模板结构、易懂的幽默内核或情绪张力，并能允许参与者进行个性化再创作，从而在传播中不断积累新的意义层次。\n\n技术细节上，互联网迷因的爆发通常依赖“可复制单元 + 情绪诱因 + 低参与门槛”的组合。早期的图像宏（image macro）依靠固定版式和冲击边框形成衍生链，视频迷因则通过截取、配音、重混等手段实现变体。以 Rickrolling 为例，它把瑞克·阿斯特利（Rick Astley）的 1987 年单曲《Never Gonna Give You Up》音乐视频包装成一条误导链接，利用好奇心与落差感制造病毒式分享；此处 [[瑞克·阿斯特利 - 永不放弃你]] 作为源载体，证明了老音乐内容可以在全新语境下重生。迷因的传播力可通过再生数、衍生版本数、跨平台迁移率和情绪感染系数等指标衡量，网络分析也揭示出超级节点、密观社群和偶然爆点对迷因扩散的关键影响。此外，模因工程（meme engineering）被用于设计天然的社交货币，让品牌、公益组织乃至政治运动有意识地孵化可复制的迷因基因。\n\n应用场景极其广泛。营销领域，品牌通过自发迷因或参与迷因改装（remix）来降低广告抵触心理，实现低成本曝光；政治传播中，口号、表情包和短视频迷因常用来凝聚认同或攻击对手，塑造叙事框架；社区运营上，群体内部的专属迷因强化归属感与加密隔阂，例如特定 Discord 频道或 subreddit 中的门槛玩笑。与此同时，[[音乐视频传播]] 作为迷因的典型载体路径，展现了视听符号被剥离原境、重新嵌入讽刺、致敬或纯娱乐场景的完整链条。教育、科学传播也开始主动借用迷因手法，将复杂概念转为易消化的模因片段，在注意力稀缺的环境中争夺认知内存。然而迷因的高速代谢也带来语境丢失、歧义放大乃至网络暴力的风险，其半衰期越来越短，迫使创作者和运营者必须在即时性与深度之间寻找平衡。理解并善用互联网迷因的生成规律，已成为数字素养和当代叙事策略的重要维度。",
+      "preview_truncated": false
+    },
+    {
+      "id": "c4cac3f87986f6f1",
+      "producer": "wiki-build",
+      "output": "pages",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "wiki/concepts/音乐视频传播.md",
+      "title": "音乐视频传播.md",
+      "size": 4155,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "recorded",
+      "preview": "---\ntitle: \"音乐视频传播\"\ntype: \"concept\"\ntags: [\"音乐视频\", \"传播学\", \"互联网文化\", \"病毒式传播\", \"YouTube\"]\nsummary: \"音乐视频传播指音乐视频通过视觉与听觉符号的结合，在受众与媒介平台间扩散、共享及再创造的过程，是互联网时代文化流通的核心形式之一。\"\nsources: [\"raw/notebooklm-analysis/node-test-fixture.md\"]\ncreated: \"2025-03-23\"\nupdated: \"2025-03-23\"\nlayer: \"L1\"\nconfidence: \"high\"\nreasoning: \"直接从NotebookLM思维导图中提取的概念。\"\n---\n\n# 音乐视频传播\n\n**音乐视频传播**是指以音乐录音制品为基底，结合动态影像形成的视听文本，在个体、群体与媒介网络之间流动、被接收、挪用和重塑的过程。它不只涵盖传统广播电视时代的单向推送，更特指进入互联网平台后，由用户行为、算法推荐与社交分享共同驱动的裂变式扩散。该概念的核心在于**视觉因素对听觉体验的增值**——影像为音乐赋予叙事、身份标识与情感脚本，从而使作品更易被记忆、模仿和二次创作。当音乐视频跨越其原始发布渠道，在论坛、社交媒体、即时通讯中反复出现时，它便从单纯的宣传物料升格为一种**参与式文化容器**，承载集体情绪、圈层暗语与时代记忆。\n\n这一传播形态的独特性，建立在技术可复制性与平台可供性的交叉点上。早期音乐视频依赖MTV等音乐电视频道的线性排播，传播路径受制于守门人选择；而数字平台（尤其是YouTube、TikTok）消解了时间的稀缺性，使任何用户均可随时发起观看、嵌入或重新剪辑。技术细节上，**分享链接、嵌入代码与短链跳转**构成了传播的基础设施，它们将音乐视频从中心化站点解放为可嵌入社交媒体动态、博客与私信中的流动模块。算法推荐系统则依据观看时长、重播率、跳过率等信号，将其推向可能感兴趣的受众，形成“流行度—推荐权重”的正反馈回路。此外，**压缩编码（如H.264/VP9）与自适应码率传输**保障了不同网络条件下的流畅启动，使得即点即看成为可能，显著降低了传播摩擦，这也是移动场景中冲动式分享得以发生的物理前提。\n\n**应用场景**覆盖产业营销、文化生态构建与日常生活仪式三个层面。在音乐工业中，发行方通过同步首播、预告片搭配Hashtag挑战，将音乐视频作为制造首周流媒体热度与社交话题的核心引擎。在亚文化圈层，“MV reaction”“remix”“meme remixing”等实践将视频拆解为可拼贴的视听素材，创作者截取标志性动作或副歌段落，注入新意义使其重生为[[互联网迷因]]。日常生活中，用户将音乐视频链接附于状态、私信或评论区，完成情绪表达、身份展演或社交破冰，典型如《Never Gonna Give You Up》因“Rickrolling”恶作剧而成为一种全球范围的**互动仪式**——这一现象映射出音乐视频传播中“意外点击”与共享玩笑如何强化社群归属感。该曲由[[Rick Astley]]演绎，1987年发行后本已沉入怀旧档案，却在2007年因匿名用户将其链接伪装为游戏预告片而引爆，最终观看量逾十亿。这充分说明在超链接时代，传播已不再单纯由内容质量决定，更取决于其作为**文化模因**被挪用与变异的潜力。\n\n在理论层面，音乐视频传播可借助**模因学**与**扩散理论**来理解。视听片段如同基因，通过复制、变异、选择而留存；平台则相当于选择性环境，流行度指标充当适应性筛选器。同时，去中心化的传播结构消解了单向创作与被动消费的界限，使[[流行文化引用]]成为日常语言的一部分——人们借用画面、旋律或舞蹈动作来回应现实，形成一种视觉化的“引用经济”。当一首音乐视频的观看量、二创量、跨平台迁移次数不断攀升时，它也便从娱乐产品转化为一种社会文本，记录并参与塑造公共记忆与流行语汇。",
+      "preview_truncated": false
+    },
+    {
+      "id": "3d265bbd0e5a7b30",
+      "producer": "wiki-build",
+      "output": "pages",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "wiki/entities/never-gonna-give-you-up.md",
+      "title": "never-gonna-give-you-up.md",
+      "size": 2390,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "recorded",
+      "preview": "---\ntitle: Never Gonna Give You Up\ntype: entity\ntags: [\"歌曲\", \"音乐视频\", \"1987年\", \"流行音乐\", \"互联网迷因\", \"Rickroll\"]\nsummary: 瑞克·阿斯特利于1987年发行的经典流行歌曲及音乐视频，后因“Rickrolling”现象成为全球知名的互联网迷因。\nsources: [\"raw/notebooklm-analysis/node-test-fixture.md\"]\ncreated: 2025-04-02\nupdated: 2025-04-02\nlayer: L1\nconfidence: high\nreasoning: 该实体在测试分析报告 node-test-fixture.md 中被列为关键实体，对其描述基于报告中明确的歌曲身份以及与之关联的音乐视频传播、流行文化引用和互联网迷因等概念。\n---\n\nNever Gonna Give You Up（通常译作《永不放弃你》）是英国歌手 [[Rick Astley]] 在1987年发行的一首流行歌曲及其音乐视频，由著名的 Stock Aitken Waterman 制作团队打造。该曲发行后迅速席卷全球榜单，在英美等多个国家登顶，其标志性的合成器前奏和瑞克·阿斯特利浑厚的嗓音，使其成为80年代舞曲流行乐的代名词。伴随歌曲的音乐视频同样极具辨识度：瑞克·阿斯特利以其招牌式的轻松律动和直视镜头的坦诚表演，在简单的街景与室内舞台间切换，构成了一段令人过目不忘的视觉记忆。\n\n进入21世纪后，这段音乐视频被赋予了远超音乐范畴的文化意义。网民开始利用隐藏链接的手段，诱使他人点开并意外观看到这段视频，这一行为被称为 [[瑞克·阿斯特利 - 永不放弃你|Rickrolling]]，它迅速演变为一种全球性的 [[互联网迷因]] 和网络恶作剧。Never Gonna Give You Up 由此完成了从畅销金曲到跨时代 [[流行文化引用]] 符号的蜕变，并在 [[音乐视频传播]] 的多次浪潮中持续被重新讨论和解构。\n\n在本分析报告所涉的音乐视频中，Never Gonna Give You Up 扮演了双重角色。它首先是作为核心表演内容，直接展现了瑞克·阿斯特利作为20世纪80年代流行偶像的舞台魅力，承载了该时期音乐视频的典型美学。其次，正是这一视频中的舞蹈、表情和整体氛围，无意中提供了日后引爆网络狂欢的完美素材，使其在视频本体之外，成为互联网亚文化中对意外、坚持与幽默的集体表达，从简单的音乐作品跃升为深嵌在数字社交结构中的文化实体。",
+      "preview_truncated": false
+    },
+    {
+      "id": "d6fbde256498ba60",
+      "producer": "wiki-build",
+      "output": "pages",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "wiki/entities/rick-astley.md",
+      "title": "rick-astley.md",
+      "size": 3878,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "recorded",
+      "preview": "---\ntitle: Rick Astley\ntype: entity\ntags:\n  - 英国歌手\n  - 1980年代流行音乐\n  - 互联网迷因\n  - 流行文化\n  - 音乐视频\nsummary: 英国流行歌手，因1987年热门单曲《Never Gonna Give You Up》及其音乐视频而闻名全球，该视频后来演变为互联网迷因\"Rickrolling\"的核心元素。\nsources:\n  - \"raw/notebooklm-analysis/node-test-fixture.md\"\ncreated: 2025-01-15\nupdated: 2025-01-15\nlayer: L1\nconfidence: high\nreasoning: 来源报告明确将Rick Astley列为关键实体，信息来源于官方音乐视频页面，身份确凿且无歧义，故置信度为高。\n---\n\n## 实体描述\n\nRick Astley（全名理查德·保罗·阿斯特利，Richard Paul Astley）是一位英国流行歌手、词曲作者和音乐人，1966年2月6日出生于英格兰兰开夏郡的牛顿勒威洛斯。他在1980年代后期迅速崛起，成为当时全球最畅销的流行艺人之一。Astley以其浑厚深情的男中音嗓音著称，这种声音与他年轻的外表形成了鲜明对比，给听众留下了深刻印象。他的音乐风格融合了流行、舞曲和灵魂乐元素，由著名制作团队Stock Aitken Waterman精心打造，成功塑造了那个时代标志性的流行声响。1987年，他的首张专辑《Whenever You Need Somebody》一举登上英国专辑榜冠军，并在全球范围内取得了数百万张的销售成绩。专辑中的主打单曲《Never Gonna Give You Up》更是横跨25个国家的排行榜登顶，成为1987年最畅销的单曲之一。Astley在1988年获得了全英音乐奖最佳英国男歌手奖，奠定了他在流行音乐史上的地位。然而，真正让Rick Astley的名字超越音乐领域、渗透进全球互联网文化的，是二十年后兴起的\"Rickrolling\"现象。这一迷因将他的音乐视频转化为一种无害的网络恶作剧，使他在数字时代获得了第二次文化生命的爆发。如今，Rick Astley不仅是一位拥有多张白金唱片的成功歌手，更是一个跨越世代、连接模拟时代与数字时代的流行文化符号。他的职业生涯经历了爆红、隐退与复兴的完整周期，展现了非凡的艺术生命力与文化韧性。\n\n## 在本视频中的角色\n\n在1987年发布的《Never Gonna Give You Up》音乐视频中，Rick Astley担任绝对的主角与核心表演者。视频以他身穿标志性的米色风衣和高腰裤形象出场，在伦敦街头及室内场景中对着镜头直接演唱。他标志性的舞步——尤其是那个侧身摆臂的动作——搭配其富有感染力的微笑和自信的眼神交流，构成了视频中最令人难忘的视觉元素。这个视频原本只是1980年代典型的流行音乐宣传片，但由于Astley真诚而略带笨拙的舞蹈风格与其浑厚成熟嗓音之间的反差魅力，使得它在二十年后被互联网社群发掘并赋予了全新的意义。在Rickrolling迷因的语境中，Astley在视频中的每一次出场都成为了一种幽默的\"伏击\"——用户以为自己点击的是某个重要链接，结果却被引导至这段视频，迎面而来的正是Astley那充满活力的舞姿和标志性的开场旋律。他在视频中的角色因此从一位流行歌手升华为全球互联网共同记忆中的核心面孔。\n\n## 相关页面\n\n- [[Never Gonna Give You Up]] — Rick Astley最具代表性的歌曲与音乐视频，也是Rickrolling迷因的载体。\n- [[瑞克·阿斯特利 - 永不放弃你]] — 该歌曲及其中文语境下的相关讨论页面。\n- [[互联网迷因]] — 探讨Rickrolling作为一种经典网络迷因的形成机制与传播路径。\n- [[音乐视频传播]] — 分析该视频如何从传统媒体跨越至数字平台，实现病毒式传播。\n- [[流行文化引用]] — 汇总Rick Astley及其作品在影视、游戏和社交媒体中的广泛引用案例。",
+      "preview_truncated": false
+    }
+  ],
+  "actual_outputs": {
+    "index": [
+      "index.md"
+    ],
+    "pages": [
+      "wiki/concepts/互联网迷因.md",
+      "wiki/concepts/音乐视频传播.md",
+      "wiki/entities/never-gonna-give-you-up.md",
+      "wiki/entities/rick-astley.md"
+    ]
+  },
+  "output_categories": {
+    "core_outputs": {
+      "title": "核心输出",
+      "description": "节点声明 outputs 对应的业务结果。",
+      "files": [
+        "index.md",
+        "wiki/concepts/互联网迷因.md",
+        "wiki/concepts/音乐视频传播.md",
+        "wiki/entities/never-gonna-give-you-up.md",
+        "wiki/entities/rick-astley.md"
+      ],
+      "count": 5
+    },
+    "raw_files": {
+      "title": "节点原始文件",
+      "description": "节点 Skill/Worker 产生的原始响应、字幕和中间文件。",
+      "files": [],
+      "count": 0
+    },
+    "run_records": {
+      "title": "运行记录",
+      "description": "Node Run 工作台、事件、状态和 capability 记录。",
+      "files": [
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/artifacts.json",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/context.json",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/dag.json",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/artifacts.json",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/capabilities.json",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/input.json",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/output.json",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/state.json",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify.json",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/artifacts.json",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/input.json",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/output.json",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/plan.json",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/state.json",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build.json",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/run.json",
+        "raw/node-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+        "raw/node-runs/node-run-wiki-build-20260622T015636-142a90/executor.log",
+        "raw/node-runs/node-run-wiki-build-20260622T015636-142a90/input.json",
+        "raw/node-runs/node-run-wiki-build-20260622T015636-142a90/result.json",
+        "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl"
+      ],
+      "count": 23
+    }
+  },
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  },
+  "capabilities": {
+    "telegram": {
+      "enabled": false,
+      "required": false,
+      "status": "disabled",
+      "managed_by": "runtime-harness",
+      "trigger": "done",
+      "triggers": [
+        "start",
+        "done",
+        "failed",
+        "skipped"
+      ],
+      "reason": "telegram capability disabled",
+      "finished_at": "2026-06-22T01:58:30Z",
+      "history": [
+        {
+          "capability": "telegram",
+          "status": "disabled",
+          "recorded_at": "2026-06-22T01:58:30Z",
+          "trigger": "done",
+          "triggers": [
+            "start",
+            "done",
+            "failed",
+            "skipped"
+          ],
+          "reason": "telegram capability disabled",
+          "managed_by": "runtime-harness"
+        }
+      ]
+    },
+    "git": {
+      "enabled": true,
+      "required": false,
+      "status": "done",
+      "managed_by": "runtime-harness",
+      "repository": "skkeoriw/wiki-sop-new-instance",
+      "managed_paths": [
+        "index.md",
+        "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+        "wiki/concepts/互联网迷因.md",
+        "wiki/concepts/音乐视频传播.md",
+        "wiki/entities/never-gonna-give-you-up.md",
+        "wiki/entities/rick-astley.md"
+      ],
+      "paths": [],
+      "credential_source": "GITHUB_TOKEN",
+      "started_at": "2026-06-22T01:58:30Z",
+      "history": [
+        {
+          "capability": "git",
+          "status": "running",
+          "recorded_at": "2026-06-22T01:58:30Z",
+          "managed_by": "runtime-harness",
+          "repository": "skkeoriw/wiki-sop-new-instance",
+          "managed_paths": [
+            "index.md",
+            "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+            "wiki/concepts/互联网迷因.md",
+            "wiki/concepts/音乐视频传播.md",
+            "wiki/entities/never-gonna-give-you-up.md",
+            "wiki/entities/rick-astley.md"
+          ],
+          "paths": [],
+          "credential_source": "GITHUB_TOKEN"
+        },
+        {
+          "capability": "git",
+          "status": "done",
+          "recorded_at": "2026-06-22T01:58:32Z",
+          "error": "",
+          "managed_by": "runtime-harness",
+          "repository": "skkeoriw/wiki-sop-new-instance",
+          "managed_paths": [
+            "index.md",
+            "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+            "wiki/concepts/互联网迷因.md",
+            "wiki/concepts/音乐视频传播.md",
+            "wiki/entities/never-gonna-give-you-up.md",
+            "wiki/entities/rick-astley.md"
+          ],
+          "paths": [],
+          "commit": "f487213",
+          "commit_message": "chore: node-wiki-build outputs [pipe:node-run-wiki-build-20260622T015636-142a90] [run:node-run-wiki-build-20260622T015636-142a90]",
+          "pushed": true,
+          "changed_files": [
+            "index.md",
+            "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/artifacts.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/context.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/dag.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/artifacts.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/input.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/output.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/plan.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/state.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/run.json",
+            "\"wiki/concepts/\\344\\272\\222\\350\\201\\224\\347\\275\\221\\350\\277\\267\\345\\233\\240.md\"",
+            "\"wiki/concepts/\\351\\237\\263\\344\\271\\220\\350\\247\\206\\351\\242\\221\\344\\274\\240\\346\\222\\255.md\"",
+            "wiki/entities/never-gonna-give-you-up.md",
+            "wiki/entities/rick-astley.md"
+          ],
+          "credential_source": "GITHUB_TOKEN"
+        },
+        {
+          "capability": "git",
+          "status": "done",
+          "recorded_at": "2026-06-22T01:58:34Z",
+          "error": "",
+          "repository": "skkeoriw/wiki-sop-new-instance",
+          "commit": "047443a",
+          "commit_message": "chore: stage-c event [run:node-run-wiki-build-20260622T015636-142a90]",
+          "pushed": true,
+          "changed_files": [
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json"
+          ]
+        }
+      ],
+      "commit": "047443a",
+      "commit_message": "chore: stage-c event [run:node-run-wiki-build-20260622T015636-142a90]",
+      "pushed": true,
+      "changed_files": [
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+        "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json"
+      ],
+      "finished_at": "2026-06-22T01:58:34Z",
+      "error": ""
+    }
+  },
+  "business_artifacts": [
+    {
+      "id": "a909ab8f85846403",
+      "producer": "wiki-build",
+      "output": "index",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "index.md",
+      "title": "index.md",
+      "size": 257,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "recorded",
+      "preview": "# YouTube Video Research Wiki\nLast updated: 2026-06-22\nTotal pages: 3\n\n## Sources\n- [[瑞克-阿斯特利-永不放弃你]]\n\n## Entities\n- [[rick-astley]]\n- [[never-gonna-give-you-up]]\n\n## Concepts\n- [[互联网迷因]]\n- [[音乐视频传播]]\n\n## Mindmaps",
+      "preview_truncated": false
+    },
+    {
+      "id": "ea86fbc6aa327c86",
+      "producer": "wiki-build",
+      "output": "pages",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "wiki/concepts/互联网迷因.md",
+      "title": "互联网迷因.md",
+      "size": 3352,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "recorded",
+      "preview": "---\ntitle: 互联网迷因\ntype: concept\ntags: [互联网迷因, 网络文化, 模因, 病毒传播]\nsummary: 互联网迷因是通过互联网快速复制和传播的文化片段，常以幽默、讽刺或病毒式娱乐形式出现，例如 Rick Astley 的《Never Gonna Give You Up》因 Rickrolling 成为经典迷因案例。\nsources: [\"raw/notebooklm-analysis/node-test-fixture.md\"]\ncreated: 2024-07-23\nupdated: 2024-07-23\nlayer: L1\nconfidence: high\nreasoning: \"直接从NotebookLM思维导图中提取的概念。\"\n---\n\n互联网迷因（Internet meme）是借助互联网环境实现快速复制、变异和扩散的文化单元，其形态覆盖图片、短语、视频、符号、行为挑战等一切可被模仿、混搭并附着情绪或观点的信息片段。迷因概念源自理查德·道金斯《自私的基因》中提出的“meme”，用于解释文化传播与基因类似的复制机制；在数字时代，互联网迷因的传播速度、变异幅度和触达广度被社交平台、即时通讯、论坛和算法推荐急剧放大，使其成为当代数字文化的核心构件。一个有效的互联网迷因往往具有可复用的模板结构、易懂的幽默内核或情绪张力，并能允许参与者进行个性化再创作，从而在传播中不断积累新的意义层次。\n\n技术细节上，互联网迷因的爆发通常依赖“可复制单元 + 情绪诱因 + 低参与门槛”的组合。早期的图像宏（image macro）依靠固定版式和冲击边框形成衍生链，视频迷因则通过截取、配音、重混等手段实现变体。以 Rickrolling 为例，它把瑞克·阿斯特利（Rick Astley）的 1987 年单曲《Never Gonna Give You Up》音乐视频包装成一条误导链接，利用好奇心与落差感制造病毒式分享；此处 [[瑞克·阿斯特利 - 永不放弃你]] 作为源载体，证明了老音乐内容可以在全新语境下重生。迷因的传播力可通过再生数、衍生版本数、跨平台迁移率和情绪感染系数等指标衡量，网络分析也揭示出超级节点、密观社群和偶然爆点对迷因扩散的关键影响。此外，模因工程（meme engineering）被用于设计天然的社交货币，让品牌、公益组织乃至政治运动有意识地孵化可复制的迷因基因。\n\n应用场景极其广泛。营销领域，品牌通过自发迷因或参与迷因改装（remix）来降低广告抵触心理，实现低成本曝光；政治传播中，口号、表情包和短视频迷因常用来凝聚认同或攻击对手，塑造叙事框架；社区运营上，群体内部的专属迷因强化归属感与加密隔阂，例如特定 Discord 频道或 subreddit 中的门槛玩笑。与此同时，[[音乐视频传播]] 作为迷因的典型载体路径，展现了视听符号被剥离原境、重新嵌入讽刺、致敬或纯娱乐场景的完整链条。教育、科学传播也开始主动借用迷因手法，将复杂概念转为易消化的模因片段，在注意力稀缺的环境中争夺认知内存。然而迷因的高速代谢也带来语境丢失、歧义放大乃至网络暴力的风险，其半衰期越来越短，迫使创作者和运营者必须在即时性与深度之间寻找平衡。理解并善用互联网迷因的生成规律，已成为数字素养和当代叙事策略的重要维度。",
+      "preview_truncated": false
+    },
+    {
+      "id": "c4cac3f87986f6f1",
+      "producer": "wiki-build",
+      "output": "pages",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "wiki/concepts/音乐视频传播.md",
+      "title": "音乐视频传播.md",
+      "size": 4155,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "recorded",
+      "preview": "---\ntitle: \"音乐视频传播\"\ntype: \"concept\"\ntags: [\"音乐视频\", \"传播学\", \"互联网文化\", \"病毒式传播\", \"YouTube\"]\nsummary: \"音乐视频传播指音乐视频通过视觉与听觉符号的结合，在受众与媒介平台间扩散、共享及再创造的过程，是互联网时代文化流通的核心形式之一。\"\nsources: [\"raw/notebooklm-analysis/node-test-fixture.md\"]\ncreated: \"2025-03-23\"\nupdated: \"2025-03-23\"\nlayer: \"L1\"\nconfidence: \"high\"\nreasoning: \"直接从NotebookLM思维导图中提取的概念。\"\n---\n\n# 音乐视频传播\n\n**音乐视频传播**是指以音乐录音制品为基底，结合动态影像形成的视听文本，在个体、群体与媒介网络之间流动、被接收、挪用和重塑的过程。它不只涵盖传统广播电视时代的单向推送，更特指进入互联网平台后，由用户行为、算法推荐与社交分享共同驱动的裂变式扩散。该概念的核心在于**视觉因素对听觉体验的增值**——影像为音乐赋予叙事、身份标识与情感脚本，从而使作品更易被记忆、模仿和二次创作。当音乐视频跨越其原始发布渠道，在论坛、社交媒体、即时通讯中反复出现时，它便从单纯的宣传物料升格为一种**参与式文化容器**，承载集体情绪、圈层暗语与时代记忆。\n\n这一传播形态的独特性，建立在技术可复制性与平台可供性的交叉点上。早期音乐视频依赖MTV等音乐电视频道的线性排播，传播路径受制于守门人选择；而数字平台（尤其是YouTube、TikTok）消解了时间的稀缺性，使任何用户均可随时发起观看、嵌入或重新剪辑。技术细节上，**分享链接、嵌入代码与短链跳转**构成了传播的基础设施，它们将音乐视频从中心化站点解放为可嵌入社交媒体动态、博客与私信中的流动模块。算法推荐系统则依据观看时长、重播率、跳过率等信号，将其推向可能感兴趣的受众，形成“流行度—推荐权重”的正反馈回路。此外，**压缩编码（如H.264/VP9）与自适应码率传输**保障了不同网络条件下的流畅启动，使得即点即看成为可能，显著降低了传播摩擦，这也是移动场景中冲动式分享得以发生的物理前提。\n\n**应用场景**覆盖产业营销、文化生态构建与日常生活仪式三个层面。在音乐工业中，发行方通过同步首播、预告片搭配Hashtag挑战，将音乐视频作为制造首周流媒体热度与社交话题的核心引擎。在亚文化圈层，“MV reaction”“remix”“meme remixing”等实践将视频拆解为可拼贴的视听素材，创作者截取标志性动作或副歌段落，注入新意义使其重生为[[互联网迷因]]。日常生活中，用户将音乐视频链接附于状态、私信或评论区，完成情绪表达、身份展演或社交破冰，典型如《Never Gonna Give You Up》因“Rickrolling”恶作剧而成为一种全球范围的**互动仪式**——这一现象映射出音乐视频传播中“意外点击”与共享玩笑如何强化社群归属感。该曲由[[Rick Astley]]演绎，1987年发行后本已沉入怀旧档案，却在2007年因匿名用户将其链接伪装为游戏预告片而引爆，最终观看量逾十亿。这充分说明在超链接时代，传播已不再单纯由内容质量决定，更取决于其作为**文化模因**被挪用与变异的潜力。\n\n在理论层面，音乐视频传播可借助**模因学**与**扩散理论**来理解。视听片段如同基因，通过复制、变异、选择而留存；平台则相当于选择性环境，流行度指标充当适应性筛选器。同时，去中心化的传播结构消解了单向创作与被动消费的界限，使[[流行文化引用]]成为日常语言的一部分——人们借用画面、旋律或舞蹈动作来回应现实，形成一种视觉化的“引用经济”。当一首音乐视频的观看量、二创量、跨平台迁移次数不断攀升时，它也便从娱乐产品转化为一种社会文本，记录并参与塑造公共记忆与流行语汇。",
+      "preview_truncated": false
+    },
+    {
+      "id": "3d265bbd0e5a7b30",
+      "producer": "wiki-build",
+      "output": "pages",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "wiki/entities/never-gonna-give-you-up.md",
+      "title": "never-gonna-give-you-up.md",
+      "size": 2390,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "recorded",
+      "preview": "---\ntitle: Never Gonna Give You Up\ntype: entity\ntags: [\"歌曲\", \"音乐视频\", \"1987年\", \"流行音乐\", \"互联网迷因\", \"Rickroll\"]\nsummary: 瑞克·阿斯特利于1987年发行的经典流行歌曲及音乐视频，后因“Rickrolling”现象成为全球知名的互联网迷因。\nsources: [\"raw/notebooklm-analysis/node-test-fixture.md\"]\ncreated: 2025-04-02\nupdated: 2025-04-02\nlayer: L1\nconfidence: high\nreasoning: 该实体在测试分析报告 node-test-fixture.md 中被列为关键实体，对其描述基于报告中明确的歌曲身份以及与之关联的音乐视频传播、流行文化引用和互联网迷因等概念。\n---\n\nNever Gonna Give You Up（通常译作《永不放弃你》）是英国歌手 [[Rick Astley]] 在1987年发行的一首流行歌曲及其音乐视频，由著名的 Stock Aitken Waterman 制作团队打造。该曲发行后迅速席卷全球榜单，在英美等多个国家登顶，其标志性的合成器前奏和瑞克·阿斯特利浑厚的嗓音，使其成为80年代舞曲流行乐的代名词。伴随歌曲的音乐视频同样极具辨识度：瑞克·阿斯特利以其招牌式的轻松律动和直视镜头的坦诚表演，在简单的街景与室内舞台间切换，构成了一段令人过目不忘的视觉记忆。\n\n进入21世纪后，这段音乐视频被赋予了远超音乐范畴的文化意义。网民开始利用隐藏链接的手段，诱使他人点开并意外观看到这段视频，这一行为被称为 [[瑞克·阿斯特利 - 永不放弃你|Rickrolling]]，它迅速演变为一种全球性的 [[互联网迷因]] 和网络恶作剧。Never Gonna Give You Up 由此完成了从畅销金曲到跨时代 [[流行文化引用]] 符号的蜕变，并在 [[音乐视频传播]] 的多次浪潮中持续被重新讨论和解构。\n\n在本分析报告所涉的音乐视频中，Never Gonna Give You Up 扮演了双重角色。它首先是作为核心表演内容，直接展现了瑞克·阿斯特利作为20世纪80年代流行偶像的舞台魅力，承载了该时期音乐视频的典型美学。其次，正是这一视频中的舞蹈、表情和整体氛围，无意中提供了日后引爆网络狂欢的完美素材，使其在视频本体之外，成为互联网亚文化中对意外、坚持与幽默的集体表达，从简单的音乐作品跃升为深嵌在数字社交结构中的文化实体。",
+      "preview_truncated": false
+    },
+    {
+      "id": "d6fbde256498ba60",
+      "producer": "wiki-build",
+      "output": "pages",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "wiki/entities/rick-astley.md",
+      "title": "rick-astley.md",
+      "size": 3878,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "recorded",
+      "preview": "---\ntitle: Rick Astley\ntype: entity\ntags:\n  - 英国歌手\n  - 1980年代流行音乐\n  - 互联网迷因\n  - 流行文化\n  - 音乐视频\nsummary: 英国流行歌手，因1987年热门单曲《Never Gonna Give You Up》及其音乐视频而闻名全球，该视频后来演变为互联网迷因\"Rickrolling\"的核心元素。\nsources:\n  - \"raw/notebooklm-analysis/node-test-fixture.md\"\ncreated: 2025-01-15\nupdated: 2025-01-15\nlayer: L1\nconfidence: high\nreasoning: 来源报告明确将Rick Astley列为关键实体，信息来源于官方音乐视频页面，身份确凿且无歧义，故置信度为高。\n---\n\n## 实体描述\n\nRick Astley（全名理查德·保罗·阿斯特利，Richard Paul Astley）是一位英国流行歌手、词曲作者和音乐人，1966年2月6日出生于英格兰兰开夏郡的牛顿勒威洛斯。他在1980年代后期迅速崛起，成为当时全球最畅销的流行艺人之一。Astley以其浑厚深情的男中音嗓音著称，这种声音与他年轻的外表形成了鲜明对比，给听众留下了深刻印象。他的音乐风格融合了流行、舞曲和灵魂乐元素，由著名制作团队Stock Aitken Waterman精心打造，成功塑造了那个时代标志性的流行声响。1987年，他的首张专辑《Whenever You Need Somebody》一举登上英国专辑榜冠军，并在全球范围内取得了数百万张的销售成绩。专辑中的主打单曲《Never Gonna Give You Up》更是横跨25个国家的排行榜登顶，成为1987年最畅销的单曲之一。Astley在1988年获得了全英音乐奖最佳英国男歌手奖，奠定了他在流行音乐史上的地位。然而，真正让Rick Astley的名字超越音乐领域、渗透进全球互联网文化的，是二十年后兴起的\"Rickrolling\"现象。这一迷因将他的音乐视频转化为一种无害的网络恶作剧，使他在数字时代获得了第二次文化生命的爆发。如今，Rick Astley不仅是一位拥有多张白金唱片的成功歌手，更是一个跨越世代、连接模拟时代与数字时代的流行文化符号。他的职业生涯经历了爆红、隐退与复兴的完整周期，展现了非凡的艺术生命力与文化韧性。\n\n## 在本视频中的角色\n\n在1987年发布的《Never Gonna Give You Up》音乐视频中，Rick Astley担任绝对的主角与核心表演者。视频以他身穿标志性的米色风衣和高腰裤形象出场，在伦敦街头及室内场景中对着镜头直接演唱。他标志性的舞步——尤其是那个侧身摆臂的动作——搭配其富有感染力的微笑和自信的眼神交流，构成了视频中最令人难忘的视觉元素。这个视频原本只是1980年代典型的流行音乐宣传片，但由于Astley真诚而略带笨拙的舞蹈风格与其浑厚成熟嗓音之间的反差魅力，使得它在二十年后被互联网社群发掘并赋予了全新的意义。在Rickrolling迷因的语境中，Astley在视频中的每一次出场都成为了一种幽默的\"伏击\"——用户以为自己点击的是某个重要链接，结果却被引导至这段视频，迎面而来的正是Astley那充满活力的舞姿和标志性的开场旋律。他在视频中的角色因此从一位流行歌手升华为全球互联网共同记忆中的核心面孔。\n\n## 相关页面\n\n- [[Never Gonna Give You Up]] — Rick Astley最具代表性的歌曲与音乐视频，也是Rickrolling迷因的载体。\n- [[瑞克·阿斯特利 - 永不放弃你]] — 该歌曲及其中文语境下的相关讨论页面。\n- [[互联网迷因]] — 探讨Rickrolling作为一种经典网络迷因的形成机制与传播路径。\n- [[音乐视频传播]] — 分析该视频如何从传统媒体跨越至数字平台，实现病毒式传播。\n- [[流行文化引用]] — 汇总Rick Astley及其作品在影视、游戏和社交媒体中的广泛引用案例。",
+      "preview_truncated": false
+    }
+  ],
+  "runtime_context": {
+    "runtime_id": "runtime-152-32-214-95",
+    "channel_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc",
+    "spi_base_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc/api/sop",
+    "registry_path": "/root/.sop/registry.json",
+    "health": {
+      "spi": "ok",
+      "registry": "ok",
+      "channel": "ok",
+      "instances": "ok"
+    },
+    "hermes_webhook_url": ""
+  },
+  "instance_context": {
+    "instance_id": "test-instance",
+    "status": "ready",
+    "repo": "skkeoriw/wiki-sop-new-instance",
+    "repo_branch": "main",
+    "wiki_local_path": "/root/wiki/wiki-sop-new-instance",
+    "workspace_status": "ready",
+    "registry_status": "enabled",
+    "run_index_path": "/root/wiki/wiki-sop-new-instance/.sop/run-index.sqlite",
+    "run_index_status": "ready",
+    "capabilities": {
+      "workspace": "ok",
+      "sop_yaml": "ok",
+      "run_index": "ok",
+      "git": "configured",
+      "telegram": "unknown",
+      "notebooklm": "unknown",
+      "vertex": "unknown",
+      "tunnel": "ok"
+    }
+  },
+  "definition_defaults": {
+    "git": {
+      "enabled": true,
+      "required": false
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false
+    }
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run",
+      "paths": []
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run"
+    }
+  },
+  "definition_scope_reports": {
+    "instance_override": {
+      "status": "unchanged",
+      "changed": {}
+    },
+    "project_default_request": {
+      "status": "skipped"
+    }
+  },
+  "environment_snapshot": [
+    {
+      "id": "telegram:YOUTUBE_WIKI_TG_TOKEN:instance-settings:YOUTUBE_WIKI_TG_TOKEN",
+      "capability": "telegram",
+      "key": "YOUTUBE_WIKI_TG_TOKEN",
+      "label": "Telegram Bot Token",
+      "source": "instance-settings:YOUTUBE_WIKI_TG_TOKEN",
+      "source_kind": "instance-settings",
+      "present": true,
+      "required": false,
+      "secret": true,
+      "value": "795***qHY",
+      "status": "disabled",
+      "unit": "",
+      "category": "telegram"
+    },
+    {
+      "id": "telegram:YOUTUBE_WIKI_TG_CHAT_ID:instance-settings:YOUTUBE_WIKI_TG_CHAT_ID",
+      "capability": "telegram",
+      "key": "YOUTUBE_WIKI_TG_CHAT_ID",
+      "label": "Telegram Chat ID",
+      "source": "instance-settings:YOUTUBE_WIKI_TG_CHAT_ID",
+      "source_kind": "instance-settings",
+      "present": true,
+      "required": false,
+      "secret": false,
+      "value": "779***193",
+      "status": "disabled",
+      "unit": "",
+      "category": "telegram"
+    },
+    {
+      "id": "git:GITHUB_TOKEN:runtime-env-file:GITHUB_TOKEN",
+      "capability": "git",
+      "key": "GITHUB_TOKEN",
+      "label": "GitHub Token",
+      "source": "runtime-env-file:GITHUB_TOKEN",
+      "source_kind": "runtime-env-file",
+      "present": true,
+      "required": false,
+      "secret": true,
+      "value": "ghp***qtP",
+      "status": "ready",
+      "unit": "",
+      "category": "github"
+    },
+    {
+      "id": "llm:WIKI_LLM_PROVIDER:instance-settings:WIKI_LLM_PROVIDER",
+      "capability": "llm",
+      "key": "WIKI_LLM_PROVIDER",
+      "label": "Wiki LLM Provider",
+      "source": "instance-settings:WIKI_LLM_PROVIDER",
+      "source_kind": "instance-settings",
+      "present": true,
+      "required": false,
+      "secret": false,
+      "value": "openai-compatible",
+      "status": "ready",
+      "unit": "",
+      "category": "llm"
+    },
+    {
+      "id": "llm:WIKI_LLM_BASE_URL:instance-settings:WIKI_LLM_BASE_URL",
+      "capability": "llm",
+      "key": "WIKI_LLM_BASE_URL",
+      "label": "Wiki LLM Gateway Base URL",
+      "source": "instance-settings:WIKI_LLM_BASE_URL",
+      "source_kind": "instance-settings",
+      "present": true,
+      "required": true,
+      "secret": false,
+      "value": "https://api-proxy.chxyka.ccwu.cc/v1",
+      "status": "ready",
+      "unit": "",
+      "category": "llm"
+    },
+    {
+      "id": "llm:WIKI_LLM_API_KEY:instance-settings:WIKI_LLM_API_KEY",
+      "capability": "llm",
+      "key": "WIKI_LLM_API_KEY",
+      "label": "Wiki LLM Gateway API Key",
+      "source": "instance-settings:WIKI_LLM_API_KEY",
+      "source_kind": "instance-settings",
+      "present": true,
+      "required": true,
+      "secret": true,
+      "value": "ah-***c68",
+      "status": "ready",
+      "unit": "",
+      "category": "llm"
+    },
+    {
+      "id": "llm:WIKI_LLM_MODEL:instance-settings:WIKI_LLM_MODEL",
+      "capability": "llm",
+      "key": "WIKI_LLM_MODEL",
+      "label": "Wiki LLM Model",
+      "source": "instance-settings:WIKI_LLM_MODEL",
+      "source_kind": "instance-settings",
+      "present": true,
+      "required": true,
+      "secret": false,
+      "value": "deepseek-v4-pro",
+      "status": "ready",
+      "unit": "",
+      "category": "llm"
+    }
+  ],
+  "capability_results": [
+    {
+      "key": "git",
+      "capability": "git",
+      "label": "GitHub workspace persistence",
+      "status": "done",
+      "enabled": true,
+      "required": false,
+      "source": "runtime-result",
+      "reason": "",
+      "managed_by": "runtime-harness",
+      "detail": {
+        "enabled": true,
+        "required": false,
+        "status": "done",
+        "managed_by": "runtime-harness",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "managed_paths": [
+          "index.md",
+          "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+          "wiki/concepts/互联网迷因.md",
+          "wiki/concepts/音乐视频传播.md",
+          "wiki/entities/never-gonna-give-you-up.md",
+          "wiki/entities/rick-astley.md"
+        ],
+        "paths": [],
+        "credential_source": "GIT***KEN",
+        "started_at": "2026-06-22T01:58:30Z",
+        "history": [
+          {
+            "capability": "git",
+            "status": "running",
+            "recorded_at": "2026-06-22T01:58:30Z",
+            "managed_by": "runtime-harness",
+            "repository": "skkeoriw/wiki-sop-new-instance",
+            "managed_paths": [
+              "index.md",
+              "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+              "wiki/concepts/互联网迷因.md",
+              "wiki/concepts/音乐视频传播.md",
+              "wiki/entities/never-gonna-give-you-up.md",
+              "wiki/entities/rick-astley.md"
+            ],
+            "paths": [],
+            "credential_source": "GIT***KEN"
+          },
+          {
+            "capability": "git",
+            "status": "done",
+            "recorded_at": "2026-06-22T01:58:32Z",
+            "error": "",
+            "managed_by": "runtime-harness",
+            "repository": "skkeoriw/wiki-sop-new-instance",
+            "managed_paths": [
+              "index.md",
+              "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+              "wiki/concepts/互联网迷因.md",
+              "wiki/concepts/音乐视频传播.md",
+              "wiki/entities/never-gonna-give-you-up.md",
+              "wiki/entities/rick-astley.md"
+            ],
+            "paths": [],
+            "commit": "f487213",
+            "commit_message": "chore: node-wiki-build outputs [pipe:node-run-wiki-build-20260622T015636-142a90] [run:node-run-wiki-build-20260622T015636-142a90]",
+            "pushed": true,
+            "changed_files": [
+              "index.md",
+              "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/artifacts.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/context.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/dag.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/artifacts.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/input.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/output.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/plan.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/state.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/run.json",
+              "\"wiki/concepts/\\344\\272\\222\\350\\201\\224\\347\\275\\221\\350\\277\\267\\345\\233\\240.md\"",
+              "\"wiki/concepts/\\351\\237\\263\\344\\271\\220\\350\\247\\206\\351\\242\\221\\344\\274\\240\\346\\222\\255.md\"",
+              "wiki/entities/never-gonna-give-you-up.md",
+              "wiki/entities/rick-astley.md"
+            ],
+            "credential_source": "GIT***KEN"
+          },
+          {
+            "capability": "git",
+            "status": "done",
+            "recorded_at": "2026-06-22T01:58:34Z",
+            "error": "",
+            "repository": "skkeoriw/wiki-sop-new-instance",
+            "commit": "047443a",
+            "commit_message": "chore: stage-c event [run:node-run-wiki-build-20260622T015636-142a90]",
+            "pushed": true,
+            "changed_files": [
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json"
+            ]
+          }
+        ],
+        "commit": "047443a",
+        "commit_message": "chore: stage-c event [run:node-run-wiki-build-20260622T015636-142a90]",
+        "pushed": true,
+        "changed_files": [
+          "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json"
+        ],
+        "finished_at": "2026-06-22T01:58:34Z",
+        "error": "",
+        "_source_key": "***"
+      }
+    },
+    {
+      "key": "llm",
+      "capability": "llm",
+      "label": "Wiki LLM Gateway",
+      "status": "ready",
+      "enabled": true,
+      "required": true,
+      "source": "config-resolution",
+      "reason": "",
+      "managed_by": "runtime-harness",
+      "detail": {
+        "capability": "llm",
+        "label": "Wiki LLM Gateway",
+        "status": "ready",
+        "required": true,
+        "enabled": true,
+        "_source_key": "***"
+      }
+    },
+    {
+      "key": "telegram",
+      "capability": "telegram",
+      "label": "Telegram progress notification",
+      "status": "disabled",
+      "enabled": false,
+      "required": false,
+      "source": "runtime-result",
+      "reason": "telegram capability disabled",
+      "managed_by": "runtime-harness",
+      "detail": {
+        "enabled": false,
+        "required": false,
+        "status": "disabled",
+        "managed_by": "runtime-harness",
+        "trigger": "done",
+        "triggers": [
+          "start",
+          "done",
+          "failed",
+          "skipped"
+        ],
+        "reason": "telegram capability disabled",
+        "finished_at": "2026-06-22T01:58:30Z",
+        "history": [
+          {
+            "capability": "telegram",
+            "status": "disabled",
+            "recorded_at": "2026-06-22T01:58:30Z",
+            "trigger": "done",
+            "triggers": [
+              "start",
+              "done",
+              "failed",
+              "skipped"
+            ],
+            "reason": "telegram capability disabled",
+            "managed_by": "runtime-harness"
+          }
+        ],
+        "_source_key": "***"
+      }
+    }
+  ],
+  "issues": [],
+  "detail": {
+    "sop_id": "test-instance",
+    "workflow_id": "youtube-research-wiki",
+    "instance_id": "test-instance",
+    "node_id": "wiki-build",
+    "node_title": "Wiki 知识图谱构建",
+    "mode": "real-node",
+    "input_source": "generated-fixture",
+    "base_run_id": "",
+    "required_inputs": [
+      {
+        "name": "reports",
+        "source": "notebooklm-research.outputs.reports",
+        "required": true,
+        "resolved": true,
+        "value": "raw/notebooklm-analysis/node-test-fixture.md",
+        "provenance": "generated-fixture",
+        "reason": ""
+      }
+    ],
+    "optional_inputs": [
+      {
+        "name": "deep_research",
+        "source": "youtube-deep-research.outputs.analysis_file",
+        "required": true,
+        "resolved": true,
+        "value": "raw/youtube-deep-research/node-test-fixture/analysis.md",
+        "provenance": "generated-fixture",
+        "reason": ""
+      }
+    ],
+    "resolved_inputs": [
+      {
+        "name": "reports",
+        "source": "notebooklm-research.outputs.reports",
+        "required": true,
+        "resolved": true,
+        "value": "raw/notebooklm-analysis/node-test-fixture.md",
+        "provenance": "generated-fixture",
+        "reason": ""
+      }
+    ],
+    "missing_inputs": [],
+    "upstream_nodes": [
+      {
+        "node_id": "notebooklm-research",
+        "output": "reports",
+        "source": "notebooklm-research.outputs.reports"
+      },
+      {
+        "node_id": "youtube-deep-research",
+        "output": "analysis_file",
+        "source": "youtube-deep-research.outputs.analysis_file"
+      }
+    ],
+    "available_existing_runs": [
+      {
+        "pipeline_id": "node-run-wiki-build-20260622T015552-bd5818",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T01:55:53Z",
+        "nodes": {
+          "wiki-build": "running"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-wiki-build-20260622T015337-bd5818",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T01:53:38Z",
+        "nodes": {
+          "wiki-build": "failed"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-wiki-build-20260621T180717-03ff23",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-21T18:08:01Z",
+        "nodes": {
+          "wiki-build": "failed"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-wiki-build-20260621T180424-03ff23",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-21T18:05:11Z",
+        "nodes": {
+          "wiki-build": "failed"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-wiki-build-20260621T180413-03ff23",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-21T18:04:59Z",
+        "nodes": {
+          "wiki-build": "failed"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260621T173840-03ff23",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-21T17:40:13Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260621T151432Z-516f89",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-21T15:16:06Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260621T135318Z-01bc69",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-21T13:54:51Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260621T135241Z-9cdb5a",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-21T13:54:26Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260621T123720Z-d77495",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-21T12:38:43Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260621T100223Z-d2378a",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-21T10:05:00Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260620T215001Z-e28c50",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T21:51:14Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260620T211507Z-34122a",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T21:16:24Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260620T210000Z-13ba9d",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T21:01:40Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260620T204214-cc2ce4",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T20:43:38Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260620T203832-cc2ce4",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T20:40:05Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260620T201622Z-5ad7a2",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T20:18:03Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260620T040644Z-087266",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T04:08:30Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T03:36:44Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-capability-harness-20260620T032833Z",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T03:30:07Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      }
+    ],
+    "side_effects": {
+      "writes_workspace": true,
+      "git_write": true,
+      "telegram": false,
+      "external_api": true,
+      "llm": true,
+      "skill": "sop-wiki-build",
+      "default_mode": "preflight",
+      "real_execution_enabled": true
+    },
+    "actions": {
+      "preflight": {
+        "method": "POST",
+        "path": "/api/sop/test-instance/nodes/wiki-build/tests",
+        "destructive": false,
+        "enabled": true
+      },
+      "real_execution": {
+        "enabled": true,
+        "reason": "Standard stage wrapper is available for real Node Run execution."
+      }
+    },
+    "status": "ready",
+    "runtime_id": "runtime-152-32-214-95",
+    "runtime_channel_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc",
+    "workflow_name": "YouTube Wiki SOP",
+    "resolved_config": {
+      "telegram": {
+        "capability": "telegram",
+        "label": "Telegram progress notification",
+        "enabled": false,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "status": "disabled",
+        "token_env": "YOU***KEN",
+        "token": {
+          "key": "YOU***KEN",
+          "label": "Telegram Bot Token",
+          "required": false,
+          "present": true,
+          "source": "instance-settings:YOUTUBE_WIKI_TG_TOKEN",
+          "masked_value": "795***qHY",
+          "value": null
+        },
+        "chat_id": {
+          "key": "YOU***_ID",
+          "label": "Telegram Chat ID",
+          "required": false,
+          "present": true,
+          "source": "instance-settings:YOUTUBE_WIKI_TG_CHAT_ID",
+          "masked_value": "779***193",
+          "value": "7796171193"
+        },
+        "probe": {
+          "enabled": false,
+          "explicit_confirmation_required": true,
+          "side_effect": "sends a Telegram test message"
+        }
+      },
+      "github": {
+        "capability": "git",
+        "label": "GitHub workspace persistence",
+        "enabled": true,
+        "required": false,
+        "status": "ready",
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "paths": [],
+        "token": {
+          "key": "GIT***KEN",
+          "label": "GitHub Token",
+          "required": false,
+          "present": true,
+          "source": "runtime-env-file:GITHUB_TOKEN",
+          "masked_value": "ghp***qtP",
+          "value": null
+        }
+      },
+      "llm": {
+        "capability": "llm",
+        "label": "Wiki LLM Gateway",
+        "enabled": true,
+        "required": true,
+        "status": "ready",
+        "managed_by": "runtime-harness",
+        "provider": {
+          "key": "WIK***DER",
+          "label": "Wiki LLM Provider",
+          "required": false,
+          "present": true,
+          "source": "instance-settings:WIKI_LLM_PROVIDER",
+          "masked_value": "openai-compatible",
+          "value": "openai-compatible"
+        },
+        "base_url": {
+          "key": "WIK***URL",
+          "label": "Wiki LLM Gateway Base URL",
+          "required": true,
+          "present": true,
+          "source": "instance-settings:WIKI_LLM_BASE_URL",
+          "masked_value": "https://api-proxy.chxyka.ccwu.cc/v1",
+          "value": "https://api-proxy.chxyka.ccwu.cc/v1"
+        },
+        "api_key": {
+          "key": "WIK***KEY",
+          "label": "Wiki LLM Gateway API Key",
+          "required": true,
+          "present": true,
+          "source": "instance-settings:WIKI_LLM_API_KEY",
+          "masked_value": "ah-***c68",
+          "value": null
+        },
+        "model": {
+          "key": "WIK***DEL",
+          "label": "Wiki LLM Model",
+          "required": true,
+          "present": true,
+          "source": "instance-settings:WIKI_LLM_MODEL",
+          "masked_value": "deepseek-v4-pro",
+          "value": "deepseek-v4-pro"
+        },
+        "missing": []
+      }
+    },
+    "runtime_context": {
+      "runtime_id": "runtime-152-32-214-95",
+      "channel_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc",
+      "spi_base_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc/api/sop",
+      "registry_path": "/root/.sop/registry.json",
+      "health": {
+        "spi": "ok",
+        "registry": "ok",
+        "channel": "ok",
+        "instances": "ok"
+      },
+      "hermes_webhook_url": ""
+    },
+    "instance_context": {
+      "instance_id": "test-instance",
+      "status": "ready",
+      "repo": "skkeoriw/wiki-sop-new-instance",
+      "repo_branch": "main",
+      "wiki_local_path": "/root/wiki/wiki-sop-new-instance",
+      "workspace_status": "ready",
+      "registry_status": "enabled",
+      "run_index_path": "/root/wiki/wiki-sop-new-instance/.sop/run-index.sqlite",
+      "run_index_status": "ready",
+      "capabilities": {
+        "workspace": "ok",
+        "sop_yaml": "ok",
+        "run_index": "ok",
+        "git": "configured",
+        "telegram": "unknown",
+        "notebooklm": "unknown",
+        "vertex": "unknown",
+        "tunnel": "ok"
+      }
+    },
+    "definition_defaults": {
+      "git": {
+        "enabled": true,
+        "required": false
+      },
+      "telegram": {
+        "enabled": false,
+        "required": false
+      }
+    },
+    "capability_overrides": {
+      "git": {
+        "enabled": true,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "paths": []
+      },
+      "telegram": {
+        "enabled": false,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run"
+      }
+    },
+    "definition_scope_reports": {
+      "instance_override": {
+        "status": "unchanged",
+        "changed": {}
+      },
+      "project_default_request": {
+        "status": "skipped"
+      }
+    },
+    "config_sources": {
+      "runtime_env_file": "/root/.agent-brain-plugins.env",
+      "runtime_env_file_present": true,
+      "runtime_env_file_keys": [
+        "BRIDGE_PORT",
+        "GITHUB_TOKEN",
+        "GOOGLE_PROJECT_ID",
+        "HERMES_WEBHOOK_PORT",
+        "HERMES_WEBHOOK_TOKEN",
+        "NOTEBOOKLM_BRIDGE_TOKEN",
+        "NOTEBOOKLM_BRIDGE_URL",
+        "NOTEBOOKLM_CLIENT_ID",
+        "VERTEX_LOCATION",
+        "WEBHOOK_PUBLIC_HOST",
+        "WIKI_DEEPSEEK_MODEL",
+        "WIKI_LLM_PROVIDER",
+        "WIKI_VERTEX_MODEL",
+        "YOUTUBE_CONTENT_API_TOKEN",
+        "YOUTUBE_CONTENT_API_URL",
+        "YOUTUBE_RESEARCH_WORKFLOW_TOKEN",
+        "YOUTUBE_RESEARCH_WORKFLOW_URL",
+        "YOUTUBE_WIKI_TG_CHAT_ID",
+        "YOUTUBE_WIKI_TG_TOKEN"
+      ],
+      "node_run_override_keys": [],
+      "capability_override_keys": [
+        "git",
+        "telegram"
+      ],
+      "settings_backend": "file",
+      "instance_settings_keys": [
+        "WIKI_LLM_API_KEY",
+        "WIKI_LLM_BASE_URL",
+        "WIKI_LLM_MODEL",
+        "WIKI_LLM_PROVIDER",
+        "YOUTUBE_WIKI_TG_CHAT_ID",
+        "YOUTUBE_WIKI_TG_TOKEN"
+      ],
+      "runtime_settings_keys": [],
+      "global_settings_keys": [],
+      "precedence": [
+        "node-run-overrides",
+        "instance-settings",
+        "runtime-settings",
+        "global-settings",
+        "runtime-env-file",
+        "bridge-env",
+        "defaults"
+      ]
+    },
+    "capability_probes": {
+      "telegram": {
+        "capability": "telegram",
+        "label": "Telegram progress notification",
+        "status": "disabled",
+        "required": false,
+        "enabled": false
+      },
+      "github": {
+        "capability": "git",
+        "label": "GitHub workspace persistence",
+        "status": "ready",
+        "required": false,
+        "enabled": true
+      },
+      "llm": {
+        "capability": "llm",
+        "label": "Wiki LLM Gateway",
+        "status": "ready",
+        "required": true,
+        "enabled": true
+      }
+    },
+    "fix_suggestions": [],
+    "node_capabilities": {
+      "git": {
+        "enabled": true,
+        "required": false
+      },
+      "telegram": {
+        "enabled": false,
+        "required": false
+      },
+      "sse": {
+        "enabled": true,
+        "required": true
+      }
+    },
+    "inner_steps": [
+      {
+        "id": "pre",
+        "title": "执行前",
+        "status": "done",
+        "summary": "Node Run 上下文、输入和运行配置已准备，并交给 stage runner on_start。",
+        "started_at": "2026-06-22T01:56:36.910392+00:00",
+        "finished_at": "2026-06-22T01:56:37.365584+00:00",
+        "detail": {
+          "mode": "real-node",
+          "input_source": "generated-fixture",
+          "resolved_inputs": [
+            {
+              "name": "reports",
+              "source": "notebooklm-research.outputs.reports",
+              "required": true,
+              "resolved": true,
+              "value": "raw/notebooklm-analysis/node-test-fixture.md",
+              "provenance": "generated-fixture",
+              "reason": ""
+            }
+          ],
+          "missing_inputs": [],
+          "config_status": "done",
+          "command": [
+            "bash",
+            "/root/agent-brain-plugins/youtube-wiki/skills/sop-wiki-build/scripts/run_wiki_build.sh",
+            "/root/wiki/wiki-sop-new-instance",
+            "node-run-wiki-build-20260622T015636-142a90",
+            "node-run-wiki-build-20260622T015636-142a90"
+          ],
+          "stage_hook": "on_start"
+        }
+      },
+      {
+        "id": "doing",
+        "title": "执行中",
+        "status": "done",
+        "summary": "Skill / agent 业务执行完成。",
+        "started_at": "2026-06-22T01:56:37.365584+00:00",
+        "finished_at": "2026-06-22T01:58:35.970583+00:00",
+        "elapsed_ms": 118604,
+        "detail": {
+          "command": [
+            "bash",
+            "/root/agent-brain-plugins/youtube-wiki/skills/sop-wiki-build/scripts/run_wiki_build.sh",
+            "/root/wiki/wiki-sop-new-instance",
+            "node-run-wiki-build-20260622T015636-142a90",
+            "node-run-wiki-build-20260622T015636-142a90"
+          ],
+          "returncode": 0,
+          "timed_out": false,
+          "log_path": "/root/wiki/wiki-sop-new-instance/raw/node-runs/node-run-wiki-build-20260622T015636-142a90/executor.log",
+          "stdout_tail": "[stage_runner] ⏳ wiki-build 开始 (run=node-run-wiki-build-20260622T015636-142a90)\n[wiki-build] node run mode: keep injected context and let runtime harness persist outputs\n[v3] 处理 4 份报告，run_id=node-run-wiki-build-20260622T015636-142a90\n  [契约] 依 pipeline-context output_files 过滤：1/4 份\n  新建: 1 份，更新: 0 份\n\n报告: node-test-fixture.md\n  [Call 1] 提取+去重...\n    → entities: 2 条, concepts: 3 条 | tokens: 562+1651\n  去重后：entities 0 新建, concepts 2 新建\n  [Call 2] 生成 source: 瑞克·阿斯特利 - 永不放弃你\n    → 瑞克-阿斯特利-永不放弃你.md (1880 chars)\n  [Call 2] 生成 concept: 互联网迷因\n    → 互联网迷因.md (1721 chars)\n  [Call 2] 生成 concept: 音乐视频传播\n    → 音乐视频传播.md (1481 chars)\n  [Call 3] 图谱连通性审查...\n    → 0 条补链建议 | tokens: 440+1425\n\n==================================================\n[v3] 完成 | pages=3 | llm_calls=5 | tokens=9515 | 112s\n{\"run_id\": \"node-run-wiki-build-20260622T015636-142a90\", \"stage\": \"stage_c_v3\", \"start_time\": \"2026-06-22T01:56:37Z\", \"end_time\": \"2026-06-22T01:58:30Z\", \"duration_s\": 112, \"llm_calls\": 5, \"prompt_tokens\": 1971, \"completion_tokens\": 7544, \"total_tokens\": 9515, \"pages_created\": 3, \"status\": \"success\"}\nBUILD_EXIT_CODE=0\n[stage_runner] ✅ wiki-build 完成 (1m53s)\n[stage_runner] → started tg-notify locally (run=direct-tg-notify-node-run-wiki-build-20260622T015636-142a90-1782093515925126807, log=/tmp/forward-tg-notify-direct-tg-notify-node-run-wiki-build-20260622T015636-142a90-1782093515925126807.log)\n[stage_runner] forward_next: started 1/1 ready node(s)\n",
+          "stderr_tail": ""
+        }
+      },
+      {
+        "id": "post",
+        "title": "执行后",
+        "status": "done",
+        "summary": "stage_runner on_done/on_failed、输出校验、Git/TG capability 和 bridge 结果收集已归档。",
+        "started_at": "2026-06-22T01:58:35.970583+00:00",
+        "finished_at": "2026-06-22T01:58:35.977735+00:00",
+        "detail": {
+          "stage_hooks": [
+            "on_done/on_failed",
+            "forward_next"
+          ],
+          "validation": {
+            "status": "passed",
+            "missing_outputs": [],
+            "unexpected_outputs": []
+          },
+          "actual_outputs": {
+            "index": [
+              "index.md"
+            ],
+            "pages": [
+              "wiki/concepts/互联网迷因.md",
+              "wiki/concepts/音乐视频传播.md",
+              "wiki/entities/never-gonna-give-you-up.md",
+              "wiki/entities/rick-astley.md"
+            ]
+          },
+          "business_artifact_count": 5,
+          "capabilities": {
+            "telegram": {
+              "enabled": false,
+              "required": false,
+              "status": "disabled",
+              "managed_by": "runtime-harness",
+              "trigger": "done",
+              "triggers": [
+                "start",
+                "done",
+                "failed",
+                "skipped"
+              ],
+              "reason": "telegram capability disabled",
+              "finished_at": "2026-06-22T01:58:30Z",
+              "history": [
+                {
+                  "capability": "telegram",
+                  "status": "disabled",
+                  "recorded_at": "2026-06-22T01:58:30Z",
+                  "trigger": "done",
+                  "triggers": [
+                    "start",
+                    "done",
+                    "failed",
+                    "skipped"
+                  ],
+                  "reason": "telegram capability disabled",
+                  "managed_by": "runtime-harness"
+                }
+              ]
+            },
+            "git": {
+              "enabled": true,
+              "required": false,
+              "status": "done",
+              "managed_by": "runtime-harness",
+              "repository": "skkeoriw/wiki-sop-new-instance",
+              "managed_paths": [
+                "index.md",
+                "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+                "wiki/concepts/互联网迷因.md",
+                "wiki/concepts/音乐视频传播.md",
+                "wiki/entities/never-gonna-give-you-up.md",
+                "wiki/entities/rick-astley.md"
+              ],
+              "paths": [],
+              "credential_source": "GIT***KEN",
+              "started_at": "2026-06-22T01:58:30Z",
+              "history": [
+                {
+                  "capability": "git",
+                  "status": "running",
+                  "recorded_at": "2026-06-22T01:58:30Z",
+                  "managed_by": "runtime-harness",
+                  "repository": "skkeoriw/wiki-sop-new-instance",
+                  "managed_paths": [
+                    "index.md",
+                    "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+                    "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+                    "wiki/concepts/互联网迷因.md",
+                    "wiki/concepts/音乐视频传播.md",
+                    "wiki/entities/never-gonna-give-you-up.md",
+                    "wiki/entities/rick-astley.md"
+                  ],
+                  "paths": [],
+                  "credential_source": "GIT***KEN"
+                },
+                {
+                  "capability": "git",
+                  "status": "done",
+                  "recorded_at": "2026-06-22T01:58:32Z",
+                  "error": "",
+                  "managed_by": "runtime-harness",
+                  "repository": "skkeoriw/wiki-sop-new-instance",
+                  "managed_paths": [
+                    "index.md",
+                    "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+                    "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+                    "wiki/concepts/互联网迷因.md",
+                    "wiki/concepts/音乐视频传播.md",
+                    "wiki/entities/never-gonna-give-you-up.md",
+                    "wiki/entities/rick-astley.md"
+                  ],
+                  "paths": [],
+                  "commit": "f487213",
+                  "commit_message": "chore: node-wiki-build outputs [pipe:node-run-wiki-build-20260622T015636-142a90] [run:node-run-wiki-build-20260622T015636-142a90]",
+                  "pushed": true,
+                  "changed_files": [
+                    "index.md",
+                    "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+                    "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/artifacts.json",
+                    "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/context.json",
+                    "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/dag.json",
+                    "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+                    "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build.json",
+                    "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/artifacts.json",
+                    "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json",
+                    "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/input.json",
+                    "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/output.json",
+                    "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/plan.json",
+                    "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/state.json",
+                    "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/run.json",
+                    "\"wiki/concepts/\\344\\272\\222\\350\\201\\224\\347\\275\\221\\350\\277\\267\\345\\233\\240.md\"",
+                    "\"wiki/concepts/\\351\\237\\263\\344\\271\\220\\350\\247\\206\\351\\242\\221\\344\\274\\240\\346\\222\\255.md\"",
+                    "wiki/entities/never-gonna-give-you-up.md",
+                    "wiki/entities/rick-astley.md"
+                  ],
+                  "credential_source": "GIT***KEN"
+                },
+                {
+                  "capability": "git",
+                  "status": "done",
+                  "recorded_at": "2026-06-22T01:58:34Z",
+                  "error": "",
+                  "repository": "skkeoriw/wiki-sop-new-instance",
+                  "commit": "047443a",
+                  "commit_message": "chore: stage-c event [run:node-run-wiki-build-20260622T015636-142a90]",
+                  "pushed": true,
+                  "changed_files": [
+                    "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+                    "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json"
+                  ]
+                }
+              ],
+              "commit": "047443a",
+              "commit_message": "chore: stage-c event [run:node-run-wiki-build-20260622T015636-142a90]",
+              "pushed": true,
+              "changed_files": [
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json"
+              ],
+              "finished_at": "2026-06-22T01:58:34Z",
+              "error": ""
+            }
+          },
+          "forward_next": "[stage_runner] forward_next: started 1/1 ready node(s)"
+        }
+      }
+    ],
+    "real_execution": {
+      "status": "done",
+      "summary": "Real node execution finished and declared outputs were found.",
+      "started_at": "2026-06-22T01:56:37.365584+00:00",
+      "finished_at": "2026-06-22T01:58:35.970583+00:00",
+      "elapsed_ms": 118604,
+      "log_path": "/root/wiki/wiki-sop-new-instance/raw/node-runs/node-run-wiki-build-20260622T015636-142a90/executor.log",
+      "actual_outputs": {
+        "index": [
+          "index.md"
+        ],
+        "pages": [
+          "wiki/concepts/互联网迷因.md",
+          "wiki/concepts/音乐视频传播.md",
+          "wiki/entities/never-gonna-give-you-up.md",
+          "wiki/entities/rick-astley.md"
+        ]
+      },
+      "artifacts": [
+        {
+          "id": "a909ab8f85846403",
+          "producer": "wiki-build",
+          "output": "index",
+          "type": "wiki.page",
+          "format": "markdown",
+          "path": "index.md",
+          "title": "index.md",
+          "size": 257,
+          "mime_type": "application/octet-stream",
+          "tags": [],
+          "metadata": {},
+          "resolution": "recorded",
+          "preview": "# YouTube Video Research Wiki\nLast updated: 2026-06-22\nTotal pages: 3\n\n## Sources\n- [[瑞克-阿斯特利-永不放弃你]]\n\n## Entities\n- [[rick-astley]]\n- [[never-gonna-give-you-up]]\n\n## Concepts\n- [[互联网迷因]]\n- [[音乐视频传播]]\n\n## Mindmaps",
+          "preview_truncated": false
+        },
+        {
+          "id": "ea86fbc6aa327c86",
+          "producer": "wiki-build",
+          "output": "pages",
+          "type": "wiki.page",
+          "format": "markdown",
+          "path": "wiki/concepts/互联网迷因.md",
+          "title": "互联网迷因.md",
+          "size": 3352,
+          "mime_type": "application/octet-stream",
+          "tags": [],
+          "metadata": {},
+          "resolution": "recorded",
+          "preview": "---\ntitle: 互联网迷因\ntype: concept\ntags: [互联网迷因, 网络文化, 模因, 病毒传播]\nsummary: 互联网迷因是通过互联网快速复制和传播的文化片段，常以幽默、讽刺或病毒式娱乐形式出现，例如 Rick Astley 的《Never Gonna Give You Up》因 Rickrolling 成为经典迷因案例。\nsources: [\"raw/notebooklm-analysis/node-test-fixture.md\"]\ncreated: 2024-07-23\nupdated: 2024-07-23\nlayer: L1\nconfidence: high\nreasoning: \"直接从NotebookLM思维导图中提取的概念。\"\n---\n\n互联网迷因（Internet meme）是借助互联网环境实现快速复制、变异和扩散的文化单元，其形态覆盖图片、短语、视频、符号、行为挑战等一切可被模仿、混搭并附着情绪或观点的信息片段。迷因概念源自理查德·道金斯《自私的基因》中提出的“meme”，用于解释文化传播与基因类似的复制机制；在数字时代，互联网迷因的传播速度、变异幅度和触达广度被社交平台、即时通讯、论坛和算法推荐急剧放大，使其成为当代数字文化的核心构件。一个有效的互联网迷因往往具有可复用的模板结构、易懂的幽默内核或情绪张力，并能允许参与者进行个性化再创作，从而在传播中不断积累新的意义层次。\n\n技术细节上，互联网迷因的爆发通常依赖“可复制单元 + 情绪诱因 + 低参与门槛”的组合。早期的图像宏（image macro）依靠固定版式和冲击边框形成衍生链，视频迷因则通过截取、配音、重混等手段实现变体。以 Rickrolling 为例，它把瑞克·阿斯特利（Rick Astley）的 1987 年单曲《Never Gonna Give You Up》音乐视频包装成一条误导链接，利用好奇心与落差感制造病毒式分享；此处 [[瑞克·阿斯特利 - 永不放弃你]] 作为源载体，证明了老音乐内容可以在全新语境下重生。迷因的传播力可通过再生数、衍生版本数、跨平台迁移率和情绪感染系数等指标衡量，网络分析也揭示出超级节点、密观社群和偶然爆点对迷因扩散的关键影响。此外，模因工程（meme engineering）被用于设计天然的社交货币，让品牌、公益组织乃至政治运动有意识地孵化可复制的迷因基因。\n\n应用场景极其广泛。营销领域，品牌通过自发迷因或参与迷因改装（remix）来降低广告抵触心理，实现低成本曝光；政治传播中，口号、表情包和短视频迷因常用来凝聚认同或攻击对手，塑造叙事框架；社区运营上，群体内部的专属迷因强化归属感与加密隔阂，例如特定 Discord 频道或 subreddit 中的门槛玩笑。与此同时，[[音乐视频传播]] 作为迷因的典型载体路径，展现了视听符号被剥离原境、重新嵌入讽刺、致敬或纯娱乐场景的完整链条。教育、科学传播也开始主动借用迷因手法，将复杂概念转为易消化的模因片段，在注意力稀缺的环境中争夺认知内存。然而迷因的高速代谢也带来语境丢失、歧义放大乃至网络暴力的风险，其半衰期越来越短，迫使创作者和运营者必须在即时性与深度之间寻找平衡。理解并善用互联网迷因的生成规律，已成为数字素养和当代叙事策略的重要维度。",
+          "preview_truncated": false
+        },
+        {
+          "id": "c4cac3f87986f6f1",
+          "producer": "wiki-build",
+          "output": "pages",
+          "type": "wiki.page",
+          "format": "markdown",
+          "path": "wiki/concepts/音乐视频传播.md",
+          "title": "音乐视频传播.md",
+          "size": 4155,
+          "mime_type": "application/octet-stream",
+          "tags": [],
+          "metadata": {},
+          "resolution": "recorded",
+          "preview": "---\ntitle: \"音乐视频传播\"\ntype: \"concept\"\ntags: [\"音乐视频\", \"传播学\", \"互联网文化\", \"病毒式传播\", \"YouTube\"]\nsummary: \"音乐视频传播指音乐视频通过视觉与听觉符号的结合，在受众与媒介平台间扩散、共享及再创造的过程，是互联网时代文化流通的核心形式之一。\"\nsources: [\"raw/notebooklm-analysis/node-test-fixture.md\"]\ncreated: \"2025-03-23\"\nupdated: \"2025-03-23\"\nlayer: \"L1\"\nconfidence: \"high\"\nreasoning: \"直接从NotebookLM思维导图中提取的概念。\"\n---\n\n# 音乐视频传播\n\n**音乐视频传播**是指以音乐录音制品为基底，结合动态影像形成的视听文本，在个体、群体与媒介网络之间流动、被接收、挪用和重塑的过程。它不只涵盖传统广播电视时代的单向推送，更特指进入互联网平台后，由用户行为、算法推荐与社交分享共同驱动的裂变式扩散。该概念的核心在于**视觉因素对听觉体验的增值**——影像为音乐赋予叙事、身份标识与情感脚本，从而使作品更易被记忆、模仿和二次创作。当音乐视频跨越其原始发布渠道，在论坛、社交媒体、即时通讯中反复出现时，它便从单纯的宣传物料升格为一种**参与式文化容器**，承载集体情绪、圈层暗语与时代记忆。\n\n这一传播形态的独特性，建立在技术可复制性与平台可供性的交叉点上。早期音乐视频依赖MTV等音乐电视频道的线性排播，传播路径受制于守门人选择；而数字平台（尤其是YouTube、TikTok）消解了时间的稀缺性，使任何用户均可随时发起观看、嵌入或重新剪辑。技术细节上，**分享链接、嵌入代码与短链跳转**构成了传播的基础设施，它们将音乐视频从中心化站点解放为可嵌入社交媒体动态、博客与私信中的流动模块。算法推荐系统则依据观看时长、重播率、跳过率等信号，将其推向可能感兴趣的受众，形成“流行度—推荐权重”的正反馈回路。此外，**压缩编码（如H.264/VP9）与自适应码率传输**保障了不同网络条件下的流畅启动，使得即点即看成为可能，显著降低了传播摩擦，这也是移动场景中冲动式分享得以发生的物理前提。\n\n**应用场景**覆盖产业营销、文化生态构建与日常生活仪式三个层面。在音乐工业中，发行方通过同步首播、预告片搭配Hashtag挑战，将音乐视频作为制造首周流媒体热度与社交话题的核心引擎。在亚文化圈层，“MV reaction”“remix”“meme remixing”等实践将视频拆解为可拼贴的视听素材，创作者截取标志性动作或副歌段落，注入新意义使其重生为[[互联网迷因]]。日常生活中，用户将音乐视频链接附于状态、私信或评论区，完成情绪表达、身份展演或社交破冰，典型如《Never Gonna Give You Up》因“Rickrolling”恶作剧而成为一种全球范围的**互动仪式**——这一现象映射出音乐视频传播中“意外点击”与共享玩笑如何强化社群归属感。该曲由[[Rick Astley]]演绎，1987年发行后本已沉入怀旧档案，却在2007年因匿名用户将其链接伪装为游戏预告片而引爆，最终观看量逾十亿。这充分说明在超链接时代，传播已不再单纯由内容质量决定，更取决于其作为**文化模因**被挪用与变异的潜力。\n\n在理论层面，音乐视频传播可借助**模因学**与**扩散理论**来理解。视听片段如同基因，通过复制、变异、选择而留存；平台则相当于选择性环境，流行度指标充当适应性筛选器。同时，去中心化的传播结构消解了单向创作与被动消费的界限，使[[流行文化引用]]成为日常语言的一部分——人们借用画面、旋律或舞蹈动作来回应现实，形成一种视觉化的“引用经济”。当一首音乐视频的观看量、二创量、跨平台迁移次数不断攀升时，它也便从娱乐产品转化为一种社会文本，记录并参与塑造公共记忆与流行语汇。",
+          "preview_truncated": false
+        },
+        {
+          "id": "3d265bbd0e5a7b30",
+          "producer": "wiki-build",
+          "output": "pages",
+          "type": "wiki.page",
+          "format": "markdown",
+          "path": "wiki/entities/never-gonna-give-you-up.md",
+          "title": "never-gonna-give-you-up.md",
+          "size": 2390,
+          "mime_type": "application/octet-stream",
+          "tags": [],
+          "metadata": {},
+          "resolution": "recorded",
+          "preview": "---\ntitle: Never Gonna Give You Up\ntype: entity\ntags: [\"歌曲\", \"音乐视频\", \"1987年\", \"流行音乐\", \"互联网迷因\", \"Rickroll\"]\nsummary: 瑞克·阿斯特利于1987年发行的经典流行歌曲及音乐视频，后因“Rickrolling”现象成为全球知名的互联网迷因。\nsources: [\"raw/notebooklm-analysis/node-test-fixture.md\"]\ncreated: 2025-04-02\nupdated: 2025-04-02\nlayer: L1\nconfidence: high\nreasoning: 该实体在测试分析报告 node-test-fixture.md 中被列为关键实体，对其描述基于报告中明确的歌曲身份以及与之关联的音乐视频传播、流行文化引用和互联网迷因等概念。\n---\n\nNever Gonna Give You Up（通常译作《永不放弃你》）是英国歌手 [[Rick Astley]] 在1987年发行的一首流行歌曲及其音乐视频，由著名的 Stock Aitken Waterman 制作团队打造。该曲发行后迅速席卷全球榜单，在英美等多个国家登顶，其标志性的合成器前奏和瑞克·阿斯特利浑厚的嗓音，使其成为80年代舞曲流行乐的代名词。伴随歌曲的音乐视频同样极具辨识度：瑞克·阿斯特利以其招牌式的轻松律动和直视镜头的坦诚表演，在简单的街景与室内舞台间切换，构成了一段令人过目不忘的视觉记忆。\n\n进入21世纪后，这段音乐视频被赋予了远超音乐范畴的文化意义。网民开始利用隐藏链接的手段，诱使他人点开并意外观看到这段视频，这一行为被称为 [[瑞克·阿斯特利 - 永不放弃你|Rickrolling]]，它迅速演变为一种全球性的 [[互联网迷因]] 和网络恶作剧。Never Gonna Give You Up 由此完成了从畅销金曲到跨时代 [[流行文化引用]] 符号的蜕变，并在 [[音乐视频传播]] 的多次浪潮中持续被重新讨论和解构。\n\n在本分析报告所涉的音乐视频中，Never Gonna Give You Up 扮演了双重角色。它首先是作为核心表演内容，直接展现了瑞克·阿斯特利作为20世纪80年代流行偶像的舞台魅力，承载了该时期音乐视频的典型美学。其次，正是这一视频中的舞蹈、表情和整体氛围，无意中提供了日后引爆网络狂欢的完美素材，使其在视频本体之外，成为互联网亚文化中对意外、坚持与幽默的集体表达，从简单的音乐作品跃升为深嵌在数字社交结构中的文化实体。",
+          "preview_truncated": false
+        },
+        {
+          "id": "d6fbde256498ba60",
+          "producer": "wiki-build",
+          "output": "pages",
+          "type": "wiki.page",
+          "format": "markdown",
+          "path": "wiki/entities/rick-astley.md",
+          "title": "rick-astley.md",
+          "size": 3878,
+          "mime_type": "application/octet-stream",
+          "tags": [],
+          "metadata": {},
+          "resolution": "recorded",
+          "preview": "---\ntitle: Rick Astley\ntype: entity\ntags:\n  - 英国歌手\n  - 1980年代流行音乐\n  - 互联网迷因\n  - 流行文化\n  - 音乐视频\nsummary: 英国流行歌手，因1987年热门单曲《Never Gonna Give You Up》及其音乐视频而闻名全球，该视频后来演变为互联网迷因\"Rickrolling\"的核心元素。\nsources:\n  - \"raw/notebooklm-analysis/node-test-fixture.md\"\ncreated: 2025-01-15\nupdated: 2025-01-15\nlayer: L1\nconfidence: high\nreasoning: 来源报告明确将Rick Astley列为关键实体，信息来源于官方音乐视频页面，身份确凿且无歧义，故置信度为高。\n---\n\n## 实体描述\n\nRick Astley（全名理查德·保罗·阿斯特利，Richard Paul Astley）是一位英国流行歌手、词曲作者和音乐人，1966年2月6日出生于英格兰兰开夏郡的牛顿勒威洛斯。他在1980年代后期迅速崛起，成为当时全球最畅销的流行艺人之一。Astley以其浑厚深情的男中音嗓音著称，这种声音与他年轻的外表形成了鲜明对比，给听众留下了深刻印象。他的音乐风格融合了流行、舞曲和灵魂乐元素，由著名制作团队Stock Aitken Waterman精心打造，成功塑造了那个时代标志性的流行声响。1987年，他的首张专辑《Whenever You Need Somebody》一举登上英国专辑榜冠军，并在全球范围内取得了数百万张的销售成绩。专辑中的主打单曲《Never Gonna Give You Up》更是横跨25个国家的排行榜登顶，成为1987年最畅销的单曲之一。Astley在1988年获得了全英音乐奖最佳英国男歌手奖，奠定了他在流行音乐史上的地位。然而，真正让Rick Astley的名字超越音乐领域、渗透进全球互联网文化的，是二十年后兴起的\"Rickrolling\"现象。这一迷因将他的音乐视频转化为一种无害的网络恶作剧，使他在数字时代获得了第二次文化生命的爆发。如今，Rick Astley不仅是一位拥有多张白金唱片的成功歌手，更是一个跨越世代、连接模拟时代与数字时代的流行文化符号。他的职业生涯经历了爆红、隐退与复兴的完整周期，展现了非凡的艺术生命力与文化韧性。\n\n## 在本视频中的角色\n\n在1987年发布的《Never Gonna Give You Up》音乐视频中，Rick Astley担任绝对的主角与核心表演者。视频以他身穿标志性的米色风衣和高腰裤形象出场，在伦敦街头及室内场景中对着镜头直接演唱。他标志性的舞步——尤其是那个侧身摆臂的动作——搭配其富有感染力的微笑和自信的眼神交流，构成了视频中最令人难忘的视觉元素。这个视频原本只是1980年代典型的流行音乐宣传片，但由于Astley真诚而略带笨拙的舞蹈风格与其浑厚成熟嗓音之间的反差魅力，使得它在二十年后被互联网社群发掘并赋予了全新的意义。在Rickrolling迷因的语境中，Astley在视频中的每一次出场都成为了一种幽默的\"伏击\"——用户以为自己点击的是某个重要链接，结果却被引导至这段视频，迎面而来的正是Astley那充满活力的舞姿和标志性的开场旋律。他在视频中的角色因此从一位流行歌手升华为全球互联网共同记忆中的核心面孔。\n\n## 相关页面\n\n- [[Never Gonna Give You Up]] — Rick Astley最具代表性的歌曲与音乐视频，也是Rickrolling迷因的载体。\n- [[瑞克·阿斯特利 - 永不放弃你]] — 该歌曲及其中文语境下的相关讨论页面。\n- [[互联网迷因]] — 探讨Rickrolling作为一种经典网络迷因的形成机制与传播路径。\n- [[音乐视频传播]] — 分析该视频如何从传统媒体跨越至数字平台，实现病毒式传播。\n- [[流行文化引用]] — 汇总Rick Astley及其作品在影视、游戏和社交媒体中的广泛引用案例。",
+          "preview_truncated": false
+        }
+      ],
+      "output_categories": {
+        "core_outputs": {
+          "title": "核心输出",
+          "description": "节点声明 outputs 对应的业务结果。",
+          "files": [
+            "index.md",
+            "wiki/concepts/互联网迷因.md",
+            "wiki/concepts/音乐视频传播.md",
+            "wiki/entities/never-gonna-give-you-up.md",
+            "wiki/entities/rick-astley.md"
+          ],
+          "count": 5
+        },
+        "raw_files": {
+          "title": "节点原始文件",
+          "description": "节点 Skill/Worker 产生的原始响应、字幕和中间文件。",
+          "files": [],
+          "count": 0
+        },
+        "run_records": {
+          "title": "运行记录",
+          "description": "Node Run 工作台、事件、状态和 capability 记录。",
+          "files": [
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/artifacts.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/context.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/dag.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/artifacts.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/capabilities.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/input.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/output.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/state.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/artifacts.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/input.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/output.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/plan.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/state.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build.json",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/run.json",
+            "raw/node-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+            "raw/node-runs/node-run-wiki-build-20260622T015636-142a90/executor.log",
+            "raw/node-runs/node-run-wiki-build-20260622T015636-142a90/input.json",
+            "raw/node-runs/node-run-wiki-build-20260622T015636-142a90/result.json",
+            "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl"
+          ],
+          "count": 23
+        }
+      },
+      "validation": {
+        "status": "passed",
+        "missing_outputs": [],
+        "unexpected_outputs": []
+      },
+      "capabilities": {
+        "telegram": {
+          "enabled": false,
+          "required": false,
+          "status": "disabled",
+          "managed_by": "runtime-harness",
+          "trigger": "done",
+          "triggers": [
+            "start",
+            "done",
+            "failed",
+            "skipped"
+          ],
+          "reason": "telegram capability disabled",
+          "finished_at": "2026-06-22T01:58:30Z",
+          "history": [
+            {
+              "capability": "telegram",
+              "status": "disabled",
+              "recorded_at": "2026-06-22T01:58:30Z",
+              "trigger": "done",
+              "triggers": [
+                "start",
+                "done",
+                "failed",
+                "skipped"
+              ],
+              "reason": "telegram capability disabled",
+              "managed_by": "runtime-harness"
+            }
+          ]
+        },
+        "git": {
+          "enabled": true,
+          "required": false,
+          "status": "done",
+          "managed_by": "runtime-harness",
+          "repository": "skkeoriw/wiki-sop-new-instance",
+          "managed_paths": [
+            "index.md",
+            "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+            "wiki/concepts/互联网迷因.md",
+            "wiki/concepts/音乐视频传播.md",
+            "wiki/entities/never-gonna-give-you-up.md",
+            "wiki/entities/rick-astley.md"
+          ],
+          "paths": [],
+          "credential_source": "GIT***KEN",
+          "started_at": "2026-06-22T01:58:30Z",
+          "history": [
+            {
+              "capability": "git",
+              "status": "running",
+              "recorded_at": "2026-06-22T01:58:30Z",
+              "managed_by": "runtime-harness",
+              "repository": "skkeoriw/wiki-sop-new-instance",
+              "managed_paths": [
+                "index.md",
+                "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+                "wiki/concepts/互联网迷因.md",
+                "wiki/concepts/音乐视频传播.md",
+                "wiki/entities/never-gonna-give-you-up.md",
+                "wiki/entities/rick-astley.md"
+              ],
+              "paths": [],
+              "credential_source": "GIT***KEN"
+            },
+            {
+              "capability": "git",
+              "status": "done",
+              "recorded_at": "2026-06-22T01:58:32Z",
+              "error": "",
+              "managed_by": "runtime-harness",
+              "repository": "skkeoriw/wiki-sop-new-instance",
+              "managed_paths": [
+                "index.md",
+                "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+                "wiki/concepts/互联网迷因.md",
+                "wiki/concepts/音乐视频传播.md",
+                "wiki/entities/never-gonna-give-you-up.md",
+                "wiki/entities/rick-astley.md"
+              ],
+              "paths": [],
+              "commit": "f487213",
+              "commit_message": "chore: node-wiki-build outputs [pipe:node-run-wiki-build-20260622T015636-142a90] [run:node-run-wiki-build-20260622T015636-142a90]",
+              "pushed": true,
+              "changed_files": [
+                "index.md",
+                "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/artifacts.json",
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/context.json",
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/dag.json",
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build.json",
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/artifacts.json",
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json",
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/input.json",
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/output.json",
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/plan.json",
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/state.json",
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/run.json",
+                "\"wiki/concepts/\\344\\272\\222\\350\\201\\224\\347\\275\\221\\350\\277\\267\\345\\233\\240.md\"",
+                "\"wiki/concepts/\\351\\237\\263\\344\\271\\220\\350\\247\\206\\351\\242\\221\\344\\274\\240\\346\\222\\255.md\"",
+                "wiki/entities/never-gonna-give-you-up.md",
+                "wiki/entities/rick-astley.md"
+              ],
+              "credential_source": "GIT***KEN"
+            },
+            {
+              "capability": "git",
+              "status": "done",
+              "recorded_at": "2026-06-22T01:58:34Z",
+              "error": "",
+              "repository": "skkeoriw/wiki-sop-new-instance",
+              "commit": "047443a",
+              "commit_message": "chore: stage-c event [run:node-run-wiki-build-20260622T015636-142a90]",
+              "pushed": true,
+              "changed_files": [
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+                "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json"
+              ]
+            }
+          ],
+          "commit": "047443a",
+          "commit_message": "chore: stage-c event [run:node-run-wiki-build-20260622T015636-142a90]",
+          "pushed": true,
+          "changed_files": [
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+            "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json"
+          ],
+          "finished_at": "2026-06-22T01:58:34Z",
+          "error": ""
+        }
+      },
+      "detail": {
+        "command": [
+          "bash",
+          "/root/agent-brain-plugins/youtube-wiki/skills/sop-wiki-build/scripts/run_wiki_build.sh",
+          "/root/wiki/wiki-sop-new-instance",
+          "node-run-wiki-build-20260622T015636-142a90",
+          "node-run-wiki-build-20260622T015636-142a90"
+        ],
+        "returncode": 0,
+        "timeout_seconds": 1500,
+        "timed_out": false,
+        "log_path": "/root/wiki/wiki-sop-new-instance/raw/node-runs/node-run-wiki-build-20260622T015636-142a90/executor.log",
+        "context_path": "/root/wiki/wiki-sop-new-instance/raw/pipeline-context.json",
+        "context": {
+          "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "source_type": "youtube",
+          "pipeline_id": "node-run-wiki-build-20260622T015636-142a90",
+          "stage_b_fetch": {
+            "run_id": "direct-1781773480251508159",
+            "video_id": "dQw4w9WgXcQ",
+            "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+            "author": "Rick Astley",
+            "published_at": "2009-10-25T06:57:33Z",
+            "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+            "meta_file": "raw/youtube-metadata/dQw4w9WgXcQ.json"
+          },
+          "stage_b": {
+            "run_id": "direct-notebooklm-research-dQw4w9WgXcQ-20260618T170437-1781773486859542982",
+            "start_time": "2026-06-18T09:04:46Z",
+            "end_time": "2026-06-18T09:05:46Z",
+            "duration_s": 60,
+            "status": "success",
+            "videos_processed": 1,
+            "reports_generated": 1,
+            "mindmaps_generated": 0,
+            "processed_urls": [
+              "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            ],
+            "output_files": [
+              "raw/notebooklm-analysis/node-test-fixture.md"
+            ],
+            "generated_files": [
+              {
+                "type": "report",
+                "path": "/tmp/notebooklm_processor/1781773534_report-1781773529.md"
+              }
+            ],
+            "source_metadata": {
+              "video_id": "dQw4w9WgXcQ",
+              "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+              "author": "Rick Astley",
+              "published_at": "2009-10-25T06:57:33Z",
+              "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+              "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+              "source_type": "youtube"
+            }
+          },
+          "stage_deep_research": {
+            "run_id": "node-run-youtube-deep-research-20260621T151432Z-516f89",
+            "job_id": "ff3c124e-7059-4b12-824c-390af04ce9c7",
+            "status": "completed",
+            "start_time": "",
+            "end_time": "2026-06-21T15:16:05Z",
+            "output_files": [
+              "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T151432Z-516f89/analysis.md",
+              "raw/youtube-deep-research/node-run-youtube-deep-research-20260621T151432Z-516f89/status.json",
+              "raw/notebooklm-analysis/Rick-Astley---Never-Gonna-Give-You-Up-Official-Video-4K-Remaster-youtube-deep-research.md"
+            ],
+            "worker_files": {
+              "transcript_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript",
+              "transcript_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=txt",
+              "transcript_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=srt",
+              "transcript_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=vtt",
+              "transcript_csv": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=csv",
+              "analysis_md": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=md",
+              "translated_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?translated=1",
+              "translated_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=srt&translated=1",
+              "translated_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=vtt&translated=1",
+              "translated_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/ff3c124e-7059-4b12-824c-390af04ce9c7/transcript?format=txt&translated=1"
+            },
+            "chunks_total": 1,
+            "chunks_done": 1
+          },
+          "node_run": {
+            "node_run_id": "node-run-wiki-build-20260622T015636-142a90",
+            "node_id": "wiki-build",
+            "mode": "real-node",
+            "input_source": "generated-fixture",
+            "base_run_id": "",
+            "capability_overrides": {
+              "git": {
+                "enabled": true,
+                "required": false,
+                "managed_by": "runtime-harness",
+                "save_scope": "run",
+                "paths": []
+              },
+              "telegram": {
+                "enabled": false,
+                "required": false,
+                "managed_by": "runtime-harness",
+                "save_scope": "run"
+              }
+            },
+            "definition_scope_reports": {
+              "instance_override": {
+                "status": "unchanged",
+                "changed": {}
+              },
+              "project_default_request": {
+                "status": "skipped"
+              }
+            },
+            "created_at": "2026-06-22T01:56:37.365882+00:00"
+          },
+          "node_run_resolved_inputs": {
+            "reports": "raw/notebooklm-analysis/node-test-fixture.md"
+          }
+        },
+        "stdout_tail": "[stage_runner] ⏳ wiki-build 开始 (run=node-run-wiki-build-20260622T015636-142a90)\n[wiki-build] node run mode: keep injected context and let runtime harness persist outputs\n[v3] 处理 4 份报告，run_id=node-run-wiki-build-20260622T015636-142a90\n  [契约] 依 pipeline-context output_files 过滤：1/4 份\n  新建: 1 份，更新: 0 份\n\n报告: node-test-fixture.md\n  [Call 1] 提取+去重...\n    → entities: 2 条, concepts: 3 条 | tokens: 562+1651\n  去重后：entities 0 新建, concepts 2 新建\n  [Call 2] 生成 source: 瑞克·阿斯特利 - 永不放弃你\n    → 瑞克-阿斯特利-永不放弃你.md (1880 chars)\n  [Call 2] 生成 concept: 互联网迷因\n    → 互联网迷因.md (1721 chars)\n  [Call 2] 生成 concept: 音乐视频传播\n    → 音乐视频传播.md (1481 chars)\n  [Call 3] 图谱连通性审查...\n    → 0 条补链建议 | tokens: 440+1425\n\n==================================================\n[v3] 完成 | pages=3 | llm_calls=5 | tokens=9515 | 112s\n{\"run_id\": \"node-run-wiki-build-20260622T015636-142a90\", \"stage\": \"stage_c_v3\", \"start_time\": \"2026-06-22T01:56:37Z\", \"end_time\": \"2026-06-22T01:58:30Z\", \"duration_s\": 112, \"llm_calls\": 5, \"prompt_tokens\": 1971, \"completion_tokens\": 7544, \"total_tokens\": 9515, \"pages_created\": 3, \"status\": \"success\"}\nBUILD_EXIT_CODE=0\n[stage_runner] ✅ wiki-build 完成 (1m53s)\n[stage_runner] → started tg-notify locally (run=direct-tg-notify-node-run-wiki-build-20260622T015636-142a90-1782093515925126807, log=/tmp/forward-tg-notify-direct-tg-notify-node-run-wiki-build-20260622T015636-142a90-1782093515925126807.log)\n[stage_runner] forward_next: started 1/1 ready node(s)\n",
+        "stderr_tail": "",
+        "node_state": {
+          "pipeline_id": "node-run-wiki-build-20260622T015636-142a90",
+          "node_id": "wiki-build",
+          "run_id": "node-run-wiki-build-20260622T015636-142a90",
+          "status": "done",
+          "mode": "blocking",
+          "needs": [
+            "notebooklm-research"
+          ],
+          "started_at": "2026-06-22T01:56:37Z",
+          "finished_at": "2026-06-22T01:58:30Z",
+          "duration_s": 113,
+          "attempt": 1,
+          "progress": 100,
+          "inputs": {
+            "reports": "notebooklm-research.outputs.reports"
+          },
+          "outputs": {
+            "index": "index.md",
+            "pages": "wiki/**"
+          },
+          "optional_inputs": {
+            "deep_research": "youtube-deep-research.outputs.analysis_file"
+          },
+          "executor": {
+            "type": "agent-skill",
+            "agent": "hermes",
+            "skill": "sop-wiki-build",
+            "entry": "scripts/run_wiki_build.sh",
+            "model": "configurable",
+            "webhook_route": "sop-wiki-build"
+          },
+          "declared_inputs": {
+            "reports": {
+              "from": "notebooklm-research.outputs.reports",
+              "required": true
+            }
+          },
+          "resolved_inputs": {
+            "reports": [],
+            "deep_research": []
+          },
+          "declared_outputs": {
+            "index": {
+              "path": "index.md",
+              "type": "file"
+            },
+            "pages": {
+              "path": "wiki/**",
+              "type": "files"
+            }
+          },
+          "actual_outputs": {
+            "index": [
+              "index.md"
+            ],
+            "pages": [
+              "wiki/concepts/互联网迷因.md",
+              "wiki/concepts/音乐视频传播.md",
+              "wiki/entities/never-gonna-give-you-up.md",
+              "wiki/entities/rick-astley.md"
+            ]
+          },
+          "artifacts": [
+            {
+              "id": "a909ab8f85846403",
+              "producer": "wiki-build",
+              "output": "index",
+              "type": "wiki.page",
+              "format": "markdown",
+              "path": "index.md",
+              "title": "index.md",
+              "size": 257,
+              "mime_type": "application/octet-stream",
+              "tags": [],
+              "metadata": {},
+              "resolution": "context"
+            },
+            {
+              "id": "ea86fbc6aa327c86",
+              "producer": "wiki-build",
+              "output": "pages",
+              "type": "wiki.page",
+              "format": "markdown",
+              "path": "wiki/concepts/互联网迷因.md",
+              "title": "互联网迷因.md",
+              "size": 3352,
+              "mime_type": "application/octet-stream",
+              "tags": [],
+              "metadata": {},
+              "resolution": "context"
+            },
+            {
+              "id": "c4cac3f87986f6f1",
+              "producer": "wiki-build",
+              "output": "pages",
+              "type": "wiki.page",
+              "format": "markdown",
+              "path": "wiki/concepts/音乐视频传播.md",
+              "title": "音乐视频传播.md",
+              "size": 3804,
+              "mime_type": "application/octet-stream",
+              "tags": [],
+              "metadata": {},
+              "resolution": "context"
+            },
+            {
+              "id": "3d265bbd0e5a7b30",
+              "producer": "wiki-build",
+              "output": "pages",
+              "type": "wiki.page",
+              "format": "markdown",
+              "path": "wiki/entities/never-gonna-give-you-up.md",
+              "title": "never-gonna-give-you-up.md",
+              "size": 2390,
+              "mime_type": "application/octet-stream",
+              "tags": [],
+              "metadata": {},
+              "resolution": "context"
+            },
+            {
+              "id": "d6fbde256498ba60",
+              "producer": "wiki-build",
+              "output": "pages",
+              "type": "wiki.page",
+              "format": "markdown",
+              "path": "wiki/entities/rick-astley.md",
+              "title": "rick-astley.md",
+              "size": 3878,
+              "mime_type": "application/octet-stream",
+              "tags": [],
+              "metadata": {},
+              "resolution": "context"
+            }
+          ],
+          "validation": {
+            "status": "passed",
+            "missing_outputs": [],
+            "unexpected_outputs": []
+          },
+          "extra": {
+            "duration_s": 113,
+            "progress": 100
+          },
+          "error": "",
+          "updated_at": "2026-06-22T01:58:30Z"
+        },
+        "capabilities": {
+          "telegram": {
+            "enabled": false,
+            "required": false,
+            "status": "disabled",
+            "managed_by": "runtime-harness",
+            "trigger": "done",
+            "triggers": [
+              "start",
+              "done",
+              "failed",
+              "skipped"
+            ],
+            "reason": "telegram capability disabled",
+            "finished_at": "2026-06-22T01:58:30Z",
+            "history": [
+              {
+                "capability": "telegram",
+                "status": "disabled",
+                "recorded_at": "2026-06-22T01:58:30Z",
+                "trigger": "done",
+                "triggers": [
+                  "start",
+                  "done",
+                  "failed",
+                  "skipped"
+                ],
+                "reason": "telegram capability disabled",
+                "managed_by": "runtime-harness"
+              }
+            ]
+          },
+          "git": {
+            "enabled": true,
+            "required": false,
+            "status": "done",
+            "managed_by": "runtime-harness",
+            "repository": "skkeoriw/wiki-sop-new-instance",
+            "managed_paths": [
+              "index.md",
+              "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+              "wiki/concepts/互联网迷因.md",
+              "wiki/concepts/音乐视频传播.md",
+              "wiki/entities/never-gonna-give-you-up.md",
+              "wiki/entities/rick-astley.md"
+            ],
+            "paths": [],
+            "credential_source": "GIT***KEN",
+            "started_at": "2026-06-22T01:58:30Z",
+            "history": [
+              {
+                "capability": "git",
+                "status": "running",
+                "recorded_at": "2026-06-22T01:58:30Z",
+                "managed_by": "runtime-harness",
+                "repository": "skkeoriw/wiki-sop-new-instance",
+                "managed_paths": [
+                  "index.md",
+                  "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+                  "wiki/concepts/互联网迷因.md",
+                  "wiki/concepts/音乐视频传播.md",
+                  "wiki/entities/never-gonna-give-you-up.md",
+                  "wiki/entities/rick-astley.md"
+                ],
+                "paths": [],
+                "credential_source": "GIT***KEN"
+              },
+              {
+                "capability": "git",
+                "status": "done",
+                "recorded_at": "2026-06-22T01:58:32Z",
+                "error": "",
+                "managed_by": "runtime-harness",
+                "repository": "skkeoriw/wiki-sop-new-instance",
+                "managed_paths": [
+                  "index.md",
+                  "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+                  "wiki/concepts/互联网迷因.md",
+                  "wiki/concepts/音乐视频传播.md",
+                  "wiki/entities/never-gonna-give-you-up.md",
+                  "wiki/entities/rick-astley.md"
+                ],
+                "paths": [],
+                "commit": "f487213",
+                "commit_message": "chore: node-wiki-build outputs [pipe:node-run-wiki-build-20260622T015636-142a90] [run:node-run-wiki-build-20260622T015636-142a90]",
+                "pushed": true,
+                "changed_files": [
+                  "index.md",
+                  "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/artifacts.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/context.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/dag.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/artifacts.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/input.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/output.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/plan.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/state.json",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/run.json",
+                  "\"wiki/concepts/\\344\\272\\222\\350\\201\\224\\347\\275\\221\\350\\277\\267\\345\\233\\240.md\"",
+                  "\"wiki/concepts/\\351\\237\\263\\344\\271\\220\\350\\247\\206\\351\\242\\221\\344\\274\\240\\346\\222\\255.md\"",
+                  "wiki/entities/never-gonna-give-you-up.md",
+                  "wiki/entities/rick-astley.md"
+                ],
+                "credential_source": "GIT***KEN"
+              },
+              {
+                "capability": "git",
+                "status": "done",
+                "recorded_at": "2026-06-22T01:58:34Z",
+                "error": "",
+                "repository": "skkeoriw/wiki-sop-new-instance",
+                "commit": "047443a",
+                "commit_message": "chore: stage-c event [run:node-run-wiki-build-20260622T015636-142a90]",
+                "pushed": true,
+                "changed_files": [
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+                  "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json"
+                ]
+              }
+            ],
+            "commit": "047443a",
+            "commit_message": "chore: stage-c event [run:node-run-wiki-build-20260622T015636-142a90]",
+            "pushed": true,
+            "changed_files": [
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json"
+            ],
+            "finished_at": "2026-06-22T01:58:34Z",
+            "error": ""
+          }
+        },
+        "actual_outputs": {
+          "index": [
+            "index.md"
+          ],
+          "pages": [
+            "wiki/concepts/互联网迷因.md",
+            "wiki/concepts/音乐视频传播.md",
+            "wiki/entities/never-gonna-give-you-up.md",
+            "wiki/entities/rick-astley.md"
+          ]
+        },
+        "output_categories": {
+          "core_outputs": {
+            "title": "核心输出",
+            "description": "节点声明 outputs 对应的业务结果。",
+            "files": [
+              "index.md",
+              "wiki/concepts/互联网迷因.md",
+              "wiki/concepts/音乐视频传播.md",
+              "wiki/entities/never-gonna-give-you-up.md",
+              "wiki/entities/rick-astley.md"
+            ],
+            "count": 5
+          },
+          "raw_files": {
+            "title": "节点原始文件",
+            "description": "节点 Skill/Worker 产生的原始响应、字幕和中间文件。",
+            "files": [],
+            "count": 0
+          },
+          "run_records": {
+            "title": "运行记录",
+            "description": "Node Run 工作台、事件、状态和 capability 记录。",
+            "files": [
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/artifacts.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/context.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/dag.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/artifacts.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/capabilities.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/input.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/output.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify/state.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/tg-notify.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/artifacts.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/capabilities.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/input.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/output.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/plan.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build/state.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/nodes/wiki-build.json",
+              "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90/run.json",
+              "raw/node-runs/node-run-wiki-build-20260622T015636-142a90/events.jsonl",
+              "raw/node-runs/node-run-wiki-build-20260622T015636-142a90/executor.log",
+              "raw/node-runs/node-run-wiki-build-20260622T015636-142a90/input.json",
+              "raw/node-runs/node-run-wiki-build-20260622T015636-142a90/result.json",
+              "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl"
+            ],
+            "count": 23
+          }
+        },
+        "validation": {
+          "status": "passed",
+          "missing_outputs": [],
+          "unexpected_outputs": []
+        }
+      }
+    }
+  }
+}

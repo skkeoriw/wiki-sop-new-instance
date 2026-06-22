@@ -1,0 +1,12 @@
+{
+  "telegram": {
+    "enabled": true,
+    "required": false,
+    "status": "pending"
+  },
+  "git": {
+    "enabled": true,
+    "required": false,
+    "status": "pending"
+  }
+}

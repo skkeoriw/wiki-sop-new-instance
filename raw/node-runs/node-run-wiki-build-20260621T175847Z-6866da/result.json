@@ -1,0 +1,1242 @@
+{
+  "node_run_id": "node-run-wiki-build-20260621T175847Z-6866da",
+  "pipeline_id": "node-run-wiki-build-20260621T175847Z-6866da",
+  "runtime_id": "runtime-152-32-214-95",
+  "instance_id": "test-instance",
+  "workflow_id": "youtube-research-wiki",
+  "node_id": "wiki-build",
+  "node_title": "Wiki 知识图谱构建",
+  "status": "blocked",
+  "mode": "real-node",
+  "input_source": "generated-fixture",
+  "started_at": "2026-06-21T17:58:49.094826+00:00",
+  "finished_at": "2026-06-21T17:58:49.094927+00:00",
+  "elapsed_ms": 341,
+  "created_from": "generated-fixture",
+  "retry_of": "",
+  "pending": false,
+  "reason": "Real node execution is not available for this node.",
+  "steps": [
+    {
+      "id": "create-run",
+      "title": "Create node run workspace",
+      "status": "done",
+      "summary": "Node Run record is allocated independently from Workflow Run.",
+      "detail": {
+        "storage": "raw/node-runs/{node_run_id}"
+      },
+      "started_at": "2026-06-21T17:58:49.094826+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-21T17:58:49.129826+00:00"
+    },
+    {
+      "id": "load-definition",
+      "title": "Load node definition",
+      "status": "done",
+      "summary": "Loaded wiki-build from youtube-research-wiki.",
+      "detail": {
+        "workflow_id": "youtube-research-wiki",
+        "node_id": "wiki-build",
+        "node_title": "Wiki 知识图谱构建"
+      },
+      "started_at": "2026-06-21T17:58:49.129826+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-21T17:58:49.164826+00:00"
+    },
+    {
+      "id": "resolve-context",
+      "title": "Resolve Runtime / Instance / Workflow context",
+      "status": "done",
+      "summary": "runtime-152-32-214-95 · test-instance · youtube-research-wiki",
+      "detail": {
+        "runtime": {
+          "runtime_id": "runtime-152-32-214-95",
+          "channel_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc",
+          "spi_base_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc/api/sop",
+          "registry_path": "/root/.sop/registry.json",
+          "health": {
+            "spi": "ok",
+            "registry": "ok",
+            "channel": "ok",
+            "instances": "ok"
+          },
+          "hermes_webhook_url": ""
+        },
+        "instance": {
+          "instance_id": "test-instance",
+          "status": "ready",
+          "repo": "skkeoriw/wiki-sop-new-instance",
+          "repo_branch": "main",
+          "wiki_local_path": "/root/wiki/wiki-sop-new-instance",
+          "workspace_status": "ready",
+          "registry_status": "enabled",
+          "run_index_path": "/root/wiki/wiki-sop-new-instance/.sop/run-index.sqlite",
+          "run_index_status": "ready",
+          "capabilities": {
+            "workspace": "ok",
+            "sop_yaml": "ok",
+            "run_index": "ok",
+            "git": "configured",
+            "telegram": "configured",
+            "notebooklm": "configured",
+            "vertex": "configured",
+            "tunnel": "ok"
+          }
+        },
+        "workflow_id": "youtube-research-wiki"
+      },
+      "started_at": "2026-06-21T17:58:49.164826+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-21T17:58:49.199826+00:00"
+    },
+    {
+      "id": "resolve-inputs",
+      "title": "Resolve node inputs",
+      "status": "done",
+      "summary": "1 resolved, 0 missing.",
+      "detail": {
+        "input_source": "generated-fixture",
+        "base_run_id": "",
+        "resolved_inputs": [
+          {
+            "name": "reports",
+            "source": "notebooklm-research.outputs.reports",
+            "required": true,
+            "resolved": true,
+            "value": "raw/notebooklm-analysis/node-test-fixture.md",
+            "provenance": "generated-fixture",
+            "reason": ""
+          }
+        ],
+        "missing_inputs": []
+      },
+      "started_at": "2026-06-21T17:58:49.199826+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-21T17:58:49.234826+00:00"
+    },
+    {
+      "id": "resolve-config",
+      "title": "Resolve execution config",
+      "status": "done",
+      "summary": "Runtime, Instance and capability config resolved.",
+      "detail": {
+        "resolved_config": {
+          "telegram": {
+            "capability": "telegram",
+            "label": "Telegram progress notification",
+            "enabled": false,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "save_scope": "run",
+            "status": "disabled",
+            "token_env": "YOUTUBE_WIKI_TG_TOKEN",
+            "token": {
+              "key": "YOUTUBE_WIKI_TG_TOKEN",
+              "label": "Telegram Bot Token",
+              "required": false,
+              "present": true,
+              "source": "instance-settings:YOUTUBE_WIKI_TG_TOKEN",
+              "masked_value": "795***qHY",
+              "value": null
+            },
+            "chat_id": {
+              "key": "YOUTUBE_WIKI_TG_CHAT_ID",
+              "label": "Telegram Chat ID",
+              "required": false,
+              "present": true,
+              "source": "instance-settings:YOUTUBE_WIKI_TG_CHAT_ID",
+              "masked_value": "779***193",
+              "value": "7796171193"
+            },
+            "probe": {
+              "enabled": false,
+              "explicit_confirmation_required": true,
+              "side_effect": "sends a Telegram test message"
+            }
+          },
+          "github": {
+            "capability": "git",
+            "label": "GitHub workspace persistence",
+            "enabled": true,
+            "required": false,
+            "status": "ready",
+            "managed_by": "runtime-harness",
+            "save_scope": "run",
+            "paths": [],
+            "token": {
+              "key": "GITHUB_TOKEN",
+              "label": "GitHub Token",
+              "required": false,
+              "present": true,
+              "source": "runtime-env-file:GITHUB_TOKEN",
+              "masked_value": "ghp***qtP",
+              "value": null
+            }
+          }
+        },
+        "definition_defaults": {
+          "git": {
+            "enabled": true,
+            "required": false
+          },
+          "telegram": {
+            "enabled": false,
+            "required": false
+          }
+        },
+        "capability_overrides": {
+          "git": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "save_scope": "run",
+            "paths": []
+          },
+          "telegram": {
+            "enabled": false,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "save_scope": "run"
+          }
+        },
+        "definition_scope_reports": {
+          "instance_override": {
+            "status": "unchanged",
+            "changed": {}
+          },
+          "project_default_request": {
+            "status": "skipped"
+          }
+        }
+      },
+      "started_at": "2026-06-21T17:58:49.234826+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-21T17:58:49.269826+00:00"
+    },
+    {
+      "id": "probe-capabilities",
+      "title": "Probe attached capabilities",
+      "status": "skipped",
+      "summary": "Capability probes are explicit. Telegram send probes require user confirmation.",
+      "detail": {
+        "telegram": {
+          "capability": "telegram",
+          "label": "Telegram progress notification",
+          "status": "disabled",
+          "required": false,
+          "enabled": false
+        },
+        "github": {
+          "capability": "git",
+          "label": "GitHub workspace persistence",
+          "status": "ready",
+          "required": false,
+          "enabled": true
+        }
+      },
+      "started_at": "2026-06-21T17:58:49.269826+00:00",
+      "elapsed_ms": 24,
+      "finished_at": "2026-06-21T17:58:49.293826+00:00"
+    },
+    {
+      "id": "build-execution-plan",
+      "title": "Build node execution plan",
+      "status": "done",
+      "summary": "Prepared real-node execution plan.",
+      "detail": {
+        "mode": "real-node",
+        "real_execution_enabled": false,
+        "reason": "Real execution is only enabled for nodes with an explicit executor adapter."
+      },
+      "started_at": "2026-06-21T17:58:49.304826+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-21T17:58:49.339826+00:00"
+    },
+    {
+      "id": "execute-or-dry-run",
+      "title": "Execute or dry-run node",
+      "status": "blocked",
+      "summary": "Real node execution is not available for this node.",
+      "detail": {
+        "mode": "real-node",
+        "side_effects": {
+          "writes_workspace": true,
+          "git_write": true,
+          "telegram": false,
+          "external_api": true,
+          "llm": true,
+          "skill": "sop-wiki-build",
+          "default_mode": "preflight",
+          "real_execution_enabled": false
+        }
+      },
+      "started_at": "2026-06-21T17:58:49.339826+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-21T17:58:49.374826+00:00"
+    },
+    {
+      "id": "validate-outputs",
+      "title": "Validate declared outputs",
+      "status": "skipped",
+      "summary": "No business execution occurred, so output validation is informational only.",
+      "detail": {
+        "declared_outputs": {
+          "index": {
+            "type": "file",
+            "path": "index.md"
+          },
+          "pages": {
+            "type": "files",
+            "path": "wiki/**"
+          }
+        }
+      },
+      "started_at": "2026-06-21T17:58:49.374826+00:00",
+      "elapsed_ms": 24,
+      "finished_at": "2026-06-21T17:58:49.398826+00:00"
+    },
+    {
+      "id": "persist-to-github",
+      "title": "Persist to GitHub",
+      "status": "skipped",
+      "summary": "Waiting for runtime harness to push selected paths to the Instance repo.",
+      "detail": {
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "paths": [],
+        "save_scope": "run"
+      },
+      "started_at": "2026-06-21T17:58:49.409826+00:00",
+      "elapsed_ms": 24,
+      "finished_at": "2026-06-21T17:58:49.433826+00:00"
+    },
+    {
+      "id": "send-telegram-notification",
+      "title": "Send Telegram notification",
+      "status": "skipped",
+      "summary": "Telegram notification is not attached for this Node Run.",
+      "detail": {
+        "chat_id": "779***193",
+        "save_scope": "run"
+      },
+      "started_at": "2026-06-21T17:58:49.444826+00:00",
+      "elapsed_ms": 24,
+      "finished_at": "2026-06-21T17:58:49.468826+00:00"
+    }
+  ],
+  "inner_steps": [
+    {
+      "id": "pre",
+      "title": "执行前",
+      "status": "done",
+      "summary": "Node Run 上下文、输入和运行配置已准备，并交给 stage runner on_start。",
+      "started_at": "2026-06-21T17:58:49.094826+00:00",
+      "finished_at": "",
+      "detail": {
+        "mode": "real-node",
+        "input_source": "generated-fixture",
+        "resolved_inputs": [
+          {
+            "name": "reports",
+            "source": "notebooklm-research.outputs.reports",
+            "required": true,
+            "resolved": true,
+            "value": "raw/notebooklm-analysis/node-test-fixture.md",
+            "provenance": "generated-fixture",
+            "reason": ""
+          }
+        ],
+        "missing_inputs": [],
+        "config_status": "done",
+        "command": [],
+        "stage_hook": "on_start"
+      }
+    },
+    {
+      "id": "doing",
+      "title": "执行中",
+      "status": "blocked",
+      "summary": "当前模式未执行真实业务逻辑。",
+      "started_at": "",
+      "finished_at": "",
+      "elapsed_ms": null,
+      "detail": {
+        "command": [],
+        "returncode": null,
+        "timed_out": false,
+        "log_path": "",
+        "stdout_tail": "",
+        "stderr_tail": ""
+      }
+    },
+    {
+      "id": "post",
+      "title": "执行后",
+      "status": "waiting",
+      "summary": "stage_runner on_done/on_failed、输出校验、Git/TG capability 和 bridge 结果收集已归档。",
+      "started_at": "",
+      "finished_at": "2026-06-21T17:58:49.094927+00:00",
+      "detail": {
+        "stage_hooks": [
+          "on_done/on_failed",
+          "forward_next"
+        ],
+        "validation": {},
+        "actual_outputs": {},
+        "business_artifact_count": 0,
+        "capabilities": {},
+        "forward_next": ""
+      }
+    }
+  ],
+  "events": [
+    {
+      "sequence": 1,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-wiki-build-20260621T175847Z-6866da",
+      "node_id": "wiki-build",
+      "step_id": "create-run",
+      "ts": "2026-06-21T17:58:49.094927+00:00",
+      "data": {
+        "title": "Create node run workspace",
+        "summary": "Node Run record is allocated independently from Workflow Run."
+      }
+    },
+    {
+      "sequence": 2,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-wiki-build-20260621T175847Z-6866da",
+      "node_id": "wiki-build",
+      "step_id": "load-definition",
+      "ts": "2026-06-21T17:58:49.094927+00:00",
+      "data": {
+        "title": "Load node definition",
+        "summary": "Loaded wiki-build from youtube-research-wiki."
+      }
+    },
+    {
+      "sequence": 3,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-wiki-build-20260621T175847Z-6866da",
+      "node_id": "wiki-build",
+      "step_id": "resolve-context",
+      "ts": "2026-06-21T17:58:49.094927+00:00",
+      "data": {
+        "title": "Resolve Runtime / Instance / Workflow context",
+        "summary": "runtime-152-32-214-95 · test-instance · youtube-research-wiki"
+      }
+    },
+    {
+      "sequence": 4,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-wiki-build-20260621T175847Z-6866da",
+      "node_id": "wiki-build",
+      "step_id": "resolve-inputs",
+      "ts": "2026-06-21T17:58:49.094927+00:00",
+      "data": {
+        "title": "Resolve node inputs",
+        "summary": "1 resolved, 0 missing."
+      }
+    },
+    {
+      "sequence": 5,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-wiki-build-20260621T175847Z-6866da",
+      "node_id": "wiki-build",
+      "step_id": "resolve-config",
+      "ts": "2026-06-21T17:58:49.094927+00:00",
+      "data": {
+        "title": "Resolve execution config",
+        "summary": "Runtime, Instance and capability config resolved."
+      }
+    },
+    {
+      "sequence": 6,
+      "event": "node_run.step.skipped",
+      "node_run_id": "node-run-wiki-build-20260621T175847Z-6866da",
+      "node_id": "wiki-build",
+      "step_id": "probe-capabilities",
+      "ts": "2026-06-21T17:58:49.094927+00:00",
+      "data": {
+        "title": "Probe attached capabilities",
+        "summary": "Capability probes are explicit. Telegram send probes require user confirmation."
+      }
+    },
+    {
+      "sequence": 7,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-wiki-build-20260621T175847Z-6866da",
+      "node_id": "wiki-build",
+      "step_id": "build-execution-plan",
+      "ts": "2026-06-21T17:58:49.094927+00:00",
+      "data": {
+        "title": "Build node execution plan",
+        "summary": "Prepared real-node execution plan."
+      }
+    },
+    {
+      "sequence": 8,
+      "event": "node_run.step.blocked",
+      "node_run_id": "node-run-wiki-build-20260621T175847Z-6866da",
+      "node_id": "wiki-build",
+      "step_id": "execute-or-dry-run",
+      "ts": "2026-06-21T17:58:49.094927+00:00",
+      "data": {
+        "title": "Execute or dry-run node",
+        "summary": "Real node execution is not available for this node."
+      }
+    },
+    {
+      "sequence": 9,
+      "event": "node_run.step.skipped",
+      "node_run_id": "node-run-wiki-build-20260621T175847Z-6866da",
+      "node_id": "wiki-build",
+      "step_id": "validate-outputs",
+      "ts": "2026-06-21T17:58:49.094927+00:00",
+      "data": {
+        "title": "Validate declared outputs",
+        "summary": "No business execution occurred, so output validation is informational only."
+      }
+    },
+    {
+      "sequence": 10,
+      "event": "node_run.step.skipped",
+      "node_run_id": "node-run-wiki-build-20260621T175847Z-6866da",
+      "node_id": "wiki-build",
+      "step_id": "persist-to-github",
+      "ts": "2026-06-21T17:58:49.094927+00:00",
+      "data": {
+        "title": "Persist to GitHub",
+        "summary": "Waiting for runtime harness to push selected paths to the Instance repo."
+      }
+    },
+    {
+      "sequence": 11,
+      "event": "node_run.step.skipped",
+      "node_run_id": "node-run-wiki-build-20260621T175847Z-6866da",
+      "node_id": "wiki-build",
+      "step_id": "send-telegram-notification",
+      "ts": "2026-06-21T17:58:49.094927+00:00",
+      "data": {
+        "title": "Send Telegram notification",
+        "summary": "Telegram notification is not attached for this Node Run."
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "node-run-result",
+      "producer": "wiki-build",
+      "type": "node-run.result",
+      "format": "json",
+      "path": "raw/node-runs/node-run-wiki-build-20260621T175847Z-6866da/result.json",
+      "title": "Node Run diagnostic result",
+      "resolution": "recorded"
+    }
+  ],
+  "actual_outputs": {},
+  "output_categories": {},
+  "validation": {},
+  "capabilities": {},
+  "business_artifacts": [],
+  "runtime_context": {
+    "runtime_id": "runtime-152-32-214-95",
+    "channel_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc",
+    "spi_base_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc/api/sop",
+    "registry_path": "/root/.sop/registry.json",
+    "health": {
+      "spi": "ok",
+      "registry": "ok",
+      "channel": "ok",
+      "instances": "ok"
+    },
+    "hermes_webhook_url": ""
+  },
+  "instance_context": {
+    "instance_id": "test-instance",
+    "status": "ready",
+    "repo": "skkeoriw/wiki-sop-new-instance",
+    "repo_branch": "main",
+    "wiki_local_path": "/root/wiki/wiki-sop-new-instance",
+    "workspace_status": "ready",
+    "registry_status": "enabled",
+    "run_index_path": "/root/wiki/wiki-sop-new-instance/.sop/run-index.sqlite",
+    "run_index_status": "ready",
+    "capabilities": {
+      "workspace": "ok",
+      "sop_yaml": "ok",
+      "run_index": "ok",
+      "git": "configured",
+      "telegram": "configured",
+      "notebooklm": "configured",
+      "vertex": "configured",
+      "tunnel": "ok"
+    }
+  },
+  "definition_defaults": {
+    "git": {
+      "enabled": true,
+      "required": false
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false
+    }
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run",
+      "paths": []
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run"
+    }
+  },
+  "definition_scope_reports": {
+    "instance_override": {
+      "status": "unchanged",
+      "changed": {}
+    },
+    "project_default_request": {
+      "status": "skipped"
+    }
+  },
+  "environment_snapshot": [
+    {
+      "id": "telegram:YOUTUBE_WIKI_TG_TOKEN:instance-settings:YOUTUBE_WIKI_TG_TOKEN",
+      "capability": "telegram",
+      "key": "YOUTUBE_WIKI_TG_TOKEN",
+      "label": "Telegram Bot Token",
+      "source": "instance-settings:YOUTUBE_WIKI_TG_TOKEN",
+      "source_kind": "instance-settings",
+      "present": true,
+      "required": false,
+      "secret": true,
+      "value": "795***qHY",
+      "status": "disabled",
+      "unit": "",
+      "category": "telegram"
+    },
+    {
+      "id": "telegram:YOUTUBE_WIKI_TG_CHAT_ID:instance-settings:YOUTUBE_WIKI_TG_CHAT_ID",
+      "capability": "telegram",
+      "key": "YOUTUBE_WIKI_TG_CHAT_ID",
+      "label": "Telegram Chat ID",
+      "source": "instance-settings:YOUTUBE_WIKI_TG_CHAT_ID",
+      "source_kind": "instance-settings",
+      "present": true,
+      "required": false,
+      "secret": false,
+      "value": "779***193",
+      "status": "disabled",
+      "unit": "",
+      "category": "telegram"
+    },
+    {
+      "id": "git:GITHUB_TOKEN:runtime-env-file:GITHUB_TOKEN",
+      "capability": "git",
+      "key": "GITHUB_TOKEN",
+      "label": "GitHub Token",
+      "source": "runtime-env-file:GITHUB_TOKEN",
+      "source_kind": "runtime-env-file",
+      "present": true,
+      "required": false,
+      "secret": true,
+      "value": "ghp***qtP",
+      "status": "ready",
+      "unit": "",
+      "category": "github"
+    }
+  ],
+  "capability_results": [
+    {
+      "key": "git",
+      "capability": "git",
+      "label": "GitHub workspace persistence",
+      "status": "ready",
+      "enabled": true,
+      "required": false,
+      "source": "config-resolution",
+      "reason": "",
+      "managed_by": "runtime-harness",
+      "detail": {
+        "capability": "git",
+        "label": "GitHub workspace persistence",
+        "status": "ready",
+        "required": false,
+        "enabled": true,
+        "_source_key": "***"
+      }
+    },
+    {
+      "key": "telegram",
+      "capability": "telegram",
+      "label": "Telegram progress notification",
+      "status": "disabled",
+      "enabled": false,
+      "required": false,
+      "source": "config-resolution",
+      "reason": "",
+      "managed_by": "runtime-harness",
+      "detail": {
+        "capability": "telegram",
+        "label": "Telegram progress notification",
+        "status": "disabled",
+        "required": false,
+        "enabled": false,
+        "_source_key": "***"
+      }
+    }
+  ],
+  "issues": [],
+  "detail": {
+    "sop_id": "test-instance",
+    "workflow_id": "youtube-research-wiki",
+    "instance_id": "test-instance",
+    "node_id": "wiki-build",
+    "node_title": "Wiki 知识图谱构建",
+    "mode": "real-node",
+    "input_source": "generated-fixture",
+    "base_run_id": "",
+    "required_inputs": [
+      {
+        "name": "reports",
+        "source": "notebooklm-research.outputs.reports",
+        "required": true,
+        "resolved": true,
+        "value": "raw/notebooklm-analysis/node-test-fixture.md",
+        "provenance": "generated-fixture",
+        "reason": ""
+      }
+    ],
+    "optional_inputs": [
+      {
+        "name": "deep_research",
+        "source": "youtube-deep-research.outputs.analysis_file",
+        "required": true,
+        "resolved": true,
+        "value": "raw/youtube-deep-research/node-test-fixture/analysis.md",
+        "provenance": "generated-fixture",
+        "reason": ""
+      }
+    ],
+    "resolved_inputs": [
+      {
+        "name": "reports",
+        "source": "notebooklm-research.outputs.reports",
+        "required": true,
+        "resolved": true,
+        "value": "raw/notebooklm-analysis/node-test-fixture.md",
+        "provenance": "generated-fixture",
+        "reason": ""
+      }
+    ],
+    "missing_inputs": [],
+    "upstream_nodes": [
+      {
+        "node_id": "notebooklm-research",
+        "output": "reports",
+        "source": "notebooklm-research.outputs.reports"
+      },
+      {
+        "node_id": "youtube-deep-research",
+        "output": "analysis_file",
+        "source": "youtube-deep-research.outputs.analysis_file"
+      }
+    ],
+    "available_existing_runs": [
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260621T173840-03ff23",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-21T17:40:13Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260621T151432Z-516f89",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-21T15:16:06Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260621T135318Z-01bc69",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-21T13:54:51Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260621T135241Z-9cdb5a",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-21T13:54:26Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260621T123720Z-d77495",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-21T12:38:43Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260621T100223Z-d2378a",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-21T10:05:00Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260620T215001Z-e28c50",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T21:51:14Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260620T211507Z-34122a",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T21:16:24Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260620T210000Z-13ba9d",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T21:01:40Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260620T204214-cc2ce4",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T20:43:38Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260620T203832-cc2ce4",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T20:40:05Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260620T201622Z-5ad7a2",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T20:18:03Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260620T040644Z-087266",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T04:08:30Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T03:36:44Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-capability-harness-20260620T032833Z",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T03:30:07Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260619T192021Z-8bcf8c",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-19T19:22:46Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-real-async-20260619T185359Z",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-19T18:55:22Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "dQw4w9WgXcQ-20260618T170437",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-19T12:04:27Z",
+        "nodes": {
+          "youtube-fetch": "done",
+          "notebooklm-research": "done",
+          "youtube-deep-research": "done",
+          "wiki-build": "failed"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "dQw4w9WgXcQ-20260618T014101",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-17T18:01:23Z",
+        "nodes": {
+          "youtube-fetch": "done",
+          "notebooklm-research": "done",
+          "youtube-deep-research": "failed",
+          "wiki-build": "failed"
+        },
+        "satisfies_upstream": false
+      }
+    ],
+    "side_effects": {
+      "writes_workspace": true,
+      "git_write": true,
+      "telegram": false,
+      "external_api": true,
+      "llm": true,
+      "skill": "sop-wiki-build",
+      "default_mode": "preflight",
+      "real_execution_enabled": false
+    },
+    "actions": {
+      "preflight": {
+        "method": "POST",
+        "path": "/api/sop/test-instance/nodes/wiki-build/tests",
+        "destructive": false,
+        "enabled": true
+      },
+      "real_execution": {
+        "enabled": false,
+        "reason": "Generic business node test currently supports preflight/dry-run only."
+      }
+    },
+    "status": "ready",
+    "runtime_id": "runtime-152-32-214-95",
+    "runtime_channel_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc",
+    "workflow_name": "YouTube Wiki SOP",
+    "resolved_config": {
+      "telegram": {
+        "capability": "telegram",
+        "label": "Telegram progress notification",
+        "enabled": false,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "status": "disabled",
+        "token_env": "YOU***KEN",
+        "token": {
+          "key": "YOU***KEN",
+          "label": "Telegram Bot Token",
+          "required": false,
+          "present": true,
+          "source": "instance-settings:YOUTUBE_WIKI_TG_TOKEN",
+          "masked_value": "795***qHY",
+          "value": null
+        },
+        "chat_id": {
+          "key": "YOU***_ID",
+          "label": "Telegram Chat ID",
+          "required": false,
+          "present": true,
+          "source": "instance-settings:YOUTUBE_WIKI_TG_CHAT_ID",
+          "masked_value": "779***193",
+          "value": "7796171193"
+        },
+        "probe": {
+          "enabled": false,
+          "explicit_confirmation_required": true,
+          "side_effect": "sends a Telegram test message"
+        }
+      },
+      "github": {
+        "capability": "git",
+        "label": "GitHub workspace persistence",
+        "enabled": true,
+        "required": false,
+        "status": "ready",
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "paths": [],
+        "token": {
+          "key": "GIT***KEN",
+          "label": "GitHub Token",
+          "required": false,
+          "present": true,
+          "source": "runtime-env-file:GITHUB_TOKEN",
+          "masked_value": "ghp***qtP",
+          "value": null
+        }
+      }
+    },
+    "runtime_context": {
+      "runtime_id": "runtime-152-32-214-95",
+      "channel_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc",
+      "spi_base_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc/api/sop",
+      "registry_path": "/root/.sop/registry.json",
+      "health": {
+        "spi": "ok",
+        "registry": "ok",
+        "channel": "ok",
+        "instances": "ok"
+      },
+      "hermes_webhook_url": ""
+    },
+    "instance_context": {
+      "instance_id": "test-instance",
+      "status": "ready",
+      "repo": "skkeoriw/wiki-sop-new-instance",
+      "repo_branch": "main",
+      "wiki_local_path": "/root/wiki/wiki-sop-new-instance",
+      "workspace_status": "ready",
+      "registry_status": "enabled",
+      "run_index_path": "/root/wiki/wiki-sop-new-instance/.sop/run-index.sqlite",
+      "run_index_status": "ready",
+      "capabilities": {
+        "workspace": "ok",
+        "sop_yaml": "ok",
+        "run_index": "ok",
+        "git": "configured",
+        "telegram": "configured",
+        "notebooklm": "configured",
+        "vertex": "configured",
+        "tunnel": "ok"
+      }
+    },
+    "definition_defaults": {
+      "git": {
+        "enabled": true,
+        "required": false
+      },
+      "telegram": {
+        "enabled": false,
+        "required": false
+      }
+    },
+    "capability_overrides": {
+      "git": {
+        "enabled": true,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "paths": []
+      },
+      "telegram": {
+        "enabled": false,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run"
+      }
+    },
+    "definition_scope_reports": {
+      "instance_override": {
+        "status": "unchanged",
+        "changed": {}
+      },
+      "project_default_request": {
+        "status": "skipped"
+      }
+    },
+    "config_sources": {
+      "runtime_env_file": "/root/.agent-brain-plugins.env",
+      "runtime_env_file_present": true,
+      "runtime_env_file_keys": [
+        "BRIDGE_PORT",
+        "GITHUB_TOKEN",
+        "GOOGLE_PROJECT_ID",
+        "HERMES_WEBHOOK_PORT",
+        "HERMES_WEBHOOK_TOKEN",
+        "NOTEBOOKLM_BRIDGE_TOKEN",
+        "NOTEBOOKLM_BRIDGE_URL",
+        "NOTEBOOKLM_CLIENT_ID",
+        "VERTEX_LOCATION",
+        "WEBHOOK_PUBLIC_HOST",
+        "WIKI_DEEPSEEK_MODEL",
+        "WIKI_LLM_PROVIDER",
+        "WIKI_VERTEX_MODEL",
+        "YOUTUBE_CONTENT_API_TOKEN",
+        "YOUTUBE_CONTENT_API_URL",
+        "YOUTUBE_RESEARCH_WORKFLOW_TOKEN",
+        "YOUTUBE_RESEARCH_WORKFLOW_URL",
+        "YOUTUBE_WIKI_TG_CHAT_ID",
+        "YOUTUBE_WIKI_TG_TOKEN"
+      ],
+      "node_run_override_keys": [],
+      "capability_override_keys": [
+        "git",
+        "telegram"
+      ],
+      "settings_backend": "file",
+      "instance_settings_keys": [
+        "YOUTUBE_WIKI_TG_CHAT_ID",
+        "YOUTUBE_WIKI_TG_TOKEN"
+      ],
+      "runtime_settings_keys": [],
+      "global_settings_keys": [],
+      "precedence": [
+        "node-run-overrides",
+        "instance-settings",
+        "runtime-settings",
+        "global-settings",
+        "runtime-env-file",
+        "bridge-env",
+        "defaults"
+      ]
+    },
+    "capability_probes": {
+      "telegram": {
+        "capability": "telegram",
+        "label": "Telegram progress notification",
+        "status": "disabled",
+        "required": false,
+        "enabled": false
+      },
+      "github": {
+        "capability": "git",
+        "label": "GitHub workspace persistence",
+        "status": "ready",
+        "required": false,
+        "enabled": true
+      }
+    },
+    "fix_suggestions": [],
+    "node_capabilities": {
+      "git": {
+        "enabled": true,
+        "required": false
+      },
+      "telegram": {
+        "enabled": false,
+        "required": false
+      },
+      "sse": {
+        "enabled": true,
+        "required": true
+      }
+    },
+    "inner_steps": [
+      {
+        "id": "pre",
+        "title": "执行前",
+        "status": "done",
+        "summary": "Node Run 上下文、输入和运行配置已准备，并交给 stage runner on_start。",
+        "started_at": "2026-06-21T17:58:49.094826+00:00",
+        "finished_at": "",
+        "detail": {
+          "mode": "real-node",
+          "input_source": "generated-fixture",
+          "resolved_inputs": [
+            {
+              "name": "reports",
+              "source": "notebooklm-research.outputs.reports",
+              "required": true,
+              "resolved": true,
+              "value": "raw/notebooklm-analysis/node-test-fixture.md",
+              "provenance": "generated-fixture",
+              "reason": ""
+            }
+          ],
+          "missing_inputs": [],
+          "config_status": "done",
+          "command": [],
+          "stage_hook": "on_start"
+        }
+      },
+      {
+        "id": "doing",
+        "title": "执行中",
+        "status": "blocked",
+        "summary": "当前模式未执行真实业务逻辑。",
+        "started_at": "",
+        "finished_at": "",
+        "elapsed_ms": null,
+        "detail": {
+          "command": [],
+          "returncode": null,
+          "timed_out": false,
+          "log_path": "",
+          "stdout_tail": "",
+          "stderr_tail": ""
+        }
+      },
+      {
+        "id": "post",
+        "title": "执行后",
+        "status": "waiting",
+        "summary": "stage_runner on_done/on_failed、输出校验、Git/TG capability 和 bridge 结果收集已归档。",
+        "started_at": "",
+        "finished_at": "2026-06-21T17:58:49.094927+00:00",
+        "detail": {
+          "stage_hooks": [
+            "on_done/on_failed",
+            "forward_next"
+          ],
+          "validation": {},
+          "actual_outputs": {},
+          "business_artifact_count": 0,
+          "capabilities": {},
+          "forward_next": ""
+        }
+      }
+    ],
+    "real_execution": {}
+  }
+}

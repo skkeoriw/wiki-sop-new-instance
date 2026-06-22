@@ -1,5 +1,5 @@
 {
-  "pipeline_id": "node-run-wiki-build-20260622T015636-142a90",
+  "pipeline_id": "node-run-wiki-build-20260622T015552-bd5818",
   "sop_id": "youtube-research-wiki",
   "repo": "skkeoriw/wiki-sop-new-instance",
   "status": "running",
@@ -9,11 +9,11 @@
     "youtube-fetch": "waiting",
     "notebooklm-research": "waiting",
     "youtube-deep-research": "waiting",
-    "wiki-build": "done",
-    "tg-notify": "running",
+    "wiki-build": "running",
+    "tg-notify": "waiting",
     "retry": "waiting"
   },
-  "last_run_id": "node-run-wiki-build-20260622T015636-142a90",
-  "started_at": "2026-06-22T01:56:37Z",
-  "updated_at": "2026-06-22T01:58:36Z"
+  "last_run_id": "node-run-wiki-build-20260622T015552-bd5818",
+  "started_at": "2026-06-22T01:55:53Z",
+  "updated_at": "2026-06-22T01:55:53Z"
 }

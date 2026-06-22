@@ -1,0 +1,1 @@
+{"ts": "2026-06-22T01:55:53Z", "event": "node.started", "pipeline_id": "node-run-wiki-build-20260622T015552-bd5818", "node_id": "wiki-build", "run_id": "node-run-wiki-build-20260622T015552-bd5818", "data": {"status": "running", "error": ""}, "sequence": 1}

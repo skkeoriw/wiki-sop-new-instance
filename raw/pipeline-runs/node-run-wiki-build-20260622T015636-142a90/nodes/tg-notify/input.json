@@ -1,0 +1,14 @@
+{
+  "declared_inputs": {
+    "index": {
+      "from": "wiki-build.outputs.index",
+      "required": true
+    }
+  },
+  "optional_inputs": {},
+  "resolved_inputs": {
+    "index": [
+      "index.md"
+    ]
+  }
+}

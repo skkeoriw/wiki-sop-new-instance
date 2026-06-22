@@ -1,0 +1,56 @@
+{
+  "pipeline_id": "node-run-wiki-build-20260622T015636-142a90",
+  "node_id": "tg-notify",
+  "run_id": "node-run-wiki-build-20260622T015636-142a90",
+  "status": "running",
+  "mode": "blocking",
+  "needs": [
+    "wiki-build"
+  ],
+  "started_at": "2026-06-22T01:58:35Z",
+  "finished_at": "",
+  "duration_s": 0,
+  "attempt": 2,
+  "progress": 0,
+  "inputs": {
+    "index": "wiki-build.outputs.index"
+  },
+  "outputs": {
+    "telegram_message": "logs/pipeline-runs/pipe-{run_id}.json"
+  },
+  "optional_inputs": {},
+  "executor": {
+    "type": "direct-skill",
+    "skill": "sop-tg-notify",
+    "webhook_route": "sop-tg-notify"
+  },
+  "declared_inputs": {
+    "index": {
+      "from": "wiki-build.outputs.index",
+      "required": true
+    }
+  },
+  "resolved_inputs": {
+    "index": [
+      "index.md"
+    ]
+  },
+  "declared_outputs": {
+    "telegram_message": {
+      "path": "logs/pipeline-runs/pipe-{run_id}.json",
+      "type": "file"
+    }
+  },
+  "actual_outputs": {},
+  "artifacts": [],
+  "validation": {
+    "status": "pending",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  },
+  "extra": {
+    "note": "final summary stage"
+  },
+  "error": "",
+  "updated_at": "2026-06-22T01:58:36Z"
+}

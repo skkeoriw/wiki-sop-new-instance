@@ -1,7 +1,7 @@
 {
   "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
   "source_type": "youtube",
-  "pipeline_id": "node-run-youtube-deep-research-20260621T151432Z-516f89",
+  "pipeline_id": "node-run-wiki-build-20260622T015552-bd5818",
   "stage_b_fetch": {
     "run_id": "direct-1781773480251508159",
     "video_id": "dQw4w9WgXcQ",
@@ -25,8 +25,7 @@
       "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     ],
     "output_files": [
-      "raw/notebooklm-analysis/长期承诺与人际关系动态_深度简报_1781773534--dQw4w9WgXcQ-20260618.md",
-      "raw/notebooklm-analysis/Rick-Astley---Never-Gonna-Give-You-Up-Official-Video-4K-Remaster-youtube-deep-research.md"
+      "raw/notebooklm-analysis/node-test-fixture.md"
     ],
     "generated_files": [
       {
@@ -71,8 +70,8 @@
     "chunks_done": 1
   },
   "node_run": {
-    "node_run_id": "node-run-youtube-deep-research-20260621T151432Z-516f89",
-    "node_id": "youtube-deep-research",
+    "node_run_id": "node-run-wiki-build-20260622T015552-bd5818",
+    "node_id": "wiki-build",
     "mode": "real-node",
     "input_source": "generated-fixture",
     "base_run_id": "",
@@ -82,14 +81,10 @@
         "required": false,
         "managed_by": "runtime-harness",
         "save_scope": "run",
-        "paths": [
-          "raw/youtube-deep-research/{pipeline_id}/**",
-          "raw/notebooklm-analysis/*-youtube-deep-research.md",
-          "raw/pipeline-context.json"
-        ]
+        "paths": []
       },
       "telegram": {
-        "enabled": true,
+        "enabled": false,
         "required": false,
         "managed_by": "runtime-harness",
         "save_scope": "run"
@@ -104,6 +99,9 @@
         "status": "skipped"
       }
     },
-    "created_at": "2026-06-21T15:14:34.860903+00:00"
+    "created_at": "2026-06-22T01:55:52.925877+00:00"
+  },
+  "node_run_resolved_inputs": {
+    "reports": "raw/notebooklm-analysis/node-test-fixture.md"
   }
 }

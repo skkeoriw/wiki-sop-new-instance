@@ -1,0 +1,31 @@
+{
+  "pipeline_id": "node-run-wiki-build-20260622T015552-bd5818",
+  "node_id": "wiki-build",
+  "run_id": "node-run-wiki-build-20260622T015552-bd5818",
+  "status": "running",
+  "mode": "blocking",
+  "needs": [
+    "notebooklm-research"
+  ],
+  "started_at": "2026-06-22T01:55:53Z",
+  "finished_at": "",
+  "duration_s": 0,
+  "attempt": 1,
+  "progress": 0,
+  "executor": {
+    "type": "agent-skill",
+    "agent": "hermes",
+    "skill": "sop-wiki-build",
+    "entry": "scripts/run_wiki_build.sh",
+    "model": "configurable",
+    "webhook_route": "sop-wiki-build"
+  },
+  "validation": {
+    "status": "pending",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  },
+  "extra": {},
+  "error": "",
+  "updated_at": "2026-06-22T01:55:53Z"
+}
