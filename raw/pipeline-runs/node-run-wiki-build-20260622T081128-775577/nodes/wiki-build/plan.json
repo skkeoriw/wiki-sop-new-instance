@@ -1,0 +1,146 @@
+{
+  "target_pages": 35,
+  "max_pages": 40,
+  "max_entities": 10,
+  "max_concepts": 29,
+  "min_importance_score": 0.65,
+  "pipeline_id": "node-run-wiki-build-20260622T081128-775577",
+  "run_id": "node-run-wiki-build-20260622T081128-775577",
+  "selected_sources": [
+    {
+      "title": "YouTube深度研究补充：瑞克·阿斯特利《永不放弃你》官方MV",
+      "slug": "YouTube深度研究补充-瑞克-阿斯特利-永不放弃你-官方MV"
+    },
+    {
+      "title": "永不放弃你 歌词",
+      "slug": "永不放弃你-歌词"
+    }
+  ],
+  "selected_entities": [],
+  "selected_concepts": [],
+  "selected_mindmaps": [],
+  "skipped_candidates": [
+    {
+      "name": "Rick Astley",
+      "slug": "rick-astley",
+      "action": "merge",
+      "importance_score": 1.0,
+      "merge_target": "rick-astley.md",
+      "reason": "与现有实体页面完全一致",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "Never Gonna Give You Up",
+      "slug": "never-gonna-give-you-up",
+      "action": "merge",
+      "importance_score": 1.0,
+      "merge_target": "never-gonna-give-you-up.md",
+      "reason": "与现有实体页面完全一致",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "YouTube",
+      "slug": "youtube",
+      "action": "skip",
+      "importance_score": 0.2,
+      "merge_target": null,
+      "reason": "通用平台，此处仅作为视频托管来源，已有全局概念覆盖",
+      "kind": "entitie",
+      "skip_reason": "action_skip"
+    },
+    {
+      "name": "瑞克摇",
+      "slug": "瑞克摇",
+      "action": "merge",
+      "importance_score": 0.9,
+      "merge_target": "瑞克摇.md",
+      "reason": "视频本身是瑞克摇现象的核心，相关概念已存在",
+      "kind": "concept",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "40亿播放量",
+      "slug": "40亿播放量",
+      "action": "merge",
+      "importance_score": 0.5,
+      "merge_target": "瑞克摇.md",
+      "reason": "属于瑞克摇传播里程碑数据，可合并到瑞克摇页面",
+      "kind": "concept",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "精彩片段提取",
+      "slug": "精彩片段提取",
+      "action": "skip",
+      "importance_score": 0.3,
+      "merge_target": null,
+      "reason": "属于通用内容运营技巧，过于宽泛，暂无建页必要",
+      "kind": "concept",
+      "skip_reason": "action_skip"
+    },
+    {
+      "name": "歌词分析",
+      "slug": "歌词分析",
+      "action": "skip",
+      "importance_score": 0.2,
+      "merge_target": null,
+      "reason": "过于通用的文本分析行为，不适合独立建页",
+      "kind": "concept",
+      "skip_reason": "action_skip"
+    },
+    {
+      "name": "Rick Astley",
+      "slug": "rick-astley",
+      "action": "merge",
+      "importance_score": 0.95,
+      "merge_target": "rick-astley.md",
+      "reason": "歌曲演唱者，已有实体页",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "Never Gonna Give You Up",
+      "slug": "never-gonna-give-you-up",
+      "action": "merge",
+      "importance_score": 1.0,
+      "merge_target": "never-gonna-give-you-up.md",
+      "reason": "歌曲本身，与现有实体完全一致",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "洗脑神曲",
+      "slug": "洗脑神曲",
+      "action": "merge",
+      "importance_score": 0.8,
+      "merge_target": "洗脑神曲.md",
+      "reason": "歌词中副歌部分反复出现，具备典型的洗脑特征",
+      "kind": "concept",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "流行文化引用",
+      "slug": "流行文化引用",
+      "action": "merge",
+      "importance_score": 0.7,
+      "merge_target": "流行文化引用.md",
+      "reason": "歌词中的承诺句式已成为广泛传播的网络迷因和引用",
+      "kind": "concept",
+      "skip_reason": "action_merge"
+    }
+  ],
+  "estimated_llm_calls": 3,
+  "actual_llm_calls": 5,
+  "prompt_tokens": 6988,
+  "completion_tokens": 10522,
+  "generated_pages": [
+    "wiki/sources/YouTube深度研究补充-瑞克-阿斯特利-永不放弃你-官方MV.md",
+    "wiki/sources/永不放弃你-歌词.md"
+  ],
+  "failed_pages": [],
+  "status": "done",
+  "updated_at": "2026-06-22T08:17:11Z",
+  "generated_pages_count": 2
+}
