@@ -1,0 +1,76 @@
+{
+  "telegram": {
+    "enabled": false,
+    "required": false,
+    "status": "disabled",
+    "managed_by": "runtime-harness",
+    "trigger": "done",
+    "triggers": [
+      "start",
+      "done",
+      "failed"
+    ],
+    "reason": "telegram capability disabled",
+    "finished_at": "2026-06-22T13:47:52Z",
+    "history": [
+      {
+        "capability": "telegram",
+        "status": "disabled",
+        "recorded_at": "2026-06-22T13:47:52Z",
+        "trigger": "done",
+        "triggers": [
+          "start",
+          "done",
+          "failed"
+        ],
+        "reason": "telegram capability disabled",
+        "managed_by": "runtime-harness"
+      }
+    ]
+  },
+  "git": {
+    "enabled": true,
+    "required": false,
+    "status": "running",
+    "managed_by": "runtime-harness",
+    "repository": "skkeoriw/wiki-sop-new-instance",
+    "managed_paths": [
+      "logs/stage-events/node-run-youtube-fetch-20260622T134710-842f65.jsonl",
+      "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/outputs/files/manifest.json",
+      "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/outputs/files/metadata.json",
+      "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/outputs/files/source-url.txt",
+      "raw/pipeline-runs/node-run-youtube-fetch-20260622T134710-842f65",
+      "raw/youtube-metadata/.gitkeep",
+      "raw/youtube-metadata/dQw4w9WgXcQ.json"
+    ],
+    "paths": [
+      "raw/node-runs/{pipeline_id}/outputs/files/**",
+      "raw/youtube-metadata/**"
+    ],
+    "credential_source": "GITHUB_TOKEN",
+    "started_at": "2026-06-22T13:47:52Z",
+    "history": [
+      {
+        "capability": "git",
+        "status": "running",
+        "recorded_at": "2026-06-22T13:47:52Z",
+        "managed_by": "runtime-harness",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "managed_paths": [
+          "logs/stage-events/node-run-youtube-fetch-20260622T134710-842f65.jsonl",
+          "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/outputs/files/manifest.json",
+          "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/outputs/files/metadata.json",
+          "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/outputs/files/source-url.txt",
+          "raw/pipeline-runs/node-run-youtube-fetch-20260622T134710-842f65",
+          "raw/youtube-metadata/.gitkeep",
+          "raw/youtube-metadata/dQw4w9WgXcQ.json"
+        ],
+        "paths": [
+          "raw/node-runs/{pipeline_id}/outputs/files/**",
+          "raw/youtube-metadata/**"
+        ],
+        "credential_source": "GITHUB_TOKEN"
+      }
+    ]
+  }
+}
