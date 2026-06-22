@@ -5,9 +5,13 @@
       "type": "file"
     }
   },
-  "actual_outputs": {},
+  "actual_outputs": {
+    "telegram_message": [
+      "logs/pipeline-runs/pipe-node-run-wiki-build-20260622T015636-142a90.json"
+    ]
+  },
   "validation": {
-    "status": "pending",
+    "status": "passed",
     "missing_outputs": [],
     "unexpected_outputs": []
   }

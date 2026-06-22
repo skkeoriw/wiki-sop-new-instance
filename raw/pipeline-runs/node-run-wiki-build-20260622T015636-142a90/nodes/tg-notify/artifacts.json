@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "id": "9e70aaa2ce8933c3",
+    "producer": "tg-notify",
+    "output": "telegram_message",
+    "type": "file",
+    "format": "json",
+    "path": "logs/pipeline-runs/pipe-node-run-wiki-build-20260622T015636-142a90.json",
+    "title": "pipe-node-run-wiki-build-20260622T015636-142a90.json",
+    "size": 5387,
+    "mime_type": "application/json",
+    "tags": [],
+    "metadata": {},
+    "resolution": "recorded"
+  }
+]

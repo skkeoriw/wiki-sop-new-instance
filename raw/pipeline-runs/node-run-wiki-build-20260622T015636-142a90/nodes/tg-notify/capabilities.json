@@ -2,11 +2,66 @@
   "telegram": {
     "enabled": true,
     "required": false,
-    "status": "pending"
+    "status": "failed",
+    "trigger": "done",
+    "triggers": [
+      "start",
+      "done",
+      "failed",
+      "skipped"
+    ],
+    "message_preview": "✅ Stage D 完成  2m02s\n   📢 Telegram 通知",
+    "sent_at": "2026-06-22T01:58:40Z",
+    "api_ok": false,
+    "error": "Forbidden: bot can't initiate conversation with a user",
+    "history": [
+      {
+        "capability": "telegram",
+        "status": "failed",
+        "recorded_at": "2026-06-22T01:58:40Z",
+        "trigger": "done",
+        "triggers": [
+          "start",
+          "done",
+          "failed",
+          "skipped"
+        ],
+        "message_preview": "✅ Stage D 完成  2m02s\n   📢 Telegram 通知",
+        "sent_at": "2026-06-22T01:58:40Z",
+        "api_ok": false,
+        "error": "Forbidden: bot can't initiate conversation with a user"
+      }
+    ]
   },
   "git": {
     "enabled": true,
     "required": false,
-    "status": "pending"
+    "status": "running",
+    "managed_by": "runtime-harness",
+    "repository": "skkeoriw/wiki-sop-new-instance",
+    "managed_paths": [
+      "logs/pipeline-runs/pipe-node-run-wiki-build-20260622T015636-142a90.json",
+      "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+      "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90"
+    ],
+    "paths": [],
+    "credential_source": "GITHUB_TOKEN",
+    "started_at": "2026-06-22T01:58:40Z",
+    "history": [
+      {
+        "capability": "git",
+        "status": "running",
+        "recorded_at": "2026-06-22T01:58:40Z",
+        "managed_by": "runtime-harness",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "managed_paths": [
+          "logs/pipeline-runs/pipe-node-run-wiki-build-20260622T015636-142a90.json",
+          "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90"
+        ],
+        "paths": [],
+        "credential_source": "GITHUB_TOKEN"
+      }
+    ]
   }
 }

@@ -10,10 +10,10 @@
     "notebooklm-research": "waiting",
     "youtube-deep-research": "waiting",
     "wiki-build": "done",
-    "tg-notify": "running",
+    "tg-notify": "done",
     "retry": "waiting"
   },
   "last_run_id": "node-run-wiki-build-20260622T015636-142a90",
   "started_at": "2026-06-22T01:56:37Z",
-  "updated_at": "2026-06-22T01:58:36Z"
+  "updated_at": "2026-06-22T01:58:40Z"
 }
