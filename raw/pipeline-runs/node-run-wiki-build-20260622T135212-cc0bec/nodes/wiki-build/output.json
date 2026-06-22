@@ -1,0 +1,26 @@
+{
+  "declared_outputs": {
+    "index": {
+      "path": "index.md",
+      "type": "file"
+    },
+    "pages": {
+      "path": "wiki/**",
+      "type": "files"
+    }
+  },
+  "actual_outputs": {
+    "index": [
+      "index.md"
+    ],
+    "pages": [
+      "wiki/sources/never-gonna-give-you-up-官方mv-歌词分析报告.md",
+      "wiki/sources/youtube深度研究补充-rick-astley-传世神曲-永不放弃的深情告白.md"
+    ]
+  },
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  }
+}

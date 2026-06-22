@@ -1,0 +1,126 @@
+{
+  "target_pages": 35,
+  "max_pages": 40,
+  "max_entities": 10,
+  "max_concepts": 29,
+  "min_importance_score": 0.65,
+  "pipeline_id": "node-run-wiki-build-20260622T135212-cc0bec",
+  "run_id": "node-run-wiki-build-20260622T135212-cc0bec",
+  "selected_sources": [
+    {
+      "title": "YouTube深度研究补充：Rick Astley传世神曲：永不放弃的深情告白",
+      "slug": "youtube深度研究补充-rick-astley-传世神曲-永不放弃的深情告白"
+    },
+    {
+      "title": "Never Gonna Give You Up 官方MV歌词分析报告",
+      "slug": "never-gonna-give-you-up-官方mv-歌词分析报告"
+    }
+  ],
+  "selected_entities": [],
+  "selected_concepts": [],
+  "selected_mindmaps": [],
+  "skipped_candidates": [
+    {
+      "name": "Rick Astley",
+      "slug": "rick-astley",
+      "action": "merge",
+      "importance_score": 1.0,
+      "merge_target": "rick-astley.md",
+      "reason": "歌手已在实体清单中，直接合并",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "Never Gonna Give You Up",
+      "slug": "never-gonna-give-you-up",
+      "action": "merge",
+      "importance_score": 1.0,
+      "merge_target": "never-gonna-give-you-up.md",
+      "reason": "歌曲已在实体清单中，直接合并",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "瑞克摇",
+      "slug": "瑞克摇",
+      "action": "merge",
+      "importance_score": 1.0,
+      "merge_target": "瑞克摇.md",
+      "reason": "即Rickrolling，已有对应概念页",
+      "kind": "concept",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "洗脑神曲",
+      "slug": "洗脑神曲",
+      "action": "merge",
+      "importance_score": 0.8,
+      "merge_target": "洗脑神曲.md",
+      "reason": "歌曲具有洗脑特质，与已有概念一致",
+      "kind": "concept",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "互联网迷因",
+      "slug": "互联网迷因",
+      "action": "merge",
+      "importance_score": 0.8,
+      "merge_target": "互联网迷因.md",
+      "reason": "Rickroll现象属于互联网迷因，已有概念",
+      "kind": "concept",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "音乐视频传播",
+      "slug": "音乐视频传播",
+      "action": "merge",
+      "importance_score": 0.8,
+      "merge_target": "音乐视频传播.md",
+      "reason": "MV传播现象，已有概念",
+      "kind": "concept",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "流行文化引用",
+      "slug": "流行文化引用",
+      "action": "merge",
+      "importance_score": 0.8,
+      "merge_target": "流行文化引用.md",
+      "reason": "Rickroll被广泛应用于流行文化，已有概念",
+      "kind": "concept",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "Rick Astley",
+      "slug": "rick-astley",
+      "action": "merge",
+      "importance_score": 0.9,
+      "merge_target": "rick-astley.md",
+      "reason": "歌词作者兼原唱，与已有实体完全一致",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "Never Gonna Give You Up",
+      "slug": "never-gonna-give-you-up",
+      "action": "merge",
+      "importance_score": 0.95,
+      "merge_target": "never-gonna-give-you-up.md",
+      "reason": "报告分析的歌曲本体，已有独立页面",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    }
+  ],
+  "estimated_llm_calls": 3,
+  "actual_llm_calls": 5,
+  "prompt_tokens": 7397,
+  "completion_tokens": 10217,
+  "generated_pages": [
+    "wiki/sources/never-gonna-give-you-up-官方mv-歌词分析报告.md",
+    "wiki/sources/youtube深度研究补充-rick-astley-传世神曲-永不放弃的深情告白.md"
+  ],
+  "failed_pages": [],
+  "status": "done",
+  "updated_at": "2026-06-22T13:55:35Z",
+  "generated_pages_count": 2
+}

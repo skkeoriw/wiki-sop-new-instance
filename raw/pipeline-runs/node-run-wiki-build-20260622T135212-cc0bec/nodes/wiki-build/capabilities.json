@@ -1,0 +1,76 @@
+{
+  "telegram": {
+    "enabled": false,
+    "required": false,
+    "status": "disabled",
+    "managed_by": "runtime-harness",
+    "trigger": "done",
+    "triggers": [
+      "start",
+      "done",
+      "failed",
+      "skipped"
+    ],
+    "reason": "telegram capability disabled",
+    "finished_at": "2026-06-22T13:55:35Z",
+    "history": [
+      {
+        "capability": "telegram",
+        "status": "disabled",
+        "recorded_at": "2026-06-22T13:55:35Z",
+        "trigger": "done",
+        "triggers": [
+          "start",
+          "done",
+          "failed",
+          "skipped"
+        ],
+        "reason": "telegram capability disabled",
+        "managed_by": "runtime-harness"
+      }
+    ]
+  },
+  "git": {
+    "enabled": true,
+    "required": false,
+    "status": "running",
+    "managed_by": "runtime-harness",
+    "repository": "skkeoriw/wiki-sop-new-instance",
+    "managed_paths": [
+      "index.md",
+      "logs/stage-events/node-run-wiki-build-20260622T135212-cc0bec.jsonl",
+      "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/index.md",
+      "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/manifest.json",
+      "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/wiki/sources/never-gonna-give-you-up-官方mv-歌词分析报告.md",
+      "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/wiki/sources/youtube深度研究补充-rick-astley-传世神曲-永不放弃的深情告白.md",
+      "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec",
+      "wiki/sources/never-gonna-give-you-up-官方mv-歌词分析报告.md",
+      "wiki/sources/youtube深度研究补充-rick-astley-传世神曲-永不放弃的深情告白.md"
+    ],
+    "paths": [],
+    "credential_source": "GITHUB_TOKEN",
+    "started_at": "2026-06-22T13:55:36Z",
+    "history": [
+      {
+        "capability": "git",
+        "status": "running",
+        "recorded_at": "2026-06-22T13:55:36Z",
+        "managed_by": "runtime-harness",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "managed_paths": [
+          "index.md",
+          "logs/stage-events/node-run-wiki-build-20260622T135212-cc0bec.jsonl",
+          "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/index.md",
+          "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/manifest.json",
+          "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/wiki/sources/never-gonna-give-you-up-官方mv-歌词分析报告.md",
+          "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/wiki/sources/youtube深度研究补充-rick-astley-传世神曲-永不放弃的深情告白.md",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T135212-cc0bec",
+          "wiki/sources/never-gonna-give-you-up-官方mv-歌词分析报告.md",
+          "wiki/sources/youtube深度研究补充-rick-astley-传世神曲-永不放弃的深情告白.md"
+        ],
+        "paths": [],
+        "credential_source": "GITHUB_TOKEN"
+      }
+    ]
+  }
+}
