@@ -1,0 +1,147 @@
+{
+  "pipeline_id": "node-run-wiki-build-20260622T015636-142a90",
+  "node_id": "wiki-build",
+  "run_id": "node-run-wiki-build-20260622T015636-142a90",
+  "status": "done",
+  "mode": "blocking",
+  "needs": [
+    "notebooklm-research"
+  ],
+  "started_at": "2026-06-22T01:56:37Z",
+  "finished_at": "2026-06-22T01:58:30Z",
+  "duration_s": 113,
+  "attempt": 1,
+  "progress": 100,
+  "inputs": {
+    "reports": "notebooklm-research.outputs.reports"
+  },
+  "outputs": {
+    "index": "index.md",
+    "pages": "wiki/**"
+  },
+  "optional_inputs": {
+    "deep_research": "youtube-deep-research.outputs.analysis_file"
+  },
+  "executor": {
+    "type": "agent-skill",
+    "agent": "hermes",
+    "skill": "sop-wiki-build",
+    "entry": "scripts/run_wiki_build.sh",
+    "model": "configurable",
+    "webhook_route": "sop-wiki-build"
+  },
+  "declared_inputs": {
+    "reports": {
+      "from": "notebooklm-research.outputs.reports",
+      "required": true
+    }
+  },
+  "resolved_inputs": {
+    "reports": [],
+    "deep_research": []
+  },
+  "declared_outputs": {
+    "index": {
+      "path": "index.md",
+      "type": "file"
+    },
+    "pages": {
+      "path": "wiki/**",
+      "type": "files"
+    }
+  },
+  "actual_outputs": {
+    "index": [
+      "index.md"
+    ],
+    "pages": [
+      "wiki/concepts/互联网迷因.md",
+      "wiki/concepts/音乐视频传播.md",
+      "wiki/entities/never-gonna-give-you-up.md",
+      "wiki/entities/rick-astley.md"
+    ]
+  },
+  "artifacts": [
+    {
+      "id": "a909ab8f85846403",
+      "producer": "wiki-build",
+      "output": "index",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "index.md",
+      "title": "index.md",
+      "size": 257,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "context"
+    },
+    {
+      "id": "ea86fbc6aa327c86",
+      "producer": "wiki-build",
+      "output": "pages",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "wiki/concepts/互联网迷因.md",
+      "title": "互联网迷因.md",
+      "size": 3352,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "context"
+    },
+    {
+      "id": "c4cac3f87986f6f1",
+      "producer": "wiki-build",
+      "output": "pages",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "wiki/concepts/音乐视频传播.md",
+      "title": "音乐视频传播.md",
+      "size": 3804,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "context"
+    },
+    {
+      "id": "3d265bbd0e5a7b30",
+      "producer": "wiki-build",
+      "output": "pages",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "wiki/entities/never-gonna-give-you-up.md",
+      "title": "never-gonna-give-you-up.md",
+      "size": 2390,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "context"
+    },
+    {
+      "id": "d6fbde256498ba60",
+      "producer": "wiki-build",
+      "output": "pages",
+      "type": "wiki.page",
+      "format": "markdown",
+      "path": "wiki/entities/rick-astley.md",
+      "title": "rick-astley.md",
+      "size": 3878,
+      "mime_type": "application/octet-stream",
+      "tags": [],
+      "metadata": {},
+      "resolution": "context"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  },
+  "extra": {
+    "duration_s": 113,
+    "progress": 100
+  },
+  "error": "",
+  "updated_at": "2026-06-22T01:58:30Z"
+}

@@ -1,0 +1,72 @@
+{
+  "telegram": {
+    "enabled": false,
+    "required": false,
+    "status": "disabled",
+    "managed_by": "runtime-harness",
+    "trigger": "done",
+    "triggers": [
+      "start",
+      "done",
+      "failed",
+      "skipped"
+    ],
+    "reason": "telegram capability disabled",
+    "finished_at": "2026-06-22T01:58:30Z",
+    "history": [
+      {
+        "capability": "telegram",
+        "status": "disabled",
+        "recorded_at": "2026-06-22T01:58:30Z",
+        "trigger": "done",
+        "triggers": [
+          "start",
+          "done",
+          "failed",
+          "skipped"
+        ],
+        "reason": "telegram capability disabled",
+        "managed_by": "runtime-harness"
+      }
+    ]
+  },
+  "git": {
+    "enabled": true,
+    "required": false,
+    "status": "running",
+    "managed_by": "runtime-harness",
+    "repository": "skkeoriw/wiki-sop-new-instance",
+    "managed_paths": [
+      "index.md",
+      "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+      "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+      "wiki/concepts/互联网迷因.md",
+      "wiki/concepts/音乐视频传播.md",
+      "wiki/entities/never-gonna-give-you-up.md",
+      "wiki/entities/rick-astley.md"
+    ],
+    "paths": [],
+    "credential_source": "GITHUB_TOKEN",
+    "started_at": "2026-06-22T01:58:30Z",
+    "history": [
+      {
+        "capability": "git",
+        "status": "running",
+        "recorded_at": "2026-06-22T01:58:30Z",
+        "managed_by": "runtime-harness",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "managed_paths": [
+          "index.md",
+          "logs/stage-events/node-run-wiki-build-20260622T015636-142a90.jsonl",
+          "raw/pipeline-runs/node-run-wiki-build-20260622T015636-142a90",
+          "wiki/concepts/互联网迷因.md",
+          "wiki/concepts/音乐视频传播.md",
+          "wiki/entities/never-gonna-give-you-up.md",
+          "wiki/entities/rick-astley.md"
+        ],
+        "paths": [],
+        "credential_source": "GITHUB_TOKEN"
+      }
+    ]
+  }
+}

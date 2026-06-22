@@ -1,0 +1,81 @@
+{
+  "target_pages": 35,
+  "max_pages": 40,
+  "max_entities": 10,
+  "max_concepts": 29,
+  "min_importance_score": 0.65,
+  "pipeline_id": "node-run-wiki-build-20260622T015636-142a90",
+  "run_id": "node-run-wiki-build-20260622T015636-142a90",
+  "selected_sources": [
+    {
+      "title": "瑞克·阿斯特利 - 永不放弃你",
+      "slug": "瑞克-阿斯特利-永不放弃你"
+    }
+  ],
+  "selected_entities": [],
+  "selected_concepts": [
+    {
+      "name": "互联网迷因",
+      "slug": "互联网迷因",
+      "action": "new",
+      "importance_score": 0.8,
+      "merge_target": null,
+      "reason": "关键概念，互联网文化重要组成部分"
+    },
+    {
+      "name": "音乐视频传播",
+      "slug": "音乐视频传播",
+      "action": "new",
+      "importance_score": 0.7,
+      "merge_target": null,
+      "reason": "分析报告中突出概念，值得建页"
+    }
+  ],
+  "selected_mindmaps": [],
+  "skipped_candidates": [
+    {
+      "name": "Rick Astley",
+      "slug": "rick-astley",
+      "action": "merge",
+      "importance_score": 0.9,
+      "merge_target": "瑞克-阿斯特利-永不放弃你.md",
+      "reason": "已有页面同时涵盖歌手与歌曲，合并至现有页面",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "Never Gonna Give You Up",
+      "slug": "never-gonna-give-you-up",
+      "action": "merge",
+      "importance_score": 0.95,
+      "merge_target": "瑞克-阿斯特利-永不放弃你.md",
+      "reason": "该歌曲为视频核心内容，已有对应页面",
+      "kind": "entitie",
+      "skip_reason": "action_merge"
+    },
+    {
+      "name": "流行文化引用",
+      "slug": "流行文化引用",
+      "action": "new",
+      "importance_score": 0.6,
+      "merge_target": null,
+      "reason": "常见文化现象，有一定深度",
+      "kind": "concept",
+      "skip_reason": "below_importance_threshold"
+    }
+  ],
+  "estimated_llm_calls": 4,
+  "actual_llm_calls": 5,
+  "prompt_tokens": 1971,
+  "completion_tokens": 7544,
+  "generated_pages": [
+    "wiki/concepts/互联网迷因.md",
+    "wiki/concepts/音乐视频传播.md",
+    "wiki/entities/never-gonna-give-you-up.md",
+    "wiki/entities/rick-astley.md"
+  ],
+  "failed_pages": [],
+  "status": "done",
+  "updated_at": "2026-06-22T01:58:30Z",
+  "generated_pages_count": 4
+}
