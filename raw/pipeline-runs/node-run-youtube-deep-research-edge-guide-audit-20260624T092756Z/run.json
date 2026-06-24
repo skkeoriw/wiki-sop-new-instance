@@ -1,0 +1,19 @@
+{
+  "pipeline_id": "node-run-youtube-deep-research-edge-guide-audit-20260624T092756Z",
+  "sop_id": "youtube-research-wiki",
+  "repo": "skkeoriw/wiki-sop-new-instance",
+  "status": "running",
+  "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "source_type": "youtube",
+  "nodes": {
+    "youtube-fetch": "waiting",
+    "notebooklm-research": "waiting",
+    "youtube-deep-research": "done",
+    "wiki-build": "waiting",
+    "tg-notify": "waiting",
+    "retry": "waiting"
+  },
+  "last_run_id": "node-run-youtube-deep-research-edge-guide-audit-20260624T092756Z",
+  "started_at": "2026-06-24T09:28:58Z",
+  "updated_at": "2026-06-24T09:30:52Z"
+}

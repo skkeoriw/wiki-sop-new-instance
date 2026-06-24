@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "executor": "hermes",
+  "requested_skill": "sop-youtube-deep-research",
+  "node_id": "youtube-deep-research",
+  "node_run_id": "node-run-youtube-deep-research-edge-guide-audit-20260624T092756Z",
+  "runtime_id": "runtime-152-32-214-95",
+  "instance_id": "test-instance",
+  "workflow_id": "youtube-research-wiki",
+  "template_source": "default",
+  "template_version": "hermes-agent-executor.v1",
+  "request_path": "raw/node-runs/node-run-youtube-deep-research-edge-guide-audit-20260624T092756Z/agent/request.md",
+  "response_path": "raw/node-runs/node-run-youtube-deep-research-edge-guide-audit-20260624T092756Z/agent/response.txt",
+  "receipt_path": "raw/node-runs/node-run-youtube-deep-research-edge-guide-audit-20260624T092756Z/agent/receipt.json",
+  "input_manifest_path": "raw/node-runs/node-run-youtube-deep-research-edge-guide-audit-20260624T092756Z/inputs/sources/manifest.json",
+  "output_manifest_path": "raw/node-runs/node-run-youtube-deep-research-edge-guide-audit-20260624T092756Z/outputs/files/manifest.json",
+  "node_execution_guide": {
+    "format": "markdown",
+    "prompt": "Use skill sop-youtube-deep-research to execute this downstream node.\n\nNode Execution Guide\n- Edge: youtube-fetch -> youtube-deep-research\n- Evaluation summary: 上游的 source_url 可直连传入下游 source_url，metadata_file 可作为可选上下文通过 JSON 路径提取 URL。边缘指令明确，无阻塞。\n- Edge Handoff Instruction: 把上游视频 URL 交给深度研究节点，metadata 只作为可选上下文。\n\nUpstream artifacts\n- source_url: raw/node-runs/{pipeline_id}/outputs/files/source-url.txt (scalar URL)\n- metadata_file: raw/node-runs/{pipeline_id}/outputs/files/metadata.json (JSON file)\n\nExecution rules\n- Use only the resolved Edge inputs and materialized artifact for source_url.\n- For source_url: use the content of source_url.txt as direct URL.\n- Optionally, if metadata_file is available, you may extract source_url using json_path \"$.source_url\" or \"$.youtube_url\" as fallback.\n- Do not require metadata_file; downstream must accept the primary source_url.\n- Downstream skill expects source_url as required input; ensure pipeline provides it.\n\nOutput expectations\n- analysis_file: raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md (markdown)\n- transcript_file: raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt (text)\n\nHandover note: This node runs after youtube-fetch and before wiki-build.",
+    "source": "edge-draft",
+    "draft_id": "youtube-fetch-to-youtube-deep-research-1782290782185-edge-20260624T084706Z",
+    "draft_path": "/root/wiki/wiki-sop-new-instance/raw/workflow-drafts/youtube-fetch-to-youtube-deep-research-1782290782185-edge-20260624T084706Z",
+    "edge_id": "youtube-fetch-to-youtube-deep-research-1782290782185",
+    "source_node": "youtube-fetch",
+    "target_node": "youtube-deep-research",
+    "approved": true,
+    "evaluation_summary": {
+      "status": "ready",
+      "score": 0.92,
+      "confidence": 0.86,
+      "summary": "上游的 source_url 可直连传入下游 source_url，metadata_file 可作为可选上下文通过 JSON 路径提取 URL。边缘指令明确，无阻塞。",
+      "used_ai": true
+    }
+  },
+  "stage_command": [
+    "bash",
+    "/root/agent-brain-plugins/youtube-wiki/skills/sop-youtube-deep-research/scripts/run_youtube_deep_research.sh",
+    "/root/wiki/wiki-sop-new-instance",
+    "node-run-youtube-deep-research-edge-guide-audit-20260624T092756Z",
+    "node-run-youtube-deep-research-edge-guide-audit-20260624T092756Z"
+  ],
+  "stage_command_preview": "bash /root/agent-brain-plugins/youtube-wiki/skills/sop-youtube-deep-research/scripts/run_youtube_deep_research.sh /root/wiki/wiki-sop-new-instance node-run-youtube-deep-research-edge-guide-audit-20260624T092756Z node-run-youtube-deep-research-edge-guide-audit-20260624T092756Z",
+  "created_at": "2026-06-24T09:27:59.022406+00:00"
+}
