@@ -1,0 +1,968 @@
+{
+  "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "source_type": "youtube",
+  "node_run_resolved_inputs": {
+    "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  },
+  "stage_b": {
+    "output_files": [
+      "raw/node-runs/node-run-wiki-build-20260622T104220-5a3066/inputs/sources/0001.md"
+    ],
+    "source_metadata": {
+      "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+      "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "author": "Rick Astley"
+    }
+  },
+  "pipeline_id": "node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z",
+  "node_run": {
+    "node_run_id": "node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z",
+    "node_id": "youtube-deep-research",
+    "mode": "real-node",
+    "input_source": "existing-node-run",
+    "base_run_id": "",
+    "source_node_run_id": "node-run-youtube-fetch-20260622T083527Z-cfe243",
+    "input_manifest": "raw/node-runs/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/inputs/sources/manifest.json",
+    "input_directory": "raw/node-runs/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/inputs/sources",
+    "input_files": [
+      "raw/node-runs/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/inputs/sources/0001.txt"
+    ],
+    "edge_contract": {
+      "id": "edge-youtube-fetch-to-youtube-deep-research",
+      "from": "youtube-fetch",
+      "to": "youtube-deep-research",
+      "intent": {
+        "title": "将视频地址交给深度研究节点",
+        "brief": "下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。"
+      },
+      "bindings": [
+        {
+          "target_input": "source_url",
+          "required": true,
+          "source": {
+            "node": "youtube-fetch",
+            "output": "source_url",
+            "extractor": {
+              "id": "direct-url",
+              "kind": "direct"
+            }
+          }
+        }
+      ],
+      "resolver": {
+        "strategy": "explicit_first",
+        "fallback": "block"
+      },
+      "validation": {
+        "on_missing_required": "block",
+        "on_multiple_candidates": "needs_review",
+        "on_type_mismatch": "block"
+      }
+    },
+    "node_execution_guide": {
+      "format": "markdown",
+      "prompt": "Use skill sop-youtube-deep-research to execute this downstream node.\n\nNode Execution Guide\n- Edge: youtube-fetch -> youtube-deep-research\n- Evaluation summary: 上游的 source_url 可直连传入下游 source_url，metadata_file 可作为可选上下文通过 JSON 路径提取 URL。边缘指令明确，无阻塞。\n- Edge Handoff Instruction: 把上游视频 URL 交给深度研究节点，metadata 只作为可选上下文。\n\nUpstream artifacts\n- source_url: raw/node-runs/{pipeline_id}/outputs/files/source-url.txt (scalar URL)\n- metadata_file: raw/node-runs/{pipeline_id}/outputs/files/metadata.json (JSON file)\n\nExecution rules\n- Use only the resolved Edge inputs and materialized artifact for source_url.\n- For source_url: use the content of source_url.txt as direct URL.\n- Optionally, if metadata_file is available, you may extract source_url using json_path \"$.source_url\" or \"$.youtube_url\" as fallback.\n- Do not require metadata_file; downstream must accept the primary source_url.\n- Downstream skill expects source_url as required input; ensure pipeline provides it.\n\nOutput expectations\n- analysis_file: raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md (markdown)\n- transcript_file: raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt (text)\n\nHandover note: This node runs after youtube-fetch and before wiki-build.",
+      "source": "edge-draft",
+      "draft_id": "youtube-fetch-to-youtube-deep-research-1782290782185-edge-20260624T084706Z",
+      "draft_path": "/root/wiki/wiki-sop-new-instance/raw/workflow-drafts/youtube-fetch-to-youtube-deep-research-1782290782185-edge-20260624T084706Z",
+      "edge_id": "youtube-fetch-to-youtube-deep-research-1782290782185",
+      "source_node": "youtube-fetch",
+      "target_node": "youtube-deep-research",
+      "approved": true,
+      "evaluation_summary": {
+        "status": "ready",
+        "score": 0.92,
+        "confidence": 0.86,
+        "summary": "上游的 source_url 可直连传入下游 source_url，metadata_file 可作为可选上下文通过 JSON 路径提取 URL。边缘指令明确，无阻塞。",
+        "used_ai": true
+      }
+    },
+    "workflow_revision": {
+      "version": 1,
+      "hash": "3dec7fb576776346",
+      "node_count": 6,
+      "edge_count": 3,
+      "nodes": {
+        "notebooklm-research": {
+          "title": "NotebookLM 研究",
+          "skill": "sop-notebooklm-research",
+          "mode": "blocking",
+          "needs": [
+            "youtube-fetch"
+          ],
+          "inputs": {
+            "source_url": "youtube-fetch.outputs.source_url",
+            "metadata_file": "youtube-fetch.outputs.metadata_file"
+          },
+          "optional_inputs": {},
+          "outputs": {
+            "reports": "raw/notebooklm-analysis/*.md",
+            "mindmaps": "raw/notebooklm-mindmaps/*.json"
+          },
+          "capabilities": {}
+        },
+        "retry": {
+          "title": "手动重试",
+          "skill": "sop-retry",
+          "mode": "manual",
+          "needs": [],
+          "inputs": {},
+          "optional_inputs": {},
+          "outputs": {},
+          "capabilities": {}
+        },
+        "tg-notify": {
+          "title": "Telegram 通知",
+          "skill": "sop-tg-notify",
+          "mode": "blocking",
+          "needs": [
+            "wiki-build"
+          ],
+          "inputs": {
+            "index": {
+              "from": "wiki-build.outputs.index",
+              "required": true,
+              "kind": "file",
+              "type": "file",
+              "value_type": "markdown"
+            }
+          },
+          "optional_inputs": {
+            "message": {
+              "from": "edge.message",
+              "required": false,
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "text",
+              "resolvers": [
+                {
+                  "id": "direct-text",
+                  "kind": "direct"
+                },
+                {
+                  "id": "metadata-title",
+                  "kind": "json_path",
+                  "path": "$.title"
+                },
+                {
+                  "id": "metadata-description",
+                  "kind": "json_path",
+                  "path": "$.description"
+                }
+              ]
+            }
+          },
+          "outputs": {
+            "telegram_message": {
+              "path": "logs/pipeline-runs/pipe-{run_id}.json",
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "relayable": false
+            }
+          },
+          "capabilities": {}
+        },
+        "wiki-build": {
+          "title": "Wiki 知识图谱构建",
+          "skill": "sop-wiki-build",
+          "mode": "blocking",
+          "needs": [
+            "notebooklm-research"
+          ],
+          "inputs": {
+            "reports": {
+              "from": "notebooklm-research.outputs.reports",
+              "kind": "files",
+              "type": "files",
+              "value_type": "markdown"
+            }
+          },
+          "optional_inputs": {
+            "deep_research": {
+              "from": "youtube-deep-research.outputs.analysis_file",
+              "required": false,
+              "kind": "files",
+              "type": "files",
+              "value_type": "markdown"
+            }
+          },
+          "outputs": {
+            "index": {
+              "path": "index.md",
+              "kind": "file",
+              "type": "file",
+              "value_type": "markdown",
+              "relayable": true
+            },
+            "pages": {
+              "path": "wiki/**",
+              "kind": "files",
+              "type": "files",
+              "value_type": "markdown",
+              "relayable": true
+            }
+          },
+          "capabilities": {}
+        },
+        "youtube-deep-research": {
+          "title": "YouTube 深度研究",
+          "skill": "sop-youtube-deep-research",
+          "mode": "sidecar",
+          "needs": [
+            "youtube-fetch"
+          ],
+          "inputs": {
+            "source_url": {
+              "from": "youtube-fetch.outputs.source_url",
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "url",
+              "resolvers": [
+                {
+                  "id": "direct-url",
+                  "kind": "direct"
+                },
+                {
+                  "id": "metadata-source-url",
+                  "kind": "json_path",
+                  "path": "$.source_url"
+                },
+                {
+                  "id": "metadata-youtube-url",
+                  "kind": "json_path",
+                  "path": "$.youtube_url"
+                },
+                {
+                  "id": "text-url",
+                  "kind": "regex",
+                  "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+                }
+              ]
+            }
+          },
+          "optional_inputs": {},
+          "outputs": {
+            "analysis_file": {
+              "path": "raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md",
+              "kind": "file",
+              "type": "file",
+              "value_type": "markdown",
+              "relayable": true,
+              "role": "wiki-source"
+            },
+            "transcript_file": {
+              "path": "raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt",
+              "kind": "file",
+              "type": "file",
+              "value_type": "text",
+              "relayable": true,
+              "role": "transcript"
+            }
+          },
+          "capabilities": {
+            "git": {
+              "enabled": true,
+              "required": false,
+              "managed_by": "runtime-harness",
+              "editable": true,
+              "save_scope": "node-definition",
+              "description": "Persist this node's workspace outputs to the current Instance repo.",
+              "paths": [
+                "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+                "raw/youtube-deep-research/{pipeline_id}/raw/**"
+              ]
+            },
+            "telegram": {
+              "enabled": true,
+              "required": false,
+              "managed_by": "runtime-harness",
+              "editable": true,
+              "save_scope": "node-definition",
+              "description": "Send progress notifications through the current Instance Telegram config.",
+              "trigger": "stage-lifecycle",
+              "triggers": [
+                "start",
+                "done",
+                "failed"
+              ]
+            }
+          }
+        },
+        "youtube-fetch": {
+          "title": "YouTube 元数据获取",
+          "skill": "sop-youtube-fetch",
+          "mode": "blocking",
+          "needs": [],
+          "inputs": {
+            "source_url": {
+              "from": "context.source_url",
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "url"
+            }
+          },
+          "optional_inputs": {},
+          "outputs": {
+            "source_url": {
+              "from": "context.source_url",
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "url",
+              "relayable": true
+            },
+            "metadata_file": {
+              "from": "context.stage_b_fetch.meta_file",
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "relayable": true
+            }
+          },
+          "capabilities": {}
+        }
+      },
+      "edges": [
+        {
+          "id": "edge-youtube-fetch-to-youtube-deep-research",
+          "from": "youtube-fetch",
+          "to": "youtube-deep-research",
+          "relay": {
+            "intent": {
+              "title": "将视频地址交给深度研究节点",
+              "brief": "下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。"
+            },
+            "bindings": [
+              {
+                "target_input": "source_url",
+                "required": true,
+                "source": {
+                  "node": "youtube-fetch",
+                  "output": "source_url",
+                  "extractor": {
+                    "id": "direct-url",
+                    "kind": "direct"
+                  }
+                }
+              }
+            ],
+            "resolver": {
+              "strategy": "explicit_first",
+              "fallback": "block"
+            },
+            "validation": {
+              "on_missing_required": "block",
+              "on_multiple_candidates": "needs_review",
+              "on_type_mismatch": "block"
+            }
+          }
+        },
+        {
+          "id": "edge-youtube-fetch-title-to-tg-notify",
+          "from": "youtube-fetch",
+          "to": "tg-notify",
+          "relay": {
+            "intent": {
+              "title": "将视频标题作为通知内容",
+              "brief": "这条边只用于测试或自定义工作流，将 metadata_file 中的视频标题提取成 Telegram 文本消息。"
+            },
+            "bindings": [
+              {
+                "target_input": "message",
+                "required": true,
+                "source": {
+                  "node": "youtube-fetch",
+                  "output": "metadata_file",
+                  "extractor": {
+                    "id": "metadata-title",
+                    "kind": "json_path",
+                    "path": "$.title"
+                  }
+                }
+              }
+            ],
+            "resolver": {
+              "strategy": "explicit_first",
+              "fallback": "needs_review"
+            },
+            "validation": {
+              "on_missing_required": "block",
+              "on_multiple_candidates": "needs_review",
+              "on_type_mismatch": "block"
+            }
+          }
+        },
+        {
+          "id": "edge-youtube-deep-research-to-wiki-build",
+          "from": "youtube-deep-research",
+          "to": "wiki-build",
+          "relay": {
+            "intent": {
+              "title": "将深度研究产物交给 Wiki 构建节点",
+              "brief": "将 analysis_file 作为 Wiki 构建的 deep_research 补充材料；transcript_file 可在自定义边中作为补充上下文。"
+            },
+            "bindings": [
+              {
+                "target_input": "deep_research",
+                "required": false,
+                "source": {
+                  "node": "youtube-deep-research",
+                  "output": "analysis_file",
+                  "extractor": {
+                    "id": "direct-file",
+                    "kind": "direct"
+                  }
+                }
+              }
+            ],
+            "resolver": {
+              "strategy": "explicit_first",
+              "fallback": "needs_review"
+            },
+            "validation": {
+              "on_missing_required": "needs_review",
+              "on_multiple_candidates": "needs_review",
+              "on_type_mismatch": "needs_review"
+            }
+          }
+        }
+      ]
+    },
+    "relay_context": {
+      "edge_id": "edge-youtube-fetch-to-youtube-deep-research",
+      "source_node": "youtube-fetch",
+      "source_node_run_id": "node-run-youtube-fetch-20260622T083527Z-cfe243",
+      "target_node": "youtube-deep-research",
+      "status": "passed",
+      "brief": "Edge: edge-youtube-fetch-to-youtube-deep-research (youtube-fetch -> youtube-deep-research)\nIntent: 将视频地址交给深度研究节点\nInstruction: 下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。\nBindings:\n- source_url -> source_url via auto; path=raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/source-url.txt",
+      "items": [
+        {
+          "edge_id": "edge-youtube-fetch-to-youtube-deep-research",
+          "source_node": "youtube-fetch",
+          "source_run_id": "node-run-youtube-fetch-20260622T083527Z-cfe243",
+          "source_output": "source_url",
+          "source_path": "raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/source-url.txt",
+          "target_node": "youtube-deep-research",
+          "target_input": "source_url",
+          "resolver": "direct-url",
+          "status": "resolved",
+          "materialized_path": "raw/node-runs/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/inputs/sources/0001.txt",
+          "value_preview": "https://www.youtube.com/watch?v=dQw4w9WgXcQ\n",
+          "errors": []
+        }
+      ]
+    },
+    "relay_context_brief": "Edge: edge-youtube-fetch-to-youtube-deep-research (youtube-fetch -> youtube-deep-research)\nIntent: 将视频地址交给深度研究节点\nInstruction: 下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。\nBindings:\n- source_url -> source_url via auto; path=raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/source-url.txt",
+    "resolution_trace": [
+      {
+        "edge_id": "edge-youtube-fetch-to-youtube-deep-research",
+        "source_node": "youtube-fetch",
+        "source_run_id": "node-run-youtube-fetch-20260622T083527Z-cfe243",
+        "source_output": "source_url",
+        "source_path": "raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/source-url.txt",
+        "target_node": "youtube-deep-research",
+        "target_input": "source_url",
+        "resolver": "direct-url",
+        "status": "resolved",
+        "materialized_path": "raw/node-runs/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/inputs/sources/0001.txt",
+        "value_preview": "https://www.youtube.com/watch?v=dQw4w9WgXcQ\n",
+        "errors": []
+      }
+    ],
+    "capability_overrides": {
+      "git": {
+        "enabled": true,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "paths": [
+          "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+          "raw/youtube-deep-research/{pipeline_id}/raw/**"
+        ]
+      },
+      "telegram": {
+        "enabled": true,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run"
+      }
+    },
+    "definition_scope_reports": {
+      "instance_override": {
+        "status": "unchanged",
+        "changed": {}
+      },
+      "project_default_request": {
+        "status": "skipped"
+      }
+    },
+    "created_at": "2026-06-24T09:19:47.817960+00:00"
+  },
+  "stage_c": {
+    "run_id": "node-run-wiki-build-20260622T104220-5a3066",
+    "start_time": "2026-06-22T10:42:50Z",
+    "end_time": "2026-06-22T10:45:53Z",
+    "duration_s": 182,
+    "llm_calls": 5,
+    "pages_created_total": 13,
+    "pages_new_this_run": 0,
+    "pages_updated_this_run": 0,
+    "file_paths": [
+      "wiki/sources/YouTube深度研究补充-神曲重温-Never-Gonna-Give-You-Up-完整歌词版.md",
+      "wiki/sources/永不放弃你-歌词.md"
+    ],
+    "sources": 6,
+    "entities": 2,
+    "concepts": 5,
+    "comparisons": 0,
+    "prompt_tokens": 7124,
+    "completion_tokens": 7477,
+    "status": "success"
+  },
+  "node_run_input_manifest": "raw/node-runs/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/inputs/sources/manifest.json",
+  "node_run_input_files": [
+    "raw/node-runs/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/inputs/sources/0001.txt"
+  ],
+  "stage_deep_research": {
+    "run_id": "node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z",
+    "job_id": "c9914d56-6d13-4838-8540-1b532f23b144",
+    "status": "completed",
+    "start_time": "",
+    "end_time": "2026-06-24T09:22:00Z",
+    "output_files": [
+      "raw/youtube-deep-research/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/outputs/analysis.md",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/outputs/transcript.txt"
+    ],
+    "raw_files": [
+      "raw/youtube-deep-research/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/raw/start.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/raw/status.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/raw/transcript.json",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/raw/transcript.srt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/raw/transcript.txt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/raw/transcript.vtt",
+      "raw/youtube-deep-research/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/raw/worker-analysis.md"
+    ],
+    "worker_files": {
+      "transcript_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/c9914d56-6d13-4838-8540-1b532f23b144/transcript",
+      "transcript_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/c9914d56-6d13-4838-8540-1b532f23b144/transcript?format=txt",
+      "transcript_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/c9914d56-6d13-4838-8540-1b532f23b144/transcript?format=srt",
+      "transcript_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/c9914d56-6d13-4838-8540-1b532f23b144/transcript?format=vtt",
+      "transcript_csv": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/c9914d56-6d13-4838-8540-1b532f23b144/transcript?format=csv",
+      "analysis_md": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/c9914d56-6d13-4838-8540-1b532f23b144/transcript?format=md",
+      "translated_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/c9914d56-6d13-4838-8540-1b532f23b144/transcript?translated=1",
+      "translated_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/c9914d56-6d13-4838-8540-1b532f23b144/transcript?format=srt&translated=1",
+      "translated_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/c9914d56-6d13-4838-8540-1b532f23b144/transcript?format=vtt&translated=1",
+      "translated_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/c9914d56-6d13-4838-8540-1b532f23b144/transcript?format=txt&translated=1"
+    },
+    "chunks_total": 1,
+    "chunks_done": 1
+  },
+  "stage_b2": {
+    "analysis_file": "raw/node-runs/node-run-wiki-build-20260622T104220-5a3066/inputs/sources/0001.md",
+    "output_files": [
+      "raw/node-runs/node-run-wiki-build-20260622T104220-5a3066/inputs/sources/0001.md"
+    ]
+  },
+  "stage_b_fetch": {
+    "run_id": "node-run-youtube-fetch-20260622T134710-842f65",
+    "video_id": "dQw4w9WgXcQ",
+    "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+    "author": "Rick Astley",
+    "published_at": "2009-10-25T06:57:33Z",
+    "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+    "meta_file": "raw/youtube-metadata/dQw4w9WgXcQ.json"
+  },
+  "node_run_relay_context": {
+    "edge_id": "edge-youtube-fetch-to-youtube-deep-research",
+    "source_node": "youtube-fetch",
+    "source_node_run_id": "node-run-youtube-fetch-20260622T083527Z-cfe243",
+    "target_node": "youtube-deep-research",
+    "status": "passed",
+    "brief": "Edge: edge-youtube-fetch-to-youtube-deep-research (youtube-fetch -> youtube-deep-research)\nIntent: 将视频地址交给深度研究节点\nInstruction: 下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。\nBindings:\n- source_url -> source_url via auto; path=raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/source-url.txt",
+    "items": [
+      {
+        "edge_id": "edge-youtube-fetch-to-youtube-deep-research",
+        "source_node": "youtube-fetch",
+        "source_run_id": "node-run-youtube-fetch-20260622T083527Z-cfe243",
+        "source_output": "source_url",
+        "source_path": "raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/source-url.txt",
+        "target_node": "youtube-deep-research",
+        "target_input": "source_url",
+        "resolver": "direct-url",
+        "status": "resolved",
+        "materialized_path": "raw/node-runs/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/inputs/sources/0001.txt",
+        "value_preview": "https://www.youtube.com/watch?v=dQw4w9WgXcQ\n",
+        "errors": []
+      }
+    ]
+  },
+  "node_run_relay_context_brief": "Edge: edge-youtube-fetch-to-youtube-deep-research (youtube-fetch -> youtube-deep-research)\nIntent: 将视频地址交给深度研究节点\nInstruction: 下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。\nBindings:\n- source_url -> source_url via auto; path=raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/source-url.txt",
+  "node_run_resolution_trace": [
+    {
+      "edge_id": "edge-youtube-fetch-to-youtube-deep-research",
+      "source_node": "youtube-fetch",
+      "source_run_id": "node-run-youtube-fetch-20260622T083527Z-cfe243",
+      "source_output": "source_url",
+      "source_path": "raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/source-url.txt",
+      "target_node": "youtube-deep-research",
+      "target_input": "source_url",
+      "resolver": "direct-url",
+      "status": "resolved",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/inputs/sources/0001.txt",
+      "value_preview": "https://www.youtube.com/watch?v=dQw4w9WgXcQ\n",
+      "errors": []
+    }
+  ],
+  "workflow_revision": {
+    "version": 1,
+    "hash": "3dec7fb576776346",
+    "node_count": 6,
+    "edge_count": 3,
+    "nodes": {
+      "notebooklm-research": {
+        "title": "NotebookLM 研究",
+        "skill": "sop-notebooklm-research",
+        "mode": "blocking",
+        "needs": [
+          "youtube-fetch"
+        ],
+        "inputs": {
+          "source_url": "youtube-fetch.outputs.source_url",
+          "metadata_file": "youtube-fetch.outputs.metadata_file"
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "reports": "raw/notebooklm-analysis/*.md",
+          "mindmaps": "raw/notebooklm-mindmaps/*.json"
+        },
+        "capabilities": {}
+      },
+      "retry": {
+        "title": "手动重试",
+        "skill": "sop-retry",
+        "mode": "manual",
+        "needs": [],
+        "inputs": {},
+        "optional_inputs": {},
+        "outputs": {},
+        "capabilities": {}
+      },
+      "tg-notify": {
+        "title": "Telegram 通知",
+        "skill": "sop-tg-notify",
+        "mode": "blocking",
+        "needs": [
+          "wiki-build"
+        ],
+        "inputs": {
+          "index": {
+            "from": "wiki-build.outputs.index",
+            "required": true,
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown"
+          }
+        },
+        "optional_inputs": {
+          "message": {
+            "from": "edge.message",
+            "required": false,
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "text",
+            "resolvers": [
+              {
+                "id": "direct-text",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-title",
+                "kind": "json_path",
+                "path": "$.title"
+              },
+              {
+                "id": "metadata-description",
+                "kind": "json_path",
+                "path": "$.description"
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "telegram_message": {
+            "path": "logs/pipeline-runs/pipe-{run_id}.json",
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": false
+          }
+        },
+        "capabilities": {}
+      },
+      "wiki-build": {
+        "title": "Wiki 知识图谱构建",
+        "skill": "sop-wiki-build",
+        "mode": "blocking",
+        "needs": [
+          "notebooklm-research"
+        ],
+        "inputs": {
+          "reports": {
+            "from": "notebooklm-research.outputs.reports",
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown"
+          }
+        },
+        "optional_inputs": {
+          "deep_research": {
+            "from": "youtube-deep-research.outputs.analysis_file",
+            "required": false,
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown"
+          }
+        },
+        "outputs": {
+          "index": {
+            "path": "index.md",
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "relayable": true
+          },
+          "pages": {
+            "path": "wiki/**",
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown",
+            "relayable": true
+          }
+        },
+        "capabilities": {}
+      },
+      "youtube-deep-research": {
+        "title": "YouTube 深度研究",
+        "skill": "sop-youtube-deep-research",
+        "mode": "sidecar",
+        "needs": [
+          "youtube-fetch"
+        ],
+        "inputs": {
+          "source_url": {
+            "from": "youtube-fetch.outputs.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "resolvers": [
+              {
+                "id": "direct-url",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-source-url",
+                "kind": "json_path",
+                "path": "$.source_url"
+              },
+              {
+                "id": "metadata-youtube-url",
+                "kind": "json_path",
+                "path": "$.youtube_url"
+              },
+              {
+                "id": "text-url",
+                "kind": "regex",
+                "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+              }
+            ]
+          }
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "analysis_file": {
+            "path": "raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md",
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "relayable": true,
+            "role": "wiki-source"
+          },
+          "transcript_file": {
+            "path": "raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt",
+            "kind": "file",
+            "type": "file",
+            "value_type": "text",
+            "relayable": true,
+            "role": "transcript"
+          }
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "editable": true,
+            "save_scope": "node-definition",
+            "description": "Persist this node's workspace outputs to the current Instance repo.",
+            "paths": [
+              "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+              "raw/youtube-deep-research/{pipeline_id}/raw/**"
+            ]
+          },
+          "telegram": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "editable": true,
+            "save_scope": "node-definition",
+            "description": "Send progress notifications through the current Instance Telegram config.",
+            "trigger": "stage-lifecycle",
+            "triggers": [
+              "start",
+              "done",
+              "failed"
+            ]
+          }
+        }
+      },
+      "youtube-fetch": {
+        "title": "YouTube 元数据获取",
+        "skill": "sop-youtube-fetch",
+        "mode": "blocking",
+        "needs": [],
+        "inputs": {
+          "source_url": {
+            "from": "context.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url"
+          }
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "source_url": {
+            "from": "context.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "relayable": true
+          },
+          "metadata_file": {
+            "from": "context.stage_b_fetch.meta_file",
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": true
+          }
+        },
+        "capabilities": {}
+      }
+    },
+    "edges": [
+      {
+        "id": "edge-youtube-fetch-to-youtube-deep-research",
+        "from": "youtube-fetch",
+        "to": "youtube-deep-research",
+        "relay": {
+          "intent": {
+            "title": "将视频地址交给深度研究节点",
+            "brief": "下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。"
+          },
+          "bindings": [
+            {
+              "target_input": "source_url",
+              "required": true,
+              "source": {
+                "node": "youtube-fetch",
+                "output": "source_url",
+                "extractor": {
+                  "id": "direct-url",
+                  "kind": "direct"
+                }
+              }
+            }
+          ],
+          "resolver": {
+            "strategy": "explicit_first",
+            "fallback": "block"
+          },
+          "validation": {
+            "on_missing_required": "block",
+            "on_multiple_candidates": "needs_review",
+            "on_type_mismatch": "block"
+          }
+        }
+      },
+      {
+        "id": "edge-youtube-fetch-title-to-tg-notify",
+        "from": "youtube-fetch",
+        "to": "tg-notify",
+        "relay": {
+          "intent": {
+            "title": "将视频标题作为通知内容",
+            "brief": "这条边只用于测试或自定义工作流，将 metadata_file 中的视频标题提取成 Telegram 文本消息。"
+          },
+          "bindings": [
+            {
+              "target_input": "message",
+              "required": true,
+              "source": {
+                "node": "youtube-fetch",
+                "output": "metadata_file",
+                "extractor": {
+                  "id": "metadata-title",
+                  "kind": "json_path",
+                  "path": "$.title"
+                }
+              }
+            }
+          ],
+          "resolver": {
+            "strategy": "explicit_first",
+            "fallback": "needs_review"
+          },
+          "validation": {
+            "on_missing_required": "block",
+            "on_multiple_candidates": "needs_review",
+            "on_type_mismatch": "block"
+          }
+        }
+      },
+      {
+        "id": "edge-youtube-deep-research-to-wiki-build",
+        "from": "youtube-deep-research",
+        "to": "wiki-build",
+        "relay": {
+          "intent": {
+            "title": "将深度研究产物交给 Wiki 构建节点",
+            "brief": "将 analysis_file 作为 Wiki 构建的 deep_research 补充材料；transcript_file 可在自定义边中作为补充上下文。"
+          },
+          "bindings": [
+            {
+              "target_input": "deep_research",
+              "required": false,
+              "source": {
+                "node": "youtube-deep-research",
+                "output": "analysis_file",
+                "extractor": {
+                  "id": "direct-file",
+                  "kind": "direct"
+                }
+              }
+            }
+          ],
+          "resolver": {
+            "strategy": "explicit_first",
+            "fallback": "needs_review"
+          },
+          "validation": {
+            "on_missing_required": "needs_review",
+            "on_multiple_candidates": "needs_review",
+            "on_type_mismatch": "needs_review"
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "pipeline_id": "node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z",
+  "node_id": "youtube-deep-research",
+  "run_id": "node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z",
+  "status": "done",
+  "mode": "sidecar",
+  "needs": [
+    "youtube-fetch"
+  ],
+  "started_at": "2026-06-24T09:20:27Z",
+  "finished_at": "2026-06-24T09:22:01Z",
+  "duration_s": 93,
+  "attempt": 1,
+  "progress": 100,
+  "executor": {
+    "type": "agent-skill",
+    "agent": "hermes",
+    "skill": "sop-youtube-deep-research",
+    "entry": "scripts/run_youtube_deep_research.sh",
+    "webhook_route": "sop-youtube-deep-research"
+  },
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  },
+  "extra": {
+    "duration_s": 93,
+    "progress": 100
+  },
+  "error": "",
+  "updated_at": "2026-06-24T09:22:01Z"
+}

@@ -1,0 +1,37 @@
+{
+  "mode": "real-node",
+  "input_source": "existing-node-run",
+  "source_node_run_id": "node-run-youtube-fetch-20260622T083527Z-cfe243",
+  "relay_mode": "selected_outputs",
+  "selected_outputs": [
+    "source_url"
+  ],
+  "node_run_id": "node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z",
+  "capability_overrides": {
+    "git": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run",
+      "paths": [
+        "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+        "raw/youtube-deep-research/{pipeline_id}/raw/**"
+      ]
+    },
+    "telegram": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run"
+    }
+  },
+  "_definition_scope_reports": {
+    "instance_override": {
+      "status": "unchanged",
+      "changed": {}
+    },
+    "project_default_request": {
+      "status": "skipped"
+    }
+  }
+}

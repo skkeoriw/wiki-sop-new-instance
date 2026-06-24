@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z",
+  "node_id": "youtube-deep-research",
+  "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "created_at": "2026-06-24T09:22:00Z",
+  "items": [
+    {
+      "path": "analysis.md",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/outputs/analysis.md",
+      "output": "analysis_file",
+      "value_type": "markdown"
+    },
+    {
+      "path": "transcript.txt",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/outputs/transcript.txt",
+      "output": "transcript_file",
+      "value_type": "text"
+    }
+  ]
+}

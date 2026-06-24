@@ -1,0 +1,33 @@
+{
+  "declared_outputs": {
+    "analysis_file": {
+      "path": "raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md",
+      "kind": "file",
+      "type": "file",
+      "value_type": "markdown",
+      "relayable": true,
+      "role": "wiki-source"
+    },
+    "transcript_file": {
+      "path": "raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "text",
+      "relayable": true,
+      "role": "transcript"
+    }
+  },
+  "actual_outputs": {
+    "analysis_file": [
+      "raw/youtube-deep-research/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/outputs/analysis.md"
+    ],
+    "transcript_file": [
+      "raw/youtube-deep-research/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/outputs/transcript.txt"
+    ]
+  },
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  }
+}
