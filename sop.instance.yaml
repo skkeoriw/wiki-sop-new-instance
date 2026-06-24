@@ -1,8 +1,8 @@
 instance_id: wiki-sop-new-instance
 sop_type: youtube-research-wiki
 repo: skkeoriw/wiki-sop-new-instance
-runtime_id: youtube-wiki
-channel_name: youtube-wiki
+runtime_id: runtime-152-32-214-95
+channel_name: runtime-152-32-214-95
 channel_url: https://runtime-152-32-214-95.chxyka.ccwu.cc
 spi_base_url: https://runtime-152-32-214-95.chxyka.ccwu.cc/api/sop
 language: zh-CN

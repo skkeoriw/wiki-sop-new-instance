@@ -1,0 +1,2783 @@
+{
+  "node_run_id": "node-run-youtube-deep-research-20260624T043140-621e6d",
+  "pipeline_id": "node-run-youtube-deep-research-20260624T043140-621e6d",
+  "runtime_id": "youtube-wiki",
+  "instance_id": "wiki-sop-new-instance",
+  "workflow_id": "youtube-research-wiki",
+  "node_id": "youtube-deep-research",
+  "node_title": "YouTube 深度研究",
+  "status": "done",
+  "mode": "dry-run",
+  "input_source": "existing-node-run",
+  "relay_mode": "selected_outputs",
+  "selected_outputs": [
+    "source_url"
+  ],
+  "relay_mappings": [
+    {
+      "source_output": "source_url",
+      "target_input": "source_url",
+      "resolver": "direct-url"
+    }
+  ],
+  "source_node_run_id": "node-run-youtube-fetch-20260622T134710-842f65",
+  "relay_selection": {
+    "relay_mode": "selected_outputs",
+    "source_node_run_id": "node-run-youtube-fetch-20260622T134710-842f65",
+    "source_node": "youtube-fetch",
+    "edge_contract": {
+      "id": "edge-youtube-fetch-to-youtube-deep-research",
+      "from": "youtube-fetch",
+      "to": "youtube-deep-research",
+      "intent": {
+        "title": "将视频地址交给深度研究节点",
+        "brief": "下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。"
+      },
+      "bindings": [
+        {
+          "target_input": "source_url",
+          "required": true,
+          "source": {
+            "node": "youtube-fetch",
+            "output": "source_url",
+            "extractor": {
+              "id": "direct-url",
+              "kind": "direct"
+            }
+          }
+        }
+      ],
+      "resolver": {
+        "strategy": "explicit_first",
+        "fallback": "block"
+      },
+      "validation": {
+        "on_missing_required": "block",
+        "on_multiple_candidates": "needs_review",
+        "on_type_mismatch": "block"
+      }
+    },
+    "edge_applied": true,
+    "selected_outputs": [
+      "source_url"
+    ],
+    "relay_mappings": [
+      {
+        "source_output": "source_url",
+        "target_input": "source_url",
+        "resolver": "direct-url"
+      }
+    ],
+    "target_node_id": "youtube-deep-research",
+    "bindings": [
+      {
+        "target_input": "source_url",
+        "required": true,
+        "source": "youtube-fetch.outputs.source_url",
+        "source_node": "youtube-fetch",
+        "source_output": "source_url",
+        "spec": {
+          "from": "youtube-fetch.outputs.source_url",
+          "kind": "scalar",
+          "type": "string",
+          "value_type": "url",
+          "resolvers": [
+            {
+              "id": "direct-url",
+              "kind": "direct"
+            },
+            {
+              "id": "metadata-source-url",
+              "kind": "json_path",
+              "path": "$.source_url"
+            },
+            {
+              "id": "metadata-youtube-url",
+              "kind": "json_path",
+              "path": "$.youtube_url"
+            },
+            {
+              "id": "text-url",
+              "kind": "regex",
+              "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+            }
+          ]
+        }
+      }
+    ],
+    "matched_outputs": [
+      "source_url"
+    ],
+    "matched_items": [
+      {
+        "path": "source-url.txt",
+        "source": "node-run",
+        "source_node": "youtube-fetch",
+        "source_run_id": "node-run-youtube-fetch-20260622T134710-842f65",
+        "source_path": "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/outputs/files/source-url.txt",
+        "output": "source_url",
+        "value_type": "text",
+        "target_input": "source_url",
+        "input_name": "source_url",
+        "resolver": "direct-url",
+        "relay_match_reason": "edge-contract"
+      }
+    ],
+    "skipped_outputs": [
+      "metadata_file"
+    ],
+    "available_outputs": [
+      "metadata_file",
+      "source_url"
+    ],
+    "invalid_mappings": []
+  },
+  "edge_contract": {
+    "id": "edge-youtube-fetch-to-youtube-deep-research",
+    "from": "youtube-fetch",
+    "to": "youtube-deep-research",
+    "intent": {
+      "title": "将视频地址交给深度研究节点",
+      "brief": "下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。"
+    },
+    "bindings": [
+      {
+        "target_input": "source_url",
+        "required": true,
+        "source": {
+          "node": "youtube-fetch",
+          "output": "source_url",
+          "extractor": {
+            "id": "direct-url",
+            "kind": "direct"
+          }
+        }
+      }
+    ],
+    "resolver": {
+      "strategy": "explicit_first",
+      "fallback": "block"
+    },
+    "validation": {
+      "on_missing_required": "block",
+      "on_multiple_candidates": "needs_review",
+      "on_type_mismatch": "block"
+    }
+  },
+  "workflow_revision": {
+    "version": 1,
+    "hash": "3dec7fb576776346",
+    "node_count": 6,
+    "edge_count": 3,
+    "nodes": {
+      "notebooklm-research": {
+        "title": "NotebookLM 研究",
+        "skill": "sop-notebooklm-research",
+        "mode": "blocking",
+        "needs": [
+          "youtube-fetch"
+        ],
+        "inputs": {
+          "source_url": "youtube-fetch.outputs.source_url",
+          "metadata_file": "youtube-fetch.outputs.metadata_file"
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "reports": "raw/notebooklm-analysis/*.md",
+          "mindmaps": "raw/notebooklm-mindmaps/*.json"
+        },
+        "capabilities": {}
+      },
+      "retry": {
+        "title": "手动重试",
+        "skill": "sop-retry",
+        "mode": "manual",
+        "needs": [],
+        "inputs": {},
+        "optional_inputs": {},
+        "outputs": {},
+        "capabilities": {}
+      },
+      "tg-notify": {
+        "title": "Telegram 通知",
+        "skill": "sop-tg-notify",
+        "mode": "blocking",
+        "needs": [
+          "wiki-build"
+        ],
+        "inputs": {
+          "index": {
+            "from": "wiki-build.outputs.index",
+            "required": true,
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown"
+          }
+        },
+        "optional_inputs": {
+          "message": {
+            "from": "edge.message",
+            "required": false,
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "text",
+            "resolvers": [
+              {
+                "id": "direct-text",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-title",
+                "kind": "json_path",
+                "path": "$.title"
+              },
+              {
+                "id": "metadata-description",
+                "kind": "json_path",
+                "path": "$.description"
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "telegram_message": {
+            "path": "logs/pipeline-runs/pipe-{run_id}.json",
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": false
+          }
+        },
+        "capabilities": {}
+      },
+      "wiki-build": {
+        "title": "Wiki 知识图谱构建",
+        "skill": "sop-wiki-build",
+        "mode": "blocking",
+        "needs": [
+          "notebooklm-research"
+        ],
+        "inputs": {
+          "reports": {
+            "from": "notebooklm-research.outputs.reports",
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown"
+          }
+        },
+        "optional_inputs": {
+          "deep_research": {
+            "from": "youtube-deep-research.outputs.analysis_file",
+            "required": false,
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown"
+          }
+        },
+        "outputs": {
+          "index": {
+            "path": "index.md",
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "relayable": true
+          },
+          "pages": {
+            "path": "wiki/**",
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown",
+            "relayable": true
+          }
+        },
+        "capabilities": {}
+      },
+      "youtube-deep-research": {
+        "title": "YouTube 深度研究",
+        "skill": "sop-youtube-deep-research",
+        "mode": "sidecar",
+        "needs": [
+          "youtube-fetch"
+        ],
+        "inputs": {
+          "source_url": {
+            "from": "youtube-fetch.outputs.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "resolvers": [
+              {
+                "id": "direct-url",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-source-url",
+                "kind": "json_path",
+                "path": "$.source_url"
+              },
+              {
+                "id": "metadata-youtube-url",
+                "kind": "json_path",
+                "path": "$.youtube_url"
+              },
+              {
+                "id": "text-url",
+                "kind": "regex",
+                "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+              }
+            ]
+          }
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "analysis_file": {
+            "path": "raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md",
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "relayable": true,
+            "role": "wiki-source"
+          },
+          "transcript_file": {
+            "path": "raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt",
+            "kind": "file",
+            "type": "file",
+            "value_type": "text",
+            "relayable": true,
+            "role": "transcript"
+          }
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "editable": true,
+            "save_scope": "node-definition",
+            "description": "Persist this node's workspace outputs to the current Instance repo.",
+            "paths": [
+              "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+              "raw/youtube-deep-research/{pipeline_id}/raw/**"
+            ]
+          },
+          "telegram": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "editable": true,
+            "save_scope": "node-definition",
+            "description": "Send progress notifications through the current Instance Telegram config.",
+            "trigger": "stage-lifecycle",
+            "triggers": [
+              "start",
+              "done",
+              "failed"
+            ]
+          }
+        }
+      },
+      "youtube-fetch": {
+        "title": "YouTube 元数据获取",
+        "skill": "sop-youtube-fetch",
+        "mode": "blocking",
+        "needs": [],
+        "inputs": {
+          "source_url": {
+            "from": "context.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url"
+          }
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "source_url": {
+            "from": "context.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "relayable": true
+          },
+          "metadata_file": {
+            "from": "context.stage_b_fetch.meta_file",
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": true
+          }
+        },
+        "capabilities": {}
+      }
+    },
+    "edges": [
+      {
+        "id": "edge-youtube-fetch-to-youtube-deep-research",
+        "from": "youtube-fetch",
+        "to": "youtube-deep-research",
+        "relay": {
+          "intent": {
+            "title": "将视频地址交给深度研究节点",
+            "brief": "下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。"
+          },
+          "bindings": [
+            {
+              "target_input": "source_url",
+              "required": true,
+              "source": {
+                "node": "youtube-fetch",
+                "output": "source_url",
+                "extractor": {
+                  "id": "direct-url",
+                  "kind": "direct"
+                }
+              }
+            }
+          ],
+          "resolver": {
+            "strategy": "explicit_first",
+            "fallback": "block"
+          },
+          "validation": {
+            "on_missing_required": "block",
+            "on_multiple_candidates": "needs_review",
+            "on_type_mismatch": "block"
+          }
+        }
+      },
+      {
+        "id": "edge-youtube-fetch-title-to-tg-notify",
+        "from": "youtube-fetch",
+        "to": "tg-notify",
+        "relay": {
+          "intent": {
+            "title": "将视频标题作为通知内容",
+            "brief": "这条边只用于测试或自定义工作流，将 metadata_file 中的视频标题提取成 Telegram 文本消息。"
+          },
+          "bindings": [
+            {
+              "target_input": "message",
+              "required": true,
+              "source": {
+                "node": "youtube-fetch",
+                "output": "metadata_file",
+                "extractor": {
+                  "id": "metadata-title",
+                  "kind": "json_path",
+                  "path": "$.title"
+                }
+              }
+            }
+          ],
+          "resolver": {
+            "strategy": "explicit_first",
+            "fallback": "needs_review"
+          },
+          "validation": {
+            "on_missing_required": "block",
+            "on_multiple_candidates": "needs_review",
+            "on_type_mismatch": "block"
+          }
+        }
+      },
+      {
+        "id": "edge-youtube-deep-research-to-wiki-build",
+        "from": "youtube-deep-research",
+        "to": "wiki-build",
+        "relay": {
+          "intent": {
+            "title": "将深度研究产物交给 Wiki 构建节点",
+            "brief": "将 analysis_file 作为 Wiki 构建的 deep_research 补充材料；transcript_file 可在自定义边中作为补充上下文。"
+          },
+          "bindings": [
+            {
+              "target_input": "deep_research",
+              "required": false,
+              "source": {
+                "node": "youtube-deep-research",
+                "output": "analysis_file",
+                "extractor": {
+                  "id": "direct-file",
+                  "kind": "direct"
+                }
+              }
+            }
+          ],
+          "resolver": {
+            "strategy": "explicit_first",
+            "fallback": "needs_review"
+          },
+          "validation": {
+            "on_missing_required": "needs_review",
+            "on_multiple_candidates": "needs_review",
+            "on_type_mismatch": "needs_review"
+          }
+        }
+      }
+    ]
+  },
+  "relay_context": {},
+  "relay_context_brief": "Edge: edge-youtube-fetch-to-youtube-deep-research (youtube-fetch -> youtube-deep-research)\nIntent: 将视频地址交给深度研究节点\nInstruction: 下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。\nBindings:\n- source_url -> source_url via direct-url; path=raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/outputs/files/source-url.txt",
+  "resolution_trace": [],
+  "started_at": "2026-06-24T04:31:41.067742+00:00",
+  "finished_at": "2026-06-24T04:31:41.081624+00:00",
+  "elapsed_ms": 354,
+  "created_from": "existing-node-run",
+  "retry_of": "",
+  "pending": false,
+  "reason": "",
+  "steps": [
+    {
+      "id": "create-run",
+      "title": "Create node run workspace",
+      "status": "done",
+      "summary": "Node Run record is allocated independently from Workflow Run.",
+      "detail": {
+        "storage": "raw/node-runs/{node_run_id}"
+      },
+      "started_at": "2026-06-24T04:31:41.067742+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-24T04:31:41.102742+00:00"
+    },
+    {
+      "id": "load-definition",
+      "title": "Load node definition",
+      "status": "done",
+      "summary": "Loaded youtube-deep-research from youtube-research-wiki.",
+      "detail": {
+        "workflow_id": "youtube-research-wiki",
+        "node_id": "youtube-deep-research",
+        "node_title": "YouTube 深度研究"
+      },
+      "started_at": "2026-06-24T04:31:41.102742+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-24T04:31:41.137742+00:00"
+    },
+    {
+      "id": "resolve-context",
+      "title": "Resolve Runtime / Instance / Workflow context",
+      "status": "done",
+      "summary": "youtube-wiki · wiki-sop-new-instance · youtube-research-wiki",
+      "detail": {
+        "runtime": {
+          "runtime_id": "youtube-wiki",
+          "channel_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc",
+          "spi_base_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc/api/sop",
+          "registry_path": "/root/.sop/registry.json",
+          "health": {
+            "spi": "ok",
+            "registry": "ok",
+            "channel": "ok",
+            "instances": "ok"
+          },
+          "hermes_webhook_url": ""
+        },
+        "instance": {
+          "instance_id": "wiki-sop-new-instance",
+          "status": "ready",
+          "repo": "skkeoriw/wiki-sop-new-instance",
+          "repo_branch": "main",
+          "wiki_local_path": "/root/wiki/wiki-sop-new-instance",
+          "workspace_status": "ready",
+          "registry_status": "enabled",
+          "run_index_path": "/root/wiki/wiki-sop-new-instance/.sop/run-index.sqlite",
+          "run_index_status": "ready",
+          "capabilities": {
+            "workspace": "ok",
+            "sop_yaml": "ok",
+            "run_index": "ok",
+            "git": "configured",
+            "telegram": "unknown",
+            "notebooklm": "unknown",
+            "vertex": "unknown",
+            "tunnel": "ok"
+          }
+        },
+        "workflow_id": "youtube-research-wiki"
+      },
+      "started_at": "2026-06-24T04:31:41.137742+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-24T04:31:41.172742+00:00"
+    },
+    {
+      "id": "resolve-inputs",
+      "title": "Resolve node inputs",
+      "status": "done",
+      "summary": "0 resolved, 1 pending relay, 0 missing.",
+      "detail": {
+        "input_source": "existing-node-run",
+        "base_run_id": "",
+        "source_node_run_id": "node-run-youtube-fetch-20260622T134710-842f65",
+        "relay_mode": "selected_outputs",
+        "selected_outputs": [
+          "source_url"
+        ],
+        "relay_mappings": [
+          {
+            "source_output": "source_url",
+            "target_input": "source_url",
+            "resolver": "direct-url"
+          }
+        ],
+        "relay_selection": {
+          "relay_mode": "selected_outputs",
+          "source_node_run_id": "node-run-youtube-fetch-20260622T134710-842f65",
+          "source_node": "youtube-fetch",
+          "edge_contract": {
+            "id": "edge-youtube-fetch-to-youtube-deep-research",
+            "from": "youtube-fetch",
+            "to": "youtube-deep-research",
+            "intent": {
+              "title": "将视频地址交给深度研究节点",
+              "brief": "下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。"
+            },
+            "bindings": [
+              {
+                "target_input": "source_url",
+                "required": true,
+                "source": {
+                  "node": "youtube-fetch",
+                  "output": "source_url",
+                  "extractor": {
+                    "id": "direct-url",
+                    "kind": "direct"
+                  }
+                }
+              }
+            ],
+            "resolver": {
+              "strategy": "explicit_first",
+              "fallback": "block"
+            },
+            "validation": {
+              "on_missing_required": "block",
+              "on_multiple_candidates": "needs_review",
+              "on_type_mismatch": "block"
+            }
+          },
+          "edge_applied": true,
+          "selected_outputs": [
+            "source_url"
+          ],
+          "relay_mappings": [
+            {
+              "source_output": "source_url",
+              "target_input": "source_url",
+              "resolver": "direct-url"
+            }
+          ],
+          "target_node_id": "youtube-deep-research",
+          "bindings": [
+            {
+              "target_input": "source_url",
+              "required": true,
+              "source": "youtube-fetch.outputs.source_url",
+              "source_node": "youtube-fetch",
+              "source_output": "source_url",
+              "spec": {
+                "from": "youtube-fetch.outputs.source_url",
+                "kind": "scalar",
+                "type": "string",
+                "value_type": "url",
+                "resolvers": [
+                  {
+                    "id": "direct-url",
+                    "kind": "direct"
+                  },
+                  {
+                    "id": "metadata-source-url",
+                    "kind": "json_path",
+                    "path": "$.source_url"
+                  },
+                  {
+                    "id": "metadata-youtube-url",
+                    "kind": "json_path",
+                    "path": "$.youtube_url"
+                  },
+                  {
+                    "id": "text-url",
+                    "kind": "regex",
+                    "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+                  }
+                ]
+              }
+            }
+          ],
+          "matched_outputs": [
+            "source_url"
+          ],
+          "matched_items": [
+            {
+              "path": "source-url.txt",
+              "source": "node-run",
+              "source_node": "youtube-fetch",
+              "source_run_id": "node-run-youtube-fetch-20260622T134710-842f65",
+              "source_path": "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/outputs/files/source-url.txt",
+              "output": "source_url",
+              "value_type": "text",
+              "target_input": "source_url",
+              "input_name": "source_url",
+              "resolver": "direct-url",
+              "relay_match_reason": "edge-contract"
+            }
+          ],
+          "skipped_outputs": [
+            "metadata_file"
+          ],
+          "available_outputs": [
+            "metadata_file",
+            "source_url"
+          ],
+          "invalid_mappings": []
+        },
+        "resolved_inputs": [],
+        "pending_materialization_inputs": [
+          {
+            "name": "source_url",
+            "source": "youtube-fetch.outputs.source_url",
+            "required": true,
+            "resolved": false,
+            "value": "node-run:node-run-youtube-fetch-20260622T134710-842f65",
+            "provenance": "node-run:node-run-youtube-fetch-20260622T134710-842f65",
+            "reason": "Source Node Run selected; the target input will be resolved from materialized relay outputs before execution.",
+            "source_node_run_id": "node-run-youtube-fetch-20260622T134710-842f65",
+            "source_output": "source_url",
+            "source_node": "youtube-fetch",
+            "target_input": "source_url",
+            "relay_mode": "selected_outputs",
+            "selected_outputs": [
+              "source_url"
+            ],
+            "resolution_state": "pending_materialization"
+          }
+        ],
+        "missing_inputs": [],
+        "input_directory": "raw/node-runs/node-run-youtube-deep-research-20260624T043140-621e6d/inputs/sources",
+        "input_manifest": "raw/node-runs/node-run-youtube-deep-research-20260624T043140-621e6d/inputs/sources/manifest.json",
+        "input_resolution": {},
+        "materialized_inputs": []
+      },
+      "started_at": "2026-06-24T04:31:41.172742+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-24T04:31:41.207742+00:00"
+    },
+    {
+      "id": "resolve-config",
+      "title": "Resolve execution config",
+      "status": "done",
+      "summary": "Runtime, Instance and capability config resolved.",
+      "detail": {
+        "resolved_config": {
+          "telegram": {
+            "capability": "telegram",
+            "label": "Telegram progress notification",
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "save_scope": "run",
+            "status": "ready",
+            "token_env": "YOUTUBE_WIKI_TG_TOKEN",
+            "token": {
+              "key": "YOUTUBE_WIKI_TG_TOKEN",
+              "label": "Telegram Bot Token",
+              "required": false,
+              "present": true,
+              "source": "runtime-env-file:YOUTUBE_WIKI_TG_TOKEN",
+              "masked_value": "787***JDA",
+              "value": null
+            },
+            "chat_id": {
+              "key": "YOUTUBE_WIKI_TG_CHAT_ID",
+              "label": "Telegram Chat ID",
+              "required": false,
+              "present": true,
+              "source": "runtime-env-file:YOUTUBE_WIKI_TG_CHAT_ID",
+              "masked_value": "693***500",
+              "value": "6938920500"
+            },
+            "probe": {
+              "enabled": true,
+              "explicit_confirmation_required": true,
+              "side_effect": "sends a Telegram test message"
+            }
+          },
+          "github": {
+            "capability": "git",
+            "label": "GitHub workspace persistence",
+            "enabled": true,
+            "required": false,
+            "status": "ready",
+            "managed_by": "runtime-harness",
+            "save_scope": "run",
+            "paths": [
+              "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+              "raw/youtube-deep-research/{pipeline_id}/raw/**"
+            ],
+            "token": {
+              "key": "GITHUB_TOKEN",
+              "label": "GitHub Token",
+              "required": false,
+              "present": true,
+              "source": "runtime-env-file:GITHUB_TOKEN",
+              "masked_value": "ghp***qtP",
+              "value": null
+            }
+          },
+          "youtube_research_worker": {
+            "capability": "youtube-research-worker",
+            "label": "YouTube Deep Research Worker",
+            "status": "ready",
+            "base_url": {
+              "key": "YOUTUBE_RESEARCH_WORKFLOW_URL",
+              "label": "Worker URL",
+              "required": true,
+              "present": true,
+              "source": "runtime-env-file:YOUTUBE_RESEARCH_WORKFLOW_URL",
+              "masked_value": "https://youtube-research-workflow.hb67egcim4.workers.dev",
+              "value": "https://youtube-research-workflow.hb67egcim4.workers.dev"
+            },
+            "token": {
+              "key": "YOUTUBE_RESEARCH_WORKFLOW_TOKEN",
+              "label": "Worker API Token",
+              "required": true,
+              "present": true,
+              "source": "runtime-env-file:YOUTUBE_RESEARCH_WORKFLOW_TOKEN",
+              "masked_value": "yt-***026",
+              "value": null
+            },
+            "timeout": {
+              "key": "YOUTUBE_RESEARCH_WORKFLOW_TIMEOUT",
+              "label": "Worker Poll Timeout",
+              "required": false,
+              "present": false,
+              "source": "default",
+              "value": 1200,
+              "unit": "seconds"
+            },
+            "poll_interval": {
+              "key": "YOUTUBE_RESEARCH_WORKFLOW_POLL_INTERVAL",
+              "label": "Worker Poll Interval",
+              "required": false,
+              "present": false,
+              "source": "default",
+              "value": 10,
+              "unit": "seconds"
+            },
+            "missing": []
+          }
+        },
+        "definition_defaults": {
+          "git": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "editable": true,
+            "save_scope": "node-definition",
+            "description": "Persist this node's workspace outputs to the current Instance repo.",
+            "paths": [
+              "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+              "raw/youtube-deep-research/{pipeline_id}/raw/**"
+            ]
+          },
+          "telegram": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "editable": true,
+            "save_scope": "node-definition",
+            "description": "Send progress notifications through the current Instance Telegram config.",
+            "trigger": "stage-lifecycle",
+            "triggers": [
+              "start",
+              "done",
+              "failed"
+            ]
+          }
+        },
+        "capability_overrides": {
+          "git": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "save_scope": "run",
+            "paths": [
+              "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+              "raw/youtube-deep-research/{pipeline_id}/raw/**"
+            ]
+          },
+          "telegram": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "save_scope": "run"
+          }
+        },
+        "definition_scope_reports": {
+          "instance_override": {
+            "status": "unchanged",
+            "changed": {}
+          },
+          "project_default_request": {
+            "status": "skipped"
+          }
+        }
+      },
+      "started_at": "2026-06-24T04:31:41.207742+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-24T04:31:41.242742+00:00"
+    },
+    {
+      "id": "generate-agent-request",
+      "title": "Generate Agent Request",
+      "status": "skipped",
+      "summary": "No Agent Request is generated outside real-node execution.",
+      "detail": {
+        "executor": "hermes",
+        "skill": "sop-youtube-deep-research",
+        "template_version": "hermes-agent-executor.v1"
+      },
+      "started_at": "2026-06-24T04:31:41.242742+00:00",
+      "elapsed_ms": 24,
+      "finished_at": "2026-06-24T04:31:41.266742+00:00"
+    },
+    {
+      "id": "probe-capabilities",
+      "title": "Probe attached capabilities",
+      "status": "skipped",
+      "summary": "Capability probes are explicit. Telegram send probes require user confirmation.",
+      "detail": {
+        "telegram": {
+          "capability": "telegram",
+          "label": "Telegram progress notification",
+          "status": "ready",
+          "required": false,
+          "enabled": true
+        },
+        "github": {
+          "capability": "git",
+          "label": "GitHub workspace persistence",
+          "status": "ready",
+          "required": false,
+          "enabled": true
+        },
+        "youtube_research_worker": {
+          "capability": "youtube-research-worker",
+          "label": "YouTube Deep Research Worker",
+          "status": "ready",
+          "required": false,
+          "enabled": true
+        }
+      },
+      "started_at": "2026-06-24T04:31:41.277742+00:00",
+      "elapsed_ms": 24,
+      "finished_at": "2026-06-24T04:31:41.301742+00:00"
+    },
+    {
+      "id": "build-execution-plan",
+      "title": "Build node execution plan",
+      "status": "done",
+      "summary": "Prepared dry-run execution plan.",
+      "detail": {
+        "mode": "dry-run",
+        "real_execution_enabled": false,
+        "reason": "Real execution is only enabled for nodes with an explicit executor adapter."
+      },
+      "started_at": "2026-06-24T04:31:41.312742+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-24T04:31:41.347742+00:00"
+    },
+    {
+      "id": "execute-or-dry-run",
+      "title": "Execute or dry-run node",
+      "status": "skipped",
+      "summary": "No business node was executed in this diagnostic run.",
+      "detail": {
+        "mode": "dry-run",
+        "side_effects": {
+          "writes_workspace": true,
+          "git_write": true,
+          "telegram": true,
+          "external_api": true,
+          "llm": false,
+          "skill": "sop-youtube-deep-research",
+          "default_mode": "preflight",
+          "real_execution_enabled": true
+        }
+      },
+      "started_at": "2026-06-24T04:31:41.347742+00:00",
+      "elapsed_ms": 24,
+      "finished_at": "2026-06-24T04:31:41.371742+00:00"
+    },
+    {
+      "id": "validate-outputs",
+      "title": "Validate declared outputs",
+      "status": "skipped",
+      "summary": "No business execution occurred, so output validation is informational only.",
+      "detail": {
+        "declared_outputs": {
+          "analysis_file": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "relayable": true,
+            "role": "wiki-source",
+            "path": "raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md"
+          },
+          "transcript_file": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "text",
+            "relayable": true,
+            "role": "transcript",
+            "path": "raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt"
+          }
+        }
+      },
+      "started_at": "2026-06-24T04:31:41.382742+00:00",
+      "elapsed_ms": 24,
+      "finished_at": "2026-06-24T04:31:41.406742+00:00"
+    },
+    {
+      "id": "persist-to-github",
+      "title": "Persist to GitHub",
+      "status": "skipped",
+      "summary": "Waiting for runtime harness to push selected paths to the Instance repo.",
+      "detail": {
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "paths": [
+          "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+          "raw/youtube-deep-research/{pipeline_id}/raw/**"
+        ],
+        "save_scope": "run"
+      },
+      "started_at": "2026-06-24T04:31:41.417742+00:00",
+      "elapsed_ms": 24,
+      "finished_at": "2026-06-24T04:31:41.441742+00:00"
+    },
+    {
+      "id": "send-telegram-notification",
+      "title": "Send Telegram notification",
+      "status": "skipped",
+      "summary": "Waiting for runtime harness to send the Instance Telegram notification.",
+      "detail": {
+        "chat_id": "693***500",
+        "save_scope": "run"
+      },
+      "started_at": "2026-06-24T04:31:41.452742+00:00",
+      "elapsed_ms": 24,
+      "finished_at": "2026-06-24T04:31:41.476742+00:00"
+    }
+  ],
+  "inner_steps": [
+    {
+      "id": "pre",
+      "title": "执行前",
+      "status": "done",
+      "summary": "Node Run 上下文、输入和运行配置已准备，并交给 stage runner on_start。",
+      "started_at": "2026-06-24T04:31:41.067742+00:00",
+      "finished_at": "",
+      "detail": {
+        "mode": "dry-run",
+        "input_source": "existing-node-run",
+        "resolved_inputs": [],
+        "pending_materialization_inputs": [
+          {
+            "name": "source_url",
+            "source": "youtube-fetch.outputs.source_url",
+            "required": true,
+            "resolved": false,
+            "value": "node-run:node-run-youtube-fetch-20260622T134710-842f65",
+            "provenance": "node-run:node-run-youtube-fetch-20260622T134710-842f65",
+            "reason": "Source Node Run selected; the target input will be resolved from materialized relay outputs before execution.",
+            "source_node_run_id": "node-run-youtube-fetch-20260622T134710-842f65",
+            "source_output": "source_url",
+            "source_node": "youtube-fetch",
+            "target_input": "source_url",
+            "relay_mode": "selected_outputs",
+            "selected_outputs": [
+              "source_url"
+            ],
+            "resolution_state": "pending_materialization"
+          }
+        ],
+        "missing_inputs": [],
+        "config_status": "done",
+        "command": [],
+        "stage_hook": "on_start"
+      }
+    },
+    {
+      "id": "doing",
+      "title": "执行中",
+      "status": "skipped",
+      "summary": "当前模式未执行真实业务逻辑。",
+      "started_at": "",
+      "finished_at": "",
+      "elapsed_ms": null,
+      "detail": {
+        "command": [],
+        "returncode": null,
+        "timed_out": false,
+        "log_path": "",
+        "stdout_tail": "",
+        "stderr_tail": ""
+      }
+    },
+    {
+      "id": "post",
+      "title": "执行后",
+      "status": "skipped",
+      "summary": "stage_runner on_done/on_failed、输出校验、Git/TG capability 和 bridge 结果收集已归档。",
+      "started_at": "",
+      "finished_at": "2026-06-24T04:31:41.081624+00:00",
+      "detail": {
+        "stage_hooks": [
+          "on_done/on_failed",
+          "forward_next"
+        ],
+        "validation": {},
+        "actual_outputs": {},
+        "business_artifact_count": 0,
+        "capabilities": {},
+        "forward_next": ""
+      }
+    }
+  ],
+  "events": [
+    {
+      "sequence": 1,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-youtube-deep-research-20260624T043140-621e6d",
+      "node_id": "youtube-deep-research",
+      "step_id": "create-run",
+      "ts": "2026-06-24T04:31:41.081624+00:00",
+      "data": {
+        "title": "Create node run workspace",
+        "summary": "Node Run record is allocated independently from Workflow Run."
+      }
+    },
+    {
+      "sequence": 2,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-youtube-deep-research-20260624T043140-621e6d",
+      "node_id": "youtube-deep-research",
+      "step_id": "load-definition",
+      "ts": "2026-06-24T04:31:41.081624+00:00",
+      "data": {
+        "title": "Load node definition",
+        "summary": "Loaded youtube-deep-research from youtube-research-wiki."
+      }
+    },
+    {
+      "sequence": 3,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-youtube-deep-research-20260624T043140-621e6d",
+      "node_id": "youtube-deep-research",
+      "step_id": "resolve-context",
+      "ts": "2026-06-24T04:31:41.081624+00:00",
+      "data": {
+        "title": "Resolve Runtime / Instance / Workflow context",
+        "summary": "youtube-wiki · wiki-sop-new-instance · youtube-research-wiki"
+      }
+    },
+    {
+      "sequence": 4,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-youtube-deep-research-20260624T043140-621e6d",
+      "node_id": "youtube-deep-research",
+      "step_id": "resolve-inputs",
+      "ts": "2026-06-24T04:31:41.081624+00:00",
+      "data": {
+        "title": "Resolve node inputs",
+        "summary": "0 resolved, 1 pending relay, 0 missing."
+      }
+    },
+    {
+      "sequence": 5,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-youtube-deep-research-20260624T043140-621e6d",
+      "node_id": "youtube-deep-research",
+      "step_id": "resolve-config",
+      "ts": "2026-06-24T04:31:41.081624+00:00",
+      "data": {
+        "title": "Resolve execution config",
+        "summary": "Runtime, Instance and capability config resolved."
+      }
+    },
+    {
+      "sequence": 6,
+      "event": "node_run.step.skipped",
+      "node_run_id": "node-run-youtube-deep-research-20260624T043140-621e6d",
+      "node_id": "youtube-deep-research",
+      "step_id": "generate-agent-request",
+      "ts": "2026-06-24T04:31:41.081624+00:00",
+      "data": {
+        "title": "Generate Agent Request",
+        "summary": "No Agent Request is generated outside real-node execution."
+      }
+    },
+    {
+      "sequence": 7,
+      "event": "node_run.step.skipped",
+      "node_run_id": "node-run-youtube-deep-research-20260624T043140-621e6d",
+      "node_id": "youtube-deep-research",
+      "step_id": "probe-capabilities",
+      "ts": "2026-06-24T04:31:41.081624+00:00",
+      "data": {
+        "title": "Probe attached capabilities",
+        "summary": "Capability probes are explicit. Telegram send probes require user confirmation."
+      }
+    },
+    {
+      "sequence": 8,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-youtube-deep-research-20260624T043140-621e6d",
+      "node_id": "youtube-deep-research",
+      "step_id": "build-execution-plan",
+      "ts": "2026-06-24T04:31:41.081624+00:00",
+      "data": {
+        "title": "Build node execution plan",
+        "summary": "Prepared dry-run execution plan."
+      }
+    },
+    {
+      "sequence": 9,
+      "event": "node_run.step.skipped",
+      "node_run_id": "node-run-youtube-deep-research-20260624T043140-621e6d",
+      "node_id": "youtube-deep-research",
+      "step_id": "execute-or-dry-run",
+      "ts": "2026-06-24T04:31:41.081624+00:00",
+      "data": {
+        "title": "Execute or dry-run node",
+        "summary": "No business node was executed in this diagnostic run."
+      }
+    },
+    {
+      "sequence": 10,
+      "event": "node_run.step.skipped",
+      "node_run_id": "node-run-youtube-deep-research-20260624T043140-621e6d",
+      "node_id": "youtube-deep-research",
+      "step_id": "validate-outputs",
+      "ts": "2026-06-24T04:31:41.081624+00:00",
+      "data": {
+        "title": "Validate declared outputs",
+        "summary": "No business execution occurred, so output validation is informational only."
+      }
+    },
+    {
+      "sequence": 11,
+      "event": "node_run.step.skipped",
+      "node_run_id": "node-run-youtube-deep-research-20260624T043140-621e6d",
+      "node_id": "youtube-deep-research",
+      "step_id": "persist-to-github",
+      "ts": "2026-06-24T04:31:41.081624+00:00",
+      "data": {
+        "title": "Persist to GitHub",
+        "summary": "Waiting for runtime harness to push selected paths to the Instance repo."
+      }
+    },
+    {
+      "sequence": 12,
+      "event": "node_run.step.skipped",
+      "node_run_id": "node-run-youtube-deep-research-20260624T043140-621e6d",
+      "node_id": "youtube-deep-research",
+      "step_id": "send-telegram-notification",
+      "ts": "2026-06-24T04:31:41.081624+00:00",
+      "data": {
+        "title": "Send Telegram notification",
+        "summary": "Waiting for runtime harness to send the Instance Telegram notification."
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "node-run-result",
+      "producer": "youtube-deep-research",
+      "type": "node-run.result",
+      "format": "json",
+      "path": "raw/node-runs/node-run-youtube-deep-research-20260624T043140-621e6d/result.json",
+      "title": "Node Run diagnostic result",
+      "resolution": "recorded"
+    }
+  ],
+  "actual_outputs": {},
+  "core_outputs": [
+    {
+      "name": "analysis_file",
+      "kind": "scalar",
+      "type": "file",
+      "value": null,
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "markdown",
+        "relayable": true,
+        "role": "wiki-source",
+        "path": "raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md"
+      }
+    },
+    {
+      "name": "transcript_file",
+      "kind": "scalar",
+      "type": "file",
+      "value": null,
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "text",
+        "relayable": true,
+        "role": "transcript",
+        "path": "raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt"
+      }
+    }
+  ],
+  "relay_package": {
+    "kind": "relay-package",
+    "output_directory": "raw/node-runs/node-run-youtube-deep-research-20260624T043140-621e6d/outputs/files",
+    "manifest_path": "raw/node-runs/node-run-youtube-deep-research-20260624T043140-621e6d/outputs/files/manifest.json",
+    "item_count": 0,
+    "items": []
+  },
+  "execution_evidence": {
+    "artifacts": [
+      {
+        "id": "node-run-result",
+        "producer": "youtube-deep-research",
+        "type": "node-run.result",
+        "format": "json",
+        "path": "raw/node-runs/node-run-youtube-deep-research-20260624T043140-621e6d/result.json",
+        "title": "Node Run diagnostic result",
+        "resolution": "recorded"
+      }
+    ],
+    "count": 1
+  },
+  "output_categories": {},
+  "input_directory": "raw/node-runs/node-run-youtube-deep-research-20260624T043140-621e6d/inputs/sources",
+  "input_manifest": "raw/node-runs/node-run-youtube-deep-research-20260624T043140-621e6d/inputs/sources/manifest.json",
+  "output_directory": "",
+  "output_manifest": "",
+  "validation": {},
+  "capabilities": {},
+  "agent_request": {},
+  "business_artifacts": [],
+  "runtime_context": {
+    "runtime_id": "youtube-wiki",
+    "channel_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc",
+    "spi_base_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc/api/sop",
+    "registry_path": "/root/.sop/registry.json",
+    "health": {
+      "spi": "ok",
+      "registry": "ok",
+      "channel": "ok",
+      "instances": "ok"
+    },
+    "hermes_webhook_url": ""
+  },
+  "instance_context": {
+    "instance_id": "wiki-sop-new-instance",
+    "status": "ready",
+    "repo": "skkeoriw/wiki-sop-new-instance",
+    "repo_branch": "main",
+    "wiki_local_path": "/root/wiki/wiki-sop-new-instance",
+    "workspace_status": "ready",
+    "registry_status": "enabled",
+    "run_index_path": "/root/wiki/wiki-sop-new-instance/.sop/run-index.sqlite",
+    "run_index_status": "ready",
+    "capabilities": {
+      "workspace": "ok",
+      "sop_yaml": "ok",
+      "run_index": "ok",
+      "git": "configured",
+      "telegram": "unknown",
+      "notebooklm": "unknown",
+      "vertex": "unknown",
+      "tunnel": "ok"
+    }
+  },
+  "definition_defaults": {
+    "git": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "editable": true,
+      "save_scope": "node-definition",
+      "description": "Persist this node's workspace outputs to the current Instance repo.",
+      "paths": [
+        "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+        "raw/youtube-deep-research/{pipeline_id}/raw/**"
+      ]
+    },
+    "telegram": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "editable": true,
+      "save_scope": "node-definition",
+      "description": "Send progress notifications through the current Instance Telegram config.",
+      "trigger": "stage-lifecycle",
+      "triggers": [
+        "start",
+        "done",
+        "failed"
+      ]
+    }
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run",
+      "paths": [
+        "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+        "raw/youtube-deep-research/{pipeline_id}/raw/**"
+      ]
+    },
+    "telegram": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run"
+    }
+  },
+  "definition_scope_reports": {
+    "instance_override": {
+      "status": "unchanged",
+      "changed": {}
+    },
+    "project_default_request": {
+      "status": "skipped"
+    }
+  },
+  "environment_snapshot": [
+    {
+      "id": "telegram:YOUTUBE_WIKI_TG_TOKEN:runtime-env-file:YOUTUBE_WIKI_TG_TOKEN",
+      "capability": "telegram",
+      "key": "YOUTUBE_WIKI_TG_TOKEN",
+      "label": "Telegram Bot Token",
+      "source": "runtime-env-file:YOUTUBE_WIKI_TG_TOKEN",
+      "source_kind": "runtime-env-file",
+      "present": true,
+      "required": false,
+      "secret": true,
+      "value": "787***JDA",
+      "status": "ready",
+      "unit": "",
+      "category": "telegram"
+    },
+    {
+      "id": "telegram:YOUTUBE_WIKI_TG_CHAT_ID:runtime-env-file:YOUTUBE_WIKI_TG_CHAT_ID",
+      "capability": "telegram",
+      "key": "YOUTUBE_WIKI_TG_CHAT_ID",
+      "label": "Telegram Chat ID",
+      "source": "runtime-env-file:YOUTUBE_WIKI_TG_CHAT_ID",
+      "source_kind": "runtime-env-file",
+      "present": true,
+      "required": false,
+      "secret": false,
+      "value": "693***500",
+      "status": "ready",
+      "unit": "",
+      "category": "telegram"
+    },
+    {
+      "id": "git:GITHUB_TOKEN:runtime-env-file:GITHUB_TOKEN",
+      "capability": "git",
+      "key": "GITHUB_TOKEN",
+      "label": "GitHub Token",
+      "source": "runtime-env-file:GITHUB_TOKEN",
+      "source_kind": "runtime-env-file",
+      "present": true,
+      "required": false,
+      "secret": true,
+      "value": "ghp***qtP",
+      "status": "ready",
+      "unit": "",
+      "category": "github"
+    },
+    {
+      "id": "youtube-research-worker:YOUTUBE_RESEARCH_WORKFLOW_URL:runtime-env-file:YOUTUBE_RESEARCH_WORKFLOW_URL",
+      "capability": "youtube-research-worker",
+      "key": "YOUTUBE_RESEARCH_WORKFLOW_URL",
+      "label": "Worker URL",
+      "source": "runtime-env-file:YOUTUBE_RESEARCH_WORKFLOW_URL",
+      "source_kind": "runtime-env-file",
+      "present": true,
+      "required": true,
+      "secret": false,
+      "value": "https://youtube-research-workflow.hb67egcim4.workers.dev",
+      "status": "ready",
+      "unit": "",
+      "category": "youtube"
+    },
+    {
+      "id": "youtube-research-worker:YOUTUBE_RESEARCH_WORKFLOW_TOKEN:runtime-env-file:YOUTUBE_RESEARCH_WORKFLOW_TOKEN",
+      "capability": "youtube-research-worker",
+      "key": "YOUTUBE_RESEARCH_WORKFLOW_TOKEN",
+      "label": "Worker API Token",
+      "source": "runtime-env-file:YOUTUBE_RESEARCH_WORKFLOW_TOKEN",
+      "source_kind": "runtime-env-file",
+      "present": true,
+      "required": true,
+      "secret": true,
+      "value": "yt-***026",
+      "status": "ready",
+      "unit": "",
+      "category": "youtube"
+    },
+    {
+      "id": "youtube-research-worker:YOUTUBE_RESEARCH_WORKFLOW_TIMEOUT:default",
+      "capability": "youtube-research-worker",
+      "key": "YOUTUBE_RESEARCH_WORKFLOW_TIMEOUT",
+      "label": "Worker Poll Timeout",
+      "source": "default",
+      "source_kind": "default",
+      "present": false,
+      "required": false,
+      "secret": false,
+      "value": "",
+      "status": "ready",
+      "unit": "seconds",
+      "category": "youtube-research-worker"
+    },
+    {
+      "id": "youtube-research-worker:YOUTUBE_RESEARCH_WORKFLOW_POLL_INTERVAL:default",
+      "capability": "youtube-research-worker",
+      "key": "YOUTUBE_RESEARCH_WORKFLOW_POLL_INTERVAL",
+      "label": "Worker Poll Interval",
+      "source": "default",
+      "source_kind": "default",
+      "present": false,
+      "required": false,
+      "secret": false,
+      "value": "",
+      "status": "ready",
+      "unit": "seconds",
+      "category": "youtube-research-worker"
+    }
+  ],
+  "capability_results": [
+    {
+      "key": "git",
+      "capability": "git",
+      "label": "GitHub workspace persistence",
+      "status": "ready",
+      "enabled": true,
+      "required": false,
+      "source": "config-resolution",
+      "reason": "",
+      "managed_by": "runtime-harness",
+      "detail": {
+        "capability": "git",
+        "label": "GitHub workspace persistence",
+        "status": "ready",
+        "required": false,
+        "enabled": true,
+        "_source_key": "***"
+      }
+    },
+    {
+      "key": "telegram",
+      "capability": "telegram",
+      "label": "Telegram progress notification",
+      "status": "ready",
+      "enabled": true,
+      "required": false,
+      "source": "config-resolution",
+      "reason": "",
+      "managed_by": "runtime-harness",
+      "detail": {
+        "capability": "telegram",
+        "label": "Telegram progress notification",
+        "status": "ready",
+        "required": false,
+        "enabled": true,
+        "_source_key": "***"
+      }
+    },
+    {
+      "key": "youtube-research-worker",
+      "capability": "youtube-research-worker",
+      "label": "YouTube Deep Research Worker",
+      "status": "ready",
+      "enabled": true,
+      "required": false,
+      "source": "config-resolution",
+      "reason": "",
+      "managed_by": "",
+      "detail": {
+        "capability": "youtube-research-worker",
+        "label": "YouTube Deep Research Worker",
+        "status": "ready",
+        "required": false,
+        "enabled": true,
+        "_source_key": "you***ker"
+      }
+    }
+  ],
+  "issues": [],
+  "detail": {
+    "sop_id": "wiki-sop-new-instance",
+    "workflow_id": "youtube-research-wiki",
+    "instance_id": "wiki-sop-new-instance",
+    "node_id": "youtube-deep-research",
+    "node_title": "YouTube 深度研究",
+    "mode": "dry-run",
+    "input_source": "existing-node-run",
+    "base_run_id": "",
+    "source_node_run_id": "node-run-youtube-fetch-20260622T134710-842f65",
+    "relay_mode": "selected_outputs",
+    "selected_outputs": [
+      "source_url"
+    ],
+    "relay_mappings": [
+      {
+        "source_output": "source_url",
+        "target_input": "source_url",
+        "resolver": "direct-url"
+      }
+    ],
+    "relay_selection": {
+      "relay_mode": "selected_outputs",
+      "source_node_run_id": "node-run-youtube-fetch-20260622T134710-842f65",
+      "source_node": "youtube-fetch",
+      "edge_contract": {
+        "id": "edge-youtube-fetch-to-youtube-deep-research",
+        "from": "youtube-fetch",
+        "to": "youtube-deep-research",
+        "intent": {
+          "title": "将视频地址交给深度研究节点",
+          "brief": "下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。"
+        },
+        "bindings": [
+          {
+            "target_input": "source_url",
+            "required": true,
+            "source": {
+              "node": "youtube-fetch",
+              "output": "source_url",
+              "extractor": {
+                "id": "direct-url",
+                "kind": "direct"
+              }
+            }
+          }
+        ],
+        "resolver": {
+          "strategy": "explicit_first",
+          "fallback": "block"
+        },
+        "validation": {
+          "on_missing_required": "block",
+          "on_multiple_candidates": "needs_review",
+          "on_type_mismatch": "block"
+        }
+      },
+      "edge_applied": true,
+      "selected_outputs": [
+        "source_url"
+      ],
+      "relay_mappings": [
+        {
+          "source_output": "source_url",
+          "target_input": "source_url",
+          "resolver": "direct-url"
+        }
+      ],
+      "target_node_id": "youtube-deep-research",
+      "bindings": [
+        {
+          "target_input": "source_url",
+          "required": true,
+          "source": "youtube-fetch.outputs.source_url",
+          "source_node": "youtube-fetch",
+          "source_output": "source_url",
+          "spec": {
+            "from": "youtube-fetch.outputs.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "resolvers": [
+              {
+                "id": "direct-url",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-source-url",
+                "kind": "json_path",
+                "path": "$.source_url"
+              },
+              {
+                "id": "metadata-youtube-url",
+                "kind": "json_path",
+                "path": "$.youtube_url"
+              },
+              {
+                "id": "text-url",
+                "kind": "regex",
+                "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+              }
+            ]
+          }
+        }
+      ],
+      "matched_outputs": [
+        "source_url"
+      ],
+      "matched_items": [
+        {
+          "path": "source-url.txt",
+          "source": "node-run",
+          "source_node": "youtube-fetch",
+          "source_run_id": "node-run-youtube-fetch-20260622T134710-842f65",
+          "source_path": "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/outputs/files/source-url.txt",
+          "output": "source_url",
+          "value_type": "text",
+          "target_input": "source_url",
+          "input_name": "source_url",
+          "resolver": "direct-url",
+          "relay_match_reason": "edge-contract"
+        }
+      ],
+      "skipped_outputs": [
+        "metadata_file"
+      ],
+      "available_outputs": [
+        "metadata_file",
+        "source_url"
+      ],
+      "invalid_mappings": []
+    },
+    "edge_contract": {
+      "id": "edge-youtube-fetch-to-youtube-deep-research",
+      "from": "youtube-fetch",
+      "to": "youtube-deep-research",
+      "intent": {
+        "title": "将视频地址交给深度研究节点",
+        "brief": "下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。"
+      },
+      "bindings": [
+        {
+          "target_input": "source_url",
+          "required": true,
+          "source": {
+            "node": "youtube-fetch",
+            "output": "source_url",
+            "extractor": {
+              "id": "direct-url",
+              "kind": "direct"
+            }
+          }
+        }
+      ],
+      "resolver": {
+        "strategy": "explicit_first",
+        "fallback": "block"
+      },
+      "validation": {
+        "on_missing_required": "block",
+        "on_multiple_candidates": "needs_review",
+        "on_type_mismatch": "block"
+      }
+    },
+    "workflow_revision": {
+      "version": 1,
+      "hash": "3dec7fb576776346",
+      "node_count": 6,
+      "edge_count": 3,
+      "nodes": {
+        "notebooklm-research": {
+          "title": "NotebookLM 研究",
+          "skill": "sop-notebooklm-research",
+          "mode": "blocking",
+          "needs": [
+            "youtube-fetch"
+          ],
+          "inputs": {
+            "source_url": "youtube-fetch.outputs.source_url",
+            "metadata_file": "youtube-fetch.outputs.metadata_file"
+          },
+          "optional_inputs": {},
+          "outputs": {
+            "reports": "raw/notebooklm-analysis/*.md",
+            "mindmaps": "raw/notebooklm-mindmaps/*.json"
+          },
+          "capabilities": {}
+        },
+        "retry": {
+          "title": "手动重试",
+          "skill": "sop-retry",
+          "mode": "manual",
+          "needs": [],
+          "inputs": {},
+          "optional_inputs": {},
+          "outputs": {},
+          "capabilities": {}
+        },
+        "tg-notify": {
+          "title": "Telegram 通知",
+          "skill": "sop-tg-notify",
+          "mode": "blocking",
+          "needs": [
+            "wiki-build"
+          ],
+          "inputs": {
+            "index": {
+              "from": "wiki-build.outputs.index",
+              "required": true,
+              "kind": "file",
+              "type": "file",
+              "value_type": "markdown"
+            }
+          },
+          "optional_inputs": {
+            "message": {
+              "from": "edge.message",
+              "required": false,
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "text",
+              "resolvers": [
+                {
+                  "id": "direct-text",
+                  "kind": "direct"
+                },
+                {
+                  "id": "metadata-title",
+                  "kind": "json_path",
+                  "path": "$.title"
+                },
+                {
+                  "id": "metadata-description",
+                  "kind": "json_path",
+                  "path": "$.description"
+                }
+              ]
+            }
+          },
+          "outputs": {
+            "telegram_message": {
+              "path": "logs/pipeline-runs/pipe-{run_id}.json",
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "relayable": false
+            }
+          },
+          "capabilities": {}
+        },
+        "wiki-build": {
+          "title": "Wiki 知识图谱构建",
+          "skill": "sop-wiki-build",
+          "mode": "blocking",
+          "needs": [
+            "notebooklm-research"
+          ],
+          "inputs": {
+            "reports": {
+              "from": "notebooklm-research.outputs.reports",
+              "kind": "files",
+              "type": "files",
+              "value_type": "markdown"
+            }
+          },
+          "optional_inputs": {
+            "deep_research": {
+              "from": "youtube-deep-research.outputs.analysis_file",
+              "required": false,
+              "kind": "files",
+              "type": "files",
+              "value_type": "markdown"
+            }
+          },
+          "outputs": {
+            "index": {
+              "path": "index.md",
+              "kind": "file",
+              "type": "file",
+              "value_type": "markdown",
+              "relayable": true
+            },
+            "pages": {
+              "path": "wiki/**",
+              "kind": "files",
+              "type": "files",
+              "value_type": "markdown",
+              "relayable": true
+            }
+          },
+          "capabilities": {}
+        },
+        "youtube-deep-research": {
+          "title": "YouTube 深度研究",
+          "skill": "sop-youtube-deep-research",
+          "mode": "sidecar",
+          "needs": [
+            "youtube-fetch"
+          ],
+          "inputs": {
+            "source_url": {
+              "from": "youtube-fetch.outputs.source_url",
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "url",
+              "resolvers": [
+                {
+                  "id": "direct-url",
+                  "kind": "direct"
+                },
+                {
+                  "id": "metadata-source-url",
+                  "kind": "json_path",
+                  "path": "$.source_url"
+                },
+                {
+                  "id": "metadata-youtube-url",
+                  "kind": "json_path",
+                  "path": "$.youtube_url"
+                },
+                {
+                  "id": "text-url",
+                  "kind": "regex",
+                  "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+                }
+              ]
+            }
+          },
+          "optional_inputs": {},
+          "outputs": {
+            "analysis_file": {
+              "path": "raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md",
+              "kind": "file",
+              "type": "file",
+              "value_type": "markdown",
+              "relayable": true,
+              "role": "wiki-source"
+            },
+            "transcript_file": {
+              "path": "raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt",
+              "kind": "file",
+              "type": "file",
+              "value_type": "text",
+              "relayable": true,
+              "role": "transcript"
+            }
+          },
+          "capabilities": {
+            "git": {
+              "enabled": true,
+              "required": false,
+              "managed_by": "runtime-harness",
+              "editable": true,
+              "save_scope": "node-definition",
+              "description": "Persist this node's workspace outputs to the current Instance repo.",
+              "paths": [
+                "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+                "raw/youtube-deep-research/{pipeline_id}/raw/**"
+              ]
+            },
+            "telegram": {
+              "enabled": true,
+              "required": false,
+              "managed_by": "runtime-harness",
+              "editable": true,
+              "save_scope": "node-definition",
+              "description": "Send progress notifications through the current Instance Telegram config.",
+              "trigger": "stage-lifecycle",
+              "triggers": [
+                "start",
+                "done",
+                "failed"
+              ]
+            }
+          }
+        },
+        "youtube-fetch": {
+          "title": "YouTube 元数据获取",
+          "skill": "sop-youtube-fetch",
+          "mode": "blocking",
+          "needs": [],
+          "inputs": {
+            "source_url": {
+              "from": "context.source_url",
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "url"
+            }
+          },
+          "optional_inputs": {},
+          "outputs": {
+            "source_url": {
+              "from": "context.source_url",
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "url",
+              "relayable": true
+            },
+            "metadata_file": {
+              "from": "context.stage_b_fetch.meta_file",
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "relayable": true
+            }
+          },
+          "capabilities": {}
+        }
+      },
+      "edges": [
+        {
+          "id": "edge-youtube-fetch-to-youtube-deep-research",
+          "from": "youtube-fetch",
+          "to": "youtube-deep-research",
+          "relay": {
+            "intent": {
+              "title": "将视频地址交给深度研究节点",
+              "brief": "下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。"
+            },
+            "bindings": [
+              {
+                "target_input": "source_url",
+                "required": true,
+                "source": {
+                  "node": "youtube-fetch",
+                  "output": "source_url",
+                  "extractor": {
+                    "id": "direct-url",
+                    "kind": "direct"
+                  }
+                }
+              }
+            ],
+            "resolver": {
+              "strategy": "explicit_first",
+              "fallback": "block"
+            },
+            "validation": {
+              "on_missing_required": "block",
+              "on_multiple_candidates": "needs_review",
+              "on_type_mismatch": "block"
+            }
+          }
+        },
+        {
+          "id": "edge-youtube-fetch-title-to-tg-notify",
+          "from": "youtube-fetch",
+          "to": "tg-notify",
+          "relay": {
+            "intent": {
+              "title": "将视频标题作为通知内容",
+              "brief": "这条边只用于测试或自定义工作流，将 metadata_file 中的视频标题提取成 Telegram 文本消息。"
+            },
+            "bindings": [
+              {
+                "target_input": "message",
+                "required": true,
+                "source": {
+                  "node": "youtube-fetch",
+                  "output": "metadata_file",
+                  "extractor": {
+                    "id": "metadata-title",
+                    "kind": "json_path",
+                    "path": "$.title"
+                  }
+                }
+              }
+            ],
+            "resolver": {
+              "strategy": "explicit_first",
+              "fallback": "needs_review"
+            },
+            "validation": {
+              "on_missing_required": "block",
+              "on_multiple_candidates": "needs_review",
+              "on_type_mismatch": "block"
+            }
+          }
+        },
+        {
+          "id": "edge-youtube-deep-research-to-wiki-build",
+          "from": "youtube-deep-research",
+          "to": "wiki-build",
+          "relay": {
+            "intent": {
+              "title": "将深度研究产物交给 Wiki 构建节点",
+              "brief": "将 analysis_file 作为 Wiki 构建的 deep_research 补充材料；transcript_file 可在自定义边中作为补充上下文。"
+            },
+            "bindings": [
+              {
+                "target_input": "deep_research",
+                "required": false,
+                "source": {
+                  "node": "youtube-deep-research",
+                  "output": "analysis_file",
+                  "extractor": {
+                    "id": "direct-file",
+                    "kind": "direct"
+                  }
+                }
+              }
+            ],
+            "resolver": {
+              "strategy": "explicit_first",
+              "fallback": "needs_review"
+            },
+            "validation": {
+              "on_missing_required": "needs_review",
+              "on_multiple_candidates": "needs_review",
+              "on_type_mismatch": "needs_review"
+            }
+          }
+        }
+      ]
+    },
+    "relay_context_brief": "Edge: edge-youtube-fetch-to-youtube-deep-research (youtube-fetch -> youtube-deep-research)\nIntent: 将视频地址交给深度研究节点\nInstruction: 下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。\nBindings:\n- source_url -> source_url via direct-url; path=raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/outputs/files/source-url.txt",
+    "manual_inputs": {},
+    "required_inputs": [
+      {
+        "name": "source_url",
+        "source": "youtube-fetch.outputs.source_url",
+        "required": true,
+        "resolved": false,
+        "value": "node-run:node-run-youtube-fetch-20260622T134710-842f65",
+        "provenance": "node-run:node-run-youtube-fetch-20260622T134710-842f65",
+        "reason": "Source Node Run selected; the target input will be resolved from materialized relay outputs before execution.",
+        "source_node_run_id": "node-run-youtube-fetch-20260622T134710-842f65",
+        "source_output": "source_url",
+        "source_node": "youtube-fetch",
+        "target_input": "source_url",
+        "relay_mode": "selected_outputs",
+        "selected_outputs": [
+          "source_url"
+        ],
+        "resolution_state": "pending_materialization"
+      }
+    ],
+    "optional_inputs": [],
+    "resolved_inputs": [],
+    "pending_materialization_inputs": [
+      {
+        "name": "source_url",
+        "source": "youtube-fetch.outputs.source_url",
+        "required": true,
+        "resolved": false,
+        "value": "node-run:node-run-youtube-fetch-20260622T134710-842f65",
+        "provenance": "node-run:node-run-youtube-fetch-20260622T134710-842f65",
+        "reason": "Source Node Run selected; the target input will be resolved from materialized relay outputs before execution.",
+        "source_node_run_id": "node-run-youtube-fetch-20260622T134710-842f65",
+        "source_output": "source_url",
+        "source_node": "youtube-fetch",
+        "target_input": "source_url",
+        "relay_mode": "selected_outputs",
+        "selected_outputs": [
+          "source_url"
+        ],
+        "resolution_state": "pending_materialization"
+      }
+    ],
+    "missing_inputs": [],
+    "upstream_nodes": [
+      {
+        "node_id": "youtube-fetch",
+        "output": "source_url",
+        "source": "youtube-fetch.outputs.source_url"
+      }
+    ],
+    "available_existing_runs": [
+      {
+        "pipeline_id": "node-run-wiki-build-20260622T135212-cc0bec",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T13:55:35Z",
+        "nodes": {
+          "wiki-build": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260622T134854-341d02",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T13:51:09Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-fetch-20260622T134710-842f65",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T13:47:52Z",
+        "nodes": {
+          "youtube-fetch": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260622T111234Z-a32a89",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T11:14:42Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-fetch-20260622T111013Z-1c2b4d",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T11:10:53Z",
+        "nodes": {
+          "youtube-fetch": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-wiki-build-20260622T104220-5a3066",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T10:45:53Z",
+        "nodes": {
+          "wiki-build": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-wiki-build-20260622T102610-5a3066",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T10:28:53Z",
+        "nodes": {
+          "wiki-build": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260622T102318-ecb0ee",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T10:25:14Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260622T091425Z-6a0670",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T09:17:29Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-fetch-20260622T083527Z-cfe243",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T08:36:00Z",
+        "nodes": {
+          "youtube-fetch": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-wiki-build-20260622T081128-775577",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T08:17:12Z",
+        "nodes": {
+          "wiki-build": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260622T080753-a589d3",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T08:10:17Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-fetch-20260622T080623-03ff23",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T08:06:57Z",
+        "nodes": {
+          "youtube-fetch": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-fetch-20260622T080125-03ff23",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T08:02:17Z",
+        "nodes": {
+          "youtube-fetch": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-wiki-build-20260622T054648Z-9b9c26",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T05:49:36Z",
+        "nodes": {
+          "wiki-build": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-wiki-build-relay-io-protocol-20260622T030602Z",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T03:09:42Z",
+        "nodes": {
+          "wiki-build": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-io-protocol-20260622T030240Z",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T03:04:14Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-wiki-build-20260622T020106-142a90",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T02:02:17Z",
+        "nodes": {
+          "wiki-build": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-wiki-build-20260622T015636-142a90",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T01:58:40Z",
+        "nodes": {
+          "wiki-build": "done",
+          "tg-notify": "done"
+        },
+        "satisfies_upstream": false
+      },
+      {
+        "pipeline_id": "node-run-wiki-build-20260622T015552-bd5818",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T02:00:11Z",
+        "nodes": {
+          "wiki-build": "failed"
+        },
+        "satisfies_upstream": false
+      }
+    ],
+    "side_effects": {
+      "writes_workspace": true,
+      "git_write": true,
+      "telegram": true,
+      "external_api": true,
+      "llm": false,
+      "skill": "sop-youtube-deep-research",
+      "default_mode": "preflight",
+      "real_execution_enabled": true
+    },
+    "actions": {
+      "preflight": {
+        "method": "POST",
+        "path": "/api/sop/wiki-sop-new-instance/nodes/youtube-deep-research/tests",
+        "destructive": false,
+        "enabled": true
+      },
+      "real_execution": {
+        "enabled": true,
+        "reason": "Standard stage wrapper is available for real Node Run execution."
+      }
+    },
+    "status": "ready",
+    "runtime_id": "youtube-wiki",
+    "runtime_channel_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc",
+    "workflow_name": "YouTube Wiki SOP",
+    "resolved_config": {
+      "telegram": {
+        "capability": "telegram",
+        "label": "Telegram progress notification",
+        "enabled": true,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "status": "ready",
+        "token_env": "YOU***KEN",
+        "token": {
+          "key": "YOU***KEN",
+          "label": "Telegram Bot Token",
+          "required": false,
+          "present": true,
+          "source": "runtime-env-file:YOUTUBE_WIKI_TG_TOKEN",
+          "masked_value": "787***JDA",
+          "value": null
+        },
+        "chat_id": {
+          "key": "YOU***_ID",
+          "label": "Telegram Chat ID",
+          "required": false,
+          "present": true,
+          "source": "runtime-env-file:YOUTUBE_WIKI_TG_CHAT_ID",
+          "masked_value": "693***500",
+          "value": "6938920500"
+        },
+        "probe": {
+          "enabled": true,
+          "explicit_confirmation_required": true,
+          "side_effect": "sends a Telegram test message"
+        }
+      },
+      "github": {
+        "capability": "git",
+        "label": "GitHub workspace persistence",
+        "enabled": true,
+        "required": false,
+        "status": "ready",
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "paths": [
+          "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+          "raw/youtube-deep-research/{pipeline_id}/raw/**"
+        ],
+        "token": {
+          "key": "GIT***KEN",
+          "label": "GitHub Token",
+          "required": false,
+          "present": true,
+          "source": "runtime-env-file:GITHUB_TOKEN",
+          "masked_value": "ghp***qtP",
+          "value": null
+        }
+      },
+      "youtube_research_worker": {
+        "capability": "youtube-research-worker",
+        "label": "YouTube Deep Research Worker",
+        "status": "ready",
+        "base_url": {
+          "key": "YOU***URL",
+          "label": "Worker URL",
+          "required": true,
+          "present": true,
+          "source": "runtime-env-file:YOUTUBE_RESEARCH_WORKFLOW_URL",
+          "masked_value": "https://youtube-research-workflow.hb67egcim4.workers.dev",
+          "value": "https://youtube-research-workflow.hb67egcim4.workers.dev"
+        },
+        "token": {
+          "key": "YOU***KEN",
+          "label": "Worker API Token",
+          "required": true,
+          "present": true,
+          "source": "runtime-env-file:YOUTUBE_RESEARCH_WORKFLOW_TOKEN",
+          "masked_value": "yt-***026",
+          "value": null
+        },
+        "timeout": {
+          "key": "YOU***OUT",
+          "label": "Worker Poll Timeout",
+          "required": false,
+          "present": false,
+          "source": "default",
+          "value": 1200,
+          "unit": "seconds"
+        },
+        "poll_interval": {
+          "key": "YOU***VAL",
+          "label": "Worker Poll Interval",
+          "required": false,
+          "present": false,
+          "source": "default",
+          "value": 10,
+          "unit": "seconds"
+        },
+        "missing": []
+      }
+    },
+    "runtime_context": {
+      "runtime_id": "youtube-wiki",
+      "channel_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc",
+      "spi_base_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc/api/sop",
+      "registry_path": "/root/.sop/registry.json",
+      "health": {
+        "spi": "ok",
+        "registry": "ok",
+        "channel": "ok",
+        "instances": "ok"
+      },
+      "hermes_webhook_url": ""
+    },
+    "instance_context": {
+      "instance_id": "wiki-sop-new-instance",
+      "status": "ready",
+      "repo": "skkeoriw/wiki-sop-new-instance",
+      "repo_branch": "main",
+      "wiki_local_path": "/root/wiki/wiki-sop-new-instance",
+      "workspace_status": "ready",
+      "registry_status": "enabled",
+      "run_index_path": "/root/wiki/wiki-sop-new-instance/.sop/run-index.sqlite",
+      "run_index_status": "ready",
+      "capabilities": {
+        "workspace": "ok",
+        "sop_yaml": "ok",
+        "run_index": "ok",
+        "git": "configured",
+        "telegram": "unknown",
+        "notebooklm": "unknown",
+        "vertex": "unknown",
+        "tunnel": "ok"
+      }
+    },
+    "definition_defaults": {
+      "git": {
+        "enabled": true,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "editable": true,
+        "save_scope": "node-definition",
+        "description": "Persist this node's workspace outputs to the current Instance repo.",
+        "paths": [
+          "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+          "raw/youtube-deep-research/{pipeline_id}/raw/**"
+        ]
+      },
+      "telegram": {
+        "enabled": true,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "editable": true,
+        "save_scope": "node-definition",
+        "description": "Send progress notifications through the current Instance Telegram config.",
+        "trigger": "stage-lifecycle",
+        "triggers": [
+          "start",
+          "done",
+          "failed"
+        ]
+      }
+    },
+    "capability_overrides": {
+      "git": {
+        "enabled": true,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "paths": [
+          "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+          "raw/youtube-deep-research/{pipeline_id}/raw/**"
+        ]
+      },
+      "telegram": {
+        "enabled": true,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run"
+      }
+    },
+    "definition_scope_reports": {
+      "instance_override": {
+        "status": "unchanged",
+        "changed": {}
+      },
+      "project_default_request": {
+        "status": "skipped"
+      }
+    },
+    "config_sources": {
+      "runtime_env_file": "/root/.agent-brain-plugins.env",
+      "runtime_env_file_present": true,
+      "runtime_env_file_keys": [
+        "BRIDGE_PORT",
+        "GITHUB_TOKEN",
+        "GOOGLE_PROJECT_ID",
+        "HERMES_WEBHOOK_PORT",
+        "HERMES_WEBHOOK_TOKEN",
+        "NOTEBOOKLM_BRIDGE_TOKEN",
+        "NOTEBOOKLM_BRIDGE_URL",
+        "NOTEBOOKLM_CLIENT_ID",
+        "VERTEX_LOCATION",
+        "WEBHOOK_PUBLIC_HOST",
+        "WIKI_DEEPSEEK_MODEL",
+        "WIKI_LLM_PROVIDER",
+        "WIKI_VERTEX_MODEL",
+        "YOUTUBE_CONTENT_API_TOKEN",
+        "YOUTUBE_CONTENT_API_URL",
+        "YOUTUBE_RESEARCH_WORKFLOW_TOKEN",
+        "YOUTUBE_RESEARCH_WORKFLOW_URL",
+        "YOUTUBE_WIKI_TG_CHAT_ID",
+        "YOUTUBE_WIKI_TG_TOKEN"
+      ],
+      "node_run_override_keys": [],
+      "capability_override_keys": [
+        "git",
+        "telegram"
+      ],
+      "settings_backend": "file",
+      "instance_settings_keys": [],
+      "runtime_settings_keys": [],
+      "global_settings_keys": [],
+      "precedence": [
+        "node-run-overrides",
+        "instance-settings",
+        "runtime-settings",
+        "global-settings",
+        "runtime-env-file",
+        "bridge-env",
+        "defaults"
+      ]
+    },
+    "capability_probes": {
+      "telegram": {
+        "capability": "telegram",
+        "label": "Telegram progress notification",
+        "status": "ready",
+        "required": false,
+        "enabled": true
+      },
+      "github": {
+        "capability": "git",
+        "label": "GitHub workspace persistence",
+        "status": "ready",
+        "required": false,
+        "enabled": true
+      },
+      "youtube_research_worker": {
+        "capability": "youtube-research-worker",
+        "label": "YouTube Deep Research Worker",
+        "status": "ready",
+        "required": false,
+        "enabled": true
+      }
+    },
+    "fix_suggestions": [],
+    "node_capabilities": {
+      "git": {
+        "enabled": true,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "editable": true,
+        "save_scope": "node-definition",
+        "description": "Persist this node's workspace outputs to the current Instance repo.",
+        "paths": [
+          "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+          "raw/youtube-deep-research/{pipeline_id}/raw/**"
+        ]
+      },
+      "telegram": {
+        "enabled": true,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "editable": true,
+        "save_scope": "node-definition",
+        "description": "Send progress notifications through the current Instance Telegram config.",
+        "trigger": "stage-lifecycle",
+        "triggers": [
+          "start",
+          "done",
+          "failed"
+        ]
+      },
+      "sse": {
+        "enabled": true,
+        "required": true
+      }
+    },
+    "inner_steps": [
+      {
+        "id": "pre",
+        "title": "执行前",
+        "status": "done",
+        "summary": "Node Run 上下文、输入和运行配置已准备，并交给 stage runner on_start。",
+        "started_at": "2026-06-24T04:31:41.067742+00:00",
+        "finished_at": "",
+        "detail": {
+          "mode": "dry-run",
+          "input_source": "existing-node-run",
+          "resolved_inputs": [],
+          "pending_materialization_inputs": [
+            {
+              "name": "source_url",
+              "source": "youtube-fetch.outputs.source_url",
+              "required": true,
+              "resolved": false,
+              "value": "node-run:node-run-youtube-fetch-20260622T134710-842f65",
+              "provenance": "node-run:node-run-youtube-fetch-20260622T134710-842f65",
+              "reason": "Source Node Run selected; the target input will be resolved from materialized relay outputs before execution.",
+              "source_node_run_id": "node-run-youtube-fetch-20260622T134710-842f65",
+              "source_output": "source_url",
+              "source_node": "youtube-fetch",
+              "target_input": "source_url",
+              "relay_mode": "selected_outputs",
+              "selected_outputs": [
+                "source_url"
+              ],
+              "resolution_state": "pending_materialization"
+            }
+          ],
+          "missing_inputs": [],
+          "config_status": "done",
+          "command": [],
+          "stage_hook": "on_start"
+        }
+      },
+      {
+        "id": "doing",
+        "title": "执行中",
+        "status": "skipped",
+        "summary": "当前模式未执行真实业务逻辑。",
+        "started_at": "",
+        "finished_at": "",
+        "elapsed_ms": null,
+        "detail": {
+          "command": [],
+          "returncode": null,
+          "timed_out": false,
+          "log_path": "",
+          "stdout_tail": "",
+          "stderr_tail": ""
+        }
+      },
+      {
+        "id": "post",
+        "title": "执行后",
+        "status": "skipped",
+        "summary": "stage_runner on_done/on_failed、输出校验、Git/TG capability 和 bridge 结果收集已归档。",
+        "started_at": "",
+        "finished_at": "2026-06-24T04:31:41.081624+00:00",
+        "detail": {
+          "stage_hooks": [
+            "on_done/on_failed",
+            "forward_next"
+          ],
+          "validation": {},
+          "actual_outputs": {},
+          "business_artifact_count": 0,
+          "capabilities": {},
+          "forward_next": ""
+        }
+      }
+    ],
+    "real_execution": {}
+  }
+}
