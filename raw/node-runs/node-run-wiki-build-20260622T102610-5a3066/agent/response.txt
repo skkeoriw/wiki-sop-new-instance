@@ -1,0 +1,21 @@
+**Wiki build complete. Status: SUCCESS ✓**
+
+**Execution:** `bash run_wiki_build.sh /root/wiki/wiki-sop-new-instance node-run-wiki-build-20260622T102610-5a3066 node-run-wiki-build-20260622T102610-5a3066`
+- Exit code 0 — wrapper ran synchronously to completion
+- Duration: 115s | LLM calls: 5 | Total tokens: 15,316
+
+**Input:** 2 reports from `youtube-deep-research` (video `dQw4w9WgXcQ`)
+- 0001.md — deep research analysis of Never Gonna Give You Up
+- 0002.txt — full transcript
+
+**Outputs** — all declared artifacts verified:
+
+| Artifact | Path | Status |
+|---|---|---|
+| Output manifest | `outputs/files/manifest.json` | ✓ (3 items) |
+| Receipt | `agent/receipt.json` | ✓ written |
+| index.md | `outputs/files/index.md` | ✓ exists |
+| Source page 1 | `wiki/sources/YouTube深度研究补充-神曲重温-Never-Gonna-Give-You-Up-完整歌词版.md` | ✓ 4,974 chars |
+| Source page 2 | `wiki/sources/瑞克-阿斯特利-永不放弃你-完整歌词.md` | ✓ 3,327 chars |
+
+The wrapper noted this is an isolated node run — downstream workflow nodes are not triggered.

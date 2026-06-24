@@ -1,0 +1,34 @@
+{
+  "node_run_id": "node-run-wiki-build-20260622T054648Z-9b9c26",
+  "mode": "real-node",
+  "input_source": "existing-node-run",
+  "pipeline_id": "",
+  "source_node_run_id": "node-run-youtube-deep-research-io-protocol-20260622T030240Z",
+  "manual_inputs": {},
+  "overrides": {},
+  "capability_overrides": {
+    "git": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run",
+      "paths": []
+    },
+    "telegram": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run"
+    }
+  },
+  "retry_of": "",
+  "_definition_scope_reports": {
+    "instance_override": {
+      "status": "unchanged",
+      "changed": {}
+    },
+    "project_default_request": {
+      "status": "skipped"
+    }
+  }
+}

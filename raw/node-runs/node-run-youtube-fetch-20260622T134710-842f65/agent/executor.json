@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "executor": "hermes",
+  "requested_skill": "sop-youtube-fetch",
+  "node_id": "youtube-fetch",
+  "node_run_id": "node-run-youtube-fetch-20260622T134710-842f65",
+  "runtime_id": "runtime-152-32-214-95",
+  "instance_id": "test-instance",
+  "workflow_id": "youtube-research-wiki",
+  "template_source": "default",
+  "template_version": "hermes-agent-executor.v1",
+  "request_path": "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/agent/request.md",
+  "response_path": "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/agent/response.txt",
+  "receipt_path": "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/agent/receipt.json",
+  "input_manifest_path": "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/inputs/sources/manifest.json",
+  "output_manifest_path": "raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/outputs/files/manifest.json",
+  "stage_command": [
+    "bash",
+    "/root/agent-brain-plugins/youtube-wiki/skills/sop-youtube-fetch/scripts/run_youtube_fetch.sh",
+    "/root/wiki/wiki-sop-new-instance",
+    "node-run-youtube-fetch-20260622T134710-842f65",
+    "node-run-youtube-fetch-20260622T134710-842f65"
+  ],
+  "stage_command_preview": "bash /root/agent-brain-plugins/youtube-wiki/skills/sop-youtube-fetch/scripts/run_youtube_fetch.sh /root/wiki/wiki-sop-new-instance node-run-youtube-fetch-20260622T134710-842f65 node-run-youtube-fetch-20260622T134710-842f65",
+  "created_at": "2026-06-22T13:47:11.407837+00:00"
+}

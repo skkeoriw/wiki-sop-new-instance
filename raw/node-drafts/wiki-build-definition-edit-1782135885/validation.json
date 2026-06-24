@@ -1,0 +1,14 @@
+{
+  "schema_id": "node-draft-schema/v1",
+  "status": "passed",
+  "errors": [],
+  "missing_fields": [],
+  "production_dag_changed": false,
+  "change_count": 3,
+  "targets": {
+    "runtime_sop_file": "/root/wiki/wiki-sop-new-instance/sop.yaml",
+    "project_skill_node_yaml": "/root/agent-brain-plugins/youtube-wiki/skills/sop-wiki-build/node.yaml",
+    "project_template_sop_yaml": "/root/agent-brain-plugins/youtube-wiki/templates/wiki-repo/sop.yaml",
+    "save_owner": "agent-brain-plugins"
+  }
+}

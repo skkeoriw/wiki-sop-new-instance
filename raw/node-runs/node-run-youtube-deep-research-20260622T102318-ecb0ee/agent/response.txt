@@ -1,0 +1,28 @@
+执行完成。以下是摘要：
+
+## sop-youtube-deep-research — 完成 ✅
+
+**节点运行 ID:** `node-run-youtube-deep-research-20260622T102318-ecb0ee`
+
+| 步骤 | 状态 | 用时 |
+|-------|--------|------|
+| stage_runner on_start | ✓ | — |
+| YouTube 研究工作流 API | ✓ job=`575ae718-7306-4535-b9b0-8eed88ac20cc` | ~75 秒（轮询：pending → downloading → transcribing → translating → analyzing → completed） |
+| 下载产出物 | ✓ 已保存 7 个 raw 文件 + 2 个 output 文件 | — |
+| 更新 pipeline-context.json | ✓ `stage_deep_research` 已更新新作业 ID | — |
+| stage_runner on_done | ✓ | — |
+| stage_runner forward_next | ✓（提示：独立节点运行 — 未启动下游节点） | — |
+
+**写入的产出物：**
+
+**output manifest** — `raw/node-runs/.../outputs/files/manifest.json`
+- `analysis.md`（10,380 字节 — 中文深度分析，含摘要、关键要点、clip 建议）
+- `transcript.txt`（1,857 字节 — 转录文本）
+
+**receipt** — `raw/node-runs/.../agent/receipt.json`
+
+**pipeline context** — `raw/pipeline-context.json` 已用新作业 `575ae718-7306-4535-b9b0-8eed88ac20cc` 更新
+
+**raw 产出物：** 7 个文件（start.json、status.json、transcript.json、transcript.srt、transcript.txt、transcript.vtt、worker-analysis.md）
+
+所有声明的输出契约均已满足。

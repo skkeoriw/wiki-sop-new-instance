@@ -1,0 +1,34 @@
+{
+  "node_run_id": "node-run-youtube-fetch-20260622T074259Z-fc321c",
+  "mode": "real-node",
+  "input_source": "generated-fixture",
+  "pipeline_id": "",
+  "source_node_run_id": "",
+  "manual_inputs": {},
+  "overrides": {},
+  "capability_overrides": {
+    "git": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run",
+      "paths": []
+    },
+    "telegram": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run"
+    }
+  },
+  "retry_of": "",
+  "_definition_scope_reports": {
+    "instance_override": {
+      "status": "unchanged",
+      "changed": {}
+    },
+    "project_default_request": {
+      "status": "skipped"
+    }
+  }
+}

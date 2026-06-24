@@ -1,0 +1,19 @@
+**Execution complete — youtube-deep-research succeeded.**
+
+**Job:** `e4e48cd4-2ec4-4901-af32-19a38a896c7e`  
+**Video:** `https://www.youtube.com/watch?v=dQw4w9WgXcQ`  
+**Duration:** 1m32s  
+**Status chain:** pending → downloading → transcribing → translating → analyzing → completed
+
+**Outputs written:**
+
+| File | Path | Size |
+|------|------|------|
+| Analysis | `.../outputs/files/analysis.md` | 11,395 B |
+| Transcript | `.../outputs/files/transcript.txt` | 1,857 B |
+| Output manifest | `.../outputs/files/manifest.json` | ✅ — 2 items (analysis_file, transcript_file) |
+| Receipt | `.../agent/receipt.json` | ✅ |
+| Worker raw data | `raw/youtube-deep-research/.../raw/` | status.json, start.json, worker-analysis.md, transcript files |
+| Pipeline context | `raw/pipeline-context.json` | Updated with `stage_deep_research` block |
+
+**Wrapper lifecycle:** `on_start` → processor (exit 0) → `on_done` → `forward_next` (isolated node run, no downstream trigger).

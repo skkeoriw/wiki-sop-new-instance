@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "kind": "input",
+  "node_run_id": "node-run-wiki-build-20260622T135212-cc0bec",
+  "node_id": "wiki-build",
+  "source_mode": "existing-node-run",
+  "created_at": "2026-06-22T13:52:13Z",
+  "items": [
+    {
+      "path": "0001.md",
+      "source": "node-run",
+      "value_type": "markdown",
+      "source_path": "raw/node-runs/node-run-youtube-deep-research-20260622T134854-341d02/outputs/files/analysis.md",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-20260622T134854-341d02",
+      "source_output": "analysis_file",
+      "input_name": "reports",
+      "target_input": "reports",
+      "value_preview": "# YouTube 深度研究补充：Rick Astley 传世神曲：永不放弃的深情告白\n\n## 基本信息\n\n- YouTube: https://www.youtube.com/watch?v=dQw4w9WgXcQ\n- Job ID: 70d0a258-a76a-4b82-ab02-84e2d713e532\n- Status: completed\n- Detected language: en\n- Model: gateway\n\n## 摘要\n\n这首经典情歌通过反复吟唱“Never gonna give you up”等坚定承诺，表达了歌手对爱人忠贞不渝的情感。歌词中既坦露了内心的渴望，也暗示了双方早已心知肚明的默契，旋律朗朗上口，成为传世金曲。\n\n## 关键要点\n\n- 歌手反复强调永不放弃、永不令对方失望的深情承诺\n- 两人彼此熟悉，但对方羞于表达，内心却清楚彼此的感情\n- 歌曲以直白的倾诉，希望对方理解自己的心意\n- 副歌部分简单重复的歌词与强劲的节奏极具记忆点\n- 因网络恶搞“Rickrolling”而再度风靡全球，成为经典梗\n\n## Clip 建议\n\n- {'start': '00:00:18', 'end': '00:00:42', 'reason': '这段独白引入歌曲动机，情感铺垫充分，适合作为短视频预告或引入片段的切片。'}\n- {'start': '00:00:42', 'end': '00:01:00', 'reason': '歌曲最核心的副歌部分，节奏强劲、歌词经典，极具传播力，适合单独传播或作为卡点视频。'}\n- {'start': '00:01:24', 'end': '00:01:41', 'reason': '第二次副歌重复，情绪更饱满，配合画面舞蹈动作，适合剪辑高光片段或舞蹈模仿。'}\n- {'start': '00:02:01', 'end': '00:02:15', 'reason': '间奏中重复“Give you up”的段落，节奏感强且带有留白，适合创意混剪或表情包素材。'}\n- {'start': '00:03:14', 'end': '00:03:31', 'reason': '结尾变奏部分将歌词改为“Never gonna tell you why”，制造意外感，适合作为对比片段或谜题式传播。'}\n\n## 文件链接\n\n",
+      "materialized_path": "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/inputs/sources/0001.md"
+    },
+    {
+      "path": "0002.txt",
+      "source": "node-run",
+      "value_type": "text",
+      "source_path": "raw/node-runs/node-run-youtube-deep-research-20260622T134854-341d02/outputs/files/transcript.txt",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-20260622T134854-341d02",
+      "source_output": "transcript_file",
+      "input_name": "reports",
+      "target_input": "reports",
+      "value_preview": "We're no strangers to love You know the rules And so do I Have no commitments what I'm thinking of You wouldn't get this from any other guy I just wanna tell you how I'm feeling Gotta make you understand Never gonna give you up Never gonna let you down Never gonna run around and desert you Never gonna make you cry Never gonna say goodbye Never gonna tell a lie And hurt you We've known each other For so long Your heart's been aching but You're too shy to say it Inside we both know what's been Going on We know the game and we're Gonna play it And if you ask me how I'm feeling Don't tell me you're too Blind to see Never gonna give you up Never gonna let you down Never gonna run around and desert you Never gonna make you cry Never gonna say goodbye Never gonna tell a lie And hurt you Never gonna give you up Never gonna let you down Never gonna run around and desert you Never gonna make you cry Never gonna say goodbye Never gonna tell a lie And hurt you Give you up Give you up Give you up N",
+      "materialized_path": "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/inputs/sources/0002.txt"
+    }
+  ],
+  "source_node_run_id": "node-run-youtube-deep-research-20260622T134854-341d02",
+  "relay_mode": "selected_outputs",
+  "selected_outputs": [
+    "analysis_file",
+    "transcript_file"
+  ],
+  "matched_outputs": [
+    "analysis_file",
+    "transcript_file"
+  ],
+  "relay_mappings": [
+    {
+      "source_output": "analysis_file",
+      "target_input": "reports",
+      "resolver": ""
+    },
+    {
+      "source_output": "transcript_file",
+      "target_input": "reports",
+      "resolver": ""
+    }
+  ],
+  "input_validation": {
+    "status": "passed",
+    "errors": [],
+    "resolved_values": {
+      "reports": [
+        "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/inputs/sources/0001.md",
+        "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/inputs/sources/0002.txt"
+      ]
+    },
+    "resolutions": [
+      {
+        "input": "reports",
+        "source_outputs": [
+          "analysis_file",
+          "transcript_file"
+        ],
+        "materialized_paths": [
+          "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/inputs/sources/0001.md",
+          "raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/inputs/sources/0002.txt"
+        ]
+      }
+    ]
+  }
+}

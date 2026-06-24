@@ -1,0 +1,24 @@
+## ✅ YouTube Fetch — Complete
+
+**Node Run:** `node-run-youtube-fetch-20260622T111013Z-1c2b4d`
+**Video:** `dQw4w9WgXcQ` — *Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)*
+**Exit Code:** `0`
+**Duration:** 2s
+
+### What was produced
+
+| Artifact | Path |
+|---|---|
+| Metadata JSON | `raw/youtube-metadata/dQw4w9WgXcQ.json` |
+| Output manifest | `raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/outputs/files/manifest.json` |
+| Metadata copy in outputs | `raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/outputs/files/metadata.json` |
+| Source URL copy | `raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/outputs/files/source-url.txt` |
+| Receipt | `raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/agent/receipt.json` |
+| Executor record | `raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/agent/executor.json` |
+
+### Stage runner actions
+
+1. **on_start** — logged start with run ID & pipeline ID
+2. **fetch_youtube_metadata.py** — fetched video metadata, wrote to `raw/youtube-metadata/dQw4w9WgXcQ.json`, updated `pipeline-context.json`, committed & pushed to git, sent TG notification
+3. **on_done** — marked the stage as complete
+4. **forward_next** — skipped (isolated mode; no downstream node auto-triggered)

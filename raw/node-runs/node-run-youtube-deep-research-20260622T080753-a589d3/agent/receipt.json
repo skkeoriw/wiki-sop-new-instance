@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "executor": "hermes",
+  "requested_skill": "sop-youtube-deep-research",
+  "executed_skill": "sop-youtube-deep-research",
+  "node_id": "youtube-deep-research",
+  "node_run_id": "node-run-youtube-deep-research-20260622T080753-a589d3",
+  "request_id": "node-run-youtube-deep-research-20260622T080753-a589d3",
+  "status": "done",
+  "returncode": 0,
+  "timed_out": false,
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  },
+  "input_manifest": "raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/inputs/sources/manifest.json",
+  "output_manifest": "raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/files/manifest.json",
+  "started_at": "2026-06-22T08:07:54.908845+00:00",
+  "finished_at": "2026-06-22T08:11:15.916778+00:00",
+  "legacy_fallback": false,
+  "error": ""
+}

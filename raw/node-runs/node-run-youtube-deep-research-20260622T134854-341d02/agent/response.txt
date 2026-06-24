@@ -1,0 +1,26 @@
+**sop-youtube-deep-research execution completed successfully.** ✅
+
+**Summary**
+
+| Field | Value |
+|---|---|
+| Source URL | `https://www.youtube.com/watch?v=dQw4w9WgXcQ` |
+| Job ID | `70d0a258-a76a-4b82-ab02-84e2d713e532` |
+| Exit Code | 0 |
+| Duration | 1m 40s |
+| Downstream | forward_next called (isolated node run — downstream not started) |
+
+**Output artifacts (via output manifest):**
+
+| Path | Size | Type |
+|---|---|---|
+| `raw/youtube-deep-research/.../outputs/analysis.md` | 12K | markdown (deep research analysis) |
+| `raw/youtube-deep-research/.../outputs/transcript.txt` | 1.8K | text (transcript) |
+
+**Raw worker artifacts also saved:**
+`start.json`, `status.json`, `worker-analysis.md`, `transcript.txt`, `transcript.srt`, `transcript.vtt`, `transcript.json`
+
+**State files written:**
+- `outputs/files/manifest.json` ✓
+- `agent/receipt.json` ✓
+- `agent/executor.json` ✓

@@ -1,0 +1,37 @@
+{
+  "node_run_id": "node-run-youtube-deep-research-20260622T091425Z-6a0670",
+  "mode": "real-node",
+  "input_source": "existing-node-run",
+  "pipeline_id": "",
+  "source_node_run_id": "node-run-youtube-fetch-20260622T083527Z-cfe243",
+  "manual_inputs": {},
+  "overrides": {},
+  "capability_overrides": {
+    "git": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run",
+      "paths": [
+        "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+        "raw/youtube-deep-research/{pipeline_id}/raw/**"
+      ]
+    },
+    "telegram": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run"
+    }
+  },
+  "retry_of": "",
+  "_definition_scope_reports": {
+    "instance_override": {
+      "status": "unchanged",
+      "changed": {}
+    },
+    "project_default_request": {
+      "status": "skipped"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "kind": "input",
+  "node_run_id": "node-run-youtube-fetch-20260622T111013Z-1c2b4d",
+  "node_id": "youtube-fetch",
+  "source_mode": "generated-fixture",
+  "created_at": "2026-06-22T11:10:16Z",
+  "items": [
+    {
+      "path": "0001.txt",
+      "source": "generated-fixture",
+      "value_type": "text",
+      "source_path": "",
+      "source_node": "",
+      "source_run_id": "",
+      "source_output": "",
+      "input_name": "source_url",
+      "target_input": "source_url",
+      "value_preview": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "materialized_path": "raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/inputs/sources/0001.txt"
+    }
+  ],
+  "selected_outputs": [],
+  "matched_outputs": []
+}

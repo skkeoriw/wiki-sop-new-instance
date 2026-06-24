@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "kind": "input",
+  "node_run_id": "node-run-youtube-deep-research-contract-negative-20260622T125659Z",
+  "node_id": "youtube-deep-research",
+  "source_mode": "existing-node-run",
+  "created_at": "2026-06-22T12:56:59Z",
+  "items": [
+    {
+      "path": "0001.txt",
+      "source": "node-run",
+      "value_type": "text",
+      "source_path": "raw/node-runs/node-run-youtube-deep-research-20260622T111234Z-a32a89/outputs/files/transcript.txt",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-20260622T111234Z-a32a89",
+      "source_output": "transcript_file",
+      "input_name": "source_url",
+      "target_input": "source_url",
+      "value_preview": "We're no strangers to love You know the rules And so do I Have no commitments what I'm thinking of You wouldn't get this from any other guy I just wanna tell you how I'm feeling Gotta make you understand Never gonna give you up Never gonna let you down Never gonna run around and desert you Never gonna make you cry Never gonna say goodbye Never gonna tell a lie And hurt you We've known each other For so long Your heart's been aching but You're too shy to say it Inside we both know what's been Going on We know the game and we're Gonna play it And if you ask me how I'm feeling Don't tell me you're too Blind to see Never gonna give you up Never gonna let you down Never gonna run around and desert you Never gonna make you cry Never gonna say goodbye Never gonna tell a lie And hurt you Never gonna give you up Never gonna let you down Never gonna run around and desert you Never gonna make you cry Never gonna say goodbye Never gonna tell a lie And hurt you Give you up Give you up Never gonna g",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-contract-negative-20260622T125659Z/inputs/sources/0001.txt"
+    }
+  ],
+  "source_node_run_id": "node-run-youtube-deep-research-20260622T111234Z-a32a89",
+  "relay_mode": "selected_outputs",
+  "selected_outputs": [
+    "transcript_file"
+  ],
+  "matched_outputs": [
+    "transcript_file"
+  ],
+  "relay_mappings": [
+    {
+      "source_output": "transcript_file",
+      "target_input": "source_url",
+      "resolver": "direct-url"
+    }
+  ],
+  "input_validation": {
+    "status": "failed",
+    "errors": [
+      {
+        "input": "source_url",
+        "reason": "resolved value is not a valid url",
+        "source_outputs": [
+          "transcript_file"
+        ]
+      }
+    ],
+    "resolved_values": {},
+    "resolutions": []
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "executor": "hermes",
+  "requested_skill": "sop-youtube-deep-research",
+  "executed_skill": "sop-youtube-deep-research",
+  "node_id": "youtube-deep-research",
+  "node_run_id": "node-run-youtube-deep-research-contract-negative-20260622T125659Z",
+  "request_id": "node-run-youtube-deep-research-contract-negative-20260622T125659Z",
+  "status": "failed",
+  "returncode": 2,
+  "timed_out": false,
+  "validation": {
+    "status": "failed",
+    "missing_outputs": [
+      "analysis_file",
+      "transcript_file"
+    ],
+    "unexpected_outputs": []
+  },
+  "input_manifest": "raw/node-runs/node-run-youtube-deep-research-contract-negative-20260622T125659Z/inputs/sources/manifest.json",
+  "output_manifest": "raw/node-runs/node-run-youtube-deep-research-contract-negative-20260622T125659Z/outputs/files/manifest.json",
+  "started_at": "2026-06-22T12:56:59.925099+00:00",
+  "finished_at": "2026-06-22T12:56:59.934356+00:00",
+  "legacy_fallback": false,
+  "error": "Required node inputs could not be resolved from the selected relay outputs."
+}

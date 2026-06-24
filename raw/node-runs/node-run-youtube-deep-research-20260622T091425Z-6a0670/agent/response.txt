@@ -1,0 +1,27 @@
+**Node execution complete.** Here's the summary:
+
+| Field | Value |
+|-------|-------|
+| Skill | `sop-youtube-deep-research` |
+| Run ID | `node-run-youtube-deep-research-20260622T091425Z-6a0670` |
+| Source URL | `https://www.youtube.com/watch?v=dQw4w9WgXcQ` |
+| Workflow Job ID | `39994ac7-b637-4230-aef2-4e4a19721b4a` |
+| Status | `completed` ✅ |
+| Duration | 2m04s (wrapper) / 124s (polling) |
+| Exit Code | 0 |
+
+**Outputs written:**
+
+1. **`raw/node-runs/node-run-youtube-deep-research-20260622T091425Z-6a0670/outputs/files/manifest.json`** — output manifest with 2 items:
+   - `analysis.md` (markdown) — YouTube deep research analysis with summary, key points, clip suggestions, and translated content
+   - `transcript.txt` (text) — full transcript
+
+2. **`raw/node-runs/node-run-youtube-deep-research-20260622T091425Z-6a0670/agent/receipt.json`** — execution receipt
+
+3. **`raw/youtube-deep-research/node-run-youtube-deep-research-20260622T091425Z-6a0670/outputs/`** — analysis + transcript
+
+4. **`raw/youtube-deep-research/node-run-youtube-deep-research-20260622T091425Z-6a0670/raw/`** — debug artifacts (start.json, status.json, transcript.json, etc.)
+
+5. **`raw/pipeline-context.json`** — updated with `stage_deep_research` block (worker files, chunks, raw files)
+
+The stage_runner noted this is an isolated node run, so `forward_next` did not cascade to downstream stages — that's expected per the runtime contract.

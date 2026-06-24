@@ -1,0 +1,24 @@
+## youtube-deep-research — Complete ✅
+
+**Command executed:**
+```
+bash /root/agent-brain-plugins/youtube-wiki/skills/sop-youtube-deep-research/scripts/run_youtube_deep_research.sh \
+  /root/wiki/wiki-sop-new-instance \
+  node-run-youtube-deep-research-20260622T080753-a589d3 \
+  node-run-youtube-deep-research-20260622T080753-a589d3
+```
+
+**Execution flow:**
+1. `stage_runner.on_start` — workspace initialized
+2. `youtube_deep_research.py` — submitted URL `https://www.youtube.com/watch?v=dQw4w9WgXcQ` to research worker
+3. Worker job `a4a19ce0-c372-46ad-a8bb-eebb7338a29a` progressed: pending → downloading → transcribing → translating → analyzing → **completed**
+4. `stage_runner.on_done` — completed in **1m41s**, exit code 0
+5. `stage_runner.forward_next` — noted isolated run (no downstream triggered)
+
+**Outputs written:**
+| Artifact | Path | Size |
+|---|---|---|
+| Output manifest | `.../outputs/files/manifest.json` | 1KB |
+| Analysis | `.../outputs/files/analysis.md` | 10.7KB |
+| Transcript | `.../outputs/files/transcript.txt` | 1.8KB |
+| Receipt | `.../agent/receipt.json` | ✅ written |

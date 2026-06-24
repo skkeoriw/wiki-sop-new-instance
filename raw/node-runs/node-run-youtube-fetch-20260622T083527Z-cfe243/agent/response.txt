@@ -1,0 +1,25 @@
+**Node Execution Complete — youtube-fetch (node-run-youtube-fetch-20260622T083527Z-cfe243)**
+
+**Status:** ✅ Success (exit code 0, 3 seconds)
+
+**What happened:**
+
+| Step | Result |
+|------|--------|
+| Wrapper executed | `run_youtube_fetch.sh` ran from the skill directory |
+| Source processed | `https://www.youtube.com/watch?v=dQw4w9WgXcQ` |
+| Metadata fetched | Video: *"Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)"* by Rick Astley |
+| Metadata written | `raw/youtube-metadata/dQw4w9WgXcQ.json` |
+| pipeline-context.json | Updated with run state |
+| Git push | Pushed OK |
+| forward_next | Not triggered (isolated run — no downstream nodes) |
+
+**Output artifacts:**
+
+| Path | Content |
+|------|---------|
+| `outputs/files/metadata.json` | YouTube metadata (title, author, published_at, thumbnail) |
+| `outputs/files/source-url.txt` | Source URL |
+| `outputs/files/manifest.json` | Output manifest (2 items) |
+| `agent/receipt.json` | Execution receipt (newly written) |
+| `raw/youtube-metadata/dQw4w9WgXcQ.json` | Canonical metadata store |

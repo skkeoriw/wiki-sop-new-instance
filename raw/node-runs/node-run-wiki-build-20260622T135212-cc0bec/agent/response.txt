@@ -1,0 +1,22 @@
+✅ **Node Execution complete — wiki-build succeeded**
+
+**Summary:**
+
+| Metric | Value |
+|---|---|
+| Status | ✅ success |
+| Duration | 2m46s |
+| LLM calls | 5 |
+| Total tokens | 17,614 |
+| Pages created | 2 |
+
+**Pages written to output:**
+- `wiki/sources/youtube深度研究补充-rick-astley-传世神曲-永不放弃的深情告白.md` (2,988 chars)
+- `wiki/sources/never-gonna-give-you-up-官方mv-歌词分析报告.md` (3,447 chars)
+
+**Output contract artifacts:**
+- ✅ Output manifest → `raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/manifest.json`
+- ✅ Receipt → `raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/agent/receipt.json`
+- ✅ Response → `raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/agent/response.txt`
+
+**forward_next:** Node run is isolated; no downstream workflow nodes triggered.

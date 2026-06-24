@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "executor": "hermes",
+  "requested_skill": "sop-youtube-deep-research",
+  "node_id": "youtube-deep-research",
+  "node_run_id": "node-run-youtube-deep-research-20260622T080753-a589d3",
+  "runtime_id": "runtime-152-32-214-95",
+  "instance_id": "test-instance",
+  "workflow_id": "youtube-research-wiki",
+  "template_source": "default",
+  "template_version": "hermes-agent-executor.v1",
+  "request_path": "raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/agent/request.md",
+  "response_path": "raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/agent/response.txt",
+  "receipt_path": "raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/agent/receipt.json",
+  "input_manifest_path": "raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/inputs/sources/manifest.json",
+  "output_manifest_path": "raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/files/manifest.json",
+  "stage_command": [
+    "bash",
+    "/root/agent-brain-plugins/youtube-wiki/skills/sop-youtube-deep-research/scripts/run_youtube_deep_research.sh",
+    "/root/wiki/wiki-sop-new-instance",
+    "node-run-youtube-deep-research-20260622T080753-a589d3",
+    "node-run-youtube-deep-research-20260622T080753-a589d3"
+  ],
+  "stage_command_preview": "bash /root/agent-brain-plugins/youtube-wiki/skills/sop-youtube-deep-research/scripts/run_youtube_deep_research.sh /root/wiki/wiki-sop-new-instance node-run-youtube-deep-research-20260622T080753-a589d3 node-run-youtube-deep-research-20260622T080753-a589d3",
+  "created_at": "2026-06-22T08:07:55.046944+00:00"
+}

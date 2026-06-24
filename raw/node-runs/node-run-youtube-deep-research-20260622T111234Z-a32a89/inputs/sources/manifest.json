@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "kind": "input",
+  "node_run_id": "node-run-youtube-deep-research-20260622T111234Z-a32a89",
+  "node_id": "youtube-deep-research",
+  "source_mode": "existing-node-run",
+  "created_at": "2026-06-22T11:12:36Z",
+  "items": [
+    {
+      "path": "0001.json",
+      "source": "node-run",
+      "value_type": "json",
+      "source_path": "raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/outputs/files/metadata.json",
+      "source_node": "youtube-fetch",
+      "source_run_id": "node-run-youtube-fetch-20260622T111013Z-1c2b4d",
+      "source_output": "metadata_file",
+      "input_name": "metadata_file",
+      "target_input": "metadata_file",
+      "value_preview": "{\n  \"video_id\": \"dQw4w9WgXcQ\",\n  \"title\": \"Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)\",\n  \"author\": \"Rick Astley\",\n  \"published_at\": \"2009-10-25T06:57:33Z\",\n  \"youtube_url\": \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\",\n  \"thumbnail\": \"https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg\",\n  \"source_url\": \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\",\n  \"fetched_at\": \"2026-06-22T11:10:50Z\",\n  \"run_id\": \"node-run-youtube-fetch-20260622T111013Z-1c2b4d\"\n}",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-20260622T111234Z-a32a89/inputs/sources/0001.json"
+    },
+    {
+      "path": "0002.txt",
+      "source": "node-run",
+      "value_type": "text",
+      "source_path": "raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/outputs/files/source-url.txt",
+      "source_node": "youtube-fetch",
+      "source_run_id": "node-run-youtube-fetch-20260622T111013Z-1c2b4d",
+      "source_output": "source_url",
+      "input_name": "source_url",
+      "target_input": "source_url",
+      "value_preview": "https://www.youtube.com/watch?v=dQw4w9WgXcQ\n",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-20260622T111234Z-a32a89/inputs/sources/0002.txt"
+    }
+  ],
+  "source_node_run_id": "node-run-youtube-fetch-20260622T111013Z-1c2b4d",
+  "relay_mode": "all_outputs",
+  "selected_outputs": [],
+  "matched_outputs": [
+    "metadata_file",
+    "source_url"
+  ]
+}

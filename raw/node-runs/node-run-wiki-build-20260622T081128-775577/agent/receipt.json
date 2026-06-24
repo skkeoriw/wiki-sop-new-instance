@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "executor": "hermes",
+  "requested_skill": "sop-wiki-build",
+  "executed_skill": "sop-wiki-build",
+  "node_id": "wiki-build",
+  "node_run_id": "node-run-wiki-build-20260622T081128-775577",
+  "request_id": "node-run-wiki-build-20260622T081128-775577",
+  "status": "done",
+  "returncode": 0,
+  "timed_out": false,
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  },
+  "input_manifest": "raw/node-runs/node-run-wiki-build-20260622T081128-775577/inputs/sources/manifest.json",
+  "output_manifest": "raw/node-runs/node-run-wiki-build-20260622T081128-775577/outputs/files/manifest.json",
+  "started_at": "2026-06-22T08:11:29.576510+00:00",
+  "finished_at": "2026-06-22T08:17:57.688961+00:00",
+  "legacy_fallback": false,
+  "error": ""
+}

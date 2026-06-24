@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "kind": "input",
+  "node_run_id": "node-run-youtube-deep-research-20260622T091425Z-6a0670",
+  "node_id": "youtube-deep-research",
+  "source_mode": "existing-node-run",
+  "created_at": "2026-06-22T09:14:28Z",
+  "items": [
+    {
+      "path": "0001.json",
+      "source": "node-run",
+      "value_type": "json",
+      "source_path": "raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/metadata.json",
+      "source_node": "youtube-fetch",
+      "source_run_id": "node-run-youtube-fetch-20260622T083527Z-cfe243",
+      "source_output": "metadata_file",
+      "input_name": ""
+    },
+    {
+      "path": "0002.txt",
+      "source": "node-run",
+      "value_type": "text",
+      "source_path": "raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/source-url.txt",
+      "source_node": "youtube-fetch",
+      "source_run_id": "node-run-youtube-fetch-20260622T083527Z-cfe243",
+      "source_output": "source_url",
+      "input_name": ""
+    }
+  ],
+  "source_node_run_id": "node-run-youtube-fetch-20260622T083527Z-cfe243"
+}

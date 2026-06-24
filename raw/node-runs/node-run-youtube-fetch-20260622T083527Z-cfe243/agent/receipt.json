@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "executor": "hermes",
+  "requested_skill": "sop-youtube-fetch",
+  "executed_skill": "sop-youtube-fetch",
+  "node_id": "youtube-fetch",
+  "node_run_id": "node-run-youtube-fetch-20260622T083527Z-cfe243",
+  "request_id": "node-run-youtube-fetch-20260622T083527Z-cfe243",
+  "status": "done",
+  "returncode": 0,
+  "timed_out": false,
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  },
+  "input_manifest": "raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/inputs/sources/manifest.json",
+  "output_manifest": "raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/manifest.json",
+  "started_at": "2026-06-22T08:35:30.257436+00:00",
+  "finished_at": "2026-06-22T08:36:51.074612+00:00",
+  "legacy_fallback": false,
+  "error": ""
+}

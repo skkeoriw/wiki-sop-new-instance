@@ -1,0 +1,28 @@
+## ✓ wiki-build 执行完成
+
+**节点运行**: `node-run-wiki-build-20260622T081128-775577`
+**状态**: success (exit code 0, 5m14s)
+
+**LLM 用量**:
+| 指标 | 值 |
+|------|------|
+| LLM 调用次数 | 5 |
+| Prompt tokens | 6,988 |
+| Completion tokens | 10,522 |
+| 总计 tokens | 17,510 |
+
+**产出物** (2 个页面):
+| 文件 | 路径 |
+|------|------|
+| index.md | `outputs/files/index.md` |
+| YouTube深度研究补充：瑞克·阿斯特利《永不放弃你》官方MV.md | `outputs/files/wiki/sources/...` |
+| 永不放弃你-歌词.md | `outputs/files/wiki/sources/...` |
+
+**实体/概念**: 5 条实体, 6 条概念提案, 0 条重复（全部已存在）
+
+**Artifacts 写入**:
+- ✅ 输出 manifest: `outputs/files/manifest.json`
+- ✅ 收据: `agent/receipt.json`
+- ✅ 执行器快照: `agent/executor.json`
+
+**说明**: 下游节点未触发（node run 为隔离模式）——`forward_next` 报告了 `isolated`。

@@ -1,0 +1,27 @@
+**Execution complete — success.** Here's the delivery summary:
+
+**YouTube Fetch — Node Run Complete**
+
+| Field | Value |
+|---|---|
+| Node Run ID | `node-run-youtube-fetch-20260622T134710-842f65` |
+| Source URL | `https://www.youtube.com/watch?v=dQw4w9WgXcQ` |
+| Exit Code | `0` |
+
+**What the wrapper did:**
+
+1. **on_start** — stage runner logged start
+2. **fetch_youtube_metadata.py** ran:
+   - Video: *"Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)"* by Rick Astley
+   - Video ID: `dQw4w9WgXcQ`
+   - Wrote metadata → `raw/youtube-metadata/dQw4w9WgXcQ.json`
+   - Updated `pipeline-context.json`
+   - Git push OK
+3. **on_done** — stage runner logged completion
+4. **forward_next** — noted as isolated node run (no downstream nodes triggered)
+
+**Output contract deliverables** (all verified):
+- `outputs/files/manifest.json` ✅ — declares `metadata.json` and `source-url.txt`
+- `outputs/files/source-url.txt` ✅ — contains the source URL
+- `outputs/files/metadata.json` ✅ — metadata copy in output directory
+- `agent/receipt.json` ✅ — written with `exit_code: 0`, `status: completed`

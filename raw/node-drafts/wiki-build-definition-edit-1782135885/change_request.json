@@ -1,0 +1,196 @@
+{
+  "version": 1,
+  "draft_type": "edit_node_definition",
+  "draft_id": "wiki-build-definition-edit-1782135885",
+  "node_id": "wiki-build",
+  "created_at": "2026-06-22T13:44:45.920687+00:00",
+  "save_target": "agent-brain-plugins",
+  "targets": {
+    "runtime_sop_file": "/root/wiki/wiki-sop-new-instance/sop.yaml",
+    "project_skill_node_yaml": "/root/agent-brain-plugins/youtube-wiki/skills/sop-wiki-build/node.yaml",
+    "project_template_sop_yaml": "/root/agent-brain-plugins/youtube-wiki/templates/wiki-repo/sop.yaml",
+    "save_owner": "agent-brain-plugins"
+  },
+  "change_summary": [
+    {
+      "field": "title",
+      "before": "Wiki 知识图谱构建",
+      "after": "Wiki Build Edited Online Check"
+    },
+    {
+      "field": "inputs",
+      "before": {
+        "reports": "notebooklm-research.outputs.reports"
+      },
+      "after": {
+        "reports": {
+          "kind": "files",
+          "type": "files",
+          "value_type": "markdown",
+          "required": true,
+          "accepts": [
+            "file:markdown",
+            "file:text",
+            "directory"
+          ]
+        }
+      }
+    },
+    {
+      "field": "executor",
+      "before": null,
+      "after": {
+        "type": "agent-skill",
+        "agent": "hermes",
+        "skill": "sop-wiki-build",
+        "entry": "scripts/run_wiki_build.sh"
+      }
+    }
+  ],
+  "before": {
+    "title": "Wiki 知识图谱构建",
+    "skill": "sop-wiki-build",
+    "webhook_route": "sop-wiki-build",
+    "mode": "blocking",
+    "needs": [
+      "notebooklm-research"
+    ],
+    "trigger": {
+      "type": "file",
+      "path": "raw/notebooklm-analysis/**"
+    },
+    "inputs": {
+      "reports": "notebooklm-research.outputs.reports"
+    },
+    "optional_inputs": {
+      "deep_research": "youtube-deep-research.outputs.analysis_file"
+    },
+    "outputs": {
+      "index": "index.md",
+      "pages": "wiki/**"
+    },
+    "infra": {
+      "tg_notify": false,
+      "log_record": true
+    },
+    "params": {
+      "build_mode": "incremental"
+    }
+  },
+  "before_merged": {
+    "inputs": {
+      "reports": {
+        "required": true,
+        "kind": "files",
+        "type": "auto",
+        "value_type": "markdown",
+        "from": "notebooklm-research.outputs.reports",
+        "accepts": [
+          "file:markdown",
+          "file:text",
+          "directory"
+        ]
+      },
+      "deep_research": {
+        "required": false,
+        "kind": "files",
+        "type": "files",
+        "value_type": "markdown",
+        "from": "youtube-deep-research.outputs.analysis_file",
+        "accepts": [
+          "file:markdown",
+          "file:text",
+          "directory"
+        ]
+      }
+    },
+    "optional_inputs": {
+      "deep_research": {
+        "type": "auto",
+        "required": true,
+        "from": "youtube-deep-research.outputs.analysis_file",
+        "kind": "auto"
+      }
+    },
+    "outputs": {
+      "index": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "markdown",
+        "relayable": true,
+        "path": "index.md"
+      },
+      "pages": {
+        "kind": "files",
+        "type": "files",
+        "value_type": "markdown",
+        "relayable": true,
+        "path": "wiki/**"
+      }
+    },
+    "capabilities": {
+      "git": {
+        "enabled": true,
+        "required": false
+      },
+      "telegram": {
+        "enabled": false,
+        "required": false
+      },
+      "sse": {
+        "enabled": true,
+        "required": true
+      }
+    }
+  },
+  "proposed": {
+    "title": "Wiki Build Edited Online Check",
+    "skill": "sop-wiki-build",
+    "webhook_route": "sop-wiki-build",
+    "mode": "blocking",
+    "needs": [
+      "notebooklm-research"
+    ],
+    "trigger": {
+      "type": "file",
+      "path": "raw/notebooklm-analysis/**"
+    },
+    "inputs": {
+      "reports": {
+        "kind": "files",
+        "type": "files",
+        "value_type": "markdown",
+        "required": true,
+        "accepts": [
+          "file:markdown",
+          "file:text",
+          "directory"
+        ]
+      }
+    },
+    "optional_inputs": {
+      "deep_research": "youtube-deep-research.outputs.analysis_file"
+    },
+    "outputs": {
+      "index": "index.md",
+      "pages": "wiki/**"
+    },
+    "infra": {
+      "tg_notify": false,
+      "log_record": true
+    },
+    "params": {
+      "build_mode": "incremental"
+    },
+    "executor": {
+      "type": "agent-skill",
+      "agent": "hermes",
+      "skill": "sop-wiki-build",
+      "entry": "scripts/run_wiki_build.sh"
+    }
+  },
+  "notes": [
+    "This draft does not modify runtime sop.yaml.",
+    "Apply/publish must be handled by a repo-first change in agent-brain-plugins."
+  ]
+}

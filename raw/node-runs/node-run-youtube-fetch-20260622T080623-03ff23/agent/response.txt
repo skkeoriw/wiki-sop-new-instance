@@ -1,0 +1,26 @@
+## ✅ Node Execution 成功
+
+**Wrapper (sop-youtube-fetch)** 已执行完成，exit code **0**。
+
+### 运行跟踪
+| 项目 | 值 |
+|------|------|
+| 脚本 | `run_youtube_fetch.sh` |
+| source_url | `https://www.youtube.com/watch?v=dQw4w9WgXcQ` |
+| 视频 ID | `dQw4w9WgXcQ` |
+| 标题 | *Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)* |
+| 作者 | Rick Astley |
+| 耗时 | ~3s |
+
+### 输出工件
+| 路径 | 状态 |
+|------|------|
+| `raw/node-runs/.../outputs/files/manifest.json` | ✅ 已写入，2 个条目 (metadata.json, source-url.txt) |
+| `raw/node-runs/.../outputs/files/metadata.json` | ✅ 已写入 (YouTube 元数据) |
+| `raw/node-runs/.../outputs/files/source-url.txt` | ✅ 已写入 |
+| `raw/youtube-metadata/dQw4w9WgXcQ.json` | ✅ 已写入 (规范位置) |
+| `raw/node-runs/.../agent/receipt.json` | ✅ 已写入 |
+| `raw/node-runs/.../agent/executor.json` | ✅ 存在 |
+
+### 后续步骤
+`forward_next` 此次无操作，因为节点运行已隔离 —— 输出工件等待下游适配器拾取。

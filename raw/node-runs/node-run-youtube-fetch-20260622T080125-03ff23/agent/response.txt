@@ -1,0 +1,25 @@
+## ✅ Execution Complete — node-run-youtube-fetch-20260622T080125-03ff23
+
+**Status:** completed (exit 0, 3s)
+
+**Wrapper output:**
+```
+[youtube-fetch] source_url=https://www.youtube.com/watch?v=dQw4w9WgXcQ
+[youtube-fetch] title=Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster), author=Rick Astley, video_id=dQw4w9WgXcQ
+[youtube-fetch] written: raw/youtube-metadata/dQw4w9WgXcQ.json
+[youtube-fetch] pipeline-context.json updated
+[youtube-fetch] git push OK
+[stage_runner] forward_next: isolated node run; downstream not started
+```
+
+**Outputs produced:**
+
+| Artifact | Path |
+|---|---|
+| Metadata JSON | `raw/youtube-metadata/dQw4w9WgXcQ.json` |
+| Output manifest | `raw/node-runs/.../outputs/files/manifest.json` |
+| Output metadata | `raw/node-runs/.../outputs/files/metadata.json` |
+| Source URL | `raw/node-runs/.../outputs/files/source-url.txt` |
+| Receipt | `raw/node-runs/.../agent/receipt.json` |
+
+**Fetched video:** `dQw4w9WgXcQ` — "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)" by Rick Astley. Pipeline context updated and pushed to git.

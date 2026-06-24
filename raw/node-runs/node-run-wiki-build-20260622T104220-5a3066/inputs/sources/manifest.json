@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "kind": "input",
+  "node_run_id": "node-run-wiki-build-20260622T104220-5a3066",
+  "node_id": "wiki-build",
+  "source_mode": "existing-node-run",
+  "created_at": "2026-06-22T10:42:21Z",
+  "items": [
+    {
+      "path": "0001.md",
+      "source": "node-run",
+      "value_type": "markdown",
+      "source_path": "raw/node-runs/node-run-youtube-deep-research-20260622T102318-ecb0ee/outputs/files/analysis.md",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-20260622T102318-ecb0ee",
+      "source_output": "analysis_file",
+      "input_name": "deep_research",
+      "target_input": "deep_research",
+      "value_preview": "# YouTube 深度研究补充：【神曲重温】Never Gonna Give You Up 完整歌词版\n\n## 基本信息\n\n- YouTube: https://www.youtube.com/watch?v=dQw4w9WgXcQ\n- Job ID: 575ae718-7306-4535-b9b0-8eed88ac20cc\n- Status: completed\n- Detected language: en\n- Model: gateway\n\n## 摘要\n\n视频为经典歌曲《Never Gonna Give You Up》的完整字幕版，歌词表达了矢志不渝的爱情承诺，传递出忠诚、陪伴与不伤害的真挚情感，旋律朗朗上口，是网络流行的“瑞克摇”文化源头。\n\n## 关键要点\n\n- 歌词以对话形式展开，表达对爱人的坚定承诺\n- 副歌反复强调永远不会放弃、让对方失望或流泪\n- 提到双方心知肚明却羞于开口的情感默契\n- 带有“瑞克摇”网络文化梗的经典旋律\n- 全曲充满积极、温暖的爱情观，朗朗上口\n\n## Clip 建议\n\n- {'start': '00:00:42', 'end': '00:01:00', 'reason': '第一次副歌部分，歌词朗朗上口，旋律洗脑，适合单独传播作为音乐高潮片段'}\n- {'start': '00:01:24', 'end': '00:01:58', 'reason': '第二次副歌加间奏重复，情感递进，适合做励志或表白类视频的BGM切片'}\n- {'start': '00:02:15', 'end': '00:02:57', 'reason': '桥段后再次进入副歌，情绪饱满，且出现歌词变化（tell you why），适合作为情感共鸣切片'}\n- {'start': '00:02:57', 'end': '00:03:31', 'reason': '最终副歌重复，歌曲最高潮，完整展现Never Gonna承诺，适合用作结尾升华片段'}\n\n## 文件链接\n\n- analysis_md: https://youtube-research-workflow.hb67egcim4.workers.dev/job/575ae718-7306-4535-b9b0-8eed88ac20cc/transcript?format=md\n- transcrip",
+      "materialized_path": "raw/node-runs/node-run-wiki-build-20260622T104220-5a3066/inputs/sources/0001.md"
+    },
+    {
+      "path": "0002.txt",
+      "source": "node-run",
+      "value_type": "text",
+      "source_path": "raw/node-runs/node-run-youtube-deep-research-20260622T102318-ecb0ee/outputs/files/transcript.txt",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-20260622T102318-ecb0ee",
+      "source_output": "transcript_file",
+      "input_name": "transcript_file",
+      "target_input": "transcript_file",
+      "value_preview": "We're no strangers to love You know the rules And so do I Have no commitments what I'm thinking of You wouldn't get this from any other guy I just wanna tell you how I'm feeling Gotta make you understand Never gonna give you up Never gonna let you down Never gonna run around and desert you Never gonna make you cry Never gonna say goodbye Never gonna tell a lie And hurt you We've known each other For so long Your heart's been aching but You're too shy to say it Inside we both know what's been Going on We know the game and we're Gonna play it And if you ask me how I'm feeling Don't tell me you're too Blind to see Never gonna give you up Never gonna let you down Never gonna run around and desert you Never gonna make you cry Never gonna say goodbye Never gonna tell a lie And hurt you Never gonna give you up Never gonna let you down Never gonna run around and desert you Never gonna make you cry Never gonna say goodbye Never gonna tell a lie And hurt you Give you up Give you up Never gonna g",
+      "materialized_path": "raw/node-runs/node-run-wiki-build-20260622T104220-5a3066/inputs/sources/0002.txt"
+    }
+  ],
+  "source_node_run_id": "node-run-youtube-deep-research-20260622T102318-ecb0ee",
+  "relay_mode": "selected_outputs",
+  "selected_outputs": [
+    "analysis_file",
+    "transcript_file"
+  ],
+  "matched_outputs": [
+    "analysis_file",
+    "transcript_file"
+  ]
+}

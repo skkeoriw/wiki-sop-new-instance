@@ -1,0 +1,34 @@
+title: Wiki Build Edited Online Check
+skill: sop-wiki-build
+webhook_route: sop-wiki-build
+mode: blocking
+needs:
+- notebooklm-research
+trigger:
+  type: file
+  path: raw/notebooklm-analysis/**
+inputs:
+  reports:
+    kind: files
+    type: files
+    value_type: markdown
+    required: true
+    accepts:
+    - file:markdown
+    - file:text
+    - directory
+optional_inputs:
+  deep_research: youtube-deep-research.outputs.analysis_file
+outputs:
+  index: index.md
+  pages: wiki/**
+infra:
+  tg_notify: false
+  log_record: true
+params:
+  build_mode: incremental
+executor:
+  type: agent-skill
+  agent: hermes
+  skill: sop-wiki-build
+  entry: scripts/run_wiki_build.sh
