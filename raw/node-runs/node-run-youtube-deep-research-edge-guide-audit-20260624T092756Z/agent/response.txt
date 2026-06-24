@@ -1,0 +1,29 @@
+## Execution Complete — Summary
+
+**Node**: `youtube-deep-research`  
+**Run ID**: `node-run-youtube-deep-research-edge-guide-audit-20260624T092756Z`  
+**Status**: ✅ **Completed** (exit code 0)
+
+### Execution flow
+1. **Skill used**: `sop-youtube-deep-research` — ran the deterministic wrapper `run_youtube_deep_research.sh`
+2. **Input resolution**: source_url read from the input manifest (`resolved_values.source_url` = `https://www.youtube.com/watch?v=dQw4w9WgXcQ`)
+3. **Workflow**: POSTed to `YOUTUBE_RESEARCH_WORKFLOW_URL`, job ID `8e9d6fee-4c2c-4de1-ae48-bc8db2fb4e6a` — progressed through `pending → downloading → transcribing → translating → analyzing → completed`
+4. **Duration**: ~113 seconds (1m53s)
+
+### Outputs produced
+
+| Artifact | Path | Size |
+|---|---|---|
+| Analysis markdown | `raw/youtube-deep-research/.../outputs/analysis.md` | 92 lines |
+| Transcript text | `raw/youtube-deep-research/.../outputs/transcript.txt` | 1857 bytes |
+| Raw status | `raw/youtube-deep-research/.../raw/status.json` | worker response |
+| Raw worker analysis | `raw/youtube-deep-research/.../raw/worker-analysis.md` | 6035 bytes |
+| Raw SRT/VTT/JSON | `raw/youtube-deep-research/.../raw/` | 4 transcript formats |
+
+### Contract artifacts
+- **Output manifest**: `raw/node-runs/.../outputs/files/manifest.json` ✓
+- **Receipt**: `raw/node-runs/.../agent/receipt.json` ✓ (written by executor)
+- **Executor record**: `raw/node-runs/.../agent/executor.json` ✓
+
+### Edge handoff
+The stage_runner called `forward_next`, but noted this is an isolated node run — downstream nodes (wiki-build) are not automatically triggered. The `stage_deep_research` block was written into `pipeline-context.json` for downstream consumption.
