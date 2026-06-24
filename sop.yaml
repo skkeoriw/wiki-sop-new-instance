@@ -22,10 +22,24 @@ nodes:
       type: file
       path: raw/youtube-links/**
     inputs:
-      source_url: context.source_url
+      source_url:
+        from: context.source_url
+        kind: scalar
+        type: string
+        value_type: url
     outputs:
-      source_url: context.source_url
-      metadata_file: raw/youtube-metadata/{pipeline_id}.json
+      source_url:
+        from: context.source_url
+        kind: scalar
+        type: string
+        value_type: url
+        relayable: true
+      metadata_file:
+        from: context.stage_b_fetch.meta_file
+        kind: file
+        type: file
+        value_type: json
+        relayable: true
     infra:
       tg_notify: true
       log_record: true
@@ -50,7 +64,7 @@ nodes:
       tg_notify: true
       log_record: true
     params:
-      notebooklm: &id001
+      notebooklm:
         outputs:
         - report
         - mindmap
@@ -69,10 +83,38 @@ nodes:
       type: file
       path: raw/youtube-metadata/**
     inputs:
-      source_url: youtube-fetch.outputs.source_url
+      source_url:
+        from: youtube-fetch.outputs.source_url
+        kind: scalar
+        type: string
+        value_type: url
+        resolvers:
+        - id: direct-url
+          kind: direct
+        - id: metadata-source-url
+          kind: json_path
+          path: $.source_url
+        - id: metadata-youtube-url
+          kind: json_path
+          path: $.youtube_url
+        - id: text-url
+          kind: regex
+          pattern: https?://(?:www\.)?(?:youtube\.com/watch\?v=[A-Za-z0-9_-]+[^\s"'<>)]*|youtu\.be/[A-Za-z0-9_-]+[^\s"'<>)]*)
     outputs:
-      analysis_file: raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md
-      transcript_file: raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt
+      analysis_file:
+        path: raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md
+        kind: file
+        type: file
+        value_type: markdown
+        relayable: true
+        role: wiki-source
+      transcript_file:
+        path: raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt
+        kind: file
+        type: file
+        value_type: text
+        relayable: true
+        role: transcript
     capabilities:
       git:
         enabled: true
@@ -98,8 +140,13 @@ nodes:
         - start
         - done
         - failed
+    actions:
+    - stage_runner on_start 记录节点开始状态，并按 capability 配置发送开始通知。
+    - 执行节点 Skill 业务逻辑，生成声明 outputs 和业务 artifacts。
+    - stage_runner on_done/on_failed 记录结果、校验产物，并按 capability 配置处理 GitHub / Telegram。
     infra:
       tg_notify: true
+      git_record: true
       log_record: true
     params:
       workflow:
@@ -115,17 +162,42 @@ nodes:
       type: file
       path: raw/notebooklm-analysis/**
     inputs:
-      reports: notebooklm-research.outputs.reports
+      reports:
+        from: notebooklm-research.outputs.reports
+        kind: files
+        type: files
+        value_type: markdown
     optional_inputs:
-      deep_research: youtube-deep-research.outputs.analysis_file
+      deep_research:
+        from: youtube-deep-research.outputs.analysis_file
+        required: false
+        kind: files
+        type: files
+        value_type: markdown
     outputs:
-      index: index.md
-      pages: wiki/**
+      index:
+        path: index.md
+        kind: file
+        type: file
+        value_type: markdown
+        relayable: true
+      pages:
+        path: wiki/**
+        kind: files
+        type: files
+        value_type: markdown
+        relayable: true
     infra:
       tg_notify: false
       log_record: true
     params:
       build_mode: incremental
+      page_generation:
+        target_pages: 35
+        max_pages: 40
+        max_entities: 10
+        max_concepts: 29
+        min_importance_score: 0.65
   tg-notify:
     title: Telegram 通知
     skill: sop-tg-notify
@@ -137,9 +209,35 @@ nodes:
       type: file
       path: index.md
     inputs:
-      index: wiki-build.outputs.index
+      index:
+        from: wiki-build.outputs.index
+        required: true
+        kind: file
+        type: file
+        value_type: markdown
+    optional_inputs:
+      message:
+        from: edge.message
+        required: false
+        kind: scalar
+        type: string
+        value_type: text
+        resolvers:
+        - id: direct-text
+          kind: direct
+        - id: metadata-title
+          kind: json_path
+          path: $.title
+        - id: metadata-description
+          kind: json_path
+          path: $.description
     outputs:
-      telegram_message: logs/pipeline-runs/pipe-{run_id}.json
+      telegram_message:
+        path: logs/pipeline-runs/pipe-{run_id}.json
+        kind: file
+        type: file
+        value_type: json
+        relayable: false
     infra:
       tg_notify: true
       log_record: true
@@ -244,7 +342,14 @@ pipeline:
     tg_notify: true
     log_record: true
   params:
-    notebooklm: *id001
+    notebooklm:
+      outputs:
+      - report
+      - mindmap
+      language: zh_Hans
+      notebook_title: wiki-sop-new-instance
+      report_prompt: 请深度研究这个视频，提炼技术架构、核心观点、关键论据，以及对行业的影响。生成结构化中文研究报告。
+      mindmap_prompt: 基于视频内容生成清晰的中文思维导图，突出核心概念之间的关系与层级。
 - stage: youtube-deep-research
   trigger: raw/youtube-metadata/**
   webhook_route: sop-youtube-deep-research
