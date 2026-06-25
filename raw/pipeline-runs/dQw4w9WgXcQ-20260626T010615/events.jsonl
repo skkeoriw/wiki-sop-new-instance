@@ -1,2 +1,3 @@
 {"ts": "2026-06-25T17:06:18Z", "event": "node.started", "pipeline_id": "dQw4w9WgXcQ-20260626T010615", "node_id": "youtube-fetch", "run_id": "direct-1782407177738498653", "data": {"status": "running", "error": ""}, "sequence": 1}
 {"ts": "2026-06-25T17:06:20Z", "event": "node.completed", "pipeline_id": "dQw4w9WgXcQ-20260626T010615", "node_id": "youtube-fetch", "run_id": "direct-1782407177738498653", "data": {"status": "done", "error": ""}, "sequence": 2}
+{"ts": "2026-06-25T17:06:22Z", "event": "git.committed", "pipeline_id": "dQw4w9WgXcQ-20260626T010615", "node_id": "youtube-fetch", "run_id": "direct-1782407177738498653", "data": {"commit": "31ca0e6", "pushed": true, "managed_by": "runtime-harness"}, "sequence": 3}
