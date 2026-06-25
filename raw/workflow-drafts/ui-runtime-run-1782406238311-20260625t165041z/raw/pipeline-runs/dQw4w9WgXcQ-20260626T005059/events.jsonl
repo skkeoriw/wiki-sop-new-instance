@@ -3,3 +3,4 @@
 {"ts": "2026-06-25T16:51:07Z", "event": "telegram.failed", "pipeline_id": "dQw4w9WgXcQ-20260626T005059", "node_id": "youtube-fetch", "run_id": "direct-1782406262893120747", "data": {"trigger": "done", "ok": false}, "sequence": 3}
 {"ts": "2026-06-25T16:51:07Z", "event": "node.completed", "pipeline_id": "dQw4w9WgXcQ-20260626T005059", "node_id": "youtube-fetch", "run_id": "direct-1782406262893120747", "data": {"status": "done", "error": ""}, "sequence": 4}
 {"ts": "2026-06-25T16:51:09Z", "event": "git.committed", "pipeline_id": "dQw4w9WgXcQ-20260626T005059", "node_id": "youtube-fetch", "run_id": "direct-1782406262893120747", "data": {"commit": "6669714", "pushed": true, "managed_by": "runtime-harness"}, "sequence": 5}
+{"ts": "2026-06-25T16:51:10Z", "event": "git.committed", "pipeline_id": "dQw4w9WgXcQ-20260626T005059", "node_id": "youtube-fetch", "run_id": "direct-1782406262893120747", "data": {"commit": "4e4cc07", "pushed": true}, "sequence": 6}
