@@ -1,0 +1,4 @@
+{"ts": "2026-06-25T16:51:48Z", "event": "tg_notify_failed", "stage": "notebooklm-research", "trigger": "start", "ok": false}
+{"ts": "2026-06-25T16:51:48Z", "event": "stage_start", "stage": "notebooklm-research", "pipeline": "youtube-research-wiki"}
+{"ts": "2026-06-25T16:52:00Z", "event": "tg_notify_failed", "stage": "notebooklm-research", "trigger": "start", "ok": false}
+{"ts": "2026-06-25T16:52:00Z", "event": "stage_start", "stage": "notebooklm-research", "pipeline": "youtube-research-wiki"}
