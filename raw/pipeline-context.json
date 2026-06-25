@@ -89,5 +89,29 @@
     "output_files": [
       "raw/node-runs/node-run-wiki-build-20260622T104220-5a3066/inputs/sources/0001.md"
     ]
+  },
+  "workflow_draft": {
+    "source": "workflow-draft",
+    "workflow_id": "youtube-research-wiki",
+    "workflow_draft_id": "ui-runtime-runfix-final-1782407155320-20260625t170558z",
+    "workflow_draft_path": "/root/wiki/wiki-sop-new-instance/raw/workflow-drafts/ui-runtime-runfix-final-1782407155320-20260625t170558z",
+    "runtime_sop_path": "/root/wiki/wiki-sop-new-instance/raw/workflow-drafts/ui-runtime-runfix-final-1782407155320-20260625t170558z/runtime_sop.yaml"
+  },
+  "stage_b_fetch": {
+    "run_id": "direct-1782407177738498653",
+    "video_id": "dQw4w9WgXcQ",
+    "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+    "author": "Rick Astley",
+    "published_at": "2009-10-25T06:57:33Z",
+    "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+    "meta_file": "raw/youtube-metadata/dQw4w9WgXcQ.json"
+  },
+  "stage_b": {
+    "source_metadata": {
+      "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+      "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "author": "Rick Astley"
+    }
   }
 }
