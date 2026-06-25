@@ -1,0 +1,59 @@
+{
+  "status": "ready",
+  "score": 0.92,
+  "confidence": 0.9,
+  "summary": "上游输出 source_url 可直接满足下游 required 输入，metadata_file 作为可选上下文通过 resolver 解析也可映射。无需额外用户输入，边缘可运行。",
+  "decision": "can_run",
+  "scores": {
+    "intent_clarity": 1,
+    "skill_fit": 0.9,
+    "artifact_usability": 0.9,
+    "guide_completeness": 0.95,
+    "risk": 0.1
+  },
+  "blocking_reasons": [],
+  "warnings": [
+    "relayMappings 中包含 metadata_file -> source_url 的映射，但 metadata_file 为文件类型，需通过 json_path 解析，建议确保 metadata.json 包含 source_url 字段。"
+  ],
+  "required_user_inputs": [],
+  "suggested_edge_instruction": "将上游 source_url 直接传递给下游 source_url，metadata_file 作为可选上下文，仅在需要时通过 json_path 提取 source_url。",
+  "resolved_handoff": {
+    "primary_artifacts": [
+      {
+        "from": "youtube-fetch.outputs.source_url",
+        "role": "primary_source",
+        "reason": "直接匹配下游 required 输入 source_url，且为 scalar:url 类型。"
+      }
+    ],
+    "supporting_artifacts": [
+      {
+        "from": "youtube-fetch.outputs.metadata_file",
+        "role": "supporting_context",
+        "reason": "可选上下文，可通过 json_path resolver 提供备选 source_url。"
+      }
+    ],
+    "downstream_inputs": [
+      {
+        "to": "youtube-deep-research.inputs.source_url",
+        "construction": "优先使用 relayMappings 中 source_url 的直接映射，若缺失则通过 metadata_file 的 json_path 提取。"
+      }
+    ]
+  },
+  "node_execution_guide": {
+    "format": "markdown",
+    "prompt": "Use skill sop-youtube-deep-research to execute this downstream node.\n\n## Node Execution Guide\n- Edge: youtube-fetch -> youtube-deep-research\n- Evaluation: 上下游输入输出映射清晰，可运行。\n- Edge Handoff Instruction: 把上游视频 URL 交给 YouTube 深度研究节点，metadata 只作为可选上下文。\n\n### Upstream Artifacts\n- `source_url`: `raw/node-runs/{pipeline_id}/outputs/files/source-url.txt` (scalar/url)\n- `metadata_file`: `raw/node-runs/{pipeline_id}/outputs/files/metadata.json` (file/json, optional)\n\n### Execution Rules\n1. **Primary Input**: Use `source_url` from upstream as `source_url` for downstream. This is the direct relay mapping.\n2. **Fallback Input**: If `source_url` is unavailable, extract `$.source_url` from `metadata_file` using json_path resolver.\n3. **Optional Context**: `metadata_file` is not required by downstream; only use if needed for fallback.\n4. **Execution Command**: Run the downstream node with the resolved `source_url`. Example:\n   ```\n   Use skill sop-youtube-deep-research to execute this Node Execution Request.\n   Execution command: bash __SKILL_DIR__/scripts/run_youtube_deep_research.sh --source-url \"${RESOLVED_URL}\"\n   ```\n5. **Outputs**: Downstream produces `analysis_file` and `transcript_file` as per skill definition."
+  },
+  "test_plan": [
+    "物化上游输出：确认 source-url.txt 和 metadata.json 存在。",
+    "验证 source-url.txt 内容为有效 YouTube URL。",
+    "使用 direct-url resolver 构造下游输入。",
+    "执行下游 skill，验证 analysis.md 和 transcript.txt 生成。",
+    "可选：测试 metadata.json 缺失 source_url 时能否通过 fallback 正常执行。"
+  ],
+  "agent": {
+    "provider": "openai-compatible",
+    "model": "deepseek-v4-flash",
+    "used_ai": true
+  },
+  "evaluated_at": "2026-06-25T11:04:09Z"
+}

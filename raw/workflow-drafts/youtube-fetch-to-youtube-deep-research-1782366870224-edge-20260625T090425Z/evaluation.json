@@ -1,0 +1,56 @@
+{
+  "status": "ready",
+  "score": 0.92,
+  "confidence": 0.86,
+  "summary": "上下游存在显式引用或同名输入输出，可稳定生成节点执行指导文档。",
+  "decision": "can_run",
+  "scores": {
+    "intent_clarity": 1,
+    "skill_fit": 0.88,
+    "artifact_usability": 0.88,
+    "guide_completeness": 0.94,
+    "risk": 0.12
+  },
+  "blocking_reasons": [],
+  "warnings": [],
+  "required_user_inputs": [],
+  "suggested_edge_instruction": "",
+  "resolved_handoff": {
+    "primary_artifacts": [
+      {
+        "from": "youtube-fetch.outputs.source_url",
+        "role": "primary_source",
+        "reason": "上游声明的可交付产物。"
+      }
+    ],
+    "supporting_artifacts": [
+      {
+        "from": "youtube-fetch.outputs.metadata_file",
+        "role": "supporting_context",
+        "reason": "该产物适合作为补充上下文，不应默认成为下游主输入。"
+      }
+    ],
+    "downstream_inputs": [
+      {
+        "to": "youtube-deep-research.inputs.source_url",
+        "construction": "由显式契约直接构造。"
+      }
+    ]
+  },
+  "node_execution_guide": {
+    "format": "markdown",
+    "prompt": "Use skill sop-youtube-deep-research to execute this downstream node.\n\nNode Execution Guide\n- Edge: youtube-fetch -> youtube-deep-research\n- Evaluation summary: 上下游存在显式引用或同名输入输出，可稳定生成节点执行指导文档。\n- Edge Handoff Instruction: 将 youtube-fetch 输出的 source_url 直接传递给 youtube-deep-research 的 source_url 输入；metadata_file 作为补充上下文不作为主输入，但可通过 json_path 解析器从中提取 source_url 备用。\n\nUpstream artifacts\n- source_url: raw/node-runs/{pipeline_id}/outputs/files/source-url.txt\n- metadata_file: raw/node-runs/{pipeline_id}/outputs/files/metadata.json\n\nExecution steps:\n1. Read the upstream source_url file (scalar URL) and pass it as the primary input to the downstream's `source_url` parameter using the direct-url resolver.\n2. Optionally, read the metadata_file (JSON) and use a json_path resolver (e.g., metadata-source-url) to extract `$.source_url` as a fallback if the primary source_url is missing or invalid.\n3. Execute the skill sop-youtube-deep-research with the constructed inputs.\n\nExpected outputs:\n- analysis_file: raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md\n- transcript_file: raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt\n\nNote: Ensure the downstream node's workspace paths are correctly resolved using the pipeline_id from the runtime context."
+  },
+  "test_plan": [
+    "物化 Edge 输入",
+    "执行下游 skill",
+    "校验声明输出",
+    "记录 edge evaluation 和 guide"
+  ],
+  "agent": {
+    "provider": "openai-compatible",
+    "model": "deepseek-v4-flash",
+    "used_ai": true
+  },
+  "evaluated_at": "2026-06-25T09:03:30Z"
+}

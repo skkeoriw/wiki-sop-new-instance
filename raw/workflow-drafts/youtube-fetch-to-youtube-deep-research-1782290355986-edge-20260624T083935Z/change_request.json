@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "draft_type": "save_evaluated_edge",
+  "draft_id": "youtube-fetch-to-youtube-deep-research-1782290355986-edge-20260624T083935Z",
+  "workflow_id": "youtube-research-wiki",
+  "edge_id": "youtube-fetch-to-youtube-deep-research-1782290355986",
+  "created_at": "2026-06-24T08:39:35.826016+00:00",
+  "save_target": "agent-brain-plugins",
+  "targets": {
+    "runtime_sop_file": "/root/wiki/wiki-sop-new-instance/sop.yaml",
+    "project_template_sop_yaml": "/root/agent-brain-plugins/youtube-wiki/templates/wiki-repo/sop.yaml",
+    "project_workflow_id": "youtube-research-wiki",
+    "save_owner": "agent-brain-plugins"
+  },
+  "change_summary": [
+    {
+      "field": "edges.youtube-fetch-to-youtube-deep-research-1782290355986",
+      "before": "missing_or_unpublished",
+      "after": {
+        "id": "youtube-fetch-to-youtube-deep-research-1782290355986",
+        "from": "youtube-fetch",
+        "to": "youtube-deep-research",
+        "relay": {
+          "mode": "auto_by_target_inputs",
+          "mappings": [
+            {
+              "sourceOutput": "source_url",
+              "targetInput": "source_url",
+              "resolver": "direct-url"
+            },
+            {
+              "sourceOutput": "metadata_file",
+              "targetInput": "source_url",
+              "resolver": "direct-url"
+            }
+          ],
+          "handoff_instruction": "把上游视频 URL 交给深度研究节点，metadata 只作为可选上下文。",
+          "node_execution_guide": {
+            "format": "markdown",
+            "prompt": "Use skill sop-youtube-deep-research to execute this downstream node.\n\n## Node Execution Guide\n- Edge: `youtube-fetch` → `youtube-deep-research`\n- Evaluation summary: 上游输出 source_url 直接匹配下游必需输入 source_url，metadata_file 可作为可选上下文。边缘指令清晰，无阻塞或兼容性问题。\n- Edge Handoff Instruction: 把上游视频 URL 交给深度研究节点，metadata 只作为可选上下文。\n\n### Upstream Artifacts\n- `source_url`: `raw/node-runs/{pipeline_id}/outputs/files/source-url.txt`\n  - Type: scalar (string, url)\n  - Role: primary_source\n- `metadata_file`: `raw/node-runs/{pipeline_id}/outputs/files/metadata.json`\n  - Type: file (json)\n  - Role: supporting_context\n\n### Execution Rules\n1. **Construct downstream input `source_url`**:\n   - Preferred: Use the upstream `source_url` scalar directly via direct-url resolver.\n   - Alternative: If `source_url` is unavailable, extract from `metadata_file` using JSON path `$.source_url` or `$.youtube_url`.\n2. **Materialize artifacts** before invoking the downstream skill.\n3. **Do not** pass `metadata_file` as primary input; it is optional context only.\n4. Ensure the resolved URL is a valid YouTube watch URL.\n\n### Downstream Required Inputs\n- `source_url`: URL string (required) – obtained as above.\n\n### Output Expectations\n- `analysis_file`: Markdown file at `raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md`\n- `transcript_file`: Text file at `raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt`\n\n### Error Handling\n- If neither source_url scalar nor valid JSON path yields a URL, fail with clear message.\n- Validate URL format before proceeding.\n\n### Post-Execution\n- Confirm output files exist and are non-empty.\n- Relay outputs to next edge if applicable."
+          },
+          "evaluation": {
+            "status": "ready",
+            "score": 0.94,
+            "confidence": 0.9,
+            "summary": "上游输出 source_url 直接匹配下游必需输入 source_url，metadata_file 可作为可选上下文。边缘指令清晰，无阻塞或兼容性问题。",
+            "decision": "can_run",
+            "evaluated_at": "2026-06-24T08:39:33Z",
+            "agent": {
+              "provider": "openai-compatible",
+              "model": "deepseek-v4-flash",
+              "used_ai": true
+            }
+          },
+          "resolved_handoff": {
+            "primary_artifacts": [
+              {
+                "from": "youtube-fetch.outputs.source_url",
+                "role": "primary_source",
+                "reason": "上游声明的直接可交付产物，为下游必需输入。"
+              }
+            ],
+            "supporting_artifacts": [
+              {
+                "from": "youtube-fetch.outputs.metadata_file",
+                "role": "supporting_context",
+                "reason": "边缘指令明确指定 metadata 为可选上下文，不应作为主输入。"
+              }
+            ],
+            "downstream_inputs": [
+              {
+                "to": "youtube-deep-research.inputs.source_url",
+                "construction": "直接使用上游 source_url 标量，或通过 metadata_file 的 JSON 路径解析 'source_url' 字段。推荐优先使用直接标量。"
+              }
+            ]
+          },
+          "test_plan": [
+            "物化上游 source_url 标量（从 source-url.txt 读取 URL）",
+            "物化上游 metadata_file（从 metadata.json 读取）作为备用",
+            "构造下游 source_url 输入（首选直接标量）",
+            "执行下游 skill sop-youtube-deep-research",
+            "校验 analysis_file 已生成且包含有效内容",
+            "校验 transcript_file 已生成且包含有效文本",
+            "记录边缘评估结果和执行指导"
+          ]
+        }
+      }
+    }
+  ],
+  "proposed": {
+    "id": "youtube-fetch-to-youtube-deep-research-1782290355986",
+    "from": "youtube-fetch",
+    "to": "youtube-deep-research",
+    "relay": {
+      "mode": "auto_by_target_inputs",
+      "mappings": [
+        {
+          "sourceOutput": "source_url",
+          "targetInput": "source_url",
+          "resolver": "direct-url"
+        },
+        {
+          "sourceOutput": "metadata_file",
+          "targetInput": "source_url",
+          "resolver": "direct-url"
+        }
+      ],
+      "handoff_instruction": "把上游视频 URL 交给深度研究节点，metadata 只作为可选上下文。",
+      "node_execution_guide": {
+        "format": "markdown",
+        "prompt": "Use skill sop-youtube-deep-research to execute this downstream node.\n\n## Node Execution Guide\n- Edge: `youtube-fetch` → `youtube-deep-research`\n- Evaluation summary: 上游输出 source_url 直接匹配下游必需输入 source_url，metadata_file 可作为可选上下文。边缘指令清晰，无阻塞或兼容性问题。\n- Edge Handoff Instruction: 把上游视频 URL 交给深度研究节点，metadata 只作为可选上下文。\n\n### Upstream Artifacts\n- `source_url`: `raw/node-runs/{pipeline_id}/outputs/files/source-url.txt`\n  - Type: scalar (string, url)\n  - Role: primary_source\n- `metadata_file`: `raw/node-runs/{pipeline_id}/outputs/files/metadata.json`\n  - Type: file (json)\n  - Role: supporting_context\n\n### Execution Rules\n1. **Construct downstream input `source_url`**:\n   - Preferred: Use the upstream `source_url` scalar directly via direct-url resolver.\n   - Alternative: If `source_url` is unavailable, extract from `metadata_file` using JSON path `$.source_url` or `$.youtube_url`.\n2. **Materialize artifacts** before invoking the downstream skill.\n3. **Do not** pass `metadata_file` as primary input; it is optional context only.\n4. Ensure the resolved URL is a valid YouTube watch URL.\n\n### Downstream Required Inputs\n- `source_url`: URL string (required) – obtained as above.\n\n### Output Expectations\n- `analysis_file`: Markdown file at `raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md`\n- `transcript_file`: Text file at `raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt`\n\n### Error Handling\n- If neither source_url scalar nor valid JSON path yields a URL, fail with clear message.\n- Validate URL format before proceeding.\n\n### Post-Execution\n- Confirm output files exist and are non-empty.\n- Relay outputs to next edge if applicable."
+      },
+      "evaluation": {
+        "status": "ready",
+        "score": 0.94,
+        "confidence": 0.9,
+        "summary": "上游输出 source_url 直接匹配下游必需输入 source_url，metadata_file 可作为可选上下文。边缘指令清晰，无阻塞或兼容性问题。",
+        "decision": "can_run",
+        "evaluated_at": "2026-06-24T08:39:33Z",
+        "agent": {
+          "provider": "openai-compatible",
+          "model": "deepseek-v4-flash",
+          "used_ai": true
+        }
+      },
+      "resolved_handoff": {
+        "primary_artifacts": [
+          {
+            "from": "youtube-fetch.outputs.source_url",
+            "role": "primary_source",
+            "reason": "上游声明的直接可交付产物，为下游必需输入。"
+          }
+        ],
+        "supporting_artifacts": [
+          {
+            "from": "youtube-fetch.outputs.metadata_file",
+            "role": "supporting_context",
+            "reason": "边缘指令明确指定 metadata 为可选上下文，不应作为主输入。"
+          }
+        ],
+        "downstream_inputs": [
+          {
+            "to": "youtube-deep-research.inputs.source_url",
+            "construction": "直接使用上游 source_url 标量，或通过 metadata_file 的 JSON 路径解析 'source_url' 字段。推荐优先使用直接标量。"
+          }
+        ]
+      },
+      "test_plan": [
+        "物化上游 source_url 标量（从 source-url.txt 读取 URL）",
+        "物化上游 metadata_file（从 metadata.json 读取）作为备用",
+        "构造下游 source_url 输入（首选直接标量）",
+        "执行下游 skill sop-youtube-deep-research",
+        "校验 analysis_file 已生成且包含有效内容",
+        "校验 transcript_file 已生成且包含有效文本",
+        "记录边缘评估结果和执行指导"
+      ]
+    }
+  },
+  "evaluation_summary": {
+    "status": "ready",
+    "score": 0.94,
+    "confidence": 0.9,
+    "summary": "上游输出 source_url 直接匹配下游必需输入 source_url，metadata_file 可作为可选上下文。边缘指令清晰，无阻塞或兼容性问题。",
+    "used_ai": true
+  },
+  "notes": [
+    "This draft does not modify runtime sop.yaml.",
+    "Apply/publish must be handled by a repo-first change in agent-brain-plugins.",
+    "The Node Execution Guide must be carried into downstream Hermes skill execution in the runtime execution phase."
+  ]
+}

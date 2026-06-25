@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "draft_type": "save_evaluated_edge",
+  "draft_id": "youtube-fetch-to-youtube-deep-research-public-verify-edge-20260624T082221Z",
+  "workflow_id": "youtube-research-wiki",
+  "edge_id": "youtube-fetch-to-youtube-deep-research-public-verify",
+  "created_at": "2026-06-24T08:22:21.094984+00:00",
+  "save_target": "agent-brain-plugins",
+  "targets": {
+    "runtime_sop_file": "/root/wiki/wiki-sop-new-instance/sop.yaml",
+    "project_template_sop_yaml": "/root/agent-brain-plugins/youtube-wiki/templates/wiki-repo/sop.yaml",
+    "project_workflow_id": "youtube-research-wiki",
+    "save_owner": "agent-brain-plugins"
+  },
+  "change_summary": [
+    {
+      "field": "edges.youtube-fetch-to-youtube-deep-research-public-verify",
+      "before": "missing_or_unpublished",
+      "after": {
+        "id": "youtube-fetch-to-youtube-deep-research-public-verify",
+        "from": "youtube-fetch",
+        "to": "youtube-deep-research",
+        "relay": {
+          "mode": "auto_by_target_inputs",
+          "mappings": [],
+          "handoff_instruction": "把 source_url 作为 YouTube 深度研究目标视频地址，metadata 只作为可选上下文。",
+          "node_execution_guide": {
+            "format": "markdown",
+            "prompt": "Use skill sop-youtube-deep-research to execute this downstream node.\n\n## 节点执行指南\n- 边缘：youtube-fetch → youtube-deep-research\n- 评估摘要：上下游存在直接输入输出映射，边缘交接指令清晰。\n- 交接指令：将 source_url 作为 YouTube 深度研究目标视频地址，metadata 只作为可选上下文。\n\n## 上游产物\n1. **source_url**：`raw/node-runs/{pipeline_id}/outputs/files/source-url.txt`\n   - 角色：主要源数据，包含目标视频 URL。\n   - 使用方式：下游节点直接读取该文件作为 source_url 输入。\n2. **metadata_file**：`raw/node-runs/{pipeline_id}/outputs/files/metadata.json`\n   - 角色：可选上下文，如不需要可忽略。\n\n## 执行规则\n- 使用已解析的边缘输入和上游文件路径。\n- 不得绕过当前节点定义的输入契约。\n- 执行完成后，验证下游输出文件是否按预期生成。\n\n## 下游输入构造\n- `source_url`：由上游 source_url 文件自动解析，支持 file:text 或 file:json 格式。\n- 如果上游 URL 为空，则执行失败。\n\n## 校验点\n- 确认下游 analysis.md 和 transcript.txt 已生成。\n- 确保节点工作区内没有残留敏感数据。"
+          },
+          "evaluation": {
+            "status": "ready",
+            "score": 0.95,
+            "confidence": 0.9,
+            "summary": "上下游存在直接输入输出映射，边缘交接指令清晰，可交付节点执行指南。",
+            "decision": "can_run",
+            "evaluated_at": "2026-06-24T08:22:20Z",
+            "agent": {
+              "provider": "openai-compatible",
+              "model": "deepseek-v4-flash",
+              "used_ai": true
+            }
+          },
+          "resolved_handoff": {
+            "primary_artifacts": [
+              {
+                "from": "youtube-fetch.outputs.source_url",
+                "role": "primary_source",
+                "reason": "上游声明的可交付产物，直接对应下游关键输入。"
+              }
+            ],
+            "supporting_artifacts": [
+              {
+                "from": "youtube-fetch.outputs.metadata_file",
+                "role": "supporting_context",
+                "reason": "metadata 只作为可选上下文，不强制传递给下游。"
+              }
+            ],
+            "downstream_inputs": [
+              {
+                "to": "youtube-deep-research.inputs.source_url",
+                "construction": "由上游声明的 source_url 直接映射，下游解析器可处理文件类型。"
+              }
+            ]
+          },
+          "test_plan": [
+            "检查上游 source_url 文件是否存在且有效",
+            "将 source_url 路径传入下游输入解析器",
+            "执行下游 sop-youtube-deep-research skill",
+            "验证下游 analysis.md 和 transcript.txt 输出",
+            "记录边缘评估及执行日志"
+          ]
+        }
+      }
+    }
+  ],
+  "proposed": {
+    "id": "youtube-fetch-to-youtube-deep-research-public-verify",
+    "from": "youtube-fetch",
+    "to": "youtube-deep-research",
+    "relay": {
+      "mode": "auto_by_target_inputs",
+      "mappings": [],
+      "handoff_instruction": "把 source_url 作为 YouTube 深度研究目标视频地址，metadata 只作为可选上下文。",
+      "node_execution_guide": {
+        "format": "markdown",
+        "prompt": "Use skill sop-youtube-deep-research to execute this downstream node.\n\n## 节点执行指南\n- 边缘：youtube-fetch → youtube-deep-research\n- 评估摘要：上下游存在直接输入输出映射，边缘交接指令清晰。\n- 交接指令：将 source_url 作为 YouTube 深度研究目标视频地址，metadata 只作为可选上下文。\n\n## 上游产物\n1. **source_url**：`raw/node-runs/{pipeline_id}/outputs/files/source-url.txt`\n   - 角色：主要源数据，包含目标视频 URL。\n   - 使用方式：下游节点直接读取该文件作为 source_url 输入。\n2. **metadata_file**：`raw/node-runs/{pipeline_id}/outputs/files/metadata.json`\n   - 角色：可选上下文，如不需要可忽略。\n\n## 执行规则\n- 使用已解析的边缘输入和上游文件路径。\n- 不得绕过当前节点定义的输入契约。\n- 执行完成后，验证下游输出文件是否按预期生成。\n\n## 下游输入构造\n- `source_url`：由上游 source_url 文件自动解析，支持 file:text 或 file:json 格式。\n- 如果上游 URL 为空，则执行失败。\n\n## 校验点\n- 确认下游 analysis.md 和 transcript.txt 已生成。\n- 确保节点工作区内没有残留敏感数据。"
+      },
+      "evaluation": {
+        "status": "ready",
+        "score": 0.95,
+        "confidence": 0.9,
+        "summary": "上下游存在直接输入输出映射，边缘交接指令清晰，可交付节点执行指南。",
+        "decision": "can_run",
+        "evaluated_at": "2026-06-24T08:22:20Z",
+        "agent": {
+          "provider": "openai-compatible",
+          "model": "deepseek-v4-flash",
+          "used_ai": true
+        }
+      },
+      "resolved_handoff": {
+        "primary_artifacts": [
+          {
+            "from": "youtube-fetch.outputs.source_url",
+            "role": "primary_source",
+            "reason": "上游声明的可交付产物，直接对应下游关键输入。"
+          }
+        ],
+        "supporting_artifacts": [
+          {
+            "from": "youtube-fetch.outputs.metadata_file",
+            "role": "supporting_context",
+            "reason": "metadata 只作为可选上下文，不强制传递给下游。"
+          }
+        ],
+        "downstream_inputs": [
+          {
+            "to": "youtube-deep-research.inputs.source_url",
+            "construction": "由上游声明的 source_url 直接映射，下游解析器可处理文件类型。"
+          }
+        ]
+      },
+      "test_plan": [
+        "检查上游 source_url 文件是否存在且有效",
+        "将 source_url 路径传入下游输入解析器",
+        "执行下游 sop-youtube-deep-research skill",
+        "验证下游 analysis.md 和 transcript.txt 输出",
+        "记录边缘评估及执行日志"
+      ]
+    }
+  },
+  "evaluation_summary": {
+    "status": "ready",
+    "score": 0.95,
+    "confidence": 0.9,
+    "summary": "上下游存在直接输入输出映射，边缘交接指令清晰，可交付节点执行指南。",
+    "used_ai": true
+  },
+  "notes": [
+    "This draft does not modify runtime sop.yaml.",
+    "Apply/publish must be handled by a repo-first change in agent-brain-plugins.",
+    "The Node Execution Guide must be carried into downstream Hermes skill execution in the runtime execution phase."
+  ]
+}

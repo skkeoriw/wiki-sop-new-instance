@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "draft_type": "save_evaluated_edge",
+  "draft_id": "youtube-fetch-to-youtube-deep-research-1782366870224-edge-20260625T071815Z",
+  "workflow_id": "youtube-research-wiki",
+  "edge_id": "youtube-fetch-to-youtube-deep-research-1782366870224",
+  "created_at": "2026-06-25T07:18:15.829255+00:00",
+  "save_target": "agent-brain-plugins",
+  "targets": {
+    "runtime_sop_file": "/root/wiki/wiki-sop-new-instance/sop.yaml",
+    "project_template_sop_yaml": "/root/agent-brain-plugins/youtube-wiki/templates/wiki-repo/sop.yaml",
+    "project_workflow_id": "youtube-research-wiki",
+    "save_owner": "agent-brain-plugins"
+  },
+  "change_summary": [
+    {
+      "field": "edges.youtube-fetch-to-youtube-deep-research-1782366870224",
+      "before": "missing_or_unpublished",
+      "after": {
+        "id": "youtube-fetch-to-youtube-deep-research-1782366870224",
+        "from": "youtube-fetch",
+        "to": "youtube-deep-research",
+        "relay": {
+          "mode": "auto_by_target_inputs",
+          "mappings": [
+            {
+              "sourceOutput": "source_url",
+              "targetInput": "source_url",
+              "resolver": "direct-url"
+            },
+            {
+              "sourceOutput": "metadata_file",
+              "targetInput": "source_url",
+              "resolver": "direct-url"
+            }
+          ],
+          "handoff_instruction": "将 youtube-fetch 输出的 source_url 直接传递给 youtube-deep-research 的 source_url 输入；metadata_file 作为补充上下文不作为主输入，但可通过 json_path 解析器从中提取 source_url 备用。",
+          "node_execution_guide": {
+            "format": "markdown",
+            "prompt": "Use skill sop-youtube-deep-research to execute this downstream node.\n\n## Node Execution Guide\n- Edge: youtube-fetch -> youtube-deep-research\n- Evaluation summary: 上下游存在显式映射，且下游输入接受多种解析方式，可稳定执行。\n- Edge Handoff Instruction: 将 youtube-fetch 输出的 source_url 直接传递给 youtube-deep-research 的 source_url 输入；metadata_file 作为补充上下文不作为主输入，但可通过 json_path 解析器从中提取 source_url 备用。\n\n### Upstream artifacts\n- **source_url**: `raw/node-runs/{pipeline_id}/outputs/files/source-url.txt` (text file containing the URL)\n- **metadata_file**: `raw/node-runs/{pipeline_id}/outputs/files/metadata.json` (JSON file with possible fields like source_url, youtube_url)\n\n### Input construction for downstream\n- **Primary**: Directly use the content of `source-url.txt` as the value for `source_url` input.\n- **Fallback**: If `source-url.txt` is unavailable, parse `metadata.json` using json_path `$.source_url` or `$.youtube_url` to extract the URL.\n\n### Execution steps\n1. Retrieve the upstream artifacts from the resolved paths.\n2. Determine the `source_url` value using the primary or fallback method.\n3. Invoke `sop-youtube-deep-research` with the constructed input.\n4. Ensure outputs are saved to the designated paths.\n\n### Notes\n- The `source_url` is required; the metadata_file is optional and only serves as backup.\n- All file paths are relative to the instance workspace."
+          },
+          "evaluation": {
+            "status": "ready",
+            "score": 0.95,
+            "confidence": 0.9,
+            "summary": "上下游存在显式映射，且下游输入接受多种解析方式，可稳定执行。",
+            "decision": "can_run",
+            "evaluated_at": "2026-06-25T07:17:46Z",
+            "agent": {
+              "provider": "openai-compatible",
+              "model": "deepseek-v4-flash",
+              "used_ai": true
+            }
+          },
+          "resolved_handoff": {
+            "primary_artifacts": [
+              {
+                "from": "youtube-fetch.outputs.source_url",
+                "role": "primary_source",
+                "reason": "上游直接输出，与下游必需输入同名且类型匹配。"
+              }
+            ],
+            "supporting_artifacts": [
+              {
+                "from": "youtube-fetch.outputs.metadata_file",
+                "role": "supporting_context",
+                "reason": "可作为补充上下文，下游可通过 json_path 解析器从中提取 source_url。"
+              }
+            ],
+            "downstream_inputs": [
+              {
+                "to": "youtube-deep-research.inputs.source_url",
+                "construction": "直接使用上游 source_url 输出，或从 metadata_file 中通过 json_path 提取。"
+              }
+            ]
+          },
+          "test_plan": [
+            "物化 Edge 输入",
+            "执行下游 skill",
+            "校验声明输出",
+            "记录 edge evaluation 和 guide"
+          ]
+        }
+      }
+    }
+  ],
+  "proposed": {
+    "id": "youtube-fetch-to-youtube-deep-research-1782366870224",
+    "from": "youtube-fetch",
+    "to": "youtube-deep-research",
+    "relay": {
+      "mode": "auto_by_target_inputs",
+      "mappings": [
+        {
+          "sourceOutput": "source_url",
+          "targetInput": "source_url",
+          "resolver": "direct-url"
+        },
+        {
+          "sourceOutput": "metadata_file",
+          "targetInput": "source_url",
+          "resolver": "direct-url"
+        }
+      ],
+      "handoff_instruction": "将 youtube-fetch 输出的 source_url 直接传递给 youtube-deep-research 的 source_url 输入；metadata_file 作为补充上下文不作为主输入，但可通过 json_path 解析器从中提取 source_url 备用。",
+      "node_execution_guide": {
+        "format": "markdown",
+        "prompt": "Use skill sop-youtube-deep-research to execute this downstream node.\n\n## Node Execution Guide\n- Edge: youtube-fetch -> youtube-deep-research\n- Evaluation summary: 上下游存在显式映射，且下游输入接受多种解析方式，可稳定执行。\n- Edge Handoff Instruction: 将 youtube-fetch 输出的 source_url 直接传递给 youtube-deep-research 的 source_url 输入；metadata_file 作为补充上下文不作为主输入，但可通过 json_path 解析器从中提取 source_url 备用。\n\n### Upstream artifacts\n- **source_url**: `raw/node-runs/{pipeline_id}/outputs/files/source-url.txt` (text file containing the URL)\n- **metadata_file**: `raw/node-runs/{pipeline_id}/outputs/files/metadata.json` (JSON file with possible fields like source_url, youtube_url)\n\n### Input construction for downstream\n- **Primary**: Directly use the content of `source-url.txt` as the value for `source_url` input.\n- **Fallback**: If `source-url.txt` is unavailable, parse `metadata.json` using json_path `$.source_url` or `$.youtube_url` to extract the URL.\n\n### Execution steps\n1. Retrieve the upstream artifacts from the resolved paths.\n2. Determine the `source_url` value using the primary or fallback method.\n3. Invoke `sop-youtube-deep-research` with the constructed input.\n4. Ensure outputs are saved to the designated paths.\n\n### Notes\n- The `source_url` is required; the metadata_file is optional and only serves as backup.\n- All file paths are relative to the instance workspace."
+      },
+      "evaluation": {
+        "status": "ready",
+        "score": 0.95,
+        "confidence": 0.9,
+        "summary": "上下游存在显式映射，且下游输入接受多种解析方式，可稳定执行。",
+        "decision": "can_run",
+        "evaluated_at": "2026-06-25T07:17:46Z",
+        "agent": {
+          "provider": "openai-compatible",
+          "model": "deepseek-v4-flash",
+          "used_ai": true
+        }
+      },
+      "resolved_handoff": {
+        "primary_artifacts": [
+          {
+            "from": "youtube-fetch.outputs.source_url",
+            "role": "primary_source",
+            "reason": "上游直接输出，与下游必需输入同名且类型匹配。"
+          }
+        ],
+        "supporting_artifacts": [
+          {
+            "from": "youtube-fetch.outputs.metadata_file",
+            "role": "supporting_context",
+            "reason": "可作为补充上下文，下游可通过 json_path 解析器从中提取 source_url。"
+          }
+        ],
+        "downstream_inputs": [
+          {
+            "to": "youtube-deep-research.inputs.source_url",
+            "construction": "直接使用上游 source_url 输出，或从 metadata_file 中通过 json_path 提取。"
+          }
+        ]
+      },
+      "test_plan": [
+        "物化 Edge 输入",
+        "执行下游 skill",
+        "校验声明输出",
+        "记录 edge evaluation 和 guide"
+      ]
+    }
+  },
+  "evaluation_summary": {
+    "status": "ready",
+    "score": 0.95,
+    "confidence": 0.9,
+    "summary": "上下游存在显式映射，且下游输入接受多种解析方式，可稳定执行。",
+    "used_ai": true
+  },
+  "notes": [
+    "This draft does not modify runtime sop.yaml.",
+    "Apply/publish must be handled by a repo-first change in agent-brain-plugins.",
+    "The Node Execution Guide must be carried into downstream Hermes skill execution in the runtime execution phase."
+  ]
+}

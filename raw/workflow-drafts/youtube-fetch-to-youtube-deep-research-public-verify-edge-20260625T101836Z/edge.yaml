@@ -1,0 +1,69 @@
+id: youtube-fetch-to-youtube-deep-research-public-verify
+from: youtube-fetch
+to: youtube-deep-research
+relay:
+  mode: auto_by_target_inputs
+  mappings: []
+  handoff_instruction: 把上游视频 URL 交给 YouTube 深度研究节点，metadata 只作为可选上下文。
+  node_execution_guide:
+    format: markdown
+    prompt: 'Use skill sop-youtube-deep-research to execute this downstream node.
+
+
+      Node Execution Guide
+
+      - Edge: youtube-fetch -> youtube-deep-research
+
+      - Evaluation summary: 上下游存在显式引用或同名输入输出，可稳定生成节点执行指导文档。
+
+      - Edge Handoff Instruction: 把上游视频 URL 交给 YouTube 深度研究节点，metadata 只作为可选上下文。
+
+
+      Upstream artifacts
+
+      - source_url: raw/node-runs/{pipeline_id}/outputs/files/source-url.txt
+
+      - metadata_file: raw/node-runs/{pipeline_id}/outputs/files/metadata.json
+
+
+      Execution rules
+
+      - Use only the resolved Edge inputs and materialized artifacts.
+
+      - For source_url, read the content of source-url.txt and use it as the source_url
+      input to youtube-deep-research.
+
+      - Optionally, read metadata.json and pass it as supporting context; the downstream
+      node''s resolvers can extract source_url from it if needed.
+
+      - Run the node execution command without modifications.
+
+      - Verify outputs: analysis.md and transcript.txt are produced in expected paths.'
+  evaluation:
+    status: ready
+    score: 0.92
+    confidence: 0.86
+    summary: 上下游存在显式引用或同名输入输出，可稳定生成节点执行指导文档。
+    decision: can_run
+    evaluated_at: '2026-06-25T10:18:15Z'
+    agent:
+      provider: openai-compatible
+      model: deepseek-v4-flash
+      used_ai: true
+  resolved_handoff:
+    primary_artifacts:
+    - from: youtube-fetch.outputs.source_url
+      role: primary_source
+      reason: 上游声明的可交付产物。
+    supporting_artifacts:
+    - from: youtube-fetch.outputs.metadata_file
+      role: supporting_context
+      reason: 该产物适合作为补充上下文，不应默认成为下游主输入。
+    downstream_inputs:
+    - to: youtube-deep-research.inputs.source_url
+      construction: 由显式契约直接构造。
+  test_plan:
+  - 物化 Edge 输入
+  - 执行下游 skill
+  - 校验声明输出
+  - 记录 edge evaluation 和 guide

@@ -1,0 +1,533 @@
+--- /root/agent-brain-plugins/youtube-wiki/templates/wiki-repo/sop.yaml
++++ /root/agent-brain-plugins/youtube-wiki/templates/wiki-repo/sop.yaml (candidate)
+@@ -1,20 +1,17 @@
+ name: youtube-research-wiki
+-version: "2.0"
++version: '2.0'
+ id: youtube-research-wiki
+ title: YouTube Wiki SOP
+ wiki_local_path: .
+ repo: __WIKI_GITHUB_REPO__
+-
+ notify:
+   telegram:
+     token_env: YOUTUBE_WIKI_TG_TOKEN
+-    chat_id: "6938920500"
+-
++    chat_id: '6938920500'
+ terminal_paths:
+-  - wiki/**
+-  - log.md
+-  - logs/pipeline-runs/**
+-
++- wiki/**
++- log.md
++- logs/pipeline-runs/**
+ nodes:
+   youtube-fetch:
+     title: YouTube 元数据获取
+@@ -47,13 +44,13 @@
+       tg_notify: true
+       log_record: true
+     params: {}
+-
+   notebooklm-research:
+     title: NotebookLM 研究
+     skill: sop-notebooklm-research
+     webhook_route: sop-notebooklm-research
+     mode: blocking
+-    needs: [youtube-fetch]
++    needs:
++    - youtube-fetch
+     trigger:
+       type: file
+       path: raw/youtube-metadata/**
+@@ -68,18 +65,20 @@
+       log_record: true
+     params:
+       notebooklm:
+-        outputs: [report, mindmap]
++        outputs:
++        - report
++        - mindmap
+         language: zh_Hans
+         notebook_title: youtube-video-research-wiki
+-        report_prompt: "请深度研究这个视频，提炼技术架构、核心观点、关键论据，以及对行业的影响。生成结构化中文研究报告。"
+-        mindmap_prompt: "基于视频内容生成清晰的中文思维导图，突出核心概念之间的关系与层级。"
+-
++        report_prompt: 请深度研究这个视频，提炼技术架构、核心观点、关键论据，以及对行业的影响。生成结构化中文研究报告。
++        mindmap_prompt: 基于视频内容生成清晰的中文思维导图，突出核心概念之间的关系与层级。
+   youtube-deep-research:
+     title: YouTube 深度研究
+     skill: sop-youtube-deep-research
+     webhook_route: sop-youtube-deep-research
+     mode: sidecar
+-    needs: [youtube-fetch]
++    needs:
++    - youtube-fetch
+     trigger:
+       type: file
+       path: raw/youtube-metadata/**
+@@ -90,17 +89,17 @@
+         type: string
+         value_type: url
+         resolvers:
+-          - id: direct-url
+-            kind: direct
+-          - id: metadata-source-url
+-            kind: json_path
+-            path: $.source_url
+-          - id: metadata-youtube-url
+-            kind: json_path
+-            path: $.youtube_url
+-          - id: text-url
+-            kind: regex
+-            pattern: 'https?://(?:www\.)?(?:youtube\.com/watch\?v=[A-Za-z0-9_-]+[^\s"''<>)]*|youtu\.be/[A-Za-z0-9_-]+[^\s"''<>)]*)'
++        - id: direct-url
++          kind: direct
++        - id: metadata-source-url
++          kind: json_path
++          path: $.source_url
++        - id: metadata-youtube-url
++          kind: json_path
++          path: $.youtube_url
++        - id: text-url
++          kind: regex
++          pattern: https?://(?:www\.)?(?:youtube\.com/watch\?v=[A-Za-z0-9_-]+[^\s"'<>)]*|youtu\.be/[A-Za-z0-9_-]+[^\s"'<>)]*)
+     outputs:
+       analysis_file:
+         path: raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md
+@@ -123,26 +122,28 @@
+         managed_by: runtime-harness
+         editable: true
+         save_scope: node-definition
+-        description: Persist this node's workspace outputs to the current Instance repo.
++        description: Persist this node's workspace outputs to the current Instance
++          repo.
+         paths:
+-          - raw/youtube-deep-research/{pipeline_id}/outputs/**
+-          - raw/youtube-deep-research/{pipeline_id}/raw/**
++        - raw/youtube-deep-research/{pipeline_id}/outputs/**
++        - raw/youtube-deep-research/{pipeline_id}/raw/**
+       telegram:
+         enabled: true
+         required: false
+         managed_by: runtime-harness
+         editable: true
+         save_scope: node-definition
+-        description: Send progress notifications through the current Instance Telegram config.
++        description: Send progress notifications through the current Instance Telegram
++          config.
+         trigger: stage-lifecycle
+         triggers:
+-          - start
+-          - done
+-          - failed
++        - start
++        - done
++        - failed
+     actions:
+-      - stage_runner on_start 记录节点开始状态，并按 capability 配置发送开始通知。
+-      - 执行节点 Skill 业务逻辑，生成声明 outputs 和业务 artifacts。
+-      - stage_runner on_done/on_failed 记录结果、校验产物，并按 capability 配置处理 GitHub / Telegram。
++    - stage_runner on_start 记录节点开始状态，并按 capability 配置发送开始通知。
++    - 执行节点 Skill 业务逻辑，生成声明 outputs 和业务 artifacts。
++    - stage_runner on_done/on_failed 记录结果、校验产物，并按 capability 配置处理 GitHub / Telegram。
+     infra:
+       tg_notify: true
+       git_record: true
+@@ -150,13 +151,13 @@
+     params:
+       workflow:
+         output_dir: raw/youtube-deep-research
+-
+   wiki-build:
+     title: Wiki 知识图谱构建
+     skill: sop-wiki-build
+     webhook_route: sop-wiki-build
+     mode: blocking
+-    needs: [notebooklm-research]
++    needs:
++    - notebooklm-research
+     trigger:
+       type: file
+       path: raw/notebooklm-analysis/**
+@@ -197,13 +198,13 @@
+         max_entities: 10
+         max_concepts: 29
+         min_importance_score: 0.65
+-
+   tg-notify:
+     title: Telegram 通知
+     skill: sop-tg-notify
+     webhook_route: sop-tg-notify
+     mode: blocking
+-    needs: [wiki-build]
++    needs:
++    - wiki-build
+     trigger:
+       type: file
+       path: index.md
+@@ -222,14 +223,14 @@
+         type: string
+         value_type: text
+         resolvers:
+-          - id: direct-text
+-            kind: direct
+-          - id: metadata-title
+-            kind: json_path
+-            path: $.title
+-          - id: metadata-description
+-            kind: json_path
+-            path: $.description
++        - id: direct-text
++          kind: direct
++        - id: metadata-title
++          kind: json_path
++          path: $.title
++        - id: metadata-description
++          kind: json_path
++          path: $.description
+     outputs:
+       telegram_message:
+         path: logs/pipeline-runs/pipe-{run_id}.json
+@@ -242,7 +243,6 @@
+       log_record: true
+     params:
+       build_mode: notify
+-
+   retry:
+     title: 手动重试
+     skill: sop-retry
+@@ -255,136 +255,200 @@
+       tg_notify: true
+       log_record: true
+     params: {}
+-
+ edges:
+-  - id: edge-youtube-fetch-to-youtube-deep-research
+-    from: youtube-fetch
+-    to: youtube-deep-research
+-    relay:
+-      intent:
+-        title: 将视频地址交给深度研究节点
+-        brief: 下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。
+-      bindings:
+-        - target_input: source_url
+-          required: true
+-          source:
+-            node: youtube-fetch
+-            output: source_url
+-            extractor:
+-              id: direct-url
+-              kind: direct
+-      resolver:
+-        strategy: explicit_first
+-        fallback: block
+-      validation:
+-        on_missing_required: block
+-        on_multiple_candidates: needs_review
+-        on_type_mismatch: block
+-
+-  - id: edge-youtube-fetch-title-to-tg-notify
+-    from: youtube-fetch
+-    to: tg-notify
+-    relay:
+-      intent:
+-        title: 将视频标题作为通知内容
+-        brief: 这条边只用于测试或自定义工作流，将 metadata_file 中的视频标题提取成 Telegram 文本消息。
+-      bindings:
+-        - target_input: message
+-          required: true
+-          source:
+-            node: youtube-fetch
+-            output: metadata_file
+-            extractor:
+-              id: metadata-title
+-              kind: json_path
+-              path: $.title
+-      resolver:
+-        strategy: explicit_first
+-        fallback: needs_review
+-      validation:
+-        on_missing_required: block
+-        on_multiple_candidates: needs_review
+-        on_type_mismatch: block
+-
+-  - id: edge-youtube-deep-research-to-wiki-build
+-    from: youtube-deep-research
+-    to: wiki-build
+-    relay:
+-      intent:
+-        title: 将深度研究产物交给 Wiki 构建节点
+-        brief: 将 analysis_file 作为 Wiki 构建的 deep_research 补充材料；transcript_file 可在自定义边中作为补充上下文。
+-      bindings:
+-        - target_input: deep_research
+-          required: false
+-          source:
+-            node: youtube-deep-research
+-            output: analysis_file
+-            extractor:
+-              id: direct-file
+-              kind: direct
+-      resolver:
+-        strategy: explicit_first
+-        fallback: needs_review
+-      validation:
+-        on_missing_required: needs_review
+-        on_multiple_candidates: needs_review
+-        on_type_mismatch: needs_review
+-
++- id: youtube-fetch-to-youtube-deep-research-1782366870224
++  from: youtube-fetch
++  to: youtube-deep-research
++  relay:
++    mode: auto_by_target_inputs
++    mappings:
++    - sourceOutput: source_url
++      targetInput: source_url
++      resolver: direct-url
++    - sourceOutput: metadata_file
++      targetInput: source_url
++      resolver: direct-url
++    handoff_instruction: 将 youtube-fetch 输出的 source_url 直接传递给 youtube-deep-research
++      的 source_url 输入；metadata_file 作为补充上下文不作为主输入，但可通过 json_path 解析器从中提取 source_url
++      备用。
++    node_execution_guide:
++      format: markdown
++      prompt: 'Use skill sop-youtube-deep-research to execute this downstream node.
++
++
++        ## Node Execution Guide
++
++        - Edge: youtube-fetch -> youtube-deep-research
++
++        - Evaluation summary: 上下游存在显式映射，且下游输入接受多种解析方式，可稳定执行。
++
++        - Edge Handoff Instruction: 将 youtube-fetch 输出的 source_url 直接传递给 youtube-deep-research
++        的 source_url 输入；metadata_file 作为补充上下文不作为主输入，但可通过 json_path 解析器从中提取 source_url
++        备用。
++
++
++        ### Upstream artifacts
++
++        - **source_url**: `raw/node-runs/{pipeline_id}/outputs/files/source-url.txt`
++        (text file containing the URL)
++
++        - **metadata_file**: `raw/node-runs/{pipeline_id}/outputs/files/metadata.json`
++        (JSON file with possible fields like source_url, youtube_url)
++
++
++        ### Input construction for downstream
++
++        - **Primary**: Directly use the content of `source-url.txt` as the value for
++        `source_url` input.
++
++        - **Fallback**: If `source-url.txt` is unavailable, parse `metadata.json`
++        using json_path `$.source_url` or `$.youtube_url` to extract the URL.
++
++
++        ### Execution steps
++
++        1. Retrieve the upstream artifacts from the resolved paths.
++
++        2. Determine the `source_url` value using the primary or fallback method.
++
++        3. Invoke `sop-youtube-deep-research` with the constructed input.
++
++        4. Ensure outputs are saved to the designated paths.
++
++
++        ### Notes
++
++        - The `source_url` is required; the metadata_file is optional and only serves
++        as backup.
++
++        - All file paths are relative to the instance workspace.'
++    evaluation:
++      status: ready
++      score: 0.95
++      confidence: 0.9
++      summary: 上下游存在显式映射，且下游输入接受多种解析方式，可稳定执行。
++      decision: can_run
++      evaluated_at: '2026-06-25T07:17:46Z'
++      agent:
++        provider: openai-compatible
++        model: deepseek-v4-flash
++        used_ai: true
++    resolved_handoff:
++      primary_artifacts:
++      - from: youtube-fetch.outputs.source_url
++        role: primary_source
++        reason: 上游直接输出，与下游必需输入同名且类型匹配。
++      supporting_artifacts:
++      - from: youtube-fetch.outputs.metadata_file
++        role: supporting_context
++        reason: 可作为补充上下文，下游可通过 json_path 解析器从中提取 source_url。
++      downstream_inputs:
++      - to: youtube-deep-research.inputs.source_url
++        construction: 直接使用上游 source_url 输出，或从 metadata_file 中通过 json_path 提取。
++    test_plan:
++    - 物化 Edge 输入
++    - 执行下游 skill
++    - 校验声明输出
++    - 记录 edge evaluation 和 guide
++- id: edge-youtube-fetch-title-to-tg-notify
++  from: youtube-fetch
++  to: tg-notify
++  relay:
++    intent:
++      title: 将视频标题作为通知内容
++      brief: 这条边只用于测试或自定义工作流，将 metadata_file 中的视频标题提取成 Telegram 文本消息。
++    bindings:
++    - target_input: message
++      required: true
++      source:
++        node: youtube-fetch
++        output: metadata_file
++        extractor:
++          id: metadata-title
++          kind: json_path
++          path: $.title
++    resolver:
++      strategy: explicit_first
++      fallback: needs_review
++    validation:
++      on_missing_required: block
++      on_multiple_candidates: needs_review
++      on_type_mismatch: block
++- id: edge-youtube-deep-research-to-wiki-build
++  from: youtube-deep-research
++  to: wiki-build
++  relay:
++    intent:
++      title: 将深度研究产物交给 Wiki 构建节点
++      brief: 将 analysis_file 作为 Wiki 构建的 deep_research 补充材料；transcript_file 可在自定义边中作为补充上下文。
++    bindings:
++    - target_input: deep_research
++      required: false
++      source:
++        node: youtube-deep-research
++        output: analysis_file
++        extractor:
++          id: direct-file
++          kind: direct
++    resolver:
++      strategy: explicit_first
++      fallback: needs_review
++    validation:
++      on_missing_required: needs_review
++      on_multiple_candidates: needs_review
++      on_type_mismatch: needs_review
+ pipeline:
+-  - stage: youtube-fetch
+-    trigger: raw/youtube-links/**
+-    webhook_route: sop-youtube-fetch
+-    infra:
+-      tg_notify: true
+-      log_record: true
+-    params: {}
+-
+-  - stage: notebooklm-research
+-    trigger: raw/youtube-metadata/**
+-    webhook_route: sop-notebooklm-research
+-    infra:
+-      tg_notify: true
+-      log_record: true
+-    params:
+-      notebooklm:
+-        outputs: [report, mindmap]
+-        language: zh_Hans
+-        notebook_title: youtube-video-research-wiki
+-        report_prompt: "请深度研究这个视频，提炼技术架构、核心观点、关键论据，以及对行业的影响。生成结构化中文研究报告。"
+-        mindmap_prompt: "基于视频内容生成清晰的中文思维导图，突出核心概念之间的关系与层级。"
+-
+-  - stage: youtube-deep-research
+-    trigger: raw/youtube-metadata/**
+-    webhook_route: sop-youtube-deep-research
+-    infra:
+-      tg_notify: true
+-      log_record: true
+-    params:
+-      workflow:
+-        output_dir: raw/youtube-deep-research
+-
+-  - stage: wiki-build
+-    trigger: raw/notebooklm-analysis/**
+-    webhook_route: sop-wiki-build
+-    infra:
+-      tg_notify: false
+-      log_record: true
+-    params:
+-      build_mode: incremental
+-
+-  - stage: tg-notify
+-    trigger: index.md
+-    webhook_route: sop-tg-notify
+-    infra:
+-      tg_notify: true
+-      log_record: true
+-    params:
+-      build_mode: notify
+-
+-  - stage: retry
+-    trigger: raw/retry/**
+-    webhook_route: sop-retry
+-    infra:
+-      tg_notify: true
+-      log_record: true
+-    params: {}
++- stage: youtube-fetch
++  trigger: raw/youtube-links/**
++  webhook_route: sop-youtube-fetch
++  infra:
++    tg_notify: true
++    log_record: true
++  params: {}
++- stage: notebooklm-research
++  trigger: raw/youtube-metadata/**
++  webhook_route: sop-notebooklm-research
++  infra:
++    tg_notify: true
++    log_record: true
++  params:
++    notebooklm:
++      outputs:
++      - report
++      - mindmap
++      language: zh_Hans
++      notebook_title: youtube-video-research-wiki
++      report_prompt: 请深度研究这个视频，提炼技术架构、核心观点、关键论据，以及对行业的影响。生成结构化中文研究报告。
++      mindmap_prompt: 基于视频内容生成清晰的中文思维导图，突出核心概念之间的关系与层级。
++- stage: youtube-deep-research
++  trigger: raw/youtube-metadata/**
++  webhook_route: sop-youtube-deep-research
++  infra:
++    tg_notify: true
++    log_record: true
++  params:
++    workflow:
++      output_dir: raw/youtube-deep-research
++- stage: wiki-build
++  trigger: raw/notebooklm-analysis/**
++  webhook_route: sop-wiki-build
++  infra:
++    tg_notify: false
++    log_record: true
++  params:
++    build_mode: incremental
++- stage: tg-notify
++  trigger: index.md
++  webhook_route: sop-tg-notify
++  infra:
++    tg_notify: true
++    log_record: true
++  params:
++    build_mode: notify
++- stage: retry
++  trigger: raw/retry/**
++  webhook_route: sop-retry
++  infra:
++    tg_notify: true
++    log_record: true
++  params: {}

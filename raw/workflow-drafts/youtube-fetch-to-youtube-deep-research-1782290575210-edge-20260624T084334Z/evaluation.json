@@ -1,0 +1,59 @@
+{
+  "status": "ready",
+  "score": 0.95,
+  "confidence": 0.9,
+  "summary": "上游输出的 source_url 可直接满足下游必需的输入，metadata_file 可作为可选上下文，手顺意图明确，无阻塞项。",
+  "decision": "can_run",
+  "scores": {
+    "intent_clarity": 1,
+    "skill_fit": 0.95,
+    "artifact_usability": 0.9,
+    "guide_completeness": 0.95,
+    "risk": 0.05
+  },
+  "blocking_reasons": [],
+  "warnings": [
+    "Relay mapping 'metadata_file -> source_url' 可能误导 metadata 作为主输入，需确保下游仅将其视为可选上下文。"
+  ],
+  "required_user_inputs": [],
+  "suggested_edge_instruction": "将上传的 source_url 作为下游主要输入，仅当需要时引用 metadata_file 作为补充。",
+  "resolved_handoff": {
+    "primary_artifacts": [
+      {
+        "from": "youtube-fetch.outputs.source_url",
+        "role": "primary_source",
+        "reason": "下游 source_url 输入的唯一必需来源，符合手顺指令。"
+      }
+    ],
+    "supporting_artifacts": [
+      {
+        "from": "youtube-fetch.outputs.metadata_file",
+        "role": "supporting_context",
+        "reason": "手顺指定 metadata 仅为可选上下文，该文件可用于下游增强分析。"
+      }
+    ],
+    "downstream_inputs": [
+      {
+        "to": "youtube-deep-research.inputs.source_url",
+        "construction": "从上游 source_url 通过 direct-url 解析器直接构造。"
+      }
+    ]
+  },
+  "node_execution_guide": {
+    "format": "markdown",
+    "prompt": "使用技能 `sop-youtube-deep-research` 执行下游节点。\n\n## Node Execution Guide\n- **Edge**: youtube-fetch → youtube-deep-research\n- **手顺指令**: 把上游视频 URL 交给深度研究节点，metadata 只作为可选上下文。\n- **上游产物**:\n  - `source_url`: raw/node-runs/{pipeline_id}/outputs/files/source-url.txt\n  - `metadata_file`: raw/node-runs/{pipeline_id}/outputs/files/metadata.json (可选)\n\n## 执行规则\n1. 仅使用已解析的 Edge 输入（source_url）作为下游主输入。\n2. 如需要，可将 metadata_file 内容作为额外上下文传递给下游 skill，但不可替代 source_url。\n3. 确保下游 skill 在调用时正确接收 source_url（字符串类型 URL）。\n4. 跟踪并记录 handoff 评估结果。\n\n## 输出预期\n- `analysis_file`: raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md\n- `transcript_file`: raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt"
+  },
+  "test_plan": [
+    "1. 确认上游 `source_url` 文件存在且为有效 URL。",
+    "2. 调用下游 skill `sop-youtube-deep-research`，传入 source_url。",
+    "3. 验证 `analysis_file` 和 `transcript_file` 被正确生成。",
+    "4. 可选：测试传入 metadata_file 作为上下文是否不影响主流程。",
+    "5. 记录 edge evaluation 和 guide 至运行时日志。"
+  ],
+  "agent": {
+    "provider": "openai-compatible",
+    "model": "deepseek-v4-flash",
+    "used_ai": true
+  },
+  "evaluated_at": "2026-06-24T08:43:32Z"
+}

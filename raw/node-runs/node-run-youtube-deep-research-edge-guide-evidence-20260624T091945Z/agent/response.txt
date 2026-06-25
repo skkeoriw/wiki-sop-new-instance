@@ -1,0 +1,31 @@
+YouTube Deep Research node executed successfully. Here's the complete summary:
+
+---
+
+**Node Execution Result: SUCCESS**
+
+| Field | Value |
+|---|---|
+| **Node** | `youtube-deep-research` |
+| **Run ID** | `node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z` |
+| **Source URL** | `https://www.youtube.com/watch?v=dQw4w9WgXcQ` (Rick Astley - Never Gonna Give You Up) |
+| **Workflow Job ID** | `c9914d56-6d13-4838-8540-1b532f23b144` |
+| **Duration** | 1m 33s |
+| **Exit Code** | 0 |
+
+**Workflow stages**: pending → downloading → transcribing → translating → analyzing → completed
+
+**Declared outputs** (all verified):
+
+| Artifact | Path | Size |
+|---|---|---|
+| **analysis.md** | `raw/youtube-deep-research/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/outputs/analysis.md` | 10,430 bytes |
+| **transcript.txt** | `raw/youtube-deep-research/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/outputs/transcript.txt` | 1,866 bytes |
+| **Output manifest** | `raw/node-runs/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/outputs/files/manifest.json` | 1,112 bytes |
+| **Receipt** | `raw/node-runs/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/agent/receipt.json` | 1,527 bytes |
+
+**Associated raw artifacts**: status.json, start.json, transcript.json, transcript.srt, transcript.vtt, transcript.txt, worker-analysis.md
+
+**Pipeline context updated**: `pipeline-context.json` → `stage_deep_research` points to this node run.
+
+**Stage runner lifecycle**: `on_start` → `on_done` → `forward_next` (isolated run noted — no downstream node started since this is a standalone node run).
