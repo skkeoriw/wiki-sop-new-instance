@@ -1,0 +1,24 @@
+{
+  "declared_outputs": {
+    "index": {
+      "path": "index.md",
+      "kind": "file",
+      "type": "file",
+      "value_type": "markdown",
+      "relayable": true
+    },
+    "pages": {
+      "path": "wiki/**",
+      "kind": "files",
+      "type": "files",
+      "value_type": "markdown",
+      "relayable": true
+    }
+  },
+  "actual_outputs": {},
+  "validation": {
+    "status": "pending",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  }
+}
