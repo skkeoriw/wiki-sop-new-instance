@@ -70,29 +70,14 @@
     "required": false,
     "status": "done",
     "repository": "skkeoriw/wiki-sop-new-instance",
-    "commit": "be1ab25",
-    "commit_message": "chore: node-notebooklm-research outputs [pipe:dQw4w9WgXcQ-20260626T005059] [run:direct-notebooklm-research-dQw4w9WgXcQ-20260626T005059-1782406272683152992]",
+    "commit": "c958590",
+    "commit_message": "chore: stage-b event [run:direct-notebooklm-research-dQw4w9WgXcQ-20260626T005059-1782406272683152992]",
     "pushed": true,
     "changed_files": [
-      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/logs/stage-events/direct-notebooklm-research-dQw4w9WgXcQ-20260626T005059-1782406272683152992.jsonl",
-      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/artifacts.json",
-      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/context.json",
       "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/events.jsonl",
-      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/notebooklm-research.json",
-      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/notebooklm-research/artifacts.json",
-      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/notebooklm-research/capabilities.json",
-      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/notebooklm-research/input.json",
-      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/notebooklm-research/output.json",
-      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/notebooklm-research/state.json",
-      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/youtube-deep-research.json",
-      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/youtube-deep-research/artifacts.json",
-      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/youtube-deep-research/capabilities.json",
-      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/youtube-deep-research/input.json",
-      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/youtube-deep-research/output.json",
-      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/youtube-deep-research/state.json",
-      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/run.json"
+      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/notebooklm-research/capabilities.json"
     ],
-    "finished_at": "2026-06-25T16:53:07Z",
+    "finished_at": "2026-06-25T16:53:09Z",
     "error": "",
     "managed_by": "runtime-harness",
     "managed_paths": [
@@ -157,6 +142,20 @@
           "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/run.json"
         ],
         "credential_source": "GITHUB_TOKEN"
+      },
+      {
+        "capability": "git",
+        "status": "done",
+        "recorded_at": "2026-06-25T16:53:09Z",
+        "error": "",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "commit": "c958590",
+        "commit_message": "chore: stage-b event [run:direct-notebooklm-research-dQw4w9WgXcQ-20260626T005059-1782406272683152992]",
+        "pushed": true,
+        "changed_files": [
+          "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/events.jsonl",
+          "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/notebooklm-research/capabilities.json"
+        ]
       }
     ]
   }
