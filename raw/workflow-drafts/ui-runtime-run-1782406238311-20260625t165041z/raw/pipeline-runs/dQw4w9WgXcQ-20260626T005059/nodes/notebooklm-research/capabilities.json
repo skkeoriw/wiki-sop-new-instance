@@ -1,0 +1,112 @@
+{
+  "telegram": {
+    "enabled": true,
+    "required": false,
+    "status": "failed",
+    "trigger": "done",
+    "triggers": [
+      "start",
+      "done",
+      "failed",
+      "skipped"
+    ],
+    "message_preview": "✅ Stage B 完成  1m17s  [dQw4w9WgXcQ-20260626T005059]\n   🔬 NotebookLM 研究\n   📄 情感承诺与人际忠诚_Rick_Astley_Never_Gonna_Give_Y_1782\n   📦 raw/notebooklm-analysis\n   🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R",
+    "sent_at": "2026-06-25T16:53:05Z",
+    "api_ok": false,
+    "error": "Forbidden: bot can't initiate conversation with a user",
+    "history": [
+      {
+        "capability": "telegram",
+        "status": "failed",
+        "recorded_at": "2026-06-25T16:51:48Z",
+        "trigger": "start",
+        "triggers": [
+          "start",
+          "done",
+          "failed",
+          "skipped"
+        ],
+        "message_preview": "⏳ Stage B 开始  [dQw4w9WgXcQ-20260626T005059]\n   🔬 NotebookLM 研究\n🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R",
+        "sent_at": "2026-06-25T16:51:48Z",
+        "api_ok": false,
+        "error": "Forbidden: bot can't initiate conversation with a user"
+      },
+      {
+        "capability": "telegram",
+        "status": "failed",
+        "recorded_at": "2026-06-25T16:52:00Z",
+        "trigger": "start",
+        "triggers": [
+          "start",
+          "done",
+          "failed",
+          "skipped"
+        ],
+        "message_preview": "⏳ Stage B 开始  [dQw4w9WgXcQ-20260626T005059]\n   🔬 NotebookLM 研究\n🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R",
+        "sent_at": "2026-06-25T16:52:00Z",
+        "api_ok": false,
+        "error": "Forbidden: bot can't initiate conversation with a user"
+      },
+      {
+        "capability": "telegram",
+        "status": "failed",
+        "recorded_at": "2026-06-25T16:53:05Z",
+        "trigger": "done",
+        "triggers": [
+          "start",
+          "done",
+          "failed",
+          "skipped"
+        ],
+        "message_preview": "✅ Stage B 完成  1m17s  [dQw4w9WgXcQ-20260626T005059]\n   🔬 NotebookLM 研究\n   📄 情感承诺与人际忠诚_Rick_Astley_Never_Gonna_Give_Y_1782\n   📦 raw/notebooklm-analysis\n   🎬 Rick Astley - Never Gonna Give You Up (Official Video) (4K R",
+        "sent_at": "2026-06-25T16:53:05Z",
+        "api_ok": false,
+        "error": "Forbidden: bot can't initiate conversation with a user"
+      }
+    ]
+  },
+  "git": {
+    "enabled": true,
+    "required": false,
+    "status": "running",
+    "repository": "skkeoriw/wiki-sop-new-instance",
+    "commit": "f7d3279",
+    "commit_message": "chore: stage-b done [pipe:dQw4w9WgXcQ-20260626T005059] [run:direct-notebooklm-research-dQw4w9WgXcQ-20260626T005059-1782406272683152992]",
+    "pushed": true,
+    "changed_files": [
+      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/logs/stage-events/direct-notebooklm-research-dQw4w9WgXcQ-20260626T005059-1782406272683152992.jsonl",
+      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/logs/stage-events/direct-youtube-deep-research-dQw4w9WgXcQ-20260626T005059-1782406272716659555.jsonl",
+      "\"raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/notebooklm-analysis/\\346\\203\\205\\346\\204\\237\\346\\211\\277\\350\\257\\272\\344\\270\\216\\344\\272\\272\\351\\231\\205\\345\\277\\240\\350\\257\\232_Rick_Astley_Never_Gonna_Give_Y_1782406371--dQw4w9WgXcQ-20260626.md\"",
+      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-context.json"
+    ],
+    "finished_at": "2026-06-25T16:53:04Z",
+    "error": "",
+    "managed_by": "runtime-harness",
+    "managed_paths": [
+      "logs/stage-events/direct-notebooklm-research-dQw4w9WgXcQ-20260626T005059-1782406272683152992.jsonl",
+      "raw/notebooklm-analysis/情感承诺与人际忠诚_Rick_Astley_Never_Gonna_Give_Y_1782406371--dQw4w9WgXcQ-20260626.md",
+      "raw/pipeline-context.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059"
+    ],
+    "paths": [],
+    "credential_source": "GITHUB_TOKEN",
+    "started_at": "2026-06-25T16:53:05Z",
+    "history": [
+      {
+        "capability": "git",
+        "status": "running",
+        "recorded_at": "2026-06-25T16:53:05Z",
+        "managed_by": "runtime-harness",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "managed_paths": [
+          "logs/stage-events/direct-notebooklm-research-dQw4w9WgXcQ-20260626T005059-1782406272683152992.jsonl",
+          "raw/notebooklm-analysis/情感承诺与人际忠诚_Rick_Astley_Never_Gonna_Give_Y_1782406371--dQw4w9WgXcQ-20260626.md",
+          "raw/pipeline-context.json",
+          "raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059"
+        ],
+        "paths": [],
+        "credential_source": "GITHUB_TOKEN"
+      }
+    ]
+  }
+}
