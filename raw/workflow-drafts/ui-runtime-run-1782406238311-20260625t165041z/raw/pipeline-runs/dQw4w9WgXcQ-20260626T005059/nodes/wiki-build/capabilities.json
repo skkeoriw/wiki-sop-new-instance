@@ -33,6 +33,48 @@
   "git": {
     "enabled": true,
     "required": false,
-    "status": "pending"
+    "status": "done",
+    "repository": "skkeoriw/wiki-sop-new-instance",
+    "commit": "bac7f51",
+    "commit_message": "chore: stage-c event [run:direct-wiki-build-dQw4w9WgXcQ-20260626T005059-1782406390963401206]",
+    "pushed": true,
+    "changed_files": [
+      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/logs/stage-events/direct-wiki-build-dQw4w9WgXcQ-20260626T005059-1782406390963401206.jsonl",
+      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/events.jsonl",
+      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/wiki-build.json",
+      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/wiki-build/artifacts.json",
+      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/wiki-build/capabilities.json",
+      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/wiki-build/input.json",
+      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/wiki-build/output.json",
+      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/wiki-build/plan.json",
+      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/wiki-build/state.json",
+      "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/run.json"
+    ],
+    "finished_at": "2026-06-25T16:53:37Z",
+    "error": "",
+    "history": [
+      {
+        "capability": "git",
+        "status": "done",
+        "recorded_at": "2026-06-25T16:53:37Z",
+        "error": "",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "commit": "bac7f51",
+        "commit_message": "chore: stage-c event [run:direct-wiki-build-dQw4w9WgXcQ-20260626T005059-1782406390963401206]",
+        "pushed": true,
+        "changed_files": [
+          "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/logs/stage-events/direct-wiki-build-dQw4w9WgXcQ-20260626T005059-1782406390963401206.jsonl",
+          "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/events.jsonl",
+          "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/wiki-build.json",
+          "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/wiki-build/artifacts.json",
+          "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/wiki-build/capabilities.json",
+          "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/wiki-build/input.json",
+          "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/wiki-build/output.json",
+          "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/wiki-build/plan.json",
+          "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/nodes/wiki-build/state.json",
+          "raw/workflow-drafts/ui-runtime-run-1782406238311-20260625t165041z/raw/pipeline-runs/dQw4w9WgXcQ-20260626T005059/run.json"
+        ]
+      }
+    ]
   }
 }

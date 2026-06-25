@@ -8,12 +8,12 @@
   "nodes": {
     "youtube-fetch": "done",
     "notebooklm-research": "done",
-    "youtube-deep-research": "running",
+    "youtube-deep-research": "done",
     "wiki-build": "failed",
     "tg-notify": "waiting",
     "retry": "waiting"
   },
-  "last_run_id": "direct-wiki-build-dQw4w9WgXcQ-20260626T005059-1782406390963401206",
+  "last_run_id": "direct-youtube-deep-research-dQw4w9WgXcQ-20260626T005059-1782406272716659555",
   "started_at": "2026-06-25T16:51:04Z",
-  "updated_at": "2026-06-25T16:53:35Z"
+  "updated_at": "2026-06-25T16:53:43Z"
 }

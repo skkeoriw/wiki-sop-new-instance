@@ -2,16 +2,16 @@
   "pipeline_id": "dQw4w9WgXcQ-20260626T005059",
   "node_id": "youtube-deep-research",
   "run_id": "direct-youtube-deep-research-dQw4w9WgXcQ-20260626T005059-1782406272716659555",
-  "status": "running",
+  "status": "done",
   "mode": "sidecar",
   "needs": [
     "youtube-fetch"
   ],
   "started_at": "2026-06-25T16:51:12Z",
-  "finished_at": "",
-  "duration_s": 0,
+  "finished_at": "2026-06-25T16:53:43Z",
+  "duration_s": 105,
   "attempt": 2,
-  "progress": 0,
+  "progress": 100,
   "inputs": {
     "source_url": {
       "from": "youtube-fetch.outputs.source_url",
@@ -534,16 +534,57 @@
       "role": "transcript"
     }
   },
-  "actual_outputs": {},
-  "artifacts": [],
+  "actual_outputs": {
+    "analysis_file": [
+      "raw/youtube-deep-research/dQw4w9WgXcQ-20260626T005059/outputs/analysis.md"
+    ],
+    "transcript_file": [
+      "raw/youtube-deep-research/dQw4w9WgXcQ-20260626T005059/outputs/transcript.txt"
+    ]
+  },
+  "artifacts": [
+    {
+      "id": "2607487816a59a04",
+      "producer": "youtube-deep-research",
+      "output": "analysis_file",
+      "type": "research.analysis",
+      "format": "markdown",
+      "path": "raw/youtube-deep-research/dQw4w9WgXcQ-20260626T005059/outputs/analysis.md",
+      "title": "analysis.md",
+      "size": 10794,
+      "mime_type": "application/octet-stream",
+      "tags": [
+        "wiki-source"
+      ],
+      "metadata": {},
+      "resolution": "recorded"
+    },
+    {
+      "id": "abae9ec72101a4c1",
+      "producer": "youtube-deep-research",
+      "output": "transcript_file",
+      "type": "research.transcript",
+      "format": "text",
+      "path": "raw/youtube-deep-research/dQw4w9WgXcQ-20260626T005059/outputs/transcript.txt",
+      "title": "transcript.txt",
+      "size": 1843,
+      "mime_type": "text/plain",
+      "tags": [
+        "wiki-source"
+      ],
+      "metadata": {},
+      "resolution": "recorded"
+    }
+  ],
   "validation": {
-    "status": "pending",
+    "status": "passed",
     "missing_outputs": [],
     "unexpected_outputs": []
   },
   "extra": {
-    "started_by": "youtube-fetch"
+    "duration_s": 105,
+    "progress": 100
   },
   "error": "",
-  "updated_at": "2026-06-25T16:51:57Z"
+  "updated_at": "2026-06-25T16:53:43Z"
 }
