@@ -100,26 +100,30 @@
           "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/run.json"
         ],
         "credential_source": "GITHUB_TOKEN"
+      },
+      {
+        "capability": "git",
+        "status": "done",
+        "recorded_at": "2026-06-26T07:18:12Z",
+        "error": "",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "commit": "eb55f2b",
+        "commit_message": "chore: stage-a event [run:direct-1782458285743015380]",
+        "pushed": true,
+        "changed_files": [
+          "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/events.jsonl",
+          "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch/capabilities.json"
+        ]
       }
     ],
-    "commit": "af95cc4",
-    "commit_message": "chore: node-youtube-fetch outputs [pipe:dQw4w9WgXcQ-20260626T151802] [run:direct-1782458285743015380]",
+    "commit": "eb55f2b",
+    "commit_message": "chore: stage-a event [run:direct-1782458285743015380]",
     "pushed": true,
     "changed_files": [
-      "logs/stage-events/direct-1782458285743015380.jsonl",
-      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/artifacts.json",
-      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/context.json",
-      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/dag.json",
       "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/events.jsonl",
-      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch.json",
-      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch/artifacts.json",
-      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch/capabilities.json",
-      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch/input.json",
-      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch/output.json",
-      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch/state.json",
-      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/run.json"
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch/capabilities.json"
     ],
-    "finished_at": "2026-06-26T07:18:10Z",
+    "finished_at": "2026-06-26T07:18:12Z",
     "error": ""
   }
 }
