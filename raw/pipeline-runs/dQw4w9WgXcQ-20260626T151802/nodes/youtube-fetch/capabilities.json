@@ -31,7 +31,7 @@
   "git": {
     "enabled": true,
     "required": false,
-    "status": "running",
+    "status": "done",
     "managed_by": "runtime-harness",
     "repository": "skkeoriw/wiki-sop-new-instance",
     "managed_paths": [
@@ -64,7 +64,62 @@
           "raw/youtube-metadata/**"
         ],
         "credential_source": "GITHUB_TOKEN"
+      },
+      {
+        "capability": "git",
+        "status": "done",
+        "recorded_at": "2026-06-26T07:18:10Z",
+        "error": "",
+        "managed_by": "runtime-harness",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "managed_paths": [
+          "logs/stage-events/direct-1782458285743015380.jsonl",
+          "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802",
+          "raw/youtube-metadata/.gitkeep",
+          "raw/youtube-metadata/dQw4w9WgXcQ.json"
+        ],
+        "paths": [
+          "raw/node-runs/{pipeline_id}/outputs/files/**",
+          "raw/youtube-metadata/**"
+        ],
+        "commit": "af95cc4",
+        "commit_message": "chore: node-youtube-fetch outputs [pipe:dQw4w9WgXcQ-20260626T151802] [run:direct-1782458285743015380]",
+        "pushed": true,
+        "changed_files": [
+          "logs/stage-events/direct-1782458285743015380.jsonl",
+          "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/artifacts.json",
+          "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/context.json",
+          "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/dag.json",
+          "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/events.jsonl",
+          "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch.json",
+          "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch/artifacts.json",
+          "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch/capabilities.json",
+          "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch/input.json",
+          "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch/output.json",
+          "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch/state.json",
+          "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/run.json"
+        ],
+        "credential_source": "GITHUB_TOKEN"
       }
-    ]
+    ],
+    "commit": "af95cc4",
+    "commit_message": "chore: node-youtube-fetch outputs [pipe:dQw4w9WgXcQ-20260626T151802] [run:direct-1782458285743015380]",
+    "pushed": true,
+    "changed_files": [
+      "logs/stage-events/direct-1782458285743015380.jsonl",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/artifacts.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/context.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/dag.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/events.jsonl",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch/artifacts.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch/capabilities.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch/input.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch/output.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/nodes/youtube-fetch/state.json",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802/run.json"
+    ],
+    "finished_at": "2026-06-26T07:18:10Z",
+    "error": ""
   }
 }
