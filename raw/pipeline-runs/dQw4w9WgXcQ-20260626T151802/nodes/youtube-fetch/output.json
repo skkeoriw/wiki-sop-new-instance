@@ -1,0 +1,27 @@
+{
+  "declared_outputs": {
+    "source_url": {
+      "from": "context.source_url",
+      "kind": "scalar",
+      "type": "string",
+      "value_type": "url",
+      "relayable": true
+    },
+    "metadata_file": {
+      "from": "context.stage_b_fetch.meta_file",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "relayable": true
+    }
+  },
+  "actual_outputs": {
+    "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "metadata_file": "raw/youtube-metadata/dQw4w9WgXcQ.json"
+  },
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": []
+  }
+}

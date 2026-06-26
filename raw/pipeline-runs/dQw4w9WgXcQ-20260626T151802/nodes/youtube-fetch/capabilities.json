@@ -1,0 +1,70 @@
+{
+  "telegram": {
+    "enabled": false,
+    "required": false,
+    "status": "disabled",
+    "managed_by": "runtime-harness",
+    "trigger": "done",
+    "triggers": [
+      "start",
+      "done",
+      "failed"
+    ],
+    "reason": "telegram capability disabled",
+    "finished_at": "2026-06-26T07:18:08Z",
+    "history": [
+      {
+        "capability": "telegram",
+        "status": "disabled",
+        "recorded_at": "2026-06-26T07:18:08Z",
+        "trigger": "done",
+        "triggers": [
+          "start",
+          "done",
+          "failed"
+        ],
+        "reason": "telegram capability disabled",
+        "managed_by": "runtime-harness"
+      }
+    ]
+  },
+  "git": {
+    "enabled": true,
+    "required": false,
+    "status": "running",
+    "managed_by": "runtime-harness",
+    "repository": "skkeoriw/wiki-sop-new-instance",
+    "managed_paths": [
+      "logs/stage-events/direct-1782458285743015380.jsonl",
+      "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802",
+      "raw/youtube-metadata/.gitkeep",
+      "raw/youtube-metadata/dQw4w9WgXcQ.json"
+    ],
+    "paths": [
+      "raw/node-runs/{pipeline_id}/outputs/files/**",
+      "raw/youtube-metadata/**"
+    ],
+    "credential_source": "GITHUB_TOKEN",
+    "started_at": "2026-06-26T07:18:08Z",
+    "history": [
+      {
+        "capability": "git",
+        "status": "running",
+        "recorded_at": "2026-06-26T07:18:08Z",
+        "managed_by": "runtime-harness",
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "managed_paths": [
+          "logs/stage-events/direct-1782458285743015380.jsonl",
+          "raw/pipeline-runs/dQw4w9WgXcQ-20260626T151802",
+          "raw/youtube-metadata/.gitkeep",
+          "raw/youtube-metadata/dQw4w9WgXcQ.json"
+        ],
+        "paths": [
+          "raw/node-runs/{pipeline_id}/outputs/files/**",
+          "raw/youtube-metadata/**"
+        ],
+        "credential_source": "GITHUB_TOKEN"
+      }
+    ]
+  }
+}
