@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "executor": "hermes",
+  "requested_skill": "chatgpt-remote-image-service",
+  "node_id": "chatgpt-remote-image-service-verify",
+  "node_run_id": "node-run-chatgpt-remote-image-service-verify-20260629T070123Z-8c8461",
+  "runtime_id": "youtube-wiki",
+  "instance_id": "wiki-sop-new-instance",
+  "workflow_id": "youtube-research-wiki",
+  "template_source": "default",
+  "template_version": "hermes-agent-executor.v1",
+  "request_path": "raw/node-runs/node-run-chatgpt-remote-image-service-verify-20260629T070123Z-8c8461/agent/request.md",
+  "response_path": "raw/node-runs/node-run-chatgpt-remote-image-service-verify-20260629T070123Z-8c8461/agent/response.txt",
+  "receipt_path": "raw/node-runs/node-run-chatgpt-remote-image-service-verify-20260629T070123Z-8c8461/agent/receipt.json",
+  "input_manifest_path": "raw/node-runs/node-run-chatgpt-remote-image-service-verify-20260629T070123Z-8c8461/inputs/sources/manifest.json",
+  "output_manifest_path": "raw/node-runs/node-run-chatgpt-remote-image-service-verify-20260629T070123Z-8c8461/outputs/manifest.json",
+  "node_execution_guide": {},
+  "stage_command": [],
+  "stage_command_preview": "",
+  "created_at": "2026-06-29T07:01:29.228651+00:00"
+}

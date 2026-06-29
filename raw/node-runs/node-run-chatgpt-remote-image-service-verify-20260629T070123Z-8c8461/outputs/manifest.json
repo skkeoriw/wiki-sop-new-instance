@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-chatgpt-remote-image-service-verify-20260629T070123Z-8c8461",
+  "node_id": "chatgpt-remote-image-service-verify",
+  "created_at": "2026-06-29T07:03:35Z",
+  "items": [
+    {
+      "path": "prompt_result.json",
+      "source": "execution",
+      "value_type": "json",
+      "output_name": "generated_image",
+      "target_output": "generated_image",
+      "value_preview": "Image of a sleeping kitten generated via ChatGPT",
+      "public_image_url": "https://resource.vyibc.com/bfa509af-9641-459d-bc78-13ddfd4392b5.png",
+      "task_id": "bfa509af-9641-459d-bc78-13ddfd4392b5",
+      "chatgpt_url": "https://chatgpt.com/c/6a4218ac-09a4-83ea-8d17-b4bdedda74bb",
+      "prompt": "小猫在睡觉",
+      "resolved_value": {
+        "publicImageUrl": "https://resource.vyibc.com/bfa509af-9641-459d-bc78-13ddfd4392b5.png",
+        "taskId": "bfa509af-9641-459d-bc78-13ddfd4392b5",
+        "chatgptUrl": "https://chatgpt.com/c/6a4218ac-09a4-83ea-8d17-b4bdedda74bb",
+        "status": "succeeded",
+        "stage": "uploadedMs",
+        "workerId": "worker-1"
+      }
+    }
+  ],
+  "output_validation": {
+    "status": "passed",
+    "errors": []
+  }
+}

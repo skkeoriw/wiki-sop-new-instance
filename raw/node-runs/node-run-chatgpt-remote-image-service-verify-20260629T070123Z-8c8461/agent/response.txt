@@ -1,0 +1,26 @@
+## Execution Complete ✓
+
+**Node**: `chatgpt-remote-image-service-verify`
+**Skill**: `chatgpt-remote-image-service`
+**Run**: `node-run-chatgpt-remote-image-service-verify-20260629T070123Z-8c8461`
+
+### What happened
+
+1. **Installed** the external skill from `skill.vyibc.com` to `~/.hermes/skills/devops/chatgpt-remote-image-service/`
+2. **Executed** the bundled CLI script with prompt `小猫在睡觉` (pure prompt, no reference image)
+3. **Image generation succeeded** — the remote ChatGPT browser worker processed the job in ~37 seconds
+
+### Results
+
+| Field | Value |
+|-------|-------|
+| **Task ID** | `bfa509af-9641-459d-bc78-13ddfd4392b5` |
+| **Public Image URL** | https://resource.vyibc.com/bfa509af-9641-459d-bc78-13ddfd4392b5.png |
+| **ChatGPT URL** | https://chatgpt.com/c/6a4218ac-09a4-83ea-8d17-b4bdedda74bb |
+| **Worker** | worker-1 (CDP port 9333) |
+| **Stage progression** | importPlaywright → waitComposer → enterImageMode → fillPrompt → clickSend → waitForGeneratedImage → downloadImage → uploadImage |
+
+### Output files written
+
+- **`outputs/manifest.json`** — Standard output manifest with one item containing the public image URL and task metadata
+- **`agent/receipt.json`** — Execution receipt with status `completed`, timestamps, and output references
