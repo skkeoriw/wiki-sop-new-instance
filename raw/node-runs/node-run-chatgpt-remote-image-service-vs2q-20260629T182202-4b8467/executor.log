@@ -1,0 +1,37 @@
+## Execution Result: FAILED (retryable)
+
+**Node:** `chatgpt-remote-image-service-vs2q`
+**Task ID:** `f0656939-dc02-457f-b13a-1d935288570b`
+
+### What happened
+
+The remote ChatGPT browser service progressed through all stages successfully **up to image generation**:
+
+| Stage | Status |
+|---|---|
+| Parse Args | ✓ |
+| Connect Browser | ✓ (922ms) |
+| Prepare Page | ✓ (1902ms) |
+| Wait Composer | ✓ |
+| Enter Image Mode | ✓ |
+| Fill Prompt | ✓ |
+| Click Send | ✓ (9345ms) |
+| Wait For Generated Image | ✓ **(~51s)** ✅ |
+| **Download Image** | **✗ FAILED** |
+
+The image **was generated** by ChatGPT (confirmed by `generatedVisibleMs: 50927`), but the remote browser worker then tried to open a download dialog (`locator('[role="dialog"]')`) and that dialog didn't appear within the 10-second timeout.
+
+### Root cause
+
+This is a transient browser automation issue — the R2 download dialog didn't appear. Likely causes:
+- Remote browser UI state mismatch after a long generation
+- The ChatGPT interface's download mechanism differs slightly from what the locator expects
+
+### Written artifacts
+
+- `raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T182202-4b8467/outputs/manifest.json` — output manifest (marked as failed, retryable)
+- `raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T182202-4b8467/agent/receipt.json` — full execution receipt
+
+### Next steps
+
+This is **retryable** — the actual image generation worked. Would you like me to retry the same request?
