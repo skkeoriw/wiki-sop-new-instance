@@ -1,0 +1,30 @@
+## Node Execution Complete — SUCCESS
+
+**Node:** `chatgpt-remote-image-service-vs2q`  
+**Run ID:** `node-run-chatgpt-remote-image-service-vs2q-20260629T192437-4b8467`  
+**Exit Code:** `0`  
+**Worker:** `worker-1` (CDP port 9333)
+
+### Input
+- Prompt: `生成一张小猫睡觉的照片` (pure text, no reference image)
+
+### Pipeline (browser stages completed)
+```
+connectBrowser → enterImageMode → fillPrompt → clickSend → waitForGeneratedImage → downloadImage → uploadImage
+```
+
+### Outputs
+
+| Field | Value |
+|---|---|
+| **public_image_url** | `https://resource.vyibc.com/82ef0526-4ec7-462e-956b-a287c9b8f55b.png` |
+| **task_id** | `82ef0526-4ec7-462e-956b-a287c9b8f55b` |
+| **chatgpt_url** | `https://chatgpt.com/c/6a42c6a5-24fc-83ea-b73f-803a859cf587` |
+| **total time** | ~60s (59886ms) |
+| **timings** | connected=988ms, pageReady=2025ms, sent=9988ms, generatedVisible=46744ms, downloaded=59259ms, uploaded=59886ms |
+
+### Written artifacts
+- `raw/node-runs/.../outputs/manifest.json` — output manifest (9 items: result, image_url, public_image_url, status, task_id, status_json, submit_json, generated_images, images)
+- `raw/node-runs/.../agent/receipt.json` — execution receipt with full metadata and timings
+
+No blockers encountered — all browser workers were logged in, the job queued and completed on the first attempt.

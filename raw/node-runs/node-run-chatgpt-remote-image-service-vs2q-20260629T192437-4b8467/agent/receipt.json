@@ -1,0 +1,22 @@
+{
+  "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260629T192437-4b8467",
+  "node_id": "chatgpt-remote-image-service-vs2q",
+  "execution_timestamp": "2026-06-29T19:26:15Z",
+  "skill": "chatgpt-remote-image-service",
+  "exit_code": 0,
+  "status": "succeeded",
+  "task_id": "82ef0526-4ec7-462e-956b-a287c9b8f55b",
+  "public_image_url": "https://resource.vyibc.com/82ef0526-4ec7-462e-956b-a287c9b8f55b.png",
+  "chatgpt_url": "https://chatgpt.com/c/6a42c6a5-24fc-83ea-b73f-803a859cf587",
+  "worker_id": "worker-1",
+  "prompt": "生成一张小猫睡觉的照片",
+  "timings": {
+    "connectedMs": 988,
+    "pageReadyMs": 2025,
+    "sentMs": 9988,
+    "generatedVisibleMs": 46744,
+    "downloadedMs": 59259,
+    "uploadedMs": 59886
+  },
+  "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T192437-4b8467/outputs/manifest.json"
+}
