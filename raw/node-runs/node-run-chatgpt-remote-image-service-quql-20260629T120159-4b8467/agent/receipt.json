@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "executor": "hermes",
+  "requested_skill": "chatgpt-remote-image-service",
+  "executed_skill": "chatgpt-remote-image-service",
+  "node_id": "chatgpt-remote-image-service-quql",
+  "node_run_id": "node-run-chatgpt-remote-image-service-quql-20260629T120159-4b8467",
+  "request_id": "node-run-chatgpt-remote-image-service-quql-20260629T120159-4b8467",
+  "status": "failed",
+  "returncode": 0,
+  "timed_out": false,
+  "validation": {
+    "status": "failed",
+    "missing_outputs": [
+      "result",
+      "images",
+      "root",
+      "expected"
+    ],
+    "unexpected_outputs": []
+  },
+  "input_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-quql-20260629T120159-4b8467/inputs/sources/manifest.json",
+  "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-quql-20260629T120159-4b8467/outputs/manifest.json",
+  "started_at": "2026-06-29T12:02:01.164553+00:00",
+  "finished_at": "2026-06-29T12:09:07.092961+00:00",
+  "legacy_fallback": false,
+  "error": "declared outputs missing"
+}

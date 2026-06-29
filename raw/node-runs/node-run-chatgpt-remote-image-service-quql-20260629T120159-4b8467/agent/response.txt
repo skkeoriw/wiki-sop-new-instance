@@ -1,0 +1,18 @@
+Node execution complete. Here's the summary:
+
+**Task**: ChatGPT Remote Image Service — generate photo of a sleeping kitten
+
+**Result**: SUCCESS
+
+| Field | Value |
+|---|---|
+| Task ID | `b018256b-9715-4075-ba77-e41a4efdee13` |
+| Status | `succeeded` |
+| Public Image URL | `https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png` |
+| ChatGPT URL | `https://chatgpt.com/c/6a425ee7-87e0-83ea-908b-fabbe8dc05c4` |
+| Total time | ~60.8s |
+| Worker | `worker-1` (CDP port 9333, already logged in) |
+
+**Outputs written**:
+- `raw/node-runs/.../outputs/manifest.json` — declares all relayable outputs (task_id, status, public_image_url, submit_json, etc.)
+- `raw/node-runs/.../agent/receipt.json` — execution receipt with timestamps and final URL

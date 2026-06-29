@@ -1,0 +1,35 @@
+{
+  "mode": "real-node",
+  "input_source": "manual",
+  "manual_inputs": {
+    "prompt": "生成一张小猫睡觉的照片",
+    "api_url": "",
+    "reference_image_file": "",
+    "reference_image_url": "",
+    "poll_interval": "",
+    "timeout_seconds": "",
+    "upload_name": ""
+  },
+  "sync": false,
+  "capability_overrides": {
+    "git": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run",
+      "paths": [
+        "raw/node-runs/{run_id}/outputs/**"
+      ]
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run"
+    }
+  },
+  "node_run_id": "",
+  "source": "node-draft-probe",
+  "_skip_definition_scope_reports": true,
+  "_definition_scope_reports": {}
+}
