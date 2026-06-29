@@ -1,0 +1,18 @@
+Node execution completed successfully. Here's the summary:
+
+**Node Run:** `node-run-chatgpt-remote-image-service-y89q-20260629T125753-4b8467`
+
+**Status:** succeeded
+
+**Details:**
+- **Prompt:** 生成一张小猫睡觉的照片
+- **Task ID:** `9adc4749-b0fd-4911-8c7f-25a5176191a4`
+- **Duration:** ~47 seconds (12:58:51 → 12:59:38 UTC)
+- **ChatGPT session:** https://chatgpt.com/c/6a426c14-7898-83ea-a019-e43f60b3f02a
+
+**Generated Image:**
+- **URL:** https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png
+
+**Written artifacts:**
+- `raw/node-runs/.../outputs/manifest.json` — output manifest with all expected fields (result, image_url, public_image_url, status, task_id, generated_images, images)
+- `raw/node-runs/.../agent/receipt.json` — execution receipt with timestamps and entry inputs

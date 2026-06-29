@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-chatgpt-remote-image-service-y89q-20260629T125753-4b8467",
+  "node_id": "chatgpt-remote-image-service-y89q",
+  "created_at": "2026-06-29T12:59:40Z",
+  "status": "succeeded",
+  "outputs": {
+    "result": {
+      "description": "Skill execution result summary.",
+      "value": "Image generation succeeded for prompt '生成一张小猫睡觉的照片'",
+      "relayable": true
+    },
+    "image_url": {
+      "description": "Result value mentioned in skill source as `imageUrl`.",
+      "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+      "value_type": "url",
+      "relayable": true
+    },
+    "public_image_url": {
+      "description": "Result value mentioned in skill source as `publicImageUrl`.",
+      "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+      "value_type": "url",
+      "relayable": true
+    },
+    "status": {
+      "description": "Result value mentioned in skill source as `status`.",
+      "value": "succeeded",
+      "value_type": "text",
+      "relayable": true
+    },
+    "task_id": {
+      "description": "Result value mentioned in skill source as `taskId`.",
+      "value": "9adc4749-b0fd-4911-8c7f-25a5176191a4",
+      "value_type": "text",
+      "relayable": true
+    },
+    "generated_images": {
+      "description": "Generated image files or public image URLs.",
+      "value": ["https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"],
+      "value_type": "image",
+      "relayable": true
+    },
+    "images": {
+      "description": "Generated image files.",
+      "value": ["https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"],
+      "relayable": true
+    }
+  },
+  "output_directory": "raw/node-runs/node-run-chatgpt-remote-image-service-y89q-20260629T125753-4b8467/outputs"
+}
