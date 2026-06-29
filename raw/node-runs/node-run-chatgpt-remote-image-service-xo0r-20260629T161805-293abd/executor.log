@@ -1,0 +1,25 @@
+## Execution Complete — Node `chatgpt-remote-image-service-xo0r` : SUCCEEDED
+
+**Prompt:** 生成一张小狗睡觉的照片  
+**Status:** `succeeded` (45.6s total)
+
+### Outputs
+
+| Output | Value |
+|--------|-------|
+| `public_image_url` | https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png |
+| `image_url` | same |
+| `task_id` | `62900dce-5b03-4ce2-bfbc-73713d5a40f4` |
+| `chatgpt_url` | https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484 |
+| `worker` | worker-1 (cdp 9333) |
+
+### Files Written
+
+- **Output manifest:** `raw/node-runs/node-run-chatgpt-remote-image-service-xo0r-20260629T161805-293abd/outputs/manifest.json`
+- **Receipt:** `raw/node-runs/node-run-chatgpt-remote-image-service-xo0r-20260629T161805-293abd/agent/receipt.json`
+
+### Timeline
+
+- `parseArgs` → `importPlaywright` → `connectBrowser` → `preparePage` → `waitComposer` → `enterImageMode` → `fillPrompt` → `waitSendEnabled` → `clickSend` → `waitForGeneratedImage` (~33s) → `downloadImage` (~2s) → `uploadImage` (<1s)
+- Browser needed no login (worker-1 was already logged in).
+- Image was uploaded to R2 as `62900dce-5b03-4ce2-bfbc-73713d5a40f4.png`.

@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-chatgpt-remote-image-service-xo0r-20260629T161805-293abd",
+  "node_id": "chatgpt-remote-image-service-xo0r",
+  "created_at": "2026-06-29T16:19:50Z",
+  "status": "succeeded",
+  "outputs": {
+    "result": {
+      "value": "Image generated successfully via ChatGPT remote image service.",
+      "value_type": "text",
+      "relayable": true
+    },
+    "image_url": {
+      "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+      "value_type": "url",
+      "relayable": true
+    },
+    "public_image_url": {
+      "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+      "value_type": "url",
+      "relayable": true
+    },
+    "status": {
+      "value": "succeeded",
+      "value_type": "text",
+      "relayable": true
+    },
+    "task_id": {
+      "value": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+      "value_type": "text",
+      "relayable": true
+    },
+    "status_json": {
+      "value": {
+        "ok": true,
+        "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+        "status": "succeeded",
+        "stage": "uploadedMs",
+        "createdAt": "2026-06-29T16:19:03.553Z",
+        "startedAt": "2026-06-29T16:19:03.556Z",
+        "finishedAt": "2026-06-29T16:19:49.490Z",
+        "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+        "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+        "workerId": "worker-1",
+        "cdpPort": "9333"
+      },
+      "value_type": "json",
+      "relayable": false
+    },
+    "submit_json": {
+      "value": {
+        "ok": true,
+        "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+        "status": "succeeded",
+        "stage": "uploadedMs",
+        "createdAt": "2026-06-29T16:19:03.553Z",
+        "startedAt": "2026-06-29T16:19:03.556Z",
+        "finishedAt": "2026-06-29T16:19:49.490Z",
+        "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+        "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+        "workerId": "worker-1",
+        "cdpPort": "9333"
+      },
+      "value_type": "json",
+      "relayable": true
+    },
+    "generated_images": {
+      "value": ["https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"],
+      "value_type": "image",
+      "relayable": true
+    },
+    "images": {
+      "value": ["https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"],
+      "relayable": true
+    }
+  },
+  "items": [
+    {
+      "path": "manifest.json",
+      "output_name": "manifest",
+      "value_type": "json"
+    }
+  ]
+}
