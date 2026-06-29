@@ -1,0 +1,30 @@
+## Node Execution Complete — FAILED
+
+**Node:** `chatgpt-remote-image-service-vs2q`
+**Run ID:** `node-run-chatgpt-remote-image-service-vs2q-20260629T184504-4b8467`
+**Status:** ❌ failed
+
+### What happened
+
+The `chatgpt-remote-image.sh` script was called with prompt `"生成一张小猫睡觉的照片"`. The remote service:
+
+1. ✅ Submitted the task — got `taskId=4b5a30c4-b976-4cba-a166-d14f5ba75664`
+2. ✅ Worker `worker-1` (cdpPort=9333) was **logged in** (loginRequired=false)
+3. ✅ Successfully entered ChatGPT image mode and sent the prompt (sentMs=12s)
+4. ✅ ChatGPT **generated the image** (generatedVisibleMs=57.8s)
+5. ❌ **Failed at `downloadImage` stage** — locator `[role="dialog"]` (the download dialog) didn't appear within 10s
+
+### Root cause
+
+The image was created by ChatGPT but the remote browser worker timed out waiting for the download dialog. This is a **transient remote service issue** — the browser automation step for downloading the generated image failed.
+
+### Outputs written
+
+| File | Path |
+|---|---|
+| Output manifest | `raw/node-runs/.../outputs/manifest.json` |
+| Receipt | `raw/node-runs/.../agent/receipt.json` |
+
+### Recommended action
+
+**Retry the node run.** This is likely a one-off timing issue with the remote service's download dialog. If it persists, check the remote browser workers at `https://chatgpt-vnc.vyibc.com/vnc.html` to verify their state.
