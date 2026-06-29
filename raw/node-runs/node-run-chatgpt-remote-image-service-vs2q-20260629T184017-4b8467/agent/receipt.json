@@ -1,0 +1,42 @@
+{
+  "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260629T184017-4b8467",
+  "node_id": "chatgpt-remote-image-service-vs2q",
+  "skill": "chatgpt-remote-image-service",
+  "executed_at": "2026-06-29T18:42:04Z",
+  "exit_code": 1,
+  "status": "failed",
+  "summary": "Image generation submitted successfully (taskId=5a842498-e2e5-4a1b-a910-c9d9b0532529). ChatGPT generated the image (generatedVisibleMs=54759) but the remote worker failed during download phase: locator '[role=\"dialog\"]' timeout exceeded after image appeared. The expected download dialog never materialized, causing Worker exited with code 1.",
+  "input": {
+    "prompt": "生成一张小猫睡觉的照片",
+    "source": "manual"
+  },
+  "output": {
+    "task_id": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+    "status": "failed",
+    "public_image_url": null,
+    "image_url": null
+  },
+  "error_detail": {
+    "stage": "downloadImage",
+    "reason": "locator.waitFor: Timeout 10000ms exceeded - waiting for locator('[role=\"dialog\"]').last() to be visible",
+    "timings": {
+      "connectedMs": 1127,
+      "pageReadyMs": 2536,
+      "sentMs": 11575,
+      "generatedVisibleMs": 54759
+    },
+    "messages": [
+      "The prompt was submitted and the ChatGPT composer generated the image successfully (55s visible).",
+      "The remote worker then tried to trigger a download dialog by clicking the download button.",
+      "The expected [role=dialog] element never appeared within 10s timeout.",
+      "This is a remote service reliability issue - the image was generated but not captured."
+    ],
+    "guidance": [
+      "Retry the same prompt - this is likely a transient service issue.",
+      "Check https://chatgpt-image.vyibc.com/health to see if the service is healthy.",
+      "If the issue persists, the remote ChatGPT page may have changed its UI layout (download dialog selectors)."
+    ]
+  },
+  "output_manifest_path": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T184017-4b8467/outputs/manifest.json",
+  "output_directory": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T184017-4b8467/outputs"
+}
