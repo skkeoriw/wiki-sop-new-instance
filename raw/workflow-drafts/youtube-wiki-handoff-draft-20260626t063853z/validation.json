@@ -1,0 +1,33 @@
+{
+  "schema_id": "workflow-draft-schema/v1",
+  "status": "warning",
+  "errors": [],
+  "warnings": [
+    {
+      "field": "edges.youtube-fetch-to-tg-notify-1782439277217",
+      "code": "edge_not_ready",
+      "message": "Edge requires a ready AI evaluation and Node Execution Guide before Runtime SOP generation",
+      "errors": [
+        {
+          "field": "evaluation.status",
+          "code": "not_approved",
+          "message": "Only ready/trial_ready Edge Handoff Agent evaluations can be saved"
+        },
+        {
+          "field": "evaluation.agent.used_ai",
+          "code": "ai_required",
+          "message": "Saved Edge drafts require a real AI Edge Handoff Agent evaluation"
+        },
+        {
+          "field": "evaluation.node_execution_guide.prompt",
+          "code": "guide_required",
+          "message": "Node Execution Guide is required before saving this Edge"
+        }
+      ]
+    }
+  ],
+  "workflow_id": "youtube-research-wiki",
+  "node_count": 2,
+  "edge_count": 1,
+  "ready_edge_count": 0
+}

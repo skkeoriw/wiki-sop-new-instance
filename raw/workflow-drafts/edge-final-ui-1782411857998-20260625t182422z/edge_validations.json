@@ -1,0 +1,31 @@
+[
+  {
+    "edge_id": "youtube-fetch-to-youtube-deep-research-final-1782411857998",
+    "source": "youtube-fetch",
+    "target": "youtube-deep-research",
+    "validation": {
+      "schema_id": "workflow-edge-draft-schema/v1",
+      "status": "failed",
+      "errors": [
+        {
+          "field": "evaluation.status",
+          "code": "not_approved",
+          "message": "Only ready/trial_ready Edge Handoff Agent evaluations can be saved"
+        },
+        {
+          "field": "evaluation.agent.used_ai",
+          "code": "ai_required",
+          "message": "Saved Edge drafts require a real AI Edge Handoff Agent evaluation"
+        },
+        {
+          "field": "evaluation.node_execution_guide.prompt",
+          "code": "guide_required",
+          "message": "Node Execution Guide is required before saving this Edge"
+        }
+      ],
+      "missing_fields": [],
+      "production_dag_changed": false,
+      "workflow_id": "youtube-research-wiki"
+    }
+  }
+]

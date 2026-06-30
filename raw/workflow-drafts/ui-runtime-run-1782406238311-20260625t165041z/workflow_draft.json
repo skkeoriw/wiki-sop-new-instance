@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "draft_type": "workflow_draft",
+  "draft_id": "ui-runtime-run-1782406238311-20260625t165041z",
+  "workflow_id": "youtube-research-wiki",
+  "name": "ui-runtime-run-1782406238311",
+  "goal": "Verify draft workflow run trigger from UI.",
+  "created_at": "2026-06-25T16:50:59Z",
+  "runtime_id": "youtube-wiki",
+  "instance_id": "test-instance",
+  "draft": {
+    "name": "ui-runtime-run-1782406238311",
+    "goal": "Verify draft workflow run trigger from UI.",
+    "nodes": [
+      {
+        "nodeId": "youtube-fetch",
+        "signature": ""
+      },
+      {
+        "nodeId": "youtube-deep-research",
+        "signature": ""
+      }
+    ],
+    "edges": [
+      {
+        "id": "youtube-fetch-to-youtube-deep-research-run-1782406238311",
+        "from": "youtube-fetch",
+        "to": "youtube-deep-research",
+        "sourceIntent": "source_url and metadata_file",
+        "targetIntent": "source_url",
+        "instruction": "把上游 source_url 交给 YouTube 深度研究节点；metadata_file 只作为可选上下文，不作为主输入。",
+        "fromSignature": "",
+        "toSignature": "",
+        "relayMode": "auto_by_target_inputs",
+        "relayMappings": []
+      }
+    ],
+    "positions": {
+      "youtube-fetch": {
+        "x": 0,
+        "y": 0
+      },
+      "youtube-deep-research": {
+        "x": 292,
+        "y": 0
+      }
+    }
+  },
+  "edge_count": 1,
+  "ready_edge_count": 1,
+  "runtime_sop_status": "not_generated",
+  "active_runtime_sop_changed": false,
+  "production_dag_changed": false
+}

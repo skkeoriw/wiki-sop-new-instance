@@ -1,0 +1,10 @@
+{
+  "schema_id": "workflow-draft-schema/v1",
+  "status": "passed",
+  "errors": [],
+  "warnings": [],
+  "workflow_id": "youtube-research-wiki",
+  "node_count": 2,
+  "edge_count": 1,
+  "ready_edge_count": 1
+}

@@ -1,0 +1,37 @@
+## Execution Result: FAILED
+
+**Node Run**: `node-run-chatgpt-remote-image-service-nrmj-20260629T175101-480b13`
+
+### What happened
+
+The remote ChatGPT image service processed the prompt **"生成一张小猫睡觉的照片"** successfully through all browser stages up to the download step, then failed.
+
+### Timeline (from task timings)
+
+| Stage | Duration | Status |
+|-------|----------|--------|
+| parseArgs | 6ms | ✅ |
+| importPlaywright | 1288ms | ✅ |
+| connectBrowser (port 9333) | 1429ms | ✅ |
+| preparePage | 3754ms | ✅ |
+| waitComposer | 10229ms | ✅ |
+| enterImageMode | 11851ms | ✅ |
+| fillPrompt | 12066ms | ✅ |
+| waitSendEnabled | 12243ms | ✅ |
+| snapshotExistingGeneratedImages | 12250ms | ✅ |
+| clickSend | 13560ms | ✅ |
+| waitForGeneratedImage | 41996ms | ✅ — **image appeared** |
+| **downloadImage** | **timeout** | ❌ |
+
+The image was generated (confirmed by `generatedVisibleMs=41996`), but the download locator `[role="dialog"]` timed out after 10s waiting for the ChatGPT save dialog. This is a transient issue on the remote service — the browser worker saw the image but the expected dialog didn't appear in time.
+
+### Outputs written
+
+- `raw/node-runs/.../outputs/manifest.json` — full output manifest with task state and timings
+- `raw/node-runs/.../agent/receipt.json` — execution receipt with failure detail and guidance
+
+### Recovery guidance
+
+1. **Retry the same prompt** — this is likely a transient glitch
+2. If it persists, open the remote VNC at `https://chatgpt-vnc.vyibc.com/vnc.html` to check browser state — the worker may need a page refresh or re-login
+3. If retries consistently fail at the same download stage, the ChatGPT UI may have changed and the worker's locator strategy needs updating

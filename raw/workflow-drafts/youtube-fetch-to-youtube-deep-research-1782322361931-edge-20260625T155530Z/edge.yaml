@@ -1,0 +1,85 @@
+id: youtube-fetch-to-youtube-deep-research-1782322361931
+from: youtube-fetch
+to: youtube-deep-research
+relay:
+  mode: auto_by_target_inputs
+  mappings: []
+  handoff_instruction: 从上游 outputs 中读取 source_url  传给下游节点
+  node_execution_guide:
+    format: markdown
+    prompt: 'Use skill sop-youtube-deep-research to execute this downstream node.
+
+
+      ## Node Execution Guide
+
+      - Edge: youtube-fetch -> youtube-deep-research
+
+      - Evaluation summary: 上下游存在直接同名输入输出映射，显式引用清晰，可稳定生成节点执行指导。
+
+      - Edge Handoff Instruction: 从上游 outputs 中读取 source_url 传给下游节点
+
+
+      ### Upstream artifacts
+
+      - source_url: raw/node-runs/{pipeline_id}/outputs/files/source-url.txt
+
+      - metadata_file: raw/node-runs/{pipeline_id}/outputs/files/metadata.json (supporting
+      context)
+
+
+      ### Execution rules
+
+      - **Primary input**: Use the resolved source_url from upstream. It is a URL
+      string.
+
+      - **Execution command**: Execute the downstream skill with the source_url as
+      input.
+
+      - **No additional user input required.**
+
+
+      ### Steps
+
+      1. Read source_url from the upstream output file.
+
+      2. Pass source_url to the downstream node''s input.
+
+      3. Run the downstream skill `sop-youtube-deep-research`.
+
+      4. Verify that analysis_file and transcript_file are generated.
+
+
+      ### Notes
+
+      - The upstream metadata_file is not required but can be used for additional
+      context if needed.
+
+      - The handoff is automatic; no manual mapping is required.'
+  evaluation:
+    status: ready
+    score: 0.95
+    confidence: 0.9
+    summary: 上下游存在直接同名输入输出映射，显式引用清晰，可稳定生成节点执行指导。
+    decision: can_run
+    evaluated_at: '2026-06-25T15:55:16Z'
+    agent:
+      provider: openai-compatible
+      model: deepseek-v4-flash
+      used_ai: true
+  resolved_handoff:
+    primary_artifacts:
+    - from: youtube-fetch.outputs.source_url
+      role: primary_source
+      reason: 上游声明的可交付产物，与下游必需输入同名同类型。
+    supporting_artifacts:
+    - from: youtube-fetch.outputs.metadata_file
+      role: supporting_context
+      reason: 该产物适合作为补充上下文，但非下游必需输入。
+    downstream_inputs:
+    - to: youtube-deep-research.inputs.source_url
+      construction: 直接使用上游 output source_url，无需转换。
+  test_plan:
+  - 验证上游 source_url 文件存在且为有效URL
+  - 执行下游节点，传递 source_url
+  - 检查下游输出文件 analysis_file 和 transcript_file 生成
+  - 记录 edge evaluation 和 guide 到日志

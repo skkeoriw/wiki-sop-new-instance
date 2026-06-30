@@ -1,0 +1,15 @@
+[
+  {
+    "edge_id": "youtube-fetch-to-tg-notify-1782439277217",
+    "source": "youtube-fetch",
+    "target": "tg-notify",
+    "validation": {
+      "schema_id": "workflow-edge-draft-schema/v1",
+      "status": "passed",
+      "errors": [],
+      "missing_fields": [],
+      "production_dag_changed": false,
+      "workflow_id": "youtube-research-wiki"
+    }
+  }
+]

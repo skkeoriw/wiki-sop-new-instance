@@ -1,0 +1,1056 @@
+{
+  "status": "failed",
+  "execution_status": "failed",
+  "business_output_status": {
+    "status": "failed_execution",
+    "expected_outputs": [
+      "result",
+      "image_url",
+      "public_image_url",
+      "status",
+      "task_id",
+      "status_json",
+      "submit_json",
+      "generated_images",
+      "images"
+    ],
+    "required_outputs": [],
+    "present_outputs": [
+      "result",
+      "status",
+      "task_id",
+      "status_json",
+      "submit_json"
+    ],
+    "missing_required_outputs": [],
+    "business_outputs": {
+      "result": {
+        "value": "Task failed: 4b5a30c4-b976-4cba-a166-d14f5ba75664. Worker exited with code 1. Image was generated (57.8s) but download dialog timed out.",
+        "value_type": "text",
+        "relayable": true
+      },
+      "status": {
+        "value": "failed",
+        "value_type": "text",
+        "relayable": true
+      },
+      "task_id": {
+        "value": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+        "value_type": "text",
+        "relayable": true
+      },
+      "status_json": {
+        "value": {
+          "ok": true,
+          "taskId": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+          "status": "failed",
+          "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+          "createdAt": "2026-06-29T18:45:54.919Z",
+          "startedAt": "2026-06-29T18:45:54.919Z",
+          "updatedAt": "2026-06-29T18:47:04.623Z",
+          "uploadName": "4b5a30c4-b976-4cba-a166-d14f5ba75664.png",
+          "workerId": "worker-1",
+          "cdpPort": "9333",
+          "loginRequired": false,
+          "error": "Worker exited with code 1",
+          "timings": {
+            "connectedMs": 1382,
+            "pageReadyMs": 2470,
+            "sentMs": 12043,
+            "generatedVisibleMs": 57801
+          }
+        },
+        "value_type": "json",
+        "relayable": false
+      },
+      "submit_json": {
+        "value": null,
+        "value_type": "json",
+        "relayable": true
+      }
+    },
+    "business_artifact_count": 0
+  },
+  "probe_id": "chatgpt-remote-image-service-vs2q-probe-20260629T184505Z-831ce1",
+  "draft_id": "chatgpt-remote-image-service-vs2q-1782757312",
+  "node_id": "chatgpt-remote-image-service-vs2q",
+  "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260629T184504-4b8467",
+  "http_status": 200,
+  "mode": "node-draft-probe-run",
+  "manual_inputs": {
+    "api_url": "",
+    "reference_image_file": "",
+    "reference_image_url": "",
+    "poll_interval": "",
+    "prompt": "生成一张小猫睡觉的照片",
+    "timeout_seconds": "",
+    "upload_name": ""
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": false
+    },
+    "telegram": {
+      "enabled": false
+    }
+  },
+  "result": {
+    "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260629T184504-4b8467",
+    "status": "failed",
+    "pending": false,
+    "started_at": "2026-06-29T18:45:05.001621+00:00",
+    "finished_at": "2026-06-29T18:55:17.160587+00:00",
+    "elapsed_ms": 282,
+    "validation": {
+      "business_output_status": {
+        "status": "failed_execution",
+        "expected_outputs": [
+          "result",
+          "image_url",
+          "public_image_url",
+          "status",
+          "task_id",
+          "status_json",
+          "submit_json",
+          "generated_images",
+          "images"
+        ],
+        "required_outputs": [],
+        "present_outputs": [
+          "result",
+          "status",
+          "task_id",
+          "status_json",
+          "submit_json"
+        ],
+        "missing_required_outputs": [],
+        "business_outputs": {
+          "result": {
+            "value": "Task failed: 4b5a30c4-b976-4cba-a166-d14f5ba75664. Worker exited with code 1. Image was generated (57.8s) but download dialog timed out.",
+            "value_type": "text",
+            "relayable": true
+          },
+          "status": {
+            "value": "failed",
+            "value_type": "text",
+            "relayable": true
+          },
+          "task_id": {
+            "value": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+            "value_type": "text",
+            "relayable": true
+          },
+          "status_json": {
+            "value": {
+              "ok": true,
+              "taskId": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+              "status": "failed",
+              "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+              "createdAt": "2026-06-29T18:45:54.919Z",
+              "startedAt": "2026-06-29T18:45:54.919Z",
+              "updatedAt": "2026-06-29T18:47:04.623Z",
+              "uploadName": "4b5a30c4-b976-4cba-a166-d14f5ba75664.png",
+              "workerId": "worker-1",
+              "cdpPort": "9333",
+              "loginRequired": false,
+              "error": "Worker exited with code 1",
+              "timings": {
+                "connectedMs": 1382,
+                "pageReadyMs": 2470,
+                "sentMs": 12043,
+                "generatedVisibleMs": 57801
+              }
+            },
+            "value_type": "json",
+            "relayable": false
+          },
+          "submit_json": {
+            "value": null,
+            "value_type": "json",
+            "relayable": true
+          }
+        },
+        "business_artifact_count": 0
+      }
+    },
+    "output_manifest": "",
+    "output_directory": "",
+    "actual_outputs": {
+      "result": {
+        "value": "Task failed: 4b5a30c4-b976-4cba-a166-d14f5ba75664. Worker exited with code 1. Image was generated (57.8s) but download dialog timed out.",
+        "value_type": "text",
+        "relayable": true
+      },
+      "image_url": [],
+      "public_image_url": [],
+      "status": {
+        "value": "failed",
+        "value_type": "text",
+        "relayable": true
+      },
+      "task_id": {
+        "value": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+        "value_type": "text",
+        "relayable": true
+      },
+      "status_json": {
+        "value": {
+          "ok": true,
+          "taskId": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+          "status": "failed",
+          "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+          "createdAt": "2026-06-29T18:45:54.919Z",
+          "startedAt": "2026-06-29T18:45:54.919Z",
+          "updatedAt": "2026-06-29T18:47:04.623Z",
+          "uploadName": "4b5a30c4-b976-4cba-a166-d14f5ba75664.png",
+          "workerId": "worker-1",
+          "cdpPort": "9333",
+          "loginRequired": false,
+          "error": "Worker exited with code 1",
+          "timings": {
+            "connectedMs": 1382,
+            "pageReadyMs": 2470,
+            "sentMs": 12043,
+            "generatedVisibleMs": 57801
+          }
+        },
+        "value_type": "json",
+        "relayable": false
+      },
+      "submit_json": {
+        "value": null,
+        "value_type": "json",
+        "relayable": true
+      },
+      "generated_images": [],
+      "images": []
+    },
+    "business_artifacts": [],
+    "core_outputs": [
+      {
+        "name": "result",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "value": "Task failed: 4b5a30c4-b976-4cba-a166-d14f5ba75664. Worker exited with code 1. Image was generated (57.8s) but download dialog timed out.",
+          "value_type": "text",
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Skill execution result summary.",
+          "relayable": true
+        }
+      },
+      {
+        "name": "image_url",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `imageUrl`.",
+          "value_type": "url",
+          "relayable": true,
+          "evidence": "source result marker imageUrl"
+        }
+      },
+      {
+        "name": "public_image_url",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `publicImageUrl`.",
+          "value_type": "url",
+          "relayable": true,
+          "evidence": "source result marker publicImageUrl"
+        }
+      },
+      {
+        "name": "status",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "value": "failed",
+          "value_type": "text",
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `status`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker status"
+        }
+      },
+      {
+        "name": "task_id",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "value": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+          "value_type": "text",
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `taskId`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker taskId"
+        }
+      },
+      {
+        "name": "status_json",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "value": {
+            "ok": true,
+            "taskId": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+            "status": "failed",
+            "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+            "createdAt": "2026-06-29T18:45:54.919Z",
+            "startedAt": "2026-06-29T18:45:54.919Z",
+            "updatedAt": "2026-06-29T18:47:04.623Z",
+            "uploadName": "4b5a30c4-b976-4cba-a166-d14f5ba75664.png",
+            "workerId": "worker-1",
+            "cdpPort": "9333",
+            "loginRequired": false,
+            "error": "Worker exited with code 1",
+            "timings": {
+              "connectedMs": 1382,
+              "pageReadyMs": 2470,
+              "sentMs": 12043,
+              "generatedVisibleMs": 57801
+            }
+          },
+          "value_type": "json",
+          "relayable": false
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Runtime value captured by script variable `status_json`.",
+          "value_type": "json",
+          "relayable": false,
+          "evidence": "source script variable status_json"
+        }
+      },
+      {
+        "name": "submit_json",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "value": null,
+          "value_type": "json",
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Runtime value captured by script variable `submit_json`.",
+          "value_type": "json",
+          "relayable": true,
+          "evidence": "source script variable submit_json"
+        }
+      },
+      {
+        "name": "generated_images",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Generated image files or public image URLs.",
+          "value_type": "image",
+          "relayable": true
+        }
+      },
+      {
+        "name": "images",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Generated image files.",
+          "relayable": true
+        }
+      }
+    ],
+    "steps": [
+      {
+        "id": "create-run",
+        "title": "Create node run workspace",
+        "status": "done",
+        "summary": "Node Run record is allocated independently from Workflow Run.",
+        "started_at": "2026-06-29T18:45:05.001621+00:00",
+        "finished_at": "2026-06-29T18:45:05.036621+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "load-definition",
+        "title": "Load node definition",
+        "status": "done",
+        "summary": "Loaded chatgpt-remote-image-service-vs2q from youtube-research-wiki.",
+        "started_at": "2026-06-29T18:45:05.036621+00:00",
+        "finished_at": "2026-06-29T18:45:05.071621+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-context",
+        "title": "Resolve Runtime / Instance / Workflow context",
+        "status": "done",
+        "summary": "youtube-wiki · wiki-sop-new-instance · youtube-research-wiki",
+        "started_at": "2026-06-29T18:45:05.071621+00:00",
+        "finished_at": "2026-06-29T18:45:05.106621+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-inputs",
+        "title": "Resolve node inputs",
+        "status": "done",
+        "summary": "1 resolved, 0 pending relay, 0 missing.",
+        "started_at": "2026-06-29T18:45:05.106621+00:00",
+        "finished_at": "2026-06-29T18:45:05.141621+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-config",
+        "title": "Resolve execution config",
+        "status": "done",
+        "summary": "Runtime, Instance and capability config resolved.",
+        "started_at": "2026-06-29T18:45:05.141621+00:00",
+        "finished_at": "2026-06-29T18:45:05.176621+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "generate-agent-request",
+        "title": "Generate Agent Request",
+        "status": "done",
+        "summary": "Hermes Agent Request was rendered and saved for this Node Run.",
+        "started_at": "2026-06-29T18:45:05.176621+00:00",
+        "finished_at": "",
+        "elapsed_ms": 0
+      },
+      {
+        "id": "probe-capabilities",
+        "title": "Probe attached capabilities",
+        "status": "skipped",
+        "summary": "Capability probes are explicit. Telegram send probes require user confirmation.",
+        "started_at": "2026-06-29T18:45:05.211621+00:00",
+        "finished_at": "2026-06-29T18:45:05.235621+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "build-execution-plan",
+        "title": "Build node execution plan",
+        "status": "done",
+        "summary": "Prepared real-node execution plan.",
+        "started_at": "2026-06-29T18:45:05.246621+00:00",
+        "finished_at": "2026-06-29T18:45:05.281621+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "execute-or-dry-run",
+        "title": "Execute or dry-run node",
+        "status": "failed",
+        "summary": "Real node execution crashed before completion.",
+        "started_at": "2026-06-29T18:45:05.281621+00:00",
+        "finished_at": "2026-06-29T18:55:17.160587+00:00",
+        "elapsed_ms": 0
+      },
+      {
+        "id": "validate-outputs",
+        "title": "Validate declared outputs",
+        "status": "waiting",
+        "summary": "Waiting for real node outputs.",
+        "started_at": "2026-06-29T18:45:05.316621+00:00",
+        "finished_at": "",
+        "elapsed_ms": 0
+      },
+      {
+        "id": "persist-to-github",
+        "title": "Persist to GitHub",
+        "status": "skipped",
+        "summary": "GitHub persistence is not attached for this Node Run.",
+        "started_at": "2026-06-29T18:45:05.351621+00:00",
+        "finished_at": "2026-06-29T18:45:05.375621+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "send-telegram-notification",
+        "title": "Send Telegram notification",
+        "status": "skipped",
+        "summary": "Telegram notification is not attached for this Node Run.",
+        "started_at": "2026-06-29T18:45:05.386621+00:00",
+        "finished_at": "2026-06-29T18:45:05.410621+00:00",
+        "elapsed_ms": 24
+      }
+    ]
+  },
+  "manifest": {
+    "version": 1,
+    "kind": "output",
+    "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260629T184504-4b8467",
+    "node_id": "chatgpt-remote-image-service-vs2q",
+    "created_at": "2026-06-30T02:45:00Z",
+    "status": "failed",
+    "error": "Remote ChatGPT image generation failed at downloadImage stage: locator.waitFor: Timeout 10000ms exceeded. waiting for locator('[role=\"dialog\"]').last() to be visible. The image was generated by ChatGPT (57.8s generation time) but the download dialog did not appear in time.",
+    "outputs": {
+      "result": {
+        "value": "Task failed: 4b5a30c4-b976-4cba-a166-d14f5ba75664. Worker exited with code 1. Image was generated (57.8s) but download dialog timed out.",
+        "value_type": "text",
+        "relayable": true
+      },
+      "task_id": {
+        "value": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+        "value_type": "text",
+        "relayable": true
+      },
+      "status": {
+        "value": "failed",
+        "value_type": "text",
+        "relayable": true
+      },
+      "status_json": {
+        "value": {
+          "ok": true,
+          "taskId": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+          "status": "failed",
+          "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+          "createdAt": "2026-06-29T18:45:54.919Z",
+          "startedAt": "2026-06-29T18:45:54.919Z",
+          "updatedAt": "2026-06-29T18:47:04.623Z",
+          "uploadName": "4b5a30c4-b976-4cba-a166-d14f5ba75664.png",
+          "workerId": "worker-1",
+          "cdpPort": "9333",
+          "loginRequired": false,
+          "error": "Worker exited with code 1",
+          "timings": {
+            "connectedMs": 1382,
+            "pageReadyMs": 2470,
+            "sentMs": 12043,
+            "generatedVisibleMs": 57801
+          }
+        },
+        "value_type": "json",
+        "relayable": false
+      },
+      "submit_json": {
+        "value": null,
+        "value_type": "json",
+        "relayable": true
+      },
+      "image_url": null,
+      "public_image_url": null,
+      "generated_images": [],
+      "images": []
+    },
+    "items": [
+      {
+        "value": "Task failed: 4b5a30c4-b976-4cba-a166-d14f5ba75664. Worker exited with code 1. Image was generated (57.8s) but download dialog timed out.",
+        "value_type": "text",
+        "relayable": true,
+        "name": "result",
+        "output": "result"
+      },
+      {
+        "value": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+        "value_type": "text",
+        "relayable": true,
+        "name": "task_id",
+        "output": "task_id"
+      },
+      {
+        "value": "failed",
+        "value_type": "text",
+        "relayable": true,
+        "name": "status",
+        "output": "status"
+      },
+      {
+        "value": {
+          "ok": true,
+          "taskId": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+          "status": "failed",
+          "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+          "createdAt": "2026-06-29T18:45:54.919Z",
+          "startedAt": "2026-06-29T18:45:54.919Z",
+          "updatedAt": "2026-06-29T18:47:04.623Z",
+          "uploadName": "4b5a30c4-b976-4cba-a166-d14f5ba75664.png",
+          "workerId": "worker-1",
+          "cdpPort": "9333",
+          "loginRequired": false,
+          "error": "Worker exited with code 1",
+          "timings": {
+            "connectedMs": 1382,
+            "pageReadyMs": 2470,
+            "sentMs": 12043,
+            "generatedVisibleMs": 57801
+          }
+        },
+        "value_type": "json",
+        "relayable": false,
+        "name": "status_json",
+        "output": "status_json"
+      },
+      {
+        "value": null,
+        "value_type": "json",
+        "relayable": true,
+        "name": "submit_json",
+        "output": "submit_json"
+      },
+      {
+        "value": null,
+        "name": "image_url",
+        "output": "image_url"
+      },
+      {
+        "value": null,
+        "name": "public_image_url",
+        "output": "public_image_url"
+      },
+      {
+        "value": [],
+        "name": "generated_images",
+        "output": "generated_images"
+      },
+      {
+        "value": [],
+        "name": "images",
+        "output": "images"
+      }
+    ]
+  },
+  "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T184504-4b8467/outputs/manifest.json",
+  "manifest_records": [
+    {
+      "value": "Task failed: 4b5a30c4-b976-4cba-a166-d14f5ba75664. Worker exited with code 1. Image was generated (57.8s) but download dialog timed out.",
+      "value_type": "text",
+      "relayable": true,
+      "name": "result",
+      "output": "result",
+      "path": ""
+    },
+    {
+      "value": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+      "value_type": "text",
+      "relayable": true,
+      "name": "task_id",
+      "output": "task_id",
+      "path": ""
+    },
+    {
+      "value": "failed",
+      "value_type": "text",
+      "relayable": true,
+      "name": "status",
+      "output": "status",
+      "path": ""
+    },
+    {
+      "value": {
+        "ok": true,
+        "taskId": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+        "status": "failed",
+        "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+        "createdAt": "2026-06-29T18:45:54.919Z",
+        "startedAt": "2026-06-29T18:45:54.919Z",
+        "updatedAt": "2026-06-29T18:47:04.623Z",
+        "uploadName": "4b5a30c4-b976-4cba-a166-d14f5ba75664.png",
+        "workerId": "worker-1",
+        "cdpPort": "9333",
+        "loginRequired": false,
+        "error": "Worker exited with code 1",
+        "timings": {
+          "connectedMs": 1382,
+          "pageReadyMs": 2470,
+          "sentMs": 12043,
+          "generatedVisibleMs": 57801
+        }
+      },
+      "value_type": "json",
+      "relayable": false,
+      "name": "status_json",
+      "output": "status_json",
+      "path": ""
+    },
+    {
+      "value": null,
+      "value_type": "json",
+      "relayable": true,
+      "name": "submit_json",
+      "output": "submit_json",
+      "path": ""
+    },
+    {
+      "value": null,
+      "name": "image_url",
+      "output": "image_url",
+      "path": ""
+    },
+    {
+      "value": null,
+      "name": "public_image_url",
+      "output": "public_image_url",
+      "path": ""
+    },
+    {
+      "value": [],
+      "name": "generated_images",
+      "output": "generated_images",
+      "path": ""
+    },
+    {
+      "value": [],
+      "name": "images",
+      "output": "images",
+      "path": ""
+    }
+  ],
+  "validation": {
+    "business_output_status": {
+      "status": "failed_execution",
+      "expected_outputs": [
+        "result",
+        "image_url",
+        "public_image_url",
+        "status",
+        "task_id",
+        "status_json",
+        "submit_json",
+        "generated_images",
+        "images"
+      ],
+      "required_outputs": [],
+      "present_outputs": [
+        "result",
+        "status",
+        "task_id",
+        "status_json",
+        "submit_json"
+      ],
+      "missing_required_outputs": [],
+      "business_outputs": {
+        "result": {
+          "value": "Task failed: 4b5a30c4-b976-4cba-a166-d14f5ba75664. Worker exited with code 1. Image was generated (57.8s) but download dialog timed out.",
+          "value_type": "text",
+          "relayable": true
+        },
+        "status": {
+          "value": "failed",
+          "value_type": "text",
+          "relayable": true
+        },
+        "task_id": {
+          "value": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+          "value_type": "text",
+          "relayable": true
+        },
+        "status_json": {
+          "value": {
+            "ok": true,
+            "taskId": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+            "status": "failed",
+            "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+            "createdAt": "2026-06-29T18:45:54.919Z",
+            "startedAt": "2026-06-29T18:45:54.919Z",
+            "updatedAt": "2026-06-29T18:47:04.623Z",
+            "uploadName": "4b5a30c4-b976-4cba-a166-d14f5ba75664.png",
+            "workerId": "worker-1",
+            "cdpPort": "9333",
+            "loginRequired": false,
+            "error": "Worker exited with code 1",
+            "timings": {
+              "connectedMs": 1382,
+              "pageReadyMs": 2470,
+              "sentMs": 12043,
+              "generatedVisibleMs": 57801
+            }
+          },
+          "value_type": "json",
+          "relayable": false
+        },
+        "submit_json": {
+          "value": null,
+          "value_type": "json",
+          "relayable": true
+        }
+      },
+      "business_artifact_count": 0
+    }
+  },
+  "actual_outputs": {
+    "result": {
+      "value": "Task failed: 4b5a30c4-b976-4cba-a166-d14f5ba75664. Worker exited with code 1. Image was generated (57.8s) but download dialog timed out.",
+      "value_type": "text",
+      "relayable": true
+    },
+    "image_url": [],
+    "public_image_url": [],
+    "status": {
+      "value": "failed",
+      "value_type": "text",
+      "relayable": true
+    },
+    "task_id": {
+      "value": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+      "value_type": "text",
+      "relayable": true
+    },
+    "status_json": {
+      "value": {
+        "ok": true,
+        "taskId": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+        "status": "failed",
+        "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+        "createdAt": "2026-06-29T18:45:54.919Z",
+        "startedAt": "2026-06-29T18:45:54.919Z",
+        "updatedAt": "2026-06-29T18:47:04.623Z",
+        "uploadName": "4b5a30c4-b976-4cba-a166-d14f5ba75664.png",
+        "workerId": "worker-1",
+        "cdpPort": "9333",
+        "loginRequired": false,
+        "error": "Worker exited with code 1",
+        "timings": {
+          "connectedMs": 1382,
+          "pageReadyMs": 2470,
+          "sentMs": 12043,
+          "generatedVisibleMs": 57801
+        }
+      },
+      "value_type": "json",
+      "relayable": false
+    },
+    "submit_json": {
+      "value": null,
+      "value_type": "json",
+      "relayable": true
+    },
+    "generated_images": [],
+    "images": []
+  },
+  "business_outputs": {
+    "result": {
+      "value": "Task failed: 4b5a30c4-b976-4cba-a166-d14f5ba75664. Worker exited with code 1. Image was generated (57.8s) but download dialog timed out.",
+      "value_type": "text",
+      "relayable": true
+    },
+    "status": {
+      "value": "failed",
+      "value_type": "text",
+      "relayable": true
+    },
+    "task_id": {
+      "value": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+      "value_type": "text",
+      "relayable": true
+    },
+    "status_json": {
+      "value": {
+        "ok": true,
+        "taskId": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+        "status": "failed",
+        "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+        "createdAt": "2026-06-29T18:45:54.919Z",
+        "startedAt": "2026-06-29T18:45:54.919Z",
+        "updatedAt": "2026-06-29T18:47:04.623Z",
+        "uploadName": "4b5a30c4-b976-4cba-a166-d14f5ba75664.png",
+        "workerId": "worker-1",
+        "cdpPort": "9333",
+        "loginRequired": false,
+        "error": "Worker exited with code 1",
+        "timings": {
+          "connectedMs": 1382,
+          "pageReadyMs": 2470,
+          "sentMs": 12043,
+          "generatedVisibleMs": 57801
+        }
+      },
+      "value_type": "json",
+      "relayable": false
+    },
+    "submit_json": {
+      "value": null,
+      "value_type": "json",
+      "relayable": true
+    }
+  },
+  "business_artifacts": [],
+  "core_outputs": [
+    {
+      "name": "result",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "value": "Task failed: 4b5a30c4-b976-4cba-a166-d14f5ba75664. Worker exited with code 1. Image was generated (57.8s) but download dialog timed out.",
+        "value_type": "text",
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Skill execution result summary.",
+        "relayable": true
+      }
+    },
+    {
+      "name": "image_url",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `imageUrl`.",
+        "value_type": "url",
+        "relayable": true,
+        "evidence": "source result marker imageUrl"
+      }
+    },
+    {
+      "name": "public_image_url",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `publicImageUrl`.",
+        "value_type": "url",
+        "relayable": true,
+        "evidence": "source result marker publicImageUrl"
+      }
+    },
+    {
+      "name": "status",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "value": "failed",
+        "value_type": "text",
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `status`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker status"
+      }
+    },
+    {
+      "name": "task_id",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "value": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+        "value_type": "text",
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `taskId`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker taskId"
+      }
+    },
+    {
+      "name": "status_json",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "value": {
+          "ok": true,
+          "taskId": "4b5a30c4-b976-4cba-a166-d14f5ba75664",
+          "status": "failed",
+          "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+          "createdAt": "2026-06-29T18:45:54.919Z",
+          "startedAt": "2026-06-29T18:45:54.919Z",
+          "updatedAt": "2026-06-29T18:47:04.623Z",
+          "uploadName": "4b5a30c4-b976-4cba-a166-d14f5ba75664.png",
+          "workerId": "worker-1",
+          "cdpPort": "9333",
+          "loginRequired": false,
+          "error": "Worker exited with code 1",
+          "timings": {
+            "connectedMs": 1382,
+            "pageReadyMs": 2470,
+            "sentMs": 12043,
+            "generatedVisibleMs": 57801
+          }
+        },
+        "value_type": "json",
+        "relayable": false
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Runtime value captured by script variable `status_json`.",
+        "value_type": "json",
+        "relayable": false,
+        "evidence": "source script variable status_json"
+      }
+    },
+    {
+      "name": "submit_json",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "value": null,
+        "value_type": "json",
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Runtime value captured by script variable `submit_json`.",
+        "value_type": "json",
+        "relayable": true,
+        "evidence": "source script variable submit_json"
+      }
+    },
+    {
+      "name": "generated_images",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Generated image files or public image URLs.",
+        "value_type": "image",
+        "relayable": true
+      }
+    },
+    {
+      "name": "images",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Generated image files.",
+        "relayable": true
+      }
+    }
+  ],
+  "created_at": "2026-06-29T18:45:05.045628+00:00",
+  "reconciled_at": "2026-06-30T15:17:15.510511+00:00"
+}

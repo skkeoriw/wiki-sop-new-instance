@@ -1,0 +1,1161 @@
+{
+  "status": "passed",
+  "probe_id": "chatgpt-remote-image-service-xo0r-probe-20260629T161805Z-79020b",
+  "draft_id": "chatgpt-remote-image-service-xo0r-1782749850",
+  "node_id": "chatgpt-remote-image-service-xo0r",
+  "node_run_id": "node-run-chatgpt-remote-image-service-xo0r-20260629T161805-293abd",
+  "http_status": 200,
+  "mode": "node-draft-probe-run",
+  "manual_inputs": {
+    "api_url": "",
+    "reference_image_file": "",
+    "reference_image_url": "",
+    "poll_interval": "",
+    "prompt": "生成一张小狗睡觉的照片",
+    "timeout_seconds": "",
+    "upload_name": ""
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": false
+    },
+    "telegram": {
+      "enabled": false
+    }
+  },
+  "result": {
+    "node_run_id": "node-run-chatgpt-remote-image-service-xo0r-20260629T161805-293abd",
+    "status": "done",
+    "pending": false,
+    "started_at": "2026-06-29T16:18:05.816505+00:00",
+    "finished_at": "2026-06-29T16:25:27.767717+00:00",
+    "elapsed_ms": 441285,
+    "validation": {
+      "status": "passed",
+      "missing_outputs": [],
+      "unexpected_outputs": [],
+      "business_output_status": {
+        "status": "passed",
+        "expected_outputs": [
+          "result",
+          "image_url",
+          "public_image_url",
+          "status",
+          "task_id",
+          "status_json",
+          "submit_json",
+          "generated_images",
+          "images"
+        ],
+        "required_outputs": [],
+        "present_outputs": [
+          "result",
+          "image_url",
+          "public_image_url",
+          "status",
+          "task_id",
+          "status_json",
+          "submit_json",
+          "generated_images",
+          "images"
+        ],
+        "missing_required_outputs": [],
+        "business_outputs": {
+          "result": {
+            "value": "Image generated successfully via ChatGPT remote image service.",
+            "value_type": "text",
+            "relayable": true
+          },
+          "image_url": {
+            "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+            "value_type": "url",
+            "relayable": true
+          },
+          "public_image_url": {
+            "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+            "value_type": "url",
+            "relayable": true
+          },
+          "status": {
+            "value": "succeeded",
+            "value_type": "text",
+            "relayable": true
+          },
+          "task_id": {
+            "value": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+            "value_type": "text",
+            "relayable": true
+          },
+          "status_json": {
+            "value": {
+              "ok": true,
+              "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+              "status": "succeeded",
+              "stage": "uploadedMs",
+              "createdAt": "2026-06-29T16:19:03.553Z",
+              "startedAt": "2026-06-29T16:19:03.556Z",
+              "finishedAt": "2026-06-29T16:19:49.490Z",
+              "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+              "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+              "workerId": "worker-1",
+              "cdpPort": "9333"
+            },
+            "value_type": "json",
+            "relayable": false
+          },
+          "submit_json": {
+            "value": {
+              "ok": true,
+              "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+              "status": "succeeded",
+              "stage": "uploadedMs",
+              "createdAt": "2026-06-29T16:19:03.553Z",
+              "startedAt": "2026-06-29T16:19:03.556Z",
+              "finishedAt": "2026-06-29T16:19:49.490Z",
+              "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+              "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+              "workerId": "worker-1",
+              "cdpPort": "9333"
+            },
+            "value_type": "json",
+            "relayable": true
+          },
+          "generated_images": {
+            "value": [
+              "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"
+            ],
+            "value_type": "image",
+            "relayable": true
+          },
+          "images": {
+            "value": [
+              "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"
+            ],
+            "relayable": true
+          }
+        },
+        "business_artifact_count": 0
+      }
+    },
+    "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-xo0r-20260629T161805-293abd/outputs/manifest.json",
+    "output_directory": "raw/node-runs/node-run-chatgpt-remote-image-service-xo0r-20260629T161805-293abd/outputs",
+    "actual_outputs": {
+      "manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-xo0r-20260629T161805-293abd/outputs/manifest.json",
+      "result": {
+        "value": "Image generated successfully via ChatGPT remote image service.",
+        "value_type": "text",
+        "relayable": true
+      },
+      "image_url": {
+        "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+        "value_type": "url",
+        "relayable": true
+      },
+      "public_image_url": {
+        "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+        "value_type": "url",
+        "relayable": true
+      },
+      "status": {
+        "value": "succeeded",
+        "value_type": "text",
+        "relayable": true
+      },
+      "task_id": {
+        "value": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+        "value_type": "text",
+        "relayable": true
+      },
+      "status_json": {
+        "value": {
+          "ok": true,
+          "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+          "status": "succeeded",
+          "stage": "uploadedMs",
+          "createdAt": "2026-06-29T16:19:03.553Z",
+          "startedAt": "2026-06-29T16:19:03.556Z",
+          "finishedAt": "2026-06-29T16:19:49.490Z",
+          "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+          "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+          "workerId": "worker-1",
+          "cdpPort": "9333"
+        },
+        "value_type": "json",
+        "relayable": false
+      },
+      "submit_json": {
+        "value": {
+          "ok": true,
+          "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+          "status": "succeeded",
+          "stage": "uploadedMs",
+          "createdAt": "2026-06-29T16:19:03.553Z",
+          "startedAt": "2026-06-29T16:19:03.556Z",
+          "finishedAt": "2026-06-29T16:19:49.490Z",
+          "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+          "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+          "workerId": "worker-1",
+          "cdpPort": "9333"
+        },
+        "value_type": "json",
+        "relayable": true
+      },
+      "generated_images": {
+        "value": [
+          "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"
+        ],
+        "value_type": "image",
+        "relayable": true
+      },
+      "images": {
+        "value": [
+          "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"
+        ],
+        "relayable": true
+      }
+    },
+    "business_artifacts": [],
+    "core_outputs": [
+      {
+        "name": "result",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "value": "Image generated successfully via ChatGPT remote image service.",
+          "value_type": "text",
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Skill execution result summary.",
+          "relayable": true
+        }
+      },
+      {
+        "name": "image_url",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+          "value_type": "url",
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `imageUrl`.",
+          "value_type": "url",
+          "relayable": true,
+          "evidence": "source result marker imageUrl"
+        }
+      },
+      {
+        "name": "public_image_url",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+          "value_type": "url",
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `publicImageUrl`.",
+          "value_type": "url",
+          "relayable": true,
+          "evidence": "source result marker publicImageUrl"
+        }
+      },
+      {
+        "name": "status",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "value": "succeeded",
+          "value_type": "text",
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `status`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker status"
+        }
+      },
+      {
+        "name": "task_id",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "value": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+          "value_type": "text",
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `taskId`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker taskId"
+        }
+      },
+      {
+        "name": "status_json",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "value": {
+            "ok": true,
+            "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+            "status": "succeeded",
+            "stage": "uploadedMs",
+            "createdAt": "2026-06-29T16:19:03.553Z",
+            "startedAt": "2026-06-29T16:19:03.556Z",
+            "finishedAt": "2026-06-29T16:19:49.490Z",
+            "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+            "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+            "workerId": "worker-1",
+            "cdpPort": "9333"
+          },
+          "value_type": "json",
+          "relayable": false
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Runtime value captured by script variable `status_json`.",
+          "value_type": "json",
+          "relayable": false,
+          "evidence": "source script variable status_json"
+        }
+      },
+      {
+        "name": "submit_json",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "value": {
+            "ok": true,
+            "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+            "status": "succeeded",
+            "stage": "uploadedMs",
+            "createdAt": "2026-06-29T16:19:03.553Z",
+            "startedAt": "2026-06-29T16:19:03.556Z",
+            "finishedAt": "2026-06-29T16:19:49.490Z",
+            "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+            "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+            "workerId": "worker-1",
+            "cdpPort": "9333"
+          },
+          "value_type": "json",
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Runtime value captured by script variable `submit_json`.",
+          "value_type": "json",
+          "relayable": true,
+          "evidence": "source script variable submit_json"
+        }
+      },
+      {
+        "name": "generated_images",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "value": [
+            "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"
+          ],
+          "value_type": "image",
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Generated image files or public image URLs.",
+          "value_type": "image",
+          "relayable": true
+        }
+      },
+      {
+        "name": "images",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "value": [
+            "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"
+          ],
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Generated image files.",
+          "relayable": true
+        }
+      }
+    ],
+    "steps": [
+      {
+        "id": "create-run",
+        "title": "Create node run workspace",
+        "status": "done",
+        "summary": "Node Run record is allocated independently from Workflow Run.",
+        "started_at": "2026-06-29T16:18:05.816505+00:00",
+        "finished_at": "2026-06-29T16:18:05.851505+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "load-definition",
+        "title": "Load node definition",
+        "status": "done",
+        "summary": "Loaded chatgpt-remote-image-service-xo0r from youtube-research-wiki.",
+        "started_at": "2026-06-29T16:18:05.851505+00:00",
+        "finished_at": "2026-06-29T16:18:05.886505+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-context",
+        "title": "Resolve Runtime / Instance / Workflow context",
+        "status": "done",
+        "summary": "youtube-wiki · wiki-sop-new-instance · youtube-research-wiki",
+        "started_at": "2026-06-29T16:18:05.886505+00:00",
+        "finished_at": "2026-06-29T16:18:05.921505+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-inputs",
+        "title": "Resolve node inputs",
+        "status": "done",
+        "summary": "1 resolved, 0 pending relay, 0 missing.",
+        "started_at": "2026-06-29T16:18:05.921505+00:00",
+        "finished_at": "2026-06-29T16:18:05.956505+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-config",
+        "title": "Resolve execution config",
+        "status": "done",
+        "summary": "Runtime, Instance and capability config resolved.",
+        "started_at": "2026-06-29T16:18:05.956505+00:00",
+        "finished_at": "2026-06-29T16:18:05.991505+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "generate-agent-request",
+        "title": "Generate Agent Request",
+        "status": "done",
+        "summary": "Hermes Agent Request was rendered and saved for this Node Run.",
+        "started_at": "2026-06-29T16:18:05.991505+00:00",
+        "finished_at": "2026-06-29T16:18:06.026505+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "probe-capabilities",
+        "title": "Probe attached capabilities",
+        "status": "skipped",
+        "summary": "Capability probes are explicit. Telegram send probes require user confirmation.",
+        "started_at": "2026-06-29T16:18:06.026505+00:00",
+        "finished_at": "2026-06-29T16:18:06.050505+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "build-execution-plan",
+        "title": "Build node execution plan",
+        "status": "done",
+        "summary": "Prepared real-node execution plan.",
+        "started_at": "2026-06-29T16:18:06.061505+00:00",
+        "finished_at": "2026-06-29T16:18:06.096505+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "execute-or-dry-run",
+        "title": "Execute or dry-run node",
+        "status": "done",
+        "summary": "Real node execution finished and output manifest was found.",
+        "started_at": "2026-06-29T16:18:05.816505+00:00",
+        "finished_at": "2026-06-29T16:25:27.767717+00:00",
+        "elapsed_ms": 0
+      },
+      {
+        "id": "validate-outputs",
+        "title": "Validate declared outputs",
+        "status": "done",
+        "summary": "Declared business outputs were found.",
+        "started_at": "2026-06-29T16:18:06.131505+00:00",
+        "finished_at": "2026-06-29T16:18:06.166505+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "persist-to-github",
+        "title": "Persist to GitHub",
+        "status": "skipped",
+        "summary": "GitHub persistence is not attached for this Node Run.",
+        "started_at": "2026-06-29T16:18:06.166505+00:00",
+        "finished_at": "2026-06-29T16:18:06.190505+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "send-telegram-notification",
+        "title": "Send Telegram notification",
+        "status": "skipped",
+        "summary": "Telegram notification is not attached for this Node Run.",
+        "started_at": "2026-06-29T16:18:06.201505+00:00",
+        "finished_at": "2026-06-29T16:18:06.225505+00:00",
+        "elapsed_ms": 24
+      }
+    ]
+  },
+  "manifest": {
+    "version": 1,
+    "kind": "output",
+    "node_run_id": "node-run-chatgpt-remote-image-service-xo0r-20260629T161805-293abd",
+    "node_id": "chatgpt-remote-image-service-xo0r",
+    "created_at": "2026-06-29T16:19:50Z",
+    "status": "succeeded",
+    "outputs": {
+      "result": {
+        "value": "Image generated successfully via ChatGPT remote image service.",
+        "value_type": "text",
+        "relayable": true
+      },
+      "image_url": {
+        "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+        "value_type": "url",
+        "relayable": true
+      },
+      "public_image_url": {
+        "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+        "value_type": "url",
+        "relayable": true
+      },
+      "status": {
+        "value": "succeeded",
+        "value_type": "text",
+        "relayable": true
+      },
+      "task_id": {
+        "value": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+        "value_type": "text",
+        "relayable": true
+      },
+      "status_json": {
+        "value": {
+          "ok": true,
+          "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+          "status": "succeeded",
+          "stage": "uploadedMs",
+          "createdAt": "2026-06-29T16:19:03.553Z",
+          "startedAt": "2026-06-29T16:19:03.556Z",
+          "finishedAt": "2026-06-29T16:19:49.490Z",
+          "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+          "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+          "workerId": "worker-1",
+          "cdpPort": "9333"
+        },
+        "value_type": "json",
+        "relayable": false
+      },
+      "submit_json": {
+        "value": {
+          "ok": true,
+          "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+          "status": "succeeded",
+          "stage": "uploadedMs",
+          "createdAt": "2026-06-29T16:19:03.553Z",
+          "startedAt": "2026-06-29T16:19:03.556Z",
+          "finishedAt": "2026-06-29T16:19:49.490Z",
+          "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+          "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+          "workerId": "worker-1",
+          "cdpPort": "9333"
+        },
+        "value_type": "json",
+        "relayable": true
+      },
+      "generated_images": {
+        "value": [
+          "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"
+        ],
+        "value_type": "image",
+        "relayable": true
+      },
+      "images": {
+        "value": [
+          "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"
+        ],
+        "relayable": true
+      }
+    },
+    "items": [
+      {
+        "path": "manifest.json",
+        "output_name": "manifest",
+        "value_type": "json"
+      }
+    ]
+  },
+  "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-xo0r-20260629T161805-293abd/outputs/manifest.json",
+  "manifest_records": [
+    {
+      "path": "raw/node-runs/node-run-chatgpt-remote-image-service-xo0r-20260629T161805-293abd/outputs/manifest.json",
+      "output_name": "manifest",
+      "value_type": "json",
+      "output": "manifest"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "passed",
+      "expected_outputs": [
+        "result",
+        "image_url",
+        "public_image_url",
+        "status",
+        "task_id",
+        "status_json",
+        "submit_json",
+        "generated_images",
+        "images"
+      ],
+      "required_outputs": [],
+      "present_outputs": [
+        "result",
+        "image_url",
+        "public_image_url",
+        "status",
+        "task_id",
+        "status_json",
+        "submit_json",
+        "generated_images",
+        "images"
+      ],
+      "missing_required_outputs": [],
+      "business_outputs": {
+        "result": {
+          "value": "Image generated successfully via ChatGPT remote image service.",
+          "value_type": "text",
+          "relayable": true
+        },
+        "image_url": {
+          "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+          "value_type": "url",
+          "relayable": true
+        },
+        "public_image_url": {
+          "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+          "value_type": "url",
+          "relayable": true
+        },
+        "status": {
+          "value": "succeeded",
+          "value_type": "text",
+          "relayable": true
+        },
+        "task_id": {
+          "value": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+          "value_type": "text",
+          "relayable": true
+        },
+        "status_json": {
+          "value": {
+            "ok": true,
+            "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+            "status": "succeeded",
+            "stage": "uploadedMs",
+            "createdAt": "2026-06-29T16:19:03.553Z",
+            "startedAt": "2026-06-29T16:19:03.556Z",
+            "finishedAt": "2026-06-29T16:19:49.490Z",
+            "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+            "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+            "workerId": "worker-1",
+            "cdpPort": "9333"
+          },
+          "value_type": "json",
+          "relayable": false
+        },
+        "submit_json": {
+          "value": {
+            "ok": true,
+            "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+            "status": "succeeded",
+            "stage": "uploadedMs",
+            "createdAt": "2026-06-29T16:19:03.553Z",
+            "startedAt": "2026-06-29T16:19:03.556Z",
+            "finishedAt": "2026-06-29T16:19:49.490Z",
+            "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+            "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+            "workerId": "worker-1",
+            "cdpPort": "9333"
+          },
+          "value_type": "json",
+          "relayable": true
+        },
+        "generated_images": {
+          "value": [
+            "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"
+          ],
+          "value_type": "image",
+          "relayable": true
+        },
+        "images": {
+          "value": [
+            "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"
+          ],
+          "relayable": true
+        }
+      },
+      "business_artifact_count": 0
+    }
+  },
+  "created_at": "2026-06-29T16:18:05.855749+00:00",
+  "actual_outputs": {
+    "manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-xo0r-20260629T161805-293abd/outputs/manifest.json",
+    "result": {
+      "value": "Image generated successfully via ChatGPT remote image service.",
+      "value_type": "text",
+      "relayable": true
+    },
+    "image_url": {
+      "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+      "value_type": "url",
+      "relayable": true
+    },
+    "public_image_url": {
+      "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+      "value_type": "url",
+      "relayable": true
+    },
+    "status": {
+      "value": "succeeded",
+      "value_type": "text",
+      "relayable": true
+    },
+    "task_id": {
+      "value": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+      "value_type": "text",
+      "relayable": true
+    },
+    "status_json": {
+      "value": {
+        "ok": true,
+        "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+        "status": "succeeded",
+        "stage": "uploadedMs",
+        "createdAt": "2026-06-29T16:19:03.553Z",
+        "startedAt": "2026-06-29T16:19:03.556Z",
+        "finishedAt": "2026-06-29T16:19:49.490Z",
+        "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+        "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+        "workerId": "worker-1",
+        "cdpPort": "9333"
+      },
+      "value_type": "json",
+      "relayable": false
+    },
+    "submit_json": {
+      "value": {
+        "ok": true,
+        "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+        "status": "succeeded",
+        "stage": "uploadedMs",
+        "createdAt": "2026-06-29T16:19:03.553Z",
+        "startedAt": "2026-06-29T16:19:03.556Z",
+        "finishedAt": "2026-06-29T16:19:49.490Z",
+        "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+        "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+        "workerId": "worker-1",
+        "cdpPort": "9333"
+      },
+      "value_type": "json",
+      "relayable": true
+    },
+    "generated_images": {
+      "value": [
+        "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"
+      ],
+      "value_type": "image",
+      "relayable": true
+    },
+    "images": {
+      "value": [
+        "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"
+      ],
+      "relayable": true
+    }
+  },
+  "reconciled_at": "2026-06-30T15:17:15.791433+00:00",
+  "execution_status": "done",
+  "business_output_status": {
+    "status": "passed",
+    "expected_outputs": [
+      "result",
+      "image_url",
+      "public_image_url",
+      "status",
+      "task_id",
+      "status_json",
+      "submit_json",
+      "generated_images",
+      "images"
+    ],
+    "required_outputs": [],
+    "present_outputs": [
+      "result",
+      "image_url",
+      "public_image_url",
+      "status",
+      "task_id",
+      "status_json",
+      "submit_json",
+      "generated_images",
+      "images"
+    ],
+    "missing_required_outputs": [],
+    "business_outputs": {
+      "result": {
+        "value": "Image generated successfully via ChatGPT remote image service.",
+        "value_type": "text",
+        "relayable": true
+      },
+      "image_url": {
+        "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+        "value_type": "url",
+        "relayable": true
+      },
+      "public_image_url": {
+        "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+        "value_type": "url",
+        "relayable": true
+      },
+      "status": {
+        "value": "succeeded",
+        "value_type": "text",
+        "relayable": true
+      },
+      "task_id": {
+        "value": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+        "value_type": "text",
+        "relayable": true
+      },
+      "status_json": {
+        "value": {
+          "ok": true,
+          "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+          "status": "succeeded",
+          "stage": "uploadedMs",
+          "createdAt": "2026-06-29T16:19:03.553Z",
+          "startedAt": "2026-06-29T16:19:03.556Z",
+          "finishedAt": "2026-06-29T16:19:49.490Z",
+          "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+          "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+          "workerId": "worker-1",
+          "cdpPort": "9333"
+        },
+        "value_type": "json",
+        "relayable": false
+      },
+      "submit_json": {
+        "value": {
+          "ok": true,
+          "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+          "status": "succeeded",
+          "stage": "uploadedMs",
+          "createdAt": "2026-06-29T16:19:03.553Z",
+          "startedAt": "2026-06-29T16:19:03.556Z",
+          "finishedAt": "2026-06-29T16:19:49.490Z",
+          "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+          "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+          "workerId": "worker-1",
+          "cdpPort": "9333"
+        },
+        "value_type": "json",
+        "relayable": true
+      },
+      "generated_images": {
+        "value": [
+          "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"
+        ],
+        "value_type": "image",
+        "relayable": true
+      },
+      "images": {
+        "value": [
+          "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"
+        ],
+        "relayable": true
+      }
+    },
+    "business_artifact_count": 0
+  },
+  "business_outputs": {
+    "result": {
+      "value": "Image generated successfully via ChatGPT remote image service.",
+      "value_type": "text",
+      "relayable": true
+    },
+    "image_url": {
+      "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+      "value_type": "url",
+      "relayable": true
+    },
+    "public_image_url": {
+      "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+      "value_type": "url",
+      "relayable": true
+    },
+    "status": {
+      "value": "succeeded",
+      "value_type": "text",
+      "relayable": true
+    },
+    "task_id": {
+      "value": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+      "value_type": "text",
+      "relayable": true
+    },
+    "status_json": {
+      "value": {
+        "ok": true,
+        "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+        "status": "succeeded",
+        "stage": "uploadedMs",
+        "createdAt": "2026-06-29T16:19:03.553Z",
+        "startedAt": "2026-06-29T16:19:03.556Z",
+        "finishedAt": "2026-06-29T16:19:49.490Z",
+        "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+        "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+        "workerId": "worker-1",
+        "cdpPort": "9333"
+      },
+      "value_type": "json",
+      "relayable": false
+    },
+    "submit_json": {
+      "value": {
+        "ok": true,
+        "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+        "status": "succeeded",
+        "stage": "uploadedMs",
+        "createdAt": "2026-06-29T16:19:03.553Z",
+        "startedAt": "2026-06-29T16:19:03.556Z",
+        "finishedAt": "2026-06-29T16:19:49.490Z",
+        "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+        "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+        "workerId": "worker-1",
+        "cdpPort": "9333"
+      },
+      "value_type": "json",
+      "relayable": true
+    },
+    "generated_images": {
+      "value": [
+        "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"
+      ],
+      "value_type": "image",
+      "relayable": true
+    },
+    "images": {
+      "value": [
+        "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"
+      ],
+      "relayable": true
+    }
+  },
+  "business_artifacts": [],
+  "core_outputs": [
+    {
+      "name": "result",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "value": "Image generated successfully via ChatGPT remote image service.",
+        "value_type": "text",
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Skill execution result summary.",
+        "relayable": true
+      }
+    },
+    {
+      "name": "image_url",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+        "value_type": "url",
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `imageUrl`.",
+        "value_type": "url",
+        "relayable": true,
+        "evidence": "source result marker imageUrl"
+      }
+    },
+    {
+      "name": "public_image_url",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "value": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+        "value_type": "url",
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `publicImageUrl`.",
+        "value_type": "url",
+        "relayable": true,
+        "evidence": "source result marker publicImageUrl"
+      }
+    },
+    {
+      "name": "status",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "value": "succeeded",
+        "value_type": "text",
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `status`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker status"
+      }
+    },
+    {
+      "name": "task_id",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "value": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+        "value_type": "text",
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `taskId`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker taskId"
+      }
+    },
+    {
+      "name": "status_json",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "value": {
+          "ok": true,
+          "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+          "status": "succeeded",
+          "stage": "uploadedMs",
+          "createdAt": "2026-06-29T16:19:03.553Z",
+          "startedAt": "2026-06-29T16:19:03.556Z",
+          "finishedAt": "2026-06-29T16:19:49.490Z",
+          "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+          "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+          "workerId": "worker-1",
+          "cdpPort": "9333"
+        },
+        "value_type": "json",
+        "relayable": false
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Runtime value captured by script variable `status_json`.",
+        "value_type": "json",
+        "relayable": false,
+        "evidence": "source script variable status_json"
+      }
+    },
+    {
+      "name": "submit_json",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "value": {
+          "ok": true,
+          "taskId": "62900dce-5b03-4ce2-bfbc-73713d5a40f4",
+          "status": "succeeded",
+          "stage": "uploadedMs",
+          "createdAt": "2026-06-29T16:19:03.553Z",
+          "startedAt": "2026-06-29T16:19:03.556Z",
+          "finishedAt": "2026-06-29T16:19:49.490Z",
+          "publicImageUrl": "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png",
+          "chatgptUrl": "https://chatgpt.com/c/6a429b00-577c-83ea-94b1-401ed5cce484",
+          "workerId": "worker-1",
+          "cdpPort": "9333"
+        },
+        "value_type": "json",
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Runtime value captured by script variable `submit_json`.",
+        "value_type": "json",
+        "relayable": true,
+        "evidence": "source script variable submit_json"
+      }
+    },
+    {
+      "name": "generated_images",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "value": [
+          "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"
+        ],
+        "value_type": "image",
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Generated image files or public image URLs.",
+        "value_type": "image",
+        "relayable": true
+      }
+    },
+    {
+      "name": "images",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "value": [
+          "https://resource.vyibc.com/62900dce-5b03-4ce2-bfbc-73713d5a40f4.png"
+        ],
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Generated image files.",
+        "relayable": true
+      }
+    }
+  ]
+}

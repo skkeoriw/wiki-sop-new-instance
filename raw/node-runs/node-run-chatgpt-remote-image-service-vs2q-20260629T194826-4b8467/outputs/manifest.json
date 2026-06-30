@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467",
+  "node_id": "chatgpt-remote-image-service-vs2q",
+  "created_at": "2026-06-29T19:55:36Z",
+  "items": [
+    {
+      "output_name": "result",
+      "value_type": "text",
+      "value_preview": "Image generated successfully via ChatGPT remote image service",
+      "relayable": true
+    },
+    {
+      "output_name": "image_url",
+      "value_type": "url",
+      "value_preview": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+      "relayable": true
+    },
+    {
+      "output_name": "public_image_url",
+      "value_type": "url",
+      "value_preview": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+      "relayable": true
+    },
+    {
+      "output_name": "status",
+      "value_type": "text",
+      "value_preview": "succeeded",
+      "relayable": true
+    },
+    {
+      "output_name": "task_id",
+      "value_type": "text",
+      "value_preview": "88ef0044-44a6-4b22-a77d-e1fdfed3148d",
+      "relayable": true
+    },
+    {
+      "output_name": "status_json",
+      "value_type": "json",
+      "value_preview": "Full task status JSON with timings and logs",
+      "relayable": false,
+      "materialized_path": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467/outputs/status.json"
+    },
+    {
+      "output_name": "submit_json",
+      "value_type": "json",
+      "value_preview": "Submit response JSON",
+      "relayable": true,
+      "materialized_path": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467/outputs/submit.json"
+    },
+    {
+      "output_name": "generated_images",
+      "value_type": "image",
+      "value_preview": "Generated image of a sleeping kitten",
+      "relayable": true,
+      "materialized_path": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467/outputs/generated_image.png"
+    },
+    {
+      "output_name": "images",
+      "value_type": "image",
+      "value_preview": "Generated image of a sleeping kitten",
+      "relayable": true,
+      "materialized_path": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467/outputs/generated_image.png"
+    },
+    {
+      "output_name": "chatgpt_url",
+      "value_type": "url",
+      "value_preview": "https://chatgpt.com/c/6a42cd88-90c4-83ea-9cf5-c2052a0b74de",
+      "relayable": true
+    }
+  ]
+}

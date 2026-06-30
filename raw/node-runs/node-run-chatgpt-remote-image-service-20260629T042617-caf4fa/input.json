@@ -1,0 +1,32 @@
+{
+  "workflow_id": "youtube-research-wiki",
+  "mode": "dry-run",
+  "input_source": "manual",
+  "manual_inputs": {
+    "prompt": "生成一张小猫睡觉的照片"
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run",
+      "paths": []
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run"
+    }
+  },
+  "_definition_scope_reports": {
+    "instance_override": {
+      "status": "unchanged",
+      "changed": {}
+    },
+    "project_default_request": {
+      "status": "skipped"
+    }
+  }
+}

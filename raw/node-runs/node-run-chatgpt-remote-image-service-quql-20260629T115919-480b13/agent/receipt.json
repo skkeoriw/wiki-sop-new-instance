@@ -1,0 +1,19 @@
+{
+  "node_run_id": "node-run-chatgpt-remote-image-service-quql-20260629T115919-480b13",
+  "node_id": "chatgpt-remote-image-service-quql",
+  "status": "succeeded",
+  "started_at": "2026-06-29T12:00:00Z",
+  "finished_at": "2026-06-29T12:00:52Z",
+  "executor": "hermes-agent",
+  "skill": "chatgpt-remote-image-service",
+  "inputs": {
+    "prompt": "生成一张小猫睡觉的照片"
+  },
+  "outputs": {
+    "taskId": "8a630322-1e4f-4751-9f22-fa2c467fb758",
+    "status": "succeeded",
+    "publicImageUrl": "https://resource.vyibc.com/8a630322-1e4f-4751-9f22-fa2c467fb758.png",
+    "chatgptUrl": "https://chatgpt.com/c/6a425e4d-a570-83ea-9eac-3e29c63a4921"
+  },
+  "summary": "纯提示词生成了一张小猫睡觉的照片。任务 8a630322 在 52 秒内完成。"
+}

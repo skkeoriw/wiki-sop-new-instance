@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T174927-480b13",
+  "node_id": "chatgpt-remote-image-service-nrmj",
+  "created_at": "2026-06-29T17:49:27Z",
+  "status": "failed",
+  "items": [
+    {
+      "name": "result",
+      "value_type": "text",
+      "value": "Image generation failed at downloadImage stage — remote browser could not locate dialog element after image was generated.",
+      "description": "Skill execution result summary."
+    },
+    {
+      "name": "status",
+      "value_type": "text",
+      "value": "failed",
+      "description": "Task status"
+    },
+    {
+      "name": "task_id",
+      "value_type": "text",
+      "value": "b20b47e1-491d-4b42-a56f-119c401cd57d",
+      "description": "Task ID from remote service"
+    },
+    {
+      "name": "status_json",
+      "value_type": "json",
+      "value": {
+        "ok": true,
+        "taskId": "b20b47e1-491d-4b42-a56f-119c401cd57d",
+        "status": "failed",
+        "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+        "createdAt": "2026-06-29T17:50:04.951Z",
+        "startedAt": "2026-06-29T17:50:04.952Z",
+        "updatedAt": "2026-06-29T17:50:56.607Z",
+        "uploadName": "b20b47e1-491d-4b42-a56f-119c401cd57d.png",
+        "workerId": "worker-2",
+        "cdpPort": "9334",
+        "loginRequired": false,
+        "timings": {
+          "connectedMs": 1326,
+          "pageReadyMs": 2772,
+          "sentMs": 10323,
+          "generatedVisibleMs": 39745
+        },
+        "error": "Worker exited with code 1",
+        "recentLogs": [
+          "{\"event\":\"stage.start\",\"taskId\":null,\"stage\":\"parseArgs\",\"elapsedMs\":2}",
+          "{\"event\":\"stage.done\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"parseArgs\",\"elapsedMs\":3}",
+          "{\"event\":\"stage.start\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"importPlaywright\",\"elapsedMs\":3}",
+          "{\"event\":\"stage.done\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"importPlaywright\",\"elapsedMs\":958}",
+          "{\"event\":\"stage.start\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"connectBrowser\",\"elapsedMs\":959,\"port\":\"9334\"}",
+          "{\"event\":\"stage.done\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"connectedMs\",\"elapsedMs\":1326,\"timingMs\":1326}",
+          "{\"event\":\"stage.start\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"preparePage\",\"elapsedMs\":1327,\"downloadOnly\":\"false\",\"url\":null,\"newTab\":false}",
+          "{\"event\":\"stage.done\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"pageReadyMs\",\"elapsedMs\":2772,\"timingMs\":2772}",
+          "{\"event\":\"stage.start\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"waitComposer\",\"elapsedMs\":2772}",
+          "{\"event\":\"stage.done\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"waitComposer\",\"elapsedMs\":7014}",
+          "{\"event\":\"stage.start\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"enterImageMode\",\"elapsedMs\":7014}",
+          "{\"event\":\"stage.done\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"enterImageMode\",\"elapsedMs\":8671}",
+          "{\"event\":\"stage.start\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"fillPrompt\",\"elapsedMs\":8671}",
+          "{\"event\":\"stage.done\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"fillPrompt\",\"elapsedMs\":9034}",
+          "{\"event\":\"stage.start\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"waitSendEnabled\",\"elapsedMs\":9034}",
+          "{\"event\":\"stage.done\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"waitSendEnabled\",\"elapsedMs\":9214}",
+          "{\"event\":\"stage.start\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"snapshotExistingGeneratedImages\",\"elapsedMs\":9214}",
+          "{\"event\":\"stage.done\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"snapshotExistingGeneratedImages\",\"elapsedMs\":9232,\"count\":0}",
+          "{\"event\":\"stage.start\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"clickSend\",\"elapsedMs\":9232}",
+          "{\"event\":\"stage.done\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"sentMs\",\"elapsedMs\":10323,\"timingMs\":10323}",
+          "{\"event\":\"stage.start\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"waitForGeneratedImage\",\"elapsedMs\":15331,\"excludeCount\":0}",
+          "{\"event\":\"stage.done\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"generatedVisibleMs\",\"elapsedMs\":39745,\"timingMs\":39745}",
+          "{\"event\":\"stage.start\",\"taskId\":\"b20b47e1-491d-4b42-a56f-119c401cd57d\",\"stage\":\"downloadImage\",\"elapsedMs\":39745}",
+          "locator.waitFor: Timeout 10000ms exceeded.",
+          "Call log:",
+          "  - waiting for locator('[role=\"dialog\"]').last() to be visible"
+        ]
+      },
+      "description": "Full status JSON from remote service"
+    },
+    {
+      "name": "submit_json",
+      "value_type": "json",
+      "value": {},
+      "description": "Submit response JSON (captured from script, task ID extracted above)"
+    }
+  ],
+  "errors": [
+    {
+      "stage": "downloadImage",
+      "message": "locator.waitFor: Timeout 10000ms exceeded — waiting for locator('[role=\"dialog\"]').last() to be visible",
+      "detail": "The remote ChatGPT browser generated the image but could not find the download dialog element. Worker worker-2 on CDP port 9334 encountered the issue. The image was successfully sent (sentMs=10323) and generated (generatedVisibleMs=39745), but the download automation failed."
+    }
+  ]
+}

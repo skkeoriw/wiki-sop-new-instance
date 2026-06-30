@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175101-480b13",
+  "node_id": "chatgpt-remote-image-service-nrmj",
+  "created_at": "2026-06-29T17:52:40Z",
+  "execution_status": "failed",
+  "items": [
+    {
+      "name": "task_id",
+      "value_type": "text",
+      "value": "2190f3aa-e9a7-45e3-a940-de8e533b9417",
+      "description": "Task ID from the remote image service"
+    },
+    {
+      "name": "status",
+      "value_type": "text",
+      "value": "failed",
+      "description": "Final task status from the remote service"
+    },
+    {
+      "name": "stage",
+      "value_type": "text",
+      "value": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+      "description": "Stage at which the task failed"
+    },
+    {
+      "name": "error",
+      "value_type": "text",
+      "value": "Worker exited with code 1",
+      "description": "Error message from the remote service"
+    }
+  ],
+  "execution": {
+    "input_prompt": "生成一张小猫睡觉的照片",
+    "script_path": "/root/.hermes/skills/devops/chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+    "task_id": "2190f3aa-e9a7-45e3-a940-de8e533b9417",
+    "worker_id": "worker-1",
+    "cdp_port": 9333,
+    "login_required": false,
+    "timings": {
+      "connectedMs": 1429,
+      "pageReadyMs": 3754,
+      "sentMs": 13560,
+      "generatedVisibleMs": 41996
+    },
+    "recent_logs": [
+      "stage.start: parseArgs (5ms)",
+      "stage.done: parseArgs (6ms)",
+      "stage.start: importPlaywright (6ms)",
+      "stage.done: importPlaywright (1288ms)",
+      "stage.start: connectBrowser (1288ms, port=9333)",
+      "stage.done: connectedMs (1429ms)",
+      "stage.start: preparePage (1429ms)",
+      "stage.done: pageReadyMs (3754ms)",
+      "stage.start: waitComposer (3754ms)",
+      "stage.done: waitComposer (10229ms)",
+      "stage.start: enterImageMode (10230ms)",
+      "stage.done: enterImageMode (11851ms)",
+      "stage.start: fillPrompt (11851ms)",
+      "stage.done: fillPrompt (12066ms)",
+      "stage.start: waitSendEnabled (12066ms)",
+      "stage.done: waitSendEnabled (12243ms)",
+      "stage.start: snapshotExistingGeneratedImages (12243ms)",
+      "stage.done: snapshotExistingGeneratedImages (12250ms, count=0)",
+      "stage.start: clickSend (12250ms)",
+      "stage.done: sentMs (13560ms)",
+      "stage.start: waitForGeneratedImage (18563ms, excludeCount=0)",
+      "stage.done: generatedVisibleMs (41997ms)",
+      "stage.start: downloadImage (41997ms)",
+      "FAIL: locator.waitFor Timeout 10000ms exceeded waiting for '[role=\"dialog\"]'.last() to be visible"
+    ]
+  }
+}

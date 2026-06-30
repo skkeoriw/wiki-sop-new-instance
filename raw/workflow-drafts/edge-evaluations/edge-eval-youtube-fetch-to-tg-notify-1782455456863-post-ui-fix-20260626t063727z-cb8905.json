@@ -1,0 +1,856 @@
+{
+  "ok": true,
+  "status": "done",
+  "http_status": 200,
+  "mode": "edge-handoff-agent-evaluation-job",
+  "evaluation_id": "edge-eval-youtube-fetch-to-tg-notify-1782455456863-post-ui-fix-20260626T063727Z-cb8905",
+  "sop_id": "test-instance",
+  "workflow_id": "youtube-research-wiki",
+  "edge_id": "youtube-fetch-to-tg-notify-1782455456863-post-ui-fix",
+  "started_at": "2026-06-26T06:37:27.436353+00:00",
+  "finished_at": "2026-06-26T06:37:49.964532+00:00",
+  "result": {
+    "ok": true,
+    "sop_id": "test-instance",
+    "workflow_id": "youtube-research-wiki",
+    "edge_id": "youtube-fetch-to-tg-notify-1782455456863-post-ui-fix",
+    "mode": "edge-handoff-agent-evaluation",
+    "request": {
+      "runtime_id": "youtube-wiki",
+      "instance_id": "test-instance",
+      "workflow_id": "youtube-research-wiki",
+      "edge_id": "youtube-fetch-to-tg-notify-1782455456863-post-ui-fix",
+      "phase": "design",
+      "workflow_goal": "",
+      "edge_handoff_instruction": "",
+      "edge": {
+        "id": "youtube-fetch-to-tg-notify-1782455456863-post-ui-fix",
+        "from": "youtube-fetch",
+        "to": "tg-notify"
+      },
+      "upstream": {
+        "node_id": "youtube-fetch",
+        "title": "YouTube 元数据获取",
+        "skill_id": "sop-youtube-fetch",
+        "skill_summary": "---\nname: sop-youtube-fetch\ndescription: \"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\"\nversion: 1.0.0\n---",
+        "skill_readme": "---\nname: sop-youtube-fetch\ndescription: \"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\"\nversion: 1.0.0\n---",
+        "inputs": {
+          "source_url": {
+            "required": true,
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "from": "context.source_url",
+            "accepts": [
+              "scalar:url",
+              "file:text"
+            ],
+            "resolvers": [
+              {
+                "id": "direct-url",
+                "kind": "direct"
+              },
+              {
+                "id": "text-url",
+                "kind": "regex",
+                "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+              }
+            ]
+          }
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "source_url": {
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "relayable": true,
+            "path": "raw/node-runs/{pipeline_id}/outputs/files/source-url.txt"
+          },
+          "metadata_file": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": true,
+            "path": "raw/node-runs/{pipeline_id}/outputs/files/metadata.json"
+          }
+        },
+        "executor": {
+          "type": "agent-skill",
+          "agent": "hermes",
+          "skill": "sop-youtube-fetch",
+          "entry": "scripts/run_youtube_fetch.sh",
+          "webhook_route": "sop-youtube-fetch"
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "paths": [
+              "raw/node-runs/{pipeline_id}/outputs/files/**",
+              "raw/youtube-metadata/**"
+            ]
+          },
+          "telegram": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "trigger": "stage-lifecycle",
+            "triggers": [
+              "start",
+              "done",
+              "failed"
+            ]
+          },
+          "sse": {
+            "enabled": true,
+            "required": true
+          }
+        },
+        "infra": {
+          "tg_notify": true,
+          "log_record": true
+        }
+      },
+      "downstream": {
+        "node_id": "tg-notify",
+        "title": "Telegram 通知",
+        "skill_id": "sop-tg-notify",
+        "skill_summary": "---\nname: sop-tg-notify\ndescription: \"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\"\nversion: 2.1.0\n---",
+        "skill_readme": "---\nname: sop-tg-notify\ndescription: \"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\"\nversion: 2.1.0\n---",
+        "inputs": {
+          "message": {
+            "required": true,
+            "kind": "object",
+            "type": "object",
+            "value_type": "text",
+            "from": "edge.message",
+            "accepts": [
+              "scalar:text",
+              "object",
+              "file:text",
+              "file:markdown",
+              "file:json"
+            ],
+            "resolvers": [
+              {
+                "id": "direct-text",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-title",
+                "kind": "json_path",
+                "path": "$.title"
+              },
+              {
+                "id": "metadata-description",
+                "kind": "json_path",
+                "path": "$.description"
+              }
+            ]
+          }
+        },
+        "optional_inputs": {
+          "index": {
+            "required": false,
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "from": "wiki-build.outputs.index",
+            "accepts": [
+              "file:markdown",
+              "file:text"
+            ]
+          }
+        },
+        "outputs": {
+          "telegram_message": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": false,
+            "path": "logs/pipeline-runs/pipe-{run_id}.json"
+          }
+        },
+        "executor": {
+          "type": "agent-skill",
+          "agent": "hermes",
+          "skill": "sop-tg-notify",
+          "entry": "scripts/run_tg_notify.sh",
+          "webhook_route": "sop-tg-notify"
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false
+          },
+          "telegram": {
+            "enabled": true,
+            "required": false
+          },
+          "sse": {
+            "enabled": true,
+            "required": true
+          }
+        },
+        "infra": {
+          "tg_notify": true,
+          "log_record": true
+        }
+      }
+    },
+    "config": {
+      "base_url": {
+        "key": "WIKI_LLM_BASE_URL",
+        "label": "Edge Handoff LLM Base URL",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_BASE_URL",
+        "masked_value": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "value": "https://api-proxy.chxyka.ccwu.cc/v1"
+      },
+      "api_key": {
+        "key": "WIKI_LLM_API_KEY",
+        "label": "Edge Handoff LLM API Key",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_API_KEY",
+        "masked_value": "ah-***c68",
+        "value": null
+      },
+      "model": {
+        "key": "EDGE_HANDOFF_LLM_MODEL",
+        "label": "Edge Handoff LLM Model",
+        "required": true,
+        "present": true,
+        "source": "bridge-env:WIKI_DEEPSEEK_MODEL:fallback-from-deepseek-v4-flash",
+        "masked_value": "deepseek-v4-pro",
+        "value": "deepseek-v4-pro"
+      },
+      "settings_backend": "file",
+      "precedence": [
+        "node-run-overrides",
+        "instance-settings",
+        "runtime-settings",
+        "global-settings",
+        "bridge-env",
+        "runtime-env-file"
+      ],
+      "sync_budget": {
+        "public_timeout_budget_seconds": 25,
+        "mode": "async",
+        "llm_timeout_seconds": 75,
+        "llm_attempts": 1,
+        "evaluator_timeout_seconds": 90
+      }
+    },
+    "evaluation": {
+      "status": "needs_instruction",
+      "score": 0.34,
+      "confidence": 0.34,
+      "summary": "下游 index, message 是泛化输入，无法确定应该消费上游产物的哪一部分、以什么格式交给下游 Agent。",
+      "decision": "needs_user_instruction",
+      "scores": {
+        "intent_clarity": 0.34,
+        "skill_fit": 0.54,
+        "artifact_usability": 0.18,
+        "guide_completeness": 0.2,
+        "risk": 0.54
+      },
+      "blocking_reasons": [],
+      "warnings": [],
+      "required_user_inputs": [
+        {
+          "field": "edge_handoff_instruction",
+          "question": "下游节点应该使用哪个上游产物作为主输入？"
+        }
+      ],
+      "suggested_edge_instruction": "使用 youtube-fetch.outputs.metadata_file 的 title 字段作为 tg-notify.inputs.message。若无 title 则阻断。source_url 仅作补充上下文。",
+      "recommended_edge_instruction": "读取 youtube-fetch.outputs.metadata_file 中的 title 字段作为 tg-notify.inputs.message。如果 metadata_file 不存在 title 或 title 为空，则阻断。；source_url 只作为补充上下文，不作为消息正文。",
+      "handoff_pattern": "extract_field",
+      "validation": {
+        "required": [
+          "youtube-fetch.outputs.metadata_file.$.title"
+        ],
+        "on_missing": "block"
+      },
+      "resolved_handoff": {
+        "primary_artifacts": [
+          {
+            "from": "youtube-fetch.outputs.source_url",
+            "role": "available_output",
+            "reason": "上游声明的可交付产物。"
+          },
+          {
+            "from": "youtube-fetch.outputs.metadata_file",
+            "role": "available_output",
+            "reason": "上游声明的可交付产物。"
+          }
+        ],
+        "supporting_artifacts": [],
+        "relay_mappings": [],
+        "downstream_inputs": [
+          {
+            "to": "tg-notify.inputs.message",
+            "construction": "需要 Edge Handoff Agent 生成结构化 relay_mappings。"
+          },
+          {
+            "to": "tg-notify.inputs.index",
+            "construction": "需要 Edge Handoff Agent 生成结构化 relay_mappings。"
+          }
+        ]
+      },
+      "node_execution_guide": {
+        "format": "markdown",
+        "prompt": ""
+      },
+      "test_plan": [
+        "补齐 Edge Handoff Instruction 或修复契约后重新评估。"
+      ],
+      "agent": {
+        "provider": "openai-compatible",
+        "model": "deepseek-v4-pro",
+        "used_ai": true
+      },
+      "trace": {
+        "trace_schema": "edge-handoff-agent-trace/v1",
+        "started_at": "2026-06-26T06:37:27Z",
+        "request": {
+          "runtime_id": "youtube-wiki",
+          "instance_id": "test-instance",
+          "workflow_id": "youtube-research-wiki",
+          "edge_id": "youtube-fetch-to-tg-notify-1782455456863-post-ui-fix",
+          "phase": "design",
+          "workflow_goal": "",
+          "edge_handoff_instruction": "",
+          "edge": {
+            "id": "youtube-fetch-to-tg-notify-1782455456863-post-ui-fix",
+            "from": "youtube-fetch",
+            "to": "tg-notify",
+            "sourceIntent": "",
+            "targetIntent": "",
+            "instruction": "",
+            "relayMode": "",
+            "relayMappings": []
+          },
+          "upstream": {
+            "node_id": "youtube-fetch",
+            "title": "YouTube 元数据获取",
+            "skill_id": "sop-youtube-fetch",
+            "skill_summary": "---\nname: sop-youtube-fetch\ndescription: \"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\"\nversion: 1.0.0\n---",
+            "inputs": {
+              "source_url": {
+                "kind": "scalar",
+                "type": "string",
+                "value_type": "url",
+                "required": true,
+                "from": "context.source_url",
+                "accepts": [
+                  "scalar:url",
+                  "file:text"
+                ],
+                "resolvers": [
+                  {
+                    "id": "direct-url",
+                    "kind": "direct"
+                  },
+                  {
+                    "id": "text-url",
+                    "kind": "regex"
+                  }
+                ]
+              }
+            },
+            "outputs": {
+              "source_url": {
+                "kind": "scalar",
+                "type": "string",
+                "value_type": "url",
+                "relayable": true,
+                "path": "raw/node-runs/{pipeline_id}/outputs/files/source-url.txt"
+              },
+              "metadata_file": {
+                "kind": "file",
+                "type": "file",
+                "value_type": "json",
+                "relayable": true,
+                "path": "raw/node-runs/{pipeline_id}/outputs/files/metadata.json"
+              }
+            },
+            "capabilities": [
+              "git",
+              "sse",
+              "telegram"
+            ]
+          },
+          "downstream": {
+            "node_id": "tg-notify",
+            "title": "Telegram 通知",
+            "skill_id": "sop-tg-notify",
+            "skill_summary": "---\nname: sop-tg-notify\ndescription: \"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\"\nversion: 2.1.0\n---",
+            "inputs": {
+              "message": {
+                "kind": "object",
+                "type": "object",
+                "value_type": "text",
+                "required": true,
+                "from": "edge.message",
+                "accepts": [
+                  "scalar:text",
+                  "object",
+                  "file:text",
+                  "file:markdown",
+                  "file:json"
+                ],
+                "resolvers": [
+                  {
+                    "id": "direct-text",
+                    "kind": "direct"
+                  },
+                  {
+                    "id": "metadata-title",
+                    "kind": "json_path",
+                    "path": "$.title"
+                  },
+                  {
+                    "id": "metadata-description",
+                    "kind": "json_path",
+                    "path": "$.description"
+                  }
+                ]
+              },
+              "index": {
+                "kind": "file",
+                "type": "file",
+                "value_type": "markdown",
+                "required": false,
+                "from": "wiki-build.outputs.index",
+                "accepts": [
+                  "file:markdown",
+                  "file:text"
+                ]
+              }
+            },
+            "outputs": {
+              "telegram_message": {
+                "kind": "file",
+                "type": "file",
+                "value_type": "json",
+                "relayable": false,
+                "path": "logs/pipeline-runs/pipe-{run_id}.json"
+              }
+            },
+            "capabilities": [
+              "git",
+              "sse",
+              "telegram"
+            ]
+          }
+        },
+        "baseline": {
+          "status": "needs_instruction",
+          "summary": "下游 index, message 是泛化输入，无法确定应该消费上游产物的哪一部分、以什么格式交给下游 Agent。",
+          "decision": "needs_user_instruction",
+          "blocking_reasons": [],
+          "required_user_inputs": [
+            {
+              "field": "edge_handoff_instruction",
+              "question": "下游节点应该使用哪个上游产物作为主输入？"
+            },
+            {
+              "field": "edge_handoff_instruction",
+              "question": "应该使用全文、摘要、标题、链接、文件目录，还是组合后的上下文？"
+            }
+          ],
+          "suggested_edge_instruction": "读取 youtube-fetch.outputs.metadata_file 中的 title 字段作为 tg-notify.inputs.message。如果 metadata_file 不存在 title 或 title 为空，则阻断。；source_url 只作为补充上下文，不作为消息正文。",
+          "handoff_pattern": "extract_field",
+          "resolved_handoff": {
+            "primary_artifacts": [
+              {
+                "from": "youtube-fetch.outputs.source_url",
+                "role": "available_output",
+                "reason": "上游声明的可交付产物。"
+              },
+              {
+                "from": "youtube-fetch.outputs.metadata_file",
+                "role": "available_output",
+                "reason": "上游声明的可交付产物。"
+              }
+            ],
+            "supporting_artifacts": [],
+            "relay_mappings": [],
+            "downstream_inputs": [
+              {
+                "to": "tg-notify.inputs.message",
+                "construction": "需要 Edge Handoff Agent 生成结构化 relay_mappings。"
+              },
+              {
+                "to": "tg-notify.inputs.index",
+                "construction": "需要 Edge Handoff Agent 生成结构化 relay_mappings。"
+              }
+            ]
+          }
+        },
+        "llm": {
+          "provider": "openai-compatible",
+          "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+          "model": "deepseek-v4-pro",
+          "timeout_seconds": 75,
+          "attempts": 1
+        },
+        "attempts": [
+          {
+            "attempt": 1,
+            "started_at": "2026-06-26T06:37:27Z",
+            "status": "response",
+            "duration_ms": 22242,
+            "raw_response": "{\"id\":\"3c0b9b86-8265-42bf-972d-018ac35c199c\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"\",\"reasoning_content\":\"We are asked to review whether the upstream node can hand off to the downstream node. The baseline suggests status \\\"needs_instruction\\\" with a suggested edge instruction. We need to determine if that's correct or if we can override it.\\n\\nExamine upstream outputs: source_url (scalar url) and metadata_file (file, json). Downstream inputs: message (object, required) and index (file:markdown, optional). Downstream message accepts scalars, objects, files. Resolvers include direct-text, metadata-title (json_path $.title), metadata-description ($.description). So downstream expects some message content. Upstream provides metadata_file which is a json file. The edge handoff instruction is empty. The sourceIntent and targetIntent are empty. relayMode empty.\\n\\nGiven no explicit instruction, the Edge Handoff Agent must infer if a clear handoff is possible. The downstream's main input is \\\"message\\\", required. The upstream has metadata_file that likely contains title, description, etc. The baseline says needs_instruction because the downstream inputs are generic and it's unclear what part to use. The suggested edge instruction is to extract title from metadata_file and use as message, with source_url as context only.\\n\\nBut is there a way to resolve it without user instruction? The downstream has resolvers that can directly extract title or description. So we could map metadata_file to message using resolver metadata-title. That would be a direct handoff pattern: extract_field. However, the downstream message input is \\\"object\\\" kind, but it accepts scalar:text. The resolver metadata-title extracts a scalar string. That should be valid.\\n\\nBut the baseline says needs_instruction with suggested edge instruction: \\\"读取 youtube-fetch.outputs.metadata_file 中的 title 字段作为 tg-notify.inputs.message。如果 metadata_file 不存在 title 或 title 为空，则阻断。；source_url 只作为补充上下文，不作为消息正文。\\\" That is essentially providing a handoff instruction. So maybe we can mark as ready with resolved_handoff? But the baseline says needs_instruction. We need to decide if the handoff is actually unclear. The user hasn't specified what message to send. Just because the downstream can extract title doesn't mean that's what the user wants. The downstream's function is to send a Telegram notification. Usually, it might want a summary, or the whole metadata, etc. Without explicit user guidance, it's ambiguous. So indeed needs_instruction is appropriate.\\n\\nThus we should return status \\\"needs_instruction\\\". Provide a compact summary, warnings, required_user_inputs (the questions from baseline), suggested_edge_instruction (the instruction), handoff_pattern, resolved_handoff as per baseline but simplified.\\n\\nWe must return JSON only, less than 700 characters. So we need to compress the response. We can remove unnecessary fields like validation? The baseline has validation? No. The required keys are status, summary, warnings, required_user_inputs, optional: blocking_reasons, suggested_edge_instruction, handoff_pattern, validation, resolved_handoff. For needs_instruction, we must provide suggested_edge_instruction. So include that. Also required_user_inputs as array. The baseline's suggested_edge_instruction is long; we can shorten but keep the essence. Also resolved_handoff can be simplified: just relay_mappings maybe empty. The baseline's resolved_handoff had primary_artifacts etc., but we only need relay_mappings? The required output for ready/trial_ready includes resolved_handoff with relay_mappings. For needs_instruction, resolved_handoff is optional. To keep character count low, we can omit resolved_handoff entirely? Actually, the baseline includes it. But we should return only what's necessary. The instructions: \\\"When status is blocked, incompatible, or needs_instruction, suggested_edge_instruction must be a complete user-applicable handoff instruction, not a question or instruction about what to write.\\\" So we must include suggested_edge_instruction. Also required_user_inputs maybe. Warnings can be empty. So we can produce:\\n\\n{\\n  \\\"status\\\": \\\"needs_instruction\\\",\\n  \\\"summary\\\": \\\"下游 index, message 是泛化输入，无法确定应该消费上游产物的哪一部分、以什么格式交给下游 Agent。\\\",\\n  \\\"warnings\\\": [],\\n  \\\"required_user_inputs\\\": [\\n    {\\n      \\\"field\\\": \\\"edge_handoff_instruction\\\",\\n      \\\"question\\\": \\\"下游节点应该使用哪个上游产物作为主输入？\\\"\\n    }\\n  ],\\n  \\\"suggested_edge_instruction\\\": \\\"使用 youtube-fetch.outputs.metadata_file 的 title 字段作为 tg-notify.inputs.message。若无 title 则阻断。source_url 仅作补充上下文。\\\",\\n  \\\"handoff_pattern\\\": \\\"extract_field\\\"\\n}\\n\\nThis is concise. No need for resolved_handoff because it's for ready/trial_ready. Also blocking_reasons not needed if no blockers\",\"reasoning\":\"We are asked to review whether the upstream node can hand off to the downstream node. The baseline suggests status \\\"needs_instruction\\\" with a suggested edge instruction. We need to determine if that's correct or if we can override it.\\n\\nExamine upstream outputs: source_url (scalar url) and metadata_file (file, json). Downstream inputs: message (object, required) and index (file:markdown, optional). Downstream message accepts scalars, objects, files. Resolvers include direct-text, metadata-title (json_path $.title), metadata-description ($.description). So downstream expects some message content. Upstream provides metadata_file which is a json file. The edge handoff instruction is empty. The sourceIntent and targetIntent are empty. relayMode empty.\\n\\nGiven no explicit instruction, the Edge Handoff Agent must infer if a clear handoff is possible. The downstream's main input is \\\"message\\\", required. The upstream has metadata_file that likely contains title, description, etc. The baseline says needs_instruction because the downstream inputs are generic and it's unclear what part to use. The suggested edge instruction is to extract title from metadata_file and use as message, with source_url as context only.\\n\\nBut is there a way to resolve it without user instruction? The downstream has resolvers that can directly extract title or description. So we could map metadata_file to message using resolver metadata-title. That would be a direct handoff pattern: extract_field. However, the downstream message input is \\\"object\\\" kind, but it accepts scalar:text. The resolver metadata-title extracts a scalar string. That should be valid.\\n\\nBut the baseline says needs_instruction with suggested edge instruction: \\\"读取 youtube-fetch.outputs.metadata_file 中的 title 字段作为 tg-notify.inputs.message。如果 metadata_file 不存在 title 或 title 为空，则阻断。；source_url 只作为补充上下文，不作为消息正文。\\\" That is essentially providing a handoff instruction. So maybe we can mark as ready with resolved_handoff? But the baseline says needs_instruction. We need to decide if the handoff is actually unclear. The user hasn't specified what message to send. Just because the downstream can extract title doesn't mean that's what the user wants. The downstream's function is to send a Telegram notification. Usually, it might want a summary, or the whole metadata, etc. Without explicit user guidance, it's ambiguous. So indeed needs_instruction is appropriate.\\n\\nThus we should return status \\\"needs_instruction\\\". Provide a compact summary, warnings, required_user_inputs (the questions from baseline), suggested_edge_instruction (the instruction), handoff_pattern, resolved_handoff as per baseline but simplified.\\n\\nWe must return JSON only, less than 700 characters. So we need to compress the response. We can remove unnecessary fields like validation? The baseline has validation? No. The required keys are status, summary, warnings, required_user_inputs, optional: blocking_reasons, suggested_edge_instruction, handoff_pattern, validation, resolved_handoff. For needs_instruction, we must provide suggested_edge_instruction. So include that. Also required_user_inputs as array. The baseline's suggested_edge_instruction is long; we can shorten but keep the essence. Also resolved_handoff can be simplified: just relay_mappings maybe empty. The baseline's resolved_handoff had primary_artifacts etc., but we only need relay_mappings? The required output for ready/trial_ready includes resolved_handoff with relay_mappings. For needs_instruction, resolved_handoff is optional. To keep character count low, we can omit resolved_handoff entirely? Actually, the baseline includes it. But we should return only what's necessary. The instructions: \\\"When status is blocked, incompatible, or needs_instruction, suggested_edge_instruction must be a complete user-applicable handoff instruction, not a question or instruction about what to write.\\\" So we must include suggested_edge_instruction. Also required_user_inputs maybe. Warnings can be empty. So we can produce:\\n\\n{\\n  \\\"status\\\": \\\"needs_instruction\\\",\\n  \\\"summary\\\": \\\"下游 index, message 是泛化输入，无法确定应该消费上游产物的哪一部分、以什么格式交给下游 Agent。\\\",\\n  \\\"warnings\\\": [],\\n  \\\"required_user_inputs\\\": [\\n    {\\n      \\\"field\\\": \\\"edge_handoff_instruction\\\",\\n      \\\"question\\\": \\\"下游节点应该使用哪个上游产物作为主输入？\\\"\\n    }\\n  ],\\n  \\\"suggested_edge_instruction\\\": \\\"使用 youtube-fetch.outputs.metadata_file 的 title 字段作为 tg-notify.inputs.message。若无 title 则阻断。source_url 仅作补充上下文。\\\",\\n  \\\"handoff_pattern\\\": \\\"extract_field\\\"\\n}\\n\\nThis is concise. No need for resolved_handoff because it's for ready/trial_ready. Also blocking_reasons not needed if no blockers\"},\"finish_reason\":\"length\",\"logprobs\":null}],\"object\":\"chat.completion\",\"created\":1782455849,\"model\":\"deepseek-v4-pro\",\"usage\":{\"prompt_tokens\":1731,\"completion_tokens\":1023,\"total_tokens\":2754,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":256},\"completion_tokens_details\":{\"audio_tokens\":0,\"reasoning_tokens\":1023,\"accepted_prediction_tokens\":0,\"rejected_prediction_tokens\":0}},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}"
+          }
+        ],
+        "llm_request": {
+          "model": "deepseek-v4-pro",
+          "messages": [
+            {
+              "role": "system",
+              "content": "Return the final answer as strict JSON in message.content only. No markdown, no prose."
+            },
+            {
+              "role": "user",
+              "content": "You are the SOP Edge Handoff Agent. Return strict JSON only.\nReview whether the upstream node can hand off to the downstream node. Do not generate long guides; the runtime will compile the final Node Execution Guide. If the handoff intent is unclear, return needs_instruction. Keep the response compact; do not copy skill docs or repeat the full request. Return less than 700 JSON characters.\n\nRequired JSON keys: status, summary, warnings, required_user_inputs. Optional keys: blocking_reasons, suggested_edge_instruction, handoff_pattern, validation, resolved_handoff. When status is blocked, incompatible, or needs_instruction, suggested_edge_instruction must be a complete user-applicable handoff instruction, not a question or instruction about what to write.\nUse one handoff_pattern when possible: direct_pass, extract_field, summarize_to_message, aggregate_files, pass_directory, optional_context, cannot_infer.\nWhen status is ready or trial_ready, resolved_handoff should include relay_mappings: an array of objects with source_output, target_input, and resolver. Use resolver ids declared by the downstream input contract; do not invent business logic outside the contracts.\n\nAllowed statuses: ['blocked', 'incompatible', 'needs_instruction', 'ready', 'trial_ready']\n\nRequest JSON:\n{\n  \"runtime_id\": \"youtube-wiki\",\n  \"instance_id\": \"test-instance\",\n  \"workflow_id\": \"youtube-research-wiki\",\n  \"edge_id\": \"youtube-fetch-to-tg-notify-1782455456863-post-ui-fix\",\n  \"phase\": \"design\",\n  \"workflow_goal\": \"\",\n  \"edge_handoff_instruction\": \"\",\n  \"edge\": {\n    \"id\": \"youtube-fetch-to-tg-notify-1782455456863-post-ui-fix\",\n    \"from\": \"youtube-fetch\",\n    \"to\": \"tg-notify\",\n    \"sourceIntent\": \"\",\n    \"targetIntent\": \"\",\n    \"instruction\": \"\",\n    \"relayMode\": \"\",\n    \"relayMappings\": []\n  },\n  \"upstream\": {\n    \"node_id\": \"youtube-fetch\",\n    \"title\": \"YouTube 元数据获取\",\n    \"skill_id\": \"sop-youtube-fetch\",\n    \"skill_summary\": \"---\\nname: sop-youtube-fetch\\ndescription: \\\"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\\\"\\nversion: 1.0.0\\n---\",\n    \"inputs\": {\n      \"source_url\": {\n        \"kind\": \"scalar\",\n        \"type\": \"string\",\n        \"value_type\": \"url\",\n        \"required\": true,\n        \"from\": \"context.source_url\",\n        \"accepts\": [\n          \"scalar:url\",\n          \"file:text\"\n        ],\n        \"resolvers\": [\n          {\n            \"id\": \"direct-url\",\n            \"kind\": \"direct\"\n          },\n          {\n            \"id\": \"text-url\",\n            \"kind\": \"regex\"\n          }\n        ]\n      }\n    },\n    \"outputs\": {\n      \"source_url\": {\n        \"kind\": \"scalar\",\n        \"type\": \"string\",\n        \"value_type\": \"url\",\n        \"relayable\": true,\n        \"path\": \"raw/node-runs/{pipeline_id}/outputs/files/source-url.txt\"\n      },\n      \"metadata_file\": {\n        \"kind\": \"file\",\n        \"type\": \"file\",\n        \"value_type\": \"json\",\n        \"relayable\": true,\n        \"path\": \"raw/node-runs/{pipeline_id}/outputs/files/metadata.json\"\n      }\n    },\n    \"capabilities\": [\n      \"git\",\n      \"sse\",\n      \"telegram\"\n    ]\n  },\n  \"downstream\": {\n    \"node_id\": \"tg-notify\",\n    \"title\": \"Telegram 通知\",\n    \"skill_id\": \"sop-tg-notify\",\n    \"skill_summary\": \"---\\nname: sop-tg-notify\\ndescription: \\\"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\\\"\\nversion: 2.1.0\\n---\",\n    \"inputs\": {\n      \"message\": {\n        \"kind\": \"object\",\n        \"type\": \"object\",\n        \"value_type\": \"text\",\n        \"required\": true,\n        \"from\": \"edge.message\",\n        \"accepts\": [\n          \"scalar:text\",\n          \"object\",\n          \"file:text\",\n          \"file:markdown\",\n          \"file:json\"\n        ],\n        \"resolvers\": [\n          {\n            \"id\": \"direct-text\",\n            \"kind\": \"direct\"\n          },\n          {\n            \"id\": \"metadata-title\",\n            \"kind\": \"json_path\",\n            \"path\": \"$.title\"\n          },\n          {\n            \"id\": \"metadata-description\",\n            \"kind\": \"json_path\",\n            \"path\": \"$.description\"\n          }\n        ]\n      },\n      \"index\": {\n        \"kind\": \"file\",\n        \"type\": \"file\",\n        \"value_type\": \"markdown\",\n        \"required\": false,\n        \"from\": \"wiki-build.outputs.index\",\n        \"accepts\": [\n          \"file:markdown\",\n          \"file:text\"\n        ]\n      }\n    },\n    \"outputs\": {\n      \"telegram_message\": {\n        \"kind\": \"file\",\n        \"type\": \"file\",\n        \"value_type\": \"json\",\n        \"relayable\": false,\n        \"path\": \"logs/pipeline-runs/pipe-{run_id}.json\"\n      }\n    },\n    \"capabilities\": [\n      \"git\",\n      \"sse\",\n      \"telegram\"\n    ]\n  }\n}\n\nA deterministic baseline is provided for calibration. Only override it when the handoff is actually unclear or unsafe:\n{\n  \"status\": \"needs_instruction\",\n  \"summary\": \"下游 index, message 是泛化输入，无法确定应该消费上游产物的哪一部分、以什么格式交给下游 Agent。\",\n  \"decision\": \"needs_user_instruction\",\n  \"blocking_reasons\": [],\n  \"required_user_inputs\": [\n    {\n      \"field\": \"edge_handoff_instruction\",\n      \"question\": \"下游节点应该使用哪个上游产物作为主输入？\"\n    },\n    {\n      \"field\": \"edge_handoff_instruction\",\n      \"question\": \"应该使用全文、摘要、标题、链接、文件目录，还是组合后的上下文？\"\n    }\n  ],\n  \"suggested_edge_instruction\": \"读取 youtube-fetch.outputs.metadata_file 中的 title 字段作为 tg-notify.inputs.message。如果 metadata_file 不存在 title 或 title 为空，则阻断。；source_url 只作为补充上下文，不作为消息正文。\",\n  \"handoff_pattern\": \"extract_field\",\n  \"resolved_handoff\": {\n    \"primary_artifacts\": [\n      {\n        \"from\": \"youtube-fetch.outputs.source_url\",\n        \"role\": \"available_output\",\n        \"reason\": \"上游声明的可交付产物。\"\n      },\n      {\n        \"from\": \"youtube-fetch.outputs.metadata_file\",\n        \"role\": \"available_output\",\n        \"reason\": \"上游声明的可交付产物。\"\n      }\n    ],\n    \"supporting_artifacts\": [],\n    \"relay_mappings\": [],\n    \"downstream_inputs\": [\n      {\n        \"to\": \"tg-notify.inputs.message\",\n        \"construction\": \"需要 Edge Handoff Agent 生成结构化 relay_mappings。\"\n      },\n      {\n        \"to\": \"tg-notify.inputs.index\",\n        \"construction\": \"需要 Edge Handoff Agent 生成结构化 relay_mappings。\"\n      }\n    ]\n  }\n}"
+            }
+          ],
+          "temperature": 0.0,
+          "max_tokens": 1024,
+          "stream": false,
+          "response_format": {
+            "type": "json_object"
+          }
+        },
+        "llm_content": "We are asked to review whether the upstream node can hand off to the downstream node. The baseline suggests status \"needs_instruction\" with a suggested edge instruction. We need to determine if that's correct or if we can override it.\n\nExamine upstream outputs: source_url (scalar url) and metadata_file (file, json). Downstream inputs: message (object, required) and index (file:markdown, optional). Downstream message accepts scalars, objects, files. Resolvers include direct-text, metadata-title (json_path $.title), metadata-description ($.description). So downstream expects some message content. Upstream provides metadata_file which is a json file. The edge handoff instruction is empty. The sourceIntent and targetIntent are empty. relayMode empty.\n\nGiven no explicit instruction, the Edge Handoff Agent must infer if a clear handoff is possible. The downstream's main input is \"message\", required. The upstream has metadata_file that likely contains title, description, etc. The baseline says needs_instruction because the downstream inputs are generic and it's unclear what part to use. The suggested edge instruction is to extract title from metadata_file and use as message, with source_url as context only.\n\nBut is there a way to resolve it without user instruction? The downstream has resolvers that can directly extract title or description. So we could map metadata_file to message using resolver metadata-title. That would be a direct handoff pattern: extract_field. However, the downstream message input is \"object\" kind, but it accepts scalar:text. The resolver metadata-title extracts a scalar string. That should be valid.\n\nBut the baseline says needs_instruction with suggested edge instruction: \"读取 youtube-fetch.outputs.metadata_file 中的 title 字段作为 tg-notify.inputs.message。如果 metadata_file 不存在 title 或 title 为空，则阻断。；source_url 只作为补充上下文，不作为消息正文。\" That is essentially providing a handoff instruction. So maybe we can mark as ready with resolved_handoff? But the baseline says needs_instruction. We need to decide if the handoff is actually unclear. The user hasn't specified what message to send. Just because the downstream can extract title doesn't mean that's what the user wants. The downstream's function is to send a Telegram notification. Usually, it might want a summary, or the whole metadata, etc. Without explicit user guidance, it's ambiguous. So indeed needs_instruction is appropriate.\n\nThus we should return status \"needs_instruction\". Provide a compact summary, warnings, required_user_inputs (the questions from baseline), suggested_edge_instruction (the instruction), handoff_pattern, resolved_handoff as per baseline but simplified.\n\nWe must return JSON only, less than 700 characters. So we need to compress the response. We can remove unnecessary fields like validation? The baseline has validation? No. The required keys are status, summary, warnings, required_user_inputs, optional: blocking_reasons, suggested_edge_instruction, handoff_pattern, validation, resolved_handoff. For needs_instruction, we must provide suggested_edge_instruction. So include that. Also required_user_inputs as array. The baseline's suggested_edge_instruction is long; we can shorten but keep the essence. Also resolved_handoff can be simplified: just relay_mappings maybe empty. The baseline's resolved_handoff had primary_artifacts etc., but we only need relay_mappings? The required output for ready/trial_ready includes resolved_handoff with relay_mappings. For needs_instruction, resolved_handoff is optional. To keep character count low, we can omit resolved_handoff entirely? Actually, the baseline includes it. But we should return only what's necessary. The instructions: \"When status is blocked, incompatible, or needs_instruction, suggested_edge_instruction must be a complete user-applicable handoff instruction, not a question or instruction about what to write.\" So we must include suggested_edge_instruction. Also required_user_inputs maybe. Warnings can be empty. So we can produce:\n\n{\n  \"status\": \"needs_instruction\",\n  \"summary\": \"下游 index, message 是泛化输入，无法确定应该消费上游产物的哪一部分、以什么格式交给下游 Agent。\",\n  \"warnings\": [],\n  \"required_user_inputs\": [\n    {\n      \"field\": \"edge_handoff_instruction\",\n      \"question\": \"下游节点应该使用哪个上游产物作为主输入？\"\n    }\n  ],\n  \"suggested_edge_instruction\": \"使用 youtube-fetch.outputs.metadata_file 的 title 字段作为 tg-notify.inputs.message。若无 title 则阻断。source_url 仅作补充上下文。\",\n  \"handoff_pattern\": \"extract_field\"\n}\n\nThis is concise. No need for resolved_handoff because it's for ready/trial_ready. Also blocking_reasons not needed if no blockers",
+        "parsed": {
+          "status": "needs_instruction",
+          "summary": "下游 index, message 是泛化输入，无法确定应该消费上游产物的哪一部分、以什么格式交给下游 Agent。",
+          "warnings": [],
+          "required_user_inputs": [
+            {
+              "field": "edge_handoff_instruction",
+              "question": "下游节点应该使用哪个上游产物作为主输入？"
+            }
+          ],
+          "suggested_edge_instruction": "使用 youtube-fetch.outputs.metadata_file 的 title 字段作为 tg-notify.inputs.message。若无 title 则阻断。source_url 仅作补充上下文。",
+          "handoff_pattern": "extract_field"
+        },
+        "finished_at": "2026-06-26T06:37:49Z"
+      },
+      "evaluated_at": "2026-06-26T06:37:49Z",
+      "evaluated_instruction_signature": "3a4aac581a8d06be",
+      "evaluated_edge_signature": "17903b7a6bba4c0d",
+      "evaluated_instruction": ""
+    },
+    "stderr": ""
+  },
+  "evaluation": {
+    "status": "needs_instruction",
+    "score": 0.34,
+    "confidence": 0.34,
+    "summary": "下游 index, message 是泛化输入，无法确定应该消费上游产物的哪一部分、以什么格式交给下游 Agent。",
+    "decision": "needs_user_instruction",
+    "scores": {
+      "intent_clarity": 0.34,
+      "skill_fit": 0.54,
+      "artifact_usability": 0.18,
+      "guide_completeness": 0.2,
+      "risk": 0.54
+    },
+    "blocking_reasons": [],
+    "warnings": [],
+    "required_user_inputs": [
+      {
+        "field": "edge_handoff_instruction",
+        "question": "下游节点应该使用哪个上游产物作为主输入？"
+      }
+    ],
+    "suggested_edge_instruction": "使用 youtube-fetch.outputs.metadata_file 的 title 字段作为 tg-notify.inputs.message。若无 title 则阻断。source_url 仅作补充上下文。",
+    "recommended_edge_instruction": "读取 youtube-fetch.outputs.metadata_file 中的 title 字段作为 tg-notify.inputs.message。如果 metadata_file 不存在 title 或 title 为空，则阻断。；source_url 只作为补充上下文，不作为消息正文。",
+    "handoff_pattern": "extract_field",
+    "validation": {
+      "required": [
+        "youtube-fetch.outputs.metadata_file.$.title"
+      ],
+      "on_missing": "block"
+    },
+    "resolved_handoff": {
+      "primary_artifacts": [
+        {
+          "from": "youtube-fetch.outputs.source_url",
+          "role": "available_output",
+          "reason": "上游声明的可交付产物。"
+        },
+        {
+          "from": "youtube-fetch.outputs.metadata_file",
+          "role": "available_output",
+          "reason": "上游声明的可交付产物。"
+        }
+      ],
+      "supporting_artifacts": [],
+      "relay_mappings": [],
+      "downstream_inputs": [
+        {
+          "to": "tg-notify.inputs.message",
+          "construction": "需要 Edge Handoff Agent 生成结构化 relay_mappings。"
+        },
+        {
+          "to": "tg-notify.inputs.index",
+          "construction": "需要 Edge Handoff Agent 生成结构化 relay_mappings。"
+        }
+      ]
+    },
+    "node_execution_guide": {
+      "format": "markdown",
+      "prompt": ""
+    },
+    "test_plan": [
+      "补齐 Edge Handoff Instruction 或修复契约后重新评估。"
+    ],
+    "agent": {
+      "provider": "openai-compatible",
+      "model": "deepseek-v4-pro",
+      "used_ai": true
+    },
+    "trace": {
+      "trace_schema": "edge-handoff-agent-trace/v1",
+      "started_at": "2026-06-26T06:37:27Z",
+      "request": {
+        "runtime_id": "youtube-wiki",
+        "instance_id": "test-instance",
+        "workflow_id": "youtube-research-wiki",
+        "edge_id": "youtube-fetch-to-tg-notify-1782455456863-post-ui-fix",
+        "phase": "design",
+        "workflow_goal": "",
+        "edge_handoff_instruction": "",
+        "edge": {
+          "id": "youtube-fetch-to-tg-notify-1782455456863-post-ui-fix",
+          "from": "youtube-fetch",
+          "to": "tg-notify",
+          "sourceIntent": "",
+          "targetIntent": "",
+          "instruction": "",
+          "relayMode": "",
+          "relayMappings": []
+        },
+        "upstream": {
+          "node_id": "youtube-fetch",
+          "title": "YouTube 元数据获取",
+          "skill_id": "sop-youtube-fetch",
+          "skill_summary": "---\nname: sop-youtube-fetch\ndescription: \"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\"\nversion: 1.0.0\n---",
+          "inputs": {
+            "source_url": {
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "url",
+              "required": true,
+              "from": "context.source_url",
+              "accepts": [
+                "scalar:url",
+                "file:text"
+              ],
+              "resolvers": [
+                {
+                  "id": "direct-url",
+                  "kind": "direct"
+                },
+                {
+                  "id": "text-url",
+                  "kind": "regex"
+                }
+              ]
+            }
+          },
+          "outputs": {
+            "source_url": {
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "url",
+              "relayable": true,
+              "path": "raw/node-runs/{pipeline_id}/outputs/files/source-url.txt"
+            },
+            "metadata_file": {
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "relayable": true,
+              "path": "raw/node-runs/{pipeline_id}/outputs/files/metadata.json"
+            }
+          },
+          "capabilities": [
+            "git",
+            "sse",
+            "telegram"
+          ]
+        },
+        "downstream": {
+          "node_id": "tg-notify",
+          "title": "Telegram 通知",
+          "skill_id": "sop-tg-notify",
+          "skill_summary": "---\nname: sop-tg-notify\ndescription: \"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\"\nversion: 2.1.0\n---",
+          "inputs": {
+            "message": {
+              "kind": "object",
+              "type": "object",
+              "value_type": "text",
+              "required": true,
+              "from": "edge.message",
+              "accepts": [
+                "scalar:text",
+                "object",
+                "file:text",
+                "file:markdown",
+                "file:json"
+              ],
+              "resolvers": [
+                {
+                  "id": "direct-text",
+                  "kind": "direct"
+                },
+                {
+                  "id": "metadata-title",
+                  "kind": "json_path",
+                  "path": "$.title"
+                },
+                {
+                  "id": "metadata-description",
+                  "kind": "json_path",
+                  "path": "$.description"
+                }
+              ]
+            },
+            "index": {
+              "kind": "file",
+              "type": "file",
+              "value_type": "markdown",
+              "required": false,
+              "from": "wiki-build.outputs.index",
+              "accepts": [
+                "file:markdown",
+                "file:text"
+              ]
+            }
+          },
+          "outputs": {
+            "telegram_message": {
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "relayable": false,
+              "path": "logs/pipeline-runs/pipe-{run_id}.json"
+            }
+          },
+          "capabilities": [
+            "git",
+            "sse",
+            "telegram"
+          ]
+        }
+      },
+      "baseline": {
+        "status": "needs_instruction",
+        "summary": "下游 index, message 是泛化输入，无法确定应该消费上游产物的哪一部分、以什么格式交给下游 Agent。",
+        "decision": "needs_user_instruction",
+        "blocking_reasons": [],
+        "required_user_inputs": [
+          {
+            "field": "edge_handoff_instruction",
+            "question": "下游节点应该使用哪个上游产物作为主输入？"
+          },
+          {
+            "field": "edge_handoff_instruction",
+            "question": "应该使用全文、摘要、标题、链接、文件目录，还是组合后的上下文？"
+          }
+        ],
+        "suggested_edge_instruction": "读取 youtube-fetch.outputs.metadata_file 中的 title 字段作为 tg-notify.inputs.message。如果 metadata_file 不存在 title 或 title 为空，则阻断。；source_url 只作为补充上下文，不作为消息正文。",
+        "handoff_pattern": "extract_field",
+        "resolved_handoff": {
+          "primary_artifacts": [
+            {
+              "from": "youtube-fetch.outputs.source_url",
+              "role": "available_output",
+              "reason": "上游声明的可交付产物。"
+            },
+            {
+              "from": "youtube-fetch.outputs.metadata_file",
+              "role": "available_output",
+              "reason": "上游声明的可交付产物。"
+            }
+          ],
+          "supporting_artifacts": [],
+          "relay_mappings": [],
+          "downstream_inputs": [
+            {
+              "to": "tg-notify.inputs.message",
+              "construction": "需要 Edge Handoff Agent 生成结构化 relay_mappings。"
+            },
+            {
+              "to": "tg-notify.inputs.index",
+              "construction": "需要 Edge Handoff Agent 生成结构化 relay_mappings。"
+            }
+          ]
+        }
+      },
+      "llm": {
+        "provider": "openai-compatible",
+        "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "model": "deepseek-v4-pro",
+        "timeout_seconds": 75,
+        "attempts": 1
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-06-26T06:37:27Z",
+          "status": "response",
+          "duration_ms": 22242,
+          "raw_response": "{\"id\":\"3c0b9b86-8265-42bf-972d-018ac35c199c\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"\",\"reasoning_content\":\"We are asked to review whether the upstream node can hand off to the downstream node. The baseline suggests status \\\"needs_instruction\\\" with a suggested edge instruction. We need to determine if that's correct or if we can override it.\\n\\nExamine upstream outputs: source_url (scalar url) and metadata_file (file, json). Downstream inputs: message (object, required) and index (file:markdown, optional). Downstream message accepts scalars, objects, files. Resolvers include direct-text, metadata-title (json_path $.title), metadata-description ($.description). So downstream expects some message content. Upstream provides metadata_file which is a json file. The edge handoff instruction is empty. The sourceIntent and targetIntent are empty. relayMode empty.\\n\\nGiven no explicit instruction, the Edge Handoff Agent must infer if a clear handoff is possible. The downstream's main input is \\\"message\\\", required. The upstream has metadata_file that likely contains title, description, etc. The baseline says needs_instruction because the downstream inputs are generic and it's unclear what part to use. The suggested edge instruction is to extract title from metadata_file and use as message, with source_url as context only.\\n\\nBut is there a way to resolve it without user instruction? The downstream has resolvers that can directly extract title or description. So we could map metadata_file to message using resolver metadata-title. That would be a direct handoff pattern: extract_field. However, the downstream message input is \\\"object\\\" kind, but it accepts scalar:text. The resolver metadata-title extracts a scalar string. That should be valid.\\n\\nBut the baseline says needs_instruction with suggested edge instruction: \\\"读取 youtube-fetch.outputs.metadata_file 中的 title 字段作为 tg-notify.inputs.message。如果 metadata_file 不存在 title 或 title 为空，则阻断。；source_url 只作为补充上下文，不作为消息正文。\\\" That is essentially providing a handoff instruction. So maybe we can mark as ready with resolved_handoff? But the baseline says needs_instruction. We need to decide if the handoff is actually unclear. The user hasn't specified what message to send. Just because the downstream can extract title doesn't mean that's what the user wants. The downstream's function is to send a Telegram notification. Usually, it might want a summary, or the whole metadata, etc. Without explicit user guidance, it's ambiguous. So indeed needs_instruction is appropriate.\\n\\nThus we should return status \\\"needs_instruction\\\". Provide a compact summary, warnings, required_user_inputs (the questions from baseline), suggested_edge_instruction (the instruction), handoff_pattern, resolved_handoff as per baseline but simplified.\\n\\nWe must return JSON only, less than 700 characters. So we need to compress the response. We can remove unnecessary fields like validation? The baseline has validation? No. The required keys are status, summary, warnings, required_user_inputs, optional: blocking_reasons, suggested_edge_instruction, handoff_pattern, validation, resolved_handoff. For needs_instruction, we must provide suggested_edge_instruction. So include that. Also required_user_inputs as array. The baseline's suggested_edge_instruction is long; we can shorten but keep the essence. Also resolved_handoff can be simplified: just relay_mappings maybe empty. The baseline's resolved_handoff had primary_artifacts etc., but we only need relay_mappings? The required output for ready/trial_ready includes resolved_handoff with relay_mappings. For needs_instruction, resolved_handoff is optional. To keep character count low, we can omit resolved_handoff entirely? Actually, the baseline includes it. But we should return only what's necessary. The instructions: \\\"When status is blocked, incompatible, or needs_instruction, suggested_edge_instruction must be a complete user-applicable handoff instruction, not a question or instruction about what to write.\\\" So we must include suggested_edge_instruction. Also required_user_inputs maybe. Warnings can be empty. So we can produce:\\n\\n{\\n  \\\"status\\\": \\\"needs_instruction\\\",\\n  \\\"summary\\\": \\\"下游 index, message 是泛化输入，无法确定应该消费上游产物的哪一部分、以什么格式交给下游 Agent。\\\",\\n  \\\"warnings\\\": [],\\n  \\\"required_user_inputs\\\": [\\n    {\\n      \\\"field\\\": \\\"edge_handoff_instruction\\\",\\n      \\\"question\\\": \\\"下游节点应该使用哪个上游产物作为主输入？\\\"\\n    }\\n  ],\\n  \\\"suggested_edge_instruction\\\": \\\"使用 youtube-fetch.outputs.metadata_file 的 title 字段作为 tg-notify.inputs.message。若无 title 则阻断。source_url 仅作补充上下文。\\\",\\n  \\\"handoff_pattern\\\": \\\"extract_field\\\"\\n}\\n\\nThis is concise. No need for resolved_handoff because it's for ready/trial_ready. Also blocking_reasons not needed if no blockers\",\"reasoning\":\"We are asked to review whether the upstream node can hand off to the downstream node. The baseline suggests status \\\"needs_instruction\\\" with a suggested edge instruction. We need to determine if that's correct or if we can override it.\\n\\nExamine upstream outputs: source_url (scalar url) and metadata_file (file, json). Downstream inputs: message (object, required) and index (file:markdown, optional). Downstream message accepts scalars, objects, files. Resolvers include direct-text, metadata-title (json_path $.title), metadata-description ($.description). So downstream expects some message content. Upstream provides metadata_file which is a json file. The edge handoff instruction is empty. The sourceIntent and targetIntent are empty. relayMode empty.\\n\\nGiven no explicit instruction, the Edge Handoff Agent must infer if a clear handoff is possible. The downstream's main input is \\\"message\\\", required. The upstream has metadata_file that likely contains title, description, etc. The baseline says needs_instruction because the downstream inputs are generic and it's unclear what part to use. The suggested edge instruction is to extract title from metadata_file and use as message, with source_url as context only.\\n\\nBut is there a way to resolve it without user instruction? The downstream has resolvers that can directly extract title or description. So we could map metadata_file to message using resolver metadata-title. That would be a direct handoff pattern: extract_field. However, the downstream message input is \\\"object\\\" kind, but it accepts scalar:text. The resolver metadata-title extracts a scalar string. That should be valid.\\n\\nBut the baseline says needs_instruction with suggested edge instruction: \\\"读取 youtube-fetch.outputs.metadata_file 中的 title 字段作为 tg-notify.inputs.message。如果 metadata_file 不存在 title 或 title 为空，则阻断。；source_url 只作为补充上下文，不作为消息正文。\\\" That is essentially providing a handoff instruction. So maybe we can mark as ready with resolved_handoff? But the baseline says needs_instruction. We need to decide if the handoff is actually unclear. The user hasn't specified what message to send. Just because the downstream can extract title doesn't mean that's what the user wants. The downstream's function is to send a Telegram notification. Usually, it might want a summary, or the whole metadata, etc. Without explicit user guidance, it's ambiguous. So indeed needs_instruction is appropriate.\\n\\nThus we should return status \\\"needs_instruction\\\". Provide a compact summary, warnings, required_user_inputs (the questions from baseline), suggested_edge_instruction (the instruction), handoff_pattern, resolved_handoff as per baseline but simplified.\\n\\nWe must return JSON only, less than 700 characters. So we need to compress the response. We can remove unnecessary fields like validation? The baseline has validation? No. The required keys are status, summary, warnings, required_user_inputs, optional: blocking_reasons, suggested_edge_instruction, handoff_pattern, validation, resolved_handoff. For needs_instruction, we must provide suggested_edge_instruction. So include that. Also required_user_inputs as array. The baseline's suggested_edge_instruction is long; we can shorten but keep the essence. Also resolved_handoff can be simplified: just relay_mappings maybe empty. The baseline's resolved_handoff had primary_artifacts etc., but we only need relay_mappings? The required output for ready/trial_ready includes resolved_handoff with relay_mappings. For needs_instruction, resolved_handoff is optional. To keep character count low, we can omit resolved_handoff entirely? Actually, the baseline includes it. But we should return only what's necessary. The instructions: \\\"When status is blocked, incompatible, or needs_instruction, suggested_edge_instruction must be a complete user-applicable handoff instruction, not a question or instruction about what to write.\\\" So we must include suggested_edge_instruction. Also required_user_inputs maybe. Warnings can be empty. So we can produce:\\n\\n{\\n  \\\"status\\\": \\\"needs_instruction\\\",\\n  \\\"summary\\\": \\\"下游 index, message 是泛化输入，无法确定应该消费上游产物的哪一部分、以什么格式交给下游 Agent。\\\",\\n  \\\"warnings\\\": [],\\n  \\\"required_user_inputs\\\": [\\n    {\\n      \\\"field\\\": \\\"edge_handoff_instruction\\\",\\n      \\\"question\\\": \\\"下游节点应该使用哪个上游产物作为主输入？\\\"\\n    }\\n  ],\\n  \\\"suggested_edge_instruction\\\": \\\"使用 youtube-fetch.outputs.metadata_file 的 title 字段作为 tg-notify.inputs.message。若无 title 则阻断。source_url 仅作补充上下文。\\\",\\n  \\\"handoff_pattern\\\": \\\"extract_field\\\"\\n}\\n\\nThis is concise. No need for resolved_handoff because it's for ready/trial_ready. Also blocking_reasons not needed if no blockers\"},\"finish_reason\":\"length\",\"logprobs\":null}],\"object\":\"chat.completion\",\"created\":1782455849,\"model\":\"deepseek-v4-pro\",\"usage\":{\"prompt_tokens\":1731,\"completion_tokens\":1023,\"total_tokens\":2754,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":256},\"completion_tokens_details\":{\"audio_tokens\":0,\"reasoning_tokens\":1023,\"accepted_prediction_tokens\":0,\"rejected_prediction_tokens\":0}},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}"
+        }
+      ],
+      "llm_request": {
+        "model": "deepseek-v4-pro",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Return the final answer as strict JSON in message.content only. No markdown, no prose."
+          },
+          {
+            "role": "user",
+            "content": "You are the SOP Edge Handoff Agent. Return strict JSON only.\nReview whether the upstream node can hand off to the downstream node. Do not generate long guides; the runtime will compile the final Node Execution Guide. If the handoff intent is unclear, return needs_instruction. Keep the response compact; do not copy skill docs or repeat the full request. Return less than 700 JSON characters.\n\nRequired JSON keys: status, summary, warnings, required_user_inputs. Optional keys: blocking_reasons, suggested_edge_instruction, handoff_pattern, validation, resolved_handoff. When status is blocked, incompatible, or needs_instruction, suggested_edge_instruction must be a complete user-applicable handoff instruction, not a question or instruction about what to write.\nUse one handoff_pattern when possible: direct_pass, extract_field, summarize_to_message, aggregate_files, pass_directory, optional_context, cannot_infer.\nWhen status is ready or trial_ready, resolved_handoff should include relay_mappings: an array of objects with source_output, target_input, and resolver. Use resolver ids declared by the downstream input contract; do not invent business logic outside the contracts.\n\nAllowed statuses: ['blocked', 'incompatible', 'needs_instruction', 'ready', 'trial_ready']\n\nRequest JSON:\n{\n  \"runtime_id\": \"youtube-wiki\",\n  \"instance_id\": \"test-instance\",\n  \"workflow_id\": \"youtube-research-wiki\",\n  \"edge_id\": \"youtube-fetch-to-tg-notify-1782455456863-post-ui-fix\",\n  \"phase\": \"design\",\n  \"workflow_goal\": \"\",\n  \"edge_handoff_instruction\": \"\",\n  \"edge\": {\n    \"id\": \"youtube-fetch-to-tg-notify-1782455456863-post-ui-fix\",\n    \"from\": \"youtube-fetch\",\n    \"to\": \"tg-notify\",\n    \"sourceIntent\": \"\",\n    \"targetIntent\": \"\",\n    \"instruction\": \"\",\n    \"relayMode\": \"\",\n    \"relayMappings\": []\n  },\n  \"upstream\": {\n    \"node_id\": \"youtube-fetch\",\n    \"title\": \"YouTube 元数据获取\",\n    \"skill_id\": \"sop-youtube-fetch\",\n    \"skill_summary\": \"---\\nname: sop-youtube-fetch\\ndescription: \\\"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\\\"\\nversion: 1.0.0\\n---\",\n    \"inputs\": {\n      \"source_url\": {\n        \"kind\": \"scalar\",\n        \"type\": \"string\",\n        \"value_type\": \"url\",\n        \"required\": true,\n        \"from\": \"context.source_url\",\n        \"accepts\": [\n          \"scalar:url\",\n          \"file:text\"\n        ],\n        \"resolvers\": [\n          {\n            \"id\": \"direct-url\",\n            \"kind\": \"direct\"\n          },\n          {\n            \"id\": \"text-url\",\n            \"kind\": \"regex\"\n          }\n        ]\n      }\n    },\n    \"outputs\": {\n      \"source_url\": {\n        \"kind\": \"scalar\",\n        \"type\": \"string\",\n        \"value_type\": \"url\",\n        \"relayable\": true,\n        \"path\": \"raw/node-runs/{pipeline_id}/outputs/files/source-url.txt\"\n      },\n      \"metadata_file\": {\n        \"kind\": \"file\",\n        \"type\": \"file\",\n        \"value_type\": \"json\",\n        \"relayable\": true,\n        \"path\": \"raw/node-runs/{pipeline_id}/outputs/files/metadata.json\"\n      }\n    },\n    \"capabilities\": [\n      \"git\",\n      \"sse\",\n      \"telegram\"\n    ]\n  },\n  \"downstream\": {\n    \"node_id\": \"tg-notify\",\n    \"title\": \"Telegram 通知\",\n    \"skill_id\": \"sop-tg-notify\",\n    \"skill_summary\": \"---\\nname: sop-tg-notify\\ndescription: \\\"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\\\"\\nversion: 2.1.0\\n---\",\n    \"inputs\": {\n      \"message\": {\n        \"kind\": \"object\",\n        \"type\": \"object\",\n        \"value_type\": \"text\",\n        \"required\": true,\n        \"from\": \"edge.message\",\n        \"accepts\": [\n          \"scalar:text\",\n          \"object\",\n          \"file:text\",\n          \"file:markdown\",\n          \"file:json\"\n        ],\n        \"resolvers\": [\n          {\n            \"id\": \"direct-text\",\n            \"kind\": \"direct\"\n          },\n          {\n            \"id\": \"metadata-title\",\n            \"kind\": \"json_path\",\n            \"path\": \"$.title\"\n          },\n          {\n            \"id\": \"metadata-description\",\n            \"kind\": \"json_path\",\n            \"path\": \"$.description\"\n          }\n        ]\n      },\n      \"index\": {\n        \"kind\": \"file\",\n        \"type\": \"file\",\n        \"value_type\": \"markdown\",\n        \"required\": false,\n        \"from\": \"wiki-build.outputs.index\",\n        \"accepts\": [\n          \"file:markdown\",\n          \"file:text\"\n        ]\n      }\n    },\n    \"outputs\": {\n      \"telegram_message\": {\n        \"kind\": \"file\",\n        \"type\": \"file\",\n        \"value_type\": \"json\",\n        \"relayable\": false,\n        \"path\": \"logs/pipeline-runs/pipe-{run_id}.json\"\n      }\n    },\n    \"capabilities\": [\n      \"git\",\n      \"sse\",\n      \"telegram\"\n    ]\n  }\n}\n\nA deterministic baseline is provided for calibration. Only override it when the handoff is actually unclear or unsafe:\n{\n  \"status\": \"needs_instruction\",\n  \"summary\": \"下游 index, message 是泛化输入，无法确定应该消费上游产物的哪一部分、以什么格式交给下游 Agent。\",\n  \"decision\": \"needs_user_instruction\",\n  \"blocking_reasons\": [],\n  \"required_user_inputs\": [\n    {\n      \"field\": \"edge_handoff_instruction\",\n      \"question\": \"下游节点应该使用哪个上游产物作为主输入？\"\n    },\n    {\n      \"field\": \"edge_handoff_instruction\",\n      \"question\": \"应该使用全文、摘要、标题、链接、文件目录，还是组合后的上下文？\"\n    }\n  ],\n  \"suggested_edge_instruction\": \"读取 youtube-fetch.outputs.metadata_file 中的 title 字段作为 tg-notify.inputs.message。如果 metadata_file 不存在 title 或 title 为空，则阻断。；source_url 只作为补充上下文，不作为消息正文。\",\n  \"handoff_pattern\": \"extract_field\",\n  \"resolved_handoff\": {\n    \"primary_artifacts\": [\n      {\n        \"from\": \"youtube-fetch.outputs.source_url\",\n        \"role\": \"available_output\",\n        \"reason\": \"上游声明的可交付产物。\"\n      },\n      {\n        \"from\": \"youtube-fetch.outputs.metadata_file\",\n        \"role\": \"available_output\",\n        \"reason\": \"上游声明的可交付产物。\"\n      }\n    ],\n    \"supporting_artifacts\": [],\n    \"relay_mappings\": [],\n    \"downstream_inputs\": [\n      {\n        \"to\": \"tg-notify.inputs.message\",\n        \"construction\": \"需要 Edge Handoff Agent 生成结构化 relay_mappings。\"\n      },\n      {\n        \"to\": \"tg-notify.inputs.index\",\n        \"construction\": \"需要 Edge Handoff Agent 生成结构化 relay_mappings。\"\n      }\n    ]\n  }\n}"
+          }
+        ],
+        "temperature": 0.0,
+        "max_tokens": 1024,
+        "stream": false,
+        "response_format": {
+          "type": "json_object"
+        }
+      },
+      "llm_content": "We are asked to review whether the upstream node can hand off to the downstream node. The baseline suggests status \"needs_instruction\" with a suggested edge instruction. We need to determine if that's correct or if we can override it.\n\nExamine upstream outputs: source_url (scalar url) and metadata_file (file, json). Downstream inputs: message (object, required) and index (file:markdown, optional). Downstream message accepts scalars, objects, files. Resolvers include direct-text, metadata-title (json_path $.title), metadata-description ($.description). So downstream expects some message content. Upstream provides metadata_file which is a json file. The edge handoff instruction is empty. The sourceIntent and targetIntent are empty. relayMode empty.\n\nGiven no explicit instruction, the Edge Handoff Agent must infer if a clear handoff is possible. The downstream's main input is \"message\", required. The upstream has metadata_file that likely contains title, description, etc. The baseline says needs_instruction because the downstream inputs are generic and it's unclear what part to use. The suggested edge instruction is to extract title from metadata_file and use as message, with source_url as context only.\n\nBut is there a way to resolve it without user instruction? The downstream has resolvers that can directly extract title or description. So we could map metadata_file to message using resolver metadata-title. That would be a direct handoff pattern: extract_field. However, the downstream message input is \"object\" kind, but it accepts scalar:text. The resolver metadata-title extracts a scalar string. That should be valid.\n\nBut the baseline says needs_instruction with suggested edge instruction: \"读取 youtube-fetch.outputs.metadata_file 中的 title 字段作为 tg-notify.inputs.message。如果 metadata_file 不存在 title 或 title 为空，则阻断。；source_url 只作为补充上下文，不作为消息正文。\" That is essentially providing a handoff instruction. So maybe we can mark as ready with resolved_handoff? But the baseline says needs_instruction. We need to decide if the handoff is actually unclear. The user hasn't specified what message to send. Just because the downstream can extract title doesn't mean that's what the user wants. The downstream's function is to send a Telegram notification. Usually, it might want a summary, or the whole metadata, etc. Without explicit user guidance, it's ambiguous. So indeed needs_instruction is appropriate.\n\nThus we should return status \"needs_instruction\". Provide a compact summary, warnings, required_user_inputs (the questions from baseline), suggested_edge_instruction (the instruction), handoff_pattern, resolved_handoff as per baseline but simplified.\n\nWe must return JSON only, less than 700 characters. So we need to compress the response. We can remove unnecessary fields like validation? The baseline has validation? No. The required keys are status, summary, warnings, required_user_inputs, optional: blocking_reasons, suggested_edge_instruction, handoff_pattern, validation, resolved_handoff. For needs_instruction, we must provide suggested_edge_instruction. So include that. Also required_user_inputs as array. The baseline's suggested_edge_instruction is long; we can shorten but keep the essence. Also resolved_handoff can be simplified: just relay_mappings maybe empty. The baseline's resolved_handoff had primary_artifacts etc., but we only need relay_mappings? The required output for ready/trial_ready includes resolved_handoff with relay_mappings. For needs_instruction, resolved_handoff is optional. To keep character count low, we can omit resolved_handoff entirely? Actually, the baseline includes it. But we should return only what's necessary. The instructions: \"When status is blocked, incompatible, or needs_instruction, suggested_edge_instruction must be a complete user-applicable handoff instruction, not a question or instruction about what to write.\" So we must include suggested_edge_instruction. Also required_user_inputs maybe. Warnings can be empty. So we can produce:\n\n{\n  \"status\": \"needs_instruction\",\n  \"summary\": \"下游 index, message 是泛化输入，无法确定应该消费上游产物的哪一部分、以什么格式交给下游 Agent。\",\n  \"warnings\": [],\n  \"required_user_inputs\": [\n    {\n      \"field\": \"edge_handoff_instruction\",\n      \"question\": \"下游节点应该使用哪个上游产物作为主输入？\"\n    }\n  ],\n  \"suggested_edge_instruction\": \"使用 youtube-fetch.outputs.metadata_file 的 title 字段作为 tg-notify.inputs.message。若无 title 则阻断。source_url 仅作补充上下文。\",\n  \"handoff_pattern\": \"extract_field\"\n}\n\nThis is concise. No need for resolved_handoff because it's for ready/trial_ready. Also blocking_reasons not needed if no blockers",
+      "parsed": {
+        "status": "needs_instruction",
+        "summary": "下游 index, message 是泛化输入，无法确定应该消费上游产物的哪一部分、以什么格式交给下游 Agent。",
+        "warnings": [],
+        "required_user_inputs": [
+          {
+            "field": "edge_handoff_instruction",
+            "question": "下游节点应该使用哪个上游产物作为主输入？"
+          }
+        ],
+        "suggested_edge_instruction": "使用 youtube-fetch.outputs.metadata_file 的 title 字段作为 tg-notify.inputs.message。若无 title 则阻断。source_url 仅作补充上下文。",
+        "handoff_pattern": "extract_field"
+      },
+      "finished_at": "2026-06-26T06:37:49Z"
+    },
+    "evaluated_at": "2026-06-26T06:37:49Z",
+    "evaluated_instruction_signature": "3a4aac581a8d06be",
+    "evaluated_edge_signature": "17903b7a6bba4c0d",
+    "evaluated_instruction": ""
+  }
+}

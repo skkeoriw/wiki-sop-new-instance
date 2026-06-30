@@ -1,0 +1,732 @@
+{
+  "status": "failed",
+  "execution_status": "failed",
+  "business_output_status": {
+    "status": "failed_execution",
+    "expected_outputs": [
+      "result",
+      "image_url",
+      "public_image_url",
+      "status",
+      "task_id",
+      "status_json",
+      "submit_json",
+      "generated_images",
+      "images"
+    ],
+    "required_outputs": [],
+    "present_outputs": [
+      "result",
+      "status",
+      "task_id",
+      "submit_json"
+    ],
+    "missing_required_outputs": [],
+    "business_outputs": {
+      "result": "FAILED",
+      "task_id": "f0656939-dc02-457f-b13a-1d935288570b",
+      "status": "failed",
+      "submit_json": {
+        "ok": true,
+        "taskId": "f0656939-dc02-457f-b13a-1d935288570b",
+        "status": "failed",
+        "stage": "downloadImage",
+        "error": "Worker exited with code 1"
+      }
+    },
+    "business_artifact_count": 0
+  },
+  "probe_id": "chatgpt-remote-image-service-vs2q-probe-20260629T182202Z-04390e",
+  "draft_id": "chatgpt-remote-image-service-vs2q-1782757312",
+  "node_id": "chatgpt-remote-image-service-vs2q",
+  "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260629T182202-4b8467",
+  "http_status": 200,
+  "mode": "node-draft-probe-run",
+  "manual_inputs": {
+    "api_url": "",
+    "reference_image_file": "",
+    "reference_image_url": "",
+    "poll_interval": "",
+    "prompt": "生成一张小猫睡觉的照片",
+    "timeout_seconds": "",
+    "upload_name": ""
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": false
+    },
+    "telegram": {
+      "enabled": false
+    }
+  },
+  "result": {
+    "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260629T182202-4b8467",
+    "status": "failed",
+    "pending": false,
+    "started_at": "2026-06-29T18:22:02.788835+00:00",
+    "finished_at": "2026-06-29T18:29:14.439468+00:00",
+    "elapsed_ms": 431204,
+    "validation": {
+      "status": "failed",
+      "missing_outputs": [],
+      "unexpected_outputs": [],
+      "business_output_status": {
+        "status": "failed_execution",
+        "expected_outputs": [
+          "result",
+          "image_url",
+          "public_image_url",
+          "status",
+          "task_id",
+          "status_json",
+          "submit_json",
+          "generated_images",
+          "images"
+        ],
+        "required_outputs": [],
+        "present_outputs": [
+          "result",
+          "status",
+          "task_id",
+          "submit_json"
+        ],
+        "missing_required_outputs": [],
+        "business_outputs": {
+          "result": "FAILED",
+          "task_id": "f0656939-dc02-457f-b13a-1d935288570b",
+          "status": "failed",
+          "submit_json": {
+            "ok": true,
+            "taskId": "f0656939-dc02-457f-b13a-1d935288570b",
+            "status": "failed",
+            "stage": "downloadImage",
+            "error": "Worker exited with code 1"
+          }
+        },
+        "business_artifact_count": 0
+      },
+      "success_evidence": {
+        "passed": false,
+        "signals": [
+          {
+            "source": "receipt",
+            "status": "success"
+          }
+        ],
+        "failures": [
+          {
+            "source": "manifest.status",
+            "status": "failed"
+          },
+          {
+            "source": "manifest.outputs.status",
+            "status": "failed"
+          },
+          {
+            "source": "receipt.status",
+            "status": "failed"
+          }
+        ]
+      },
+      "execution_status": "failed",
+      "error": {}
+    },
+    "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T182202-4b8467/outputs/manifest.json",
+    "output_directory": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T182202-4b8467/outputs",
+    "actual_outputs": {
+      "result": "FAILED",
+      "task_id": "f0656939-dc02-457f-b13a-1d935288570b",
+      "status": "failed",
+      "public_image_url": [],
+      "image_url": [],
+      "generated_images": [],
+      "images": [],
+      "submit_json": {
+        "ok": true,
+        "taskId": "f0656939-dc02-457f-b13a-1d935288570b",
+        "status": "failed",
+        "stage": "downloadImage",
+        "error": "Worker exited with code 1"
+      },
+      "status_json": []
+    },
+    "business_artifacts": [],
+    "core_outputs": [
+      {
+        "name": "result",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "FAILED",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Skill execution result summary.",
+          "relayable": true
+        }
+      },
+      {
+        "name": "image_url",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `imageUrl`.",
+          "value_type": "url",
+          "relayable": true,
+          "evidence": "source result marker imageUrl"
+        }
+      },
+      {
+        "name": "public_image_url",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `publicImageUrl`.",
+          "value_type": "url",
+          "relayable": true,
+          "evidence": "source result marker publicImageUrl"
+        }
+      },
+      {
+        "name": "status",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "failed",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `status`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker status"
+        }
+      },
+      {
+        "name": "task_id",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "f0656939-dc02-457f-b13a-1d935288570b",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `taskId`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker taskId"
+        }
+      },
+      {
+        "name": "status_json",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Runtime value captured by script variable `status_json`.",
+          "value_type": "json",
+          "relayable": false,
+          "evidence": "source script variable status_json"
+        }
+      },
+      {
+        "name": "submit_json",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "ok": true,
+          "taskId": "f0656939-dc02-457f-b13a-1d935288570b",
+          "status": "failed",
+          "stage": "downloadImage",
+          "error": "Worker exited with code 1"
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Runtime value captured by script variable `submit_json`.",
+          "value_type": "json",
+          "relayable": true,
+          "evidence": "source script variable submit_json"
+        }
+      },
+      {
+        "name": "generated_images",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Generated image files or public image URLs.",
+          "value_type": "image",
+          "relayable": true
+        }
+      },
+      {
+        "name": "images",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Generated image files.",
+          "relayable": true
+        }
+      }
+    ],
+    "steps": [
+      {
+        "id": "create-run",
+        "title": "Create node run workspace",
+        "status": "done",
+        "summary": "Node Run record is allocated independently from Workflow Run.",
+        "started_at": "2026-06-29T18:22:02.788835+00:00",
+        "finished_at": "2026-06-29T18:22:02.823835+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "load-definition",
+        "title": "Load node definition",
+        "status": "done",
+        "summary": "Loaded chatgpt-remote-image-service-vs2q from youtube-research-wiki.",
+        "started_at": "2026-06-29T18:22:02.823835+00:00",
+        "finished_at": "2026-06-29T18:22:02.858835+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-context",
+        "title": "Resolve Runtime / Instance / Workflow context",
+        "status": "done",
+        "summary": "youtube-wiki · wiki-sop-new-instance · youtube-research-wiki",
+        "started_at": "2026-06-29T18:22:02.858835+00:00",
+        "finished_at": "2026-06-29T18:22:02.893835+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-inputs",
+        "title": "Resolve node inputs",
+        "status": "done",
+        "summary": "1 resolved, 0 pending relay, 0 missing.",
+        "started_at": "2026-06-29T18:22:02.893835+00:00",
+        "finished_at": "2026-06-29T18:22:02.928835+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-config",
+        "title": "Resolve execution config",
+        "status": "done",
+        "summary": "Runtime, Instance and capability config resolved.",
+        "started_at": "2026-06-29T18:22:02.928835+00:00",
+        "finished_at": "2026-06-29T18:22:02.963835+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "generate-agent-request",
+        "title": "Generate Agent Request",
+        "status": "done",
+        "summary": "Hermes Agent Request was rendered and saved for this Node Run.",
+        "started_at": "2026-06-29T18:22:02.963835+00:00",
+        "finished_at": "2026-06-29T18:22:02.998835+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "probe-capabilities",
+        "title": "Probe attached capabilities",
+        "status": "skipped",
+        "summary": "Capability probes are explicit. Telegram send probes require user confirmation.",
+        "started_at": "2026-06-29T18:22:02.998835+00:00",
+        "finished_at": "2026-06-29T18:22:03.022835+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "build-execution-plan",
+        "title": "Build node execution plan",
+        "status": "done",
+        "summary": "Prepared real-node execution plan.",
+        "started_at": "2026-06-29T18:22:03.033835+00:00",
+        "finished_at": "2026-06-29T18:22:03.068835+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "execute-or-dry-run",
+        "title": "Execute or dry-run node",
+        "status": "failed",
+        "summary": "Real node execution failed after the async run wrote failure evidence.",
+        "started_at": "2026-06-29T18:22:02.788835+00:00",
+        "finished_at": "2026-06-29T18:29:14.439468+00:00",
+        "elapsed_ms": 0
+      },
+      {
+        "id": "validate-outputs",
+        "title": "Validate declared outputs",
+        "status": "failed",
+        "summary": "Declared outputs are missing.",
+        "started_at": "2026-06-29T18:22:03.103835+00:00",
+        "finished_at": "2026-06-29T18:22:03.138835+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "persist-to-github",
+        "title": "Persist to GitHub",
+        "status": "skipped",
+        "summary": "GitHub persistence is not attached for this Node Run.",
+        "started_at": "2026-06-29T18:22:03.138835+00:00",
+        "finished_at": "2026-06-29T18:22:03.162835+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "send-telegram-notification",
+        "title": "Send Telegram notification",
+        "status": "skipped",
+        "summary": "Telegram notification is not attached for this Node Run.",
+        "started_at": "2026-06-29T18:22:03.173835+00:00",
+        "finished_at": "2026-06-29T18:22:03.197835+00:00",
+        "elapsed_ms": 24
+      }
+    ]
+  },
+  "manifest": {
+    "version": 1,
+    "kind": "output",
+    "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260629T182202-4b8467",
+    "node_id": "chatgpt-remote-image-service-vs2q",
+    "created_at": "2026-06-29T18:23:52Z",
+    "status": "failed",
+    "retryable": true,
+    "outputs": {
+      "status": "failed",
+      "task_id": "f0656939-dc02-457f-b13a-1d935288570b",
+      "error": "downloadImage stage failed: locator('[role=\"dialog\"]').last() not visible within 10s timeout",
+      "image_url": null,
+      "public_image_url": null,
+      "submit_json": {
+        "ok": true,
+        "taskId": "f0656939-dc02-457f-b13a-1d935288570b",
+        "status": "failed",
+        "stage": "downloadImage",
+        "error": "Worker exited with code 1"
+      }
+    },
+    "r2_upload_urls": [],
+    "generated_files": [],
+    "errors": [
+      "downloadImage stage: locator('[role=\"dialog\"]').last() to be visible - Timeout 10000ms exceeded"
+    ],
+    "items": [
+      {
+        "value": "failed",
+        "name": "status",
+        "output": "status"
+      },
+      {
+        "value": "f0656939-dc02-457f-b13a-1d935288570b",
+        "name": "task_id",
+        "output": "task_id"
+      },
+      {
+        "value": "downloadImage stage failed: locator('[role=\"dialog\"]').last() not visible within 10s timeout",
+        "name": "error",
+        "output": "error"
+      },
+      {
+        "value": null,
+        "name": "image_url",
+        "output": "image_url"
+      },
+      {
+        "value": null,
+        "name": "public_image_url",
+        "output": "public_image_url"
+      },
+      {
+        "ok": true,
+        "taskId": "f0656939-dc02-457f-b13a-1d935288570b",
+        "status": "failed",
+        "stage": "downloadImage",
+        "error": "Worker exited with code 1",
+        "name": "submit_json",
+        "output": "submit_json"
+      },
+      {
+        "output": "result",
+        "value": "FAILED",
+        "value_type": "text",
+        "kind": "scalar",
+        "source": "node-run-text-evidence"
+      }
+    ]
+  },
+  "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T182202-4b8467/outputs/manifest.json",
+  "manifest_records": [
+    {
+      "value": "failed",
+      "name": "status",
+      "output": "status",
+      "path": ""
+    },
+    {
+      "value": "f0656939-dc02-457f-b13a-1d935288570b",
+      "name": "task_id",
+      "output": "task_id",
+      "path": ""
+    },
+    {
+      "value": "downloadImage stage failed: locator('[role=\"dialog\"]').last() not visible within 10s timeout",
+      "name": "error",
+      "output": "error",
+      "path": ""
+    },
+    {
+      "value": null,
+      "name": "image_url",
+      "output": "image_url",
+      "path": ""
+    },
+    {
+      "value": null,
+      "name": "public_image_url",
+      "output": "public_image_url",
+      "path": ""
+    },
+    {
+      "output": "result",
+      "value": "FAILED",
+      "value_type": "text",
+      "kind": "scalar",
+      "source": "node-run-text-evidence",
+      "path": ""
+    }
+  ],
+  "validation": {
+    "status": "failed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "failed_execution",
+      "expected_outputs": [
+        "result",
+        "image_url",
+        "public_image_url",
+        "status",
+        "task_id",
+        "status_json",
+        "submit_json",
+        "generated_images",
+        "images"
+      ],
+      "required_outputs": [],
+      "present_outputs": [
+        "result",
+        "status",
+        "task_id",
+        "submit_json"
+      ],
+      "missing_required_outputs": [],
+      "business_outputs": {
+        "result": "FAILED",
+        "task_id": "f0656939-dc02-457f-b13a-1d935288570b",
+        "status": "failed",
+        "submit_json": {
+          "ok": true,
+          "taskId": "f0656939-dc02-457f-b13a-1d935288570b",
+          "status": "failed",
+          "stage": "downloadImage",
+          "error": "Worker exited with code 1"
+        }
+      },
+      "business_artifact_count": 0
+    },
+    "success_evidence": {
+      "passed": false,
+      "signals": [
+        {
+          "source": "receipt",
+          "status": "success"
+        }
+      ],
+      "failures": [
+        {
+          "source": "manifest.status",
+          "status": "failed"
+        },
+        {
+          "source": "manifest.outputs.status",
+          "status": "failed"
+        },
+        {
+          "source": "receipt.status",
+          "status": "failed"
+        }
+      ]
+    },
+    "execution_status": "failed",
+    "error": {}
+  },
+  "actual_outputs": {
+    "result": "FAILED",
+    "task_id": "f0656939-dc02-457f-b13a-1d935288570b",
+    "status": "failed",
+    "public_image_url": [],
+    "image_url": [],
+    "generated_images": [],
+    "images": [],
+    "submit_json": {
+      "ok": true,
+      "taskId": "f0656939-dc02-457f-b13a-1d935288570b",
+      "status": "failed",
+      "stage": "downloadImage",
+      "error": "Worker exited with code 1"
+    },
+    "status_json": []
+  },
+  "business_outputs": {
+    "result": "FAILED",
+    "task_id": "f0656939-dc02-457f-b13a-1d935288570b",
+    "status": "failed",
+    "submit_json": {
+      "ok": true,
+      "taskId": "f0656939-dc02-457f-b13a-1d935288570b",
+      "status": "failed",
+      "stage": "downloadImage",
+      "error": "Worker exited with code 1"
+    }
+  },
+  "business_artifacts": [],
+  "core_outputs": [
+    {
+      "name": "result",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "FAILED",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Skill execution result summary.",
+        "relayable": true
+      }
+    },
+    {
+      "name": "image_url",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `imageUrl`.",
+        "value_type": "url",
+        "relayable": true,
+        "evidence": "source result marker imageUrl"
+      }
+    },
+    {
+      "name": "public_image_url",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `publicImageUrl`.",
+        "value_type": "url",
+        "relayable": true,
+        "evidence": "source result marker publicImageUrl"
+      }
+    },
+    {
+      "name": "status",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "failed",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `status`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker status"
+      }
+    },
+    {
+      "name": "task_id",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "f0656939-dc02-457f-b13a-1d935288570b",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `taskId`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker taskId"
+      }
+    },
+    {
+      "name": "status_json",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Runtime value captured by script variable `status_json`.",
+        "value_type": "json",
+        "relayable": false,
+        "evidence": "source script variable status_json"
+      }
+    },
+    {
+      "name": "submit_json",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "ok": true,
+        "taskId": "f0656939-dc02-457f-b13a-1d935288570b",
+        "status": "failed",
+        "stage": "downloadImage",
+        "error": "Worker exited with code 1"
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Runtime value captured by script variable `submit_json`.",
+        "value_type": "json",
+        "relayable": true,
+        "evidence": "source script variable submit_json"
+      }
+    },
+    {
+      "name": "generated_images",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Generated image files or public image URLs.",
+        "value_type": "image",
+        "relayable": true
+      }
+    },
+    {
+      "name": "images",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Generated image files.",
+        "relayable": true
+      }
+    }
+  ],
+  "created_at": "2026-06-29T18:22:02.828590+00:00",
+  "reconciled_at": "2026-06-30T15:17:15.322936+00:00"
+}

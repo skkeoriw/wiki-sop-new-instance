@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "draft_type": "workflow_draft",
+  "draft_id": "youtube-wiki-handoff-draft-20260625t171144z",
+  "workflow_id": "youtube-research-wiki-ui-runtime-publish-1782406114250-20260625t164838z",
+  "name": "youtube-wiki-handoff-draft",
+  "goal": "Fetch YouTube source material, research it deeply, then build wiki-ready pages through explicit agent handoffs.",
+  "created_at": "2026-06-25T17:12:38Z",
+  "runtime_id": "youtube-wiki",
+  "instance_id": "test-instance",
+  "draft": {
+    "name": "youtube-wiki-handoff-draft",
+    "goal": "Fetch YouTube source material, research it deeply, then build wiki-ready pages through explicit agent handoffs.",
+    "nodes": [
+      {
+        "nodeId": "youtube-fetch",
+        "signature": "{\"nodeId\":\"youtube-fetch\",\"title\":\"YouTube Fetch\",\"needs\":[],\"inputs\":[\"source_url\"],\"optionalInputs\":[],\"outputs\":[\"metadata_file\",\"source_url\"]}"
+      },
+      {
+        "nodeId": "youtube-deep-research",
+        "signature": "{\"nodeId\":\"youtube-deep-research\",\"title\":\"YouTube 深度研究\",\"needs\":[\"youtube-fetch\"],\"inputs\":[\"source_url\"],\"optionalInputs\":[],\"outputs\":[\"analysis_file\",\"transcript_file\"]}"
+      }
+    ],
+    "edges": [
+      {
+        "id": "youtube-fetch-to-youtube-deep-research-1782322361931",
+        "from": "youtube-fetch",
+        "to": "youtube-deep-research",
+        "sourceIntent": "metadata_file: file; source_url: string",
+        "targetIntent": "source_url: string",
+        "instruction": "213123123",
+        "fromSignature": "{\"nodeId\":\"youtube-fetch\",\"title\":\"YouTube 元数据获取\",\"needs\":[],\"inputs\":[\"source_url\"],\"optionalInputs\":[],\"outputs\":[\"metadata_file\",\"source_url\"]}",
+        "toSignature": "{\"nodeId\":\"youtube-deep-research\",\"title\":\"YouTube 深度研究\",\"needs\":[\"youtube-fetch\"],\"inputs\":[\"source_url\"],\"optionalInputs\":[],\"outputs\":[\"analysis_file\",\"transcript_file\"]}",
+        "relayMode": "auto_by_target_inputs",
+        "relayMappings": []
+      }
+    ],
+    "positions": {
+      "youtube-fetch": {
+        "x": -263.2258064516129,
+        "y": -27.096774193548384
+      },
+      "youtube-deep-research": {
+        "x": 137.83274135337328,
+        "y": -6.806811811225373
+      }
+    }
+  },
+  "edge_count": 1,
+  "ready_edge_count": 0,
+  "runtime_sop_status": "not_generated",
+  "active_runtime_sop_changed": false,
+  "production_dag_changed": false
+}

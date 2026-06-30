@@ -1,0 +1,11 @@
+{
+  "schema_id": "node-draft-schema/v1",
+  "status": "passed",
+  "errors": [],
+  "missing_fields": [],
+  "production_dag_changed": false,
+  "node_builder": true,
+  "contract_synthesis": "passed",
+  "output_count": 3,
+  "node_builder_contract_review": true
+}

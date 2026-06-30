@@ -1,0 +1,29 @@
+## Execution Result: FAILED
+
+**Node run:** `node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467`
+
+### What happened
+
+The `chatgpt-remote-image.sh` script (from the `devops/chatgpt-remote-image-service` skill) was called with `--prompt "生成一张小猫睡觉的照片"`.
+
+The remote service:
+1. Connected to a browser worker (worker-1, CDP port 9333, logged in) — 933ms
+2. Opened ChatGPT, entered image mode, filled the prompt — 8420ms
+3. Submitted and waited for generation — image appeared at ~40s
+4. **Failed** at the `downloadImage` stage: `locator('[role="dialog"]').last()` timed out after 10s
+5. Worker exited with code 1
+
+### Root cause
+
+The generated image **was** produced (visible at 40,256ms), but the download dialog selector `[role="dialog"]` didn't match anything within the 10s timeout. This is likely a **ChatGPT UI change** or a transient state issue where the dialog wasn't in a locatable state when Playwright tried to interact with it. The remote endpoint's browser automation code expects a dialog element to click for download but couldn't find one.
+
+### Outputs written
+
+- `raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/receipt.json`
+- `raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json`
+
+### Possible remediation
+
+- **Retry** — this could be transient; the prompt and browser connection worked fine
+- **Check the remote service** — the download dialog selector `[role="dialog"]` may need updating if ChatGPT changed its UI
+- **Check `/health`** on the endpoint to see if worker-1 experienced issues (the script did print the health summary to stderr but not to stdout)

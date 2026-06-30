@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T174831-480b13",
+  "node_id": "chatgpt-remote-image-service-nrmj",
+  "status": "failed",
+  "created_at": "2026-06-29T17:51:10Z",
+  "items": [
+    {
+      "output_name": "status",
+      "value_type": "text",
+      "value": "failed",
+      "source": "task_status"
+    },
+    {
+      "output_name": "task_id",
+      "value_type": "text",
+      "value": "3d78accf-3036-4d6b-b066-645dcd3d1a7f",
+      "source": "task_status"
+    },
+    {
+      "output_name": "submit_json",
+      "value_type": "json",
+      "value": {
+        "taskId": "3d78accf-3036-4d6b-b066-645dcd3d1a7f"
+      },
+      "source": "submit_response"
+    },
+    {
+      "output_name": "status_json",
+      "value_type": "json",
+      "value": {
+        "ok": true,
+        "taskId": "3d78accf-3036-4d6b-b066-645dcd3d1a7f",
+        "status": "failed",
+        "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+        "createdAt": "2026-06-29T17:50:20.015Z",
+        "startedAt": "2026-06-29T17:50:20.016Z",
+        "updatedAt": "2026-06-29T17:51:09.373Z",
+        "uploadName": "3d78accf-3036-4d6b-b066-645dcd3d1a7f.png",
+        "workerId": "worker-1",
+        "cdpPort": "9333",
+        "loginRequired": false,
+        "timings": {
+          "connectedMs": 1074,
+          "pageReadyMs": 2659,
+          "sentMs": 10211,
+          "generatedVisibleMs": 37484
+        },
+        "error": "Worker exited with code 1",
+        "recentLogs": [
+          "stage.start parseArgs",
+          "stage.start importPlaywright",
+          "stage.start connectBrowser port=9333",
+          "stage.start preparePage",
+          "stage.start waitComposer",
+          "stage.start enterImageMode",
+          "stage.start fillPrompt",
+          "stage.start waitSendEnabled",
+          "stage.start snapshotExistingGeneratedImages count=0",
+          "stage.start clickSend",
+          "sentMs=10211",
+          "stage.start waitForGeneratedImage excludeCount=0",
+          "generatedVisibleMs=37484",
+          "stage.start downloadImage",
+          "locator.waitFor: Timeout 10000ms exceeded. waiting for locator('[role=\"dialog\"]').last() to be visible"
+        ]
+      },
+      "source": "task_poll_response"
+    }
+  ],
+  "error": {
+    "message": "ChatGPT image generation succeeded but download stage failed: locator '[role=\"dialog\"]' not visible. The image was generated (generatedVisibleMs=37484) but the save-image dialog automation timed out (10s).",
+    "stage": "downloadImage",
+    "task_id": "3d78accf-3036-4d6b-b066-645dcd3d1a7f",
+    "attempts": 2
+  }
+}

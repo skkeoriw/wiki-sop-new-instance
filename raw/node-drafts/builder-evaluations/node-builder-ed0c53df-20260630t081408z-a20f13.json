@@ -1,0 +1,1171 @@
+{
+  "ok": true,
+  "status": "done",
+  "http_status": 200,
+  "mode": "node-builder-agent-evaluation-job",
+  "evaluation_id": "node-builder-ed0c53df-20260630T081408Z-a20f13",
+  "sop_id": "wiki-sop-new-instance",
+  "instance_id": "wiki-sop-new-instance",
+  "started_at": "2026-06-30T08:14:08.284152+00:00",
+  "finished_at": "2026-06-30T08:15:40.586140+00:00",
+  "result": {
+    "ok": true,
+    "mode": "node-builder-agent-evaluation",
+    "request": {
+      "skill_install_command": "  bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426')",
+      "user_instruction": "  将该 Skill 构建为独立的 YouTube 元数据获取 Runtime Node。用户输入 source_url 后调用配置的 YouTube 内容 API 获取元数据，并输出 metadata.json、source-url.txt、result.json；不得绑定固定上下游或 Edge 交接逻辑。",
+      "fetch_metadata": true,
+      "async_job": true,
+      "runtime_id": "youtube-wiki",
+      "instance_id": "wiki-sop-new-instance"
+    },
+    "config": {
+      "base_url": {
+        "key": "WIKI_LLM_BASE_URL",
+        "label": "Node Builder LLM Base URL",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_BASE_URL",
+        "masked_value": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "value": "https://api-proxy.chxyka.ccwu.cc/v1"
+      },
+      "api_key": {
+        "key": "WIKI_LLM_API_KEY",
+        "label": "Node Builder LLM API Key",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_API_KEY",
+        "masked_value": "ah-***c68",
+        "value": null
+      },
+      "model": {
+        "key": "WIKI_LLM_MODEL",
+        "label": "Node Builder LLM Model",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_MODEL",
+        "masked_value": "deepseek-v4-pro",
+        "value": "deepseek-v4-pro"
+      },
+      "settings_backend": "file",
+      "precedence": [
+        "node-run-overrides",
+        "instance-settings",
+        "runtime-settings",
+        "global-settings",
+        "bridge-env",
+        "runtime-env-file"
+      ]
+    },
+    "evaluation": {
+      "status": "ready",
+      "summary": "Node Builder used deterministic source analysis because the LLM evaluation response was not usable. Probe Run is required before Runtime publish.",
+      "skill_identity": {
+        "skill_id": "youtube-metadata-fetch",
+        "title": "Youtube Metadata Fetch",
+        "description": "将该 Skill 构建为独立的 YouTube 元数据获取 Runtime Node。用户输入 source_url 后调用配置的 YouTube 内容 API 获取元数据，并输出 metadata.json、source-url.txt、result.json；不得绑定固定上下游或 Edge 交接逻辑。",
+        "installer_url": "https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426",
+        "trusted_source": true
+      },
+      "node_draft": {
+        "schema": "node-definition/v1",
+        "id": "youtube-metadata-fetch",
+        "title": "Youtube Metadata Fetch",
+        "description": "将该 Skill 构建为独立的 YouTube 元数据获取 Runtime Node。用户输入 source_url 后调用配置的 YouTube 内容 API 获取元数据，并输出 metadata.json、source-url.txt、result.json；不得绑定固定上下游或 Edge 交接逻辑。",
+        "version": "0.1-runtime-draft",
+        "skill": {
+          "id": "youtube-metadata-fetch",
+          "source": "skill-installer",
+          "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426')",
+          "source_digest": {
+            "installer_url": "https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426",
+            "zip_url": "https://skill.vyibc.com/youtube-metadata-fetch/release/youtube-metadata-fetch-20260630075426.zip?ts=20260630075426",
+            "files": [
+              {
+                "path": "youtube-metadata-fetch/SKILL.md",
+                "bytes": 2000,
+                "truncated": false
+              },
+              {
+                "path": "youtube-metadata-fetch/agents/openai.yaml",
+                "bytes": 247,
+                "truncated": false
+              },
+              {
+                "path": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh",
+                "bytes": 1813,
+                "truncated": false
+              },
+              {
+                "path": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py",
+                "bytes": 5344,
+                "truncated": false
+              }
+            ]
+          }
+        },
+        "executor": {
+          "type": "agent-skill",
+          "agent": "hermes",
+          "skill": "youtube-metadata-fetch",
+          "request_template": "node-execution-request/v1"
+        },
+        "entry": {
+          "inputs": {
+            "api_token": {
+              "required": false,
+              "input_kind": "text",
+              "value_type": "text",
+              "label": "Api Token",
+              "description": "Value for CLI option --api-token.",
+              "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --api-token -> $API_TOKEN",
+              "cli_option": "--api-token"
+            },
+            "api_url": {
+              "required": false,
+              "input_kind": "url",
+              "value_type": "url",
+              "label": "Api Url",
+              "description": "Value for CLI option --api-url.",
+              "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --api-url -> $API_URL",
+              "cli_option": "--api-url"
+            },
+            "include_raw": {
+              "required": false,
+              "input_kind": "text",
+              "value_type": "text",
+              "label": "Include Raw",
+              "description": "Value for CLI option --include-raw.",
+              "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --include-raw -> $INCLUDE_RAW",
+              "cli_option": "--include-raw"
+            },
+            "output_dir": {
+              "required": false,
+              "input_kind": "directory",
+              "value_type": "text",
+              "label": "Output Dir",
+              "description": "Value for CLI option --output-dir.",
+              "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --output-dir -> $OUTPUT_DIR",
+              "cli_option": "--output-dir"
+            },
+            "output_json": {
+              "required": false,
+              "input_kind": "text",
+              "value_type": "text",
+              "label": "Output Json",
+              "description": "Value for CLI option --output-json.",
+              "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --output-json -> $OUTPUT_JSON",
+              "cli_option": "--output-json"
+            },
+            "source_url": {
+              "required": true,
+              "input_kind": "url",
+              "value_type": "url",
+              "label": "Source Url",
+              "description": "Value for CLI option --source-url.",
+              "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --source-url -> $SOURCE_URL",
+              "cli_option": "--source-url"
+            },
+            "timeout_seconds": {
+              "required": false,
+              "input_kind": "number",
+              "value_type": "number",
+              "label": "Timeout Seconds",
+              "description": "Value for CLI option --timeout-seconds.",
+              "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --timeout-seconds -> $TIMEOUT_SECONDS",
+              "cli_option": "--timeout-seconds"
+            }
+          }
+        },
+        "handoff": {
+          "accepts": {
+            "upstream_outputs_dir": {
+              "required": false,
+              "description": "一个或多个上游 Node 的标准输出目录。"
+            },
+            "instruction": {
+              "required": true,
+              "description": "Edge Handoff Agent 或用户提供的交接说明。"
+            },
+            "context": {
+              "required": false,
+              "description": "运行上下文或补充说明。"
+            }
+          },
+          "produces": {
+            "outputs_dir": "raw/node-runs/{run_id}/outputs",
+            "manifest": "raw/node-runs/{run_id}/outputs/manifest.json"
+          }
+        },
+        "outputs": {
+          "root": "raw/node-runs/{run_id}/outputs",
+          "manifest": "raw/node-runs/{run_id}/outputs/manifest.json",
+          "expected": {
+            "result": {
+              "description": "Skill execution result summary.",
+              "relayable": true
+            },
+            "status": {
+              "description": "Result value mentioned in skill source as `status`.",
+              "value_type": "text",
+              "relayable": true,
+              "evidence": "source result marker status"
+            }
+          }
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false
+          },
+          "telegram": {
+            "enabled": false,
+            "required": false
+          },
+          "sse": {
+            "enabled": true,
+            "required": true
+          }
+        },
+        "ui": {
+          "category": "custom"
+        },
+        "coverage_report": {
+          "status": "passed",
+          "covered_inputs": [
+            {
+              "input": "api_token",
+              "option": "--api-token",
+              "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --api-token -> $API_TOKEN"
+            },
+            {
+              "input": "api_url",
+              "option": "--api-url",
+              "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --api-url -> $API_URL"
+            },
+            {
+              "input": "include_raw",
+              "option": "--include-raw",
+              "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --include-raw -> $INCLUDE_RAW"
+            },
+            {
+              "input": "output_dir",
+              "option": "--output-dir",
+              "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --output-dir -> $OUTPUT_DIR"
+            },
+            {
+              "input": "output_json",
+              "option": "--output-json",
+              "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --output-json -> $OUTPUT_JSON"
+            },
+            {
+              "input": "source_url",
+              "option": "--source-url",
+              "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --source-url -> $SOURCE_URL"
+            },
+            {
+              "input": "timeout_seconds",
+              "option": "--timeout-seconds",
+              "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --timeout-seconds -> $TIMEOUT_SECONDS"
+            }
+          ],
+          "missing_inputs": [],
+          "source_files_read": [
+            "youtube-metadata-fetch/SKILL.md",
+            "youtube-metadata-fetch/agents/openai.yaml",
+            "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh",
+            "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py"
+          ],
+          "errors": []
+        }
+      },
+      "missing_fields": [],
+      "risks": [
+        {
+          "code": "ai_evaluation_unparsed",
+          "message": "Node Builder LLM evaluation returned an unusable response. The deterministic source analysis was used instead; run Probe before publishing.",
+          "detail": "Node Builder LLM returned invalid JSON: Expecting ',' delimiter: line 80 column 8 (char 3933); repair failed: LLM repair response message.content was empty"
+        }
+      ],
+      "assumptions": [
+        "No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics."
+      ],
+      "test_plan": [
+        "校验 node-definition/v1 字段和安全路径。",
+        "检查 skill install command 格式和来源。",
+        "验证 Hermes 可识别 skill youtube-metadata-fetch.",
+        "生成 Node Execution Request 预览。",
+        "执行草稿测试并校验 outputs_dir/manifest.json。",
+        "发布到当前 Runtime 后通过真实 Node Run 再测一次。"
+      ],
+      "metadata_probe": {
+        "attempted": true,
+        "items": [
+          {
+            "url": "https://skill.vyibc.com/install-youtube-metadata-fetch.json",
+            "ok": false,
+            "error": "HTTP Error 404: Not Found"
+          },
+          {
+            "url": "https://skill.vyibc.com/install-youtube-metadata-fetch.manifest.json",
+            "ok": false,
+            "error": "HTTP Error 404: Not Found"
+          },
+          {
+            "url": "https://skill.vyibc.com/install-youtube-metadata-fetch.skill.json",
+            "ok": false,
+            "error": "HTTP Error 404: Not Found"
+          }
+        ]
+      },
+      "source_digest": {
+        "attempted": true,
+        "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426')",
+        "installer_url": "https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426",
+        "zip_url": "https://skill.vyibc.com/youtube-metadata-fetch/release/youtube-metadata-fetch-20260630075426.zip?ts=20260630075426",
+        "trusted_source": true,
+        "files": [
+          {
+            "path": "youtube-metadata-fetch/SKILL.md",
+            "bytes": 2000,
+            "truncated": false
+          },
+          {
+            "path": "youtube-metadata-fetch/agents/openai.yaml",
+            "bytes": 247,
+            "truncated": false
+          },
+          {
+            "path": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh",
+            "bytes": 1813,
+            "truncated": false
+          },
+          {
+            "path": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py",
+            "bytes": 5344,
+            "truncated": false
+          }
+        ],
+        "cli_options": [
+          {
+            "option": "--api-token",
+            "variable": "API_TOKEN",
+            "input_name": "api_token",
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Api Token",
+            "description": "Value for CLI option --api-token.",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --api-token -> $API_TOKEN"
+          },
+          {
+            "option": "--api-url",
+            "variable": "API_URL",
+            "input_name": "api_url",
+            "required": false,
+            "input_kind": "url",
+            "value_type": "url",
+            "label": "Api Url",
+            "description": "Value for CLI option --api-url.",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --api-url -> $API_URL"
+          },
+          {
+            "option": "--include-raw",
+            "variable": "INCLUDE_RAW",
+            "input_name": "include_raw",
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Include Raw",
+            "description": "Value for CLI option --include-raw.",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --include-raw -> $INCLUDE_RAW"
+          },
+          {
+            "option": "--output-dir",
+            "variable": "OUTPUT_DIR",
+            "input_name": "output_dir",
+            "required": false,
+            "input_kind": "directory",
+            "value_type": "text",
+            "label": "Output Dir",
+            "description": "Value for CLI option --output-dir.",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --output-dir -> $OUTPUT_DIR"
+          },
+          {
+            "option": "--output-json",
+            "variable": "OUTPUT_JSON",
+            "input_name": "output_json",
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Output Json",
+            "description": "Value for CLI option --output-json.",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --output-json -> $OUTPUT_JSON"
+          },
+          {
+            "option": "--source-url",
+            "variable": "SOURCE_URL",
+            "input_name": "source_url",
+            "required": true,
+            "input_kind": "url",
+            "value_type": "url",
+            "label": "Source Url",
+            "description": "Value for CLI option --source-url.",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --source-url -> $SOURCE_URL"
+          },
+          {
+            "option": "--timeout-seconds",
+            "variable": "TIMEOUT_SECONDS",
+            "input_name": "timeout_seconds",
+            "required": false,
+            "input_kind": "number",
+            "value_type": "number",
+            "label": "Timeout Seconds",
+            "description": "Value for CLI option --timeout-seconds.",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --timeout-seconds -> $TIMEOUT_SECONDS"
+          }
+        ],
+        "installer_script_preview": "#!/usr/bin/env bash\n# Auto-generated one-click install script for: youtube-metadata-fetch\n# Generated by publish-skill — https://skills.vyibc.com/install-publish-skill.sh\nset -euo pipefail\n\nSKILL_NAME=\"youtube-metadata-fetch\"\nZIP_URL=\"https://skill.vyibc.com/youtube-metadata-fetch/release/youtube-metadata-fetch-20260630075426.zip?ts=20260630075426\"\n\n# ── 工具选择 ──────────────────────────────────────────────\nTARGET=\"${1:-}\"\nif [[ -z \"$TARGET\" ]]; then\n  echo \"🛠  选择安装 ${SKILL_NAME} 到哪个 AI 工具：\"\n  echo \"  1) Codex        (~/.codex/skills/)\"\n  echo \"  2) Cursor       (~/.cursor/skills/)\"\n  echo \"  3)\n...[truncated for Node Builder]"
+      },
+      "coverage_report": {
+        "status": "passed",
+        "covered_inputs": [
+          {
+            "input": "api_token",
+            "option": "--api-token",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --api-token -> $API_TOKEN"
+          },
+          {
+            "input": "api_url",
+            "option": "--api-url",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --api-url -> $API_URL"
+          },
+          {
+            "input": "include_raw",
+            "option": "--include-raw",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --include-raw -> $INCLUDE_RAW"
+          },
+          {
+            "input": "output_dir",
+            "option": "--output-dir",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --output-dir -> $OUTPUT_DIR"
+          },
+          {
+            "input": "output_json",
+            "option": "--output-json",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --output-json -> $OUTPUT_JSON"
+          },
+          {
+            "input": "source_url",
+            "option": "--source-url",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --source-url -> $SOURCE_URL"
+          },
+          {
+            "input": "timeout_seconds",
+            "option": "--timeout-seconds",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --timeout-seconds -> $TIMEOUT_SECONDS"
+          }
+        ],
+        "missing_inputs": [],
+        "source_files_read": [
+          "youtube-metadata-fetch/SKILL.md",
+          "youtube-metadata-fetch/agents/openai.yaml",
+          "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh",
+          "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py"
+        ],
+        "errors": []
+      },
+      "agent": {
+        "provider": "openai-compatible",
+        "model": "deepseek-v4-pro",
+        "used_ai": false,
+        "fallback": "deterministic-source-analysis",
+        "error": "Node Builder LLM returned invalid JSON: Expecting ',' delimiter: line 80 column 8 (char 3933); repair failed: LLM repair response message.content was empty"
+      },
+      "trace": {
+        "trace_schema": "node-builder-agent-trace/v1",
+        "request": {
+          "skill_install_command": "  bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426')",
+          "user_instruction": "  将该 Skill 构建为独立的 YouTube 元数据获取 Runtime Node。用户输入 source_url 后调用配置的 YouTube 内容 API 获取元数据，并输出 metadata.json、source-url.txt、result.json；不得绑定固定上下游或 Edge 交接逻辑。",
+          "fetch_metadata": true,
+          "async_job": true,
+          "runtime_id": "youtube-wiki",
+          "instance_id": "wiki-sop-new-instance"
+        },
+        "config": {
+          "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+          "model": "deepseek-v4-pro",
+          "api_key": "ah-***c68"
+        },
+        "started_at": "2026-06-30T08:14:15Z",
+        "parse_error": "Expecting ',' delimiter: line 80 column 8 (char 3933)",
+        "repair_error": "LLM repair response message.content was empty",
+        "llm_request": {
+          "model": "deepseek-v4-pro",
+          "temperature": 0.0,
+          "max_tokens": 4096,
+          "stream": false,
+          "response_format": {
+            "type": "json_object"
+          },
+          "messages": [
+            {
+              "role": "system",
+              "content_preview": "",
+              "content_chars": 0
+            },
+            {
+              "role": "user",
+              "content_preview": "",
+              "content_chars": 0
+            }
+          ]
+        },
+        "attempts": [
+          {
+            "status": "response",
+            "duration_ms": 48089,
+            "raw_response_preview": ""
+          },
+          {
+            "status": "repair-response",
+            "duration_ms": 36862,
+            "raw_response_preview": ""
+          }
+        ]
+      },
+      "evaluated_at": "2026-06-30T08:15:40Z"
+    },
+    "trace": {
+      "trace_schema": "node-builder-agent-trace/v1",
+      "request": {
+        "skill_install_command": "  bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426')",
+        "user_instruction": "  将该 Skill 构建为独立的 YouTube 元数据获取 Runtime Node。用户输入 source_url 后调用配置的 YouTube 内容 API 获取元数据，并输出 metadata.json、source-url.txt、result.json；不得绑定固定上下游或 Edge 交接逻辑。",
+        "fetch_metadata": true,
+        "async_job": true,
+        "runtime_id": "youtube-wiki",
+        "instance_id": "wiki-sop-new-instance"
+      },
+      "config": {
+        "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "model": "deepseek-v4-pro",
+        "api_key": "ah-***c68"
+      },
+      "started_at": "2026-06-30T08:14:15Z",
+      "parse_error": "Expecting ',' delimiter: line 80 column 8 (char 3933)",
+      "repair_error": "LLM repair response message.content was empty",
+      "llm_request": {
+        "model": "deepseek-v4-pro",
+        "temperature": 0.0,
+        "max_tokens": 4096,
+        "stream": false,
+        "response_format": {
+          "type": "json_object"
+        },
+        "messages": [
+          {
+            "role": "system",
+            "content_preview": "",
+            "content_chars": 0
+          },
+          {
+            "role": "user",
+            "content_preview": "",
+            "content_chars": 0
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "status": "response",
+          "duration_ms": 48089,
+          "raw_response_preview": ""
+        },
+        {
+          "status": "repair-response",
+          "duration_ms": 36862,
+          "raw_response_preview": ""
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  "request": {
+    "skill_install_command": "  bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426')",
+    "user_instruction": "  将该 Skill 构建为独立的 YouTube 元数据获取 Runtime Node。用户输入 source_url 后调用配置的 YouTube 内容 API 获取元数据，并输出 metadata.json、source-url.txt、result.json；不得绑定固定上下游或 Edge 交接逻辑。",
+    "fetch_metadata": true,
+    "async_job": true,
+    "runtime_id": "youtube-wiki",
+    "instance_id": "wiki-sop-new-instance"
+  },
+  "config": {
+    "base_url": {
+      "key": "WIKI_LLM_BASE_URL",
+      "label": "Node Builder LLM Base URL",
+      "required": true,
+      "present": true,
+      "source": "instance-settings:WIKI_LLM_BASE_URL",
+      "masked_value": "https://api-proxy.chxyka.ccwu.cc/v1",
+      "value": "https://api-proxy.chxyka.ccwu.cc/v1"
+    },
+    "api_key": {
+      "key": "WIKI_LLM_API_KEY",
+      "label": "Node Builder LLM API Key",
+      "required": true,
+      "present": true,
+      "source": "instance-settings:WIKI_LLM_API_KEY",
+      "masked_value": "ah-***c68",
+      "value": null
+    },
+    "model": {
+      "key": "WIKI_LLM_MODEL",
+      "label": "Node Builder LLM Model",
+      "required": true,
+      "present": true,
+      "source": "instance-settings:WIKI_LLM_MODEL",
+      "masked_value": "deepseek-v4-pro",
+      "value": "deepseek-v4-pro"
+    },
+    "settings_backend": "file",
+    "precedence": [
+      "node-run-overrides",
+      "instance-settings",
+      "runtime-settings",
+      "global-settings",
+      "bridge-env",
+      "runtime-env-file"
+    ]
+  },
+  "evaluation": {
+    "status": "ready",
+    "summary": "Node Builder used deterministic source analysis because the LLM evaluation response was not usable. Probe Run is required before Runtime publish.",
+    "skill_identity": {
+      "skill_id": "youtube-metadata-fetch",
+      "title": "Youtube Metadata Fetch",
+      "description": "将该 Skill 构建为独立的 YouTube 元数据获取 Runtime Node。用户输入 source_url 后调用配置的 YouTube 内容 API 获取元数据，并输出 metadata.json、source-url.txt、result.json；不得绑定固定上下游或 Edge 交接逻辑。",
+      "installer_url": "https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426",
+      "trusted_source": true
+    },
+    "node_draft": {
+      "schema": "node-definition/v1",
+      "id": "youtube-metadata-fetch",
+      "title": "Youtube Metadata Fetch",
+      "description": "将该 Skill 构建为独立的 YouTube 元数据获取 Runtime Node。用户输入 source_url 后调用配置的 YouTube 内容 API 获取元数据，并输出 metadata.json、source-url.txt、result.json；不得绑定固定上下游或 Edge 交接逻辑。",
+      "version": "0.1-runtime-draft",
+      "skill": {
+        "id": "youtube-metadata-fetch",
+        "source": "skill-installer",
+        "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426')",
+        "source_digest": {
+          "installer_url": "https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426",
+          "zip_url": "https://skill.vyibc.com/youtube-metadata-fetch/release/youtube-metadata-fetch-20260630075426.zip?ts=20260630075426",
+          "files": [
+            {
+              "path": "youtube-metadata-fetch/SKILL.md",
+              "bytes": 2000,
+              "truncated": false
+            },
+            {
+              "path": "youtube-metadata-fetch/agents/openai.yaml",
+              "bytes": 247,
+              "truncated": false
+            },
+            {
+              "path": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh",
+              "bytes": 1813,
+              "truncated": false
+            },
+            {
+              "path": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py",
+              "bytes": 5344,
+              "truncated": false
+            }
+          ]
+        }
+      },
+      "executor": {
+        "type": "agent-skill",
+        "agent": "hermes",
+        "skill": "youtube-metadata-fetch",
+        "request_template": "node-execution-request/v1"
+      },
+      "entry": {
+        "inputs": {
+          "api_token": {
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Api Token",
+            "description": "Value for CLI option --api-token.",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --api-token -> $API_TOKEN",
+            "cli_option": "--api-token"
+          },
+          "api_url": {
+            "required": false,
+            "input_kind": "url",
+            "value_type": "url",
+            "label": "Api Url",
+            "description": "Value for CLI option --api-url.",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --api-url -> $API_URL",
+            "cli_option": "--api-url"
+          },
+          "include_raw": {
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Include Raw",
+            "description": "Value for CLI option --include-raw.",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --include-raw -> $INCLUDE_RAW",
+            "cli_option": "--include-raw"
+          },
+          "output_dir": {
+            "required": false,
+            "input_kind": "directory",
+            "value_type": "text",
+            "label": "Output Dir",
+            "description": "Value for CLI option --output-dir.",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --output-dir -> $OUTPUT_DIR",
+            "cli_option": "--output-dir"
+          },
+          "output_json": {
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Output Json",
+            "description": "Value for CLI option --output-json.",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --output-json -> $OUTPUT_JSON",
+            "cli_option": "--output-json"
+          },
+          "source_url": {
+            "required": true,
+            "input_kind": "url",
+            "value_type": "url",
+            "label": "Source Url",
+            "description": "Value for CLI option --source-url.",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --source-url -> $SOURCE_URL",
+            "cli_option": "--source-url"
+          },
+          "timeout_seconds": {
+            "required": false,
+            "input_kind": "number",
+            "value_type": "number",
+            "label": "Timeout Seconds",
+            "description": "Value for CLI option --timeout-seconds.",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --timeout-seconds -> $TIMEOUT_SECONDS",
+            "cli_option": "--timeout-seconds"
+          }
+        }
+      },
+      "handoff": {
+        "accepts": {
+          "upstream_outputs_dir": {
+            "required": false,
+            "description": "一个或多个上游 Node 的标准输出目录。"
+          },
+          "instruction": {
+            "required": true,
+            "description": "Edge Handoff Agent 或用户提供的交接说明。"
+          },
+          "context": {
+            "required": false,
+            "description": "运行上下文或补充说明。"
+          }
+        },
+        "produces": {
+          "outputs_dir": "raw/node-runs/{run_id}/outputs",
+          "manifest": "raw/node-runs/{run_id}/outputs/manifest.json"
+        }
+      },
+      "outputs": {
+        "root": "raw/node-runs/{run_id}/outputs",
+        "manifest": "raw/node-runs/{run_id}/outputs/manifest.json",
+        "expected": {
+          "result": {
+            "description": "Skill execution result summary.",
+            "relayable": true
+          },
+          "status": {
+            "description": "Result value mentioned in skill source as `status`.",
+            "value_type": "text",
+            "relayable": true,
+            "evidence": "source result marker status"
+          }
+        }
+      },
+      "capabilities": {
+        "git": {
+          "enabled": true,
+          "required": false
+        },
+        "telegram": {
+          "enabled": false,
+          "required": false
+        },
+        "sse": {
+          "enabled": true,
+          "required": true
+        }
+      },
+      "ui": {
+        "category": "custom"
+      },
+      "coverage_report": {
+        "status": "passed",
+        "covered_inputs": [
+          {
+            "input": "api_token",
+            "option": "--api-token",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --api-token -> $API_TOKEN"
+          },
+          {
+            "input": "api_url",
+            "option": "--api-url",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --api-url -> $API_URL"
+          },
+          {
+            "input": "include_raw",
+            "option": "--include-raw",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --include-raw -> $INCLUDE_RAW"
+          },
+          {
+            "input": "output_dir",
+            "option": "--output-dir",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --output-dir -> $OUTPUT_DIR"
+          },
+          {
+            "input": "output_json",
+            "option": "--output-json",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --output-json -> $OUTPUT_JSON"
+          },
+          {
+            "input": "source_url",
+            "option": "--source-url",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --source-url -> $SOURCE_URL"
+          },
+          {
+            "input": "timeout_seconds",
+            "option": "--timeout-seconds",
+            "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --timeout-seconds -> $TIMEOUT_SECONDS"
+          }
+        ],
+        "missing_inputs": [],
+        "source_files_read": [
+          "youtube-metadata-fetch/SKILL.md",
+          "youtube-metadata-fetch/agents/openai.yaml",
+          "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh",
+          "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py"
+        ],
+        "errors": []
+      }
+    },
+    "missing_fields": [],
+    "risks": [
+      {
+        "code": "ai_evaluation_unparsed",
+        "message": "Node Builder LLM evaluation returned an unusable response. The deterministic source analysis was used instead; run Probe before publishing.",
+        "detail": "Node Builder LLM returned invalid JSON: Expecting ',' delimiter: line 80 column 8 (char 3933); repair failed: LLM repair response message.content was empty"
+      }
+    ],
+    "assumptions": [
+      "No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics."
+    ],
+    "test_plan": [
+      "校验 node-definition/v1 字段和安全路径。",
+      "检查 skill install command 格式和来源。",
+      "验证 Hermes 可识别 skill youtube-metadata-fetch.",
+      "生成 Node Execution Request 预览。",
+      "执行草稿测试并校验 outputs_dir/manifest.json。",
+      "发布到当前 Runtime 后通过真实 Node Run 再测一次。"
+    ],
+    "metadata_probe": {
+      "attempted": true,
+      "items": [
+        {
+          "url": "https://skill.vyibc.com/install-youtube-metadata-fetch.json",
+          "ok": false,
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://skill.vyibc.com/install-youtube-metadata-fetch.manifest.json",
+          "ok": false,
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://skill.vyibc.com/install-youtube-metadata-fetch.skill.json",
+          "ok": false,
+          "error": "HTTP Error 404: Not Found"
+        }
+      ]
+    },
+    "source_digest": {
+      "attempted": true,
+      "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426')",
+      "installer_url": "https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426",
+      "zip_url": "https://skill.vyibc.com/youtube-metadata-fetch/release/youtube-metadata-fetch-20260630075426.zip?ts=20260630075426",
+      "trusted_source": true,
+      "files": [
+        {
+          "path": "youtube-metadata-fetch/SKILL.md",
+          "bytes": 2000,
+          "truncated": false
+        },
+        {
+          "path": "youtube-metadata-fetch/agents/openai.yaml",
+          "bytes": 247,
+          "truncated": false
+        },
+        {
+          "path": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh",
+          "bytes": 1813,
+          "truncated": false
+        },
+        {
+          "path": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py",
+          "bytes": 5344,
+          "truncated": false
+        }
+      ],
+      "cli_options": [
+        {
+          "option": "--api-token",
+          "variable": "API_TOKEN",
+          "input_name": "api_token",
+          "required": false,
+          "input_kind": "text",
+          "value_type": "text",
+          "label": "Api Token",
+          "description": "Value for CLI option --api-token.",
+          "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --api-token -> $API_TOKEN"
+        },
+        {
+          "option": "--api-url",
+          "variable": "API_URL",
+          "input_name": "api_url",
+          "required": false,
+          "input_kind": "url",
+          "value_type": "url",
+          "label": "Api Url",
+          "description": "Value for CLI option --api-url.",
+          "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --api-url -> $API_URL"
+        },
+        {
+          "option": "--include-raw",
+          "variable": "INCLUDE_RAW",
+          "input_name": "include_raw",
+          "required": false,
+          "input_kind": "text",
+          "value_type": "text",
+          "label": "Include Raw",
+          "description": "Value for CLI option --include-raw.",
+          "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --include-raw -> $INCLUDE_RAW"
+        },
+        {
+          "option": "--output-dir",
+          "variable": "OUTPUT_DIR",
+          "input_name": "output_dir",
+          "required": false,
+          "input_kind": "directory",
+          "value_type": "text",
+          "label": "Output Dir",
+          "description": "Value for CLI option --output-dir.",
+          "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --output-dir -> $OUTPUT_DIR"
+        },
+        {
+          "option": "--output-json",
+          "variable": "OUTPUT_JSON",
+          "input_name": "output_json",
+          "required": false,
+          "input_kind": "text",
+          "value_type": "text",
+          "label": "Output Json",
+          "description": "Value for CLI option --output-json.",
+          "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --output-json -> $OUTPUT_JSON"
+        },
+        {
+          "option": "--source-url",
+          "variable": "SOURCE_URL",
+          "input_name": "source_url",
+          "required": true,
+          "input_kind": "url",
+          "value_type": "url",
+          "label": "Source Url",
+          "description": "Value for CLI option --source-url.",
+          "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --source-url -> $SOURCE_URL"
+        },
+        {
+          "option": "--timeout-seconds",
+          "variable": "TIMEOUT_SECONDS",
+          "input_name": "timeout_seconds",
+          "required": false,
+          "input_kind": "number",
+          "value_type": "number",
+          "label": "Timeout Seconds",
+          "description": "Value for CLI option --timeout-seconds.",
+          "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --timeout-seconds -> $TIMEOUT_SECONDS"
+        }
+      ],
+      "installer_script_preview": "#!/usr/bin/env bash\n# Auto-generated one-click install script for: youtube-metadata-fetch\n# Generated by publish-skill — https://skills.vyibc.com/install-publish-skill.sh\nset -euo pipefail\n\nSKILL_NAME=\"youtube-metadata-fetch\"\nZIP_URL=\"https://skill.vyibc.com/youtube-metadata-fetch/release/youtube-metadata-fetch-20260630075426.zip?ts=20260630075426\"\n\n# ── 工具选择 ──────────────────────────────────────────────\nTARGET=\"${1:-}\"\nif [[ -z \"$TARGET\" ]]; then\n  echo \"🛠  选择安装 ${SKILL_NAME} 到哪个 AI 工具：\"\n  echo \"  1) Codex        (~/.codex/skills/)\"\n  echo \"  2) Cursor       (~/.cursor/skills/)\"\n  echo \"  3)\n...[truncated for Node Builder]"
+    },
+    "coverage_report": {
+      "status": "passed",
+      "covered_inputs": [
+        {
+          "input": "api_token",
+          "option": "--api-token",
+          "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --api-token -> $API_TOKEN"
+        },
+        {
+          "input": "api_url",
+          "option": "--api-url",
+          "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --api-url -> $API_URL"
+        },
+        {
+          "input": "include_raw",
+          "option": "--include-raw",
+          "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --include-raw -> $INCLUDE_RAW"
+        },
+        {
+          "input": "output_dir",
+          "option": "--output-dir",
+          "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --output-dir -> $OUTPUT_DIR"
+        },
+        {
+          "input": "output_json",
+          "option": "--output-json",
+          "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --output-json -> $OUTPUT_JSON"
+        },
+        {
+          "input": "source_url",
+          "option": "--source-url",
+          "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --source-url -> $SOURCE_URL"
+        },
+        {
+          "input": "timeout_seconds",
+          "option": "--timeout-seconds",
+          "evidence": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --timeout-seconds -> $TIMEOUT_SECONDS"
+        }
+      ],
+      "missing_inputs": [],
+      "source_files_read": [
+        "youtube-metadata-fetch/SKILL.md",
+        "youtube-metadata-fetch/agents/openai.yaml",
+        "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh",
+        "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py"
+      ],
+      "errors": []
+    },
+    "agent": {
+      "provider": "openai-compatible",
+      "model": "deepseek-v4-pro",
+      "used_ai": false,
+      "fallback": "deterministic-source-analysis",
+      "error": "Node Builder LLM returned invalid JSON: Expecting ',' delimiter: line 80 column 8 (char 3933); repair failed: LLM repair response message.content was empty"
+    },
+    "trace": {
+      "trace_schema": "node-builder-agent-trace/v1",
+      "request": {
+        "skill_install_command": "  bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426')",
+        "user_instruction": "  将该 Skill 构建为独立的 YouTube 元数据获取 Runtime Node。用户输入 source_url 后调用配置的 YouTube 内容 API 获取元数据，并输出 metadata.json、source-url.txt、result.json；不得绑定固定上下游或 Edge 交接逻辑。",
+        "fetch_metadata": true,
+        "async_job": true,
+        "runtime_id": "youtube-wiki",
+        "instance_id": "wiki-sop-new-instance"
+      },
+      "config": {
+        "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "model": "deepseek-v4-pro",
+        "api_key": "ah-***c68"
+      },
+      "started_at": "2026-06-30T08:14:15Z",
+      "parse_error": "Expecting ',' delimiter: line 80 column 8 (char 3933)",
+      "repair_error": "LLM repair response message.content was empty",
+      "llm_request": {
+        "model": "deepseek-v4-pro",
+        "temperature": 0.0,
+        "max_tokens": 4096,
+        "stream": false,
+        "response_format": {
+          "type": "json_object"
+        },
+        "messages": [
+          {
+            "role": "system",
+            "content_preview": "",
+            "content_chars": 0
+          },
+          {
+            "role": "user",
+            "content_preview": "",
+            "content_chars": 0
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "status": "response",
+          "duration_ms": 48089,
+          "raw_response_preview": ""
+        },
+        {
+          "status": "repair-response",
+          "duration_ms": 36862,
+          "raw_response_preview": ""
+        }
+      ]
+    },
+    "evaluated_at": "2026-06-30T08:15:40Z"
+  },
+  "trace": {
+    "trace_schema": "node-builder-agent-trace/v1",
+    "request": {
+      "skill_install_command": "  bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426')",
+      "user_instruction": "  将该 Skill 构建为独立的 YouTube 元数据获取 Runtime Node。用户输入 source_url 后调用配置的 YouTube 内容 API 获取元数据，并输出 metadata.json、source-url.txt、result.json；不得绑定固定上下游或 Edge 交接逻辑。",
+      "fetch_metadata": true,
+      "async_job": true,
+      "runtime_id": "youtube-wiki",
+      "instance_id": "wiki-sop-new-instance"
+    },
+    "config": {
+      "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+      "model": "deepseek-v4-pro",
+      "api_key": "ah-***c68"
+    },
+    "started_at": "2026-06-30T08:14:15Z",
+    "parse_error": "Expecting ',' delimiter: line 80 column 8 (char 3933)",
+    "repair_error": "LLM repair response message.content was empty",
+    "llm_request": {
+      "model": "deepseek-v4-pro",
+      "temperature": 0.0,
+      "max_tokens": 4096,
+      "stream": false,
+      "response_format": {
+        "type": "json_object"
+      },
+      "messages": [
+        {
+          "role": "system",
+          "content_preview": "",
+          "content_chars": 0
+        },
+        {
+          "role": "user",
+          "content_preview": "",
+          "content_chars": 0
+        }
+      ]
+    },
+    "attempts": [
+      {
+        "status": "response",
+        "duration_ms": 48089,
+        "raw_response_preview": ""
+      },
+      {
+        "status": "repair-response",
+        "duration_ms": 36862,
+        "raw_response_preview": ""
+      }
+    ]
+  },
+  "stderr": ""
+}

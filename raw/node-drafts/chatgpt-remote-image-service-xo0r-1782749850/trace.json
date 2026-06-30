@@ -1,0 +1,45 @@
+{
+  "trace_schema": "node-builder-agent-trace/v1",
+  "request": {
+    "runtime_id": "youtube-wiki",
+    "instance_id": "wiki-sop-new-instance",
+    "skill_install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+    "user_instruction": "  把这个 Skill 转换成一个不绑定上下游的 Runtime Node；首节点测试时允许用户直接输入 prompt，也要保留引用图、上传名、超时等 skill 暴露的可配置参数。",
+    "fetch_metadata": true
+  },
+  "config": {
+    "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+    "model": "deepseek-v4-pro",
+    "api_key": "ah-***c68"
+  },
+  "started_at": "2026-06-29T16:14:54Z",
+  "finished_at": "2026-06-29T16:15:14Z",
+  "llm_request": {
+    "model": "deepseek-v4-pro",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "stream": false,
+    "response_format": {
+      "type": "json_object"
+    },
+    "messages": [
+      {
+        "role": "system",
+        "content_preview": "",
+        "content_chars": 0
+      },
+      {
+        "role": "user",
+        "content_preview": "",
+        "content_chars": 0
+      }
+    ]
+  },
+  "attempts": [
+    {
+      "status": "response",
+      "duration_ms": 19588,
+      "raw_response_preview": ""
+    }
+  ]
+}

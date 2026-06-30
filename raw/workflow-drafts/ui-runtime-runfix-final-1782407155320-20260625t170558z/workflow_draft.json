@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "draft_type": "workflow_draft",
+  "draft_id": "ui-runtime-runfix-final-1782407155320-20260625t170558z",
+  "workflow_id": "youtube-research-wiki",
+  "name": "ui-runtime-runfix-final-1782407155320",
+  "goal": "Verify draft workflow run writes to instance workspace after runtime snapshot fix.",
+  "created_at": "2026-06-25T17:06:14Z",
+  "runtime_id": "youtube-wiki",
+  "instance_id": "test-instance",
+  "draft": {
+    "name": "ui-runtime-runfix-final-1782407155320",
+    "goal": "Verify draft workflow run writes to instance workspace after runtime snapshot fix.",
+    "nodes": [
+      {
+        "nodeId": "youtube-fetch",
+        "signature": "{\"nodeId\":\"youtube-fetch\",\"title\":\"YouTube 元数据获取\",\"needs\":[],\"inputs\":[\"source_url\"],\"optionalInputs\":[],\"outputs\":[\"metadata_file\",\"source_url\"]}"
+      },
+      {
+        "nodeId": "youtube-deep-research",
+        "signature": "{\"nodeId\":\"youtube-deep-research\",\"title\":\"YouTube 深度研究\",\"needs\":[\"youtube-fetch\"],\"inputs\":[\"source_url\"],\"optionalInputs\":[],\"outputs\":[\"analysis_file\",\"transcript_file\"]}"
+      }
+    ],
+    "edges": [
+      {
+        "id": "youtube-fetch-to-youtube-deep-research-runfix-final-1782407155320",
+        "from": "youtube-fetch",
+        "to": "youtube-deep-research",
+        "sourceIntent": "metadata_file: file; source_url: string",
+        "targetIntent": "source_url: string",
+        "instruction": "把上游 source_url 交给 YouTube 深度研究节点；metadata_file 只作为可选上下文，不作为主输入。",
+        "fromSignature": "{\"nodeId\":\"youtube-fetch\",\"title\":\"YouTube 元数据获取\",\"needs\":[],\"inputs\":[\"source_url\"],\"optionalInputs\":[],\"outputs\":[\"metadata_file\",\"source_url\"]}",
+        "toSignature": "{\"nodeId\":\"youtube-deep-research\",\"title\":\"YouTube 深度研究\",\"needs\":[\"youtube-fetch\"],\"inputs\":[\"source_url\"],\"optionalInputs\":[],\"outputs\":[\"analysis_file\",\"transcript_file\"]}",
+        "relayMode": "auto_by_target_inputs",
+        "relayMappings": []
+      }
+    ],
+    "positions": {
+      "youtube-fetch": {
+        "x": 0,
+        "y": 0
+      },
+      "youtube-deep-research": {
+        "x": 292,
+        "y": 0
+      }
+    }
+  },
+  "edge_count": 1,
+  "ready_edge_count": 1,
+  "runtime_sop_status": "runtime_sop_ready",
+  "active_runtime_sop_changed": false,
+  "production_dag_changed": false,
+  "runtime_sop_path": "/root/wiki/wiki-sop-new-instance/raw/workflow-drafts/ui-runtime-runfix-final-1782407155320-20260625t170558z/runtime_sop.yaml",
+  "updated_at": "2026-06-25T17:06:15Z",
+  "hash_after": "b70d1b8435659f43"
+}

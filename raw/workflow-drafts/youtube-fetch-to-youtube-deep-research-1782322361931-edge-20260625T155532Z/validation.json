@@ -1,0 +1,15 @@
+{
+  "schema_id": "workflow-edge-draft-schema/v1",
+  "status": "passed",
+  "errors": [],
+  "missing_fields": [],
+  "production_dag_changed": false,
+  "workflow_id": "youtube-research-wiki",
+  "targets": {
+    "runtime_sop_file": "/root/wiki/wiki-sop-new-instance/sop.yaml",
+    "project_template_sop_yaml": "/root/agent-brain-plugins/youtube-wiki/templates/wiki-repo/sop.yaml",
+    "project_workflow_id": "youtube-research-wiki",
+    "save_owner": "agent-brain-plugins"
+  },
+  "change_count": 1
+}

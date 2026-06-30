@@ -1,0 +1,558 @@
+{
+  "status": "failed",
+  "execution_status": "failed",
+  "business_output_status": {
+    "status": "failed_execution",
+    "expected_outputs": [
+      "result",
+      "image_url",
+      "public_image_url",
+      "status",
+      "task_id",
+      "status_json",
+      "submit_json",
+      "generated_images",
+      "images"
+    ],
+    "required_outputs": [],
+    "present_outputs": [
+      "result",
+      "task_id"
+    ],
+    "missing_required_outputs": [],
+    "business_outputs": {
+      "result": "The remote service failed at the download dialog phase. The prompt was submitted and image was generated (visible at ~40s), but the browser could not locate the download confirmation dialog ([role=\"dialog\"]) within timeout.",
+      "task_id": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c"
+    },
+    "business_artifact_count": 0
+  },
+  "probe_id": "chatgpt-remote-image-service-nrmj-probe-20260629T175713Z-64c8fb",
+  "draft_id": "chatgpt-remote-image-service-nrmj-1782755304",
+  "node_id": "chatgpt-remote-image-service-nrmj",
+  "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+  "http_status": 200,
+  "mode": "node-draft-probe-run",
+  "manual_inputs": {
+    "api_url": "",
+    "reference_image_file": "",
+    "reference_image_url": "",
+    "poll_interval": "",
+    "prompt": "生成一张小猫睡觉的照片",
+    "timeout_seconds": "",
+    "upload_name": ""
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": false
+    },
+    "telegram": {
+      "enabled": false
+    }
+  },
+  "result": {
+    "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+    "status": "failed",
+    "pending": false,
+    "started_at": "2026-06-29T17:57:13.410782+00:00",
+    "finished_at": "2026-06-29T17:58:48Z",
+    "elapsed_ms": 282,
+    "validation": {
+      "status": "failed",
+      "missing_outputs": [],
+      "unexpected_outputs": [],
+      "business_output_status": {
+        "status": "failed_execution",
+        "expected_outputs": [
+          "result",
+          "image_url",
+          "public_image_url",
+          "status",
+          "task_id",
+          "status_json",
+          "submit_json",
+          "generated_images",
+          "images"
+        ],
+        "required_outputs": [],
+        "present_outputs": [
+          "result",
+          "task_id"
+        ],
+        "missing_required_outputs": [],
+        "business_outputs": {
+          "result": "The remote service failed at the download dialog phase. The prompt was submitted and image was generated (visible at ~40s), but the browser could not locate the download confirmation dialog ([role=\"dialog\"]) within timeout.",
+          "task_id": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c"
+        },
+        "business_artifact_count": 0
+      },
+      "execution_status": "failed",
+      "error": {
+        "taskId": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+        "status": "failed",
+        "stage": "waiting for locator('[role=\"dialog\"]').last() to be visible",
+        "error": "Worker exited with code 1",
+        "summary": "The ChatGPT remote image service connected to a browser worker and submitted the prompt successfully, but failed at the download stage. The generated image appeared (visible at ~40s), but the dialog for download confirmation was not found within the 10s timeout — possibly a ChatGPT UI change or transient browser state. The remote browser worker (worker-1, CDP port 9333) was logged in and active."
+      }
+    },
+    "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json",
+    "output_directory": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs",
+    "actual_outputs": {
+      "result": "The remote service failed at the download dialog phase. The prompt was submitted and image was generated (visible at ~40s), but the browser could not locate the download confirmation dialog ([role=\"dialog\"]) within timeout.",
+      "image_url": [],
+      "public_image_url": [],
+      "status": [],
+      "task_id": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+      "status_json": [],
+      "submit_json": [],
+      "generated_images": [],
+      "images": []
+    },
+    "business_artifacts": [],
+    "core_outputs": [
+      {
+        "name": "result",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "The remote service failed at the download dialog phase. The prompt was submitted and image was generated (visible at ~40s), but the browser could not locate the download confirmation dialog ([role=\"dialog\"]) within timeout.",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Skill execution result summary.",
+          "relayable": true
+        }
+      },
+      {
+        "name": "image_url",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `imageUrl`.",
+          "value_type": "url",
+          "relayable": true,
+          "evidence": "source result marker imageUrl"
+        }
+      },
+      {
+        "name": "public_image_url",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `publicImageUrl`.",
+          "value_type": "url",
+          "relayable": true,
+          "evidence": "source result marker publicImageUrl"
+        }
+      },
+      {
+        "name": "status",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `status`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker status"
+        }
+      },
+      {
+        "name": "task_id",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `taskId`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker taskId"
+        }
+      },
+      {
+        "name": "status_json",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Runtime value captured by script variable `status_json`.",
+          "value_type": "json",
+          "relayable": false,
+          "evidence": "source script variable status_json"
+        }
+      },
+      {
+        "name": "submit_json",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Runtime value captured by script variable `submit_json`.",
+          "value_type": "json",
+          "relayable": true,
+          "evidence": "source script variable submit_json"
+        }
+      },
+      {
+        "name": "generated_images",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Generated image files or public image URLs.",
+          "value_type": "image",
+          "relayable": true
+        }
+      },
+      {
+        "name": "images",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Generated image files.",
+          "relayable": true
+        }
+      }
+    ],
+    "steps": [
+      {
+        "id": "create-run",
+        "title": "Create node run workspace",
+        "status": "done",
+        "summary": "Node Run record is allocated independently from Workflow Run.",
+        "started_at": "2026-06-29T17:57:13.410782+00:00",
+        "finished_at": "2026-06-29T17:57:13.445782+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "load-definition",
+        "title": "Load node definition",
+        "status": "done",
+        "summary": "Loaded chatgpt-remote-image-service-nrmj from youtube-research-wiki.",
+        "started_at": "2026-06-29T17:57:13.445782+00:00",
+        "finished_at": "2026-06-29T17:57:13.480782+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-context",
+        "title": "Resolve Runtime / Instance / Workflow context",
+        "status": "done",
+        "summary": "youtube-wiki · wiki-sop-new-instance · youtube-research-wiki",
+        "started_at": "2026-06-29T17:57:13.480782+00:00",
+        "finished_at": "2026-06-29T17:57:13.515782+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-inputs",
+        "title": "Resolve node inputs",
+        "status": "done",
+        "summary": "1 resolved, 0 pending relay, 0 missing.",
+        "started_at": "2026-06-29T17:57:13.515782+00:00",
+        "finished_at": "2026-06-29T17:57:13.550782+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-config",
+        "title": "Resolve execution config",
+        "status": "done",
+        "summary": "Runtime, Instance and capability config resolved.",
+        "started_at": "2026-06-29T17:57:13.550782+00:00",
+        "finished_at": "2026-06-29T17:57:13.585782+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "generate-agent-request",
+        "title": "Generate Agent Request",
+        "status": "done",
+        "summary": "Hermes Agent Request was rendered and saved for this Node Run.",
+        "started_at": "2026-06-29T17:57:13.585782+00:00",
+        "finished_at": "",
+        "elapsed_ms": 0
+      },
+      {
+        "id": "probe-capabilities",
+        "title": "Probe attached capabilities",
+        "status": "skipped",
+        "summary": "Capability probes are explicit. Telegram send probes require user confirmation.",
+        "started_at": "2026-06-29T17:57:13.620782+00:00",
+        "finished_at": "2026-06-29T17:57:13.644782+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "build-execution-plan",
+        "title": "Build node execution plan",
+        "status": "done",
+        "summary": "Prepared real-node execution plan.",
+        "started_at": "2026-06-29T17:57:13.655782+00:00",
+        "finished_at": "2026-06-29T17:57:13.690782+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "execute-or-dry-run",
+        "title": "Execute or dry-run node",
+        "status": "failed",
+        "summary": "The ChatGPT remote image service connected to a browser worker and submitted the prompt successfully, but failed at the download stage. The generated image appeared (visible at ~40s), but the dialog for download confirmation was not found within the 10s timeout — possibly a ChatGPT UI change or transient browser state. The remote browser worker (worker-1, CDP port 9333) was logged in and active.",
+        "started_at": "2026-06-29T17:57:13.410782+00:00",
+        "finished_at": "2026-06-29T17:58:48Z",
+        "elapsed_ms": 0
+      },
+      {
+        "id": "validate-outputs",
+        "title": "Validate declared outputs",
+        "status": "failed",
+        "summary": "Declared outputs are missing.",
+        "started_at": "2026-06-29T17:57:13.725782+00:00",
+        "finished_at": "",
+        "elapsed_ms": 0
+      },
+      {
+        "id": "persist-to-github",
+        "title": "Persist to GitHub",
+        "status": "skipped",
+        "summary": "GitHub persistence is not attached for this Node Run.",
+        "started_at": "2026-06-29T17:57:13.760782+00:00",
+        "finished_at": "2026-06-29T17:57:13.784782+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "send-telegram-notification",
+        "title": "Send Telegram notification",
+        "status": "skipped",
+        "summary": "Telegram notification is not attached for this Node Run.",
+        "started_at": "2026-06-29T17:57:13.795782+00:00",
+        "finished_at": "2026-06-29T17:57:13.819782+00:00",
+        "elapsed_ms": 24
+      }
+    ]
+  },
+  "manifest": {
+    "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+    "workflow_id": "youtube-research-wiki",
+    "node_id": "chatgpt-remote-image-service-nrmj",
+    "status": "failed",
+    "files": [],
+    "summary": {
+      "prompt": "生成一张小猫睡觉的照片",
+      "taskId": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+      "result": "The remote service failed at the download dialog phase. The prompt was submitted and image was generated (visible at ~40s), but the browser could not locate the download confirmation dialog ([role=\"dialog\"]) within timeout."
+    },
+    "error": {
+      "taskId": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+      "status": "failed",
+      "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+      "error": "Worker exited with code 1",
+      "recentLogs": [
+        "stage.connectBrowser done (933ms)",
+        "stage.preparePage done (1794ms)",
+        "stage.waitComposer done (5465ms)",
+        "stage.enterImageMode done (7304ms)",
+        "stage.fillPrompt done (7599ms)",
+        "stage.waitSendEnabled done (7745ms)",
+        "stage.snapshotExistingGeneratedImages done (7752ms, count=0)",
+        "stage.clickSend -> sentMs=8420ms",
+        "stage.waitForGeneratedImage -> generatedVisibleMs=40256ms",
+        "stage.downloadImage -> FAILED: locator('[role=\"dialog\"]').last() timeout 10s",
+        "Worker exited with code 1"
+      ]
+    },
+    "created_at": "2026-06-29T17:58:48Z"
+  },
+  "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json",
+  "manifest_records": [],
+  "validation": {
+    "status": "failed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "failed_execution",
+      "expected_outputs": [
+        "result",
+        "image_url",
+        "public_image_url",
+        "status",
+        "task_id",
+        "status_json",
+        "submit_json",
+        "generated_images",
+        "images"
+      ],
+      "required_outputs": [],
+      "present_outputs": [
+        "result",
+        "task_id"
+      ],
+      "missing_required_outputs": [],
+      "business_outputs": {
+        "result": "The remote service failed at the download dialog phase. The prompt was submitted and image was generated (visible at ~40s), but the browser could not locate the download confirmation dialog ([role=\"dialog\"]) within timeout.",
+        "task_id": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c"
+      },
+      "business_artifact_count": 0
+    },
+    "execution_status": "failed",
+    "error": {
+      "taskId": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+      "status": "failed",
+      "stage": "waiting for locator('[role=\"dialog\"]').last() to be visible",
+      "error": "Worker exited with code 1",
+      "summary": "The ChatGPT remote image service connected to a browser worker and submitted the prompt successfully, but failed at the download stage. The generated image appeared (visible at ~40s), but the dialog for download confirmation was not found within the 10s timeout — possibly a ChatGPT UI change or transient browser state. The remote browser worker (worker-1, CDP port 9333) was logged in and active."
+    }
+  },
+  "actual_outputs": {
+    "result": "The remote service failed at the download dialog phase. The prompt was submitted and image was generated (visible at ~40s), but the browser could not locate the download confirmation dialog ([role=\"dialog\"]) within timeout.",
+    "image_url": [],
+    "public_image_url": [],
+    "status": [],
+    "task_id": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+    "status_json": [],
+    "submit_json": [],
+    "generated_images": [],
+    "images": []
+  },
+  "business_outputs": {
+    "result": "The remote service failed at the download dialog phase. The prompt was submitted and image was generated (visible at ~40s), but the browser could not locate the download confirmation dialog ([role=\"dialog\"]) within timeout.",
+    "task_id": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c"
+  },
+  "business_artifacts": [],
+  "core_outputs": [
+    {
+      "name": "result",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "The remote service failed at the download dialog phase. The prompt was submitted and image was generated (visible at ~40s), but the browser could not locate the download confirmation dialog ([role=\"dialog\"]) within timeout.",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Skill execution result summary.",
+        "relayable": true
+      }
+    },
+    {
+      "name": "image_url",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `imageUrl`.",
+        "value_type": "url",
+        "relayable": true,
+        "evidence": "source result marker imageUrl"
+      }
+    },
+    {
+      "name": "public_image_url",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `publicImageUrl`.",
+        "value_type": "url",
+        "relayable": true,
+        "evidence": "source result marker publicImageUrl"
+      }
+    },
+    {
+      "name": "status",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `status`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker status"
+      }
+    },
+    {
+      "name": "task_id",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `taskId`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker taskId"
+      }
+    },
+    {
+      "name": "status_json",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Runtime value captured by script variable `status_json`.",
+        "value_type": "json",
+        "relayable": false,
+        "evidence": "source script variable status_json"
+      }
+    },
+    {
+      "name": "submit_json",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Runtime value captured by script variable `submit_json`.",
+        "value_type": "json",
+        "relayable": true,
+        "evidence": "source script variable submit_json"
+      }
+    },
+    {
+      "name": "generated_images",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Generated image files or public image URLs.",
+        "value_type": "image",
+        "relayable": true
+      }
+    },
+    {
+      "name": "images",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Generated image files.",
+        "relayable": true
+      }
+    }
+  ],
+  "created_at": "2026-06-29T17:57:13.460513+00:00",
+  "reconciled_at": "2026-06-30T15:17:15.762236+00:00"
+}

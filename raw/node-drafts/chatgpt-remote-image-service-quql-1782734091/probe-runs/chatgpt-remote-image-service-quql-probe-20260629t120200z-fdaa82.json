@@ -1,0 +1,964 @@
+{
+  "status": "passed",
+  "probe_id": "chatgpt-remote-image-service-quql-probe-20260629T120200Z-fdaa82",
+  "draft_id": "chatgpt-remote-image-service-quql-1782734091",
+  "node_id": "chatgpt-remote-image-service-quql",
+  "node_run_id": "node-run-chatgpt-remote-image-service-quql-20260629T120159-4b8467",
+  "http_status": 200,
+  "mode": "node-draft-probe-run",
+  "manual_inputs": {
+    "prompt": "生成一张小猫睡觉的照片",
+    "api_url": "",
+    "reference_image_file": "",
+    "reference_image_url": "",
+    "poll_interval": "",
+    "timeout_seconds": "",
+    "upload_name": ""
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": false
+    },
+    "telegram": {
+      "enabled": false
+    }
+  },
+  "result": {
+    "node_run_id": "node-run-chatgpt-remote-image-service-quql-20260629T120159-4b8467",
+    "status": "done",
+    "pending": false,
+    "started_at": "2026-06-29T12:02:00.330563+00:00",
+    "finished_at": "2026-06-29T12:09:07.092961+00:00",
+    "elapsed_ms": 426280,
+    "validation": {
+      "status": "passed",
+      "missing_outputs": [],
+      "unexpected_outputs": [],
+      "business_output_status": {
+        "status": "passed",
+        "expected_outputs": [
+          "result",
+          "image_url",
+          "public_image_url",
+          "status",
+          "task_id",
+          "status_json",
+          "submit_json",
+          "generated_images",
+          "images"
+        ],
+        "required_outputs": [],
+        "present_outputs": [
+          "result",
+          "image_url",
+          "public_image_url",
+          "status",
+          "task_id",
+          "status_json",
+          "submit_json",
+          "generated_images",
+          "images"
+        ],
+        "missing_required_outputs": [],
+        "business_outputs": {
+          "result": "Image generated successfully via ChatGPT remote image service. Prompt: 生成一张小猫睡觉的照片",
+          "task_id": "b018256b-9715-4075-ba77-e41a4efdee13",
+          "status": "succeeded",
+          "public_image_url": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+          "image_url": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+          "generated_images": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+          "images": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+          "status_json": {
+            "ok": true,
+            "taskId": "b018256b-9715-4075-ba77-e41a4efdee13",
+            "status": "succeeded",
+            "stage": "uploadedMs",
+            "createdAt": "2026-06-29T12:02:36.909Z",
+            "startedAt": "2026-06-29T12:02:36.910Z",
+            "finishedAt": "2026-06-29T12:03:38.012Z",
+            "updatedAt": "2026-06-29T12:03:38.012Z",
+            "publicImageUrl": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+            "downloadedPath": "/opt/chatgpt-image-service/data/downloads/ChatGPT Image Jun 29, 2026, 12_03_35 PM.png",
+            "chatgptUrl": "https://chatgpt.com/c/6a425ee7-87e0-83ea-908b-fabbe8dc05c4",
+            "uploadName": "b018256b-9715-4075-ba77-e41a4efdee13.png",
+            "workerId": "worker-1",
+            "cdpPort": "9333",
+            "loginRequired": false,
+            "timings": {
+              "connectedMs": 1223,
+              "pageReadyMs": 3730,
+              "sentMs": 11771,
+              "generatedVisibleMs": 56271,
+              "downloadedMs": 60101,
+              "uploadedMs": 60804
+            }
+          },
+          "submit_json": {
+            "taskId": "b018256b-9715-4075-ba77-e41a4efdee13"
+          }
+        },
+        "business_artifact_count": 0
+      }
+    },
+    "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-quql-20260629T120159-4b8467/outputs/manifest.json",
+    "output_directory": "raw/node-runs/node-run-chatgpt-remote-image-service-quql-20260629T120159-4b8467/outputs",
+    "actual_outputs": {
+      "result": "Image generated successfully via ChatGPT remote image service. Prompt: 生成一张小猫睡觉的照片",
+      "task_id": "b018256b-9715-4075-ba77-e41a4efdee13",
+      "status": "succeeded",
+      "public_image_url": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "image_url": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "generated_images": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "images": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "status_json": {
+        "ok": true,
+        "taskId": "b018256b-9715-4075-ba77-e41a4efdee13",
+        "status": "succeeded",
+        "stage": "uploadedMs",
+        "createdAt": "2026-06-29T12:02:36.909Z",
+        "startedAt": "2026-06-29T12:02:36.910Z",
+        "finishedAt": "2026-06-29T12:03:38.012Z",
+        "updatedAt": "2026-06-29T12:03:38.012Z",
+        "publicImageUrl": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "downloadedPath": "/opt/chatgpt-image-service/data/downloads/ChatGPT Image Jun 29, 2026, 12_03_35 PM.png",
+        "chatgptUrl": "https://chatgpt.com/c/6a425ee7-87e0-83ea-908b-fabbe8dc05c4",
+        "uploadName": "b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "workerId": "worker-1",
+        "cdpPort": "9333",
+        "loginRequired": false,
+        "timings": {
+          "connectedMs": 1223,
+          "pageReadyMs": 3730,
+          "sentMs": 11771,
+          "generatedVisibleMs": 56271,
+          "downloadedMs": 60101,
+          "uploadedMs": 60804
+        }
+      },
+      "submit_json": {
+        "taskId": "b018256b-9715-4075-ba77-e41a4efdee13"
+      }
+    },
+    "business_artifacts": [],
+    "core_outputs": [
+      {
+        "name": "result",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "Image generated successfully via ChatGPT remote image service. Prompt: 生成一张小猫睡觉的照片",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Skill execution result summary.",
+          "relayable": true
+        }
+      },
+      {
+        "name": "image_url",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `imageUrl`.",
+          "value_type": "url",
+          "relayable": true,
+          "evidence": "source result marker imageUrl"
+        }
+      },
+      {
+        "name": "public_image_url",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `publicImageUrl`.",
+          "value_type": "url",
+          "relayable": true,
+          "evidence": "source result marker publicImageUrl"
+        }
+      },
+      {
+        "name": "status",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "succeeded",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `status`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker status"
+        }
+      },
+      {
+        "name": "task_id",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "b018256b-9715-4075-ba77-e41a4efdee13",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `taskId`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker taskId"
+        }
+      },
+      {
+        "name": "status_json",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "ok": true,
+          "taskId": "b018256b-9715-4075-ba77-e41a4efdee13",
+          "status": "succeeded",
+          "stage": "uploadedMs",
+          "createdAt": "2026-06-29T12:02:36.909Z",
+          "startedAt": "2026-06-29T12:02:36.910Z",
+          "finishedAt": "2026-06-29T12:03:38.012Z",
+          "updatedAt": "2026-06-29T12:03:38.012Z",
+          "publicImageUrl": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+          "downloadedPath": "/opt/chatgpt-image-service/data/downloads/ChatGPT Image Jun 29, 2026, 12_03_35 PM.png",
+          "chatgptUrl": "https://chatgpt.com/c/6a425ee7-87e0-83ea-908b-fabbe8dc05c4",
+          "uploadName": "b018256b-9715-4075-ba77-e41a4efdee13.png",
+          "workerId": "worker-1",
+          "cdpPort": "9333",
+          "loginRequired": false,
+          "timings": {
+            "connectedMs": 1223,
+            "pageReadyMs": 3730,
+            "sentMs": 11771,
+            "generatedVisibleMs": 56271,
+            "downloadedMs": 60101,
+            "uploadedMs": 60804
+          }
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Runtime value captured by script variable `status_json`.",
+          "value_type": "json",
+          "relayable": false,
+          "evidence": "source script variable status_json"
+        }
+      },
+      {
+        "name": "submit_json",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "taskId": "b018256b-9715-4075-ba77-e41a4efdee13"
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Runtime value captured by script variable `submit_json`.",
+          "value_type": "json",
+          "relayable": true,
+          "evidence": "source script variable submit_json"
+        }
+      },
+      {
+        "name": "generated_images",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Generated image files or public image URLs.",
+          "value_type": "image",
+          "relayable": true
+        }
+      },
+      {
+        "name": "images",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Generated image files.",
+          "relayable": true
+        }
+      }
+    ],
+    "steps": [
+      {
+        "id": "create-run",
+        "title": "Create node run workspace",
+        "status": "done",
+        "summary": "Node Run record is allocated independently from Workflow Run.",
+        "started_at": "2026-06-29T12:02:00.330563+00:00",
+        "finished_at": "2026-06-29T12:02:00.365563+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "load-definition",
+        "title": "Load node definition",
+        "status": "done",
+        "summary": "Loaded chatgpt-remote-image-service-quql from youtube-research-wiki.",
+        "started_at": "2026-06-29T12:02:00.365563+00:00",
+        "finished_at": "2026-06-29T12:02:00.400563+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-context",
+        "title": "Resolve Runtime / Instance / Workflow context",
+        "status": "done",
+        "summary": "youtube-wiki · wiki-sop-new-instance · youtube-research-wiki",
+        "started_at": "2026-06-29T12:02:00.400563+00:00",
+        "finished_at": "2026-06-29T12:02:00.435563+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-inputs",
+        "title": "Resolve node inputs",
+        "status": "done",
+        "summary": "1 resolved, 0 pending relay, 0 missing.",
+        "started_at": "2026-06-29T12:02:00.435563+00:00",
+        "finished_at": "2026-06-29T12:02:00.470563+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-config",
+        "title": "Resolve execution config",
+        "status": "done",
+        "summary": "Runtime, Instance and capability config resolved.",
+        "started_at": "2026-06-29T12:02:00.470563+00:00",
+        "finished_at": "2026-06-29T12:02:00.505563+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "generate-agent-request",
+        "title": "Generate Agent Request",
+        "status": "done",
+        "summary": "Hermes Agent Request was rendered and saved for this Node Run.",
+        "started_at": "2026-06-29T12:02:00.505563+00:00",
+        "finished_at": "2026-06-29T12:02:00.540563+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "probe-capabilities",
+        "title": "Probe attached capabilities",
+        "status": "skipped",
+        "summary": "Capability probes are explicit. Telegram send probes require user confirmation.",
+        "started_at": "2026-06-29T12:02:00.540563+00:00",
+        "finished_at": "2026-06-29T12:02:00.564563+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "build-execution-plan",
+        "title": "Build node execution plan",
+        "status": "done",
+        "summary": "Prepared real-node execution plan.",
+        "started_at": "2026-06-29T12:02:00.575563+00:00",
+        "finished_at": "2026-06-29T12:02:00.610563+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "execute-or-dry-run",
+        "title": "Execute or dry-run node",
+        "status": "done",
+        "summary": "Real node execution finished and output manifest was found.",
+        "started_at": "2026-06-29T12:02:00.330563+00:00",
+        "finished_at": "2026-06-29T12:09:07.092961+00:00",
+        "elapsed_ms": 0
+      },
+      {
+        "id": "validate-outputs",
+        "title": "Validate declared outputs",
+        "status": "done",
+        "summary": "Declared business outputs were found.",
+        "started_at": "2026-06-29T12:02:00.645563+00:00",
+        "finished_at": "2026-06-29T12:02:00.680563+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "persist-to-github",
+        "title": "Persist to GitHub",
+        "status": "skipped",
+        "summary": "GitHub persistence is not attached for this Node Run.",
+        "started_at": "2026-06-29T12:02:00.680563+00:00",
+        "finished_at": "2026-06-29T12:02:00.704563+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "send-telegram-notification",
+        "title": "Send Telegram notification",
+        "status": "skipped",
+        "summary": "Telegram notification is not attached for this Node Run.",
+        "started_at": "2026-06-29T12:02:00.715563+00:00",
+        "finished_at": "2026-06-29T12:02:00.739563+00:00",
+        "elapsed_ms": 24
+      }
+    ]
+  },
+  "manifest": {
+    "version": 1,
+    "kind": "output",
+    "node_run_id": "node-run-chatgpt-remote-image-service-quql-20260629T120159-4b8467",
+    "node_id": "chatgpt-remote-image-service-quql",
+    "created_at": "2026-06-29T12:04:00Z",
+    "items": [
+      {
+        "name": "result",
+        "path": "",
+        "value_type": "text",
+        "value": "Image generated successfully via ChatGPT remote image service. Prompt: 生成一张小猫睡觉的照片",
+        "relayable": true
+      },
+      {
+        "name": "task_id",
+        "path": "",
+        "value_type": "text",
+        "value": "b018256b-9715-4075-ba77-e41a4efdee13",
+        "relayable": true
+      },
+      {
+        "name": "status",
+        "path": "",
+        "value_type": "text",
+        "value": "succeeded",
+        "relayable": true
+      },
+      {
+        "name": "public_image_url",
+        "path": "",
+        "value_type": "url",
+        "value": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "relayable": true
+      },
+      {
+        "name": "image_url",
+        "path": "",
+        "value_type": "url",
+        "value": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "relayable": true
+      },
+      {
+        "name": "generated_images",
+        "path": "",
+        "value_type": "image",
+        "value": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "relayable": true
+      },
+      {
+        "name": "images",
+        "path": "",
+        "value_type": "text",
+        "value": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "relayable": true
+      },
+      {
+        "name": "status_json",
+        "path": "",
+        "value_type": "json",
+        "value": {
+          "ok": true,
+          "taskId": "b018256b-9715-4075-ba77-e41a4efdee13",
+          "status": "succeeded",
+          "stage": "uploadedMs",
+          "createdAt": "2026-06-29T12:02:36.909Z",
+          "startedAt": "2026-06-29T12:02:36.910Z",
+          "finishedAt": "2026-06-29T12:03:38.012Z",
+          "updatedAt": "2026-06-29T12:03:38.012Z",
+          "publicImageUrl": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+          "downloadedPath": "/opt/chatgpt-image-service/data/downloads/ChatGPT Image Jun 29, 2026, 12_03_35 PM.png",
+          "chatgptUrl": "https://chatgpt.com/c/6a425ee7-87e0-83ea-908b-fabbe8dc05c4",
+          "uploadName": "b018256b-9715-4075-ba77-e41a4efdee13.png",
+          "workerId": "worker-1",
+          "cdpPort": "9333",
+          "loginRequired": false,
+          "timings": {
+            "connectedMs": 1223,
+            "pageReadyMs": 3730,
+            "sentMs": 11771,
+            "generatedVisibleMs": 56271,
+            "downloadedMs": 60101,
+            "uploadedMs": 60804
+          }
+        },
+        "relayable": false
+      },
+      {
+        "name": "submit_json",
+        "path": "",
+        "value_type": "json",
+        "value": {
+          "taskId": "b018256b-9715-4075-ba77-e41a4efdee13"
+        },
+        "relayable": true
+      }
+    ]
+  },
+  "manifest_records": [
+    {
+      "name": "result",
+      "path": "",
+      "value_type": "text",
+      "value": "Image generated successfully via ChatGPT remote image service. Prompt: 生成一张小猫睡觉的照片",
+      "relayable": true,
+      "output": "result"
+    },
+    {
+      "name": "task_id",
+      "path": "",
+      "value_type": "text",
+      "value": "b018256b-9715-4075-ba77-e41a4efdee13",
+      "relayable": true,
+      "output": "task_id"
+    },
+    {
+      "name": "status",
+      "path": "",
+      "value_type": "text",
+      "value": "succeeded",
+      "relayable": true,
+      "output": "status"
+    },
+    {
+      "name": "public_image_url",
+      "path": "",
+      "value_type": "url",
+      "value": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "relayable": true,
+      "output": "public_image_url"
+    },
+    {
+      "name": "image_url",
+      "path": "",
+      "value_type": "url",
+      "value": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "relayable": true,
+      "output": "image_url"
+    },
+    {
+      "name": "generated_images",
+      "path": "",
+      "value_type": "image",
+      "value": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "relayable": true,
+      "output": "generated_images"
+    },
+    {
+      "name": "images",
+      "path": "",
+      "value_type": "text",
+      "value": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "relayable": true,
+      "output": "images"
+    },
+    {
+      "name": "status_json",
+      "path": "",
+      "value_type": "json",
+      "value": {
+        "ok": true,
+        "taskId": "b018256b-9715-4075-ba77-e41a4efdee13",
+        "status": "succeeded",
+        "stage": "uploadedMs",
+        "createdAt": "2026-06-29T12:02:36.909Z",
+        "startedAt": "2026-06-29T12:02:36.910Z",
+        "finishedAt": "2026-06-29T12:03:38.012Z",
+        "updatedAt": "2026-06-29T12:03:38.012Z",
+        "publicImageUrl": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "downloadedPath": "/opt/chatgpt-image-service/data/downloads/ChatGPT Image Jun 29, 2026, 12_03_35 PM.png",
+        "chatgptUrl": "https://chatgpt.com/c/6a425ee7-87e0-83ea-908b-fabbe8dc05c4",
+        "uploadName": "b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "workerId": "worker-1",
+        "cdpPort": "9333",
+        "loginRequired": false,
+        "timings": {
+          "connectedMs": 1223,
+          "pageReadyMs": 3730,
+          "sentMs": 11771,
+          "generatedVisibleMs": 56271,
+          "downloadedMs": 60101,
+          "uploadedMs": 60804
+        }
+      },
+      "relayable": false,
+      "output": "status_json"
+    },
+    {
+      "name": "submit_json",
+      "path": "",
+      "value_type": "json",
+      "value": {
+        "taskId": "b018256b-9715-4075-ba77-e41a4efdee13"
+      },
+      "relayable": true,
+      "output": "submit_json"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "passed",
+      "expected_outputs": [
+        "result",
+        "image_url",
+        "public_image_url",
+        "status",
+        "task_id",
+        "status_json",
+        "submit_json",
+        "generated_images",
+        "images"
+      ],
+      "required_outputs": [],
+      "present_outputs": [
+        "result",
+        "image_url",
+        "public_image_url",
+        "status",
+        "task_id",
+        "status_json",
+        "submit_json",
+        "generated_images",
+        "images"
+      ],
+      "missing_required_outputs": [],
+      "business_outputs": {
+        "result": "Image generated successfully via ChatGPT remote image service. Prompt: 生成一张小猫睡觉的照片",
+        "task_id": "b018256b-9715-4075-ba77-e41a4efdee13",
+        "status": "succeeded",
+        "public_image_url": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "image_url": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "generated_images": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "images": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "status_json": {
+          "ok": true,
+          "taskId": "b018256b-9715-4075-ba77-e41a4efdee13",
+          "status": "succeeded",
+          "stage": "uploadedMs",
+          "createdAt": "2026-06-29T12:02:36.909Z",
+          "startedAt": "2026-06-29T12:02:36.910Z",
+          "finishedAt": "2026-06-29T12:03:38.012Z",
+          "updatedAt": "2026-06-29T12:03:38.012Z",
+          "publicImageUrl": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+          "downloadedPath": "/opt/chatgpt-image-service/data/downloads/ChatGPT Image Jun 29, 2026, 12_03_35 PM.png",
+          "chatgptUrl": "https://chatgpt.com/c/6a425ee7-87e0-83ea-908b-fabbe8dc05c4",
+          "uploadName": "b018256b-9715-4075-ba77-e41a4efdee13.png",
+          "workerId": "worker-1",
+          "cdpPort": "9333",
+          "loginRequired": false,
+          "timings": {
+            "connectedMs": 1223,
+            "pageReadyMs": 3730,
+            "sentMs": 11771,
+            "generatedVisibleMs": 56271,
+            "downloadedMs": 60101,
+            "uploadedMs": 60804
+          }
+        },
+        "submit_json": {
+          "taskId": "b018256b-9715-4075-ba77-e41a4efdee13"
+        }
+      },
+      "business_artifact_count": 0
+    }
+  },
+  "created_at": "2026-06-29T12:02:00.370914+00:00",
+  "actual_outputs": {
+    "result": "Image generated successfully via ChatGPT remote image service. Prompt: 生成一张小猫睡觉的照片",
+    "task_id": "b018256b-9715-4075-ba77-e41a4efdee13",
+    "status": "succeeded",
+    "public_image_url": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+    "image_url": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+    "generated_images": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+    "images": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+    "status_json": {
+      "ok": true,
+      "taskId": "b018256b-9715-4075-ba77-e41a4efdee13",
+      "status": "succeeded",
+      "stage": "uploadedMs",
+      "createdAt": "2026-06-29T12:02:36.909Z",
+      "startedAt": "2026-06-29T12:02:36.910Z",
+      "finishedAt": "2026-06-29T12:03:38.012Z",
+      "updatedAt": "2026-06-29T12:03:38.012Z",
+      "publicImageUrl": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "downloadedPath": "/opt/chatgpt-image-service/data/downloads/ChatGPT Image Jun 29, 2026, 12_03_35 PM.png",
+      "chatgptUrl": "https://chatgpt.com/c/6a425ee7-87e0-83ea-908b-fabbe8dc05c4",
+      "uploadName": "b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "workerId": "worker-1",
+      "cdpPort": "9333",
+      "loginRequired": false,
+      "timings": {
+        "connectedMs": 1223,
+        "pageReadyMs": 3730,
+        "sentMs": 11771,
+        "generatedVisibleMs": 56271,
+        "downloadedMs": 60101,
+        "uploadedMs": 60804
+      }
+    },
+    "submit_json": {
+      "taskId": "b018256b-9715-4075-ba77-e41a4efdee13"
+    }
+  },
+  "reconciled_at": "2026-06-30T15:17:15.854059+00:00",
+  "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-quql-20260629T120159-4b8467/outputs/manifest.json",
+  "execution_status": "done",
+  "business_output_status": {
+    "status": "passed",
+    "expected_outputs": [
+      "result",
+      "image_url",
+      "public_image_url",
+      "status",
+      "task_id",
+      "status_json",
+      "submit_json",
+      "generated_images",
+      "images"
+    ],
+    "required_outputs": [],
+    "present_outputs": [
+      "result",
+      "image_url",
+      "public_image_url",
+      "status",
+      "task_id",
+      "status_json",
+      "submit_json",
+      "generated_images",
+      "images"
+    ],
+    "missing_required_outputs": [],
+    "business_outputs": {
+      "result": "Image generated successfully via ChatGPT remote image service. Prompt: 生成一张小猫睡觉的照片",
+      "task_id": "b018256b-9715-4075-ba77-e41a4efdee13",
+      "status": "succeeded",
+      "public_image_url": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "image_url": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "generated_images": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "images": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "status_json": {
+        "ok": true,
+        "taskId": "b018256b-9715-4075-ba77-e41a4efdee13",
+        "status": "succeeded",
+        "stage": "uploadedMs",
+        "createdAt": "2026-06-29T12:02:36.909Z",
+        "startedAt": "2026-06-29T12:02:36.910Z",
+        "finishedAt": "2026-06-29T12:03:38.012Z",
+        "updatedAt": "2026-06-29T12:03:38.012Z",
+        "publicImageUrl": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "downloadedPath": "/opt/chatgpt-image-service/data/downloads/ChatGPT Image Jun 29, 2026, 12_03_35 PM.png",
+        "chatgptUrl": "https://chatgpt.com/c/6a425ee7-87e0-83ea-908b-fabbe8dc05c4",
+        "uploadName": "b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "workerId": "worker-1",
+        "cdpPort": "9333",
+        "loginRequired": false,
+        "timings": {
+          "connectedMs": 1223,
+          "pageReadyMs": 3730,
+          "sentMs": 11771,
+          "generatedVisibleMs": 56271,
+          "downloadedMs": 60101,
+          "uploadedMs": 60804
+        }
+      },
+      "submit_json": {
+        "taskId": "b018256b-9715-4075-ba77-e41a4efdee13"
+      }
+    },
+    "business_artifact_count": 0
+  },
+  "business_outputs": {
+    "result": "Image generated successfully via ChatGPT remote image service. Prompt: 生成一张小猫睡觉的照片",
+    "task_id": "b018256b-9715-4075-ba77-e41a4efdee13",
+    "status": "succeeded",
+    "public_image_url": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+    "image_url": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+    "generated_images": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+    "images": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+    "status_json": {
+      "ok": true,
+      "taskId": "b018256b-9715-4075-ba77-e41a4efdee13",
+      "status": "succeeded",
+      "stage": "uploadedMs",
+      "createdAt": "2026-06-29T12:02:36.909Z",
+      "startedAt": "2026-06-29T12:02:36.910Z",
+      "finishedAt": "2026-06-29T12:03:38.012Z",
+      "updatedAt": "2026-06-29T12:03:38.012Z",
+      "publicImageUrl": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "downloadedPath": "/opt/chatgpt-image-service/data/downloads/ChatGPT Image Jun 29, 2026, 12_03_35 PM.png",
+      "chatgptUrl": "https://chatgpt.com/c/6a425ee7-87e0-83ea-908b-fabbe8dc05c4",
+      "uploadName": "b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "workerId": "worker-1",
+      "cdpPort": "9333",
+      "loginRequired": false,
+      "timings": {
+        "connectedMs": 1223,
+        "pageReadyMs": 3730,
+        "sentMs": 11771,
+        "generatedVisibleMs": 56271,
+        "downloadedMs": 60101,
+        "uploadedMs": 60804
+      }
+    },
+    "submit_json": {
+      "taskId": "b018256b-9715-4075-ba77-e41a4efdee13"
+    }
+  },
+  "business_artifacts": [],
+  "core_outputs": [
+    {
+      "name": "result",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "Image generated successfully via ChatGPT remote image service. Prompt: 生成一张小猫睡觉的照片",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Skill execution result summary.",
+        "relayable": true
+      }
+    },
+    {
+      "name": "image_url",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `imageUrl`.",
+        "value_type": "url",
+        "relayable": true,
+        "evidence": "source result marker imageUrl"
+      }
+    },
+    {
+      "name": "public_image_url",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `publicImageUrl`.",
+        "value_type": "url",
+        "relayable": true,
+        "evidence": "source result marker publicImageUrl"
+      }
+    },
+    {
+      "name": "status",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "succeeded",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `status`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker status"
+      }
+    },
+    {
+      "name": "task_id",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "b018256b-9715-4075-ba77-e41a4efdee13",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `taskId`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker taskId"
+      }
+    },
+    {
+      "name": "status_json",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "ok": true,
+        "taskId": "b018256b-9715-4075-ba77-e41a4efdee13",
+        "status": "succeeded",
+        "stage": "uploadedMs",
+        "createdAt": "2026-06-29T12:02:36.909Z",
+        "startedAt": "2026-06-29T12:02:36.910Z",
+        "finishedAt": "2026-06-29T12:03:38.012Z",
+        "updatedAt": "2026-06-29T12:03:38.012Z",
+        "publicImageUrl": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "downloadedPath": "/opt/chatgpt-image-service/data/downloads/ChatGPT Image Jun 29, 2026, 12_03_35 PM.png",
+        "chatgptUrl": "https://chatgpt.com/c/6a425ee7-87e0-83ea-908b-fabbe8dc05c4",
+        "uploadName": "b018256b-9715-4075-ba77-e41a4efdee13.png",
+        "workerId": "worker-1",
+        "cdpPort": "9333",
+        "loginRequired": false,
+        "timings": {
+          "connectedMs": 1223,
+          "pageReadyMs": 3730,
+          "sentMs": 11771,
+          "generatedVisibleMs": 56271,
+          "downloadedMs": 60101,
+          "uploadedMs": 60804
+        }
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Runtime value captured by script variable `status_json`.",
+        "value_type": "json",
+        "relayable": false,
+        "evidence": "source script variable status_json"
+      }
+    },
+    {
+      "name": "submit_json",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "taskId": "b018256b-9715-4075-ba77-e41a4efdee13"
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Runtime value captured by script variable `submit_json`.",
+        "value_type": "json",
+        "relayable": true,
+        "evidence": "source script variable submit_json"
+      }
+    },
+    {
+      "name": "generated_images",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Generated image files or public image URLs.",
+        "value_type": "image",
+        "relayable": true
+      }
+    },
+    {
+      "name": "images",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "https://resource.vyibc.com/b018256b-9715-4075-ba77-e41a4efdee13.png",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Generated image files.",
+        "relayable": true
+      }
+    }
+  ]
+}

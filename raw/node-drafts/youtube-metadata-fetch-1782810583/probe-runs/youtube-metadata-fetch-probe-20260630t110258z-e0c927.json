@@ -1,0 +1,893 @@
+{
+  "status": "passed",
+  "execution_status": "done",
+  "business_output_status": {
+    "status": "passed",
+    "expected_outputs": [
+      "result",
+      "status",
+      "metadata_json",
+      "source_url_txt",
+      "result_json"
+    ],
+    "required_outputs": [],
+    "present_outputs": [
+      "result",
+      "metadata_json",
+      "source_url_txt",
+      "result_json"
+    ],
+    "missing_required_outputs": [],
+    "business_outputs": {
+      "result": "**",
+      "metadata_json": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json"
+      ],
+      "source_url_txt": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt"
+      ],
+      "result_json": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json"
+      ]
+    },
+    "business_artifact_count": 3
+  },
+  "probe_id": "youtube-metadata-fetch-probe-20260630T110258Z-e0c927",
+  "draft_id": "youtube-metadata-fetch-1782810583",
+  "node_id": "youtube-metadata-fetch",
+  "node_run_id": "node-run-youtube-metadata-fetch-20260630T110258-1c02da",
+  "http_status": 200,
+  "mode": "node-draft-probe-run",
+  "manual_inputs": {
+    "api_token": "",
+    "api_url": "",
+    "include_raw": "",
+    "source_url": "https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s",
+    "timeout_seconds": ""
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": false
+    },
+    "telegram": {
+      "enabled": false
+    }
+  },
+  "result": {
+    "node_run_id": "node-run-youtube-metadata-fetch-20260630T110258-1c02da",
+    "status": "done",
+    "pending": false,
+    "started_at": "2026-06-30T11:02:58.815977+00:00",
+    "finished_at": "2026-06-30T11:09:30.538734+00:00",
+    "elapsed_ms": 391226,
+    "validation": {
+      "status": "passed",
+      "missing_outputs": [],
+      "unexpected_outputs": [],
+      "business_output_status": {
+        "status": "passed",
+        "expected_outputs": [
+          "result",
+          "status",
+          "metadata_json",
+          "source_url_txt",
+          "result_json"
+        ],
+        "required_outputs": [],
+        "present_outputs": [
+          "result",
+          "metadata_json",
+          "source_url_txt",
+          "result_json"
+        ],
+        "missing_required_outputs": [],
+        "business_outputs": {
+          "result": "**",
+          "metadata_json": [
+            "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json"
+          ],
+          "source_url_txt": [
+            "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt"
+          ],
+          "result_json": [
+            "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json"
+          ]
+        },
+        "business_artifact_count": 4
+      },
+      "success_evidence": {
+        "passed": true,
+        "signals": [
+          {
+            "source": "receipt.status",
+            "status": "succeeded"
+          },
+          {
+            "source": "output_artifacts",
+            "count": 3
+          },
+          {
+            "source": "receipt",
+            "status": "success"
+          }
+        ],
+        "failures": []
+      }
+    },
+    "output_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/manifest.json",
+    "output_directory": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs",
+    "actual_outputs": {
+      "result": "**",
+      "status": [],
+      "metadata_json": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json"
+      ],
+      "source_url_txt": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt"
+      ],
+      "result_json": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json"
+      ]
+    },
+    "business_artifacts": [
+      {
+        "id": "eb088c44db3dbbd9",
+        "producer": "youtube-metadata-fetch",
+        "output": "metadata_json",
+        "type": "file",
+        "format": "json",
+        "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json",
+        "title": "metadata.json",
+        "size": 434,
+        "mime_type": "application/json",
+        "tags": [],
+        "metadata": {
+          "manifest_item": {
+            "path": "metadata.json",
+            "output_name": "metadata_json",
+            "value_type": "json",
+            "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json",
+            "size_bytes": 434,
+            "relayable": true,
+            "description": "Normalized YouTube metadata JSON"
+          }
+        },
+        "resolution": "node-run-output-manifest",
+        "preview": "{\n  \"video_id\": \"96jN2OCOfLs\",\n  \"title\": \"Andrej Karpathy: From Vibe Coding to Agentic Engineering w/ Stephanie Zhan\",\n  \"author\": \"Sequoia Capital\",\n  \"published_at\": \"2026-04-29T15:21:18Z\",\n  \"youtube_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs\",\n  \"thumbnail\": \"https://i.ytimg.com/vi/96jN2OCOfLs/hqdefault.jpg\",\n  \"source_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s\",\n  \"fetched_at\": \"2026-06-30T11:03:57Z\"\n}\n",
+        "preview_truncated": false
+      },
+      {
+        "id": "907e003b72916d4a",
+        "producer": "youtube-metadata-fetch",
+        "output": "source_url_txt",
+        "type": "file",
+        "format": "text",
+        "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt",
+        "title": "source-url.txt",
+        "size": 50,
+        "mime_type": "text/plain",
+        "tags": [],
+        "metadata": {
+          "manifest_item": {
+            "path": "source-url.txt",
+            "output_name": "source_url_txt",
+            "value_type": "text",
+            "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt",
+            "size_bytes": 50,
+            "relayable": true,
+            "description": "Source URL text file"
+          }
+        },
+        "resolution": "node-run-output-manifest",
+        "preview": "https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s\n",
+        "preview_truncated": false
+      },
+      {
+        "id": "fb62772d094f31e8",
+        "producer": "youtube-metadata-fetch",
+        "output": "result_json",
+        "type": "file",
+        "format": "json",
+        "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json",
+        "title": "result.json",
+        "size": 724,
+        "mime_type": "application/json",
+        "tags": [],
+        "metadata": {
+          "manifest_item": {
+            "path": "result.json",
+            "output_name": "result_json",
+            "value_type": "json",
+            "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json",
+            "size_bytes": 724,
+            "relayable": true,
+            "description": "Execution result with metadata inline"
+          }
+        },
+        "resolution": "node-run-output-manifest",
+        "preview": "{\n  \"status\": \"succeeded\",\n  \"metadata_file\": \"raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json\",\n  \"source_url_file\": \"raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt\",\n  \"metadata\": {\n    \"video_id\": \"96jN2OCOfLs\",\n    \"title\": \"Andrej Karpathy: From Vibe Coding to Agentic Engineering w/ Stephanie Zhan\",\n    \"author\": \"Sequoia Capital\",\n    \"published_at\": \"2026-04-29T15:21:18Z\",\n    \"youtube_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs\",\n    \"thumbnail\": \"https://i.ytimg.com/vi/96jN2OCOfLs/hqdefault.jpg\",\n    \"source_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s\",\n    \"fetched_at\": \"2026-06-30T11:03:57Z\"\n  }\n}\n",
+        "preview_truncated": false
+      }
+    ],
+    "core_outputs": [
+      {
+        "name": "result",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "**",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Skill execution result summary.",
+          "relayable": true
+        }
+      },
+      {
+        "name": "status",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `status`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker status"
+        }
+      },
+      {
+        "name": "metadata_json",
+        "kind": "file",
+        "type": "file",
+        "value": [
+          "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json"
+        ],
+        "files": [
+          "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json"
+        ],
+        "artifacts": [
+          {
+            "id": "eb088c44db3dbbd9",
+            "producer": "youtube-metadata-fetch",
+            "output": "metadata_json",
+            "type": "file",
+            "format": "json",
+            "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json",
+            "title": "metadata.json",
+            "size": 434,
+            "mime_type": "application/json",
+            "tags": [],
+            "metadata": {
+              "manifest_item": {
+                "path": "metadata.json",
+                "output_name": "metadata_json",
+                "value_type": "json",
+                "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json",
+                "size_bytes": 434,
+                "relayable": true,
+                "description": "Normalized YouTube metadata JSON"
+              }
+            },
+            "resolution": "node-run-output-manifest",
+            "preview": "{\n  \"video_id\": \"96jN2OCOfLs\",\n  \"title\": \"Andrej Karpathy: From Vibe Coding to Agentic Engineering w/ Stephanie Zhan\",\n  \"author\": \"Sequoia Capital\",\n  \"published_at\": \"2026-04-29T15:21:18Z\",\n  \"youtube_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs\",\n  \"thumbnail\": \"https://i.ytimg.com/vi/96jN2OCOfLs/hqdefault.jpg\",\n  \"source_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s\",\n  \"fetched_at\": \"2026-06-30T11:03:57Z\"\n}\n",
+            "preview_truncated": false
+          }
+        ],
+        "declared": {
+          "description": "Output file `metadata.json` produced or documented by the skill.",
+          "value_type": "json",
+          "relayable": true,
+          "evidence": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py: metadata.json"
+        }
+      },
+      {
+        "name": "source_url_txt",
+        "kind": "file",
+        "type": "file",
+        "value": [
+          "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt"
+        ],
+        "files": [
+          "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt"
+        ],
+        "artifacts": [
+          {
+            "id": "907e003b72916d4a",
+            "producer": "youtube-metadata-fetch",
+            "output": "source_url_txt",
+            "type": "file",
+            "format": "text",
+            "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt",
+            "title": "source-url.txt",
+            "size": 50,
+            "mime_type": "text/plain",
+            "tags": [],
+            "metadata": {
+              "manifest_item": {
+                "path": "source-url.txt",
+                "output_name": "source_url_txt",
+                "value_type": "text",
+                "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt",
+                "size_bytes": 50,
+                "relayable": true,
+                "description": "Source URL text file"
+              }
+            },
+            "resolution": "node-run-output-manifest",
+            "preview": "https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s\n",
+            "preview_truncated": false
+          }
+        ],
+        "declared": {
+          "description": "Output file `source-url.txt` produced or documented by the skill.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py: source-url.txt"
+        }
+      },
+      {
+        "name": "result_json",
+        "kind": "file",
+        "type": "file",
+        "value": [
+          "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json"
+        ],
+        "files": [
+          "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json"
+        ],
+        "artifacts": [
+          {
+            "id": "fb62772d094f31e8",
+            "producer": "youtube-metadata-fetch",
+            "output": "result_json",
+            "type": "file",
+            "format": "json",
+            "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json",
+            "title": "result.json",
+            "size": 724,
+            "mime_type": "application/json",
+            "tags": [],
+            "metadata": {
+              "manifest_item": {
+                "path": "result.json",
+                "output_name": "result_json",
+                "value_type": "json",
+                "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json",
+                "size_bytes": 724,
+                "relayable": true,
+                "description": "Execution result with metadata inline"
+              }
+            },
+            "resolution": "node-run-output-manifest",
+            "preview": "{\n  \"status\": \"succeeded\",\n  \"metadata_file\": \"raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json\",\n  \"source_url_file\": \"raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt\",\n  \"metadata\": {\n    \"video_id\": \"96jN2OCOfLs\",\n    \"title\": \"Andrej Karpathy: From Vibe Coding to Agentic Engineering w/ Stephanie Zhan\",\n    \"author\": \"Sequoia Capital\",\n    \"published_at\": \"2026-04-29T15:21:18Z\",\n    \"youtube_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs\",\n    \"thumbnail\": \"https://i.ytimg.com/vi/96jN2OCOfLs/hqdefault.jpg\",\n    \"source_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s\",\n    \"fetched_at\": \"2026-06-30T11:03:57Z\"\n  }\n}\n",
+            "preview_truncated": false
+          }
+        ],
+        "declared": {
+          "description": "Output file `result.json` produced or documented by the skill.",
+          "value_type": "json",
+          "relayable": true,
+          "evidence": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py: result.json"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "id": "create-run",
+        "title": "Create node run workspace",
+        "status": "done",
+        "summary": "Node Run record is allocated independently from Workflow Run.",
+        "started_at": "2026-06-30T11:02:58.815977+00:00",
+        "finished_at": "2026-06-30T11:02:58.850977+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "load-definition",
+        "title": "Load node definition",
+        "status": "done",
+        "summary": "Loaded youtube-metadata-fetch from youtube-research-wiki.",
+        "started_at": "2026-06-30T11:02:58.850977+00:00",
+        "finished_at": "2026-06-30T11:02:58.885977+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-context",
+        "title": "Resolve Runtime / Instance / Workflow context",
+        "status": "done",
+        "summary": "youtube-wiki · wiki-sop-new-instance · youtube-research-wiki",
+        "started_at": "2026-06-30T11:02:58.885977+00:00",
+        "finished_at": "2026-06-30T11:02:58.920977+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-inputs",
+        "title": "Resolve node inputs",
+        "status": "done",
+        "summary": "1 resolved, 0 pending relay, 0 missing.",
+        "started_at": "2026-06-30T11:02:58.920977+00:00",
+        "finished_at": "2026-06-30T11:02:58.955977+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-config",
+        "title": "Resolve execution config",
+        "status": "done",
+        "summary": "Runtime, Instance and capability config resolved.",
+        "started_at": "2026-06-30T11:02:58.955977+00:00",
+        "finished_at": "2026-06-30T11:02:58.990977+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "generate-agent-request",
+        "title": "Generate Agent Request",
+        "status": "done",
+        "summary": "Hermes Agent Request was rendered and saved for this Node Run.",
+        "started_at": "2026-06-30T11:02:58.990977+00:00",
+        "finished_at": "2026-06-30T11:02:59.025977+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "probe-capabilities",
+        "title": "Probe attached capabilities",
+        "status": "skipped",
+        "summary": "Capability probes are explicit. Telegram send probes require user confirmation.",
+        "started_at": "2026-06-30T11:02:59.025977+00:00",
+        "finished_at": "2026-06-30T11:02:59.049977+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "build-execution-plan",
+        "title": "Build node execution plan",
+        "status": "done",
+        "summary": "Prepared real-node execution plan.",
+        "started_at": "2026-06-30T11:02:59.060977+00:00",
+        "finished_at": "2026-06-30T11:02:59.095977+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "execute-or-dry-run",
+        "title": "Execute or dry-run node",
+        "status": "done",
+        "summary": "Real node execution finished and declared business outputs were found.",
+        "started_at": "2026-06-30T11:02:59.634106+00:00",
+        "finished_at": "2026-06-30T11:09:30.508108+00:00",
+        "elapsed_ms": 390874
+      },
+      {
+        "id": "validate-outputs",
+        "title": "Validate declared outputs",
+        "status": "done",
+        "summary": "Declared business outputs were found.",
+        "started_at": "2026-06-30T11:02:59.130977+00:00",
+        "finished_at": "2026-06-30T11:02:59.165977+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "persist-to-github",
+        "title": "Persist to GitHub",
+        "status": "skipped",
+        "summary": "GitHub persistence is not attached for this Node Run.",
+        "started_at": "2026-06-30T11:02:59.165977+00:00",
+        "finished_at": "2026-06-30T11:02:59.189977+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "send-telegram-notification",
+        "title": "Send Telegram notification",
+        "status": "skipped",
+        "summary": "Telegram notification is not attached for this Node Run.",
+        "started_at": "2026-06-30T11:02:59.200977+00:00",
+        "finished_at": "2026-06-30T11:02:59.224977+00:00",
+        "elapsed_ms": 24
+      }
+    ]
+  },
+  "manifest": {
+    "version": 1,
+    "kind": "output",
+    "node_run_id": "node-run-youtube-metadata-fetch-20260630T110258-1c02da",
+    "node_id": "youtube-metadata-fetch",
+    "created_at": "2026-06-30T11:03:57Z",
+    "items": [
+      {
+        "path": "metadata.json",
+        "output_name": "metadata_json",
+        "value_type": "json",
+        "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json",
+        "size_bytes": 434,
+        "relayable": true,
+        "description": "Normalized YouTube metadata JSON"
+      },
+      {
+        "path": "source-url.txt",
+        "output_name": "source_url_txt",
+        "value_type": "text",
+        "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt",
+        "size_bytes": 50,
+        "relayable": true,
+        "description": "Source URL text file"
+      },
+      {
+        "path": "result.json",
+        "output_name": "result_json",
+        "value_type": "json",
+        "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json",
+        "size_bytes": 724,
+        "relayable": true,
+        "description": "Execution result with metadata inline"
+      },
+      {
+        "output_name": "status",
+        "value_type": "text",
+        "resolved_value": "succeeded",
+        "relayable": true,
+        "description": "Execution status"
+      },
+      {
+        "output_name": "result",
+        "value_type": "text",
+        "resolved_value": "succeeded",
+        "relayable": true,
+        "description": "Skill execution result summary"
+      }
+    ]
+  },
+  "output_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/manifest.json",
+  "manifest_records": [
+    {
+      "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json",
+      "output_name": "metadata_json",
+      "value_type": "json",
+      "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json",
+      "size_bytes": 434,
+      "relayable": true,
+      "description": "Normalized YouTube metadata JSON",
+      "output": "metadata_json"
+    },
+    {
+      "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt",
+      "output_name": "source_url_txt",
+      "value_type": "text",
+      "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt",
+      "size_bytes": 50,
+      "relayable": true,
+      "description": "Source URL text file",
+      "output": "source_url_txt"
+    },
+    {
+      "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json",
+      "output_name": "result_json",
+      "value_type": "json",
+      "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json",
+      "size_bytes": 724,
+      "relayable": true,
+      "description": "Execution result with metadata inline",
+      "output": "result_json"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "passed",
+      "expected_outputs": [
+        "result",
+        "status",
+        "metadata_json",
+        "source_url_txt",
+        "result_json"
+      ],
+      "required_outputs": [],
+      "present_outputs": [
+        "result",
+        "metadata_json",
+        "source_url_txt",
+        "result_json"
+      ],
+      "missing_required_outputs": [],
+      "business_outputs": {
+        "result": "**",
+        "metadata_json": [
+          "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json"
+        ],
+        "source_url_txt": [
+          "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt"
+        ],
+        "result_json": [
+          "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json"
+        ]
+      },
+      "business_artifact_count": 4
+    },
+    "success_evidence": {
+      "passed": true,
+      "signals": [
+        {
+          "source": "receipt.status",
+          "status": "succeeded"
+        },
+        {
+          "source": "output_artifacts",
+          "count": 3
+        },
+        {
+          "source": "receipt",
+          "status": "success"
+        }
+      ],
+      "failures": []
+    }
+  },
+  "actual_outputs": {
+    "result": "**",
+    "status": [],
+    "metadata_json": [
+      "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json"
+    ],
+    "source_url_txt": [
+      "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt"
+    ],
+    "result_json": [
+      "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json"
+    ]
+  },
+  "business_outputs": {
+    "result": "**",
+    "metadata_json": [
+      "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json"
+    ],
+    "source_url_txt": [
+      "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt"
+    ],
+    "result_json": [
+      "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json"
+    ]
+  },
+  "business_artifacts": [
+    {
+      "id": "eb088c44db3dbbd9",
+      "producer": "youtube-metadata-fetch",
+      "output": "metadata_json",
+      "type": "file",
+      "format": "json",
+      "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json",
+      "title": "metadata.json",
+      "size": 434,
+      "mime_type": "application/json",
+      "tags": [],
+      "metadata": {
+        "manifest_item": {
+          "path": "metadata.json",
+          "output_name": "metadata_json",
+          "value_type": "json",
+          "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json",
+          "size_bytes": 434,
+          "relayable": true,
+          "description": "Normalized YouTube metadata JSON"
+        }
+      },
+      "resolution": "node-run-output-manifest",
+      "preview": "{\n  \"video_id\": \"96jN2OCOfLs\",\n  \"title\": \"Andrej Karpathy: From Vibe Coding to Agentic Engineering w/ Stephanie Zhan\",\n  \"author\": \"Sequoia Capital\",\n  \"published_at\": \"2026-04-29T15:21:18Z\",\n  \"youtube_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs\",\n  \"thumbnail\": \"https://i.ytimg.com/vi/96jN2OCOfLs/hqdefault.jpg\",\n  \"source_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s\",\n  \"fetched_at\": \"2026-06-30T11:03:57Z\"\n}\n",
+      "preview_truncated": false
+    },
+    {
+      "id": "907e003b72916d4a",
+      "producer": "youtube-metadata-fetch",
+      "output": "source_url_txt",
+      "type": "file",
+      "format": "text",
+      "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt",
+      "title": "source-url.txt",
+      "size": 50,
+      "mime_type": "text/plain",
+      "tags": [],
+      "metadata": {
+        "manifest_item": {
+          "path": "source-url.txt",
+          "output_name": "source_url_txt",
+          "value_type": "text",
+          "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt",
+          "size_bytes": 50,
+          "relayable": true,
+          "description": "Source URL text file"
+        }
+      },
+      "resolution": "node-run-output-manifest",
+      "preview": "https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s\n",
+      "preview_truncated": false
+    },
+    {
+      "id": "fb62772d094f31e8",
+      "producer": "youtube-metadata-fetch",
+      "output": "result_json",
+      "type": "file",
+      "format": "json",
+      "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json",
+      "title": "result.json",
+      "size": 724,
+      "mime_type": "application/json",
+      "tags": [],
+      "metadata": {
+        "manifest_item": {
+          "path": "result.json",
+          "output_name": "result_json",
+          "value_type": "json",
+          "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json",
+          "size_bytes": 724,
+          "relayable": true,
+          "description": "Execution result with metadata inline"
+        }
+      },
+      "resolution": "node-run-output-manifest",
+      "preview": "{\n  \"status\": \"succeeded\",\n  \"metadata_file\": \"raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json\",\n  \"source_url_file\": \"raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt\",\n  \"metadata\": {\n    \"video_id\": \"96jN2OCOfLs\",\n    \"title\": \"Andrej Karpathy: From Vibe Coding to Agentic Engineering w/ Stephanie Zhan\",\n    \"author\": \"Sequoia Capital\",\n    \"published_at\": \"2026-04-29T15:21:18Z\",\n    \"youtube_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs\",\n    \"thumbnail\": \"https://i.ytimg.com/vi/96jN2OCOfLs/hqdefault.jpg\",\n    \"source_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s\",\n    \"fetched_at\": \"2026-06-30T11:03:57Z\"\n  }\n}\n",
+      "preview_truncated": false
+    }
+  ],
+  "core_outputs": [
+    {
+      "name": "result",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "**",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Skill execution result summary.",
+        "relayable": true
+      }
+    },
+    {
+      "name": "status",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `status`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker status"
+      }
+    },
+    {
+      "name": "metadata_json",
+      "kind": "file",
+      "type": "file",
+      "value": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json"
+      ],
+      "files": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json"
+      ],
+      "artifacts": [
+        {
+          "id": "eb088c44db3dbbd9",
+          "producer": "youtube-metadata-fetch",
+          "output": "metadata_json",
+          "type": "file",
+          "format": "json",
+          "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json",
+          "title": "metadata.json",
+          "size": 434,
+          "mime_type": "application/json",
+          "tags": [],
+          "metadata": {
+            "manifest_item": {
+              "path": "metadata.json",
+              "output_name": "metadata_json",
+              "value_type": "json",
+              "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json",
+              "size_bytes": 434,
+              "relayable": true,
+              "description": "Normalized YouTube metadata JSON"
+            }
+          },
+          "resolution": "node-run-output-manifest",
+          "preview": "{\n  \"video_id\": \"96jN2OCOfLs\",\n  \"title\": \"Andrej Karpathy: From Vibe Coding to Agentic Engineering w/ Stephanie Zhan\",\n  \"author\": \"Sequoia Capital\",\n  \"published_at\": \"2026-04-29T15:21:18Z\",\n  \"youtube_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs\",\n  \"thumbnail\": \"https://i.ytimg.com/vi/96jN2OCOfLs/hqdefault.jpg\",\n  \"source_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s\",\n  \"fetched_at\": \"2026-06-30T11:03:57Z\"\n}\n",
+          "preview_truncated": false
+        }
+      ],
+      "declared": {
+        "description": "Output file `metadata.json` produced or documented by the skill.",
+        "value_type": "json",
+        "relayable": true,
+        "evidence": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py: metadata.json"
+      }
+    },
+    {
+      "name": "source_url_txt",
+      "kind": "file",
+      "type": "file",
+      "value": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt"
+      ],
+      "files": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt"
+      ],
+      "artifacts": [
+        {
+          "id": "907e003b72916d4a",
+          "producer": "youtube-metadata-fetch",
+          "output": "source_url_txt",
+          "type": "file",
+          "format": "text",
+          "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt",
+          "title": "source-url.txt",
+          "size": 50,
+          "mime_type": "text/plain",
+          "tags": [],
+          "metadata": {
+            "manifest_item": {
+              "path": "source-url.txt",
+              "output_name": "source_url_txt",
+              "value_type": "text",
+              "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt",
+              "size_bytes": 50,
+              "relayable": true,
+              "description": "Source URL text file"
+            }
+          },
+          "resolution": "node-run-output-manifest",
+          "preview": "https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s\n",
+          "preview_truncated": false
+        }
+      ],
+      "declared": {
+        "description": "Output file `source-url.txt` produced or documented by the skill.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py: source-url.txt"
+      }
+    },
+    {
+      "name": "result_json",
+      "kind": "file",
+      "type": "file",
+      "value": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json"
+      ],
+      "files": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json"
+      ],
+      "artifacts": [
+        {
+          "id": "fb62772d094f31e8",
+          "producer": "youtube-metadata-fetch",
+          "output": "result_json",
+          "type": "file",
+          "format": "json",
+          "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json",
+          "title": "result.json",
+          "size": 724,
+          "mime_type": "application/json",
+          "tags": [],
+          "metadata": {
+            "manifest_item": {
+              "path": "result.json",
+              "output_name": "result_json",
+              "value_type": "json",
+              "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json",
+              "size_bytes": 724,
+              "relayable": true,
+              "description": "Execution result with metadata inline"
+            }
+          },
+          "resolution": "node-run-output-manifest",
+          "preview": "{\n  \"status\": \"succeeded\",\n  \"metadata_file\": \"raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json\",\n  \"source_url_file\": \"raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt\",\n  \"metadata\": {\n    \"video_id\": \"96jN2OCOfLs\",\n    \"title\": \"Andrej Karpathy: From Vibe Coding to Agentic Engineering w/ Stephanie Zhan\",\n    \"author\": \"Sequoia Capital\",\n    \"published_at\": \"2026-04-29T15:21:18Z\",\n    \"youtube_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs\",\n    \"thumbnail\": \"https://i.ytimg.com/vi/96jN2OCOfLs/hqdefault.jpg\",\n    \"source_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s\",\n    \"fetched_at\": \"2026-06-30T11:03:57Z\"\n  }\n}\n",
+          "preview_truncated": false
+        }
+      ],
+      "declared": {
+        "description": "Output file `result.json` produced or documented by the skill.",
+        "value_type": "json",
+        "relayable": true,
+        "evidence": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py: result.json"
+      }
+    }
+  ],
+  "created_at": "2026-06-30T11:02:58.824912+00:00",
+  "reconciled_at": "2026-06-30T15:17:15.148399+00:00"
+}

@@ -1,0 +1,723 @@
+{
+  "status": "passed",
+  "execution_status": "done",
+  "business_output_status": {
+    "status": "passed",
+    "expected_outputs": [
+      "result",
+      "image_url",
+      "public_image_url",
+      "status",
+      "task_id",
+      "status_json",
+      "submit_json",
+      "generated_images",
+      "images"
+    ],
+    "required_outputs": [],
+    "present_outputs": [
+      "result",
+      "image_url",
+      "public_image_url",
+      "status",
+      "task_id",
+      "status_json",
+      "submit_json",
+      "generated_images",
+      "images"
+    ],
+    "missing_required_outputs": [],
+    "business_outputs": {
+      "result": "Image generated successfully via ChatGPT remote image service",
+      "image_url": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+      "public_image_url": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+      "status": "succeeded",
+      "task_id": "88ef0044-44a6-4b22-a77d-e1fdfed3148d",
+      "status_json": "Full task status JSON with timings and logs",
+      "submit_json": "Submit response JSON",
+      "generated_images": "Generated image of a sleeping kitten",
+      "images": "Generated image of a sleeping kitten",
+      "chatgpt_url": "https://chatgpt.com/c/6a42cd88-90c4-83ea-9cf5-c2052a0b74de"
+    },
+    "business_artifact_count": 0
+  },
+  "probe_id": "chatgpt-remote-image-service-vs2q-probe-20260629T194827Z-34e7c4",
+  "draft_id": "chatgpt-remote-image-service-vs2q-1782757312",
+  "node_id": "chatgpt-remote-image-service-vs2q",
+  "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467",
+  "http_status": 200,
+  "mode": "node-draft-probe-run",
+  "manual_inputs": {
+    "api_url": "",
+    "reference_image_file": "",
+    "reference_image_url": "",
+    "poll_interval": "",
+    "prompt": "生成一张小猫睡觉的照片",
+    "timeout_seconds": "",
+    "upload_name": ""
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": false
+    },
+    "telegram": {
+      "enabled": false
+    }
+  },
+  "result": {
+    "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467",
+    "status": "done",
+    "pending": false,
+    "started_at": "2026-06-29T19:48:27.195293+00:00",
+    "finished_at": "2026-06-29T19:55:36Z",
+    "elapsed_ms": 282,
+    "validation": {
+      "status": "passed",
+      "missing_outputs": [],
+      "unexpected_outputs": [],
+      "business_output_status": {
+        "status": "passed",
+        "expected_outputs": [
+          "result",
+          "image_url",
+          "public_image_url",
+          "status",
+          "task_id",
+          "status_json",
+          "submit_json",
+          "generated_images",
+          "images"
+        ],
+        "required_outputs": [],
+        "present_outputs": [
+          "result",
+          "image_url",
+          "public_image_url",
+          "status",
+          "task_id",
+          "status_json",
+          "submit_json",
+          "generated_images",
+          "images"
+        ],
+        "missing_required_outputs": [],
+        "business_outputs": {
+          "result": "Image generated successfully via ChatGPT remote image service",
+          "image_url": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+          "public_image_url": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+          "status": "succeeded",
+          "task_id": "88ef0044-44a6-4b22-a77d-e1fdfed3148d",
+          "status_json": "Full task status JSON with timings and logs",
+          "submit_json": "Submit response JSON",
+          "generated_images": "Generated image of a sleeping kitten",
+          "images": "Generated image of a sleeping kitten",
+          "chatgpt_url": "https://chatgpt.com/c/6a42cd88-90c4-83ea-9cf5-c2052a0b74de"
+        },
+        "business_artifact_count": 3
+      }
+    },
+    "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467/outputs/manifest.json",
+    "output_directory": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467/outputs",
+    "actual_outputs": {
+      "result": "Image generated successfully via ChatGPT remote image service",
+      "image_url": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+      "public_image_url": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+      "status": "succeeded",
+      "task_id": "88ef0044-44a6-4b22-a77d-e1fdfed3148d",
+      "status_json": "Full task status JSON with timings and logs",
+      "submit_json": "Submit response JSON",
+      "generated_images": "Generated image of a sleeping kitten",
+      "images": "Generated image of a sleeping kitten",
+      "chatgpt_url": "https://chatgpt.com/c/6a42cd88-90c4-83ea-9cf5-c2052a0b74de"
+    },
+    "business_artifacts": [],
+    "core_outputs": [
+      {
+        "name": "result",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "Image generated successfully via ChatGPT remote image service",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Skill execution result summary.",
+          "relayable": true
+        }
+      },
+      {
+        "name": "image_url",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `imageUrl`.",
+          "value_type": "url",
+          "relayable": true,
+          "evidence": "source result marker imageUrl"
+        }
+      },
+      {
+        "name": "public_image_url",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `publicImageUrl`.",
+          "value_type": "url",
+          "relayable": true,
+          "evidence": "source result marker publicImageUrl"
+        }
+      },
+      {
+        "name": "status",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "succeeded",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `status`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker status"
+        }
+      },
+      {
+        "name": "task_id",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "88ef0044-44a6-4b22-a77d-e1fdfed3148d",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `taskId`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker taskId"
+        }
+      },
+      {
+        "name": "status_json",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "Full task status JSON with timings and logs",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Runtime value captured by script variable `status_json`.",
+          "value_type": "json",
+          "relayable": false,
+          "evidence": "source script variable status_json"
+        }
+      },
+      {
+        "name": "submit_json",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "Submit response JSON",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Runtime value captured by script variable `submit_json`.",
+          "value_type": "json",
+          "relayable": true,
+          "evidence": "source script variable submit_json"
+        }
+      },
+      {
+        "name": "generated_images",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "Generated image of a sleeping kitten",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Generated image files or public image URLs.",
+          "value_type": "image",
+          "relayable": true
+        }
+      },
+      {
+        "name": "images",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "Generated image of a sleeping kitten",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Generated image files.",
+          "relayable": true
+        }
+      }
+    ],
+    "steps": [
+      {
+        "id": "create-run",
+        "title": "Create node run workspace",
+        "status": "done",
+        "summary": "Node Run record is allocated independently from Workflow Run.",
+        "started_at": "2026-06-29T19:48:27.195293+00:00",
+        "finished_at": "2026-06-29T19:48:27.230293+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "load-definition",
+        "title": "Load node definition",
+        "status": "done",
+        "summary": "Loaded chatgpt-remote-image-service-vs2q from youtube-research-wiki.",
+        "started_at": "2026-06-29T19:48:27.230293+00:00",
+        "finished_at": "2026-06-29T19:48:27.265293+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-context",
+        "title": "Resolve Runtime / Instance / Workflow context",
+        "status": "done",
+        "summary": "youtube-wiki · wiki-sop-new-instance · youtube-research-wiki",
+        "started_at": "2026-06-29T19:48:27.265293+00:00",
+        "finished_at": "2026-06-29T19:48:27.300293+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-inputs",
+        "title": "Resolve node inputs",
+        "status": "done",
+        "summary": "1 resolved, 0 pending relay, 0 missing.",
+        "started_at": "2026-06-29T19:48:27.300293+00:00",
+        "finished_at": "2026-06-29T19:48:27.335293+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-config",
+        "title": "Resolve execution config",
+        "status": "done",
+        "summary": "Runtime, Instance and capability config resolved.",
+        "started_at": "2026-06-29T19:48:27.335293+00:00",
+        "finished_at": "2026-06-29T19:48:27.370293+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "generate-agent-request",
+        "title": "Generate Agent Request",
+        "status": "done",
+        "summary": "Hermes Agent Request was rendered and saved for this Node Run.",
+        "started_at": "2026-06-29T19:48:27.370293+00:00",
+        "finished_at": "",
+        "elapsed_ms": 0
+      },
+      {
+        "id": "probe-capabilities",
+        "title": "Probe attached capabilities",
+        "status": "skipped",
+        "summary": "Capability probes are explicit. Telegram send probes require user confirmation.",
+        "started_at": "2026-06-29T19:48:27.405293+00:00",
+        "finished_at": "2026-06-29T19:48:27.429293+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "build-execution-plan",
+        "title": "Build node execution plan",
+        "status": "done",
+        "summary": "Prepared real-node execution plan.",
+        "started_at": "2026-06-29T19:48:27.440293+00:00",
+        "finished_at": "2026-06-29T19:48:27.475293+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "execute-or-dry-run",
+        "title": "Execute or dry-run node",
+        "status": "done",
+        "summary": "Real node execution finished and output manifest was found.",
+        "started_at": "2026-06-29T19:48:27.195293+00:00",
+        "finished_at": "2026-06-29T19:55:36Z",
+        "elapsed_ms": 0
+      },
+      {
+        "id": "validate-outputs",
+        "title": "Validate declared outputs",
+        "status": "done",
+        "summary": "Declared business outputs were found.",
+        "started_at": "2026-06-29T19:48:27.510293+00:00",
+        "finished_at": "",
+        "elapsed_ms": 0
+      },
+      {
+        "id": "persist-to-github",
+        "title": "Persist to GitHub",
+        "status": "skipped",
+        "summary": "GitHub persistence is not attached for this Node Run.",
+        "started_at": "2026-06-29T19:48:27.545293+00:00",
+        "finished_at": "2026-06-29T19:48:27.569293+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "send-telegram-notification",
+        "title": "Send Telegram notification",
+        "status": "skipped",
+        "summary": "Telegram notification is not attached for this Node Run.",
+        "started_at": "2026-06-29T19:48:27.580293+00:00",
+        "finished_at": "2026-06-29T19:48:27.604293+00:00",
+        "elapsed_ms": 24
+      }
+    ]
+  },
+  "manifest": {
+    "version": 1,
+    "kind": "output",
+    "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467",
+    "node_id": "chatgpt-remote-image-service-vs2q",
+    "created_at": "2026-06-29T19:55:36Z",
+    "items": [
+      {
+        "output_name": "result",
+        "value_type": "text",
+        "value_preview": "Image generated successfully via ChatGPT remote image service",
+        "relayable": true
+      },
+      {
+        "output_name": "image_url",
+        "value_type": "url",
+        "value_preview": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+        "relayable": true
+      },
+      {
+        "output_name": "public_image_url",
+        "value_type": "url",
+        "value_preview": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+        "relayable": true
+      },
+      {
+        "output_name": "status",
+        "value_type": "text",
+        "value_preview": "succeeded",
+        "relayable": true
+      },
+      {
+        "output_name": "task_id",
+        "value_type": "text",
+        "value_preview": "88ef0044-44a6-4b22-a77d-e1fdfed3148d",
+        "relayable": true
+      },
+      {
+        "output_name": "status_json",
+        "value_type": "json",
+        "value_preview": "Full task status JSON with timings and logs",
+        "relayable": false,
+        "materialized_path": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467/outputs/status.json"
+      },
+      {
+        "output_name": "submit_json",
+        "value_type": "json",
+        "value_preview": "Submit response JSON",
+        "relayable": true,
+        "materialized_path": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467/outputs/submit.json"
+      },
+      {
+        "output_name": "generated_images",
+        "value_type": "image",
+        "value_preview": "Generated image of a sleeping kitten",
+        "relayable": true,
+        "materialized_path": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467/outputs/generated_image.png"
+      },
+      {
+        "output_name": "images",
+        "value_type": "image",
+        "value_preview": "Generated image of a sleeping kitten",
+        "relayable": true,
+        "materialized_path": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467/outputs/generated_image.png"
+      },
+      {
+        "output_name": "chatgpt_url",
+        "value_type": "url",
+        "value_preview": "https://chatgpt.com/c/6a42cd88-90c4-83ea-9cf5-c2052a0b74de",
+        "relayable": true
+      }
+    ]
+  },
+  "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467/outputs/manifest.json",
+  "manifest_records": [
+    {
+      "output_name": "result",
+      "value_type": "text",
+      "value_preview": "Image generated successfully via ChatGPT remote image service",
+      "relayable": true,
+      "output": "result",
+      "path": ""
+    },
+    {
+      "output_name": "image_url",
+      "value_type": "url",
+      "value_preview": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+      "relayable": true,
+      "output": "image_url",
+      "path": ""
+    },
+    {
+      "output_name": "public_image_url",
+      "value_type": "url",
+      "value_preview": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+      "relayable": true,
+      "output": "public_image_url",
+      "path": ""
+    },
+    {
+      "output_name": "status",
+      "value_type": "text",
+      "value_preview": "succeeded",
+      "relayable": true,
+      "output": "status",
+      "path": ""
+    },
+    {
+      "output_name": "task_id",
+      "value_type": "text",
+      "value_preview": "88ef0044-44a6-4b22-a77d-e1fdfed3148d",
+      "relayable": true,
+      "output": "task_id",
+      "path": ""
+    },
+    {
+      "output_name": "status_json",
+      "value_type": "json",
+      "value_preview": "Full task status JSON with timings and logs",
+      "relayable": false,
+      "materialized_path": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467/outputs/status.json",
+      "output": "status_json",
+      "path": ""
+    },
+    {
+      "output_name": "submit_json",
+      "value_type": "json",
+      "value_preview": "Submit response JSON",
+      "relayable": true,
+      "materialized_path": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467/outputs/submit.json",
+      "output": "submit_json",
+      "path": ""
+    },
+    {
+      "output_name": "generated_images",
+      "value_type": "image",
+      "value_preview": "Generated image of a sleeping kitten",
+      "relayable": true,
+      "materialized_path": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467/outputs/generated_image.png",
+      "output": "generated_images",
+      "path": ""
+    },
+    {
+      "output_name": "images",
+      "value_type": "image",
+      "value_preview": "Generated image of a sleeping kitten",
+      "relayable": true,
+      "materialized_path": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467/outputs/generated_image.png",
+      "output": "images",
+      "path": ""
+    },
+    {
+      "output_name": "chatgpt_url",
+      "value_type": "url",
+      "value_preview": "https://chatgpt.com/c/6a42cd88-90c4-83ea-9cf5-c2052a0b74de",
+      "relayable": true,
+      "output": "chatgpt_url",
+      "path": ""
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "passed",
+      "expected_outputs": [
+        "result",
+        "image_url",
+        "public_image_url",
+        "status",
+        "task_id",
+        "status_json",
+        "submit_json",
+        "generated_images",
+        "images"
+      ],
+      "required_outputs": [],
+      "present_outputs": [
+        "result",
+        "image_url",
+        "public_image_url",
+        "status",
+        "task_id",
+        "status_json",
+        "submit_json",
+        "generated_images",
+        "images"
+      ],
+      "missing_required_outputs": [],
+      "business_outputs": {
+        "result": "Image generated successfully via ChatGPT remote image service",
+        "image_url": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+        "public_image_url": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+        "status": "succeeded",
+        "task_id": "88ef0044-44a6-4b22-a77d-e1fdfed3148d",
+        "status_json": "Full task status JSON with timings and logs",
+        "submit_json": "Submit response JSON",
+        "generated_images": "Generated image of a sleeping kitten",
+        "images": "Generated image of a sleeping kitten",
+        "chatgpt_url": "https://chatgpt.com/c/6a42cd88-90c4-83ea-9cf5-c2052a0b74de"
+      },
+      "business_artifact_count": 3
+    }
+  },
+  "actual_outputs": {
+    "result": "Image generated successfully via ChatGPT remote image service",
+    "image_url": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+    "public_image_url": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+    "status": "succeeded",
+    "task_id": "88ef0044-44a6-4b22-a77d-e1fdfed3148d",
+    "status_json": "Full task status JSON with timings and logs",
+    "submit_json": "Submit response JSON",
+    "generated_images": "Generated image of a sleeping kitten",
+    "images": "Generated image of a sleeping kitten",
+    "chatgpt_url": "https://chatgpt.com/c/6a42cd88-90c4-83ea-9cf5-c2052a0b74de"
+  },
+  "business_outputs": {
+    "result": "Image generated successfully via ChatGPT remote image service",
+    "image_url": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+    "public_image_url": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+    "status": "succeeded",
+    "task_id": "88ef0044-44a6-4b22-a77d-e1fdfed3148d",
+    "status_json": "Full task status JSON with timings and logs",
+    "submit_json": "Submit response JSON",
+    "generated_images": "Generated image of a sleeping kitten",
+    "images": "Generated image of a sleeping kitten",
+    "chatgpt_url": "https://chatgpt.com/c/6a42cd88-90c4-83ea-9cf5-c2052a0b74de"
+  },
+  "business_artifacts": [],
+  "core_outputs": [
+    {
+      "name": "result",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "Image generated successfully via ChatGPT remote image service",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Skill execution result summary.",
+        "relayable": true
+      }
+    },
+    {
+      "name": "image_url",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `imageUrl`.",
+        "value_type": "url",
+        "relayable": true,
+        "evidence": "source result marker imageUrl"
+      }
+    },
+    {
+      "name": "public_image_url",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "https://resource.vyibc.com/88ef0044-44a6-4b22-a77d-e1fdfed3148d.png",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `publicImageUrl`.",
+        "value_type": "url",
+        "relayable": true,
+        "evidence": "source result marker publicImageUrl"
+      }
+    },
+    {
+      "name": "status",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "succeeded",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `status`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker status"
+      }
+    },
+    {
+      "name": "task_id",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "88ef0044-44a6-4b22-a77d-e1fdfed3148d",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `taskId`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker taskId"
+      }
+    },
+    {
+      "name": "status_json",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "Full task status JSON with timings and logs",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Runtime value captured by script variable `status_json`.",
+        "value_type": "json",
+        "relayable": false,
+        "evidence": "source script variable status_json"
+      }
+    },
+    {
+      "name": "submit_json",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "Submit response JSON",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Runtime value captured by script variable `submit_json`.",
+        "value_type": "json",
+        "relayable": true,
+        "evidence": "source script variable submit_json"
+      }
+    },
+    {
+      "name": "generated_images",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "Generated image of a sleeping kitten",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Generated image files or public image URLs.",
+        "value_type": "image",
+        "relayable": true
+      }
+    },
+    {
+      "name": "images",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "Generated image of a sleeping kitten",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Generated image files.",
+        "relayable": true
+      }
+    }
+  ],
+  "created_at": "2026-06-29T19:48:27.236027+00:00",
+  "reconciled_at": "2026-06-30T15:17:15.643918+00:00"
+}

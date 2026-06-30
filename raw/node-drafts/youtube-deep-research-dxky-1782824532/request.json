@@ -1,0 +1,8 @@
+{
+  "skill_install_command": " bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451') ",
+  "user_instruction": "转换成不绑定上下游的 Runtime Node；首节点测试允许直接输入 source_url，保留超时、轮询间隔和是否包含 transcript 等配置。",
+  "fetch_metadata": true,
+  "async_job": true,
+  "runtime_id": "youtube-wiki",
+  "instance_id": "wiki-sop-new-instance"
+}

@@ -1,0 +1,1611 @@
+{
+  "ok": true,
+  "status": "done",
+  "http_status": 200,
+  "mode": "node-builder-agent-evaluation-job",
+  "evaluation_id": "node-builder-597d7f0f-20260629T091732Z-b36dad",
+  "sop_id": "wiki-sop-new-instance",
+  "instance_id": "wiki-sop-new-instance",
+  "started_at": "2026-06-29T09:17:32.767236+00:00",
+  "finished_at": "2026-06-29T09:18:21.653201+00:00",
+  "result": {
+    "ok": true,
+    "mode": "node-builder-agent-evaluation",
+    "request": {
+      "runtime_id": "youtube-wiki",
+      "instance_id": "wiki-sop-new-instance",
+      "skill_install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+      "user_instruction": "把这个 Skill 转换成一个不绑定上下游的 Runtime Node；首节点测试时允许用户直接输入 prompt，也要保留引用图、上传名、超时等 skill 暴露的可配置参数。",
+      "fetch_metadata": true
+    },
+    "config": {
+      "base_url": {
+        "key": "WIKI_LLM_BASE_URL",
+        "label": "Node Builder LLM Base URL",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_BASE_URL",
+        "masked_value": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "value": "https://api-proxy.chxyka.ccwu.cc/v1"
+      },
+      "api_key": {
+        "key": "WIKI_LLM_API_KEY",
+        "label": "Node Builder LLM API Key",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_API_KEY",
+        "masked_value": "ah-***c68",
+        "value": null
+      },
+      "model": {
+        "key": "WIKI_LLM_MODEL",
+        "label": "Node Builder LLM Model",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_MODEL",
+        "masked_value": "deepseek-v4-pro",
+        "value": "deepseek-v4-pro"
+      },
+      "settings_backend": "file",
+      "precedence": [
+        "node-run-overrides",
+        "instance-settings",
+        "runtime-settings",
+        "global-settings",
+        "bridge-env",
+        "runtime-env-file"
+      ]
+    },
+    "evaluation": {
+      "status": "ready",
+      "summary": "Node definition for ChatGPT Remote Image Service skill. Accepts prompt, reference images (file or URL), upload name, API URL, poll interval, timeout. Produces generated image public URL and task status. No upstream/downstream binding; suitable as first node in a workflow.",
+      "skill_identity": {
+        "skill_id": "chatgpt-remote-image-service",
+        "title": "Chatgpt Remote Image Service",
+        "description": "Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint.",
+        "installer_url": "https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544",
+        "trusted_source": true
+      },
+      "node_draft": {
+        "schema": "node-definition/v1",
+        "id": "chatgpt-remote-image-service",
+        "title": "Chatgpt Remote Image Service",
+        "description": "把这个 Skill 转换成一个不绑定上下游的 Runtime Node；首节点测试时允许用户直接输入 prompt，也要保留引用图、上传名、超时等 skill 暴露的可配置参数。",
+        "version": "0.1-runtime-draft",
+        "skill": {
+          "id": "chatgpt-remote-image-service",
+          "source": "skill-installer",
+          "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+          "source_digest": {
+            "installer_url": "https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544",
+            "zip_url": "https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip",
+            "files": [
+              {
+                "path": "chatgpt-remote-image-service/agents/openai.yaml",
+                "bytes": 227,
+                "truncated": false
+              },
+              {
+                "path": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+                "bytes": 5390,
+                "truncated": false
+              },
+              {
+                "path": "chatgpt-remote-image-service/SKILL.md",
+                "bytes": 3484,
+                "truncated": false,
+                "content": "---\nname: chatgpt-remote-image-service\ndescription: Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint. Trigger for requests involving remote ChatGPT 生图接口, 公网生图服务, chatgpt-image.vyibc.com, remote image generation API, taskId polling, or CLI calls to the image service.\n---\n\n# ChatGPT Remote Image Service\n\nUse this skill for the hosted ChatGPT image queue service.\n\nDefault endpoint:\n\n```text\nhttps://chatgpt-image.vyibc.com\n```\n\nThe service is public and does not require an Authorization header. Object names are made unique by the service: if the caller sends `uploadName=test.png`, the final R2 object will use the task id, such as `<taskId>.png`, to avoid overwriting prior images.\n\nThe service supports both modes:\n\n- Reference-image generation: send `image` and `prompt`.\n- Reference-image generation from URL: pass `--imageUrl` to the CLI, or download the URL first for raw HTTP.\n- Pure prompt generation: send only `prompt`.\n\n## Quick Start\n\nPrefer the bundled CLI:\n\n```bash\nscripts/chatgpt-remote-image.sh \\\n  --imageUrl \"https://resource.vyibc.com/reference.png\" \\\n  --prompt \"以参考图中的人物为准，生成一张在游泳馆的照片\"\n```\n\nLocal reference file:\n\n```bash\nscripts/chatgpt-remote-image.sh \\\n  --image /path/to/reference.png \\\n  --prompt \"以参考图中的人物为准，生成一张在游泳馆的照片\"\n```\n\nPure prompt generation:\n\n```bash\nscripts/chatgpt-remote-image.sh \\\n  --prompt \"生成一张未来城市夜景照片，真实摄影风格\"\n```\n\nThe script submits `POST /generate`, polls `GET /tasks/<taskId>`, and exits successfully only when `publicImageUrl` is returned.\nAt startup it also prints the current browser worker summary, including total workers, logged-in workers, workers requiring login, active workers, queued tasks, and CDP ports.\nIf\n...[truncated for Node Builder]"
+              }
+            ]
+          }
+        },
+        "executor": {
+          "type": "agent-skill",
+          "agent": "hermes",
+          "skill": "chatgpt-remote-image-service",
+          "request_template": "node-execution-request/v1"
+        },
+        "entry": {
+          "inputs": {
+            "api_url": {
+              "required": false,
+              "input_kind": "url",
+              "value_type": "url",
+              "label": "Api Url",
+              "description": "Value for CLI option --apiUrl.",
+              "evidence": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option --apiUrl -> $API_URL",
+              "cli_option": "--apiUrl"
+            },
+            "reference_image_file": {
+              "required": false,
+              "input_kind": "file",
+              "value_type": "image",
+              "label": "Reference Image File",
+              "description": "Optional local reference image file path consumed by the skill.",
+              "evidence": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option --image -> $IMAGE",
+              "cli_option": "--image"
+            },
+            "reference_image_url": {
+              "required": false,
+              "input_kind": "url",
+              "value_type": "url",
+              "label": "Reference Image Url",
+              "description": "Optional reference image URL consumed by the skill.",
+              "evidence": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option --image-url -> $IMAGE_URL; chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option --imageUrl -> $IMAGE_URL",
+              "cli_option": "--image-url"
+            },
+            "poll_interval": {
+              "required": false,
+              "input_kind": "number",
+              "value_type": "number",
+              "label": "Poll Interval",
+              "description": "Value for CLI option --pollInterval.",
+              "evidence": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option --pollInterval -> $POLL_INTERVAL",
+              "cli_option": "--pollInterval"
+            },
+            "prompt": {
+              "required": true,
+              "input_kind": "text",
+              "value_type": "text",
+              "label": "Prompt",
+              "description": "Task prompt or user instruction passed to the skill.",
+              "evidence": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option --prompt -> $PROMPT",
+              "cli_option": "--prompt",
+              "example": "生成一张小猫睡觉的照片"
+            },
+            "timeout_seconds": {
+              "required": false,
+              "input_kind": "number",
+              "value_type": "number",
+              "label": "Timeout Seconds",
+              "description": "Value for CLI option --timeoutSeconds.",
+              "evidence": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option --timeoutSeconds -> $TIMEOUT_SECONDS",
+              "cli_option": "--timeoutSeconds"
+            },
+            "upload_name": {
+              "required": false,
+              "input_kind": "text",
+              "value_type": "text",
+              "label": "Upload Name",
+              "description": "Optional output object/file name hint.",
+              "evidence": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option --uploadName -> $UPLOAD_NAME",
+              "cli_option": "--uploadName"
+            }
+          }
+        },
+        "handoff": {
+          "accepts": {
+            "upstream_outputs_dir": {
+              "required": false,
+              "description": "一个或多个上游 Node 的标准输出目录。"
+            },
+            "instruction": {
+              "required": true,
+              "description": "Edge Handoff Agent 或用户提供的交接说明。"
+            },
+            "context": {
+              "required": false,
+              "description": "运行上下文或补充说明。"
+            }
+          },
+          "produces": {
+            "outputs_dir": "raw/node-runs/{run_id}/outputs",
+            "manifest": "raw/node-runs/{run_id}/outputs/manifest.json"
+          }
+        },
+        "outputs": {
+          "root": "raw/node-runs/{run_id}/outputs",
+          "manifest": "raw/node-runs/{run_id}/outputs/manifest.json",
+          "expected": {
+            "result": {
+              "description": "Skill execution result summary.",
+              "relayable": true
+            },
+            "image_url": {
+              "description": "Result value mentioned in skill source as `imageUrl`.",
+              "value_type": "url",
+              "relayable": true,
+              "evidence": "source result marker imageUrl"
+            },
+            "public_image_url": {
+              "description": "Result value mentioned in skill source as `publicImageUrl`.",
+              "value_type": "url",
+              "relayable": true,
+              "evidence": "source result marker publicImageUrl"
+            },
+            "status": {
+              "description": "Result value mentioned in skill source as `status`.",
+              "value_type": "text",
+              "relayable": true,
+              "evidence": "source result marker status"
+            },
+            "task_id": {
+              "description": "Result value mentioned in skill source as `taskId`.",
+              "value_type": "text",
+              "relayable": true,
+              "evidence": "source result marker taskId"
+            },
+            "status_json": {
+              "description": "Runtime value captured by script variable `status_json`.",
+              "value_type": "json",
+              "relayable": false,
+              "evidence": "source script variable status_json"
+            },
+            "submit_json": {
+              "description": "Runtime value captured by script variable `submit_json`.",
+              "value_type": "json",
+              "relayable": true,
+              "evidence": "source script variable submit_json"
+            },
+            "generated_images": {
+              "description": "Generated image files or public image URLs.",
+              "value_type": "image",
+              "relayable": true
+            },
+            "images": {
+              "description": "Generated image files.",
+              "relayable": true
+            }
+          }
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false
+          },
+          "telegram": {
+            "enabled": false,
+            "required": false
+          },
+          "sse": {
+            "enabled": true,
+            "required": true
+          }
+        },
+        "ui": {
+          "category": "generation"
+        },
+        "coverage_report": {
+          "status": "passed",
+          "covered_inputs": [
+            {
+              "input": "api_url",
+              "option": "--apiUrl",
+              "evidence": null
+            },
+            {
+              "input": "reference_image_file",
+              "option": "--image",
+              "evidence": null
+            },
+            {
+              "input": "reference_image_url",
+              "option": "--image-url",
+              "evidence": null
+            },
+            {
+              "input": "poll_interval",
+              "option": "--pollInterval",
+              "evidence": null
+            },
+            {
+              "input": "prompt",
+              "option": "--prompt",
+              "evidence": null
+            },
+            {
+              "input": "timeout_seconds",
+              "option": "--timeoutSeconds",
+              "evidence": null
+            },
+            {
+              "input": "upload_name",
+              "option": "--uploadName",
+              "evidence": null
+            }
+          ],
+          "missing_inputs": [],
+          "source_files_read": [
+            "chatgpt-remote-image-service/agents/openai.yaml",
+            "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+            "chatgpt-remote-image-service/SKILL.md"
+          ],
+          "errors": []
+        }
+      },
+      "missing_fields": [],
+      "risks": [],
+      "assumptions": [
+        "No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics.",
+        "The executor type is agent-skill using hermes agent, which is appropriate for running shell-based skills.",
+        "Skill installer is trusted and provides all necessary scripts and documentation."
+      ],
+      "test_plan": [
+        {
+          "manual_first_node_test": {
+            "description": "Run as a first node in a workflow with user-provided prompt. Optionally provide reference image URL or file. Verify that the node executes the skill, polls task, and returns publicImageUrl in outputs.",
+            "inputs": {
+              "prompt": "Test prompt, e.g., 'Generate a test image of a sunset'",
+              "reference_image_url": "Optional: URL of a reference image",
+              "reference_image_file": "Optional: local file path",
+              "upload_name": "Optional: custom name for output image",
+              "timeout_seconds": 300,
+              "poll_interval": 5
+            },
+            "expected_outputs": [
+              "public_image_url",
+              "task_id",
+              "status",
+              "manifest.json in outputs dir"
+            ],
+            "verification": "Check that outputs dir contains manifest.json and that the public_image_url is accessible."
+          }
+        }
+      ],
+      "metadata_probe": {},
+      "source_digest": {
+        "attempted": true,
+        "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+        "installer_url": "https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544",
+        "zip_url": "https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip",
+        "trusted_source": true,
+        "files": [
+          {
+            "path": "chatgpt-remote-image-service/agents/openai.yaml",
+            "bytes": 227,
+            "truncated": false
+          },
+          {
+            "path": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+            "bytes": 5390,
+            "truncated": false
+          },
+          {
+            "path": "chatgpt-remote-image-service/SKILL.md",
+            "bytes": 3484,
+            "truncated": false
+          }
+        ],
+        "cli_options": [
+          {
+            "option": "--apiUrl",
+            "variable": "API_URL",
+            "input_name": "api_url",
+            "required": false
+          },
+          {
+            "option": "--image",
+            "variable": "IMAGE",
+            "input_name": "reference_image_file",
+            "required": false
+          },
+          {
+            "option": "--image-url",
+            "variable": "IMAGE_URL",
+            "input_name": "reference_image_url",
+            "required": false
+          },
+          {
+            "option": "--pollInterval",
+            "variable": "POLL_INTERVAL",
+            "input_name": "poll_interval",
+            "required": false
+          },
+          {
+            "option": "--prompt",
+            "variable": "PROMPT",
+            "input_name": "prompt",
+            "required": true
+          },
+          {
+            "option": "--timeoutSeconds",
+            "variable": "TIMEOUT_SECONDS",
+            "input_name": "timeout_seconds",
+            "required": false
+          },
+          {
+            "option": "--uploadName",
+            "variable": "UPLOAD_NAME",
+            "input_name": "upload_name",
+            "required": false
+          }
+        ],
+        "errors": []
+      },
+      "coverage_report": {
+        "status": "passed",
+        "covered_inputs": [
+          {
+            "input": "api_url",
+            "option": "--apiUrl",
+            "evidence": null
+          },
+          {
+            "input": "reference_image_file",
+            "option": "--image",
+            "evidence": null
+          },
+          {
+            "input": "reference_image_url",
+            "option": "--image-url",
+            "evidence": null
+          },
+          {
+            "input": "poll_interval",
+            "option": "--pollInterval",
+            "evidence": null
+          },
+          {
+            "input": "prompt",
+            "option": "--prompt",
+            "evidence": null
+          },
+          {
+            "input": "timeout_seconds",
+            "option": "--timeoutSeconds",
+            "evidence": null
+          },
+          {
+            "input": "upload_name",
+            "option": "--uploadName",
+            "evidence": null
+          }
+        ],
+        "missing_inputs": [],
+        "source_files_read": [
+          "chatgpt-remote-image-service/agents/openai.yaml",
+          "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+          "chatgpt-remote-image-service/SKILL.md"
+        ],
+        "errors": []
+      },
+      "agent": {
+        "provider": "openai-compatible",
+        "model": "deepseek-v4-pro",
+        "used_ai": true
+      },
+      "trace": {
+        "trace_schema": "node-builder-agent-trace/v1",
+        "request": {
+          "runtime_id": "youtube-wiki",
+          "instance_id": "wiki-sop-new-instance",
+          "skill_install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+          "user_instruction": "把这个 Skill 转换成一个不绑定上下游的 Runtime Node；首节点测试时允许用户直接输入 prompt，也要保留引用图、上传名、超时等 skill 暴露的可配置参数。",
+          "fetch_metadata": true
+        },
+        "config": {
+          "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+          "model": "deepseek-v4-pro",
+          "api_key": "ah-***c68"
+        },
+        "started_at": "2026-06-29T09:17:35Z",
+        "attempts": [
+          {
+            "status": "response",
+            "duration_ms": 46289,
+            "raw_response": "{\"id\":\"e6deb3e0-1917-4e53-ba1d-ba9eef67a1b8\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"status\\\": \\\"ready\\\",\\n  \\\"summary\\\": \\\"Node definition for ChatGPT Remote Image Service skill. Accepts prompt, reference images (file or URL), upload name, API URL, poll interval, timeout. Produces generated image public URL and task status. No upstream/downstream binding; suitable as first node in a workflow.\\\",\\n  \\\"missing_fields\\\": [],\\n  \\\"risks\\\": [],\\n  \\\"assumptions\\\": [\\n    \\\"No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics.\\\",\\n    \\\"The executor type is agent-skill using hermes agent, which is appropriate for running shell-based skills.\\\",\\n    \\\"Skill installer is trusted and provides all necessary scripts and documentation.\\\"\\n  ],\\n  \\\"test_plan\\\": {\\n    \\\"manual_first_node_test\\\": {\\n      \\\"description\\\": \\\"Run as a first node in a workflow with user-provided prompt. Optionally provide reference image URL or file. Verify that the node executes the skill, polls task, and returns publicImageUrl in outputs.\\\",\\n      \\\"inputs\\\": {\\n        \\\"prompt\\\": \\\"Test prompt, e.g., 'Generate a test image of a sunset'\\\",\\n        \\\"reference_image_url\\\": \\\"Optional: URL of a reference image\\\",\\n        \\\"reference_image_file\\\": \\\"Optional: local file path\\\",\\n        \\\"upload_name\\\": \\\"Optional: custom name for output image\\\",\\n        \\\"timeout_seconds\\\": 300,\\n        \\\"poll_interval\\\": 5\\n      },\\n      \\\"expected_outputs\\\": [\\n        \\\"public_image_url\\\",\\n        \\\"task_id\\\",\\n        \\\"status\\\",\\n        \\\"manifest.json in outputs dir\\\"\\n      ],\\n      \\\"verification\\\": \\\"Check that outputs dir contains manifest.json and that the public_image_url is accessible.\\\"\\n    }\\n  },\\n  \\\"skill_identity\\\": {\\n    \\\"skill_id\\\": \\\"chatgpt-remote-image-service\\\",\\n    \\\"title\\\": \\\"Chatgpt Remote Image Service\\\",\\n    \\\"description\\\": \\\"Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint.\\\",\\n    \\\"installer_url\\\": \\\"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\\\",\\n    \\\"trusted_source\\\": true\\n  },\\n  \\\"metadata_probe\\\": null,\\n  \\\"source_digest\\\": {\\n    \\\"attempted\\\": true,\\n    \\\"install_command\\\": \\\"bash \\u003c(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')\\\",\\n    \\\"installer_url\\\": \\\"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\\\",\\n    \\\"zip_url\\\": \\\"https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip\\\",\\n    \\\"trusted_source\\\": true,\\n    \\\"files\\\": [\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/agents/openai.yaml\\\", \\\"bytes\\\": 227, \\\"truncated\\\": false },\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\\\", \\\"bytes\\\": 5390, \\\"truncated\\\": false },\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/SKILL.md\\\", \\\"bytes\\\": 3484, \\\"truncated\\\": false }\\n    ],\\n    \\\"cli_options\\\": [\\n      { \\\"option\\\": \\\"--apiUrl\\\", \\\"variable\\\": \\\"API_URL\\\", \\\"input_name\\\": \\\"api_url\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--image\\\", \\\"variable\\\": \\\"IMAGE\\\", \\\"input_name\\\": \\\"reference_image_file\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--image-url\\\", \\\"variable\\\": \\\"IMAGE_URL\\\", \\\"input_name\\\": \\\"reference_image_url\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--pollInterval\\\", \\\"variable\\\": \\\"POLL_INTERVAL\\\", \\\"input_name\\\": \\\"poll_interval\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--prompt\\\", \\\"variable\\\": \\\"PROMPT\\\", \\\"input_name\\\": \\\"prompt\\\", \\\"required\\\": true },\\n      { \\\"option\\\": \\\"--timeoutSeconds\\\", \\\"variable\\\": \\\"TIMEOUT_SECONDS\\\", \\\"input_name\\\": \\\"timeout_seconds\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--uploadName\\\", \\\"variable\\\": \\\"UPLOAD_NAME\\\", \\\"input_name\\\": \\\"upload_name\\\", \\\"required\\\": false }\\n    ],\\n    \\\"errors\\\": []\\n  },\\n  \\\"coverage_report\\\": {\\n    \\\"status\\\": \\\"passed\\\",\\n    \\\"covered_inputs\\\": [\\\"api_url\\\", \\\"reference_image_file\\\", \\\"reference_image_url\\\", \\\"poll_interval\\\", \\\"prompt\\\", \\\"timeout_seconds\\\", \\\"upload_name\\\"],\\n    \\\"missing_inputs\\\": [],\\n    \\\"source_files_read\\\": [\\n      \\\"chatgpt-remote-image-service/agents/openai.yaml\\\",\\n      \\\"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\\\",\\n      \\\"chatgpt-remote-image-service/SKILL.md\\\"\\n    ],\\n    \\\"errors\\\": []\\n  }\\n}\",\"reasoning_content\":\"We are asked to return strict JSON only, no prose. The output must be a JSON object with required keys: status, summary, missing_fields, risks, assumptions, test_plan. Optional keys: skill_identity, node_draft, metadata_probe, source_digest, coverage_report. The deterministic baseline is provided, and we are to refine it. The instructions say: \\\"Do not repeat the full baseline node_draft.\\\" and \\\"Omit node_draft when the baseline is acceptable; the runtime will merge your result with the baseline. Include node_draft only when you need to replace or correct specific draft fields, and keep it compact.\\\"\\n\\nWe need to produce a JSON response that incorporates the baseline maybe with adjustments, but the baseline seems quite complete. The status is \\\"ready\\\", but we need to verify if anything is missing. The user instruction is: \\\"把这个 Skill 转换成一个不绑定上下游的 Runtime Node；首节点测试时允许用户直接输入 prompt，也要保留引用图、上传名、超时等 skill 暴露的可配置参数。\\\" So they want to convert this skill into a runtime node that is not bound to upstream/downstream, and when used as a first node for testing, allow the user to directly input prompt, and also keep configurable parameters exposed by the skill like reference image, upload name, timeout, etc. The baseline already has all these inputs. It is unbinding. So it seems acceptable. But we need to consider metadata_probe? The user request had \\\"fetch_metadata\\\": true, so we might include metadata_probe if we can. The baseline doesn't have metadata_probe. The instructions say: \\\"If source evidence cannot be read, do not claim high confidence; use needs_user_input.\\\" But we have source evidence read successfully from the installer digest. So we can be confident. The baseline's coverage_report is passed. So status ready.\\n\\nWe need to output a JSON object. The baseline's node_draft is quite large, but we are told to omit it if baseline acceptable. However, we need to include the required keys: status, summary, missing_fields, risks, assumptions, test_plan. The baseline already has some of these: status: \\\"ready\\\", summary? It's not in the baseline as a separate key, but it appears inside skill_identity as description. We need to add a summary field. Look at required keys: status, summary, missing_fields, risks, assumptions, test_plan. So we must include summary. Also, missing_fields is required. The baseline has coverage_report.missing_inputs empty, but we should include a dedicated missing_fields key (likely an array of missing field names). The baseline has risks and assumptions. It has a test_plan? No, the baseline does not include a test_plan. We need to add one. So we must produce a JSON with these keys, and optionally skip node_draft or include a compact correction if needed.\\n\\nGiven the baseline is largely acceptable, we can output a JSON with status: \\\"ready\\\", a suitable summary, missing_fields: [] (since all inputs covered), risks: [], assumptions: (as in baseline), test_plan: (we need to generate a concise test plan for this node). Also, we need to check if the node_draft should be included at all. The instruction says omit node_draft when baseline acceptable. The baseline provided is the deterministic baseline to refine, so we can output a response that includes status, summary, missing_fields, risks, assumptions, test_plan, and optionally other keys if needed. Since the user asked to \\\"return strict JSON only\\\", we should not include node_draft if it's unchanged. But the baseline already had node_draft embedded in the prompt. Our output should be a new JSON that merges what's needed. Maybe we should still output a top-level object with those keys, and skip node_draft entirely, because the runtime will merge the baseline. So I'll produce:\\n\\n{\\n  \\\"status\\\": \\\"ready\\\",\\n  \\\"summary\\\": \\\"Node definition for ChatGPT Remote Image Service skill. Accepts prompt, reference images (file or URL), upload name, API URL, poll interval, timeout. Produces generated image public URL and task status. No upstream/downstream binding; suitable as first node in a workflow.\\\",\\n  \\\"missing_fields\\\": [],\\n  \\\"risks\\\": [],\\n  \\\"assumptions\\\": [\\n    \\\"No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics.\\\",\\n    \\\"The executor type is agent-skill using hermes agent, which is appropriate for running shell-based skills.\\\",\\n    \\\"Skill installer is trusted and provides all necessary scripts and documentation.\\\"\\n  ],\\n  \\\"test_plan\\\": {\\n    \\\"manual_first_node_test\\\": {\\n      \\\"description\\\": \\\"Run as a first node in a workflow with user-provided prompt. Optionally provide reference image URL or file. Verify that the node executes the skill, polls task, and returns publicImageUrl in outputs.\\\",\\n      \\\"inputs\\\": {\\n        \\\"prompt\\\": \\\"Test prompt, e.g., 'Generate a test image of a sunset'\\\",\\n        \\\"reference_image_url\\\": \\\"Optional: URL of a reference image\\\",\\n        \\\"reference_image_file\\\": \\\"Optional: local file path\\\",\\n        \\\"upload_name\\\": \\\"Optional: custom name for output image\\\",\\n        \\\"timeout_seconds\\\": 300,\\n        \\\"poll_interval\\\": 5\\n      },\\n      \\\"expected_outputs\\\": [\\n        \\\"public_image_url\\\",\\n        \\\"task_id\\\",\\n        \\\"status\\\",\\n        \\\"manifest.json in outputs dir\\\"\\n      ],\\n      \\\"verification\\\": \\\"Check that outputs dir contains manifest.json and that the public_image_url is accessible.\\\"\\n    },\\n    \\\"health_check\\\": {\\n      \\\"description\\\": \\\"Verify that the skill can check the service health endpoint.\\\",\\n      \\\"commented\\\": \\\"Health check is part of the skill script but not directly exposed as a separate execution mode; it prints summary during submission.\\\"\\n    }\\n  },\\n  \\\"skill_identity\\\": {\\n    \\\"skill_id\\\": \\\"chatgpt-remote-image-service\\\",\\n    \\\"title\\\": \\\"Chatgpt Remote Image Service\\\",\\n    \\\"description\\\": \\\"Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint.\\\",\\n    \\\"installer_url\\\": \\\"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\\\",\\n    \\\"trusted_source\\\": true\\n  },\\n  \\\"metadata_probe\\\": null,\\n  \\\"source_digest\\\": {\\n    \\\"attempted\\\": true,\\n    \\\"install_command\\\": \\\"bash \\u003c(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')\\\",\\n    \\\"installer_url\\\": \\\"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\\\",\\n    \\\"zip_url\\\": \\\"https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip\\\",\\n    \\\"trusted_source\\\": true,\\n    \\\"files\\\": [\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/agents/openai.yaml\\\", \\\"bytes\\\": 227, \\\"truncated\\\": false },\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\\\", \\\"bytes\\\": 5390, \\\"truncated\\\": false },\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/SKILL.md\\\", \\\"bytes\\\": 3484, \\\"truncated\\\": false }\\n    ],\\n    \\\"cli_options\\\": [\\n      { \\\"option\\\": \\\"--apiUrl\\\", \\\"variable\\\": \\\"API_URL\\\", \\\"input_name\\\": \\\"api_url\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--image\\\", \\\"variable\\\": \\\"IMAGE\\\", \\\"input_name\\\": \\\"reference_image_file\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--image-url\\\", \\\"variable\\\": \\\"IMAGE_URL\\\", \\\"input_name\\\": \\\"reference_image_url\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--pollInterval\\\", \\\"variable\\\": \\\"POLL_INTERVAL\\\", \\\"input_name\\\": \\\"poll_interval\\\", \\\"required\\\": false },\\n      { \\\"opt\n...[truncated for Node Builder]"
+          }
+        ],
+        "llm_request": {
+          "model": "deepseek-v4-pro",
+          "messages": [
+            {
+              "role": "system",
+              "content": "Return strict JSON in message.content only. No prose."
+            },
+            {
+              "role": "user",
+              "content": "You are the SOP Node Builder Agent. Return strict JSON only, no markdown.\nBuild a node-definition/v1 draft from the skill install command and optional user instruction. A Node is a skill execution unit. Do not bind it to fixed upstream or downstream nodes. Edges own handoff semantics. The node should accept upstream_outputs_dir, instruction and context, and produce raw/node-runs/{run_id}/outputs plus manifest.json.\n\nRequired JSON keys: status, summary, missing_fields, risks, assumptions, test_plan. Optional JSON keys: skill_identity, node_draft, metadata_probe, source_digest, coverage_report. Allowed status: ready, needs_user_input, blocked. If uncertain, use needs_user_input and name the missing facts. Do not invent concrete scripts unless the source material proves they exist; use executor.request_template when only agent-skill is known. Capabilities should usually be git enabled, telegram disabled unless clearly notification-related, sse enabled.\n\nOutput size rule:\n- The deterministic baseline below is already a valid draft candidate.\n- Do not repeat the full baseline node_draft.\n- Omit node_draft when the baseline is acceptable; the runtime will merge your result with the baseline.\n- Include node_draft only when you need to replace or correct specific draft fields, and keep it compact.\n\nNode model rules:\n- Use schema node-definition/v1.\n- Put first-node/manual-test inputs under entry.inputs.\n- Handoff accepts upstream_outputs_dir, instruction, context.\n- outputs.root is raw/node-runs/{run_id}/outputs.\n- outputs.manifest is raw/node-runs/{run_id}/outputs/manifest.json.\n- outputs.expected describes logical artifacts; it is not a hard upstream binding.\n\nSource evidence rules:\n- Prefer facts from skill_source_digest files over guesses from the install command.\n- Map CLI\n...[truncated for Node Builder]"
+            }
+          ],
+          "temperature": 0.0,
+          "max_tokens": 4096,
+          "stream": false,
+          "response_format": {
+            "type": "json_object"
+          }
+        },
+        "llm_content": "{\n  \"status\": \"ready\",\n  \"summary\": \"Node definition for ChatGPT Remote Image Service skill. Accepts prompt, reference images (file or URL), upload name, API URL, poll interval, timeout. Produces generated image public URL and task status. No upstream/downstream binding; suitable as first node in a workflow.\",\n  \"missing_fields\": [],\n  \"risks\": [],\n  \"assumptions\": [\n    \"No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics.\",\n    \"The executor type is agent-skill using hermes agent, which is appropriate for running shell-based skills.\",\n    \"Skill installer is trusted and provides all necessary scripts and documentation.\"\n  ],\n  \"test_plan\": {\n    \"manual_first_node_test\": {\n      \"description\": \"Run as a first node in a workflow with user-provided prompt. Optionally provide reference image URL or file. Verify that the node executes the skill, polls task, and returns publicImageUrl in outputs.\",\n      \"inputs\": {\n        \"prompt\": \"Test prompt, e.g., 'Generate a test image of a sunset'\",\n        \"reference_image_url\": \"Optional: URL of a reference image\",\n        \"reference_image_file\": \"Optional: local file path\",\n        \"upload_name\": \"Optional: custom name for output image\",\n        \"timeout_seconds\": 300,\n        \"poll_interval\": 5\n      },\n      \"expected_outputs\": [\n        \"public_image_url\",\n        \"task_id\",\n        \"status\",\n        \"manifest.json in outputs dir\"\n      ],\n      \"verification\": \"Check that outputs dir contains manifest.json and that the public_image_url is accessible.\"\n    }\n  },\n  \"skill_identity\": {\n    \"skill_id\": \"chatgpt-remote-image-service\",\n    \"title\": \"Chatgpt Remote Image Service\",\n    \"description\": \"Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint.\",\n    \"installer_url\": \"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\",\n    \"trusted_source\": true\n  },\n  \"metadata_probe\": null,\n  \"source_digest\": {\n    \"attempted\": true,\n    \"install_command\": \"bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')\",\n    \"installer_url\": \"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\",\n    \"zip_url\": \"https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip\",\n    \"trusted_source\": true,\n    \"files\": [\n      { \"path\": \"chatgpt-remote-image-service/agents/openai.yaml\", \"bytes\": 227, \"truncated\": false },\n      { \"path\": \"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\", \"bytes\": 5390, \"truncated\": false },\n      { \"path\": \"chatgpt-remote-image-service/SKILL.md\", \"bytes\": 3484, \"truncated\": false }\n    ],\n    \"cli_options\": [\n      { \"option\": \"--apiUrl\", \"variable\": \"API_URL\", \"input_name\": \"api_url\", \"required\": false },\n      { \"option\": \"--image\", \"variable\": \"IMAGE\", \"input_name\": \"reference_image_file\", \"required\": false },\n      { \"option\": \"--image-url\", \"variable\": \"IMAGE_URL\", \"input_name\": \"reference_image_url\", \"required\": false },\n      { \"option\": \"--pollInterval\", \"variable\": \"POLL_INTERVAL\", \"input_name\": \"poll_interval\", \"required\": false },\n      { \"option\": \"--prompt\", \"variable\": \"PROMPT\", \"input_name\": \"prompt\", \"required\": true },\n      { \"option\": \"--timeoutSeconds\", \"variable\": \"TIMEOUT_SECONDS\", \"input_name\": \"timeout_seconds\", \"required\": false },\n      { \"option\": \"--uploadName\", \"variable\": \"UPLOAD_NAME\", \"input_name\": \"upload_name\", \"required\": false }\n    ],\n    \"errors\": []\n  },\n  \"coverage_report\": {\n    \"status\": \"passed\",\n    \"covered_inputs\": [\"api_url\", \"reference_image_file\", \"reference_image_url\", \"poll_interval\", \"prompt\", \"timeout_seconds\", \"upload_name\"],\n    \"missing_inputs\": [],\n    \"source_files_read\": [\n      \"chatgpt-remote-image-service/agents/openai.yaml\",\n      \"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\",\n      \"chatgpt-remote-image-service/SKILL.md\"\n    ],\n    \"errors\": []\n  }\n}",
+        "parsed": {
+          "status": "ready",
+          "summary": "Node definition for ChatGPT Remote Image Service skill. Accepts prompt, reference images (file or URL), upload name, API URL, poll interval, timeout. Produces generated image public URL and task status. No upstream/downstream binding; suitable as first node in a workflow.",
+          "missing_fields": [],
+          "risks": [],
+          "assumptions": [
+            "No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics.",
+            "The executor type is agent-skill using hermes agent, which is appropriate for running shell-based skills.",
+            "Skill installer is trusted and provides all necessary scripts and documentation."
+          ],
+          "test_plan": {
+            "manual_first_node_test": {
+              "description": "Run as a first node in a workflow with user-provided prompt. Optionally provide reference image URL or file. Verify that the node executes the skill, polls task, and returns publicImageUrl in outputs.",
+              "inputs": {
+                "prompt": "Test prompt, e.g., 'Generate a test image of a sunset'",
+                "reference_image_url": "Optional: URL of a reference image",
+                "reference_image_file": "Optional: local file path",
+                "upload_name": "Optional: custom name for output image",
+                "timeout_seconds": 300,
+                "poll_interval": 5
+              },
+              "expected_outputs": [
+                "public_image_url",
+                "task_id",
+                "status",
+                "manifest.json in outputs dir"
+              ],
+              "verification": "Check that outputs dir contains manifest.json and that the public_image_url is accessible."
+            }
+          },
+          "skill_identity": {
+            "skill_id": "chatgpt-remote-image-service",
+            "title": "Chatgpt Remote Image Service",
+            "description": "Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint.",
+            "installer_url": "https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544",
+            "trusted_source": true
+          },
+          "metadata_probe": null,
+          "source_digest": {
+            "attempted": true,
+            "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+            "installer_url": "https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544",
+            "zip_url": "https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip",
+            "trusted_source": true,
+            "files": [
+              {
+                "path": "chatgpt-remote-image-service/agents/openai.yaml",
+                "bytes": 227,
+                "truncated": false
+              },
+              {
+                "path": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+                "bytes": 5390,
+                "truncated": false
+              },
+              {
+                "path": "chatgpt-remote-image-service/SKILL.md",
+                "bytes": 3484,
+                "truncated": false
+              }
+            ],
+            "cli_options": [
+              {
+                "option": "--apiUrl",
+                "variable": "API_URL",
+                "input_name": "api_url",
+                "required": false
+              },
+              {
+                "option": "--image",
+                "variable": "IMAGE",
+                "input_name": "reference_image_file",
+                "required": false
+              },
+              {
+                "option": "--image-url",
+                "variable": "IMAGE_URL",
+                "input_name": "reference_image_url",
+                "required": false
+              },
+              {
+                "option": "--pollInterval",
+                "variable": "POLL_INTERVAL",
+                "input_name": "poll_interval",
+                "required": false
+              },
+              {
+                "option": "--prompt",
+                "variable": "PROMPT",
+                "input_name": "prompt",
+                "required": true
+              },
+              {
+                "option": "--timeoutSeconds",
+                "variable": "TIMEOUT_SECONDS",
+                "input_name": "timeout_seconds",
+                "required": false
+              },
+              {
+                "option": "--uploadName",
+                "variable": "UPLOAD_NAME",
+                "input_name": "upload_name",
+                "required": false
+              }
+            ],
+            "errors": []
+          },
+          "coverage_report": {
+            "status": "passed",
+            "covered_inputs": [
+              "api_url",
+              "reference_image_file",
+              "reference_image_url",
+              "poll_interval",
+              "prompt",
+              "timeout_seconds",
+              "upload_name"
+            ],
+            "missing_inputs": [],
+            "source_files_read": [
+              "chatgpt-remote-image-service/agents/openai.yaml",
+              "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+              "chatgpt-remote-image-service/SKILL.md"
+            ],
+            "errors": []
+          }
+        },
+        "finished_at": "2026-06-29T09:18:21Z"
+      },
+      "evaluated_at": "2026-06-29T09:18:21Z"
+    },
+    "trace": {
+      "trace_schema": "node-builder-agent-trace/v1",
+      "request": {
+        "runtime_id": "youtube-wiki",
+        "instance_id": "wiki-sop-new-instance",
+        "skill_install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+        "user_instruction": "把这个 Skill 转换成一个不绑定上下游的 Runtime Node；首节点测试时允许用户直接输入 prompt，也要保留引用图、上传名、超时等 skill 暴露的可配置参数。",
+        "fetch_metadata": true
+      },
+      "config": {
+        "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "model": "deepseek-v4-pro",
+        "api_key": "ah-***c68"
+      },
+      "started_at": "2026-06-29T09:17:35Z",
+      "attempts": [
+        {
+          "status": "response",
+          "duration_ms": 46289,
+          "raw_response": "{\"id\":\"e6deb3e0-1917-4e53-ba1d-ba9eef67a1b8\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"status\\\": \\\"ready\\\",\\n  \\\"summary\\\": \\\"Node definition for ChatGPT Remote Image Service skill. Accepts prompt, reference images (file or URL), upload name, API URL, poll interval, timeout. Produces generated image public URL and task status. No upstream/downstream binding; suitable as first node in a workflow.\\\",\\n  \\\"missing_fields\\\": [],\\n  \\\"risks\\\": [],\\n  \\\"assumptions\\\": [\\n    \\\"No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics.\\\",\\n    \\\"The executor type is agent-skill using hermes agent, which is appropriate for running shell-based skills.\\\",\\n    \\\"Skill installer is trusted and provides all necessary scripts and documentation.\\\"\\n  ],\\n  \\\"test_plan\\\": {\\n    \\\"manual_first_node_test\\\": {\\n      \\\"description\\\": \\\"Run as a first node in a workflow with user-provided prompt. Optionally provide reference image URL or file. Verify that the node executes the skill, polls task, and returns publicImageUrl in outputs.\\\",\\n      \\\"inputs\\\": {\\n        \\\"prompt\\\": \\\"Test prompt, e.g., 'Generate a test image of a sunset'\\\",\\n        \\\"reference_image_url\\\": \\\"Optional: URL of a reference image\\\",\\n        \\\"reference_image_file\\\": \\\"Optional: local file path\\\",\\n        \\\"upload_name\\\": \\\"Optional: custom name for output image\\\",\\n        \\\"timeout_seconds\\\": 300,\\n        \\\"poll_interval\\\": 5\\n      },\\n      \\\"expected_outputs\\\": [\\n        \\\"public_image_url\\\",\\n        \\\"task_id\\\",\\n        \\\"status\\\",\\n        \\\"manifest.json in outputs dir\\\"\\n      ],\\n      \\\"verification\\\": \\\"Check that outputs dir contains manifest.json and that the public_image_url is accessible.\\\"\\n    }\\n  },\\n  \\\"skill_identity\\\": {\\n    \\\"skill_id\\\": \\\"chatgpt-remote-image-service\\\",\\n    \\\"title\\\": \\\"Chatgpt Remote Image Service\\\",\\n    \\\"description\\\": \\\"Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint.\\\",\\n    \\\"installer_url\\\": \\\"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\\\",\\n    \\\"trusted_source\\\": true\\n  },\\n  \\\"metadata_probe\\\": null,\\n  \\\"source_digest\\\": {\\n    \\\"attempted\\\": true,\\n    \\\"install_command\\\": \\\"bash \\u003c(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')\\\",\\n    \\\"installer_url\\\": \\\"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\\\",\\n    \\\"zip_url\\\": \\\"https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip\\\",\\n    \\\"trusted_source\\\": true,\\n    \\\"files\\\": [\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/agents/openai.yaml\\\", \\\"bytes\\\": 227, \\\"truncated\\\": false },\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\\\", \\\"bytes\\\": 5390, \\\"truncated\\\": false },\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/SKILL.md\\\", \\\"bytes\\\": 3484, \\\"truncated\\\": false }\\n    ],\\n    \\\"cli_options\\\": [\\n      { \\\"option\\\": \\\"--apiUrl\\\", \\\"variable\\\": \\\"API_URL\\\", \\\"input_name\\\": \\\"api_url\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--image\\\", \\\"variable\\\": \\\"IMAGE\\\", \\\"input_name\\\": \\\"reference_image_file\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--image-url\\\", \\\"variable\\\": \\\"IMAGE_URL\\\", \\\"input_name\\\": \\\"reference_image_url\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--pollInterval\\\", \\\"variable\\\": \\\"POLL_INTERVAL\\\", \\\"input_name\\\": \\\"poll_interval\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--prompt\\\", \\\"variable\\\": \\\"PROMPT\\\", \\\"input_name\\\": \\\"prompt\\\", \\\"required\\\": true },\\n      { \\\"option\\\": \\\"--timeoutSeconds\\\", \\\"variable\\\": \\\"TIMEOUT_SECONDS\\\", \\\"input_name\\\": \\\"timeout_seconds\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--uploadName\\\", \\\"variable\\\": \\\"UPLOAD_NAME\\\", \\\"input_name\\\": \\\"upload_name\\\", \\\"required\\\": false }\\n    ],\\n    \\\"errors\\\": []\\n  },\\n  \\\"coverage_report\\\": {\\n    \\\"status\\\": \\\"passed\\\",\\n    \\\"covered_inputs\\\": [\\\"api_url\\\", \\\"reference_image_file\\\", \\\"reference_image_url\\\", \\\"poll_interval\\\", \\\"prompt\\\", \\\"timeout_seconds\\\", \\\"upload_name\\\"],\\n    \\\"missing_inputs\\\": [],\\n    \\\"source_files_read\\\": [\\n      \\\"chatgpt-remote-image-service/agents/openai.yaml\\\",\\n      \\\"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\\\",\\n      \\\"chatgpt-remote-image-service/SKILL.md\\\"\\n    ],\\n    \\\"errors\\\": []\\n  }\\n}\",\"reasoning_content\":\"We are asked to return strict JSON only, no prose. The output must be a JSON object with required keys: status, summary, missing_fields, risks, assumptions, test_plan. Optional keys: skill_identity, node_draft, metadata_probe, source_digest, coverage_report. The deterministic baseline is provided, and we are to refine it. The instructions say: \\\"Do not repeat the full baseline node_draft.\\\" and \\\"Omit node_draft when the baseline is acceptable; the runtime will merge your result with the baseline. Include node_draft only when you need to replace or correct specific draft fields, and keep it compact.\\\"\\n\\nWe need to produce a JSON response that incorporates the baseline maybe with adjustments, but the baseline seems quite complete. The status is \\\"ready\\\", but we need to verify if anything is missing. The user instruction is: \\\"把这个 Skill 转换成一个不绑定上下游的 Runtime Node；首节点测试时允许用户直接输入 prompt，也要保留引用图、上传名、超时等 skill 暴露的可配置参数。\\\" So they want to convert this skill into a runtime node that is not bound to upstream/downstream, and when used as a first node for testing, allow the user to directly input prompt, and also keep configurable parameters exposed by the skill like reference image, upload name, timeout, etc. The baseline already has all these inputs. It is unbinding. So it seems acceptable. But we need to consider metadata_probe? The user request had \\\"fetch_metadata\\\": true, so we might include metadata_probe if we can. The baseline doesn't have metadata_probe. The instructions say: \\\"If source evidence cannot be read, do not claim high confidence; use needs_user_input.\\\" But we have source evidence read successfully from the installer digest. So we can be confident. The baseline's coverage_report is passed. So status ready.\\n\\nWe need to output a JSON object. The baseline's node_draft is quite large, but we are told to omit it if baseline acceptable. However, we need to include the required keys: status, summary, missing_fields, risks, assumptions, test_plan. The baseline already has some of these: status: \\\"ready\\\", summary? It's not in the baseline as a separate key, but it appears inside skill_identity as description. We need to add a summary field. Look at required keys: status, summary, missing_fields, risks, assumptions, test_plan. So we must include summary. Also, missing_fields is required. The baseline has coverage_report.missing_inputs empty, but we should include a dedicated missing_fields key (likely an array of missing field names). The baseline has risks and assumptions. It has a test_plan? No, the baseline does not include a test_plan. We need to add one. So we must produce a JSON with these keys, and optionally skip node_draft or include a compact correction if needed.\\n\\nGiven the baseline is largely acceptable, we can output a JSON with status: \\\"ready\\\", a suitable summary, missing_fields: [] (since all inputs covered), risks: [], assumptions: (as in baseline), test_plan: (we need to generate a concise test plan for this node). Also, we need to check if the node_draft should be included at all. The instruction says omit node_draft when baseline acceptable. The baseline provided is the deterministic baseline to refine, so we can output a response that includes status, summary, missing_fields, risks, assumptions, test_plan, and optionally other keys if needed. Since the user asked to \\\"return strict JSON only\\\", we should not include node_draft if it's unchanged. But the baseline already had node_draft embedded in the prompt. Our output should be a new JSON that merges what's needed. Maybe we should still output a top-level object with those keys, and skip node_draft entirely, because the runtime will merge the baseline. So I'll produce:\\n\\n{\\n  \\\"status\\\": \\\"ready\\\",\\n  \\\"summary\\\": \\\"Node definition for ChatGPT Remote Image Service skill. Accepts prompt, reference images (file or URL), upload name, API URL, poll interval, timeout. Produces generated image public URL and task status. No upstream/downstream binding; suitable as first node in a workflow.\\\",\\n  \\\"missing_fields\\\": [],\\n  \\\"risks\\\": [],\\n  \\\"assumptions\\\": [\\n    \\\"No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics.\\\",\\n    \\\"The executor type is agent-skill using hermes agent, which is appropriate for running shell-based skills.\\\",\\n    \\\"Skill installer is trusted and provides all necessary scripts and documentation.\\\"\\n  ],\\n  \\\"test_plan\\\": {\\n    \\\"manual_first_node_test\\\": {\\n      \\\"description\\\": \\\"Run as a first node in a workflow with user-provided prompt. Optionally provide reference image URL or file. Verify that the node executes the skill, polls task, and returns publicImageUrl in outputs.\\\",\\n      \\\"inputs\\\": {\\n        \\\"prompt\\\": \\\"Test prompt, e.g., 'Generate a test image of a sunset'\\\",\\n        \\\"reference_image_url\\\": \\\"Optional: URL of a reference image\\\",\\n        \\\"reference_image_file\\\": \\\"Optional: local file path\\\",\\n        \\\"upload_name\\\": \\\"Optional: custom name for output image\\\",\\n        \\\"timeout_seconds\\\": 300,\\n        \\\"poll_interval\\\": 5\\n      },\\n      \\\"expected_outputs\\\": [\\n        \\\"public_image_url\\\",\\n        \\\"task_id\\\",\\n        \\\"status\\\",\\n        \\\"manifest.json in outputs dir\\\"\\n      ],\\n      \\\"verification\\\": \\\"Check that outputs dir contains manifest.json and that the public_image_url is accessible.\\\"\\n    },\\n    \\\"health_check\\\": {\\n      \\\"description\\\": \\\"Verify that the skill can check the service health endpoint.\\\",\\n      \\\"commented\\\": \\\"Health check is part of the skill script but not directly exposed as a separate execution mode; it prints summary during submission.\\\"\\n    }\\n  },\\n  \\\"skill_identity\\\": {\\n    \\\"skill_id\\\": \\\"chatgpt-remote-image-service\\\",\\n    \\\"title\\\": \\\"Chatgpt Remote Image Service\\\",\\n    \\\"description\\\": \\\"Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint.\\\",\\n    \\\"installer_url\\\": \\\"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\\\",\\n    \\\"trusted_source\\\": true\\n  },\\n  \\\"metadata_probe\\\": null,\\n  \\\"source_digest\\\": {\\n    \\\"attempted\\\": true,\\n    \\\"install_command\\\": \\\"bash \\u003c(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')\\\",\\n    \\\"installer_url\\\": \\\"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\\\",\\n    \\\"zip_url\\\": \\\"https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip\\\",\\n    \\\"trusted_source\\\": true,\\n    \\\"files\\\": [\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/agents/openai.yaml\\\", \\\"bytes\\\": 227, \\\"truncated\\\": false },\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\\\", \\\"bytes\\\": 5390, \\\"truncated\\\": false },\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/SKILL.md\\\", \\\"bytes\\\": 3484, \\\"truncated\\\": false }\\n    ],\\n    \\\"cli_options\\\": [\\n      { \\\"option\\\": \\\"--apiUrl\\\", \\\"variable\\\": \\\"API_URL\\\", \\\"input_name\\\": \\\"api_url\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--image\\\", \\\"variable\\\": \\\"IMAGE\\\", \\\"input_name\\\": \\\"reference_image_file\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--image-url\\\", \\\"variable\\\": \\\"IMAGE_URL\\\", \\\"input_name\\\": \\\"reference_image_url\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--pollInterval\\\", \\\"variable\\\": \\\"POLL_INTERVAL\\\", \\\"input_name\\\": \\\"poll_interval\\\", \\\"required\\\": false },\\n      { \\\"opt\n...[truncated for Node Builder]"
+        }
+      ],
+      "llm_request": {
+        "model": "deepseek-v4-pro",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Return strict JSON in message.content only. No prose."
+          },
+          {
+            "role": "user",
+            "content": "You are the SOP Node Builder Agent. Return strict JSON only, no markdown.\nBuild a node-definition/v1 draft from the skill install command and optional user instruction. A Node is a skill execution unit. Do not bind it to fixed upstream or downstream nodes. Edges own handoff semantics. The node should accept upstream_outputs_dir, instruction and context, and produce raw/node-runs/{run_id}/outputs plus manifest.json.\n\nRequired JSON keys: status, summary, missing_fields, risks, assumptions, test_plan. Optional JSON keys: skill_identity, node_draft, metadata_probe, source_digest, coverage_report. Allowed status: ready, needs_user_input, blocked. If uncertain, use needs_user_input and name the missing facts. Do not invent concrete scripts unless the source material proves they exist; use executor.request_template when only agent-skill is known. Capabilities should usually be git enabled, telegram disabled unless clearly notification-related, sse enabled.\n\nOutput size rule:\n- The deterministic baseline below is already a valid draft candidate.\n- Do not repeat the full baseline node_draft.\n- Omit node_draft when the baseline is acceptable; the runtime will merge your result with the baseline.\n- Include node_draft only when you need to replace or correct specific draft fields, and keep it compact.\n\nNode model rules:\n- Use schema node-definition/v1.\n- Put first-node/manual-test inputs under entry.inputs.\n- Handoff accepts upstream_outputs_dir, instruction, context.\n- outputs.root is raw/node-runs/{run_id}/outputs.\n- outputs.manifest is raw/node-runs/{run_id}/outputs/manifest.json.\n- outputs.expected describes logical artifacts; it is not a hard upstream binding.\n\nSource evidence rules:\n- Prefer facts from skill_source_digest files over guesses from the install command.\n- Map CLI\n...[truncated for Node Builder]"
+          }
+        ],
+        "temperature": 0.0,
+        "max_tokens": 4096,
+        "stream": false,
+        "response_format": {
+          "type": "json_object"
+        }
+      },
+      "llm_content": "{\n  \"status\": \"ready\",\n  \"summary\": \"Node definition for ChatGPT Remote Image Service skill. Accepts prompt, reference images (file or URL), upload name, API URL, poll interval, timeout. Produces generated image public URL and task status. No upstream/downstream binding; suitable as first node in a workflow.\",\n  \"missing_fields\": [],\n  \"risks\": [],\n  \"assumptions\": [\n    \"No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics.\",\n    \"The executor type is agent-skill using hermes agent, which is appropriate for running shell-based skills.\",\n    \"Skill installer is trusted and provides all necessary scripts and documentation.\"\n  ],\n  \"test_plan\": {\n    \"manual_first_node_test\": {\n      \"description\": \"Run as a first node in a workflow with user-provided prompt. Optionally provide reference image URL or file. Verify that the node executes the skill, polls task, and returns publicImageUrl in outputs.\",\n      \"inputs\": {\n        \"prompt\": \"Test prompt, e.g., 'Generate a test image of a sunset'\",\n        \"reference_image_url\": \"Optional: URL of a reference image\",\n        \"reference_image_file\": \"Optional: local file path\",\n        \"upload_name\": \"Optional: custom name for output image\",\n        \"timeout_seconds\": 300,\n        \"poll_interval\": 5\n      },\n      \"expected_outputs\": [\n        \"public_image_url\",\n        \"task_id\",\n        \"status\",\n        \"manifest.json in outputs dir\"\n      ],\n      \"verification\": \"Check that outputs dir contains manifest.json and that the public_image_url is accessible.\"\n    }\n  },\n  \"skill_identity\": {\n    \"skill_id\": \"chatgpt-remote-image-service\",\n    \"title\": \"Chatgpt Remote Image Service\",\n    \"description\": \"Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint.\",\n    \"installer_url\": \"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\",\n    \"trusted_source\": true\n  },\n  \"metadata_probe\": null,\n  \"source_digest\": {\n    \"attempted\": true,\n    \"install_command\": \"bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')\",\n    \"installer_url\": \"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\",\n    \"zip_url\": \"https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip\",\n    \"trusted_source\": true,\n    \"files\": [\n      { \"path\": \"chatgpt-remote-image-service/agents/openai.yaml\", \"bytes\": 227, \"truncated\": false },\n      { \"path\": \"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\", \"bytes\": 5390, \"truncated\": false },\n      { \"path\": \"chatgpt-remote-image-service/SKILL.md\", \"bytes\": 3484, \"truncated\": false }\n    ],\n    \"cli_options\": [\n      { \"option\": \"--apiUrl\", \"variable\": \"API_URL\", \"input_name\": \"api_url\", \"required\": false },\n      { \"option\": \"--image\", \"variable\": \"IMAGE\", \"input_name\": \"reference_image_file\", \"required\": false },\n      { \"option\": \"--image-url\", \"variable\": \"IMAGE_URL\", \"input_name\": \"reference_image_url\", \"required\": false },\n      { \"option\": \"--pollInterval\", \"variable\": \"POLL_INTERVAL\", \"input_name\": \"poll_interval\", \"required\": false },\n      { \"option\": \"--prompt\", \"variable\": \"PROMPT\", \"input_name\": \"prompt\", \"required\": true },\n      { \"option\": \"--timeoutSeconds\", \"variable\": \"TIMEOUT_SECONDS\", \"input_name\": \"timeout_seconds\", \"required\": false },\n      { \"option\": \"--uploadName\", \"variable\": \"UPLOAD_NAME\", \"input_name\": \"upload_name\", \"required\": false }\n    ],\n    \"errors\": []\n  },\n  \"coverage_report\": {\n    \"status\": \"passed\",\n    \"covered_inputs\": [\"api_url\", \"reference_image_file\", \"reference_image_url\", \"poll_interval\", \"prompt\", \"timeout_seconds\", \"upload_name\"],\n    \"missing_inputs\": [],\n    \"source_files_read\": [\n      \"chatgpt-remote-image-service/agents/openai.yaml\",\n      \"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\",\n      \"chatgpt-remote-image-service/SKILL.md\"\n    ],\n    \"errors\": []\n  }\n}",
+      "parsed": {
+        "status": "ready",
+        "summary": "Node definition for ChatGPT Remote Image Service skill. Accepts prompt, reference images (file or URL), upload name, API URL, poll interval, timeout. Produces generated image public URL and task status. No upstream/downstream binding; suitable as first node in a workflow.",
+        "missing_fields": [],
+        "risks": [],
+        "assumptions": [
+          "No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics.",
+          "The executor type is agent-skill using hermes agent, which is appropriate for running shell-based skills.",
+          "Skill installer is trusted and provides all necessary scripts and documentation."
+        ],
+        "test_plan": {
+          "manual_first_node_test": {
+            "description": "Run as a first node in a workflow with user-provided prompt. Optionally provide reference image URL or file. Verify that the node executes the skill, polls task, and returns publicImageUrl in outputs.",
+            "inputs": {
+              "prompt": "Test prompt, e.g., 'Generate a test image of a sunset'",
+              "reference_image_url": "Optional: URL of a reference image",
+              "reference_image_file": "Optional: local file path",
+              "upload_name": "Optional: custom name for output image",
+              "timeout_seconds": 300,
+              "poll_interval": 5
+            },
+            "expected_outputs": [
+              "public_image_url",
+              "task_id",
+              "status",
+              "manifest.json in outputs dir"
+            ],
+            "verification": "Check that outputs dir contains manifest.json and that the public_image_url is accessible."
+          }
+        },
+        "skill_identity": {
+          "skill_id": "chatgpt-remote-image-service",
+          "title": "Chatgpt Remote Image Service",
+          "description": "Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint.",
+          "installer_url": "https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544",
+          "trusted_source": true
+        },
+        "metadata_probe": null,
+        "source_digest": {
+          "attempted": true,
+          "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+          "installer_url": "https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544",
+          "zip_url": "https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip",
+          "trusted_source": true,
+          "files": [
+            {
+              "path": "chatgpt-remote-image-service/agents/openai.yaml",
+              "bytes": 227,
+              "truncated": false
+            },
+            {
+              "path": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+              "bytes": 5390,
+              "truncated": false
+            },
+            {
+              "path": "chatgpt-remote-image-service/SKILL.md",
+              "bytes": 3484,
+              "truncated": false
+            }
+          ],
+          "cli_options": [
+            {
+              "option": "--apiUrl",
+              "variable": "API_URL",
+              "input_name": "api_url",
+              "required": false
+            },
+            {
+              "option": "--image",
+              "variable": "IMAGE",
+              "input_name": "reference_image_file",
+              "required": false
+            },
+            {
+              "option": "--image-url",
+              "variable": "IMAGE_URL",
+              "input_name": "reference_image_url",
+              "required": false
+            },
+            {
+              "option": "--pollInterval",
+              "variable": "POLL_INTERVAL",
+              "input_name": "poll_interval",
+              "required": false
+            },
+            {
+              "option": "--prompt",
+              "variable": "PROMPT",
+              "input_name": "prompt",
+              "required": true
+            },
+            {
+              "option": "--timeoutSeconds",
+              "variable": "TIMEOUT_SECONDS",
+              "input_name": "timeout_seconds",
+              "required": false
+            },
+            {
+              "option": "--uploadName",
+              "variable": "UPLOAD_NAME",
+              "input_name": "upload_name",
+              "required": false
+            }
+          ],
+          "errors": []
+        },
+        "coverage_report": {
+          "status": "passed",
+          "covered_inputs": [
+            "api_url",
+            "reference_image_file",
+            "reference_image_url",
+            "poll_interval",
+            "prompt",
+            "timeout_seconds",
+            "upload_name"
+          ],
+          "missing_inputs": [],
+          "source_files_read": [
+            "chatgpt-remote-image-service/agents/openai.yaml",
+            "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+            "chatgpt-remote-image-service/SKILL.md"
+          ],
+          "errors": []
+        }
+      },
+      "finished_at": "2026-06-29T09:18:21Z"
+    },
+    "stderr": ""
+  },
+  "request": {
+    "runtime_id": "youtube-wiki",
+    "instance_id": "wiki-sop-new-instance",
+    "skill_install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+    "user_instruction": "把这个 Skill 转换成一个不绑定上下游的 Runtime Node；首节点测试时允许用户直接输入 prompt，也要保留引用图、上传名、超时等 skill 暴露的可配置参数。",
+    "fetch_metadata": true
+  },
+  "config": {
+    "base_url": {
+      "key": "WIKI_LLM_BASE_URL",
+      "label": "Node Builder LLM Base URL",
+      "required": true,
+      "present": true,
+      "source": "instance-settings:WIKI_LLM_BASE_URL",
+      "masked_value": "https://api-proxy.chxyka.ccwu.cc/v1",
+      "value": "https://api-proxy.chxyka.ccwu.cc/v1"
+    },
+    "api_key": {
+      "key": "WIKI_LLM_API_KEY",
+      "label": "Node Builder LLM API Key",
+      "required": true,
+      "present": true,
+      "source": "instance-settings:WIKI_LLM_API_KEY",
+      "masked_value": "ah-***c68",
+      "value": null
+    },
+    "model": {
+      "key": "WIKI_LLM_MODEL",
+      "label": "Node Builder LLM Model",
+      "required": true,
+      "present": true,
+      "source": "instance-settings:WIKI_LLM_MODEL",
+      "masked_value": "deepseek-v4-pro",
+      "value": "deepseek-v4-pro"
+    },
+    "settings_backend": "file",
+    "precedence": [
+      "node-run-overrides",
+      "instance-settings",
+      "runtime-settings",
+      "global-settings",
+      "bridge-env",
+      "runtime-env-file"
+    ]
+  },
+  "evaluation": {
+    "status": "ready",
+    "summary": "Node definition for ChatGPT Remote Image Service skill. Accepts prompt, reference images (file or URL), upload name, API URL, poll interval, timeout. Produces generated image public URL and task status. No upstream/downstream binding; suitable as first node in a workflow.",
+    "skill_identity": {
+      "skill_id": "chatgpt-remote-image-service",
+      "title": "Chatgpt Remote Image Service",
+      "description": "Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint.",
+      "installer_url": "https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544",
+      "trusted_source": true
+    },
+    "node_draft": {
+      "schema": "node-definition/v1",
+      "id": "chatgpt-remote-image-service",
+      "title": "Chatgpt Remote Image Service",
+      "description": "把这个 Skill 转换成一个不绑定上下游的 Runtime Node；首节点测试时允许用户直接输入 prompt，也要保留引用图、上传名、超时等 skill 暴露的可配置参数。",
+      "version": "0.1-runtime-draft",
+      "skill": {
+        "id": "chatgpt-remote-image-service",
+        "source": "skill-installer",
+        "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+        "source_digest": {
+          "installer_url": "https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544",
+          "zip_url": "https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip",
+          "files": [
+            {
+              "path": "chatgpt-remote-image-service/agents/openai.yaml",
+              "bytes": 227,
+              "truncated": false
+            },
+            {
+              "path": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+              "bytes": 5390,
+              "truncated": false
+            },
+            {
+              "path": "chatgpt-remote-image-service/SKILL.md",
+              "bytes": 3484,
+              "truncated": false,
+              "content": "---\nname: chatgpt-remote-image-service\ndescription: Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint. Trigger for requests involving remote ChatGPT 生图接口, 公网生图服务, chatgpt-image.vyibc.com, remote image generation API, taskId polling, or CLI calls to the image service.\n---\n\n# ChatGPT Remote Image Service\n\nUse this skill for the hosted ChatGPT image queue service.\n\nDefault endpoint:\n\n```text\nhttps://chatgpt-image.vyibc.com\n```\n\nThe service is public and does not require an Authorization header. Object names are made unique by the service: if the caller sends `uploadName=test.png`, the final R2 object will use the task id, such as `<taskId>.png`, to avoid overwriting prior images.\n\nThe service supports both modes:\n\n- Reference-image generation: send `image` and `prompt`.\n- Reference-image generation from URL: pass `--imageUrl` to the CLI, or download the URL first for raw HTTP.\n- Pure prompt generation: send only `prompt`.\n\n## Quick Start\n\nPrefer the bundled CLI:\n\n```bash\nscripts/chatgpt-remote-image.sh \\\n  --imageUrl \"https://resource.vyibc.com/reference.png\" \\\n  --prompt \"以参考图中的人物为准，生成一张在游泳馆的照片\"\n```\n\nLocal reference file:\n\n```bash\nscripts/chatgpt-remote-image.sh \\\n  --image /path/to/reference.png \\\n  --prompt \"以参考图中的人物为准，生成一张在游泳馆的照片\"\n```\n\nPure prompt generation:\n\n```bash\nscripts/chatgpt-remote-image.sh \\\n  --prompt \"生成一张未来城市夜景照片，真实摄影风格\"\n```\n\nThe script submits `POST /generate`, polls `GET /tasks/<taskId>`, and exits successfully only when `publicImageUrl` is returned.\nAt startup it also prints the current browser worker summary, including total workers, logged-in workers, workers requiring login, active workers, queued tasks, and CDP ports.\nIf\n...[truncated for Node Builder]"
+            }
+          ]
+        }
+      },
+      "executor": {
+        "type": "agent-skill",
+        "agent": "hermes",
+        "skill": "chatgpt-remote-image-service",
+        "request_template": "node-execution-request/v1"
+      },
+      "entry": {
+        "inputs": {
+          "api_url": {
+            "required": false,
+            "input_kind": "url",
+            "value_type": "url",
+            "label": "Api Url",
+            "description": "Value for CLI option --apiUrl.",
+            "evidence": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option --apiUrl -> $API_URL",
+            "cli_option": "--apiUrl"
+          },
+          "reference_image_file": {
+            "required": false,
+            "input_kind": "file",
+            "value_type": "image",
+            "label": "Reference Image File",
+            "description": "Optional local reference image file path consumed by the skill.",
+            "evidence": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option --image -> $IMAGE",
+            "cli_option": "--image"
+          },
+          "reference_image_url": {
+            "required": false,
+            "input_kind": "url",
+            "value_type": "url",
+            "label": "Reference Image Url",
+            "description": "Optional reference image URL consumed by the skill.",
+            "evidence": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option --image-url -> $IMAGE_URL; chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option --imageUrl -> $IMAGE_URL",
+            "cli_option": "--image-url"
+          },
+          "poll_interval": {
+            "required": false,
+            "input_kind": "number",
+            "value_type": "number",
+            "label": "Poll Interval",
+            "description": "Value for CLI option --pollInterval.",
+            "evidence": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option --pollInterval -> $POLL_INTERVAL",
+            "cli_option": "--pollInterval"
+          },
+          "prompt": {
+            "required": true,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Prompt",
+            "description": "Task prompt or user instruction passed to the skill.",
+            "evidence": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option --prompt -> $PROMPT",
+            "cli_option": "--prompt",
+            "example": "生成一张小猫睡觉的照片"
+          },
+          "timeout_seconds": {
+            "required": false,
+            "input_kind": "number",
+            "value_type": "number",
+            "label": "Timeout Seconds",
+            "description": "Value for CLI option --timeoutSeconds.",
+            "evidence": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option --timeoutSeconds -> $TIMEOUT_SECONDS",
+            "cli_option": "--timeoutSeconds"
+          },
+          "upload_name": {
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Upload Name",
+            "description": "Optional output object/file name hint.",
+            "evidence": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option --uploadName -> $UPLOAD_NAME",
+            "cli_option": "--uploadName"
+          }
+        }
+      },
+      "handoff": {
+        "accepts": {
+          "upstream_outputs_dir": {
+            "required": false,
+            "description": "一个或多个上游 Node 的标准输出目录。"
+          },
+          "instruction": {
+            "required": true,
+            "description": "Edge Handoff Agent 或用户提供的交接说明。"
+          },
+          "context": {
+            "required": false,
+            "description": "运行上下文或补充说明。"
+          }
+        },
+        "produces": {
+          "outputs_dir": "raw/node-runs/{run_id}/outputs",
+          "manifest": "raw/node-runs/{run_id}/outputs/manifest.json"
+        }
+      },
+      "outputs": {
+        "root": "raw/node-runs/{run_id}/outputs",
+        "manifest": "raw/node-runs/{run_id}/outputs/manifest.json",
+        "expected": {
+          "result": {
+            "description": "Skill execution result summary.",
+            "relayable": true
+          },
+          "image_url": {
+            "description": "Result value mentioned in skill source as `imageUrl`.",
+            "value_type": "url",
+            "relayable": true,
+            "evidence": "source result marker imageUrl"
+          },
+          "public_image_url": {
+            "description": "Result value mentioned in skill source as `publicImageUrl`.",
+            "value_type": "url",
+            "relayable": true,
+            "evidence": "source result marker publicImageUrl"
+          },
+          "status": {
+            "description": "Result value mentioned in skill source as `status`.",
+            "value_type": "text",
+            "relayable": true,
+            "evidence": "source result marker status"
+          },
+          "task_id": {
+            "description": "Result value mentioned in skill source as `taskId`.",
+            "value_type": "text",
+            "relayable": true,
+            "evidence": "source result marker taskId"
+          },
+          "status_json": {
+            "description": "Runtime value captured by script variable `status_json`.",
+            "value_type": "json",
+            "relayable": false,
+            "evidence": "source script variable status_json"
+          },
+          "submit_json": {
+            "description": "Runtime value captured by script variable `submit_json`.",
+            "value_type": "json",
+            "relayable": true,
+            "evidence": "source script variable submit_json"
+          },
+          "generated_images": {
+            "description": "Generated image files or public image URLs.",
+            "value_type": "image",
+            "relayable": true
+          },
+          "images": {
+            "description": "Generated image files.",
+            "relayable": true
+          }
+        }
+      },
+      "capabilities": {
+        "git": {
+          "enabled": true,
+          "required": false
+        },
+        "telegram": {
+          "enabled": false,
+          "required": false
+        },
+        "sse": {
+          "enabled": true,
+          "required": true
+        }
+      },
+      "ui": {
+        "category": "generation"
+      },
+      "coverage_report": {
+        "status": "passed",
+        "covered_inputs": [
+          {
+            "input": "api_url",
+            "option": "--apiUrl",
+            "evidence": null
+          },
+          {
+            "input": "reference_image_file",
+            "option": "--image",
+            "evidence": null
+          },
+          {
+            "input": "reference_image_url",
+            "option": "--image-url",
+            "evidence": null
+          },
+          {
+            "input": "poll_interval",
+            "option": "--pollInterval",
+            "evidence": null
+          },
+          {
+            "input": "prompt",
+            "option": "--prompt",
+            "evidence": null
+          },
+          {
+            "input": "timeout_seconds",
+            "option": "--timeoutSeconds",
+            "evidence": null
+          },
+          {
+            "input": "upload_name",
+            "option": "--uploadName",
+            "evidence": null
+          }
+        ],
+        "missing_inputs": [],
+        "source_files_read": [
+          "chatgpt-remote-image-service/agents/openai.yaml",
+          "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+          "chatgpt-remote-image-service/SKILL.md"
+        ],
+        "errors": []
+      }
+    },
+    "missing_fields": [],
+    "risks": [],
+    "assumptions": [
+      "No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics.",
+      "The executor type is agent-skill using hermes agent, which is appropriate for running shell-based skills.",
+      "Skill installer is trusted and provides all necessary scripts and documentation."
+    ],
+    "test_plan": [
+      {
+        "manual_first_node_test": {
+          "description": "Run as a first node in a workflow with user-provided prompt. Optionally provide reference image URL or file. Verify that the node executes the skill, polls task, and returns publicImageUrl in outputs.",
+          "inputs": {
+            "prompt": "Test prompt, e.g., 'Generate a test image of a sunset'",
+            "reference_image_url": "Optional: URL of a reference image",
+            "reference_image_file": "Optional: local file path",
+            "upload_name": "Optional: custom name for output image",
+            "timeout_seconds": 300,
+            "poll_interval": 5
+          },
+          "expected_outputs": [
+            "public_image_url",
+            "task_id",
+            "status",
+            "manifest.json in outputs dir"
+          ],
+          "verification": "Check that outputs dir contains manifest.json and that the public_image_url is accessible."
+        }
+      }
+    ],
+    "metadata_probe": {},
+    "source_digest": {
+      "attempted": true,
+      "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+      "installer_url": "https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544",
+      "zip_url": "https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip",
+      "trusted_source": true,
+      "files": [
+        {
+          "path": "chatgpt-remote-image-service/agents/openai.yaml",
+          "bytes": 227,
+          "truncated": false
+        },
+        {
+          "path": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+          "bytes": 5390,
+          "truncated": false
+        },
+        {
+          "path": "chatgpt-remote-image-service/SKILL.md",
+          "bytes": 3484,
+          "truncated": false
+        }
+      ],
+      "cli_options": [
+        {
+          "option": "--apiUrl",
+          "variable": "API_URL",
+          "input_name": "api_url",
+          "required": false
+        },
+        {
+          "option": "--image",
+          "variable": "IMAGE",
+          "input_name": "reference_image_file",
+          "required": false
+        },
+        {
+          "option": "--image-url",
+          "variable": "IMAGE_URL",
+          "input_name": "reference_image_url",
+          "required": false
+        },
+        {
+          "option": "--pollInterval",
+          "variable": "POLL_INTERVAL",
+          "input_name": "poll_interval",
+          "required": false
+        },
+        {
+          "option": "--prompt",
+          "variable": "PROMPT",
+          "input_name": "prompt",
+          "required": true
+        },
+        {
+          "option": "--timeoutSeconds",
+          "variable": "TIMEOUT_SECONDS",
+          "input_name": "timeout_seconds",
+          "required": false
+        },
+        {
+          "option": "--uploadName",
+          "variable": "UPLOAD_NAME",
+          "input_name": "upload_name",
+          "required": false
+        }
+      ],
+      "errors": []
+    },
+    "coverage_report": {
+      "status": "passed",
+      "covered_inputs": [
+        {
+          "input": "api_url",
+          "option": "--apiUrl",
+          "evidence": null
+        },
+        {
+          "input": "reference_image_file",
+          "option": "--image",
+          "evidence": null
+        },
+        {
+          "input": "reference_image_url",
+          "option": "--image-url",
+          "evidence": null
+        },
+        {
+          "input": "poll_interval",
+          "option": "--pollInterval",
+          "evidence": null
+        },
+        {
+          "input": "prompt",
+          "option": "--prompt",
+          "evidence": null
+        },
+        {
+          "input": "timeout_seconds",
+          "option": "--timeoutSeconds",
+          "evidence": null
+        },
+        {
+          "input": "upload_name",
+          "option": "--uploadName",
+          "evidence": null
+        }
+      ],
+      "missing_inputs": [],
+      "source_files_read": [
+        "chatgpt-remote-image-service/agents/openai.yaml",
+        "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+        "chatgpt-remote-image-service/SKILL.md"
+      ],
+      "errors": []
+    },
+    "agent": {
+      "provider": "openai-compatible",
+      "model": "deepseek-v4-pro",
+      "used_ai": true
+    },
+    "trace": {
+      "trace_schema": "node-builder-agent-trace/v1",
+      "request": {
+        "runtime_id": "youtube-wiki",
+        "instance_id": "wiki-sop-new-instance",
+        "skill_install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+        "user_instruction": "把这个 Skill 转换成一个不绑定上下游的 Runtime Node；首节点测试时允许用户直接输入 prompt，也要保留引用图、上传名、超时等 skill 暴露的可配置参数。",
+        "fetch_metadata": true
+      },
+      "config": {
+        "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "model": "deepseek-v4-pro",
+        "api_key": "ah-***c68"
+      },
+      "started_at": "2026-06-29T09:17:35Z",
+      "attempts": [
+        {
+          "status": "response",
+          "duration_ms": 46289,
+          "raw_response": "{\"id\":\"e6deb3e0-1917-4e53-ba1d-ba9eef67a1b8\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"status\\\": \\\"ready\\\",\\n  \\\"summary\\\": \\\"Node definition for ChatGPT Remote Image Service skill. Accepts prompt, reference images (file or URL), upload name, API URL, poll interval, timeout. Produces generated image public URL and task status. No upstream/downstream binding; suitable as first node in a workflow.\\\",\\n  \\\"missing_fields\\\": [],\\n  \\\"risks\\\": [],\\n  \\\"assumptions\\\": [\\n    \\\"No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics.\\\",\\n    \\\"The executor type is agent-skill using hermes agent, which is appropriate for running shell-based skills.\\\",\\n    \\\"Skill installer is trusted and provides all necessary scripts and documentation.\\\"\\n  ],\\n  \\\"test_plan\\\": {\\n    \\\"manual_first_node_test\\\": {\\n      \\\"description\\\": \\\"Run as a first node in a workflow with user-provided prompt. Optionally provide reference image URL or file. Verify that the node executes the skill, polls task, and returns publicImageUrl in outputs.\\\",\\n      \\\"inputs\\\": {\\n        \\\"prompt\\\": \\\"Test prompt, e.g., 'Generate a test image of a sunset'\\\",\\n        \\\"reference_image_url\\\": \\\"Optional: URL of a reference image\\\",\\n        \\\"reference_image_file\\\": \\\"Optional: local file path\\\",\\n        \\\"upload_name\\\": \\\"Optional: custom name for output image\\\",\\n        \\\"timeout_seconds\\\": 300,\\n        \\\"poll_interval\\\": 5\\n      },\\n      \\\"expected_outputs\\\": [\\n        \\\"public_image_url\\\",\\n        \\\"task_id\\\",\\n        \\\"status\\\",\\n        \\\"manifest.json in outputs dir\\\"\\n      ],\\n      \\\"verification\\\": \\\"Check that outputs dir contains manifest.json and that the public_image_url is accessible.\\\"\\n    }\\n  },\\n  \\\"skill_identity\\\": {\\n    \\\"skill_id\\\": \\\"chatgpt-remote-image-service\\\",\\n    \\\"title\\\": \\\"Chatgpt Remote Image Service\\\",\\n    \\\"description\\\": \\\"Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint.\\\",\\n    \\\"installer_url\\\": \\\"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\\\",\\n    \\\"trusted_source\\\": true\\n  },\\n  \\\"metadata_probe\\\": null,\\n  \\\"source_digest\\\": {\\n    \\\"attempted\\\": true,\\n    \\\"install_command\\\": \\\"bash \\u003c(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')\\\",\\n    \\\"installer_url\\\": \\\"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\\\",\\n    \\\"zip_url\\\": \\\"https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip\\\",\\n    \\\"trusted_source\\\": true,\\n    \\\"files\\\": [\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/agents/openai.yaml\\\", \\\"bytes\\\": 227, \\\"truncated\\\": false },\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\\\", \\\"bytes\\\": 5390, \\\"truncated\\\": false },\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/SKILL.md\\\", \\\"bytes\\\": 3484, \\\"truncated\\\": false }\\n    ],\\n    \\\"cli_options\\\": [\\n      { \\\"option\\\": \\\"--apiUrl\\\", \\\"variable\\\": \\\"API_URL\\\", \\\"input_name\\\": \\\"api_url\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--image\\\", \\\"variable\\\": \\\"IMAGE\\\", \\\"input_name\\\": \\\"reference_image_file\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--image-url\\\", \\\"variable\\\": \\\"IMAGE_URL\\\", \\\"input_name\\\": \\\"reference_image_url\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--pollInterval\\\", \\\"variable\\\": \\\"POLL_INTERVAL\\\", \\\"input_name\\\": \\\"poll_interval\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--prompt\\\", \\\"variable\\\": \\\"PROMPT\\\", \\\"input_name\\\": \\\"prompt\\\", \\\"required\\\": true },\\n      { \\\"option\\\": \\\"--timeoutSeconds\\\", \\\"variable\\\": \\\"TIMEOUT_SECONDS\\\", \\\"input_name\\\": \\\"timeout_seconds\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--uploadName\\\", \\\"variable\\\": \\\"UPLOAD_NAME\\\", \\\"input_name\\\": \\\"upload_name\\\", \\\"required\\\": false }\\n    ],\\n    \\\"errors\\\": []\\n  },\\n  \\\"coverage_report\\\": {\\n    \\\"status\\\": \\\"passed\\\",\\n    \\\"covered_inputs\\\": [\\\"api_url\\\", \\\"reference_image_file\\\", \\\"reference_image_url\\\", \\\"poll_interval\\\", \\\"prompt\\\", \\\"timeout_seconds\\\", \\\"upload_name\\\"],\\n    \\\"missing_inputs\\\": [],\\n    \\\"source_files_read\\\": [\\n      \\\"chatgpt-remote-image-service/agents/openai.yaml\\\",\\n      \\\"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\\\",\\n      \\\"chatgpt-remote-image-service/SKILL.md\\\"\\n    ],\\n    \\\"errors\\\": []\\n  }\\n}\",\"reasoning_content\":\"We are asked to return strict JSON only, no prose. The output must be a JSON object with required keys: status, summary, missing_fields, risks, assumptions, test_plan. Optional keys: skill_identity, node_draft, metadata_probe, source_digest, coverage_report. The deterministic baseline is provided, and we are to refine it. The instructions say: \\\"Do not repeat the full baseline node_draft.\\\" and \\\"Omit node_draft when the baseline is acceptable; the runtime will merge your result with the baseline. Include node_draft only when you need to replace or correct specific draft fields, and keep it compact.\\\"\\n\\nWe need to produce a JSON response that incorporates the baseline maybe with adjustments, but the baseline seems quite complete. The status is \\\"ready\\\", but we need to verify if anything is missing. The user instruction is: \\\"把这个 Skill 转换成一个不绑定上下游的 Runtime Node；首节点测试时允许用户直接输入 prompt，也要保留引用图、上传名、超时等 skill 暴露的可配置参数。\\\" So they want to convert this skill into a runtime node that is not bound to upstream/downstream, and when used as a first node for testing, allow the user to directly input prompt, and also keep configurable parameters exposed by the skill like reference image, upload name, timeout, etc. The baseline already has all these inputs. It is unbinding. So it seems acceptable. But we need to consider metadata_probe? The user request had \\\"fetch_metadata\\\": true, so we might include metadata_probe if we can. The baseline doesn't have metadata_probe. The instructions say: \\\"If source evidence cannot be read, do not claim high confidence; use needs_user_input.\\\" But we have source evidence read successfully from the installer digest. So we can be confident. The baseline's coverage_report is passed. So status ready.\\n\\nWe need to output a JSON object. The baseline's node_draft is quite large, but we are told to omit it if baseline acceptable. However, we need to include the required keys: status, summary, missing_fields, risks, assumptions, test_plan. The baseline already has some of these: status: \\\"ready\\\", summary? It's not in the baseline as a separate key, but it appears inside skill_identity as description. We need to add a summary field. Look at required keys: status, summary, missing_fields, risks, assumptions, test_plan. So we must include summary. Also, missing_fields is required. The baseline has coverage_report.missing_inputs empty, but we should include a dedicated missing_fields key (likely an array of missing field names). The baseline has risks and assumptions. It has a test_plan? No, the baseline does not include a test_plan. We need to add one. So we must produce a JSON with these keys, and optionally skip node_draft or include a compact correction if needed.\\n\\nGiven the baseline is largely acceptable, we can output a JSON with status: \\\"ready\\\", a suitable summary, missing_fields: [] (since all inputs covered), risks: [], assumptions: (as in baseline), test_plan: (we need to generate a concise test plan for this node). Also, we need to check if the node_draft should be included at all. The instruction says omit node_draft when baseline acceptable. The baseline provided is the deterministic baseline to refine, so we can output a response that includes status, summary, missing_fields, risks, assumptions, test_plan, and optionally other keys if needed. Since the user asked to \\\"return strict JSON only\\\", we should not include node_draft if it's unchanged. But the baseline already had node_draft embedded in the prompt. Our output should be a new JSON that merges what's needed. Maybe we should still output a top-level object with those keys, and skip node_draft entirely, because the runtime will merge the baseline. So I'll produce:\\n\\n{\\n  \\\"status\\\": \\\"ready\\\",\\n  \\\"summary\\\": \\\"Node definition for ChatGPT Remote Image Service skill. Accepts prompt, reference images (file or URL), upload name, API URL, poll interval, timeout. Produces generated image public URL and task status. No upstream/downstream binding; suitable as first node in a workflow.\\\",\\n  \\\"missing_fields\\\": [],\\n  \\\"risks\\\": [],\\n  \\\"assumptions\\\": [\\n    \\\"No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics.\\\",\\n    \\\"The executor type is agent-skill using hermes agent, which is appropriate for running shell-based skills.\\\",\\n    \\\"Skill installer is trusted and provides all necessary scripts and documentation.\\\"\\n  ],\\n  \\\"test_plan\\\": {\\n    \\\"manual_first_node_test\\\": {\\n      \\\"description\\\": \\\"Run as a first node in a workflow with user-provided prompt. Optionally provide reference image URL or file. Verify that the node executes the skill, polls task, and returns publicImageUrl in outputs.\\\",\\n      \\\"inputs\\\": {\\n        \\\"prompt\\\": \\\"Test prompt, e.g., 'Generate a test image of a sunset'\\\",\\n        \\\"reference_image_url\\\": \\\"Optional: URL of a reference image\\\",\\n        \\\"reference_image_file\\\": \\\"Optional: local file path\\\",\\n        \\\"upload_name\\\": \\\"Optional: custom name for output image\\\",\\n        \\\"timeout_seconds\\\": 300,\\n        \\\"poll_interval\\\": 5\\n      },\\n      \\\"expected_outputs\\\": [\\n        \\\"public_image_url\\\",\\n        \\\"task_id\\\",\\n        \\\"status\\\",\\n        \\\"manifest.json in outputs dir\\\"\\n      ],\\n      \\\"verification\\\": \\\"Check that outputs dir contains manifest.json and that the public_image_url is accessible.\\\"\\n    },\\n    \\\"health_check\\\": {\\n      \\\"description\\\": \\\"Verify that the skill can check the service health endpoint.\\\",\\n      \\\"commented\\\": \\\"Health check is part of the skill script but not directly exposed as a separate execution mode; it prints summary during submission.\\\"\\n    }\\n  },\\n  \\\"skill_identity\\\": {\\n    \\\"skill_id\\\": \\\"chatgpt-remote-image-service\\\",\\n    \\\"title\\\": \\\"Chatgpt Remote Image Service\\\",\\n    \\\"description\\\": \\\"Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint.\\\",\\n    \\\"installer_url\\\": \\\"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\\\",\\n    \\\"trusted_source\\\": true\\n  },\\n  \\\"metadata_probe\\\": null,\\n  \\\"source_digest\\\": {\\n    \\\"attempted\\\": true,\\n    \\\"install_command\\\": \\\"bash \\u003c(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')\\\",\\n    \\\"installer_url\\\": \\\"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\\\",\\n    \\\"zip_url\\\": \\\"https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip\\\",\\n    \\\"trusted_source\\\": true,\\n    \\\"files\\\": [\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/agents/openai.yaml\\\", \\\"bytes\\\": 227, \\\"truncated\\\": false },\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\\\", \\\"bytes\\\": 5390, \\\"truncated\\\": false },\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/SKILL.md\\\", \\\"bytes\\\": 3484, \\\"truncated\\\": false }\\n    ],\\n    \\\"cli_options\\\": [\\n      { \\\"option\\\": \\\"--apiUrl\\\", \\\"variable\\\": \\\"API_URL\\\", \\\"input_name\\\": \\\"api_url\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--image\\\", \\\"variable\\\": \\\"IMAGE\\\", \\\"input_name\\\": \\\"reference_image_file\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--image-url\\\", \\\"variable\\\": \\\"IMAGE_URL\\\", \\\"input_name\\\": \\\"reference_image_url\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--pollInterval\\\", \\\"variable\\\": \\\"POLL_INTERVAL\\\", \\\"input_name\\\": \\\"poll_interval\\\", \\\"required\\\": false },\\n      { \\\"opt\n...[truncated for Node Builder]"
+        }
+      ],
+      "llm_request": {
+        "model": "deepseek-v4-pro",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Return strict JSON in message.content only. No prose."
+          },
+          {
+            "role": "user",
+            "content": "You are the SOP Node Builder Agent. Return strict JSON only, no markdown.\nBuild a node-definition/v1 draft from the skill install command and optional user instruction. A Node is a skill execution unit. Do not bind it to fixed upstream or downstream nodes. Edges own handoff semantics. The node should accept upstream_outputs_dir, instruction and context, and produce raw/node-runs/{run_id}/outputs plus manifest.json.\n\nRequired JSON keys: status, summary, missing_fields, risks, assumptions, test_plan. Optional JSON keys: skill_identity, node_draft, metadata_probe, source_digest, coverage_report. Allowed status: ready, needs_user_input, blocked. If uncertain, use needs_user_input and name the missing facts. Do not invent concrete scripts unless the source material proves they exist; use executor.request_template when only agent-skill is known. Capabilities should usually be git enabled, telegram disabled unless clearly notification-related, sse enabled.\n\nOutput size rule:\n- The deterministic baseline below is already a valid draft candidate.\n- Do not repeat the full baseline node_draft.\n- Omit node_draft when the baseline is acceptable; the runtime will merge your result with the baseline.\n- Include node_draft only when you need to replace or correct specific draft fields, and keep it compact.\n\nNode model rules:\n- Use schema node-definition/v1.\n- Put first-node/manual-test inputs under entry.inputs.\n- Handoff accepts upstream_outputs_dir, instruction, context.\n- outputs.root is raw/node-runs/{run_id}/outputs.\n- outputs.manifest is raw/node-runs/{run_id}/outputs/manifest.json.\n- outputs.expected describes logical artifacts; it is not a hard upstream binding.\n\nSource evidence rules:\n- Prefer facts from skill_source_digest files over guesses from the install command.\n- Map CLI\n...[truncated for Node Builder]"
+          }
+        ],
+        "temperature": 0.0,
+        "max_tokens": 4096,
+        "stream": false,
+        "response_format": {
+          "type": "json_object"
+        }
+      },
+      "llm_content": "{\n  \"status\": \"ready\",\n  \"summary\": \"Node definition for ChatGPT Remote Image Service skill. Accepts prompt, reference images (file or URL), upload name, API URL, poll interval, timeout. Produces generated image public URL and task status. No upstream/downstream binding; suitable as first node in a workflow.\",\n  \"missing_fields\": [],\n  \"risks\": [],\n  \"assumptions\": [\n    \"No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics.\",\n    \"The executor type is agent-skill using hermes agent, which is appropriate for running shell-based skills.\",\n    \"Skill installer is trusted and provides all necessary scripts and documentation.\"\n  ],\n  \"test_plan\": {\n    \"manual_first_node_test\": {\n      \"description\": \"Run as a first node in a workflow with user-provided prompt. Optionally provide reference image URL or file. Verify that the node executes the skill, polls task, and returns publicImageUrl in outputs.\",\n      \"inputs\": {\n        \"prompt\": \"Test prompt, e.g., 'Generate a test image of a sunset'\",\n        \"reference_image_url\": \"Optional: URL of a reference image\",\n        \"reference_image_file\": \"Optional: local file path\",\n        \"upload_name\": \"Optional: custom name for output image\",\n        \"timeout_seconds\": 300,\n        \"poll_interval\": 5\n      },\n      \"expected_outputs\": [\n        \"public_image_url\",\n        \"task_id\",\n        \"status\",\n        \"manifest.json in outputs dir\"\n      ],\n      \"verification\": \"Check that outputs dir contains manifest.json and that the public_image_url is accessible.\"\n    }\n  },\n  \"skill_identity\": {\n    \"skill_id\": \"chatgpt-remote-image-service\",\n    \"title\": \"Chatgpt Remote Image Service\",\n    \"description\": \"Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint.\",\n    \"installer_url\": \"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\",\n    \"trusted_source\": true\n  },\n  \"metadata_probe\": null,\n  \"source_digest\": {\n    \"attempted\": true,\n    \"install_command\": \"bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')\",\n    \"installer_url\": \"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\",\n    \"zip_url\": \"https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip\",\n    \"trusted_source\": true,\n    \"files\": [\n      { \"path\": \"chatgpt-remote-image-service/agents/openai.yaml\", \"bytes\": 227, \"truncated\": false },\n      { \"path\": \"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\", \"bytes\": 5390, \"truncated\": false },\n      { \"path\": \"chatgpt-remote-image-service/SKILL.md\", \"bytes\": 3484, \"truncated\": false }\n    ],\n    \"cli_options\": [\n      { \"option\": \"--apiUrl\", \"variable\": \"API_URL\", \"input_name\": \"api_url\", \"required\": false },\n      { \"option\": \"--image\", \"variable\": \"IMAGE\", \"input_name\": \"reference_image_file\", \"required\": false },\n      { \"option\": \"--image-url\", \"variable\": \"IMAGE_URL\", \"input_name\": \"reference_image_url\", \"required\": false },\n      { \"option\": \"--pollInterval\", \"variable\": \"POLL_INTERVAL\", \"input_name\": \"poll_interval\", \"required\": false },\n      { \"option\": \"--prompt\", \"variable\": \"PROMPT\", \"input_name\": \"prompt\", \"required\": true },\n      { \"option\": \"--timeoutSeconds\", \"variable\": \"TIMEOUT_SECONDS\", \"input_name\": \"timeout_seconds\", \"required\": false },\n      { \"option\": \"--uploadName\", \"variable\": \"UPLOAD_NAME\", \"input_name\": \"upload_name\", \"required\": false }\n    ],\n    \"errors\": []\n  },\n  \"coverage_report\": {\n    \"status\": \"passed\",\n    \"covered_inputs\": [\"api_url\", \"reference_image_file\", \"reference_image_url\", \"poll_interval\", \"prompt\", \"timeout_seconds\", \"upload_name\"],\n    \"missing_inputs\": [],\n    \"source_files_read\": [\n      \"chatgpt-remote-image-service/agents/openai.yaml\",\n      \"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\",\n      \"chatgpt-remote-image-service/SKILL.md\"\n    ],\n    \"errors\": []\n  }\n}",
+      "parsed": {
+        "status": "ready",
+        "summary": "Node definition for ChatGPT Remote Image Service skill. Accepts prompt, reference images (file or URL), upload name, API URL, poll interval, timeout. Produces generated image public URL and task status. No upstream/downstream binding; suitable as first node in a workflow.",
+        "missing_fields": [],
+        "risks": [],
+        "assumptions": [
+          "No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics.",
+          "The executor type is agent-skill using hermes agent, which is appropriate for running shell-based skills.",
+          "Skill installer is trusted and provides all necessary scripts and documentation."
+        ],
+        "test_plan": {
+          "manual_first_node_test": {
+            "description": "Run as a first node in a workflow with user-provided prompt. Optionally provide reference image URL or file. Verify that the node executes the skill, polls task, and returns publicImageUrl in outputs.",
+            "inputs": {
+              "prompt": "Test prompt, e.g., 'Generate a test image of a sunset'",
+              "reference_image_url": "Optional: URL of a reference image",
+              "reference_image_file": "Optional: local file path",
+              "upload_name": "Optional: custom name for output image",
+              "timeout_seconds": 300,
+              "poll_interval": 5
+            },
+            "expected_outputs": [
+              "public_image_url",
+              "task_id",
+              "status",
+              "manifest.json in outputs dir"
+            ],
+            "verification": "Check that outputs dir contains manifest.json and that the public_image_url is accessible."
+          }
+        },
+        "skill_identity": {
+          "skill_id": "chatgpt-remote-image-service",
+          "title": "Chatgpt Remote Image Service",
+          "description": "Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint.",
+          "installer_url": "https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544",
+          "trusted_source": true
+        },
+        "metadata_probe": null,
+        "source_digest": {
+          "attempted": true,
+          "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+          "installer_url": "https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544",
+          "zip_url": "https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip",
+          "trusted_source": true,
+          "files": [
+            {
+              "path": "chatgpt-remote-image-service/agents/openai.yaml",
+              "bytes": 227,
+              "truncated": false
+            },
+            {
+              "path": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+              "bytes": 5390,
+              "truncated": false
+            },
+            {
+              "path": "chatgpt-remote-image-service/SKILL.md",
+              "bytes": 3484,
+              "truncated": false
+            }
+          ],
+          "cli_options": [
+            {
+              "option": "--apiUrl",
+              "variable": "API_URL",
+              "input_name": "api_url",
+              "required": false
+            },
+            {
+              "option": "--image",
+              "variable": "IMAGE",
+              "input_name": "reference_image_file",
+              "required": false
+            },
+            {
+              "option": "--image-url",
+              "variable": "IMAGE_URL",
+              "input_name": "reference_image_url",
+              "required": false
+            },
+            {
+              "option": "--pollInterval",
+              "variable": "POLL_INTERVAL",
+              "input_name": "poll_interval",
+              "required": false
+            },
+            {
+              "option": "--prompt",
+              "variable": "PROMPT",
+              "input_name": "prompt",
+              "required": true
+            },
+            {
+              "option": "--timeoutSeconds",
+              "variable": "TIMEOUT_SECONDS",
+              "input_name": "timeout_seconds",
+              "required": false
+            },
+            {
+              "option": "--uploadName",
+              "variable": "UPLOAD_NAME",
+              "input_name": "upload_name",
+              "required": false
+            }
+          ],
+          "errors": []
+        },
+        "coverage_report": {
+          "status": "passed",
+          "covered_inputs": [
+            "api_url",
+            "reference_image_file",
+            "reference_image_url",
+            "poll_interval",
+            "prompt",
+            "timeout_seconds",
+            "upload_name"
+          ],
+          "missing_inputs": [],
+          "source_files_read": [
+            "chatgpt-remote-image-service/agents/openai.yaml",
+            "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+            "chatgpt-remote-image-service/SKILL.md"
+          ],
+          "errors": []
+        }
+      },
+      "finished_at": "2026-06-29T09:18:21Z"
+    },
+    "evaluated_at": "2026-06-29T09:18:21Z"
+  },
+  "trace": {
+    "trace_schema": "node-builder-agent-trace/v1",
+    "request": {
+      "runtime_id": "youtube-wiki",
+      "instance_id": "wiki-sop-new-instance",
+      "skill_install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+      "user_instruction": "把这个 Skill 转换成一个不绑定上下游的 Runtime Node；首节点测试时允许用户直接输入 prompt，也要保留引用图、上传名、超时等 skill 暴露的可配置参数。",
+      "fetch_metadata": true
+    },
+    "config": {
+      "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+      "model": "deepseek-v4-pro",
+      "api_key": "ah-***c68"
+    },
+    "started_at": "2026-06-29T09:17:35Z",
+    "attempts": [
+      {
+        "status": "response",
+        "duration_ms": 46289,
+        "raw_response": "{\"id\":\"e6deb3e0-1917-4e53-ba1d-ba9eef67a1b8\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"status\\\": \\\"ready\\\",\\n  \\\"summary\\\": \\\"Node definition for ChatGPT Remote Image Service skill. Accepts prompt, reference images (file or URL), upload name, API URL, poll interval, timeout. Produces generated image public URL and task status. No upstream/downstream binding; suitable as first node in a workflow.\\\",\\n  \\\"missing_fields\\\": [],\\n  \\\"risks\\\": [],\\n  \\\"assumptions\\\": [\\n    \\\"No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics.\\\",\\n    \\\"The executor type is agent-skill using hermes agent, which is appropriate for running shell-based skills.\\\",\\n    \\\"Skill installer is trusted and provides all necessary scripts and documentation.\\\"\\n  ],\\n  \\\"test_plan\\\": {\\n    \\\"manual_first_node_test\\\": {\\n      \\\"description\\\": \\\"Run as a first node in a workflow with user-provided prompt. Optionally provide reference image URL or file. Verify that the node executes the skill, polls task, and returns publicImageUrl in outputs.\\\",\\n      \\\"inputs\\\": {\\n        \\\"prompt\\\": \\\"Test prompt, e.g., 'Generate a test image of a sunset'\\\",\\n        \\\"reference_image_url\\\": \\\"Optional: URL of a reference image\\\",\\n        \\\"reference_image_file\\\": \\\"Optional: local file path\\\",\\n        \\\"upload_name\\\": \\\"Optional: custom name for output image\\\",\\n        \\\"timeout_seconds\\\": 300,\\n        \\\"poll_interval\\\": 5\\n      },\\n      \\\"expected_outputs\\\": [\\n        \\\"public_image_url\\\",\\n        \\\"task_id\\\",\\n        \\\"status\\\",\\n        \\\"manifest.json in outputs dir\\\"\\n      ],\\n      \\\"verification\\\": \\\"Check that outputs dir contains manifest.json and that the public_image_url is accessible.\\\"\\n    }\\n  },\\n  \\\"skill_identity\\\": {\\n    \\\"skill_id\\\": \\\"chatgpt-remote-image-service\\\",\\n    \\\"title\\\": \\\"Chatgpt Remote Image Service\\\",\\n    \\\"description\\\": \\\"Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint.\\\",\\n    \\\"installer_url\\\": \\\"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\\\",\\n    \\\"trusted_source\\\": true\\n  },\\n  \\\"metadata_probe\\\": null,\\n  \\\"source_digest\\\": {\\n    \\\"attempted\\\": true,\\n    \\\"install_command\\\": \\\"bash \\u003c(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')\\\",\\n    \\\"installer_url\\\": \\\"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\\\",\\n    \\\"zip_url\\\": \\\"https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip\\\",\\n    \\\"trusted_source\\\": true,\\n    \\\"files\\\": [\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/agents/openai.yaml\\\", \\\"bytes\\\": 227, \\\"truncated\\\": false },\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\\\", \\\"bytes\\\": 5390, \\\"truncated\\\": false },\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/SKILL.md\\\", \\\"bytes\\\": 3484, \\\"truncated\\\": false }\\n    ],\\n    \\\"cli_options\\\": [\\n      { \\\"option\\\": \\\"--apiUrl\\\", \\\"variable\\\": \\\"API_URL\\\", \\\"input_name\\\": \\\"api_url\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--image\\\", \\\"variable\\\": \\\"IMAGE\\\", \\\"input_name\\\": \\\"reference_image_file\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--image-url\\\", \\\"variable\\\": \\\"IMAGE_URL\\\", \\\"input_name\\\": \\\"reference_image_url\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--pollInterval\\\", \\\"variable\\\": \\\"POLL_INTERVAL\\\", \\\"input_name\\\": \\\"poll_interval\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--prompt\\\", \\\"variable\\\": \\\"PROMPT\\\", \\\"input_name\\\": \\\"prompt\\\", \\\"required\\\": true },\\n      { \\\"option\\\": \\\"--timeoutSeconds\\\", \\\"variable\\\": \\\"TIMEOUT_SECONDS\\\", \\\"input_name\\\": \\\"timeout_seconds\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--uploadName\\\", \\\"variable\\\": \\\"UPLOAD_NAME\\\", \\\"input_name\\\": \\\"upload_name\\\", \\\"required\\\": false }\\n    ],\\n    \\\"errors\\\": []\\n  },\\n  \\\"coverage_report\\\": {\\n    \\\"status\\\": \\\"passed\\\",\\n    \\\"covered_inputs\\\": [\\\"api_url\\\", \\\"reference_image_file\\\", \\\"reference_image_url\\\", \\\"poll_interval\\\", \\\"prompt\\\", \\\"timeout_seconds\\\", \\\"upload_name\\\"],\\n    \\\"missing_inputs\\\": [],\\n    \\\"source_files_read\\\": [\\n      \\\"chatgpt-remote-image-service/agents/openai.yaml\\\",\\n      \\\"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\\\",\\n      \\\"chatgpt-remote-image-service/SKILL.md\\\"\\n    ],\\n    \\\"errors\\\": []\\n  }\\n}\",\"reasoning_content\":\"We are asked to return strict JSON only, no prose. The output must be a JSON object with required keys: status, summary, missing_fields, risks, assumptions, test_plan. Optional keys: skill_identity, node_draft, metadata_probe, source_digest, coverage_report. The deterministic baseline is provided, and we are to refine it. The instructions say: \\\"Do not repeat the full baseline node_draft.\\\" and \\\"Omit node_draft when the baseline is acceptable; the runtime will merge your result with the baseline. Include node_draft only when you need to replace or correct specific draft fields, and keep it compact.\\\"\\n\\nWe need to produce a JSON response that incorporates the baseline maybe with adjustments, but the baseline seems quite complete. The status is \\\"ready\\\", but we need to verify if anything is missing. The user instruction is: \\\"把这个 Skill 转换成一个不绑定上下游的 Runtime Node；首节点测试时允许用户直接输入 prompt，也要保留引用图、上传名、超时等 skill 暴露的可配置参数。\\\" So they want to convert this skill into a runtime node that is not bound to upstream/downstream, and when used as a first node for testing, allow the user to directly input prompt, and also keep configurable parameters exposed by the skill like reference image, upload name, timeout, etc. The baseline already has all these inputs. It is unbinding. So it seems acceptable. But we need to consider metadata_probe? The user request had \\\"fetch_metadata\\\": true, so we might include metadata_probe if we can. The baseline doesn't have metadata_probe. The instructions say: \\\"If source evidence cannot be read, do not claim high confidence; use needs_user_input.\\\" But we have source evidence read successfully from the installer digest. So we can be confident. The baseline's coverage_report is passed. So status ready.\\n\\nWe need to output a JSON object. The baseline's node_draft is quite large, but we are told to omit it if baseline acceptable. However, we need to include the required keys: status, summary, missing_fields, risks, assumptions, test_plan. The baseline already has some of these: status: \\\"ready\\\", summary? It's not in the baseline as a separate key, but it appears inside skill_identity as description. We need to add a summary field. Look at required keys: status, summary, missing_fields, risks, assumptions, test_plan. So we must include summary. Also, missing_fields is required. The baseline has coverage_report.missing_inputs empty, but we should include a dedicated missing_fields key (likely an array of missing field names). The baseline has risks and assumptions. It has a test_plan? No, the baseline does not include a test_plan. We need to add one. So we must produce a JSON with these keys, and optionally skip node_draft or include a compact correction if needed.\\n\\nGiven the baseline is largely acceptable, we can output a JSON with status: \\\"ready\\\", a suitable summary, missing_fields: [] (since all inputs covered), risks: [], assumptions: (as in baseline), test_plan: (we need to generate a concise test plan for this node). Also, we need to check if the node_draft should be included at all. The instruction says omit node_draft when baseline acceptable. The baseline provided is the deterministic baseline to refine, so we can output a response that includes status, summary, missing_fields, risks, assumptions, test_plan, and optionally other keys if needed. Since the user asked to \\\"return strict JSON only\\\", we should not include node_draft if it's unchanged. But the baseline already had node_draft embedded in the prompt. Our output should be a new JSON that merges what's needed. Maybe we should still output a top-level object with those keys, and skip node_draft entirely, because the runtime will merge the baseline. So I'll produce:\\n\\n{\\n  \\\"status\\\": \\\"ready\\\",\\n  \\\"summary\\\": \\\"Node definition for ChatGPT Remote Image Service skill. Accepts prompt, reference images (file or URL), upload name, API URL, poll interval, timeout. Produces generated image public URL and task status. No upstream/downstream binding; suitable as first node in a workflow.\\\",\\n  \\\"missing_fields\\\": [],\\n  \\\"risks\\\": [],\\n  \\\"assumptions\\\": [\\n    \\\"No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics.\\\",\\n    \\\"The executor type is agent-skill using hermes agent, which is appropriate for running shell-based skills.\\\",\\n    \\\"Skill installer is trusted and provides all necessary scripts and documentation.\\\"\\n  ],\\n  \\\"test_plan\\\": {\\n    \\\"manual_first_node_test\\\": {\\n      \\\"description\\\": \\\"Run as a first node in a workflow with user-provided prompt. Optionally provide reference image URL or file. Verify that the node executes the skill, polls task, and returns publicImageUrl in outputs.\\\",\\n      \\\"inputs\\\": {\\n        \\\"prompt\\\": \\\"Test prompt, e.g., 'Generate a test image of a sunset'\\\",\\n        \\\"reference_image_url\\\": \\\"Optional: URL of a reference image\\\",\\n        \\\"reference_image_file\\\": \\\"Optional: local file path\\\",\\n        \\\"upload_name\\\": \\\"Optional: custom name for output image\\\",\\n        \\\"timeout_seconds\\\": 300,\\n        \\\"poll_interval\\\": 5\\n      },\\n      \\\"expected_outputs\\\": [\\n        \\\"public_image_url\\\",\\n        \\\"task_id\\\",\\n        \\\"status\\\",\\n        \\\"manifest.json in outputs dir\\\"\\n      ],\\n      \\\"verification\\\": \\\"Check that outputs dir contains manifest.json and that the public_image_url is accessible.\\\"\\n    },\\n    \\\"health_check\\\": {\\n      \\\"description\\\": \\\"Verify that the skill can check the service health endpoint.\\\",\\n      \\\"commented\\\": \\\"Health check is part of the skill script but not directly exposed as a separate execution mode; it prints summary during submission.\\\"\\n    }\\n  },\\n  \\\"skill_identity\\\": {\\n    \\\"skill_id\\\": \\\"chatgpt-remote-image-service\\\",\\n    \\\"title\\\": \\\"Chatgpt Remote Image Service\\\",\\n    \\\"description\\\": \\\"Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint.\\\",\\n    \\\"installer_url\\\": \\\"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\\\",\\n    \\\"trusted_source\\\": true\\n  },\\n  \\\"metadata_probe\\\": null,\\n  \\\"source_digest\\\": {\\n    \\\"attempted\\\": true,\\n    \\\"install_command\\\": \\\"bash \\u003c(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')\\\",\\n    \\\"installer_url\\\": \\\"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\\\",\\n    \\\"zip_url\\\": \\\"https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip\\\",\\n    \\\"trusted_source\\\": true,\\n    \\\"files\\\": [\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/agents/openai.yaml\\\", \\\"bytes\\\": 227, \\\"truncated\\\": false },\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\\\", \\\"bytes\\\": 5390, \\\"truncated\\\": false },\\n      { \\\"path\\\": \\\"chatgpt-remote-image-service/SKILL.md\\\", \\\"bytes\\\": 3484, \\\"truncated\\\": false }\\n    ],\\n    \\\"cli_options\\\": [\\n      { \\\"option\\\": \\\"--apiUrl\\\", \\\"variable\\\": \\\"API_URL\\\", \\\"input_name\\\": \\\"api_url\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--image\\\", \\\"variable\\\": \\\"IMAGE\\\", \\\"input_name\\\": \\\"reference_image_file\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--image-url\\\", \\\"variable\\\": \\\"IMAGE_URL\\\", \\\"input_name\\\": \\\"reference_image_url\\\", \\\"required\\\": false },\\n      { \\\"option\\\": \\\"--pollInterval\\\", \\\"variable\\\": \\\"POLL_INTERVAL\\\", \\\"input_name\\\": \\\"poll_interval\\\", \\\"required\\\": false },\\n      { \\\"opt\n...[truncated for Node Builder]"
+      }
+    ],
+    "llm_request": {
+      "model": "deepseek-v4-pro",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Return strict JSON in message.content only. No prose."
+        },
+        {
+          "role": "user",
+          "content": "You are the SOP Node Builder Agent. Return strict JSON only, no markdown.\nBuild a node-definition/v1 draft from the skill install command and optional user instruction. A Node is a skill execution unit. Do not bind it to fixed upstream or downstream nodes. Edges own handoff semantics. The node should accept upstream_outputs_dir, instruction and context, and produce raw/node-runs/{run_id}/outputs plus manifest.json.\n\nRequired JSON keys: status, summary, missing_fields, risks, assumptions, test_plan. Optional JSON keys: skill_identity, node_draft, metadata_probe, source_digest, coverage_report. Allowed status: ready, needs_user_input, blocked. If uncertain, use needs_user_input and name the missing facts. Do not invent concrete scripts unless the source material proves they exist; use executor.request_template when only agent-skill is known. Capabilities should usually be git enabled, telegram disabled unless clearly notification-related, sse enabled.\n\nOutput size rule:\n- The deterministic baseline below is already a valid draft candidate.\n- Do not repeat the full baseline node_draft.\n- Omit node_draft when the baseline is acceptable; the runtime will merge your result with the baseline.\n- Include node_draft only when you need to replace or correct specific draft fields, and keep it compact.\n\nNode model rules:\n- Use schema node-definition/v1.\n- Put first-node/manual-test inputs under entry.inputs.\n- Handoff accepts upstream_outputs_dir, instruction, context.\n- outputs.root is raw/node-runs/{run_id}/outputs.\n- outputs.manifest is raw/node-runs/{run_id}/outputs/manifest.json.\n- outputs.expected describes logical artifacts; it is not a hard upstream binding.\n\nSource evidence rules:\n- Prefer facts from skill_source_digest files over guesses from the install command.\n- Map CLI\n...[truncated for Node Builder]"
+        }
+      ],
+      "temperature": 0.0,
+      "max_tokens": 4096,
+      "stream": false,
+      "response_format": {
+        "type": "json_object"
+      }
+    },
+    "llm_content": "{\n  \"status\": \"ready\",\n  \"summary\": \"Node definition for ChatGPT Remote Image Service skill. Accepts prompt, reference images (file or URL), upload name, API URL, poll interval, timeout. Produces generated image public URL and task status. No upstream/downstream binding; suitable as first node in a workflow.\",\n  \"missing_fields\": [],\n  \"risks\": [],\n  \"assumptions\": [\n    \"No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics.\",\n    \"The executor type is agent-skill using hermes agent, which is appropriate for running shell-based skills.\",\n    \"Skill installer is trusted and provides all necessary scripts and documentation.\"\n  ],\n  \"test_plan\": {\n    \"manual_first_node_test\": {\n      \"description\": \"Run as a first node in a workflow with user-provided prompt. Optionally provide reference image URL or file. Verify that the node executes the skill, polls task, and returns publicImageUrl in outputs.\",\n      \"inputs\": {\n        \"prompt\": \"Test prompt, e.g., 'Generate a test image of a sunset'\",\n        \"reference_image_url\": \"Optional: URL of a reference image\",\n        \"reference_image_file\": \"Optional: local file path\",\n        \"upload_name\": \"Optional: custom name for output image\",\n        \"timeout_seconds\": 300,\n        \"poll_interval\": 5\n      },\n      \"expected_outputs\": [\n        \"public_image_url\",\n        \"task_id\",\n        \"status\",\n        \"manifest.json in outputs dir\"\n      ],\n      \"verification\": \"Check that outputs dir contains manifest.json and that the public_image_url is accessible.\"\n    }\n  },\n  \"skill_identity\": {\n    \"skill_id\": \"chatgpt-remote-image-service\",\n    \"title\": \"Chatgpt Remote Image Service\",\n    \"description\": \"Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint.\",\n    \"installer_url\": \"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\",\n    \"trusted_source\": true\n  },\n  \"metadata_probe\": null,\n  \"source_digest\": {\n    \"attempted\": true,\n    \"install_command\": \"bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')\",\n    \"installer_url\": \"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\",\n    \"zip_url\": \"https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip\",\n    \"trusted_source\": true,\n    \"files\": [\n      { \"path\": \"chatgpt-remote-image-service/agents/openai.yaml\", \"bytes\": 227, \"truncated\": false },\n      { \"path\": \"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\", \"bytes\": 5390, \"truncated\": false },\n      { \"path\": \"chatgpt-remote-image-service/SKILL.md\", \"bytes\": 3484, \"truncated\": false }\n    ],\n    \"cli_options\": [\n      { \"option\": \"--apiUrl\", \"variable\": \"API_URL\", \"input_name\": \"api_url\", \"required\": false },\n      { \"option\": \"--image\", \"variable\": \"IMAGE\", \"input_name\": \"reference_image_file\", \"required\": false },\n      { \"option\": \"--image-url\", \"variable\": \"IMAGE_URL\", \"input_name\": \"reference_image_url\", \"required\": false },\n      { \"option\": \"--pollInterval\", \"variable\": \"POLL_INTERVAL\", \"input_name\": \"poll_interval\", \"required\": false },\n      { \"option\": \"--prompt\", \"variable\": \"PROMPT\", \"input_name\": \"prompt\", \"required\": true },\n      { \"option\": \"--timeoutSeconds\", \"variable\": \"TIMEOUT_SECONDS\", \"input_name\": \"timeout_seconds\", \"required\": false },\n      { \"option\": \"--uploadName\", \"variable\": \"UPLOAD_NAME\", \"input_name\": \"upload_name\", \"required\": false }\n    ],\n    \"errors\": []\n  },\n  \"coverage_report\": {\n    \"status\": \"passed\",\n    \"covered_inputs\": [\"api_url\", \"reference_image_file\", \"reference_image_url\", \"poll_interval\", \"prompt\", \"timeout_seconds\", \"upload_name\"],\n    \"missing_inputs\": [],\n    \"source_files_read\": [\n      \"chatgpt-remote-image-service/agents/openai.yaml\",\n      \"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\",\n      \"chatgpt-remote-image-service/SKILL.md\"\n    ],\n    \"errors\": []\n  }\n}",
+    "parsed": {
+      "status": "ready",
+      "summary": "Node definition for ChatGPT Remote Image Service skill. Accepts prompt, reference images (file or URL), upload name, API URL, poll interval, timeout. Produces generated image public URL and task status. No upstream/downstream binding; suitable as first node in a workflow.",
+      "missing_fields": [],
+      "risks": [],
+      "assumptions": [
+        "No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics.",
+        "The executor type is agent-skill using hermes agent, which is appropriate for running shell-based skills.",
+        "Skill installer is trusted and provides all necessary scripts and documentation."
+      ],
+      "test_plan": {
+        "manual_first_node_test": {
+          "description": "Run as a first node in a workflow with user-provided prompt. Optionally provide reference image URL or file. Verify that the node executes the skill, polls task, and returns publicImageUrl in outputs.",
+          "inputs": {
+            "prompt": "Test prompt, e.g., 'Generate a test image of a sunset'",
+            "reference_image_url": "Optional: URL of a reference image",
+            "reference_image_file": "Optional: local file path",
+            "upload_name": "Optional: custom name for output image",
+            "timeout_seconds": 300,
+            "poll_interval": 5
+          },
+          "expected_outputs": [
+            "public_image_url",
+            "task_id",
+            "status",
+            "manifest.json in outputs dir"
+          ],
+          "verification": "Check that outputs dir contains manifest.json and that the public_image_url is accessible."
+        }
+      },
+      "skill_identity": {
+        "skill_id": "chatgpt-remote-image-service",
+        "title": "Chatgpt Remote Image Service",
+        "description": "Use when the user wants to submit reference-image generation jobs to the remote ChatGPT image HTTP service, poll task status, or get a public R2 image URL from the hosted endpoint.",
+        "installer_url": "https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544",
+        "trusted_source": true
+      },
+      "metadata_probe": null,
+      "source_digest": {
+        "attempted": true,
+        "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+        "installer_url": "https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544",
+        "zip_url": "https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip",
+        "trusted_source": true,
+        "files": [
+          {
+            "path": "chatgpt-remote-image-service/agents/openai.yaml",
+            "bytes": 227,
+            "truncated": false
+          },
+          {
+            "path": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+            "bytes": 5390,
+            "truncated": false
+          },
+          {
+            "path": "chatgpt-remote-image-service/SKILL.md",
+            "bytes": 3484,
+            "truncated": false
+          }
+        ],
+        "cli_options": [
+          {
+            "option": "--apiUrl",
+            "variable": "API_URL",
+            "input_name": "api_url",
+            "required": false
+          },
+          {
+            "option": "--image",
+            "variable": "IMAGE",
+            "input_name": "reference_image_file",
+            "required": false
+          },
+          {
+            "option": "--image-url",
+            "variable": "IMAGE_URL",
+            "input_name": "reference_image_url",
+            "required": false
+          },
+          {
+            "option": "--pollInterval",
+            "variable": "POLL_INTERVAL",
+            "input_name": "poll_interval",
+            "required": false
+          },
+          {
+            "option": "--prompt",
+            "variable": "PROMPT",
+            "input_name": "prompt",
+            "required": true
+          },
+          {
+            "option": "--timeoutSeconds",
+            "variable": "TIMEOUT_SECONDS",
+            "input_name": "timeout_seconds",
+            "required": false
+          },
+          {
+            "option": "--uploadName",
+            "variable": "UPLOAD_NAME",
+            "input_name": "upload_name",
+            "required": false
+          }
+        ],
+        "errors": []
+      },
+      "coverage_report": {
+        "status": "passed",
+        "covered_inputs": [
+          "api_url",
+          "reference_image_file",
+          "reference_image_url",
+          "poll_interval",
+          "prompt",
+          "timeout_seconds",
+          "upload_name"
+        ],
+        "missing_inputs": [],
+        "source_files_read": [
+          "chatgpt-remote-image-service/agents/openai.yaml",
+          "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+          "chatgpt-remote-image-service/SKILL.md"
+        ],
+        "errors": []
+      }
+    },
+    "finished_at": "2026-06-29T09:18:21Z"
+  },
+  "stderr": ""
+}

@@ -1,0 +1,16 @@
+{
+  "status": "runtime_sop_ready",
+  "workflow_id": "youtube-research-wiki",
+  "draft_id": "ui-runtime-publish-1782406114250-20260625t164838z",
+  "draft_path": "/root/wiki/wiki-sop-new-instance/raw/workflow-drafts/ui-runtime-publish-1782406114250-20260625t164838z",
+  "runtime_sop_path": "/root/wiki/wiki-sop-new-instance/raw/workflow-drafts/ui-runtime-publish-1782406114250-20260625t164838z/runtime_sop.yaml",
+  "runtime_sop_source": "/root/wiki/wiki-sop-new-instance/sop.yaml",
+  "edge_count": 1,
+  "change_count": 1,
+  "hash_before": "5750a6dcf94e957e",
+  "hash_after": "13c6512ed96759dc",
+  "active_runtime_sop_changed": false,
+  "production_dag_changed": false,
+  "repo_first_required": false,
+  "message": "workflow draft Runtime SOP snapshot prepared; active sop.yaml is unchanged"
+}

@@ -1,0 +1,65 @@
+- id: youtube-fetch-to-tg-notify-1782413126164
+  from: youtube-fetch
+  to: tg-notify
+  relay:
+    mode: auto_by_target_inputs
+    mappings:
+    - source_output: metadata_file
+      target_input: message
+      resolver: json_path
+    handoff_instruction: tg发送上节点 metadata_file中的title 到群里
+    node_execution_guide:
+      format: markdown
+      prompt: 'Use skill sop-tg-notify to execute this downstream node.
+
+
+        Node Execution Guide
+
+        - Edge: youtube-fetch -> tg-notify
+
+        - Evaluation summary: Edge Handoff Instruction 已说明泛化输入的消费方式，可生成下游节点执行指导文档。
+
+        - Edge Handoff Instruction: tg发送上节点 metadata_file中的title 到群里
+
+
+        Upstream artifacts
+
+        - source_url: raw/node-runs/{pipeline_id}/outputs/files/source-url.txt
+
+        - metadata_file: raw/node-runs/{pipeline_id}/outputs/files/metadata.json
+
+
+        Execution rules
+
+        - Use only the resolved Edge inputs and materialized artifacts listed here.
+
+        - If a required artifact cannot be read, fail before executing the downstream
+        skill.
+
+        - Do not silently fall back to stale pipeline context or unrelated historical
+        artifacts.
+
+        - Preserve the downstream skill boundary; this guide shapes execution but
+        does not replace the skill.'
+    evaluation:
+      status: ready
+      score: 0.92
+      confidence: 0.88
+      summary: Extract 'title' from upstream metadata_file and pass as Telegram message.
+      decision: can_run
+      evaluated_at: '2026-06-27T10:41:14Z'
+      agent:
+        provider: openai-compatible
+        model: deepseek-v4-pro
+        used_ai: true
+    resolved_handoff:
+      relay_mappings:
+      - source_output: metadata_file
+        target_input: message
+        resolver: json_path
+        resolver_detail: title
+    test_plan:
+    - 物化 Edge 输入
+    - 执行下游 skill
+    - 校验声明输出
+    - 记录 edge evaluation 和 guide

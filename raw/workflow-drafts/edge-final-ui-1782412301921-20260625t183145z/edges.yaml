@@ -1,0 +1,68 @@
+- id: youtube-fetch-to-youtube-deep-research-final-1782412301921
+  from: youtube-fetch
+  to: youtube-deep-research
+  relay:
+    mode: auto_by_target_inputs
+    mappings: []
+    handoff_instruction: 从上游 outputs 中读取 metadata_file 的 source_url 字段传给下游节点，忽略 source_url
+      输出。
+    node_execution_guide:
+      format: markdown
+      prompt: 'Use skill sop-youtube-deep-research to execute this downstream node.
+
+
+        Node Execution Guide
+
+        - Edge: youtube-fetch -> youtube-deep-research
+
+        - Evaluation summary: 上下游存在显式引用或同名输入输出，可稳定生成节点执行指导文档。
+
+        - Edge Handoff Instruction: 从上游 outputs 中读取 metadata_file 的 source_url 字段传给下游节点，忽略
+        source_url 输出。
+
+
+        Upstream artifacts
+
+        - source_url: raw/node-runs/{pipeline_id}/outputs/files/source-url.txt
+
+        - metadata_file: raw/node-runs/{pipeline_id}/outputs/files/metadata.json
+
+
+        Execution rules
+
+        - Use only the resolved Edge inputs and materialized artifacts listed here.
+
+        - If a required artifact cannot be read, fail before executing the downstream
+        skill.
+
+        - Do not silently fall back to stale pipeline context or unrelated historical
+        artifacts.
+
+        - Preserve the downstream skill boundary; this guide shapes execution but
+        does not replace the skill.'
+    evaluation:
+      status: ready
+      score: 0.92
+      confidence: 0.88
+      summary: 下游输入 source_url 可通过上游 metadata_file 的 $.source_url 字段解析得到，忽略显式 source_url
+        输出。
+      decision: can_run
+      evaluated_at: '2026-06-25T18:32:11Z'
+      agent:
+        provider: openai-compatible
+        model: deepseek-v4-pro
+        used_ai: true
+    resolved_handoff:
+      primary_artifacts:
+      - from: youtube-fetch.outputs.metadata_file
+        role: primary_source
+        reason: 上游可交付产物，内含 source_url 字段。
+      supporting_artifacts: []
+      downstream_inputs:
+      - to: youtube-deep-research.inputs.source_url
+        construction: 使用 json_path 解析器从 metadata_file 提取。
+    test_plan:
+    - 物化 Edge 输入
+    - 执行下游 skill
+    - 校验声明输出
+    - 记录 edge evaluation 和 guide

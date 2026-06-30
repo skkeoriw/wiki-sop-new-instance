@@ -1,0 +1,8 @@
+{
+  "status": "published",
+  "node_id": "chatgpt-remote-image-service-verify",
+  "runtime_catalog_path": "/root/.sop/node-catalog/chatgpt-remote-image-service-verify/node.yaml",
+  "visible_in_nodes_api": true,
+  "published_at": "2026-06-29T06:40:39.161414+00:00",
+  "message": "Node is published to the current Runtime catalog. Source repo is unchanged."
+}

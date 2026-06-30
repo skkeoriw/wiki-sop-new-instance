@@ -1,0 +1,1207 @@
+{
+  "status": "failed",
+  "execution_status": "failed",
+  "business_output_status": {
+    "status": "failed_execution",
+    "expected_outputs": [
+      "result",
+      "image_url",
+      "public_image_url",
+      "status",
+      "task_id",
+      "status_json",
+      "submit_json",
+      "generated_images",
+      "images"
+    ],
+    "required_outputs": [],
+    "present_outputs": [
+      "result",
+      "image_url",
+      "public_image_url",
+      "status",
+      "task_id",
+      "status_json",
+      "generated_images"
+    ],
+    "missing_required_outputs": [],
+    "business_outputs": {
+      "result": {
+        "ok": true,
+        "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+        "status": "failed",
+        "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+        "error": "Worker exited with code 1",
+        "timings": {
+          "connectedMs": 1127,
+          "pageReadyMs": 2536,
+          "sentMs": 11575,
+          "generatedVisibleMs": 54759
+        }
+      },
+      "image_url": "https://chatgpt-image.vyibc.com/health`",
+      "public_image_url": "https://chatgpt-image.vyibc.com/health`",
+      "status": "failed",
+      "task_id": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+      "status_json": {
+        "ok": true,
+        "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+        "status": "failed",
+        "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+        "createdAt": "2026-06-29T18:40:57.768Z",
+        "startedAt": "2026-06-29T18:40:57.769Z",
+        "updatedAt": "2026-06-29T18:42:04.412Z",
+        "uploadName": "5a842498-e2e5-4a1b-a910-c9d9b0532529.png",
+        "workerId": "worker-1",
+        "cdpPort": "9333",
+        "loginRequired": false,
+        "timings": {
+          "connectedMs": 1127,
+          "pageReadyMs": 2536,
+          "sentMs": 11575,
+          "generatedVisibleMs": 54759
+        },
+        "error": "Worker exited with code 1",
+        "recentLogs": [
+          "stage.start parseArgs",
+          "stage.done parseArgs",
+          "stage.start importPlaywright",
+          "stage.done importPlaywright",
+          "stage.start connectBrowser port=9333",
+          "stage.done connectedMs=1127",
+          "stage.start preparePage",
+          "stage.done pageReadyMs=2536",
+          "stage.start waitComposer",
+          "stage.done waitComposer",
+          "stage.start enterImageMode",
+          "stage.done enterImageMode",
+          "stage.start fillPrompt",
+          "stage.done fillPrompt",
+          "stage.start waitSendEnabled",
+          "stage.done waitSendEnabled",
+          "stage.start snapshotExistingGeneratedImages count=0",
+          "stage.start clickSend",
+          "stage.done sentMs=11575",
+          "stage.start waitForGeneratedImage",
+          "stage.done generatedVisibleMs=54759",
+          "stage.start downloadImage",
+          "FAIL: locator.waitFor timeout 10000ms - waiting for dialog"
+        ],
+        "relayable": false
+      },
+      "generated_images": "https://chatgpt-image.vyibc.com/health`"
+    },
+    "business_artifact_count": 0
+  },
+  "probe_id": "chatgpt-remote-image-service-vs2q-probe-20260629T184017Z-da2ff9",
+  "draft_id": "chatgpt-remote-image-service-vs2q-1782757312",
+  "node_id": "chatgpt-remote-image-service-vs2q",
+  "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260629T184017-4b8467",
+  "http_status": 200,
+  "mode": "node-draft-probe-run",
+  "manual_inputs": {
+    "api_url": "",
+    "reference_image_file": "",
+    "reference_image_url": "",
+    "poll_interval": "",
+    "prompt": "生成一张小猫睡觉的照片",
+    "timeout_seconds": "",
+    "upload_name": ""
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": false
+    },
+    "telegram": {
+      "enabled": false
+    }
+  },
+  "result": {
+    "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260629T184017-4b8467",
+    "status": "failed",
+    "pending": false,
+    "started_at": "2026-06-29T18:40:17.726517+00:00",
+    "finished_at": "2026-06-29T18:47:34.943691+00:00",
+    "elapsed_ms": 282,
+    "validation": {
+      "business_output_status": {
+        "status": "failed_execution",
+        "expected_outputs": [
+          "result",
+          "image_url",
+          "public_image_url",
+          "status",
+          "task_id",
+          "status_json",
+          "submit_json",
+          "generated_images",
+          "images"
+        ],
+        "required_outputs": [],
+        "present_outputs": [
+          "result",
+          "image_url",
+          "public_image_url",
+          "status",
+          "task_id",
+          "status_json",
+          "generated_images"
+        ],
+        "missing_required_outputs": [],
+        "business_outputs": {
+          "result": {
+            "ok": true,
+            "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+            "status": "failed",
+            "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+            "error": "Worker exited with code 1",
+            "timings": {
+              "connectedMs": 1127,
+              "pageReadyMs": 2536,
+              "sentMs": 11575,
+              "generatedVisibleMs": 54759
+            }
+          },
+          "image_url": "https://chatgpt-image.vyibc.com/health`",
+          "public_image_url": "https://chatgpt-image.vyibc.com/health`",
+          "status": "failed",
+          "task_id": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+          "status_json": {
+            "ok": true,
+            "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+            "status": "failed",
+            "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+            "createdAt": "2026-06-29T18:40:57.768Z",
+            "startedAt": "2026-06-29T18:40:57.769Z",
+            "updatedAt": "2026-06-29T18:42:04.412Z",
+            "uploadName": "5a842498-e2e5-4a1b-a910-c9d9b0532529.png",
+            "workerId": "worker-1",
+            "cdpPort": "9333",
+            "loginRequired": false,
+            "timings": {
+              "connectedMs": 1127,
+              "pageReadyMs": 2536,
+              "sentMs": 11575,
+              "generatedVisibleMs": 54759
+            },
+            "error": "Worker exited with code 1",
+            "recentLogs": [
+              "stage.start parseArgs",
+              "stage.done parseArgs",
+              "stage.start importPlaywright",
+              "stage.done importPlaywright",
+              "stage.start connectBrowser port=9333",
+              "stage.done connectedMs=1127",
+              "stage.start preparePage",
+              "stage.done pageReadyMs=2536",
+              "stage.start waitComposer",
+              "stage.done waitComposer",
+              "stage.start enterImageMode",
+              "stage.done enterImageMode",
+              "stage.start fillPrompt",
+              "stage.done fillPrompt",
+              "stage.start waitSendEnabled",
+              "stage.done waitSendEnabled",
+              "stage.start snapshotExistingGeneratedImages count=0",
+              "stage.start clickSend",
+              "stage.done sentMs=11575",
+              "stage.start waitForGeneratedImage",
+              "stage.done generatedVisibleMs=54759",
+              "stage.start downloadImage",
+              "FAIL: locator.waitFor timeout 10000ms - waiting for dialog"
+            ],
+            "relayable": false
+          },
+          "generated_images": "https://chatgpt-image.vyibc.com/health`"
+        },
+        "business_artifact_count": 0
+      }
+    },
+    "output_manifest": "",
+    "output_directory": "",
+    "actual_outputs": {
+      "result": {
+        "ok": true,
+        "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+        "status": "failed",
+        "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+        "error": "Worker exited with code 1",
+        "timings": {
+          "connectedMs": 1127,
+          "pageReadyMs": 2536,
+          "sentMs": 11575,
+          "generatedVisibleMs": 54759
+        }
+      },
+      "image_url": "https://chatgpt-image.vyibc.com/health`",
+      "public_image_url": "https://chatgpt-image.vyibc.com/health`",
+      "status": "failed",
+      "task_id": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+      "status_json": {
+        "ok": true,
+        "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+        "status": "failed",
+        "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+        "createdAt": "2026-06-29T18:40:57.768Z",
+        "startedAt": "2026-06-29T18:40:57.769Z",
+        "updatedAt": "2026-06-29T18:42:04.412Z",
+        "uploadName": "5a842498-e2e5-4a1b-a910-c9d9b0532529.png",
+        "workerId": "worker-1",
+        "cdpPort": "9333",
+        "loginRequired": false,
+        "timings": {
+          "connectedMs": 1127,
+          "pageReadyMs": 2536,
+          "sentMs": 11575,
+          "generatedVisibleMs": 54759
+        },
+        "error": "Worker exited with code 1",
+        "recentLogs": [
+          "stage.start parseArgs",
+          "stage.done parseArgs",
+          "stage.start importPlaywright",
+          "stage.done importPlaywright",
+          "stage.start connectBrowser port=9333",
+          "stage.done connectedMs=1127",
+          "stage.start preparePage",
+          "stage.done pageReadyMs=2536",
+          "stage.start waitComposer",
+          "stage.done waitComposer",
+          "stage.start enterImageMode",
+          "stage.done enterImageMode",
+          "stage.start fillPrompt",
+          "stage.done fillPrompt",
+          "stage.start waitSendEnabled",
+          "stage.done waitSendEnabled",
+          "stage.start snapshotExistingGeneratedImages count=0",
+          "stage.start clickSend",
+          "stage.done sentMs=11575",
+          "stage.start waitForGeneratedImage",
+          "stage.done generatedVisibleMs=54759",
+          "stage.start downloadImage",
+          "FAIL: locator.waitFor timeout 10000ms - waiting for dialog"
+        ],
+        "relayable": false
+      },
+      "submit_json": [],
+      "generated_images": "https://chatgpt-image.vyibc.com/health`",
+      "images": []
+    },
+    "business_artifacts": [],
+    "core_outputs": [
+      {
+        "name": "result",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "ok": true,
+          "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+          "status": "failed",
+          "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+          "error": "Worker exited with code 1",
+          "timings": {
+            "connectedMs": 1127,
+            "pageReadyMs": 2536,
+            "sentMs": 11575,
+            "generatedVisibleMs": 54759
+          }
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Skill execution result summary.",
+          "relayable": true
+        }
+      },
+      {
+        "name": "image_url",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "https://chatgpt-image.vyibc.com/health`",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `imageUrl`.",
+          "value_type": "url",
+          "relayable": true,
+          "evidence": "source result marker imageUrl"
+        }
+      },
+      {
+        "name": "public_image_url",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "https://chatgpt-image.vyibc.com/health`",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `publicImageUrl`.",
+          "value_type": "url",
+          "relayable": true,
+          "evidence": "source result marker publicImageUrl"
+        }
+      },
+      {
+        "name": "status",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "failed",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `status`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker status"
+        }
+      },
+      {
+        "name": "task_id",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `taskId`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker taskId"
+        }
+      },
+      {
+        "name": "status_json",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "ok": true,
+          "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+          "status": "failed",
+          "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+          "createdAt": "2026-06-29T18:40:57.768Z",
+          "startedAt": "2026-06-29T18:40:57.769Z",
+          "updatedAt": "2026-06-29T18:42:04.412Z",
+          "uploadName": "5a842498-e2e5-4a1b-a910-c9d9b0532529.png",
+          "workerId": "worker-1",
+          "cdpPort": "9333",
+          "loginRequired": false,
+          "timings": {
+            "connectedMs": 1127,
+            "pageReadyMs": 2536,
+            "sentMs": 11575,
+            "generatedVisibleMs": 54759
+          },
+          "error": "Worker exited with code 1",
+          "recentLogs": [
+            "stage.start parseArgs",
+            "stage.done parseArgs",
+            "stage.start importPlaywright",
+            "stage.done importPlaywright",
+            "stage.start connectBrowser port=9333",
+            "stage.done connectedMs=1127",
+            "stage.start preparePage",
+            "stage.done pageReadyMs=2536",
+            "stage.start waitComposer",
+            "stage.done waitComposer",
+            "stage.start enterImageMode",
+            "stage.done enterImageMode",
+            "stage.start fillPrompt",
+            "stage.done fillPrompt",
+            "stage.start waitSendEnabled",
+            "stage.done waitSendEnabled",
+            "stage.start snapshotExistingGeneratedImages count=0",
+            "stage.start clickSend",
+            "stage.done sentMs=11575",
+            "stage.start waitForGeneratedImage",
+            "stage.done generatedVisibleMs=54759",
+            "stage.start downloadImage",
+            "FAIL: locator.waitFor timeout 10000ms - waiting for dialog"
+          ],
+          "relayable": false
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Runtime value captured by script variable `status_json`.",
+          "value_type": "json",
+          "relayable": false,
+          "evidence": "source script variable status_json"
+        }
+      },
+      {
+        "name": "submit_json",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Runtime value captured by script variable `submit_json`.",
+          "value_type": "json",
+          "relayable": true,
+          "evidence": "source script variable submit_json"
+        }
+      },
+      {
+        "name": "generated_images",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "https://chatgpt-image.vyibc.com/health`",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Generated image files or public image URLs.",
+          "value_type": "image",
+          "relayable": true
+        }
+      },
+      {
+        "name": "images",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Generated image files.",
+          "relayable": true
+        }
+      }
+    ],
+    "steps": [
+      {
+        "id": "create-run",
+        "title": "Create node run workspace",
+        "status": "done",
+        "summary": "Node Run record is allocated independently from Workflow Run.",
+        "started_at": "2026-06-29T18:40:17.726517+00:00",
+        "finished_at": "2026-06-29T18:40:17.761517+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "load-definition",
+        "title": "Load node definition",
+        "status": "done",
+        "summary": "Loaded chatgpt-remote-image-service-vs2q from youtube-research-wiki.",
+        "started_at": "2026-06-29T18:40:17.761517+00:00",
+        "finished_at": "2026-06-29T18:40:17.796517+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-context",
+        "title": "Resolve Runtime / Instance / Workflow context",
+        "status": "done",
+        "summary": "youtube-wiki · wiki-sop-new-instance · youtube-research-wiki",
+        "started_at": "2026-06-29T18:40:17.796517+00:00",
+        "finished_at": "2026-06-29T18:40:17.831517+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-inputs",
+        "title": "Resolve node inputs",
+        "status": "done",
+        "summary": "1 resolved, 0 pending relay, 0 missing.",
+        "started_at": "2026-06-29T18:40:17.831517+00:00",
+        "finished_at": "2026-06-29T18:40:17.866517+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-config",
+        "title": "Resolve execution config",
+        "status": "done",
+        "summary": "Runtime, Instance and capability config resolved.",
+        "started_at": "2026-06-29T18:40:17.866517+00:00",
+        "finished_at": "2026-06-29T18:40:17.901517+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "generate-agent-request",
+        "title": "Generate Agent Request",
+        "status": "done",
+        "summary": "Hermes Agent Request was rendered and saved for this Node Run.",
+        "started_at": "2026-06-29T18:40:17.901517+00:00",
+        "finished_at": "",
+        "elapsed_ms": 0
+      },
+      {
+        "id": "probe-capabilities",
+        "title": "Probe attached capabilities",
+        "status": "skipped",
+        "summary": "Capability probes are explicit. Telegram send probes require user confirmation.",
+        "started_at": "2026-06-29T18:40:17.936517+00:00",
+        "finished_at": "2026-06-29T18:40:17.960517+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "build-execution-plan",
+        "title": "Build node execution plan",
+        "status": "done",
+        "summary": "Prepared real-node execution plan.",
+        "started_at": "2026-06-29T18:40:17.971517+00:00",
+        "finished_at": "2026-06-29T18:40:18.006517+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "execute-or-dry-run",
+        "title": "Execute or dry-run node",
+        "status": "failed",
+        "summary": "Real node execution crashed before completion.",
+        "started_at": "2026-06-29T18:40:18.006517+00:00",
+        "finished_at": "2026-06-29T18:47:34.943691+00:00",
+        "elapsed_ms": 0
+      },
+      {
+        "id": "validate-outputs",
+        "title": "Validate declared outputs",
+        "status": "waiting",
+        "summary": "Waiting for real node outputs.",
+        "started_at": "2026-06-29T18:40:18.041517+00:00",
+        "finished_at": "",
+        "elapsed_ms": 0
+      },
+      {
+        "id": "persist-to-github",
+        "title": "Persist to GitHub",
+        "status": "skipped",
+        "summary": "GitHub persistence is not attached for this Node Run.",
+        "started_at": "2026-06-29T18:40:18.076517+00:00",
+        "finished_at": "2026-06-29T18:40:18.100517+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "send-telegram-notification",
+        "title": "Send Telegram notification",
+        "status": "skipped",
+        "summary": "Telegram notification is not attached for this Node Run.",
+        "started_at": "2026-06-29T18:40:18.111517+00:00",
+        "finished_at": "2026-06-29T18:40:18.135517+00:00",
+        "elapsed_ms": 24
+      }
+    ]
+  },
+  "manifest": {
+    "version": 1,
+    "kind": "output",
+    "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260629T184017-4b8467",
+    "node_id": "chatgpt-remote-image-service-vs2q",
+    "created_at": "2026-06-29T18:42:04Z",
+    "status": "failed",
+    "error": "Remote ChatGPT image worker failed during download phase: locator '[role=\"dialog\"]' timeout exceeded after image was generated. The image was generated by ChatGPT (stage=waitForGeneratedImage completed) but the download could not be captured because the expected dialog element never appeared.",
+    "items": [
+      {
+        "output_name": "status",
+        "value_type": "text",
+        "value": "failed",
+        "relayable": true
+      },
+      {
+        "output_name": "task_id",
+        "value_type": "text",
+        "value": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+        "relayable": true
+      },
+      {
+        "output_name": "result",
+        "value_type": "json",
+        "value": {
+          "ok": true,
+          "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+          "status": "failed",
+          "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+          "error": "Worker exited with code 1",
+          "timings": {
+            "connectedMs": 1127,
+            "pageReadyMs": 2536,
+            "sentMs": 11575,
+            "generatedVisibleMs": 54759
+          }
+        },
+        "relayable": true
+      },
+      {
+        "output_name": "status_json",
+        "value_type": "json",
+        "value": {
+          "ok": true,
+          "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+          "status": "failed",
+          "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+          "createdAt": "2026-06-29T18:40:57.768Z",
+          "startedAt": "2026-06-29T18:40:57.769Z",
+          "updatedAt": "2026-06-29T18:42:04.412Z",
+          "uploadName": "5a842498-e2e5-4a1b-a910-c9d9b0532529.png",
+          "workerId": "worker-1",
+          "cdpPort": "9333",
+          "loginRequired": false,
+          "timings": {
+            "connectedMs": 1127,
+            "pageReadyMs": 2536,
+            "sentMs": 11575,
+            "generatedVisibleMs": 54759
+          },
+          "error": "Worker exited with code 1",
+          "recentLogs": [
+            "stage.start parseArgs",
+            "stage.done parseArgs",
+            "stage.start importPlaywright",
+            "stage.done importPlaywright",
+            "stage.start connectBrowser port=9333",
+            "stage.done connectedMs=1127",
+            "stage.start preparePage",
+            "stage.done pageReadyMs=2536",
+            "stage.start waitComposer",
+            "stage.done waitComposer",
+            "stage.start enterImageMode",
+            "stage.done enterImageMode",
+            "stage.start fillPrompt",
+            "stage.done fillPrompt",
+            "stage.start waitSendEnabled",
+            "stage.done waitSendEnabled",
+            "stage.start snapshotExistingGeneratedImages count=0",
+            "stage.start clickSend",
+            "stage.done sentMs=11575",
+            "stage.start waitForGeneratedImage",
+            "stage.done generatedVisibleMs=54759",
+            "stage.start downloadImage",
+            "FAIL: locator.waitFor timeout 10000ms - waiting for dialog"
+          ],
+          "relayable": false
+        }
+      },
+      {
+        "output": "image_url",
+        "value": "https://chatgpt-image.vyibc.com/health`",
+        "value_type": "url",
+        "kind": "scalar",
+        "source": "node-run-text-evidence"
+      },
+      {
+        "output": "public_image_url",
+        "value": "https://chatgpt-image.vyibc.com/health`",
+        "value_type": "url",
+        "kind": "scalar",
+        "source": "node-run-text-evidence"
+      }
+    ],
+    "selected_outputs": [],
+    "matched_outputs": []
+  },
+  "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T184017-4b8467/outputs/manifest.json",
+  "manifest_records": [
+    {
+      "output_name": "status",
+      "value_type": "text",
+      "value": "failed",
+      "relayable": true,
+      "output": "status",
+      "path": ""
+    },
+    {
+      "output_name": "task_id",
+      "value_type": "text",
+      "value": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+      "relayable": true,
+      "output": "task_id",
+      "path": ""
+    },
+    {
+      "output_name": "result",
+      "value_type": "json",
+      "value": {
+        "ok": true,
+        "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+        "status": "failed",
+        "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+        "error": "Worker exited with code 1",
+        "timings": {
+          "connectedMs": 1127,
+          "pageReadyMs": 2536,
+          "sentMs": 11575,
+          "generatedVisibleMs": 54759
+        }
+      },
+      "relayable": true,
+      "output": "result",
+      "path": ""
+    },
+    {
+      "output_name": "status_json",
+      "value_type": "json",
+      "value": {
+        "ok": true,
+        "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+        "status": "failed",
+        "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+        "createdAt": "2026-06-29T18:40:57.768Z",
+        "startedAt": "2026-06-29T18:40:57.769Z",
+        "updatedAt": "2026-06-29T18:42:04.412Z",
+        "uploadName": "5a842498-e2e5-4a1b-a910-c9d9b0532529.png",
+        "workerId": "worker-1",
+        "cdpPort": "9333",
+        "loginRequired": false,
+        "timings": {
+          "connectedMs": 1127,
+          "pageReadyMs": 2536,
+          "sentMs": 11575,
+          "generatedVisibleMs": 54759
+        },
+        "error": "Worker exited with code 1",
+        "recentLogs": [
+          "stage.start parseArgs",
+          "stage.done parseArgs",
+          "stage.start importPlaywright",
+          "stage.done importPlaywright",
+          "stage.start connectBrowser port=9333",
+          "stage.done connectedMs=1127",
+          "stage.start preparePage",
+          "stage.done pageReadyMs=2536",
+          "stage.start waitComposer",
+          "stage.done waitComposer",
+          "stage.start enterImageMode",
+          "stage.done enterImageMode",
+          "stage.start fillPrompt",
+          "stage.done fillPrompt",
+          "stage.start waitSendEnabled",
+          "stage.done waitSendEnabled",
+          "stage.start snapshotExistingGeneratedImages count=0",
+          "stage.start clickSend",
+          "stage.done sentMs=11575",
+          "stage.start waitForGeneratedImage",
+          "stage.done generatedVisibleMs=54759",
+          "stage.start downloadImage",
+          "FAIL: locator.waitFor timeout 10000ms - waiting for dialog"
+        ],
+        "relayable": false
+      },
+      "output": "status_json",
+      "path": ""
+    },
+    {
+      "output": "image_url",
+      "value": "https://chatgpt-image.vyibc.com/health`",
+      "value_type": "url",
+      "kind": "scalar",
+      "source": "node-run-text-evidence",
+      "path": ""
+    },
+    {
+      "output": "public_image_url",
+      "value": "https://chatgpt-image.vyibc.com/health`",
+      "value_type": "url",
+      "kind": "scalar",
+      "source": "node-run-text-evidence",
+      "path": ""
+    }
+  ],
+  "validation": {
+    "business_output_status": {
+      "status": "failed_execution",
+      "expected_outputs": [
+        "result",
+        "image_url",
+        "public_image_url",
+        "status",
+        "task_id",
+        "status_json",
+        "submit_json",
+        "generated_images",
+        "images"
+      ],
+      "required_outputs": [],
+      "present_outputs": [
+        "result",
+        "image_url",
+        "public_image_url",
+        "status",
+        "task_id",
+        "status_json",
+        "generated_images"
+      ],
+      "missing_required_outputs": [],
+      "business_outputs": {
+        "result": {
+          "ok": true,
+          "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+          "status": "failed",
+          "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+          "error": "Worker exited with code 1",
+          "timings": {
+            "connectedMs": 1127,
+            "pageReadyMs": 2536,
+            "sentMs": 11575,
+            "generatedVisibleMs": 54759
+          }
+        },
+        "image_url": "https://chatgpt-image.vyibc.com/health`",
+        "public_image_url": "https://chatgpt-image.vyibc.com/health`",
+        "status": "failed",
+        "task_id": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+        "status_json": {
+          "ok": true,
+          "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+          "status": "failed",
+          "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+          "createdAt": "2026-06-29T18:40:57.768Z",
+          "startedAt": "2026-06-29T18:40:57.769Z",
+          "updatedAt": "2026-06-29T18:42:04.412Z",
+          "uploadName": "5a842498-e2e5-4a1b-a910-c9d9b0532529.png",
+          "workerId": "worker-1",
+          "cdpPort": "9333",
+          "loginRequired": false,
+          "timings": {
+            "connectedMs": 1127,
+            "pageReadyMs": 2536,
+            "sentMs": 11575,
+            "generatedVisibleMs": 54759
+          },
+          "error": "Worker exited with code 1",
+          "recentLogs": [
+            "stage.start parseArgs",
+            "stage.done parseArgs",
+            "stage.start importPlaywright",
+            "stage.done importPlaywright",
+            "stage.start connectBrowser port=9333",
+            "stage.done connectedMs=1127",
+            "stage.start preparePage",
+            "stage.done pageReadyMs=2536",
+            "stage.start waitComposer",
+            "stage.done waitComposer",
+            "stage.start enterImageMode",
+            "stage.done enterImageMode",
+            "stage.start fillPrompt",
+            "stage.done fillPrompt",
+            "stage.start waitSendEnabled",
+            "stage.done waitSendEnabled",
+            "stage.start snapshotExistingGeneratedImages count=0",
+            "stage.start clickSend",
+            "stage.done sentMs=11575",
+            "stage.start waitForGeneratedImage",
+            "stage.done generatedVisibleMs=54759",
+            "stage.start downloadImage",
+            "FAIL: locator.waitFor timeout 10000ms - waiting for dialog"
+          ],
+          "relayable": false
+        },
+        "generated_images": "https://chatgpt-image.vyibc.com/health`"
+      },
+      "business_artifact_count": 0
+    }
+  },
+  "actual_outputs": {
+    "result": {
+      "ok": true,
+      "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+      "status": "failed",
+      "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+      "error": "Worker exited with code 1",
+      "timings": {
+        "connectedMs": 1127,
+        "pageReadyMs": 2536,
+        "sentMs": 11575,
+        "generatedVisibleMs": 54759
+      }
+    },
+    "image_url": "https://chatgpt-image.vyibc.com/health`",
+    "public_image_url": "https://chatgpt-image.vyibc.com/health`",
+    "status": "failed",
+    "task_id": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+    "status_json": {
+      "ok": true,
+      "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+      "status": "failed",
+      "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+      "createdAt": "2026-06-29T18:40:57.768Z",
+      "startedAt": "2026-06-29T18:40:57.769Z",
+      "updatedAt": "2026-06-29T18:42:04.412Z",
+      "uploadName": "5a842498-e2e5-4a1b-a910-c9d9b0532529.png",
+      "workerId": "worker-1",
+      "cdpPort": "9333",
+      "loginRequired": false,
+      "timings": {
+        "connectedMs": 1127,
+        "pageReadyMs": 2536,
+        "sentMs": 11575,
+        "generatedVisibleMs": 54759
+      },
+      "error": "Worker exited with code 1",
+      "recentLogs": [
+        "stage.start parseArgs",
+        "stage.done parseArgs",
+        "stage.start importPlaywright",
+        "stage.done importPlaywright",
+        "stage.start connectBrowser port=9333",
+        "stage.done connectedMs=1127",
+        "stage.start preparePage",
+        "stage.done pageReadyMs=2536",
+        "stage.start waitComposer",
+        "stage.done waitComposer",
+        "stage.start enterImageMode",
+        "stage.done enterImageMode",
+        "stage.start fillPrompt",
+        "stage.done fillPrompt",
+        "stage.start waitSendEnabled",
+        "stage.done waitSendEnabled",
+        "stage.start snapshotExistingGeneratedImages count=0",
+        "stage.start clickSend",
+        "stage.done sentMs=11575",
+        "stage.start waitForGeneratedImage",
+        "stage.done generatedVisibleMs=54759",
+        "stage.start downloadImage",
+        "FAIL: locator.waitFor timeout 10000ms - waiting for dialog"
+      ],
+      "relayable": false
+    },
+    "submit_json": [],
+    "generated_images": "https://chatgpt-image.vyibc.com/health`",
+    "images": []
+  },
+  "business_outputs": {
+    "result": {
+      "ok": true,
+      "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+      "status": "failed",
+      "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+      "error": "Worker exited with code 1",
+      "timings": {
+        "connectedMs": 1127,
+        "pageReadyMs": 2536,
+        "sentMs": 11575,
+        "generatedVisibleMs": 54759
+      }
+    },
+    "image_url": "https://chatgpt-image.vyibc.com/health`",
+    "public_image_url": "https://chatgpt-image.vyibc.com/health`",
+    "status": "failed",
+    "task_id": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+    "status_json": {
+      "ok": true,
+      "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+      "status": "failed",
+      "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+      "createdAt": "2026-06-29T18:40:57.768Z",
+      "startedAt": "2026-06-29T18:40:57.769Z",
+      "updatedAt": "2026-06-29T18:42:04.412Z",
+      "uploadName": "5a842498-e2e5-4a1b-a910-c9d9b0532529.png",
+      "workerId": "worker-1",
+      "cdpPort": "9333",
+      "loginRequired": false,
+      "timings": {
+        "connectedMs": 1127,
+        "pageReadyMs": 2536,
+        "sentMs": 11575,
+        "generatedVisibleMs": 54759
+      },
+      "error": "Worker exited with code 1",
+      "recentLogs": [
+        "stage.start parseArgs",
+        "stage.done parseArgs",
+        "stage.start importPlaywright",
+        "stage.done importPlaywright",
+        "stage.start connectBrowser port=9333",
+        "stage.done connectedMs=1127",
+        "stage.start preparePage",
+        "stage.done pageReadyMs=2536",
+        "stage.start waitComposer",
+        "stage.done waitComposer",
+        "stage.start enterImageMode",
+        "stage.done enterImageMode",
+        "stage.start fillPrompt",
+        "stage.done fillPrompt",
+        "stage.start waitSendEnabled",
+        "stage.done waitSendEnabled",
+        "stage.start snapshotExistingGeneratedImages count=0",
+        "stage.start clickSend",
+        "stage.done sentMs=11575",
+        "stage.start waitForGeneratedImage",
+        "stage.done generatedVisibleMs=54759",
+        "stage.start downloadImage",
+        "FAIL: locator.waitFor timeout 10000ms - waiting for dialog"
+      ],
+      "relayable": false
+    },
+    "generated_images": "https://chatgpt-image.vyibc.com/health`"
+  },
+  "business_artifacts": [],
+  "core_outputs": [
+    {
+      "name": "result",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "ok": true,
+        "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+        "status": "failed",
+        "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+        "error": "Worker exited with code 1",
+        "timings": {
+          "connectedMs": 1127,
+          "pageReadyMs": 2536,
+          "sentMs": 11575,
+          "generatedVisibleMs": 54759
+        }
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Skill execution result summary.",
+        "relayable": true
+      }
+    },
+    {
+      "name": "image_url",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "https://chatgpt-image.vyibc.com/health`",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `imageUrl`.",
+        "value_type": "url",
+        "relayable": true,
+        "evidence": "source result marker imageUrl"
+      }
+    },
+    {
+      "name": "public_image_url",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "https://chatgpt-image.vyibc.com/health`",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `publicImageUrl`.",
+        "value_type": "url",
+        "relayable": true,
+        "evidence": "source result marker publicImageUrl"
+      }
+    },
+    {
+      "name": "status",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "failed",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `status`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker status"
+      }
+    },
+    {
+      "name": "task_id",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `taskId`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker taskId"
+      }
+    },
+    {
+      "name": "status_json",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "ok": true,
+        "taskId": "5a842498-e2e5-4a1b-a910-c9d9b0532529",
+        "status": "failed",
+        "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+        "createdAt": "2026-06-29T18:40:57.768Z",
+        "startedAt": "2026-06-29T18:40:57.769Z",
+        "updatedAt": "2026-06-29T18:42:04.412Z",
+        "uploadName": "5a842498-e2e5-4a1b-a910-c9d9b0532529.png",
+        "workerId": "worker-1",
+        "cdpPort": "9333",
+        "loginRequired": false,
+        "timings": {
+          "connectedMs": 1127,
+          "pageReadyMs": 2536,
+          "sentMs": 11575,
+          "generatedVisibleMs": 54759
+        },
+        "error": "Worker exited with code 1",
+        "recentLogs": [
+          "stage.start parseArgs",
+          "stage.done parseArgs",
+          "stage.start importPlaywright",
+          "stage.done importPlaywright",
+          "stage.start connectBrowser port=9333",
+          "stage.done connectedMs=1127",
+          "stage.start preparePage",
+          "stage.done pageReadyMs=2536",
+          "stage.start waitComposer",
+          "stage.done waitComposer",
+          "stage.start enterImageMode",
+          "stage.done enterImageMode",
+          "stage.start fillPrompt",
+          "stage.done fillPrompt",
+          "stage.start waitSendEnabled",
+          "stage.done waitSendEnabled",
+          "stage.start snapshotExistingGeneratedImages count=0",
+          "stage.start clickSend",
+          "stage.done sentMs=11575",
+          "stage.start waitForGeneratedImage",
+          "stage.done generatedVisibleMs=54759",
+          "stage.start downloadImage",
+          "FAIL: locator.waitFor timeout 10000ms - waiting for dialog"
+        ],
+        "relayable": false
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Runtime value captured by script variable `status_json`.",
+        "value_type": "json",
+        "relayable": false,
+        "evidence": "source script variable status_json"
+      }
+    },
+    {
+      "name": "submit_json",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Runtime value captured by script variable `submit_json`.",
+        "value_type": "json",
+        "relayable": true,
+        "evidence": "source script variable submit_json"
+      }
+    },
+    {
+      "name": "generated_images",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "https://chatgpt-image.vyibc.com/health`",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Generated image files or public image URLs.",
+        "value_type": "image",
+        "relayable": true
+      }
+    },
+    {
+      "name": "images",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Generated image files.",
+        "relayable": true
+      }
+    }
+  ],
+  "created_at": "2026-06-29T18:40:17.767575+00:00",
+  "reconciled_at": "2026-06-30T15:17:15.416570+00:00"
+}

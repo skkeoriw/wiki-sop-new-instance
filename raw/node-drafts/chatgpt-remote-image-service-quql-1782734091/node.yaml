@@ -1,0 +1,227 @@
+schema: node-definition/v1
+id: chatgpt-remote-image-service-quql
+title: Chatgpt Remote Image Service
+description: 分析这个 Skill 如何成为不绑定上下游的 Runtime Node；首节点或单节点 Probe Run 允许用户直接输入 prompt。
+version: 0.1-runtime-draft
+skill:
+  id: chatgpt-remote-image-service
+  source: skill-installer
+  install_command: bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')
+  source_digest:
+    installer_url: https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544
+    zip_url: https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip
+    files:
+    - path: chatgpt-remote-image-service/agents/openai.yaml
+      bytes: 227
+      truncated: false
+    - path: chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh
+      bytes: 5390
+      truncated: false
+    - path: chatgpt-remote-image-service/SKILL.md
+      bytes: 3484
+      truncated: false
+      content: "---\nname: chatgpt-remote-image-service\ndescription: Use when the\
+        \ user wants to submit reference-image generation jobs to the remote ChatGPT\
+        \ image HTTP service, poll task status, or get a public R2 image URL from\
+        \ the hosted endpoint. Trigger for requests involving remote ChatGPT 生图接口,\
+        \ 公网生图服务, chatgpt-image.vyibc.com, remote image generation API, taskId polling,\
+        \ or CLI calls to the image service.\n---\n\n# ChatGPT Remote Image Service\n\
+        \nUse this skill for the hosted ChatGPT image queue service.\n\nDefault endpoint:\n\
+        \n```text\nhttps://chatgpt-image.vyibc.com\n```\n\nThe service is public and\
+        \ does not require an Authorization header. Object names are made unique by\
+        \ the service: if the caller sends `uploadName=test.png`, the final R2 object\
+        \ will use the task id, such as `<taskId>.png`, to avoid overwriting prior\
+        \ images.\n\nThe service supports both modes:\n\n- Reference-image generation:\
+        \ send `image` and `prompt`.\n- Reference-image generation from URL: pass\
+        \ `--imageUrl` to the CLI, or download the URL first for raw HTTP.\n- Pure\
+        \ prompt generation: send only `prompt`.\n\n## Quick Start\n\nPrefer the bundled\
+        \ CLI:\n\n```bash\nscripts/chatgpt-remote-image.sh \\\n  --imageUrl \"https://resource.vyibc.com/reference.png\"\
+        \ \\\n  --prompt \"以参考图中的人物为准，生成一张在游泳馆的照片\"\n```\n\nLocal reference file:\n\
+        \n```bash\nscripts/chatgpt-remote-image.sh \\\n  --image /path/to/reference.png\
+        \ \\\n  --prompt \"以参考图中的人物为准，生成一张在游泳馆的照片\"\n```\n\nPure prompt generation:\n\
+        \n```bash\nscripts/chatgpt-remote-image.sh \\\n  --prompt \"生成一张未来城市夜景照片，真实摄影风格\"\
+        \n```\n\nThe script submits `POST /generate`, polls `GET /tasks/<taskId>`,\
+        \ and exits successfully only when `publicImageUrl` is returned.\nAt startup\
+        \ it also prints the current browser worker summary, including total workers,\
+        \ logged-in workers, workers requiring login, active workers, queued tasks,\
+        \ and CDP ports.\nIf\n...[truncated for Node Builder]"
+executor:
+  type: agent-skill
+  agent: hermes
+  skill: chatgpt-remote-image-service
+  request_template: node-execution-request/v1
+entry:
+  inputs:
+    api_url:
+      required: false
+      input_kind: url
+      value_type: url
+      label: Api Url
+      description: Value for CLI option --apiUrl.
+      evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+        --apiUrl -> $API_URL'
+      cli_option: --apiUrl
+    reference_image_file:
+      required: false
+      input_kind: file
+      value_type: image
+      label: Reference Image File
+      description: Optional local reference image file path consumed by the skill.
+      evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+        --image -> $IMAGE'
+      cli_option: --image
+    reference_image_url:
+      required: false
+      input_kind: url
+      value_type: url
+      label: Reference Image Url
+      description: Optional reference image URL consumed by the skill.
+      evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+        --image-url -> $IMAGE_URL; chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh:
+        option --imageUrl -> $IMAGE_URL'
+      cli_option: --image-url
+    poll_interval:
+      required: false
+      input_kind: number
+      value_type: number
+      label: Poll Interval
+      description: Value for CLI option --pollInterval.
+      evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+        --pollInterval -> $POLL_INTERVAL'
+      cli_option: --pollInterval
+    prompt:
+      required: true
+      input_kind: text
+      value_type: text
+      label: Prompt
+      description: Task prompt or user instruction passed to the skill.
+      evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+        --prompt -> $PROMPT'
+      cli_option: --prompt
+      example: 生成一张小猫睡觉的照片
+    timeout_seconds:
+      required: false
+      input_kind: number
+      value_type: number
+      label: Timeout Seconds
+      description: Value for CLI option --timeoutSeconds.
+      evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+        --timeoutSeconds -> $TIMEOUT_SECONDS'
+      cli_option: --timeoutSeconds
+    upload_name:
+      required: false
+      input_kind: text
+      value_type: text
+      label: Upload Name
+      description: Optional output object/file name hint.
+      evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+        --uploadName -> $UPLOAD_NAME'
+      cli_option: --uploadName
+handoff:
+  accepts:
+    upstream_outputs_dir:
+      required: false
+      description: 一个或多个上游 Node 的标准输出目录。
+    instruction:
+      required: true
+      description: Edge Handoff Agent 或用户提供的交接说明。
+    context:
+      required: false
+      description: 运行上下文或补充说明。
+  produces:
+    outputs_dir: raw/node-runs/{run_id}/outputs
+    manifest: raw/node-runs/{run_id}/outputs/manifest.json
+outputs:
+  root: raw/node-runs/{run_id}/outputs
+  manifest: raw/node-runs/{run_id}/outputs/manifest.json
+  expected:
+    result:
+      description: Skill execution result summary.
+      relayable: true
+    image_url:
+      description: Result value mentioned in skill source as `imageUrl`.
+      value_type: url
+      relayable: true
+      evidence: source result marker imageUrl
+    public_image_url:
+      description: Result value mentioned in skill source as `publicImageUrl`.
+      value_type: url
+      relayable: true
+      evidence: source result marker publicImageUrl
+    status:
+      description: Result value mentioned in skill source as `status`.
+      value_type: text
+      relayable: true
+      evidence: source result marker status
+    task_id:
+      description: Result value mentioned in skill source as `taskId`.
+      value_type: text
+      relayable: true
+      evidence: source result marker taskId
+    status_json:
+      description: Runtime value captured by script variable `status_json`.
+      value_type: json
+      relayable: false
+      evidence: source script variable status_json
+    submit_json:
+      description: Runtime value captured by script variable `submit_json`.
+      value_type: json
+      relayable: true
+      evidence: source script variable submit_json
+    generated_images:
+      description: Generated image files or public image URLs.
+      value_type: image
+      relayable: true
+    images:
+      description: Generated image files.
+      relayable: true
+capabilities:
+  git:
+    enabled: true
+    required: false
+  telegram:
+    enabled: false
+    required: false
+  sse:
+    enabled: true
+    required: true
+ui:
+  category: generation
+coverage_report:
+  status: passed
+  covered_inputs:
+  - input: api_url
+    option: --apiUrl
+    evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+      --apiUrl -> $API_URL'
+  - input: reference_image_file
+    option: --image
+    evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+      --image -> $IMAGE'
+  - input: reference_image_url
+    option: --image-url
+    evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+      --image-url -> $IMAGE_URL; chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh:
+      option --imageUrl -> $IMAGE_URL'
+  - input: poll_interval
+    option: --pollInterval
+    evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+      --pollInterval -> $POLL_INTERVAL'
+  - input: prompt
+    option: --prompt
+    evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+      --prompt -> $PROMPT'
+  - input: timeout_seconds
+    option: --timeoutSeconds
+    evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+      --timeoutSeconds -> $TIMEOUT_SECONDS'
+  - input: upload_name
+    option: --uploadName
+    evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+      --uploadName -> $UPLOAD_NAME'
+  missing_inputs: []
+  source_files_read:
+  - chatgpt-remote-image-service/agents/openai.yaml
+  - chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh
+  - chatgpt-remote-image-service/SKILL.md
+  errors: []

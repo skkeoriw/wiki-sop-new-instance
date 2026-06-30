@@ -1,0 +1,81 @@
+- id: youtube-fetch-to-youtube-deep-research-runfix-debug-1782406930705
+  from: youtube-fetch
+  to: youtube-deep-research
+  relay:
+    mode: auto_by_target_inputs
+    mappings: []
+    handoff_instruction: 把上游 source_url 交给 YouTube 深度研究节点；metadata_file 只作为可选上下文，不作为主输入。
+    node_execution_guide:
+      format: markdown
+      prompt: 'Use skill sop-youtube-deep-research to execute this downstream node.
+
+
+        Node Execution Guide
+
+        - Edge: youtube-fetch -> youtube-deep-research
+
+        - Evaluation summary: 上下游存在显式引用或同名输入输出，可稳定生成节点执行指导文档。
+
+        - Edge Handoff Instruction: 把上游 source_url 交给 YouTube 深度研究节点；metadata_file
+        只作为可选上下文，不作为主输入。
+
+
+        Upstream artifacts
+
+        - source_url: raw/node-runs/{pipeline_id}/outputs/files/source-url.txt
+
+        - metadata_file: raw/node-runs/{pipeline_id}/outputs/files/metadata.json
+
+
+        Execution rules
+
+        - Use only the resolved Edge inputs
+
+        - source_url: required, type url, resolves from upstream source_url file (text)
+        or metadata.json if available
+
+        - metadata_file: not a required input, but can be used as additional context
+        if needed
+
+        - Ensure the downstream node receives source_url via its input resolver
+
+        - After execution, validate that analysis_file and transcript_file are produced
+
+
+        Test plan:
+
+        1. Materialize Edge inputs
+
+        2. Execute downstream skill
+
+        3. Verify declared outputs
+
+        4. Record edge evaluation and guide'
+    evaluation:
+      status: ready
+      score: 0.92
+      confidence: 0.86
+      summary: 上下游存在显式引用或同名输入输出，可稳定生成节点执行指导文档。
+      decision: can_run
+      evaluated_at: '2026-06-25T17:02:27Z'
+      agent:
+        provider: openai-compatible
+        model: deepseek-v4-flash
+        used_ai: true
+    resolved_handoff:
+      primary_artifacts:
+      - from: youtube-fetch.outputs.source_url
+        role: primary_source
+        reason: 上游声明的可交付产物。
+      supporting_artifacts:
+      - from: youtube-fetch.outputs.metadata_file
+        role: supporting_context
+        reason: 该产物适合作为补充上下文，不应默认成为下游主输入。
+      downstream_inputs:
+      - to: youtube-deep-research.inputs.source_url
+        construction: 由显式契约直接构造。
+    test_plan:
+    - 物化 Edge 输入
+    - 执行下游 skill
+    - 校验声明输出
+    - 记录 edge evaluation 和 guide

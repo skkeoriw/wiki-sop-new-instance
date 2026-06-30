@@ -1,0 +1,74 @@
+- id: youtube-fetch-to-youtube-deep-research-runfix-1782406770261
+  from: youtube-fetch
+  to: youtube-deep-research
+  relay:
+    mode: auto_by_target_inputs
+    mappings: []
+    handoff_instruction: 把上游 source_url 交给 YouTube 深度研究节点；metadata_file 只作为可选上下文，不作为主输入。
+    node_execution_guide:
+      format: markdown
+      prompt: 'Use skill sop-youtube-deep-research to execute this downstream node.
+
+
+        ## Node Execution Guide
+
+        - **Edge**: youtube-fetch → youtube-deep-research
+
+        - **Edge Handoff Instruction**: 把上游 source_url 交给 YouTube 深度研究节点；metadata_file
+        只作为可选上下文，不作为主输入。
+
+
+        ## Upstream Artifacts
+
+        - `source_url`: `raw/node-runs/{pipeline_id}/outputs/files/source-url.txt`（强制主输入）
+
+        - `metadata_file`: `raw/node-runs/{pipeline_id}/outputs/files/metadata.json`（可选上下文，不自动注入）
+
+
+        ## Execution Rules
+
+        1. 使用 `source_url` 作为下游 `youtube-deep-research` 的 `source_url` 输入。
+
+        2. 若需要 `metadata_file` 作为上下文，可在执行前将文件内容注入工作区或作为环境变量传递。
+
+        3. 遵循下游 skill 定义的执行流程。
+
+
+        ## Downstream Inputs
+
+        - `source_url`: 必填，从上游产物直接传递。
+
+
+        ## Output Expectations
+
+        - `analysis_file`: `raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md`
+
+        - `transcript_file`: `raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt`'
+    evaluation:
+      status: ready
+      score: 0.95
+      confidence: 0.9
+      summary: 上游显式输出 source_url 被下游作为 required 输入引用，且边缘指令清晰区分主次，可稳定生成节点执行指导。
+      decision: can_run
+      evaluated_at: '2026-06-25T16:59:48Z'
+      agent:
+        provider: openai-compatible
+        model: deepseek-v4-flash
+        used_ai: true
+    resolved_handoff:
+      primary_artifacts:
+      - from: youtube-fetch.outputs.source_url
+        role: primary_source
+        reason: 下游 source_url 输入直接映射至此产物。
+      supporting_artifacts:
+      - from: youtube-fetch.outputs.metadata_file
+        role: supporting_context
+        reason: 边缘指令明确为可选上下文，不作为主输入。
+      downstream_inputs:
+      - to: youtube-deep-research.inputs.source_url
+        construction: 从上游 source_url 产物直接传递。
+    test_plan:
+    - 物化 Edge 输入（source_url）
+    - 执行下游 skill sop-youtube-deep-research
+    - 校验声明输出文件是否存在
+    - 记录 edge evaluation 和 guide

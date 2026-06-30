@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "draft_id": "chatgpt-remote-image-service-1782707113",
+  "node_id": "chatgpt-remote-image-service",
+  "mode": "draft-test",
+  "executes_install": false,
+  "executes_real_node": false,
+  "steps": [
+    {
+      "id": "validate-node-yaml",
+      "title": "Validate node-definition/v1",
+      "status": "done",
+      "detail": "schema must be node-definition/v1"
+    },
+    {
+      "id": "inspect-install-command",
+      "title": "Inspect skill install command",
+      "status": "done",
+      "detail": "install command is required before real install"
+    },
+    {
+      "id": "hermes-skill-check",
+      "title": "Check Hermes skill target",
+      "status": "done",
+      "detail": "executor.skill or skill.id is required"
+    },
+    {
+      "id": "handoff-contract-check",
+      "title": "Check handoff contract",
+      "status": "done",
+      "detail": "must accept instruction and upstream_outputs_dir"
+    },
+    {
+      "id": "manifest-contract-check",
+      "title": "Check outputs manifest contract",
+      "status": "done",
+      "detail": "manifest path is required"
+    }
+  ],
+  "tested_at": "2026-06-29T05:43:16.605673+00:00",
+  "next_step": "publish-runtime"
+}

@@ -1,0 +1,780 @@
+{
+  "ok": true,
+  "status": "done",
+  "http_status": 200,
+  "mode": "edge-handoff-agent-evaluation-job",
+  "evaluation_id": "edge-eval-verify-pattern-catalog-fetch-to-tg-20260626T084303Z-2bd977",
+  "sop_id": "wiki-sop-new-instance",
+  "workflow_id": "youtube-research-wiki",
+  "edge_id": "verify-pattern-catalog-fetch-to-tg",
+  "started_at": "2026-06-26T08:43:03.218404+00:00",
+  "finished_at": "2026-06-26T08:43:27.240800+00:00",
+  "result": {
+    "ok": true,
+    "sop_id": "wiki-sop-new-instance",
+    "workflow_id": "youtube-research-wiki",
+    "edge_id": "verify-pattern-catalog-fetch-to-tg",
+    "mode": "edge-handoff-agent-evaluation",
+    "request": {
+      "runtime_id": "youtube-wiki",
+      "instance_id": "wiki-sop-new-instance",
+      "workflow_id": "youtube-research-wiki",
+      "edge_id": "verify-pattern-catalog-fetch-to-tg",
+      "phase": "design",
+      "workflow_goal": "",
+      "edge_handoff_instruction": "将 metadata_file 发送到 tg 群里面。",
+      "edge": {
+        "id": "verify-pattern-catalog-fetch-to-tg",
+        "from": "youtube-fetch",
+        "to": "tg-notify"
+      },
+      "upstream": {
+        "node_id": "youtube-fetch",
+        "title": "YouTube 元数据获取",
+        "skill_id": "sop-youtube-fetch",
+        "skill_summary": "---\nname: sop-youtube-fetch\ndescription: \"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\"\nversion: 1.0.0\n---",
+        "skill_readme": "---\nname: sop-youtube-fetch\ndescription: \"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\"\nversion: 1.0.0\n---",
+        "inputs": {
+          "source_url": {
+            "required": true,
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "from": "context.source_url",
+            "accepts": [
+              "scalar:url",
+              "file:text"
+            ],
+            "resolvers": [
+              {
+                "id": "direct-url",
+                "kind": "direct"
+              },
+              {
+                "id": "text-url",
+                "kind": "regex",
+                "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+              }
+            ]
+          }
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "source_url": {
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "relayable": true,
+            "path": "raw/node-runs/{pipeline_id}/outputs/files/source-url.txt"
+          },
+          "metadata_file": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": true,
+            "path": "raw/node-runs/{pipeline_id}/outputs/files/metadata.json"
+          }
+        },
+        "executor": {
+          "type": "agent-skill",
+          "agent": "hermes",
+          "skill": "sop-youtube-fetch",
+          "entry": "scripts/run_youtube_fetch.sh",
+          "webhook_route": "sop-youtube-fetch"
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "paths": [
+              "raw/node-runs/{pipeline_id}/outputs/files/**",
+              "raw/youtube-metadata/**"
+            ]
+          },
+          "telegram": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "trigger": "stage-lifecycle",
+            "triggers": [
+              "start",
+              "done",
+              "failed"
+            ]
+          },
+          "sse": {
+            "enabled": true,
+            "required": true
+          }
+        },
+        "infra": {
+          "tg_notify": true,
+          "log_record": true
+        }
+      },
+      "downstream": {
+        "node_id": "tg-notify",
+        "title": "Telegram 通知",
+        "skill_id": "sop-tg-notify",
+        "skill_summary": "---\nname: sop-tg-notify\ndescription: \"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\"\nversion: 2.1.0\n---",
+        "skill_readme": "---\nname: sop-tg-notify\ndescription: \"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\"\nversion: 2.1.0\n---",
+        "inputs": {
+          "message": {
+            "required": true,
+            "kind": "object",
+            "type": "object",
+            "value_type": "text",
+            "from": "edge.message",
+            "accepts": [
+              "scalar:text",
+              "object",
+              "file:text",
+              "file:markdown",
+              "file:json"
+            ],
+            "resolvers": [
+              {
+                "id": "direct-text",
+                "kind": "direct"
+              }
+            ]
+          }
+        },
+        "optional_inputs": {
+          "index": {
+            "required": false,
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "from": "wiki-build.outputs.index",
+            "accepts": [
+              "file:markdown",
+              "file:text"
+            ]
+          }
+        },
+        "outputs": {
+          "telegram_message": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": false,
+            "path": "logs/pipeline-runs/pipe-{run_id}.json"
+          }
+        },
+        "executor": {
+          "type": "agent-skill",
+          "agent": "hermes",
+          "skill": "sop-tg-notify",
+          "entry": "scripts/run_tg_notify.sh",
+          "webhook_route": "sop-tg-notify"
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false
+          },
+          "telegram": {
+            "enabled": true,
+            "required": false
+          },
+          "sse": {
+            "enabled": true,
+            "required": true
+          }
+        },
+        "infra": {
+          "tg_notify": true,
+          "log_record": true
+        }
+      }
+    },
+    "config": {
+      "base_url": {
+        "key": "WIKI_LLM_BASE_URL",
+        "label": "Edge Handoff LLM Base URL",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_BASE_URL",
+        "masked_value": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "value": "https://api-proxy.chxyka.ccwu.cc/v1"
+      },
+      "api_key": {
+        "key": "WIKI_LLM_API_KEY",
+        "label": "Edge Handoff LLM API Key",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_API_KEY",
+        "masked_value": "ah-***c68",
+        "value": null
+      },
+      "model": {
+        "key": "EDGE_HANDOFF_LLM_MODEL",
+        "label": "Edge Handoff LLM Model",
+        "required": true,
+        "present": true,
+        "source": "bridge-env:WIKI_DEEPSEEK_MODEL:fallback-from-deepseek-v4-flash",
+        "masked_value": "deepseek-v4-pro",
+        "value": "deepseek-v4-pro"
+      },
+      "settings_backend": "file",
+      "precedence": [
+        "node-run-overrides",
+        "instance-settings",
+        "runtime-settings",
+        "global-settings",
+        "bridge-env",
+        "runtime-env-file"
+      ],
+      "sync_budget": {
+        "public_timeout_budget_seconds": 25,
+        "mode": "async",
+        "llm_timeout_seconds": 75,
+        "llm_attempts": 1,
+        "evaluator_timeout_seconds": 90
+      }
+    },
+    "evaluation": {
+      "status": "trial_ready",
+      "score": 0.76,
+      "confidence": 0.76,
+      "summary": "直接传递上游 metadata_file 到下游 Telegram 通知消息输入。",
+      "decision": "can_run_with_review",
+      "scores": {
+        "intent_clarity": 0.9,
+        "skill_fit": 0.72,
+        "artifact_usability": 0.7,
+        "guide_completeness": 0.82,
+        "risk": 0.32
+      },
+      "blocking_reasons": [],
+      "warnings": [
+        "假设下游 tg-notify 可以直接将 metadata_file（JSON）内容作为 Telegram 消息发送。若消息格式需定制，用户应补充模板说明。"
+      ],
+      "required_user_inputs": [],
+      "suggested_edge_instruction": "",
+      "recommended_edge_instruction": "",
+      "handoff_pattern": "send_artifact_content",
+      "validation": {
+        "required": [],
+        "on_missing": "needs_instruction"
+      },
+      "resolved_handoff": {
+        "relay_mappings": [
+          {
+            "source_output": "metadata_file",
+            "target_input": "message",
+            "resolver": "direct"
+          }
+        ]
+      },
+      "node_execution_guide": {
+        "format": "markdown",
+        "prompt": "Use skill sop-tg-notify to execute this downstream node.\n\nNode Execution Guide\n- Edge: youtube-fetch -> tg-notify\n- Evaluation summary: Edge Handoff Instruction 已说明泛化输入的消费方式，可生成下游节点执行指导文档。\n- Edge Handoff Instruction: 将 metadata_file 发送到 tg 群里面。\n\nUpstream artifacts\n- source_url: raw/node-runs/{pipeline_id}/outputs/files/source-url.txt\n- metadata_file: raw/node-runs/{pipeline_id}/outputs/files/metadata.json\n\nExecution rules\n- Use only the resolved Edge inputs and materialized artifacts listed here.\n- If a required artifact cannot be read, fail before executing the downstream skill.\n- Do not silently fall back to stale pipeline context or unrelated historical artifacts.\n- Preserve the downstream skill boundary; this guide shapes execution but does not replace the skill."
+      },
+      "test_plan": [
+        "物化 Edge 输入",
+        "执行下游 skill",
+        "校验声明输出",
+        "记录 edge evaluation 和 guide"
+      ],
+      "agent": {
+        "provider": "openai-compatible",
+        "model": "deepseek-v4-pro",
+        "used_ai": true
+      },
+      "trace": {
+        "trace_schema": "edge-handoff-agent-trace/v1",
+        "started_at": "2026-06-26T08:43:03Z",
+        "request": {
+          "runtime_id": "youtube-wiki",
+          "instance_id": "wiki-sop-new-instance",
+          "workflow_id": "youtube-research-wiki",
+          "edge_id": "verify-pattern-catalog-fetch-to-tg",
+          "phase": "design",
+          "workflow_goal": "",
+          "edge_handoff_instruction": "将 metadata_file 发送到 tg 群里面。",
+          "edge": {
+            "id": "verify-pattern-catalog-fetch-to-tg",
+            "from": "youtube-fetch",
+            "to": "tg-notify",
+            "sourceIntent": "",
+            "targetIntent": "",
+            "instruction": "",
+            "relayMode": "",
+            "relayMappings": []
+          },
+          "upstream": {
+            "node_id": "youtube-fetch",
+            "title": "YouTube 元数据获取",
+            "skill_id": "sop-youtube-fetch",
+            "skill_summary": "---\nname: sop-youtube-fetch\ndescription: \"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\"\nversion: 1.0.0\n---",
+            "inputs": {
+              "source_url": {
+                "kind": "scalar",
+                "type": "string",
+                "value_type": "url",
+                "required": true,
+                "from": "context.source_url",
+                "accepts": [
+                  "scalar:url",
+                  "file:text"
+                ],
+                "resolvers": [
+                  {
+                    "id": "direct-url",
+                    "kind": "direct"
+                  },
+                  {
+                    "id": "text-url",
+                    "kind": "regex"
+                  }
+                ]
+              }
+            },
+            "outputs": {
+              "source_url": {
+                "kind": "scalar",
+                "type": "string",
+                "value_type": "url",
+                "relayable": true,
+                "path": "raw/node-runs/{pipeline_id}/outputs/files/source-url.txt"
+              },
+              "metadata_file": {
+                "kind": "file",
+                "type": "file",
+                "value_type": "json",
+                "relayable": true,
+                "path": "raw/node-runs/{pipeline_id}/outputs/files/metadata.json"
+              }
+            },
+            "capabilities": [
+              "git",
+              "sse",
+              "telegram"
+            ]
+          },
+          "downstream": {
+            "node_id": "tg-notify",
+            "title": "Telegram 通知",
+            "skill_id": "sop-tg-notify",
+            "skill_summary": "---\nname: sop-tg-notify\ndescription: \"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\"\nversion: 2.1.0\n---",
+            "inputs": {
+              "message": {
+                "kind": "object",
+                "type": "object",
+                "value_type": "text",
+                "required": true,
+                "from": "edge.message",
+                "accepts": [
+                  "scalar:text",
+                  "object",
+                  "file:text",
+                  "file:markdown",
+                  "file:json"
+                ],
+                "resolvers": [
+                  {
+                    "id": "direct-text",
+                    "kind": "direct"
+                  }
+                ]
+              },
+              "index": {
+                "kind": "file",
+                "type": "file",
+                "value_type": "markdown",
+                "required": false,
+                "from": "wiki-build.outputs.index",
+                "accepts": [
+                  "file:markdown",
+                  "file:text"
+                ]
+              }
+            },
+            "outputs": {
+              "telegram_message": {
+                "kind": "file",
+                "type": "file",
+                "value_type": "json",
+                "relayable": false,
+                "path": "logs/pipeline-runs/pipe-{run_id}.json"
+              }
+            },
+            "capabilities": [
+              "git",
+              "sse",
+              "telegram"
+            ]
+          }
+        },
+        "baseline": {
+          "status": "trial_ready",
+          "summary": "Edge Handoff Instruction 已说明泛化输入的消费方式，可生成下游节点执行指导文档。",
+          "decision": "can_run_with_review",
+          "blocking_reasons": [],
+          "required_user_inputs": [],
+          "suggested_edge_instruction": "",
+          "handoff_pattern": "cannot_infer",
+          "resolved_handoff": {
+            "primary_artifacts": [
+              {
+                "from": "youtube-fetch.outputs.source_url",
+                "role": "available_output",
+                "reason": "上游声明的可交付产物。"
+              },
+              {
+                "from": "youtube-fetch.outputs.metadata_file",
+                "role": "available_output",
+                "reason": "上游声明的可交付产物。"
+              }
+            ],
+            "supporting_artifacts": [],
+            "relay_mappings": [],
+            "downstream_inputs": [
+              {
+                "to": "tg-notify.inputs.message",
+                "construction": "需要 Edge Handoff Agent 生成结构化 relay_mappings。"
+              },
+              {
+                "to": "tg-notify.inputs.index",
+                "construction": "需要 Edge Handoff Agent 生成结构化 relay_mappings。"
+              }
+            ]
+          }
+        },
+        "llm": {
+          "provider": "openai-compatible",
+          "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+          "model": "deepseek-v4-pro",
+          "timeout_seconds": 75,
+          "attempts": 1
+        },
+        "attempts": [
+          {
+            "attempt": 1,
+            "started_at": "2026-06-26T08:43:03Z",
+            "status": "response",
+            "duration_ms": 23738,
+            "raw_response": "{\"id\":\"d47cf881-8ddf-448d-8428-8ca7fc530365\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"status\\\": \\\"trial_ready\\\",\\n  \\\"summary\\\": \\\"直接传递上游 metadata_file 到下游 Telegram 通知消息输入。\\\",\\n  \\\"warnings\\\": [\\\"假设下游 tg-notify 可以直接将 metadata_file（JSON）内容作为 Telegram 消息发送。若消息格式需定制，用户应补充模板说明。\\\"],\\n  \\\"required_user_inputs\\\": [],\\n  \\\"handoff_pattern\\\": \\\"send_artifact_content\\\",\\n  \\\"resolved_handoff\\\": {\\n    \\\"relay_mappings\\\": [\\n      {\\n        \\\"source_output\\\": \\\"metadata_file\\\",\\n        \\\"target_input\\\": \\\"message\\\",\\n        \\\"resolver\\\": \\\"direct\\\"\\n      }\\n    ]\\n  }\\n}\",\"reasoning_content\":\"We are asked to produce a JSON response for the edge handoff. The instruction is \\\"将 metadata_file 发送到 tg 群里面。\\\" which translates to \\\"Send metadata_file to the tg group.\\\" The downstream node is tg-notify, with required input message (object/text) and optional index (file/markdown). The upstream outputs include metadata_file (a JSON file). The instruction specifically mentions sending metadata_file. The downstream skill summary says it sends a Telegram notification, and its message input accepts various formats including file:json. So it can directly send the metadata_file content as the message. This maps to the handoff pattern \\\"send_artifact_content\\\" (send artifact content). Alternatively, we could extract fields or summarize, but the instruction is simply to send the file. Since downstream can accept file:json, we can relay metadata_file to the message input. So this is trial_ready. The instruction is clear: \\\"send metadata_file\\\". So status: trial_ready. Handoff pattern: send_artifact_content. Relay mappings: source_output: \\\"metadata_file\\\", target_input: \\\"message\\\", resolver: direct (since the downstream's message input resolver is \\\"direct-text\\\", but it accepts file:json, so maybe we can use a resolver that treats the file as content. The downstream input \\\"message\\\" accepts file:json, so we can directly pass the file reference. The resolver \\\"direct\\\" might be appropriate, but the input type is object, not directly file. The accepts list includes file:json, so the downstream skill should know how to handle it. I'll use \\\"direct\\\" as the resolver, or perhaps \\\"file_content\\\" but the pattern expects resolvers from downstream contracts. The only declared resolver for message is \\\"direct-text\\\". That might not directly handle a file reference. However, the instruction says to send the file, so we can interpret that the content of the file should be sent. But the downstream may need a file reference. The downstream input message is an object, so it might expect a structure. The skill summary says it reads pipeline-context.json and assembles a report. So maybe the message input is not directly the file content. The edge_handoff_instruction explicitly says \\\"发送 metadata_file\\\", so we assume the downstream can accept that file and send its content. Since it's a trial_ready, we note assumptions in warnings: assuming the Telegram notification skill can transmit the metadata_file content as-is. No need for extraction. The baseline calibration gave \\\"cannot_infer\\\" but that seems too cautious because the instruction is clear: send metadata_file. The downstream skill can handle file:json, so we can map it. So I'll override with trial_ready and send_artifact_content. Required user inputs: none. Warnings: \\\"Assumes tg-notify can send the metadata_file content directly as a Telegram message; if the message format needs to be specific, user may need to provide a wrapper or template.\\\" Summary: \\\"将上游 metadata_file 直接发送到 Telegram 通知中。下游 tg-notify 可接收 file:json，因此直接传递文件内容。\\\" Something like that. Resolved handoff with relay_mappings: [{source_output: \\\"metadata_file\\\", target_input: \\\"message\\\", resolver: \\\"direct\\\"}]. Use resolver \\\"direct\\\" because no field extraction needed. That's within 700 chars.\",\"reasoning\":\"We are asked to produce a JSON response for the edge handoff. The instruction is \\\"将 metadata_file 发送到 tg 群里面。\\\" which translates to \\\"Send metadata_file to the tg group.\\\" The downstream node is tg-notify, with required input message (object/text) and optional index (file/markdown). The upstream outputs include metadata_file (a JSON file). The instruction specifically mentions sending metadata_file. The downstream skill summary says it sends a Telegram notification, and its message input accepts various formats including file:json. So it can directly send the metadata_file content as the message. This maps to the handoff pattern \\\"send_artifact_content\\\" (send artifact content). Alternatively, we could extract fields or summarize, but the instruction is simply to send the file. Since downstream can accept file:json, we can relay metadata_file to the message input. So this is trial_ready. The instruction is clear: \\\"send metadata_file\\\". So status: trial_ready. Handoff pattern: send_artifact_content. Relay mappings: source_output: \\\"metadata_file\\\", target_input: \\\"message\\\", resolver: direct (since the downstream's message input resolver is \\\"direct-text\\\", but it accepts file:json, so maybe we can use a resolver that treats the file as content. The downstream input \\\"message\\\" accepts file:json, so we can directly pass the file reference. The resolver \\\"direct\\\" might be appropriate, but the input type is object, not directly file. The accepts list includes file:json, so the downstream skill should know how to handle it. I'll use \\\"direct\\\" as the resolver, or perhaps \\\"file_content\\\" but the pattern expects resolvers from downstream contracts. The only declared resolver for message is \\\"direct-text\\\". That might not directly handle a file reference. However, the instruction says to send the file, so we can interpret that the content of the file should be sent. But the downstream may need a file reference. The downstream input message is an object, so it might expect a structure. The skill summary says it reads pipeline-context.json and assembles a report. So maybe the message input is not directly the file content. The edge_handoff_instruction explicitly says \\\"发送 metadata_file\\\", so we assume the downstream can accept that file and send its content. Since it's a trial_ready, we note assumptions in warnings: assuming the Telegram notification skill can transmit the metadata_file content as-is. No need for extraction. The baseline calibration gave \\\"cannot_infer\\\" but that seems too cautious because the instruction is clear: send metadata_file. The downstream skill can handle file:json, so we can map it. So I'll override with trial_ready and send_artifact_content. Required user inputs: none. Warnings: \\\"Assumes tg-notify can send the metadata_file content directly as a Telegram message; if the message format needs to be specific, user may need to provide a wrapper or template.\\\" Summary: \\\"将上游 metadata_file 直接发送到 Telegram 通知中。下游 tg-notify 可接收 file:json，因此直接传递文件内容。\\\" Something like that. Resolved handoff with relay_mappings: [{source_output: \\\"metadata_file\\\", target_input: \\\"message\\\", resolver: \\\"direct\\\"}]. Use resolver \\\"direct\\\" because no field extraction needed. That's within 700 chars.\"},\"finish_reason\":\"stop\",\"logprobs\":null}],\"object\":\"chat.completion\",\"created\":1782463386,\"model\":\"deepseek-v4-pro\",\"usage\":{\"prompt_tokens\":2648,\"completion_tokens\":829,\"total_tokens\":3477,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":0},\"completion_tokens_details\":{\"audio_tokens\":0,\"reasoning_tokens\":687,\"accepted_prediction_tokens\":0,\"rejected_prediction_tokens\":0}},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}"
+          }
+        ],
+        "llm_request": {
+          "model": "deepseek-v4-pro",
+          "messages": [
+            {
+              "role": "system",
+              "content": "Return the final answer as strict JSON in message.content only. No markdown, no prose."
+            },
+            {
+              "role": "user",
+              "content": "You are the SOP Edge Handoff Agent. Return strict JSON only.\nReview whether the upstream node can hand off to the downstream node. Do not generate long guides; the runtime will compile the final Node Execution Guide. Treat edge_handoff_instruction as user-authored natural-language intent, not as a schema field. The instruction may map artifacts, transform content, summarize files, generate new runtime text, or intentionally ignore upstream artifacts. If the downstream skill can execute the instruction with clear assumptions, return trial_ready instead of needs_instruction and put the assumptions in warnings. Use needs_instruction only when no executable interpretation can be derived, the instruction references unavailable artifacts, or the requested handoff contradicts the downstream skill. Keep the response compact; do not copy skill docs or repeat the full request. Return less than 700 JSON characters.\n\nRequired JSON keys: status, summary, warnings, required_user_inputs. Optional keys: blocking_reasons, suggested_edge_instruction, handoff_pattern, validation, resolved_handoff. When status is blocked, incompatible, or needs_instruction, suggested_edge_instruction must be a complete user-applicable handoff instruction, not a question or instruction about what to write.\nChoose exactly one handoff_pattern from the Handoff Pattern Catalog below. Do not invent pattern IDs.\nWhen status is ready or trial_ready, resolved_handoff should include relay_mappings: an array of objects with source_output, target_input, and resolver when an upstream artifact is used. For generated content such as 'send current date', use source_output='runtime' and resolver='generated'. Use resolver ids declared by the downstream input contract; do not invent business logic outside the contracts.\n\nHandoff Pattern Catalog JSON:\n[\n  {\n    \"id\": \"direct_pass\",\n    \"label\": \"直接传递\",\n    \"use_when\": \"上游某个输出可以不转换地满足下游同名或明确引用的输入。\",\n    \"uses_upstream_artifact\": true,\n    \"resolved_handoff\": \"relay_mappings must map source_output to target_input with resolver direct.\",\n    \"missing_behavior\": \"block when the selected source output is missing or empty.\"\n  },\n  {\n    \"id\": \"extract_field\",\n    \"label\": \"字段提取\",\n    \"use_when\": \"用户说明或真实 artifact schema 明确指出要从 JSON/object/file 中提取某个字段。\",\n    \"uses_upstream_artifact\": true,\n    \"resolved_handoff\": \"relay_mappings must include source_output, target_input, resolver json_path or an explicit extractor description.\",\n    \"missing_behavior\": \"block unless the user explicitly provides a fallback.\"\n  },\n  {\n    \"id\": \"summarize_to_message\",\n    \"label\": \"摘要成消息\",\n    \"use_when\": \"下游需要 message/summary，用户要求把长文本、报告或多文件压缩成通知/摘要。\",\n    \"uses_upstream_artifact\": true,\n    \"resolved_handoff\": \"relay_mappings should select the source file/artifact and describe the summary goal.\",\n    \"missing_behavior\": \"block when all selected source artifacts are missing.\"\n  },\n  {\n    \"id\": \"send_artifact_content\",\n    \"label\": \"发送产物内容\",\n    \"use_when\": \"用户要求把某个上游产物直接发送、展示或交给通知类节点。\",\n    \"uses_upstream_artifact\": true,\n    \"resolved_handoff\": \"relay_mappings should select the artifact and target message/content/payload input.\",\n    \"missing_behavior\": \"block when the selected artifact is missing.\"\n  },\n  {\n    \"id\": \"generated_message\",\n    \"label\": \"生成运行时文本\",\n    \"use_when\": \"用户要求发送当前日期、固定文案、运行状态等不依赖上游业务产物的文本。\",\n    \"uses_upstream_artifact\": false,\n    \"resolved_handoff\": \"use source_output runtime and resolver generated; explain what text is generated.\",\n    \"missing_behavior\": \"block only if required runtime context is unavailable.\"\n  },\n  {\n    \"id\": \"aggregate_files\",\n    \"label\": \"聚合多文件\",\n    \"use_when\": \"下游需要 sources/reports/files/documents，且一个或多个上游文件要合并为输入集合。\",\n    \"uses_upstream_artifact\": true,\n    \"resolved_handoff\": \"relay_mappings should list selected file outputs and target collection input.\",\n    \"missing_behavior\": \"block when required files are missing; optional files may warn.\"\n  },\n  {\n    \"id\": \"pass_directory\",\n    \"label\": \"传递目录\",\n    \"use_when\": \"下游明确消费目录或文件夹，而不是单个文件或字符串。\",\n    \"uses_upstream_artifact\": true,\n    \"resolved_handoff\": \"relay_mappings should map directory output to directory input.\",\n    \"missing_behavior\": \"block when the directory is missing.\"\n  },\n  {\n    \"id\": \"optional_context\",\n    \"label\": \"可选上下文\",\n    \"use_when\": \"上游产物只作为补充上下文，不应该成为下游主输入。\",\n    \"uses_upstream_artifact\": true,\n    \"resolved_handoff\": \"place selected artifact under supporting context; do not satisfy required input with it.\",\n    \"missing_behavior\": \"warn, do not block, unless it is explicitly marked required.\"\n  },\n  {\n    \"id\": \"cannot_infer\",\n    \"label\": \"无法推断\",\n    \"use_when\": \"缺少用户意图、上下游语义不对应、或无法判断要传什么/怎么转换。\",\n    \"uses_upstream_artifact\": false,\n    \"resolved_handoff\": \"do not produce relay_mappings; ask for a concrete edge_handoff_instruction.\",\n    \"missing_behavior\": \"needs_instruction.\"\n  }\n]\n\nExamples:\n- Instruction 'tg only sends current date' for a notification node is trial_ready with handoff_pattern generated_message.\n- Instruction 'send metadata_file to the Telegram group' is trial_ready if metadata_file is an upstream output; interpret it as sending the file content or a safe compact rendering according to the downstream skill.\n- Instruction 'read a named field from metadata_file as message' is trial_ready only when the user names the field or the actual artifact schema proves it exists.\n- Empty instruction for a generic message input is needs_instruction.\n\nAllowed statuses: ['blocked', 'incompatible', 'needs_instruction', 'ready', 'trial_ready']\n\nRequest JSON:\n{\n  \"runtime_id\": \"youtube-wiki\",\n  \"instance_id\": \"wiki-sop-new-instance\",\n  \"workflow_id\": \"youtube-research-wiki\",\n  \"edge_id\": \"verify-pattern-catalog-fetch-to-tg\",\n  \"phase\": \"design\",\n  \"workflow_goal\": \"\",\n  \"edge_handoff_instruction\": \"将 metadata_file 发送到 tg 群里面。\",\n  \"edge\": {\n    \"id\": \"verify-pattern-catalog-fetch-to-tg\",\n    \"from\": \"youtube-fetch\",\n    \"to\": \"tg-notify\",\n    \"sourceIntent\": \"\",\n    \"targetIntent\": \"\",\n    \"instruction\": \"\",\n    \"relayMode\": \"\",\n    \"relayMappings\": []\n  },\n  \"upstream\": {\n    \"node_id\": \"youtube-fetch\",\n    \"title\": \"YouTube 元数据获取\",\n    \"skill_id\": \"sop-youtube-fetch\",\n    \"skill_summary\": \"---\\nname: sop-youtube-fetch\\ndescription: \\\"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\\\"\\nversion: 1.0.0\\n---\",\n    \"inputs\": {\n      \"source_url\": {\n        \"kind\": \"scalar\",\n        \"type\": \"string\",\n        \"value_type\": \"url\",\n        \"required\": true,\n        \"from\": \"context.source_url\",\n        \"accepts\": [\n          \"scalar:url\",\n          \"file:text\"\n        ],\n        \"resolvers\": [\n          {\n            \"id\": \"direct-url\",\n            \"kind\": \"direct\"\n          },\n          {\n            \"id\": \"text-url\",\n            \"kind\": \"regex\"\n          }\n        ]\n      }\n    },\n    \"outputs\": {\n      \"source_url\": {\n        \"kind\": \"scalar\",\n        \"type\": \"string\",\n        \"value_type\": \"url\",\n        \"relayable\": true,\n        \"path\": \"raw/node-runs/{pipeline_id}/outputs/files/source-url.txt\"\n      },\n      \"metadata_file\": {\n        \"kind\": \"file\",\n        \"type\": \"file\",\n        \"value_type\": \"json\",\n        \"relayable\": true,\n        \"path\": \"raw/node-runs/{pipeline_id}/outputs/files/metadata.json\"\n      }\n    },\n    \"capabilities\": [\n      \"git\",\n      \"sse\",\n      \"telegram\"\n    ]\n  },\n  \"downstream\": {\n    \"node_id\": \"tg-notify\",\n    \"title\": \"Telegram 通知\",\n    \"skill_id\": \"sop-tg-notify\",\n    \"skill_summary\": \"---\\nname: sop-tg-notify\\ndescription: \\\"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\\\"\\nversion: 2.1.0\\n---\",\n    \"inputs\": {\n      \"message\": {\n        \"kind\": \"object\",\n        \"type\": \"object\",\n        \"value_type\": \"text\",\n        \"required\": true,\n        \"from\": \"edge.message\",\n        \"accepts\": [\n          \"scalar:text\",\n          \"object\",\n          \"file:text\",\n          \"file:markdown\",\n          \"file:json\"\n        ],\n        \"resolvers\": [\n          {\n            \"id\": \"direct-text\",\n            \"kind\": \"direct\"\n          }\n        ]\n      },\n      \"index\": {\n        \"kind\": \"file\",\n        \"type\": \"file\",\n        \"value_type\": \"markdown\",\n        \"required\": false,\n        \"from\": \"wiki-build.outputs.index\",\n        \"accepts\": [\n          \"file:markdown\",\n          \"file:text\"\n        ]\n      }\n    },\n    \"outputs\": {\n      \"telegram_message\": {\n        \"kind\": \"file\",\n        \"type\": \"file\",\n        \"value_type\": \"json\",\n        \"relayable\": false,\n        \"path\": \"logs/pipeline-runs/pipe-{run_id}.json\"\n      }\n    },\n    \"capabilities\": [\n      \"git\",\n      \"sse\",\n      \"telegram\"\n    ]\n  }\n}\n\nA deterministic baseline is provided for calibration. Only override it when the handoff is actually unclear or unsafe:\n{\n  \"status\": \"trial_ready\",\n  \"summary\": \"Edge Handoff Instruction 已说明泛化输入的消费方式，可生成下游节点执行指导文档。\",\n  \"decision\": \"can_run_with_review\",\n  \"blocking_reasons\": [],\n  \"required_user_inputs\": [],\n  \"suggested_edge_instruction\": \"\",\n  \"handoff_pattern\": \"cannot_infer\",\n  \"resolved_handoff\": {\n    \"primary_artifacts\": [\n      {\n        \"from\": \"youtube-fetch.outputs.source_url\",\n        \"role\": \"available_output\",\n        \"reason\": \"上游声明的可交付产物。\"\n      },\n      {\n        \"from\": \"youtube-fetch.outputs.metadata_file\",\n        \"role\": \"available_output\",\n        \"reason\": \"上游声明的可交付产物。\"\n      }\n    ],\n    \"supporting_artifacts\": [],\n    \"relay_mappings\": [],\n    \"downstream_inputs\": [\n      {\n        \"to\": \"tg-notify.inputs.message\",\n        \"construction\": \"需要 Edge Handoff Agent 生成结构化 relay_mappings。\"\n      },\n      {\n        \"to\": \"tg-notify.inputs.index\",\n        \"construction\": \"需要 Edge Handoff Agent 生成结构化 relay_mappings。\"\n      }\n    ]\n  }\n}"
+            }
+          ],
+          "temperature": 0.0,
+          "max_tokens": 4096,
+          "stream": false,
+          "response_format": {
+            "type": "json_object"
+          }
+        },
+        "llm_content": "{\n  \"status\": \"trial_ready\",\n  \"summary\": \"直接传递上游 metadata_file 到下游 Telegram 通知消息输入。\",\n  \"warnings\": [\"假设下游 tg-notify 可以直接将 metadata_file（JSON）内容作为 Telegram 消息发送。若消息格式需定制，用户应补充模板说明。\"],\n  \"required_user_inputs\": [],\n  \"handoff_pattern\": \"send_artifact_content\",\n  \"resolved_handoff\": {\n    \"relay_mappings\": [\n      {\n        \"source_output\": \"metadata_file\",\n        \"target_input\": \"message\",\n        \"resolver\": \"direct\"\n      }\n    ]\n  }\n}",
+        "parsed": {
+          "status": "trial_ready",
+          "summary": "直接传递上游 metadata_file 到下游 Telegram 通知消息输入。",
+          "warnings": [
+            "假设下游 tg-notify 可以直接将 metadata_file（JSON）内容作为 Telegram 消息发送。若消息格式需定制，用户应补充模板说明。"
+          ],
+          "required_user_inputs": [],
+          "handoff_pattern": "send_artifact_content",
+          "resolved_handoff": {
+            "relay_mappings": [
+              {
+                "source_output": "metadata_file",
+                "target_input": "message",
+                "resolver": "direct"
+              }
+            ]
+          }
+        },
+        "finished_at": "2026-06-26T08:43:27Z"
+      },
+      "evaluated_at": "2026-06-26T08:43:27Z",
+      "evaluated_instruction_signature": "965372a96337d3ba",
+      "evaluated_edge_signature": "1d29f9b442cd8a5c",
+      "evaluated_instruction": "将 metadata_file 发送到 tg 群里面。"
+    },
+    "stderr": ""
+  },
+  "evaluation": {
+    "status": "trial_ready",
+    "score": 0.76,
+    "confidence": 0.76,
+    "summary": "直接传递上游 metadata_file 到下游 Telegram 通知消息输入。",
+    "decision": "can_run_with_review",
+    "scores": {
+      "intent_clarity": 0.9,
+      "skill_fit": 0.72,
+      "artifact_usability": 0.7,
+      "guide_completeness": 0.82,
+      "risk": 0.32
+    },
+    "blocking_reasons": [],
+    "warnings": [
+      "假设下游 tg-notify 可以直接将 metadata_file（JSON）内容作为 Telegram 消息发送。若消息格式需定制，用户应补充模板说明。"
+    ],
+    "required_user_inputs": [],
+    "suggested_edge_instruction": "",
+    "recommended_edge_instruction": "",
+    "handoff_pattern": "send_artifact_content",
+    "validation": {
+      "required": [],
+      "on_missing": "needs_instruction"
+    },
+    "resolved_handoff": {
+      "relay_mappings": [
+        {
+          "source_output": "metadata_file",
+          "target_input": "message",
+          "resolver": "direct"
+        }
+      ]
+    },
+    "node_execution_guide": {
+      "format": "markdown",
+      "prompt": "Use skill sop-tg-notify to execute this downstream node.\n\nNode Execution Guide\n- Edge: youtube-fetch -> tg-notify\n- Evaluation summary: Edge Handoff Instruction 已说明泛化输入的消费方式，可生成下游节点执行指导文档。\n- Edge Handoff Instruction: 将 metadata_file 发送到 tg 群里面。\n\nUpstream artifacts\n- source_url: raw/node-runs/{pipeline_id}/outputs/files/source-url.txt\n- metadata_file: raw/node-runs/{pipeline_id}/outputs/files/metadata.json\n\nExecution rules\n- Use only the resolved Edge inputs and materialized artifacts listed here.\n- If a required artifact cannot be read, fail before executing the downstream skill.\n- Do not silently fall back to stale pipeline context or unrelated historical artifacts.\n- Preserve the downstream skill boundary; this guide shapes execution but does not replace the skill."
+    },
+    "test_plan": [
+      "物化 Edge 输入",
+      "执行下游 skill",
+      "校验声明输出",
+      "记录 edge evaluation 和 guide"
+    ],
+    "agent": {
+      "provider": "openai-compatible",
+      "model": "deepseek-v4-pro",
+      "used_ai": true
+    },
+    "trace": {
+      "trace_schema": "edge-handoff-agent-trace/v1",
+      "started_at": "2026-06-26T08:43:03Z",
+      "request": {
+        "runtime_id": "youtube-wiki",
+        "instance_id": "wiki-sop-new-instance",
+        "workflow_id": "youtube-research-wiki",
+        "edge_id": "verify-pattern-catalog-fetch-to-tg",
+        "phase": "design",
+        "workflow_goal": "",
+        "edge_handoff_instruction": "将 metadata_file 发送到 tg 群里面。",
+        "edge": {
+          "id": "verify-pattern-catalog-fetch-to-tg",
+          "from": "youtube-fetch",
+          "to": "tg-notify",
+          "sourceIntent": "",
+          "targetIntent": "",
+          "instruction": "",
+          "relayMode": "",
+          "relayMappings": []
+        },
+        "upstream": {
+          "node_id": "youtube-fetch",
+          "title": "YouTube 元数据获取",
+          "skill_id": "sop-youtube-fetch",
+          "skill_summary": "---\nname: sop-youtube-fetch\ndescription: \"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\"\nversion: 1.0.0\n---",
+          "inputs": {
+            "source_url": {
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "url",
+              "required": true,
+              "from": "context.source_url",
+              "accepts": [
+                "scalar:url",
+                "file:text"
+              ],
+              "resolvers": [
+                {
+                  "id": "direct-url",
+                  "kind": "direct"
+                },
+                {
+                  "id": "text-url",
+                  "kind": "regex"
+                }
+              ]
+            }
+          },
+          "outputs": {
+            "source_url": {
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "url",
+              "relayable": true,
+              "path": "raw/node-runs/{pipeline_id}/outputs/files/source-url.txt"
+            },
+            "metadata_file": {
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "relayable": true,
+              "path": "raw/node-runs/{pipeline_id}/outputs/files/metadata.json"
+            }
+          },
+          "capabilities": [
+            "git",
+            "sse",
+            "telegram"
+          ]
+        },
+        "downstream": {
+          "node_id": "tg-notify",
+          "title": "Telegram 通知",
+          "skill_id": "sop-tg-notify",
+          "skill_summary": "---\nname: sop-tg-notify\ndescription: \"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\"\nversion: 2.1.0\n---",
+          "inputs": {
+            "message": {
+              "kind": "object",
+              "type": "object",
+              "value_type": "text",
+              "required": true,
+              "from": "edge.message",
+              "accepts": [
+                "scalar:text",
+                "object",
+                "file:text",
+                "file:markdown",
+                "file:json"
+              ],
+              "resolvers": [
+                {
+                  "id": "direct-text",
+                  "kind": "direct"
+                }
+              ]
+            },
+            "index": {
+              "kind": "file",
+              "type": "file",
+              "value_type": "markdown",
+              "required": false,
+              "from": "wiki-build.outputs.index",
+              "accepts": [
+                "file:markdown",
+                "file:text"
+              ]
+            }
+          },
+          "outputs": {
+            "telegram_message": {
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "relayable": false,
+              "path": "logs/pipeline-runs/pipe-{run_id}.json"
+            }
+          },
+          "capabilities": [
+            "git",
+            "sse",
+            "telegram"
+          ]
+        }
+      },
+      "baseline": {
+        "status": "trial_ready",
+        "summary": "Edge Handoff Instruction 已说明泛化输入的消费方式，可生成下游节点执行指导文档。",
+        "decision": "can_run_with_review",
+        "blocking_reasons": [],
+        "required_user_inputs": [],
+        "suggested_edge_instruction": "",
+        "handoff_pattern": "cannot_infer",
+        "resolved_handoff": {
+          "primary_artifacts": [
+            {
+              "from": "youtube-fetch.outputs.source_url",
+              "role": "available_output",
+              "reason": "上游声明的可交付产物。"
+            },
+            {
+              "from": "youtube-fetch.outputs.metadata_file",
+              "role": "available_output",
+              "reason": "上游声明的可交付产物。"
+            }
+          ],
+          "supporting_artifacts": [],
+          "relay_mappings": [],
+          "downstream_inputs": [
+            {
+              "to": "tg-notify.inputs.message",
+              "construction": "需要 Edge Handoff Agent 生成结构化 relay_mappings。"
+            },
+            {
+              "to": "tg-notify.inputs.index",
+              "construction": "需要 Edge Handoff Agent 生成结构化 relay_mappings。"
+            }
+          ]
+        }
+      },
+      "llm": {
+        "provider": "openai-compatible",
+        "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "model": "deepseek-v4-pro",
+        "timeout_seconds": 75,
+        "attempts": 1
+      },
+      "attempts": [
+        {
+          "attempt": 1,
+          "started_at": "2026-06-26T08:43:03Z",
+          "status": "response",
+          "duration_ms": 23738,
+          "raw_response": "{\"id\":\"d47cf881-8ddf-448d-8428-8ca7fc530365\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"status\\\": \\\"trial_ready\\\",\\n  \\\"summary\\\": \\\"直接传递上游 metadata_file 到下游 Telegram 通知消息输入。\\\",\\n  \\\"warnings\\\": [\\\"假设下游 tg-notify 可以直接将 metadata_file（JSON）内容作为 Telegram 消息发送。若消息格式需定制，用户应补充模板说明。\\\"],\\n  \\\"required_user_inputs\\\": [],\\n  \\\"handoff_pattern\\\": \\\"send_artifact_content\\\",\\n  \\\"resolved_handoff\\\": {\\n    \\\"relay_mappings\\\": [\\n      {\\n        \\\"source_output\\\": \\\"metadata_file\\\",\\n        \\\"target_input\\\": \\\"message\\\",\\n        \\\"resolver\\\": \\\"direct\\\"\\n      }\\n    ]\\n  }\\n}\",\"reasoning_content\":\"We are asked to produce a JSON response for the edge handoff. The instruction is \\\"将 metadata_file 发送到 tg 群里面。\\\" which translates to \\\"Send metadata_file to the tg group.\\\" The downstream node is tg-notify, with required input message (object/text) and optional index (file/markdown). The upstream outputs include metadata_file (a JSON file). The instruction specifically mentions sending metadata_file. The downstream skill summary says it sends a Telegram notification, and its message input accepts various formats including file:json. So it can directly send the metadata_file content as the message. This maps to the handoff pattern \\\"send_artifact_content\\\" (send artifact content). Alternatively, we could extract fields or summarize, but the instruction is simply to send the file. Since downstream can accept file:json, we can relay metadata_file to the message input. So this is trial_ready. The instruction is clear: \\\"send metadata_file\\\". So status: trial_ready. Handoff pattern: send_artifact_content. Relay mappings: source_output: \\\"metadata_file\\\", target_input: \\\"message\\\", resolver: direct (since the downstream's message input resolver is \\\"direct-text\\\", but it accepts file:json, so maybe we can use a resolver that treats the file as content. The downstream input \\\"message\\\" accepts file:json, so we can directly pass the file reference. The resolver \\\"direct\\\" might be appropriate, but the input type is object, not directly file. The accepts list includes file:json, so the downstream skill should know how to handle it. I'll use \\\"direct\\\" as the resolver, or perhaps \\\"file_content\\\" but the pattern expects resolvers from downstream contracts. The only declared resolver for message is \\\"direct-text\\\". That might not directly handle a file reference. However, the instruction says to send the file, so we can interpret that the content of the file should be sent. But the downstream may need a file reference. The downstream input message is an object, so it might expect a structure. The skill summary says it reads pipeline-context.json and assembles a report. So maybe the message input is not directly the file content. The edge_handoff_instruction explicitly says \\\"发送 metadata_file\\\", so we assume the downstream can accept that file and send its content. Since it's a trial_ready, we note assumptions in warnings: assuming the Telegram notification skill can transmit the metadata_file content as-is. No need for extraction. The baseline calibration gave \\\"cannot_infer\\\" but that seems too cautious because the instruction is clear: send metadata_file. The downstream skill can handle file:json, so we can map it. So I'll override with trial_ready and send_artifact_content. Required user inputs: none. Warnings: \\\"Assumes tg-notify can send the metadata_file content directly as a Telegram message; if the message format needs to be specific, user may need to provide a wrapper or template.\\\" Summary: \\\"将上游 metadata_file 直接发送到 Telegram 通知中。下游 tg-notify 可接收 file:json，因此直接传递文件内容。\\\" Something like that. Resolved handoff with relay_mappings: [{source_output: \\\"metadata_file\\\", target_input: \\\"message\\\", resolver: \\\"direct\\\"}]. Use resolver \\\"direct\\\" because no field extraction needed. That's within 700 chars.\",\"reasoning\":\"We are asked to produce a JSON response for the edge handoff. The instruction is \\\"将 metadata_file 发送到 tg 群里面。\\\" which translates to \\\"Send metadata_file to the tg group.\\\" The downstream node is tg-notify, with required input message (object/text) and optional index (file/markdown). The upstream outputs include metadata_file (a JSON file). The instruction specifically mentions sending metadata_file. The downstream skill summary says it sends a Telegram notification, and its message input accepts various formats including file:json. So it can directly send the metadata_file content as the message. This maps to the handoff pattern \\\"send_artifact_content\\\" (send artifact content). Alternatively, we could extract fields or summarize, but the instruction is simply to send the file. Since downstream can accept file:json, we can relay metadata_file to the message input. So this is trial_ready. The instruction is clear: \\\"send metadata_file\\\". So status: trial_ready. Handoff pattern: send_artifact_content. Relay mappings: source_output: \\\"metadata_file\\\", target_input: \\\"message\\\", resolver: direct (since the downstream's message input resolver is \\\"direct-text\\\", but it accepts file:json, so maybe we can use a resolver that treats the file as content. The downstream input \\\"message\\\" accepts file:json, so we can directly pass the file reference. The resolver \\\"direct\\\" might be appropriate, but the input type is object, not directly file. The accepts list includes file:json, so the downstream skill should know how to handle it. I'll use \\\"direct\\\" as the resolver, or perhaps \\\"file_content\\\" but the pattern expects resolvers from downstream contracts. The only declared resolver for message is \\\"direct-text\\\". That might not directly handle a file reference. However, the instruction says to send the file, so we can interpret that the content of the file should be sent. But the downstream may need a file reference. The downstream input message is an object, so it might expect a structure. The skill summary says it reads pipeline-context.json and assembles a report. So maybe the message input is not directly the file content. The edge_handoff_instruction explicitly says \\\"发送 metadata_file\\\", so we assume the downstream can accept that file and send its content. Since it's a trial_ready, we note assumptions in warnings: assuming the Telegram notification skill can transmit the metadata_file content as-is. No need for extraction. The baseline calibration gave \\\"cannot_infer\\\" but that seems too cautious because the instruction is clear: send metadata_file. The downstream skill can handle file:json, so we can map it. So I'll override with trial_ready and send_artifact_content. Required user inputs: none. Warnings: \\\"Assumes tg-notify can send the metadata_file content directly as a Telegram message; if the message format needs to be specific, user may need to provide a wrapper or template.\\\" Summary: \\\"将上游 metadata_file 直接发送到 Telegram 通知中。下游 tg-notify 可接收 file:json，因此直接传递文件内容。\\\" Something like that. Resolved handoff with relay_mappings: [{source_output: \\\"metadata_file\\\", target_input: \\\"message\\\", resolver: \\\"direct\\\"}]. Use resolver \\\"direct\\\" because no field extraction needed. That's within 700 chars.\"},\"finish_reason\":\"stop\",\"logprobs\":null}],\"object\":\"chat.completion\",\"created\":1782463386,\"model\":\"deepseek-v4-pro\",\"usage\":{\"prompt_tokens\":2648,\"completion_tokens\":829,\"total_tokens\":3477,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":0},\"completion_tokens_details\":{\"audio_tokens\":0,\"reasoning_tokens\":687,\"accepted_prediction_tokens\":0,\"rejected_prediction_tokens\":0}},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}"
+        }
+      ],
+      "llm_request": {
+        "model": "deepseek-v4-pro",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Return the final answer as strict JSON in message.content only. No markdown, no prose."
+          },
+          {
+            "role": "user",
+            "content": "You are the SOP Edge Handoff Agent. Return strict JSON only.\nReview whether the upstream node can hand off to the downstream node. Do not generate long guides; the runtime will compile the final Node Execution Guide. Treat edge_handoff_instruction as user-authored natural-language intent, not as a schema field. The instruction may map artifacts, transform content, summarize files, generate new runtime text, or intentionally ignore upstream artifacts. If the downstream skill can execute the instruction with clear assumptions, return trial_ready instead of needs_instruction and put the assumptions in warnings. Use needs_instruction only when no executable interpretation can be derived, the instruction references unavailable artifacts, or the requested handoff contradicts the downstream skill. Keep the response compact; do not copy skill docs or repeat the full request. Return less than 700 JSON characters.\n\nRequired JSON keys: status, summary, warnings, required_user_inputs. Optional keys: blocking_reasons, suggested_edge_instruction, handoff_pattern, validation, resolved_handoff. When status is blocked, incompatible, or needs_instruction, suggested_edge_instruction must be a complete user-applicable handoff instruction, not a question or instruction about what to write.\nChoose exactly one handoff_pattern from the Handoff Pattern Catalog below. Do not invent pattern IDs.\nWhen status is ready or trial_ready, resolved_handoff should include relay_mappings: an array of objects with source_output, target_input, and resolver when an upstream artifact is used. For generated content such as 'send current date', use source_output='runtime' and resolver='generated'. Use resolver ids declared by the downstream input contract; do not invent business logic outside the contracts.\n\nHandoff Pattern Catalog JSON:\n[\n  {\n    \"id\": \"direct_pass\",\n    \"label\": \"直接传递\",\n    \"use_when\": \"上游某个输出可以不转换地满足下游同名或明确引用的输入。\",\n    \"uses_upstream_artifact\": true,\n    \"resolved_handoff\": \"relay_mappings must map source_output to target_input with resolver direct.\",\n    \"missing_behavior\": \"block when the selected source output is missing or empty.\"\n  },\n  {\n    \"id\": \"extract_field\",\n    \"label\": \"字段提取\",\n    \"use_when\": \"用户说明或真实 artifact schema 明确指出要从 JSON/object/file 中提取某个字段。\",\n    \"uses_upstream_artifact\": true,\n    \"resolved_handoff\": \"relay_mappings must include source_output, target_input, resolver json_path or an explicit extractor description.\",\n    \"missing_behavior\": \"block unless the user explicitly provides a fallback.\"\n  },\n  {\n    \"id\": \"summarize_to_message\",\n    \"label\": \"摘要成消息\",\n    \"use_when\": \"下游需要 message/summary，用户要求把长文本、报告或多文件压缩成通知/摘要。\",\n    \"uses_upstream_artifact\": true,\n    \"resolved_handoff\": \"relay_mappings should select the source file/artifact and describe the summary goal.\",\n    \"missing_behavior\": \"block when all selected source artifacts are missing.\"\n  },\n  {\n    \"id\": \"send_artifact_content\",\n    \"label\": \"发送产物内容\",\n    \"use_when\": \"用户要求把某个上游产物直接发送、展示或交给通知类节点。\",\n    \"uses_upstream_artifact\": true,\n    \"resolved_handoff\": \"relay_mappings should select the artifact and target message/content/payload input.\",\n    \"missing_behavior\": \"block when the selected artifact is missing.\"\n  },\n  {\n    \"id\": \"generated_message\",\n    \"label\": \"生成运行时文本\",\n    \"use_when\": \"用户要求发送当前日期、固定文案、运行状态等不依赖上游业务产物的文本。\",\n    \"uses_upstream_artifact\": false,\n    \"resolved_handoff\": \"use source_output runtime and resolver generated; explain what text is generated.\",\n    \"missing_behavior\": \"block only if required runtime context is unavailable.\"\n  },\n  {\n    \"id\": \"aggregate_files\",\n    \"label\": \"聚合多文件\",\n    \"use_when\": \"下游需要 sources/reports/files/documents，且一个或多个上游文件要合并为输入集合。\",\n    \"uses_upstream_artifact\": true,\n    \"resolved_handoff\": \"relay_mappings should list selected file outputs and target collection input.\",\n    \"missing_behavior\": \"block when required files are missing; optional files may warn.\"\n  },\n  {\n    \"id\": \"pass_directory\",\n    \"label\": \"传递目录\",\n    \"use_when\": \"下游明确消费目录或文件夹，而不是单个文件或字符串。\",\n    \"uses_upstream_artifact\": true,\n    \"resolved_handoff\": \"relay_mappings should map directory output to directory input.\",\n    \"missing_behavior\": \"block when the directory is missing.\"\n  },\n  {\n    \"id\": \"optional_context\",\n    \"label\": \"可选上下文\",\n    \"use_when\": \"上游产物只作为补充上下文，不应该成为下游主输入。\",\n    \"uses_upstream_artifact\": true,\n    \"resolved_handoff\": \"place selected artifact under supporting context; do not satisfy required input with it.\",\n    \"missing_behavior\": \"warn, do not block, unless it is explicitly marked required.\"\n  },\n  {\n    \"id\": \"cannot_infer\",\n    \"label\": \"无法推断\",\n    \"use_when\": \"缺少用户意图、上下游语义不对应、或无法判断要传什么/怎么转换。\",\n    \"uses_upstream_artifact\": false,\n    \"resolved_handoff\": \"do not produce relay_mappings; ask for a concrete edge_handoff_instruction.\",\n    \"missing_behavior\": \"needs_instruction.\"\n  }\n]\n\nExamples:\n- Instruction 'tg only sends current date' for a notification node is trial_ready with handoff_pattern generated_message.\n- Instruction 'send metadata_file to the Telegram group' is trial_ready if metadata_file is an upstream output; interpret it as sending the file content or a safe compact rendering according to the downstream skill.\n- Instruction 'read a named field from metadata_file as message' is trial_ready only when the user names the field or the actual artifact schema proves it exists.\n- Empty instruction for a generic message input is needs_instruction.\n\nAllowed statuses: ['blocked', 'incompatible', 'needs_instruction', 'ready', 'trial_ready']\n\nRequest JSON:\n{\n  \"runtime_id\": \"youtube-wiki\",\n  \"instance_id\": \"wiki-sop-new-instance\",\n  \"workflow_id\": \"youtube-research-wiki\",\n  \"edge_id\": \"verify-pattern-catalog-fetch-to-tg\",\n  \"phase\": \"design\",\n  \"workflow_goal\": \"\",\n  \"edge_handoff_instruction\": \"将 metadata_file 发送到 tg 群里面。\",\n  \"edge\": {\n    \"id\": \"verify-pattern-catalog-fetch-to-tg\",\n    \"from\": \"youtube-fetch\",\n    \"to\": \"tg-notify\",\n    \"sourceIntent\": \"\",\n    \"targetIntent\": \"\",\n    \"instruction\": \"\",\n    \"relayMode\": \"\",\n    \"relayMappings\": []\n  },\n  \"upstream\": {\n    \"node_id\": \"youtube-fetch\",\n    \"title\": \"YouTube 元数据获取\",\n    \"skill_id\": \"sop-youtube-fetch\",\n    \"skill_summary\": \"---\\nname: sop-youtube-fetch\\ndescription: \\\"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\\\"\\nversion: 1.0.0\\n---\",\n    \"inputs\": {\n      \"source_url\": {\n        \"kind\": \"scalar\",\n        \"type\": \"string\",\n        \"value_type\": \"url\",\n        \"required\": true,\n        \"from\": \"context.source_url\",\n        \"accepts\": [\n          \"scalar:url\",\n          \"file:text\"\n        ],\n        \"resolvers\": [\n          {\n            \"id\": \"direct-url\",\n            \"kind\": \"direct\"\n          },\n          {\n            \"id\": \"text-url\",\n            \"kind\": \"regex\"\n          }\n        ]\n      }\n    },\n    \"outputs\": {\n      \"source_url\": {\n        \"kind\": \"scalar\",\n        \"type\": \"string\",\n        \"value_type\": \"url\",\n        \"relayable\": true,\n        \"path\": \"raw/node-runs/{pipeline_id}/outputs/files/source-url.txt\"\n      },\n      \"metadata_file\": {\n        \"kind\": \"file\",\n        \"type\": \"file\",\n        \"value_type\": \"json\",\n        \"relayable\": true,\n        \"path\": \"raw/node-runs/{pipeline_id}/outputs/files/metadata.json\"\n      }\n    },\n    \"capabilities\": [\n      \"git\",\n      \"sse\",\n      \"telegram\"\n    ]\n  },\n  \"downstream\": {\n    \"node_id\": \"tg-notify\",\n    \"title\": \"Telegram 通知\",\n    \"skill_id\": \"sop-tg-notify\",\n    \"skill_summary\": \"---\\nname: sop-tg-notify\\ndescription: \\\"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\\\"\\nversion: 2.1.0\\n---\",\n    \"inputs\": {\n      \"message\": {\n        \"kind\": \"object\",\n        \"type\": \"object\",\n        \"value_type\": \"text\",\n        \"required\": true,\n        \"from\": \"edge.message\",\n        \"accepts\": [\n          \"scalar:text\",\n          \"object\",\n          \"file:text\",\n          \"file:markdown\",\n          \"file:json\"\n        ],\n        \"resolvers\": [\n          {\n            \"id\": \"direct-text\",\n            \"kind\": \"direct\"\n          }\n        ]\n      },\n      \"index\": {\n        \"kind\": \"file\",\n        \"type\": \"file\",\n        \"value_type\": \"markdown\",\n        \"required\": false,\n        \"from\": \"wiki-build.outputs.index\",\n        \"accepts\": [\n          \"file:markdown\",\n          \"file:text\"\n        ]\n      }\n    },\n    \"outputs\": {\n      \"telegram_message\": {\n        \"kind\": \"file\",\n        \"type\": \"file\",\n        \"value_type\": \"json\",\n        \"relayable\": false,\n        \"path\": \"logs/pipeline-runs/pipe-{run_id}.json\"\n      }\n    },\n    \"capabilities\": [\n      \"git\",\n      \"sse\",\n      \"telegram\"\n    ]\n  }\n}\n\nA deterministic baseline is provided for calibration. Only override it when the handoff is actually unclear or unsafe:\n{\n  \"status\": \"trial_ready\",\n  \"summary\": \"Edge Handoff Instruction 已说明泛化输入的消费方式，可生成下游节点执行指导文档。\",\n  \"decision\": \"can_run_with_review\",\n  \"blocking_reasons\": [],\n  \"required_user_inputs\": [],\n  \"suggested_edge_instruction\": \"\",\n  \"handoff_pattern\": \"cannot_infer\",\n  \"resolved_handoff\": {\n    \"primary_artifacts\": [\n      {\n        \"from\": \"youtube-fetch.outputs.source_url\",\n        \"role\": \"available_output\",\n        \"reason\": \"上游声明的可交付产物。\"\n      },\n      {\n        \"from\": \"youtube-fetch.outputs.metadata_file\",\n        \"role\": \"available_output\",\n        \"reason\": \"上游声明的可交付产物。\"\n      }\n    ],\n    \"supporting_artifacts\": [],\n    \"relay_mappings\": [],\n    \"downstream_inputs\": [\n      {\n        \"to\": \"tg-notify.inputs.message\",\n        \"construction\": \"需要 Edge Handoff Agent 生成结构化 relay_mappings。\"\n      },\n      {\n        \"to\": \"tg-notify.inputs.index\",\n        \"construction\": \"需要 Edge Handoff Agent 生成结构化 relay_mappings。\"\n      }\n    ]\n  }\n}"
+          }
+        ],
+        "temperature": 0.0,
+        "max_tokens": 4096,
+        "stream": false,
+        "response_format": {
+          "type": "json_object"
+        }
+      },
+      "llm_content": "{\n  \"status\": \"trial_ready\",\n  \"summary\": \"直接传递上游 metadata_file 到下游 Telegram 通知消息输入。\",\n  \"warnings\": [\"假设下游 tg-notify 可以直接将 metadata_file（JSON）内容作为 Telegram 消息发送。若消息格式需定制，用户应补充模板说明。\"],\n  \"required_user_inputs\": [],\n  \"handoff_pattern\": \"send_artifact_content\",\n  \"resolved_handoff\": {\n    \"relay_mappings\": [\n      {\n        \"source_output\": \"metadata_file\",\n        \"target_input\": \"message\",\n        \"resolver\": \"direct\"\n      }\n    ]\n  }\n}",
+      "parsed": {
+        "status": "trial_ready",
+        "summary": "直接传递上游 metadata_file 到下游 Telegram 通知消息输入。",
+        "warnings": [
+          "假设下游 tg-notify 可以直接将 metadata_file（JSON）内容作为 Telegram 消息发送。若消息格式需定制，用户应补充模板说明。"
+        ],
+        "required_user_inputs": [],
+        "handoff_pattern": "send_artifact_content",
+        "resolved_handoff": {
+          "relay_mappings": [
+            {
+              "source_output": "metadata_file",
+              "target_input": "message",
+              "resolver": "direct"
+            }
+          ]
+        }
+      },
+      "finished_at": "2026-06-26T08:43:27Z"
+    },
+    "evaluated_at": "2026-06-26T08:43:27Z",
+    "evaluated_instruction_signature": "965372a96337d3ba",
+    "evaluated_edge_signature": "1d29f9b442cd8a5c",
+    "evaluated_instruction": "将 metadata_file 发送到 tg 群里面。"
+  }
+}

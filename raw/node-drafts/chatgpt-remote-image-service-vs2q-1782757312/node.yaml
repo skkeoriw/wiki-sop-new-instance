@@ -1,0 +1,315 @@
+schema: node-definition/v1
+id: chatgpt-remote-image-service-vs2q
+title: Chatgpt Remote Image Service
+description: 把这个 Skill 转换成一个不绑定上下游的 Runtime Node；首节点测试时允许用户直接输入 prompt，也要保留引用图、上传名、超时等
+  skill 暴露的可配置参数。
+version: 0.1-runtime-draft
+skill:
+  id: chatgpt-remote-image-service
+  source: skill-installer
+  install_command: bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')
+  source_digest:
+    installer_url: https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544
+    zip_url: https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip
+    files:
+    - path: chatgpt-remote-image-service/agents/openai.yaml
+      bytes: 227
+      truncated: false
+    - path: chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh
+      bytes: 5390
+      truncated: false
+    - path: chatgpt-remote-image-service/SKILL.md
+      bytes: 3484
+      truncated: false
+executor:
+  type: agent-skill
+  agent: hermes
+  skill: chatgpt-remote-image-service
+  request_template: node-execution-request/v1
+entry:
+  inputs:
+    api_url:
+      required: false
+      input_kind: url
+      value_type: url
+      label: Api Url
+      description: Value for CLI option --apiUrl.
+      evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+        --apiUrl -> $API_URL'
+      cli_option: --apiUrl
+    reference_image_file:
+      required: false
+      input_kind: file
+      value_type: image
+      label: Reference Image File
+      description: Optional local reference image file path consumed by the skill.
+      evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+        --image -> $IMAGE'
+      cli_option: --image
+    reference_image_url:
+      required: false
+      input_kind: url
+      value_type: url
+      label: Reference Image Url
+      description: Optional reference image URL consumed by the skill.
+      evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+        --image-url -> $IMAGE_URL; chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh:
+        option --imageUrl -> $IMAGE_URL'
+      cli_option: --image-url
+    poll_interval:
+      required: false
+      input_kind: number
+      value_type: number
+      label: Poll Interval
+      description: Value for CLI option --pollInterval.
+      evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+        --pollInterval -> $POLL_INTERVAL'
+      cli_option: --pollInterval
+    prompt:
+      required: true
+      input_kind: text
+      value_type: text
+      label: Prompt
+      description: Task prompt or user instruction passed to the skill.
+      evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+        --prompt -> $PROMPT'
+      cli_option: --prompt
+      example: 生成一张小猫睡觉的照片
+    timeout_seconds:
+      required: false
+      input_kind: number
+      value_type: number
+      label: Timeout Seconds
+      description: Value for CLI option --timeoutSeconds.
+      evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+        --timeoutSeconds -> $TIMEOUT_SECONDS'
+      cli_option: --timeoutSeconds
+    upload_name:
+      required: false
+      input_kind: text
+      value_type: text
+      label: Upload Name
+      description: Optional output object/file name hint.
+      evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+        --uploadName -> $UPLOAD_NAME'
+      cli_option: --uploadName
+handoff:
+  accepts:
+    upstream_outputs_dir:
+      required: false
+      description: 一个或多个上游 Node 的标准输出目录。
+    instruction:
+      required: true
+      description: Edge Handoff Agent 或用户提供的交接说明。
+    context:
+      required: false
+      description: 运行上下文或补充说明。
+  produces:
+    outputs_dir: raw/node-runs/{run_id}/outputs
+    manifest: raw/node-runs/{run_id}/outputs/manifest.json
+outputs:
+  result:
+    kind: scalar
+    type: string
+    value_type: text
+    relayable: true
+    fields:
+      resolved_value:
+        type: string
+        sample: 'Image generated successfully via ChatGPT remote image service. Prompt:
+          生成一张小猫睡觉的照片'
+  task_id:
+    kind: scalar
+    type: string
+    value_type: text
+    relayable: true
+    fields:
+      resolved_value:
+        type: string
+        sample: d599c328-521d-4814-ab43-dfc522db836a
+  status:
+    kind: scalar
+    type: string
+    value_type: text
+    relayable: true
+    fields:
+      resolved_value:
+        type: string
+        sample: succeeded
+  public_image_url:
+    kind: scalar
+    type: string
+    value_type: url
+    relayable: true
+    fields:
+      resolved_value:
+        type: string
+        sample: https://resource.vyibc.com/d599c328-521d-4814-ab43-dfc522db836a.png
+  image_url:
+    kind: scalar
+    type: string
+    value_type: url
+    relayable: true
+    fields:
+      resolved_value:
+        type: string
+        sample: https://resource.vyibc.com/d599c328-521d-4814-ab43-dfc522db836a.png
+  generated_images:
+    kind: scalar
+    type: string
+    value_type: image
+    relayable: true
+    fields:
+      resolved_value:
+        type: string
+        sample: https://resource.vyibc.com/d599c328-521d-4814-ab43-dfc522db836a.png
+      local_path:
+        type: string
+        sample: raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260630T024155-4b8467/outputs/generated_image.png
+  images:
+    kind: scalar
+    type: string
+    value_type: image
+    relayable: true
+    fields:
+      resolved_value:
+        type: string
+        sample: generated_image.png
+      local_path:
+        type: string
+        sample: raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260630T024155-4b8467/outputs/generated_image.png
+  submit_json:
+    kind: scalar
+    type: string
+    value_type: json
+    relayable: true
+    fields:
+      resolved_value:
+        type: object
+        sample:
+          ok: true
+          taskId: d599c328-521d-4814-ab43-dfc522db836a
+  status_json:
+    kind: scalar
+    type: string
+    value_type: json
+    relayable: true
+    fields:
+      resolved_value:
+        type: object
+        sample:
+          ok: true
+          taskId: d599c328-521d-4814-ab43-dfc522db836a
+          status: succeeded
+          stage: uploadedMs
+          createdAt: '2026-06-30T02:42:45.282Z'
+          startedAt: '2026-06-30T02:42:45.282Z'
+          finishedAt: '2026-06-30T02:43:38.950Z'
+          updatedAt: '2026-06-30T02:43:38.950Z'
+          publicImageUrl: https://resource.vyibc.com/d599c328-521d-4814-ab43-dfc522db836a.png
+          downloadedPath: /opt/chatgpt-image-service/data/downloads/chatgpt-generated-1782787418309.png
+          chatgptUrl: https://chatgpt.com/c/6a432d2e-3a30-83ea-b58d-d0ed7e87b4e9
+          uploadName: d599c328-521d-4814-ab43-dfc522db836a.png
+          workerId: worker-1
+          cdpPort: '9333'
+          loginRequired: false
+          timings:
+            connectedMs: 1062
+            pageReadyMs: 1995
+            sentMs: 9332
+            generatedVisibleMs: 40690
+            downloadedMs: 52958
+            uploadedMs: 53571
+capabilities:
+  git:
+    enabled: true
+    required: false
+  telegram:
+    enabled: false
+    required: false
+  sse:
+    enabled: true
+    required: true
+ui:
+  category: generation
+coverage_report:
+  status: passed
+  covered_inputs:
+  - input: api_url
+    option: --apiUrl
+    evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+      --apiUrl -> $API_URL'
+  - input: reference_image_file
+    option: --image
+    evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+      --image -> $IMAGE'
+  - input: reference_image_url
+    option: --image-url
+    evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+      --image-url -> $IMAGE_URL; chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh:
+      option --imageUrl -> $IMAGE_URL'
+  - input: poll_interval
+    option: --pollInterval
+    evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+      --pollInterval -> $POLL_INTERVAL'
+  - input: prompt
+    option: --prompt
+    evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+      --prompt -> $PROMPT'
+  - input: timeout_seconds
+    option: --timeoutSeconds
+    evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+      --timeoutSeconds -> $TIMEOUT_SECONDS'
+  - input: upload_name
+    option: --uploadName
+    evidence: 'chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh: option
+      --uploadName -> $UPLOAD_NAME'
+  missing_inputs: []
+  source_files_read:
+  - chatgpt-remote-image-service/agents/openai.yaml
+  - chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh
+  - chatgpt-remote-image-service/SKILL.md
+  errors: []
+analysis:
+  contract_synthesis:
+    source: node-draft-probe
+    probe_id: chatgpt-remote-image-service-vs2q-probe-20260630T024156Z-1d74ef
+    node_run_id: node-run-chatgpt-remote-image-service-vs2q-20260630T024155-4b8467
+    manifest_record_count: 9
+    node_builder_contract_review: true
+    synthesized_at: '2026-06-30T03:50:59.985742+00:00'
+contract_summary:
+  primary_outputs:
+  - public_image_url
+  artifact_outputs:
+  - generated_images
+  auxiliary_outputs:
+  - result
+  - task_id
+  - status
+  diagnostic_outputs:
+  - submit_json
+  - status_json
+  aliases:
+    image_url: public_image_url
+    images: generated_images
+  recommended_edge_outputs:
+  - public_image_url
+  - generated_images
+agent_review:
+  summary: Contract review classified runtime-observed outputs into primary, artifact,
+    auxiliary and diagnostic groups.
+  warnings:
+  - code: contract_review_ai_fallback
+    message: The read operation timed out
+  risks: []
+  recommendations:
+  - Use public_image_url, generated_images as default downstream Edge outputs.
+  - Keep JSON status payloads as diagnostics unless a downstream Edge explicitly requests
+    them.
+  agent:
+    provider: openai-compatible
+    model: deepseek-v4-pro
+    used_ai: false
+    fallback: deterministic-contract-review
+    error: The read operation timed out

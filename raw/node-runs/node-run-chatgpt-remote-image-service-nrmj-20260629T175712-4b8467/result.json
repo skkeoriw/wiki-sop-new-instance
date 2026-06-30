@@ -1,0 +1,2851 @@
+{
+  "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+  "pipeline_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+  "runtime_id": "youtube-wiki",
+  "instance_id": "wiki-sop-new-instance",
+  "workflow_id": "youtube-research-wiki",
+  "node_id": "chatgpt-remote-image-service-nrmj",
+  "node_title": "Chatgpt Remote Image Service",
+  "status": "failed",
+  "mode": "real-node",
+  "input_source": "manual",
+  "relay_mode": "",
+  "selected_outputs": [],
+  "relay_mappings": [],
+  "source_node_run_id": "",
+  "relay_selection": {},
+  "edge_contract": {},
+  "node_execution_guide": {},
+  "workflow_revision": {
+    "version": 1,
+    "hash": "db8b2fa2b5347cd5",
+    "node_count": 7,
+    "edge_count": 3,
+    "nodes": {
+      "chatgpt-remote-image-service-nrmj": {
+        "title": "Chatgpt Remote Image Service",
+        "skill": {
+          "id": "chatgpt-remote-image-service",
+          "source": "skill-installer",
+          "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+          "source_digest": {
+            "installer_url": "https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544",
+            "zip_url": "https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip",
+            "files": [
+              {
+                "path": "chatgpt-remote-image-service/agents/openai.yaml",
+                "bytes": 227,
+                "truncated": false
+              },
+              {
+                "path": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+                "bytes": 5390,
+                "truncated": false
+              },
+              {
+                "path": "chatgpt-remote-image-service/SKILL.md",
+                "bytes": 3484,
+                "truncated": false
+              }
+            ]
+          }
+        },
+        "mode": "",
+        "needs": [],
+        "inputs": {},
+        "optional_inputs": {},
+        "outputs": {
+          "root": "raw/node-runs/{run_id}/outputs",
+          "manifest": "raw/node-runs/{run_id}/outputs/manifest.json",
+          "expected": {
+            "result": {
+              "description": "Skill execution result summary.",
+              "relayable": true
+            },
+            "image_url": {
+              "description": "Result value mentioned in skill source as `imageUrl`.",
+              "value_type": "url",
+              "relayable": true,
+              "evidence": "source result marker imageUrl"
+            },
+            "public_image_url": {
+              "description": "Result value mentioned in skill source as `publicImageUrl`.",
+              "value_type": "url",
+              "relayable": true,
+              "evidence": "source result marker publicImageUrl"
+            },
+            "status": {
+              "description": "Result value mentioned in skill source as `status`.",
+              "value_type": "text",
+              "relayable": true,
+              "evidence": "source result marker status"
+            },
+            "task_id": {
+              "description": "Result value mentioned in skill source as `taskId`.",
+              "value_type": "text",
+              "relayable": true,
+              "evidence": "source result marker taskId"
+            },
+            "status_json": {
+              "description": "Runtime value captured by script variable `status_json`.",
+              "value_type": "json",
+              "relayable": false,
+              "evidence": "source script variable status_json"
+            },
+            "submit_json": {
+              "description": "Runtime value captured by script variable `submit_json`.",
+              "value_type": "json",
+              "relayable": true,
+              "evidence": "source script variable submit_json"
+            },
+            "generated_images": {
+              "description": "Generated image files or public image URLs.",
+              "value_type": "image",
+              "relayable": true
+            },
+            "images": {
+              "description": "Generated image files.",
+              "relayable": true
+            }
+          }
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false
+          },
+          "telegram": {
+            "enabled": false,
+            "required": false
+          },
+          "sse": {
+            "enabled": true,
+            "required": true
+          }
+        }
+      },
+      "notebooklm-research": {
+        "title": "NotebookLM 研究",
+        "skill": "sop-notebooklm-research",
+        "mode": "blocking",
+        "needs": [
+          "youtube-fetch"
+        ],
+        "inputs": {
+          "source_url": "youtube-fetch.outputs.source_url",
+          "metadata_file": "youtube-fetch.outputs.metadata_file"
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "reports": "raw/notebooklm-analysis/*.md",
+          "mindmaps": "raw/notebooklm-mindmaps/*.json"
+        },
+        "capabilities": {}
+      },
+      "retry": {
+        "title": "手动重试",
+        "skill": "sop-retry",
+        "mode": "manual",
+        "needs": [],
+        "inputs": {},
+        "optional_inputs": {},
+        "outputs": {},
+        "capabilities": {}
+      },
+      "tg-notify": {
+        "title": "Telegram 通知",
+        "skill": "sop-tg-notify",
+        "mode": "blocking",
+        "needs": [
+          "wiki-build"
+        ],
+        "inputs": {
+          "index": {
+            "from": "wiki-build.outputs.index",
+            "required": true,
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown"
+          }
+        },
+        "optional_inputs": {
+          "message": {
+            "from": "edge.message",
+            "required": false,
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "text",
+            "resolvers": [
+              {
+                "id": "direct-text",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-title",
+                "kind": "json_path",
+                "path": "$.title"
+              },
+              {
+                "id": "metadata-description",
+                "kind": "json_path",
+                "path": "$.description"
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "telegram_message": {
+            "path": "logs/pipeline-runs/pipe-{run_id}.json",
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": false
+          }
+        },
+        "capabilities": {}
+      },
+      "wiki-build": {
+        "title": "Wiki 知识图谱构建",
+        "skill": "sop-wiki-build",
+        "mode": "blocking",
+        "needs": [
+          "notebooklm-research"
+        ],
+        "inputs": {
+          "reports": {
+            "from": "notebooklm-research.outputs.reports",
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown"
+          }
+        },
+        "optional_inputs": {
+          "deep_research": {
+            "from": "youtube-deep-research.outputs.analysis_file",
+            "required": false,
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown"
+          }
+        },
+        "outputs": {
+          "index": {
+            "path": "index.md",
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "relayable": true
+          },
+          "pages": {
+            "path": "wiki/**",
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown",
+            "relayable": true
+          }
+        },
+        "capabilities": {}
+      },
+      "youtube-deep-research": {
+        "title": "YouTube 深度研究",
+        "skill": "sop-youtube-deep-research",
+        "mode": "sidecar",
+        "needs": [
+          "youtube-fetch"
+        ],
+        "inputs": {
+          "source_url": {
+            "from": "youtube-fetch.outputs.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "resolvers": [
+              {
+                "id": "direct-url",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-source-url",
+                "kind": "json_path",
+                "path": "$.source_url"
+              },
+              {
+                "id": "metadata-youtube-url",
+                "kind": "json_path",
+                "path": "$.youtube_url"
+              },
+              {
+                "id": "text-url",
+                "kind": "regex",
+                "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+              }
+            ]
+          }
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "analysis_file": {
+            "path": "raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md",
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "relayable": true,
+            "role": "wiki-source"
+          },
+          "transcript_file": {
+            "path": "raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt",
+            "kind": "file",
+            "type": "file",
+            "value_type": "text",
+            "relayable": true,
+            "role": "transcript"
+          }
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "editable": true,
+            "save_scope": "node-definition",
+            "description": "Persist this node's workspace outputs to the current Instance repo.",
+            "paths": [
+              "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+              "raw/youtube-deep-research/{pipeline_id}/raw/**"
+            ]
+          },
+          "telegram": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "editable": true,
+            "save_scope": "node-definition",
+            "description": "Send progress notifications through the current Instance Telegram config.",
+            "trigger": "stage-lifecycle",
+            "triggers": [
+              "start",
+              "done",
+              "failed"
+            ]
+          }
+        }
+      },
+      "youtube-fetch": {
+        "title": "YouTube 元数据获取",
+        "skill": "sop-youtube-fetch",
+        "mode": "blocking",
+        "needs": [],
+        "inputs": {
+          "source_url": {
+            "from": "context.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url"
+          }
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "source_url": {
+            "from": "context.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "relayable": true
+          },
+          "metadata_file": {
+            "from": "context.stage_b_fetch.meta_file",
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": true
+          }
+        },
+        "capabilities": {}
+      }
+    },
+    "edges": [
+      {
+        "id": "edge-youtube-fetch-to-youtube-deep-research",
+        "from": "youtube-fetch",
+        "to": "youtube-deep-research",
+        "relay": {
+          "intent": {
+            "title": "将视频地址交给深度研究节点",
+            "brief": "下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。"
+          },
+          "bindings": [
+            {
+              "target_input": "source_url",
+              "required": true,
+              "source": {
+                "node": "youtube-fetch",
+                "output": "source_url",
+                "extractor": {
+                  "id": "direct-url",
+                  "kind": "direct"
+                }
+              }
+            }
+          ],
+          "resolver": {
+            "strategy": "explicit_first",
+            "fallback": "block"
+          },
+          "validation": {
+            "on_missing_required": "block",
+            "on_multiple_candidates": "needs_review",
+            "on_type_mismatch": "block"
+          }
+        }
+      },
+      {
+        "id": "edge-youtube-fetch-title-to-tg-notify",
+        "from": "youtube-fetch",
+        "to": "tg-notify",
+        "relay": {
+          "intent": {
+            "title": "将视频标题作为通知内容",
+            "brief": "这条边只用于测试或自定义工作流，将 metadata_file 中的视频标题提取成 Telegram 文本消息。"
+          },
+          "bindings": [
+            {
+              "target_input": "message",
+              "required": true,
+              "source": {
+                "node": "youtube-fetch",
+                "output": "metadata_file",
+                "extractor": {
+                  "id": "metadata-title",
+                  "kind": "json_path",
+                  "path": "$.title"
+                }
+              }
+            }
+          ],
+          "resolver": {
+            "strategy": "explicit_first",
+            "fallback": "needs_review"
+          },
+          "validation": {
+            "on_missing_required": "block",
+            "on_multiple_candidates": "needs_review",
+            "on_type_mismatch": "block"
+          }
+        }
+      },
+      {
+        "id": "edge-youtube-deep-research-to-wiki-build",
+        "from": "youtube-deep-research",
+        "to": "wiki-build",
+        "relay": {
+          "intent": {
+            "title": "将深度研究产物交给 Wiki 构建节点",
+            "brief": "将 analysis_file 作为 Wiki 构建的 deep_research 补充材料；transcript_file 可在自定义边中作为补充上下文。"
+          },
+          "bindings": [
+            {
+              "target_input": "deep_research",
+              "required": false,
+              "source": {
+                "node": "youtube-deep-research",
+                "output": "analysis_file",
+                "extractor": {
+                  "id": "direct-file",
+                  "kind": "direct"
+                }
+              }
+            }
+          ],
+          "resolver": {
+            "strategy": "explicit_first",
+            "fallback": "needs_review"
+          },
+          "validation": {
+            "on_missing_required": "needs_review",
+            "on_multiple_candidates": "needs_review",
+            "on_type_mismatch": "needs_review"
+          }
+        }
+      }
+    ]
+  },
+  "relay_context": {},
+  "relay_context_brief": "",
+  "resolution_trace": [],
+  "started_at": "2026-06-29T17:57:13.410782+00:00",
+  "finished_at": "2026-06-29T17:58:48Z",
+  "elapsed_ms": 282,
+  "created_from": "manual",
+  "retry_of": "",
+  "pending": false,
+  "reason": "",
+  "steps": [
+    {
+      "id": "create-run",
+      "title": "Create node run workspace",
+      "status": "done",
+      "summary": "Node Run record is allocated independently from Workflow Run.",
+      "detail": {
+        "storage": "raw/node-runs/{node_run_id}"
+      },
+      "started_at": "2026-06-29T17:57:13.410782+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-29T17:57:13.445782+00:00"
+    },
+    {
+      "id": "load-definition",
+      "title": "Load node definition",
+      "status": "done",
+      "summary": "Loaded chatgpt-remote-image-service-nrmj from youtube-research-wiki.",
+      "detail": {
+        "workflow_id": "youtube-research-wiki",
+        "node_id": "chatgpt-remote-image-service-nrmj",
+        "node_title": "Chatgpt Remote Image Service"
+      },
+      "started_at": "2026-06-29T17:57:13.445782+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-29T17:57:13.480782+00:00"
+    },
+    {
+      "id": "resolve-context",
+      "title": "Resolve Runtime / Instance / Workflow context",
+      "status": "done",
+      "summary": "youtube-wiki · wiki-sop-new-instance · youtube-research-wiki",
+      "detail": {
+        "runtime": {
+          "runtime_id": "youtube-wiki",
+          "channel_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc",
+          "spi_base_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc/api/sop",
+          "registry_path": "/root/.sop/registry.json",
+          "health": {
+            "spi": "ok",
+            "registry": "ok",
+            "channel": "ok",
+            "instances": "ok"
+          },
+          "hermes_webhook_url": ""
+        },
+        "instance": {
+          "instance_id": "wiki-sop-new-instance",
+          "status": "ready",
+          "repo": "skkeoriw/wiki-sop-new-instance",
+          "repo_branch": "main",
+          "wiki_local_path": "/root/wiki/wiki-sop-new-instance",
+          "workspace_status": "ready",
+          "registry_status": "enabled",
+          "run_index_path": "/root/wiki/wiki-sop-new-instance/.sop/run-index.sqlite",
+          "run_index_status": "ready",
+          "capabilities": {
+            "workspace": "ok",
+            "sop_yaml": "ok",
+            "run_index": "ok",
+            "git": "configured",
+            "telegram": "configured",
+            "notebooklm": "configured",
+            "vertex": "configured",
+            "tunnel": "ok"
+          }
+        },
+        "workflow_id": "youtube-research-wiki"
+      },
+      "started_at": "2026-06-29T17:57:13.480782+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-29T17:57:13.515782+00:00"
+    },
+    {
+      "id": "resolve-inputs",
+      "title": "Resolve node inputs",
+      "status": "done",
+      "summary": "1 resolved, 0 pending relay, 0 missing.",
+      "detail": {
+        "input_source": "manual",
+        "base_run_id": "",
+        "source_node_run_id": "",
+        "relay_mode": "",
+        "selected_outputs": [],
+        "relay_mappings": [],
+        "relay_selection": {},
+        "resolved_inputs": [
+          {
+            "name": "prompt",
+            "source": "",
+            "required": true,
+            "resolved": true,
+            "value": "生成一张小猫睡觉的照片",
+            "provenance": "manual",
+            "reason": ""
+          }
+        ],
+        "pending_materialization_inputs": [],
+        "missing_inputs": [],
+        "input_directory": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources",
+        "input_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources/manifest.json",
+        "input_resolution": {},
+        "materialized_inputs": []
+      },
+      "started_at": "2026-06-29T17:57:13.515782+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-29T17:57:13.550782+00:00"
+    },
+    {
+      "id": "resolve-config",
+      "title": "Resolve execution config",
+      "status": "done",
+      "summary": "Runtime, Instance and capability config resolved.",
+      "detail": {
+        "resolved_config": {
+          "telegram": {
+            "capability": "telegram",
+            "label": "Telegram progress notification",
+            "enabled": false,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "save_scope": "run",
+            "status": "disabled",
+            "token_env": "YOUTUBE_WIKI_TG_TOKEN",
+            "token": {
+              "key": "YOUTUBE_WIKI_TG_TOKEN",
+              "label": "Telegram Bot Token",
+              "required": false,
+              "present": true,
+              "source": "bridge-env:YOUTUBE_WIKI_TG_TOKEN",
+              "masked_value": "787***JDA",
+              "value": null
+            },
+            "chat_id": {
+              "key": "YOUTUBE_WIKI_TG_CHAT_ID",
+              "label": "Telegram Chat ID",
+              "required": false,
+              "present": true,
+              "source": "bridge-env:YOUTUBE_WIKI_TG_CHAT_ID",
+              "masked_value": "693***500",
+              "value": "6938920500"
+            },
+            "probe": {
+              "enabled": false,
+              "explicit_confirmation_required": true,
+              "side_effect": "sends a Telegram test message"
+            }
+          },
+          "github": {
+            "capability": "git",
+            "label": "GitHub workspace persistence",
+            "enabled": false,
+            "required": false,
+            "status": "disabled",
+            "managed_by": "runtime-harness",
+            "save_scope": "run",
+            "paths": [
+              "raw/node-runs/{run_id}/outputs/**"
+            ],
+            "token": {
+              "key": "GITHUB_TOKEN",
+              "label": "GitHub Token",
+              "required": false,
+              "present": true,
+              "source": "bridge-env:GITHUB_TOKEN",
+              "masked_value": "ghp***qtP",
+              "value": null
+            }
+          }
+        },
+        "definition_defaults": {
+          "git": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "paths": [
+              "raw/node-runs/{run_id}/outputs/**"
+            ]
+          },
+          "telegram": {
+            "enabled": false,
+            "required": false
+          }
+        },
+        "capability_overrides": {
+          "git": {
+            "enabled": false,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "save_scope": "run",
+            "paths": [
+              "raw/node-runs/{run_id}/outputs/**"
+            ]
+          },
+          "telegram": {
+            "enabled": false,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "save_scope": "run"
+          }
+        },
+        "definition_scope_reports": {}
+      },
+      "started_at": "2026-06-29T17:57:13.550782+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-29T17:57:13.585782+00:00"
+    },
+    {
+      "id": "generate-agent-request",
+      "title": "Generate Agent Request",
+      "status": "done",
+      "summary": "Hermes Agent Request was rendered and saved for this Node Run.",
+      "detail": {
+        "request_path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/request.md",
+        "version": 1,
+        "executor": "hermes",
+        "requested_skill": "chatgpt-remote-image-service",
+        "node_id": "chatgpt-remote-image-service-nrmj",
+        "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+        "runtime_id": "youtube-wiki",
+        "instance_id": "wiki-sop-new-instance",
+        "workflow_id": "youtube-research-wiki",
+        "template_source": "default",
+        "template_version": "hermes-agent-executor.v1",
+        "response_path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/response.txt",
+        "receipt_path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/receipt.json",
+        "input_manifest_path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources/manifest.json",
+        "output_manifest_path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json",
+        "node_execution_guide": {},
+        "stage_command": [],
+        "stage_command_preview": "",
+        "created_at": "2026-06-29T17:57:14.449302+00:00"
+      },
+      "started_at": "2026-06-29T17:57:13.585782+00:00",
+      "elapsed_ms": 0
+    },
+    {
+      "id": "probe-capabilities",
+      "title": "Probe attached capabilities",
+      "status": "skipped",
+      "summary": "Capability probes are explicit. Telegram send probes require user confirmation.",
+      "detail": {
+        "telegram": {
+          "capability": "telegram",
+          "label": "Telegram progress notification",
+          "status": "disabled",
+          "required": false,
+          "enabled": false
+        },
+        "github": {
+          "capability": "git",
+          "label": "GitHub workspace persistence",
+          "status": "disabled",
+          "required": false,
+          "enabled": false
+        }
+      },
+      "started_at": "2026-06-29T17:57:13.620782+00:00",
+      "elapsed_ms": 24,
+      "finished_at": "2026-06-29T17:57:13.644782+00:00"
+    },
+    {
+      "id": "build-execution-plan",
+      "title": "Build node execution plan",
+      "status": "done",
+      "summary": "Prepared real-node execution plan.",
+      "detail": {
+        "mode": "real-node",
+        "real_execution_enabled": true,
+        "reason": "Real execution will call the configured Agent Executor for this node."
+      },
+      "started_at": "2026-06-29T17:57:13.655782+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-06-29T17:57:13.690782+00:00"
+    },
+    {
+      "id": "execute-or-dry-run",
+      "title": "Execute or dry-run node",
+      "status": "failed",
+      "summary": "The ChatGPT remote image service connected to a browser worker and submitted the prompt successfully, but failed at the download stage. The generated image appeared (visible at ~40s), but the dialog for download confirmation was not found within the 10s timeout — possibly a ChatGPT UI change or transient browser state. The remote browser worker (worker-1, CDP port 9333) was logged in and active.",
+      "detail": {
+        "receipt": {
+          "runtime_id": "youtube-wiki",
+          "instance_id": "wiki-sop-new-instance",
+          "workflow_id": "youtube-research-wiki",
+          "node_id": "chatgpt-remote-image-service-nrmj",
+          "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+          "executed_at": "2026-06-29T17:57:56Z",
+          "completed_at": "2026-06-29T17:58:48Z",
+          "status": "failed",
+          "skill": "chatgpt-remote-image-service",
+          "entry_inputs": {
+            "prompt": "生成一张小猫睡觉的照片"
+          },
+          "error": {
+            "taskId": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+            "status": "failed",
+            "stage": "waiting for locator('[role=\"dialog\"]').last() to be visible",
+            "error": "Worker exited with code 1",
+            "summary": "The ChatGPT remote image service connected to a browser worker and submitted the prompt successfully, but failed at the download stage. The generated image appeared (visible at ~40s), but the dialog for download confirmation was not found within the 10s timeout — possibly a ChatGPT UI change or transient browser state. The remote browser worker (worker-1, CDP port 9333) was logged in and active."
+          }
+        },
+        "manifest_status": "failed",
+        "manifest_summary": {
+          "prompt": "生成一张小猫睡觉的照片",
+          "taskId": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+          "result": "The remote service failed at the download dialog phase. The prompt was submitted and image was generated (visible at ~40s), but the browser could not locate the download confirmation dialog ([role=\"dialog\"]) within timeout."
+        },
+        "manifest_error": {
+          "taskId": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+          "status": "failed",
+          "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+          "error": "Worker exited with code 1",
+          "recentLogs": [
+            "stage.connectBrowser done (933ms)",
+            "stage.preparePage done (1794ms)",
+            "stage.waitComposer done (5465ms)",
+            "stage.enterImageMode done (7304ms)",
+            "stage.fillPrompt done (7599ms)",
+            "stage.waitSendEnabled done (7745ms)",
+            "stage.snapshotExistingGeneratedImages done (7752ms, count=0)",
+            "stage.clickSend -> sentMs=8420ms",
+            "stage.waitForGeneratedImage -> generatedVisibleMs=40256ms",
+            "stage.downloadImage -> FAILED: locator('[role=\"dialog\"]').last() timeout 10s",
+            "Worker exited with code 1"
+          ]
+        },
+        "response_path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/response.txt",
+        "actual_outputs": {},
+        "validation": {
+          "status": "failed",
+          "missing_outputs": [],
+          "unexpected_outputs": [],
+          "business_output_status": {
+            "status": "missing_business_outputs",
+            "expected_outputs": [
+              "result",
+              "image_url",
+              "public_image_url",
+              "status",
+              "task_id",
+              "status_json",
+              "submit_json",
+              "generated_images",
+              "images"
+            ],
+            "required_outputs": [],
+            "present_outputs": [],
+            "missing_required_outputs": [],
+            "business_outputs": {},
+            "business_artifact_count": 0
+          },
+          "execution_status": "failed",
+          "error": {
+            "taskId": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+            "status": "failed",
+            "stage": "waiting for locator('[role=\"dialog\"]').last() to be visible",
+            "error": "Worker exited with code 1",
+            "summary": "The ChatGPT remote image service connected to a browser worker and submitted the prompt successfully, but failed at the download stage. The generated image appeared (visible at ~40s), but the dialog for download confirmation was not found within the 10s timeout — possibly a ChatGPT UI change or transient browser state. The remote browser worker (worker-1, CDP port 9333) was logged in and active."
+          }
+        }
+      },
+      "started_at": "2026-06-29T17:57:13.410782+00:00",
+      "elapsed_ms": 0,
+      "finished_at": "2026-06-29T17:58:48Z"
+    },
+    {
+      "id": "validate-outputs",
+      "title": "Validate declared outputs",
+      "status": "failed",
+      "summary": "Declared outputs are missing.",
+      "detail": {
+        "status": "failed",
+        "missing_outputs": [],
+        "unexpected_outputs": [],
+        "business_output_status": {
+          "status": "missing_business_outputs",
+          "expected_outputs": [
+            "result",
+            "image_url",
+            "public_image_url",
+            "status",
+            "task_id",
+            "status_json",
+            "submit_json",
+            "generated_images",
+            "images"
+          ],
+          "required_outputs": [],
+          "present_outputs": [],
+          "missing_required_outputs": [],
+          "business_outputs": {},
+          "business_artifact_count": 0
+        },
+        "execution_status": "failed",
+        "error": {
+          "taskId": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+          "status": "failed",
+          "stage": "waiting for locator('[role=\"dialog\"]').last() to be visible",
+          "error": "Worker exited with code 1",
+          "summary": "The ChatGPT remote image service connected to a browser worker and submitted the prompt successfully, but failed at the download stage. The generated image appeared (visible at ~40s), but the dialog for download confirmation was not found within the 10s timeout — possibly a ChatGPT UI change or transient browser state. The remote browser worker (worker-1, CDP port 9333) was logged in and active."
+        }
+      },
+      "started_at": "2026-06-29T17:57:13.725782+00:00",
+      "elapsed_ms": 0
+    },
+    {
+      "id": "persist-to-github",
+      "title": "Persist to GitHub",
+      "status": "skipped",
+      "summary": "GitHub persistence is not attached for this Node Run.",
+      "detail": {
+        "repository": "skkeoriw/wiki-sop-new-instance",
+        "paths": [
+          "raw/node-runs/{run_id}/outputs/**"
+        ],
+        "save_scope": "run"
+      },
+      "started_at": "2026-06-29T17:57:13.760782+00:00",
+      "elapsed_ms": 24,
+      "finished_at": "2026-06-29T17:57:13.784782+00:00"
+    },
+    {
+      "id": "send-telegram-notification",
+      "title": "Send Telegram notification",
+      "status": "skipped",
+      "summary": "Telegram notification is not attached for this Node Run.",
+      "detail": {
+        "chat_id": "693***500",
+        "save_scope": "run"
+      },
+      "started_at": "2026-06-29T17:57:13.795782+00:00",
+      "elapsed_ms": 24,
+      "finished_at": "2026-06-29T17:57:13.819782+00:00"
+    }
+  ],
+  "inner_steps": [
+    {
+      "id": "pre",
+      "title": "执行前",
+      "status": "done",
+      "summary": "Node Run 上下文、输入和运行配置已准备，并交给 stage runner on_start。",
+      "started_at": "2026-06-29T17:57:13.410782+00:00",
+      "finished_at": "",
+      "detail": {
+        "mode": "real-node",
+        "input_source": "manual",
+        "resolved_inputs": [
+          {
+            "name": "prompt",
+            "source": "",
+            "required": true,
+            "resolved": true,
+            "value": "生成一张小猫睡觉的照片",
+            "provenance": "manual",
+            "reason": ""
+          }
+        ],
+        "pending_materialization_inputs": [],
+        "missing_inputs": [],
+        "config_status": "done",
+        "command": [],
+        "stage_hook": "on_start"
+      }
+    },
+    {
+      "id": "doing",
+      "title": "执行中",
+      "status": "running",
+      "summary": "Skill / agent 业务仍在执行。",
+      "started_at": "",
+      "finished_at": "",
+      "elapsed_ms": null,
+      "detail": {
+        "command": [],
+        "returncode": null,
+        "timed_out": false,
+        "log_path": "",
+        "stdout_tail": "",
+        "stderr_tail": ""
+      }
+    },
+    {
+      "id": "post",
+      "title": "执行后",
+      "status": "waiting",
+      "summary": "stage_runner on_done/on_failed、输出校验、Git/TG capability 和 bridge 结果收集已归档。",
+      "started_at": "",
+      "finished_at": "2026-06-29T17:57:13.437457+00:00",
+      "detail": {
+        "stage_hooks": [
+          "on_done/on_failed",
+          "forward_next"
+        ],
+        "validation": {},
+        "actual_outputs": {},
+        "business_artifact_count": 0,
+        "capabilities": {},
+        "forward_next": ""
+      }
+    }
+  ],
+  "events": [
+    {
+      "sequence": 1,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+      "node_id": "chatgpt-remote-image-service-nrmj",
+      "step_id": "create-run",
+      "ts": "2026-06-29T17:57:13.437457+00:00",
+      "data": {
+        "title": "Create node run workspace",
+        "summary": "Node Run record is allocated independently from Workflow Run."
+      }
+    },
+    {
+      "sequence": 2,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+      "node_id": "chatgpt-remote-image-service-nrmj",
+      "step_id": "load-definition",
+      "ts": "2026-06-29T17:57:13.437457+00:00",
+      "data": {
+        "title": "Load node definition",
+        "summary": "Loaded chatgpt-remote-image-service-nrmj from youtube-research-wiki."
+      }
+    },
+    {
+      "sequence": 3,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+      "node_id": "chatgpt-remote-image-service-nrmj",
+      "step_id": "resolve-context",
+      "ts": "2026-06-29T17:57:13.437457+00:00",
+      "data": {
+        "title": "Resolve Runtime / Instance / Workflow context",
+        "summary": "youtube-wiki · wiki-sop-new-instance · youtube-research-wiki"
+      }
+    },
+    {
+      "sequence": 4,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+      "node_id": "chatgpt-remote-image-service-nrmj",
+      "step_id": "resolve-inputs",
+      "ts": "2026-06-29T17:57:13.437457+00:00",
+      "data": {
+        "title": "Resolve node inputs",
+        "summary": "1 resolved, 0 pending relay, 0 missing."
+      }
+    },
+    {
+      "sequence": 5,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+      "node_id": "chatgpt-remote-image-service-nrmj",
+      "step_id": "resolve-config",
+      "ts": "2026-06-29T17:57:13.437457+00:00",
+      "data": {
+        "title": "Resolve execution config",
+        "summary": "Runtime, Instance and capability config resolved."
+      }
+    },
+    {
+      "sequence": 6,
+      "event": "node_run.step.waiting",
+      "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+      "node_id": "chatgpt-remote-image-service-nrmj",
+      "step_id": "generate-agent-request",
+      "ts": "2026-06-29T17:57:13.437457+00:00",
+      "data": {
+        "title": "Generate Agent Request",
+        "summary": "Waiting to render the Hermes skill request."
+      }
+    },
+    {
+      "sequence": 7,
+      "event": "node_run.step.skipped",
+      "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+      "node_id": "chatgpt-remote-image-service-nrmj",
+      "step_id": "probe-capabilities",
+      "ts": "2026-06-29T17:57:13.437457+00:00",
+      "data": {
+        "title": "Probe attached capabilities",
+        "summary": "Capability probes are explicit. Telegram send probes require user confirmation."
+      }
+    },
+    {
+      "sequence": 8,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+      "node_id": "chatgpt-remote-image-service-nrmj",
+      "step_id": "build-execution-plan",
+      "ts": "2026-06-29T17:57:13.437457+00:00",
+      "data": {
+        "title": "Build node execution plan",
+        "summary": "Prepared real-node execution plan."
+      }
+    },
+    {
+      "sequence": 9,
+      "event": "node_run.step.running",
+      "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+      "node_id": "chatgpt-remote-image-service-nrmj",
+      "step_id": "execute-or-dry-run",
+      "ts": "2026-06-29T17:57:13.437457+00:00",
+      "data": {
+        "title": "Execute or dry-run node",
+        "summary": "Real stage wrapper is running in the background."
+      }
+    },
+    {
+      "sequence": 10,
+      "event": "node_run.step.waiting",
+      "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+      "node_id": "chatgpt-remote-image-service-nrmj",
+      "step_id": "validate-outputs",
+      "ts": "2026-06-29T17:57:13.437457+00:00",
+      "data": {
+        "title": "Validate declared outputs",
+        "summary": "Waiting for the real node to produce declared outputs."
+      }
+    },
+    {
+      "sequence": 11,
+      "event": "node_run.step.skipped",
+      "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+      "node_id": "chatgpt-remote-image-service-nrmj",
+      "step_id": "persist-to-github",
+      "ts": "2026-06-29T17:57:13.437457+00:00",
+      "data": {
+        "title": "Persist to GitHub",
+        "summary": "GitHub persistence is not attached for this Node Run."
+      }
+    },
+    {
+      "sequence": 12,
+      "event": "node_run.step.skipped",
+      "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+      "node_id": "chatgpt-remote-image-service-nrmj",
+      "step_id": "send-telegram-notification",
+      "ts": "2026-06-29T17:57:13.437457+00:00",
+      "data": {
+        "title": "Send Telegram notification",
+        "summary": "Telegram notification is not attached for this Node Run."
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "1255f7712fb861a3",
+      "producer": "chatgpt-remote-image-service-nrmj",
+      "output": "manifest",
+      "type": "file",
+      "format": "json",
+      "path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json",
+      "title": "manifest.json",
+      "size": 1427,
+      "mime_type": "application/json",
+      "tags": [],
+      "metadata": {},
+      "resolution": "node-run-output-manifest",
+      "preview": "{\n  \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\",\n  \"workflow_id\": \"youtube-research-wiki\",\n  \"node_id\": \"chatgpt-remote-image-service-nrmj\",\n  \"status\": \"failed\",\n  \"files\": [],\n  \"summary\": {\n    \"prompt\": \"生成一张小猫睡觉的照片\",\n    \"taskId\": \"3d4c127b-ef8c-4189-8c36-3fcb5b39db4c\",\n    \"result\": \"The remote service failed at the download dialog phase. The prompt was submitted and image was generated (visible at ~40s), but the browser could not locate the download confirmation dialog ([role=\\\"dialog\\\"]) within timeout.\"\n  },\n  \"error\": {\n    \"taskId\": \"3d4c127b-ef8c-4189-8c36-3fcb5b39db4c\",\n    \"status\": \"failed\",\n    \"stage\": \"  - waiting for locator('[role=\\\"dialog\\\"]').last() to be visible\",\n    \"error\": \"Worker exited with code 1\",\n    \"recentLogs\": [\n      \"stage.connectBrowser done (933ms)\",\n      \"stage.preparePage done (1794ms)\",\n      \"stage.waitComposer done (5465ms)\",\n      \"stage.enterImageMode done (7304ms)\",\n      \"stage.fillPrompt done (7599ms)\",\n      \"stage.waitSendEnabled done (7745ms)\",\n      \"stage.snapshotExistingGeneratedImages done (7752ms, count=0)\",\n      \"stage.clickSend -> sentMs=8420ms\",\n      \"stage.waitForGeneratedImage -> generatedVisibleMs=40256ms\",\n      \"stage.downloadImage -> FAILED: locator('[role=\\\"dialog\\\"]').last() timeout 10s\",\n      \"Worker exited with code 1\"\n    ]\n  },\n  \"created_at\": \"2026-06-29T17:58:48Z\"\n}\n",
+      "preview_truncated": false
+    }
+  ],
+  "actual_outputs": {},
+  "core_outputs": [],
+  "relay_package": {
+    "kind": "relay-package",
+    "output_directory": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs",
+    "manifest_path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json",
+    "item_count": 0,
+    "items": []
+  },
+  "execution_evidence": {
+    "artifacts": [
+      {
+        "id": "c34a2dc3ac606c8e",
+        "producer": "chatgpt-remote-image-service-nrmj",
+        "output": "agent_request",
+        "type": "node-run.agent.request",
+        "format": "markdown",
+        "path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/request.md",
+        "title": "Rendered Agent Request",
+        "size": 2123,
+        "mime_type": "application/octet-stream",
+        "tags": [],
+        "metadata": {},
+        "resolution": "node-run-agent",
+        "preview": "Use skill chatgpt-remote-image-service to execute this Node Execution Request.\n\n# Node Execution Request\n\nRuntime context:\n- runtime_id: youtube-wiki\n- instance_id: wiki-sop-new-instance\n- workflow_id: youtube-research-wiki\n- node_id: chatgpt-remote-image-service-nrmj\n- node_run_id: node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\n\nInput contract:\n- entry_inputs: {\n  \"prompt\": \"生成一张小猫睡觉的照片\"\n}\n- input_manifest_path: raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources/manifest.json\n- input_directory: raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources\n- source_url: https://www.youtube.com/watch?v=dQw4w9WgXcQ\n- Only use files listed in the input manifest unless the selected skill already has a stricter rule.\n\nRelay context:\nNo upstream relay context was provided for this run.\n\nApproved Edge Handoff Guide:\nNo approved Edge Handoff Guide was resolved for this run.\n\nOutput contract:\n- output_directory: raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs\n- output_manifest_path: raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json\n- receipt_path: raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/receipt.json\n- Do not report success unless the declared output manifest and receipt are written or the runtime wrapper writes equivalent state that the adapter can verify.\n\nExecution command:\n```bash\n\n```\nIf the execution command is empty, execute the selected skill directly from this request: read entry_inputs, input_directory, input_manifest and the approved handoff guide, then write outputs to output_directory and output_manifest_path.\n\n\nExecution rules:\n- Use the selected skill only: chatgpt-remote-image-service.\n- Run the command from the Instance workspace unless the skill has an equivalent deterministic wrapper.\n- Preserve the provided environment variables.\n- Do not invent paths.\n- If execution fails, return the failure and include stderr/log guidance.\n",
+        "preview_truncated": false
+      },
+      {
+        "id": "7219e977d4595642",
+        "producer": "chatgpt-remote-image-service-nrmj",
+        "output": "agent_executor",
+        "type": "node-run.agent.executor",
+        "format": "json",
+        "path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/executor.json",
+        "title": "Agent Executor Metadata",
+        "size": 1193,
+        "mime_type": "application/json",
+        "tags": [],
+        "metadata": {},
+        "resolution": "node-run-agent",
+        "preview": "{\n  \"version\": 1,\n  \"executor\": \"hermes\",\n  \"requested_skill\": \"chatgpt-remote-image-service\",\n  \"node_id\": \"chatgpt-remote-image-service-nrmj\",\n  \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\",\n  \"runtime_id\": \"youtube-wiki\",\n  \"instance_id\": \"wiki-sop-new-instance\",\n  \"workflow_id\": \"youtube-research-wiki\",\n  \"template_source\": \"default\",\n  \"template_version\": \"hermes-agent-executor.v1\",\n  \"request_path\": \"raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/request.md\",\n  \"response_path\": \"raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/response.txt\",\n  \"receipt_path\": \"raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/receipt.json\",\n  \"input_manifest_path\": \"raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources/manifest.json\",\n  \"output_manifest_path\": \"raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json\",\n  \"node_execution_guide\": {},\n  \"stage_command\": [],\n  \"stage_command_preview\": \"\",\n  \"created_at\": \"2026-06-29T17:57:14.449302+00:00\"\n}\n",
+        "preview_truncated": false
+      },
+      {
+        "id": "b92ced57858cb5fc",
+        "producer": "chatgpt-remote-image-service-nrmj",
+        "output": "agent_response",
+        "type": "node-run.agent.response",
+        "format": "text",
+        "path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/response.txt",
+        "title": "Hermes Agent Response",
+        "size": 1712,
+        "mime_type": "text/plain",
+        "tags": [],
+        "metadata": {},
+        "resolution": "node-run-agent",
+        "preview": "## Execution Result: FAILED\n\n**Node run:** `node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467`\n\n### What happened\n\nThe `chatgpt-remote-image.sh` script (from the `devops/chatgpt-remote-image-service` skill) was called with `--prompt \"生成一张小猫睡觉的照片\"`.\n\nThe remote service:\n1. Connected to a browser worker (worker-1, CDP port 9333, logged in) — 933ms\n2. Opened ChatGPT, entered image mode, filled the prompt — 8420ms\n3. Submitted and waited for generation — image appeared at ~40s\n4. **Failed** at the `downloadImage` stage: `locator('[role=\"dialog\"]').last()` timed out after 10s\n5. Worker exited with code 1\n\n### Root cause\n\nThe generated image **was** produced (visible at 40,256ms), but the download dialog selector `[role=\"dialog\"]` didn't match anything within the 10s timeout. This is likely a **ChatGPT UI change** or a transient state issue where the dialog wasn't in a locatable state when Playwright tried to interact with it. The remote endpoint's browser automation code expects a dialog element to click for download but couldn't find one.\n\n### Outputs written\n\n- `raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/receipt.json`\n- `raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json`\n\n### Possible remediation\n\n- **Retry** — this could be transient; the prompt and browser connection worked fine\n- **Check the remote service** — the download dialog selector `[role=\"dialog\"]` may need updating if ChatGPT changed its UI\n- **Check `/health`** on the endpoint to see if worker-1 experienced issues (the script did print the health summary to stderr but not to stdout)\n",
+        "preview_truncated": false
+      },
+      {
+        "id": "039dfed92955a0ec",
+        "producer": "chatgpt-remote-image-service-nrmj",
+        "output": "agent_receipt",
+        "type": "node-run.agent.receipt",
+        "format": "json",
+        "path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/receipt.json",
+        "title": "Agent Execution Receipt",
+        "size": 1112,
+        "mime_type": "application/json",
+        "tags": [],
+        "metadata": {},
+        "resolution": "node-run-agent",
+        "preview": "{\n  \"runtime_id\": \"youtube-wiki\",\n  \"instance_id\": \"wiki-sop-new-instance\",\n  \"workflow_id\": \"youtube-research-wiki\",\n  \"node_id\": \"chatgpt-remote-image-service-nrmj\",\n  \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\",\n  \"executed_at\": \"2026-06-29T17:57:56Z\",\n  \"completed_at\": \"2026-06-29T17:58:48Z\",\n  \"status\": \"failed\",\n  \"skill\": \"chatgpt-remote-image-service\",\n  \"entry_inputs\": {\n    \"prompt\": \"生成一张小猫睡觉的照片\"\n  },\n  \"error\": {\n    \"taskId\": \"3d4c127b-ef8c-4189-8c36-3fcb5b39db4c\",\n    \"status\": \"failed\",\n    \"stage\": \"waiting for locator('[role=\\\"dialog\\\"]').last() to be visible\",\n    \"error\": \"Worker exited with code 1\",\n    \"summary\": \"The ChatGPT remote image service connected to a browser worker and submitted the prompt successfully, but failed at the download stage. The generated image appeared (visible at ~40s), but the dialog for download confirmation was not found within the 10s timeout — possibly a ChatGPT UI change or transient browser state. The remote browser worker (worker-1, CDP port 9333) was logged in and active.\"\n  }\n}\n",
+        "preview_truncated": false
+      },
+      {
+        "id": "2f1df375f1919199",
+        "producer": "chatgpt-remote-image-service-nrmj",
+        "output": "node_run_result",
+        "type": "file",
+        "format": "json",
+        "path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/result.json",
+        "title": "Node Run Result",
+        "size": 76735,
+        "mime_type": "application/json",
+        "tags": [],
+        "metadata": {},
+        "resolution": "execution-evidence",
+        "preview": "{\n  \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\",\n  \"pipeline_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\",\n  \"runtime_id\": \"youtube-wiki\",\n  \"instance_id\": \"wiki-sop-new-instance\",\n  \"workflow_id\": \"youtube-research-wiki\",\n  \"node_id\": \"chatgpt-remote-image-service-nrmj\",\n  \"node_title\": \"Chatgpt Remote Image Service\",\n  \"status\": \"running\",\n  \"mode\": \"real-node\",\n  \"input_source\": \"manual\",\n  \"relay_mode\": \"\",\n  \"selected_outputs\": [],\n  \"relay_mappings\": [],\n  \"source_node_run_id\": \"\",\n  \"relay_selection\": {},\n  \"edge_contract\": {},\n  \"node_execution_guide\": {},\n  \"workflow_revision\": {\n    \"version\": 1,\n    \"hash\": \"db8b2fa2b5347cd5\",\n    \"node_count\": 7,\n    \"edge_count\": 3,\n    \"nodes\": {\n      \"chatgpt-remote-image-service-nrmj\": {\n        \"title\": \"Chatgpt Remote Image Service\",\n        \"skill\": {\n          \"id\": \"chatgpt-remote-image-service\",\n          \"source\": \"skill-installer\",\n          \"install_command\": \"bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')\",\n          \"source_digest\": {\n            \"installer_url\": \"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\",\n            \"zip_url\": \"https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip\",\n            \"files\": [\n              {\n                \"path\": \"chatgpt-remote-image-service/agents/openai.yaml\",\n                \"bytes\": 227,\n                \"truncated\": false\n              },\n              {\n                \"path\": \"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\",\n                \"bytes\": 5390,\n                \"truncated\": false\n              },\n              {\n                \"path\": \"chatgpt-remote-image-service/SKILL.md\",\n                \"bytes\": 3484,\n                \"truncated\": false\n              }\n            ]\n          }\n        },\n        \"mode\": \"\",\n        \"needs\": [],\n        \"inputs\": {},\n        \"optional_inputs\": {},\n        \"outputs\": {\n          \"root\": \"raw/node-runs/{run_id}/outputs\",\n          \"manifest\": \"raw/node-runs/{run_id}/outputs/manifest.json\",\n          \"expected\": {\n            \"result\": {\n              \"description\": \"Skill execution result summary.\",\n              \"relayable\": true\n            },\n            \"image_url\": {\n              \"description\": \"Result value mentioned in skill source as `imageUrl`.\",\n              \"value_type\": \"url\",\n              \"relayable\": true,\n              \"evidence\": \"source result marker imageUrl\"\n            },\n            \"public_image_url\": {\n              \"description\": \"Result value mentioned in skill source as `publicImageUrl`.\",\n              \"value_type\": \"url\",\n              \"relayable\": true,\n              \"evidence\": \"source result marker publicImageUrl\"\n            },\n            \"status\": {\n              \"description\": \"Result value mentioned in skill source as `status`.\",\n              \"value_type\": \"text\",\n              \"relayable\": true,\n              \"evidence\": \"source result marker status\"\n            },\n            \"task_id\": {\n              \"description\": \"Result value mentioned in skill source as `taskId`.\",\n              \"value_type\": \"text\",\n              \"relayable\": true,\n              \"evidence\": \"source result marker taskId\"\n            },\n            \"status_json\": {\n              \"description\": \"Runtime value captured by script variable `status_json`.\",\n              \"value_type\": \"json\",\n              \"relayable\": false,\n              \"evidence\": \"source script variable status_json\"\n            },\n            \"submit_json\": {\n              \"description\": \"Runtime value captured by script variable `submit_json`.\",\n              \"value_type\": \"json\",\n              \"relayable\": true,\n              \"evidence\": \"source script variable submit_json\"\n            },\n            \"generated_images\": {\n              \"description\": \"Generated image files or public image URLs.\",\n              \"value_type\": \"image\",\n              \"relayable\": true\n            },\n            \"images\": {\n              \"description\": \"Generated image files.\",\n              \"relayable\": true\n            }\n          }\n        },\n        \"capabilities\": {\n          \"git\": {\n            \"enabled\": true,\n            \"required\": false\n          },\n          \"telegram\": {\n            \"enabled\": false,\n            \"required\": false\n          },\n          \"sse\": {\n            \"enabled\": true,\n            \"required\": true\n          }\n        }\n      },\n      \"notebooklm-research\": {\n        \"title\": \"NotebookLM 研究\",\n        \"skill\": \"sop-notebooklm-research\",\n        \"mode\": \"blocking\",\n        \"needs\": [\n          \"youtube-fetch\"\n        ],\n        \"inputs\": {\n          \"source_url\": \"youtube-fetch.outputs.source_url\",\n          \"metadata_file\": \"youtube-fetch.outputs.metadata_file\"\n        },\n        \"optional_inputs\": {},\n        \"outputs\": {\n          \"reports\": \"raw/notebooklm-analysis/*.md\",\n          \"mindmaps\": \"raw/notebooklm-mindmaps/*.json\"\n        },\n        \"capabilities\": {}\n      },\n      \"retry\": {\n        \"title\": \"手动重试\",\n        \"skill\": \"sop-retry\",\n        \"mode\": \"manual\",\n        \"needs\": [],\n        \"inputs\": {},\n        \"optional_inputs\": {},\n        \"outputs\": {},\n        \"capabilities\": {}\n      },\n      \"tg-notify\": {\n        \"title\": \"Telegram 通知\",\n        \"skill\": \"sop-tg-notify\",\n        \"mode\": \"blocking\",\n        \"needs\": [\n          \"wiki-build\"\n        ],\n        \"inputs\": {\n          \"index\": {\n            \"from\": \"wiki-build.outputs.index\",\n            \"required\": true,\n            \"kind\": \"file\",\n            \"type\": \"file\",\n            \"value_type\": \"markdown\"\n          }\n        },\n        \"optional_inputs\": {\n          \"message\": {\n            \"from\": \"edge.message\",\n            \"required\": false,\n            \"kind\": \"scalar\",\n            \"type\": \"string\",\n            \"value_type\": \"text\",\n            \"resolvers\": [\n              {\n                \"id\": \"direct-text\",\n                \"kind\": \"direct\"\n              },\n              {\n                \"id\": \"metadata-title\",\n                \"kind\": \"json_path\",\n                \"path\": \"$.title\"\n              },\n              {\n                \"id\": \"metadata-description\",\n                \"kind\": \"json_path\",\n                \"path\": \"$.description\"\n              }\n            ]\n          }\n        },\n        \"outputs\": {\n          \"telegram_message\": {\n            \"path\": \"logs/pipeline-runs/pipe-{run_id}.json\",\n            \"kind\": \"file\",\n            \"type\": \"file\",\n            \"value_type\": \"json\",\n            \"relayable\": false\n          }\n        },\n        \"capabilities\": {}\n      },\n      \"wiki-build\": {\n        \"title\": \"Wiki 知识图谱构建\",\n        \"skill\": \"sop-wiki-build\",\n        \"mode\": \"blocking\",\n        \"needs\": [\n          \"notebooklm-research\"\n        ],\n        \"inputs\": {\n          \"reports\": {\n            \"from\": \"notebooklm-research.outputs.reports\",\n            \"kind\": \"files\",\n            \"type\": \"files\",\n            \"value_type\": \"markdown\"\n          }\n        },\n        \"optional_inputs\": {\n          \"deep_research\": {\n            \"from\": \"youtube-deep-research.outputs.analysis_file\",\n            \"required\": false,\n            \"kind\": \"files\",\n            \"type\": \"files\",\n            \"value_type\": \"markdown\"\n          }\n        },\n        \"outputs\": {\n          \"index\": {\n            \"path\": \"index.md\",\n            \"kind\": \"file\",\n            \"type\": \"file\",\n            \"value_type\": \"markdown\",\n            \"relayable\": true\n          },\n          \"pages\": {\n            \"path\": \"wiki/**\",\n            \"kind\": \"files\",\n            \"type\": \"files\",\n            \"value_type\": \"markdown\",\n            \"relayable\": true\n          }\n        },\n        \"capabilities\": {}\n      },\n      \"youtube-deep-research\": {\n        \"title\": \"YouTube 深度研究\",\n        \"skill\": \"sop-youtube-deep-research\",\n        \"mode\": \"sidecar\",\n        \"needs\": [\n          \"youtube-fetch\"\n        ],\n        \"inputs\": {\n          \"source_url\": {\n            \"from\": \"youtube-fetch.outputs.source_url\",\n            \"kind\": \"scalar\",\n            \"type\": \"string\",\n            \"value_type\": \"url\",\n            \"resolvers\": [\n              {\n                \"id\": \"direct-url\",\n                \"kind\": \"direct\"\n              },\n              {\n                \"id\": \"metadata-source-url\",\n                \"kind\": \"json_path\",\n                \"path\": \"$.source_url\"\n              },\n              {\n                \"id\": \"metadata-youtube-url\",\n                \"kind\": \"json_path\",\n                \"path\": \"$.youtube_url\"\n              },\n              {\n                \"id\": \"text-url\",\n                \"kind\": \"regex\",\n                \"pattern\": \"https?://(?:www\\\\.)?(?:youtube\\\\.com/watch\\\\?v=[A-Za-z0-9_-]+[^\\\\s\\\"'<>)]*|youtu\\\\.be/[A-Za-z0-9_-]+[^\\\\s\\\"'<>)]*)\"\n              }\n            ]\n          }\n        },\n        \"optional_inputs\": {},\n        \"outputs\": {\n          \"analysis_file\": {\n            \"path\": \"raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md\",\n            \"kind\": \"file\",\n            \"type\": \"file\",\n            \"value_type\": \"markdown\",\n            \"relayable\": true,\n            \"role\": \"wiki-source\"\n          },\n          \"transcript_file\": {\n            \"path\": \"raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt\",\n            \"kind\": \"file\",\n            \"type\": \"file\",\n            \"value_type\": \"text\",\n            \"relayable\": true,\n            \"role\": \"transcript\"\n          }\n        },\n        \"capabilities\": {\n          \"git\": {\n            \"enabled\": true,\n            \"required\": false,\n            \"managed_by\": \"runtime-harness\",\n            \"editable\": true,\n            \"save_scope\": \"node-definition\",\n            \"description\": \"Persist this node's workspace outputs to the current Instance repo.\",\n            \"paths\": [\n              \"raw/youtube-deep-research/{pipeline_id}/outputs/**\",\n              \"raw/youtube-deep-research/{pipeline_id}/raw/**\"\n            ]\n          },\n          \"telegram\": {\n            \"enabled\": true,\n            \"required\": false,\n            \"managed_by\": \"runtime-harness\",\n            \"editable\": true,\n            \"save_scope\": \"node-definition\",\n            \"description\": \"Send progress notifications through the current Instance Telegram config.\",\n            \"trigger\": \"stage-lifecycle\",\n            \"triggers\": [\n              \"start\",\n              \"done\",\n              \"failed\"\n            ]\n          }\n        }\n      },\n      \"youtube-fetch\": {\n        \"title\": \"YouTube 元数据获取\",\n        \"skill\": \"sop-youtube-fetch\",\n        \"mode\": \"blocking\",\n        \"needs\": [],\n        \"inputs\": {\n          \"source_url\": {\n            \"from\": \"context.source_url\",\n            \"kind\": \"scalar\",\n            \"type\": \"string\",\n            \"value_type\": \"url\"\n          }\n        },\n        \"optional_inputs\": {},\n        \"outputs\": {\n          \"source_url\": {\n            \"from\": \"context.source_url\",\n            \"kind\": \"scalar\",\n            \"type\": \"string\",\n            \"value_type\": \"url\",\n            \"relayable\": true\n          },\n          \"metadata_file\": {\n            \"from\": \"context.stage_b_fetch.meta_file\",\n            \"kind\": \"file\",\n            \"type\": \"file\",\n            \"value_type\": \"json\",\n            \"relayable\": true\n          }\n        },\n        \"capabilities\": {}\n      }\n    },\n    \"edges\": [\n      {\n        \"id\": \"edge-youtube-fetch-to-youtube-deep-research\",\n        \"from\": \"youtube-fetch\",\n        \"to\": \"youtube-deep-research\",\n        \"relay\": {\n          \"intent\": {\n            \"title\": \"将视频地址交给深度研究节点\",\n            \"brief\": \"下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。\"\n          },\n          \"bindings\": [\n            {\n              \"target_input\": \"source_url\",\n              \"required\": true,\n              \"source\": {\n                \"node\": \"youtube-fetch\",\n                \"output\": \"source_url\",\n                \"extractor\": {\n                  \"id\": \"direct-url\",\n                  \"kind\": \"direct\"\n                }\n              }\n            }\n          ],\n          \"resolver\": {\n            \"strategy\": \"explicit_first\",\n            \"fallback\": \"block\"\n          },\n          \"validation\": {\n            \"on_missing_required\": \"block\",\n            \"on_multiple_candidates\": \"needs_review\",\n            \"on_type_mismatch\": \"block\"\n          }\n        }\n      },\n      {\n        \"id\": \"edge-youtube-fetch-title-to-tg-notify\",\n        \"from\": \"youtube-fetch\",\n        \"to\": \"tg-notify\",\n        \"relay\": {\n          \"intent\": {\n            \"title\": \"将视频标题作为通知内容\",\n            \"brief\": \"这条边只用于测试或自定义工作流，将 metadata_file 中的视频标题提取成 Telegram 文本消息。\"\n          },\n          \"bindings\": [\n            {\n              \"target_input\": \"message\",\n              \"required\": true,\n              \"source\": {\n                \"node\": \"youtube-fetch\",\n                \"output\": \"metadata_file\",\n                \"extractor\": {\n                  \"id\": \"metadata-title\",\n                  \"kind\": \"json_path\",\n                  \"path\": \"$.title\"\n                }\n              }\n            }\n          ],\n          \"resolver\": {\n            \"strategy\": \"explicit_first\",\n            \"fallback\": \"needs_review\"\n          },\n          \"validation\": {\n            \"on_missing_required\": \"block\",\n            \"on_multiple_candidates\": \"needs_review\",\n            \"on_type_mismatch\": \"block\"\n          }\n        }\n      },\n      {\n        \"id\": \"edge-youtube-deep-research-to-wiki-build\",\n        \"from\": \"youtube-deep-research\",\n        \"to\": \"wiki-build\",\n        \"relay\": {\n          \"intent\": {\n            \"title\": \"将深度研究产物交给 Wiki 构建节点\",\n            \"brief\": \"将 analysis_file 作为 Wiki 构建的 deep_research 补充材料；transcript_file 可在自定义边中作为补充上下文。\"\n          },\n          \"bindings\": [\n            {\n              \"target_input\": \"deep_research\",\n              \"required\": false,\n              \"source\": {\n                \"node\": \"youtube-deep-research\",\n                \"output\": \"analysis_file\",\n                \"extractor\": {\n                  \"id\": \"direct-file\",\n                  \"kind\": \"direct\"\n                }\n              }\n            }\n          ],\n          \"resolver\": {\n            \"strategy\": \"explicit_first\",\n            \"fallback\": \"needs_review\"\n          },\n          \"validation\": {\n            \"on_missing_required\": \"needs_review\",\n            \"on_multiple_candidates\": \"needs_review\",\n            \"on_type_mismatch\": \"needs_review\"\n          }\n        }\n      }\n    ]\n  },\n  \"relay_context\": {},\n  \"relay_context_brief\": \"\",\n  \"resolution_trace\": [],\n  \"started_at\": \"2026-06-29T17:57:13.410782+00:00\",\n  \"finished_at\": \"\",\n  \"elapsed_ms\": 282,\n  \"created_from\": \"manual\",\n  \"retry_of\": \"\",\n  \"pending\": true,\n  \"reason\": \"\",\n  \"steps\": [\n    {\n      \"id\": \"create-run\",\n      \"title\": \"Create node run workspace\",\n      \"status\": \"done\",\n      \"summary\": \"Node Run record is allocated independently from Workflow Run.\",\n      \"detail\": {\n        \"storage\": \"raw/node-runs/{node_run_id}\"\n      },\n      \"started_at\": \"2026-06-29T17:57:13.410782+00:00\",\n      \"elapsed_ms\": 35,\n      \"finished_at\": \"2026-06-29T17:57:13.445782+00:00\"\n    },\n    {\n      \"id\": \"load-definition\",\n      \"title\": \"Load node definition\",\n      \"status\": \"done\",\n      \"summary\": \"Loaded chatgpt-remote-image-service-nrmj from youtube-research-wiki.\",\n      \"detail\": {\n        \"workflow_id\": \"youtube-research-wiki\",\n        \"node_id\": \"chatgpt-remote-image-service-nrmj\",\n        \"node_title\": \"Chatgpt Remote Image Service\"\n      },\n      \"started_at\": \"2026-06-29T17:57:13.445782+00:00\",\n      \"elapsed_ms\": 35,\n      \"finished_at\": \"2026-06-29T17:57:13.480782+00:00\"\n    },\n    {\n      \"id\": \"resolve-context\",\n      \"title\": \"Resolve Runtime / Instance / Workflow context\",\n      \"status\": \"done\",\n      \"summary\": \"youtube-wiki · wiki-sop-new-instance · youtube-research-wiki\",\n      \"detail\": {\n        \"run",
+        "preview_truncated": true
+      },
+      {
+        "id": "44451bcef2205f2d",
+        "producer": "chatgpt-remote-image-service-nrmj",
+        "output": "node_run_events",
+        "type": "file",
+        "format": "jsonl",
+        "path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/events.jsonl",
+        "title": "Node Run Events",
+        "size": 4458,
+        "mime_type": "application/octet-stream",
+        "tags": [],
+        "metadata": {},
+        "resolution": "execution-evidence",
+        "preview": "{\"sequence\": 1, \"event\": \"node_run.step.done\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"create-run\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Create node run workspace\", \"summary\": \"Node Run record is allocated independently from Workflow Run.\"}}\n{\"sequence\": 2, \"event\": \"node_run.step.done\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"load-definition\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Load node definition\", \"summary\": \"Loaded chatgpt-remote-image-service-nrmj from youtube-research-wiki.\"}}\n{\"sequence\": 3, \"event\": \"node_run.step.done\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"resolve-context\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Resolve Runtime / Instance / Workflow context\", \"summary\": \"youtube-wiki · wiki-sop-new-instance · youtube-research-wiki\"}}\n{\"sequence\": 4, \"event\": \"node_run.step.done\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"resolve-inputs\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Resolve node inputs\", \"summary\": \"1 resolved, 0 pending relay, 0 missing.\"}}\n{\"sequence\": 5, \"event\": \"node_run.step.done\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"resolve-config\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Resolve execution config\", \"summary\": \"Runtime, Instance and capability config resolved.\"}}\n{\"sequence\": 6, \"event\": \"node_run.step.waiting\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"generate-agent-request\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Generate Agent Request\", \"summary\": \"Waiting to render the Hermes skill request.\"}}\n{\"sequence\": 7, \"event\": \"node_run.step.skipped\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"probe-capabilities\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Probe attached capabilities\", \"summary\": \"Capability probes are explicit. Telegram send probes require user confirmation.\"}}\n{\"sequence\": 8, \"event\": \"node_run.step.done\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"build-execution-plan\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Build node execution plan\", \"summary\": \"Prepared real-node execution plan.\"}}\n{\"sequence\": 9, \"event\": \"node_run.step.running\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"execute-or-dry-run\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Execute or dry-run node\", \"summary\": \"Real stage wrapper is running in the background.\"}}\n{\"sequence\": 10, \"event\": \"node_run.step.waiting\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"validate-outputs\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Validate declared outputs\", \"summary\": \"Waiting for the real node to produce declared outputs.\"}}\n{\"sequence\": 11, \"event\": \"node_run.step.skipped\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"persist-to-github\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Persist to GitHub\", \"summary\": \"GitHub persistence is not attached for this Node Run.\"}}\n{\"sequence\": 12, \"event\": \"node_run.step.skipped\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"send-telegram-notification\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Send Telegram notification\", \"summary\": \"Telegram notification is not attached for this Node Run.\"}}\n",
+        "preview_truncated": false
+      }
+    ],
+    "count": 6
+  },
+  "output_categories": {
+    "core_outputs": {
+      "title": "核心输出",
+      "description": "节点声明 outputs 对应的业务结果。",
+      "files": [],
+      "count": 0
+    },
+    "raw_files": {
+      "title": "节点原始文件",
+      "description": "节点 Skill/Worker 产生的原始响应、字幕和中间文件。",
+      "files": [],
+      "count": 0
+    },
+    "run_records": {
+      "title": "运行记录",
+      "description": "Node Run 工作台、事件、状态和 capability 记录。",
+      "files": [
+        "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/executor.json",
+        "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/receipt.json",
+        "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/request.md",
+        "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/response.txt",
+        "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/events.jsonl",
+        "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/input.json",
+        "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources/0001.txt",
+        "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources/manifest.json",
+        "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json",
+        "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/request.json",
+        "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/result.json"
+      ],
+      "count": 11
+    },
+    "node_run_outputs": {
+      "title": "统一输出目录",
+      "description": "本次 Node Run 写入标准 outputs 目录的可中继产物，供下游节点作为目录输入。",
+      "files": [
+        "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json"
+      ],
+      "count": 1
+    }
+  },
+  "input_directory": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources",
+  "input_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources/manifest.json",
+  "output_directory": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs",
+  "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json",
+  "validation": {
+    "status": "failed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "missing_business_outputs",
+      "expected_outputs": [
+        "result",
+        "image_url",
+        "public_image_url",
+        "status",
+        "task_id",
+        "status_json",
+        "submit_json",
+        "generated_images",
+        "images"
+      ],
+      "required_outputs": [],
+      "present_outputs": [],
+      "missing_required_outputs": [],
+      "business_outputs": {},
+      "business_artifact_count": 0
+    },
+    "execution_status": "failed",
+    "error": {
+      "taskId": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+      "status": "failed",
+      "stage": "waiting for locator('[role=\"dialog\"]').last() to be visible",
+      "error": "Worker exited with code 1",
+      "summary": "The ChatGPT remote image service connected to a browser worker and submitted the prompt successfully, but failed at the download stage. The generated image appeared (visible at ~40s), but the dialog for download confirmation was not found within the 10s timeout — possibly a ChatGPT UI change or transient browser state. The remote browser worker (worker-1, CDP port 9333) was logged in and active."
+    }
+  },
+  "business_output_status": {
+    "status": "missing_business_outputs",
+    "expected_outputs": [
+      "result",
+      "image_url",
+      "public_image_url",
+      "status",
+      "task_id",
+      "status_json",
+      "submit_json",
+      "generated_images",
+      "images"
+    ],
+    "required_outputs": [],
+    "present_outputs": [],
+    "missing_required_outputs": [],
+    "business_outputs": {},
+    "business_artifact_count": 0
+  },
+  "capabilities": {},
+  "agent_request": {},
+  "business_artifacts": [],
+  "runtime_context": {
+    "runtime_id": "youtube-wiki",
+    "channel_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc",
+    "spi_base_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc/api/sop",
+    "registry_path": "/root/.sop/registry.json",
+    "health": {
+      "spi": "ok",
+      "registry": "ok",
+      "channel": "ok",
+      "instances": "ok"
+    },
+    "hermes_webhook_url": ""
+  },
+  "instance_context": {
+    "instance_id": "wiki-sop-new-instance",
+    "status": "ready",
+    "repo": "skkeoriw/wiki-sop-new-instance",
+    "repo_branch": "main",
+    "wiki_local_path": "/root/wiki/wiki-sop-new-instance",
+    "workspace_status": "ready",
+    "registry_status": "enabled",
+    "run_index_path": "/root/wiki/wiki-sop-new-instance/.sop/run-index.sqlite",
+    "run_index_status": "ready",
+    "capabilities": {
+      "workspace": "ok",
+      "sop_yaml": "ok",
+      "run_index": "ok",
+      "git": "configured",
+      "telegram": "configured",
+      "notebooklm": "configured",
+      "vertex": "configured",
+      "tunnel": "ok"
+    }
+  },
+  "definition_defaults": {
+    "git": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "paths": [
+        "raw/node-runs/{run_id}/outputs/**"
+      ]
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false
+    }
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run",
+      "paths": [
+        "raw/node-runs/{run_id}/outputs/**"
+      ]
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run"
+    }
+  },
+  "definition_scope_reports": {},
+  "environment_snapshot": [
+    {
+      "id": "telegram:YOUTUBE_WIKI_TG_TOKEN:bridge-env:YOUTUBE_WIKI_TG_TOKEN",
+      "capability": "telegram",
+      "key": "YOUTUBE_WIKI_TG_TOKEN",
+      "label": "Telegram Bot Token",
+      "source": "bridge-env:YOUTUBE_WIKI_TG_TOKEN",
+      "source_kind": "bridge-env",
+      "present": true,
+      "required": false,
+      "secret": true,
+      "value": "787***JDA",
+      "status": "disabled",
+      "unit": "",
+      "category": "telegram"
+    },
+    {
+      "id": "telegram:YOUTUBE_WIKI_TG_CHAT_ID:bridge-env:YOUTUBE_WIKI_TG_CHAT_ID",
+      "capability": "telegram",
+      "key": "YOUTUBE_WIKI_TG_CHAT_ID",
+      "label": "Telegram Chat ID",
+      "source": "bridge-env:YOUTUBE_WIKI_TG_CHAT_ID",
+      "source_kind": "bridge-env",
+      "present": true,
+      "required": false,
+      "secret": false,
+      "value": "693***500",
+      "status": "disabled",
+      "unit": "",
+      "category": "telegram"
+    },
+    {
+      "id": "git:GITHUB_TOKEN:bridge-env:GITHUB_TOKEN",
+      "capability": "git",
+      "key": "GITHUB_TOKEN",
+      "label": "GitHub Token",
+      "source": "bridge-env:GITHUB_TOKEN",
+      "source_kind": "bridge-env",
+      "present": true,
+      "required": false,
+      "secret": true,
+      "value": "ghp***qtP",
+      "status": "disabled",
+      "unit": "",
+      "category": "github"
+    }
+  ],
+  "capability_results": [
+    {
+      "key": "git",
+      "capability": "git",
+      "label": "GitHub workspace persistence",
+      "status": "disabled",
+      "enabled": false,
+      "required": false,
+      "source": "config-resolution",
+      "reason": "",
+      "managed_by": "runtime-harness",
+      "detail": {
+        "capability": "git",
+        "label": "GitHub workspace persistence",
+        "status": "disabled",
+        "required": false,
+        "enabled": false,
+        "_source_key": "***"
+      }
+    },
+    {
+      "key": "telegram",
+      "capability": "telegram",
+      "label": "Telegram progress notification",
+      "status": "disabled",
+      "enabled": false,
+      "required": false,
+      "source": "config-resolution",
+      "reason": "",
+      "managed_by": "runtime-harness",
+      "detail": {
+        "capability": "telegram",
+        "label": "Telegram progress notification",
+        "status": "disabled",
+        "required": false,
+        "enabled": false,
+        "_source_key": "***"
+      }
+    }
+  ],
+  "issues": [],
+  "detail": {
+    "sop_id": "wiki-sop-new-instance",
+    "workflow_id": "youtube-research-wiki",
+    "instance_id": "wiki-sop-new-instance",
+    "node_id": "chatgpt-remote-image-service-nrmj",
+    "node_title": "Chatgpt Remote Image Service",
+    "mode": "real-node",
+    "input_source": "manual",
+    "base_run_id": "",
+    "source_node_run_id": "",
+    "relay_mode": "",
+    "selected_outputs": [],
+    "relay_mappings": [],
+    "relay_selection": {},
+    "edge_contract": {},
+    "node_execution_guide": {},
+    "workflow_revision": {
+      "version": 1,
+      "hash": "db8b2fa2b5347cd5",
+      "node_count": 7,
+      "edge_count": 3,
+      "nodes": {
+        "chatgpt-remote-image-service-nrmj": {
+          "title": "Chatgpt Remote Image Service",
+          "skill": {
+            "id": "chatgpt-remote-image-service",
+            "source": "skill-installer",
+            "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+            "source_digest": {
+              "installer_url": "https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544",
+              "zip_url": "https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip",
+              "files": [
+                {
+                  "path": "chatgpt-remote-image-service/agents/openai.yaml",
+                  "bytes": 227,
+                  "truncated": false
+                },
+                {
+                  "path": "chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh",
+                  "bytes": 5390,
+                  "truncated": false
+                },
+                {
+                  "path": "chatgpt-remote-image-service/SKILL.md",
+                  "bytes": 3484,
+                  "truncated": false
+                }
+              ]
+            }
+          },
+          "mode": "",
+          "needs": [],
+          "inputs": {},
+          "optional_inputs": {},
+          "outputs": {
+            "root": "raw/node-runs/{run_id}/outputs",
+            "manifest": "raw/node-runs/{run_id}/outputs/manifest.json",
+            "expected": {
+              "result": {
+                "description": "Skill execution result summary.",
+                "relayable": true
+              },
+              "image_url": {
+                "description": "Result value mentioned in skill source as `imageUrl`.",
+                "value_type": "url",
+                "relayable": true,
+                "evidence": "source result marker imageUrl"
+              },
+              "public_image_url": {
+                "description": "Result value mentioned in skill source as `publicImageUrl`.",
+                "value_type": "url",
+                "relayable": true,
+                "evidence": "source result marker publicImageUrl"
+              },
+              "status": {
+                "description": "Result value mentioned in skill source as `status`.",
+                "value_type": "text",
+                "relayable": true,
+                "evidence": "source result marker status"
+              },
+              "task_id": {
+                "description": "Result value mentioned in skill source as `taskId`.",
+                "value_type": "text",
+                "relayable": true,
+                "evidence": "source result marker taskId"
+              },
+              "status_json": {
+                "description": "Runtime value captured by script variable `status_json`.",
+                "value_type": "json",
+                "relayable": false,
+                "evidence": "source script variable status_json"
+              },
+              "submit_json": {
+                "description": "Runtime value captured by script variable `submit_json`.",
+                "value_type": "json",
+                "relayable": true,
+                "evidence": "source script variable submit_json"
+              },
+              "generated_images": {
+                "description": "Generated image files or public image URLs.",
+                "value_type": "image",
+                "relayable": true
+              },
+              "images": {
+                "description": "Generated image files.",
+                "relayable": true
+              }
+            }
+          },
+          "capabilities": {
+            "git": {
+              "enabled": true,
+              "required": false
+            },
+            "telegram": {
+              "enabled": false,
+              "required": false
+            },
+            "sse": {
+              "enabled": true,
+              "required": true
+            }
+          }
+        },
+        "notebooklm-research": {
+          "title": "NotebookLM 研究",
+          "skill": "sop-notebooklm-research",
+          "mode": "blocking",
+          "needs": [
+            "youtube-fetch"
+          ],
+          "inputs": {
+            "source_url": "youtube-fetch.outputs.source_url",
+            "metadata_file": "youtube-fetch.outputs.metadata_file"
+          },
+          "optional_inputs": {},
+          "outputs": {
+            "reports": "raw/notebooklm-analysis/*.md",
+            "mindmaps": "raw/notebooklm-mindmaps/*.json"
+          },
+          "capabilities": {}
+        },
+        "retry": {
+          "title": "手动重试",
+          "skill": "sop-retry",
+          "mode": "manual",
+          "needs": [],
+          "inputs": {},
+          "optional_inputs": {},
+          "outputs": {},
+          "capabilities": {}
+        },
+        "tg-notify": {
+          "title": "Telegram 通知",
+          "skill": "sop-tg-notify",
+          "mode": "blocking",
+          "needs": [
+            "wiki-build"
+          ],
+          "inputs": {
+            "index": {
+              "from": "wiki-build.outputs.index",
+              "required": true,
+              "kind": "file",
+              "type": "file",
+              "value_type": "markdown"
+            }
+          },
+          "optional_inputs": {
+            "message": {
+              "from": "edge.message",
+              "required": false,
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "text",
+              "resolvers": [
+                {
+                  "id": "direct-text",
+                  "kind": "direct"
+                },
+                {
+                  "id": "metadata-title",
+                  "kind": "json_path",
+                  "path": "$.title"
+                },
+                {
+                  "id": "metadata-description",
+                  "kind": "json_path",
+                  "path": "$.description"
+                }
+              ]
+            }
+          },
+          "outputs": {
+            "telegram_message": {
+              "path": "logs/pipeline-runs/pipe-{run_id}.json",
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "relayable": false
+            }
+          },
+          "capabilities": {}
+        },
+        "wiki-build": {
+          "title": "Wiki 知识图谱构建",
+          "skill": "sop-wiki-build",
+          "mode": "blocking",
+          "needs": [
+            "notebooklm-research"
+          ],
+          "inputs": {
+            "reports": {
+              "from": "notebooklm-research.outputs.reports",
+              "kind": "files",
+              "type": "files",
+              "value_type": "markdown"
+            }
+          },
+          "optional_inputs": {
+            "deep_research": {
+              "from": "youtube-deep-research.outputs.analysis_file",
+              "required": false,
+              "kind": "files",
+              "type": "files",
+              "value_type": "markdown"
+            }
+          },
+          "outputs": {
+            "index": {
+              "path": "index.md",
+              "kind": "file",
+              "type": "file",
+              "value_type": "markdown",
+              "relayable": true
+            },
+            "pages": {
+              "path": "wiki/**",
+              "kind": "files",
+              "type": "files",
+              "value_type": "markdown",
+              "relayable": true
+            }
+          },
+          "capabilities": {}
+        },
+        "youtube-deep-research": {
+          "title": "YouTube 深度研究",
+          "skill": "sop-youtube-deep-research",
+          "mode": "sidecar",
+          "needs": [
+            "youtube-fetch"
+          ],
+          "inputs": {
+            "source_url": {
+              "from": "youtube-fetch.outputs.source_url",
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "url",
+              "resolvers": [
+                {
+                  "id": "direct-url",
+                  "kind": "direct"
+                },
+                {
+                  "id": "metadata-source-url",
+                  "kind": "json_path",
+                  "path": "$.source_url"
+                },
+                {
+                  "id": "metadata-youtube-url",
+                  "kind": "json_path",
+                  "path": "$.youtube_url"
+                },
+                {
+                  "id": "text-url",
+                  "kind": "regex",
+                  "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+                }
+              ]
+            }
+          },
+          "optional_inputs": {},
+          "outputs": {
+            "analysis_file": {
+              "path": "raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md",
+              "kind": "file",
+              "type": "file",
+              "value_type": "markdown",
+              "relayable": true,
+              "role": "wiki-source"
+            },
+            "transcript_file": {
+              "path": "raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt",
+              "kind": "file",
+              "type": "file",
+              "value_type": "text",
+              "relayable": true,
+              "role": "transcript"
+            }
+          },
+          "capabilities": {
+            "git": {
+              "enabled": true,
+              "required": false,
+              "managed_by": "runtime-harness",
+              "editable": true,
+              "save_scope": "node-definition",
+              "description": "Persist this node's workspace outputs to the current Instance repo.",
+              "paths": [
+                "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+                "raw/youtube-deep-research/{pipeline_id}/raw/**"
+              ]
+            },
+            "telegram": {
+              "enabled": true,
+              "required": false,
+              "managed_by": "runtime-harness",
+              "editable": true,
+              "save_scope": "node-definition",
+              "description": "Send progress notifications through the current Instance Telegram config.",
+              "trigger": "stage-lifecycle",
+              "triggers": [
+                "start",
+                "done",
+                "failed"
+              ]
+            }
+          }
+        },
+        "youtube-fetch": {
+          "title": "YouTube 元数据获取",
+          "skill": "sop-youtube-fetch",
+          "mode": "blocking",
+          "needs": [],
+          "inputs": {
+            "source_url": {
+              "from": "context.source_url",
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "url"
+            }
+          },
+          "optional_inputs": {},
+          "outputs": {
+            "source_url": {
+              "from": "context.source_url",
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "url",
+              "relayable": true
+            },
+            "metadata_file": {
+              "from": "context.stage_b_fetch.meta_file",
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "relayable": true
+            }
+          },
+          "capabilities": {}
+        }
+      },
+      "edges": [
+        {
+          "id": "edge-youtube-fetch-to-youtube-deep-research",
+          "from": "youtube-fetch",
+          "to": "youtube-deep-research",
+          "relay": {
+            "intent": {
+              "title": "将视频地址交给深度研究节点",
+              "brief": "下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。"
+            },
+            "bindings": [
+              {
+                "target_input": "source_url",
+                "required": true,
+                "source": {
+                  "node": "youtube-fetch",
+                  "output": "source_url",
+                  "extractor": {
+                    "id": "direct-url",
+                    "kind": "direct"
+                  }
+                }
+              }
+            ],
+            "resolver": {
+              "strategy": "explicit_first",
+              "fallback": "block"
+            },
+            "validation": {
+              "on_missing_required": "block",
+              "on_multiple_candidates": "needs_review",
+              "on_type_mismatch": "block"
+            }
+          }
+        },
+        {
+          "id": "edge-youtube-fetch-title-to-tg-notify",
+          "from": "youtube-fetch",
+          "to": "tg-notify",
+          "relay": {
+            "intent": {
+              "title": "将视频标题作为通知内容",
+              "brief": "这条边只用于测试或自定义工作流，将 metadata_file 中的视频标题提取成 Telegram 文本消息。"
+            },
+            "bindings": [
+              {
+                "target_input": "message",
+                "required": true,
+                "source": {
+                  "node": "youtube-fetch",
+                  "output": "metadata_file",
+                  "extractor": {
+                    "id": "metadata-title",
+                    "kind": "json_path",
+                    "path": "$.title"
+                  }
+                }
+              }
+            ],
+            "resolver": {
+              "strategy": "explicit_first",
+              "fallback": "needs_review"
+            },
+            "validation": {
+              "on_missing_required": "block",
+              "on_multiple_candidates": "needs_review",
+              "on_type_mismatch": "block"
+            }
+          }
+        },
+        {
+          "id": "edge-youtube-deep-research-to-wiki-build",
+          "from": "youtube-deep-research",
+          "to": "wiki-build",
+          "relay": {
+            "intent": {
+              "title": "将深度研究产物交给 Wiki 构建节点",
+              "brief": "将 analysis_file 作为 Wiki 构建的 deep_research 补充材料；transcript_file 可在自定义边中作为补充上下文。"
+            },
+            "bindings": [
+              {
+                "target_input": "deep_research",
+                "required": false,
+                "source": {
+                  "node": "youtube-deep-research",
+                  "output": "analysis_file",
+                  "extractor": {
+                    "id": "direct-file",
+                    "kind": "direct"
+                  }
+                }
+              }
+            ],
+            "resolver": {
+              "strategy": "explicit_first",
+              "fallback": "needs_review"
+            },
+            "validation": {
+              "on_missing_required": "needs_review",
+              "on_multiple_candidates": "needs_review",
+              "on_type_mismatch": "needs_review"
+            }
+          }
+        }
+      ]
+    },
+    "relay_instruction": "",
+    "relay_context_brief": "",
+    "manual_inputs": {
+      "api_url": "",
+      "reference_image_file": "",
+      "reference_image_url": "",
+      "poll_interval": "",
+      "prompt": "生成一张小猫睡觉的照片",
+      "timeout_seconds": "",
+      "upload_name": ""
+    },
+    "required_inputs": [
+      {
+        "name": "prompt",
+        "source": "",
+        "required": true,
+        "resolved": true,
+        "value": "生成一张小猫睡觉的照片",
+        "provenance": "manual",
+        "reason": ""
+      }
+    ],
+    "optional_inputs": [],
+    "resolved_inputs": [
+      {
+        "name": "prompt",
+        "source": "",
+        "required": true,
+        "resolved": true,
+        "value": "生成一张小猫睡觉的照片",
+        "provenance": "manual",
+        "reason": ""
+      }
+    ],
+    "pending_materialization_inputs": [],
+    "missing_inputs": [],
+    "upstream_nodes": [],
+    "available_existing_runs": [
+      {
+        "pipeline_id": "dQw4w9WgXcQ-20260627T184205",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-27T10:42:11Z",
+        "nodes": {
+          "youtube-fetch": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "dQw4w9WgXcQ-20260626T151802",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-26T07:18:08Z",
+        "nodes": {
+          "youtube-fetch": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "dQw4w9WgXcQ-20260626T010615",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-25T17:06:20Z",
+        "nodes": {
+          "youtube-fetch": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-edge-guide-audit-20260624T092756Z",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-24T09:30:52Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-24T09:22:01Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-edge-guide-real-20260624T090739Z",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-24T09:10:27Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-wiki-build-20260622T135212-cc0bec",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T13:55:35Z",
+        "nodes": {
+          "wiki-build": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260622T134854-341d02",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T13:51:09Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-fetch-20260622T134710-842f65",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T13:47:52Z",
+        "nodes": {
+          "youtube-fetch": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260622T111234Z-a32a89",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T11:14:42Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-fetch-20260622T111013Z-1c2b4d",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T11:10:53Z",
+        "nodes": {
+          "youtube-fetch": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-wiki-build-20260622T104220-5a3066",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T10:45:53Z",
+        "nodes": {
+          "wiki-build": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-wiki-build-20260622T102610-5a3066",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T10:28:53Z",
+        "nodes": {
+          "wiki-build": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260622T102318-ecb0ee",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T10:25:14Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260622T091425Z-6a0670",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T09:17:29Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-fetch-20260622T083527Z-cfe243",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T08:36:00Z",
+        "nodes": {
+          "youtube-fetch": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-wiki-build-20260622T081128-775577",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T08:17:12Z",
+        "nodes": {
+          "wiki-build": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260622T080753-a589d3",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T08:10:17Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-fetch-20260622T080623-03ff23",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T08:06:57Z",
+        "nodes": {
+          "youtube-fetch": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-fetch-20260622T080125-03ff23",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T08:02:17Z",
+        "nodes": {
+          "youtube-fetch": "done"
+        },
+        "satisfies_upstream": true
+      }
+    ],
+    "side_effects": {
+      "writes_workspace": true,
+      "git_write": false,
+      "telegram": false,
+      "external_api": true,
+      "llm": false,
+      "skill": "chatgpt-remote-image-service",
+      "default_mode": "preflight",
+      "real_execution_enabled": true
+    },
+    "actions": {
+      "preflight": {
+        "method": "POST",
+        "path": "/api/sop/wiki-sop-new-instance/nodes/chatgpt-remote-image-service-nrmj/tests",
+        "destructive": false,
+        "enabled": true
+      },
+      "real_execution": {
+        "enabled": true,
+        "reason": "Standard stage wrapper is available for real Node Run execution."
+      }
+    },
+    "status": "ready",
+    "runtime_id": "youtube-wiki",
+    "runtime_channel_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc",
+    "workflow_name": "YouTube Wiki SOP",
+    "node_source": "sop",
+    "resolved_config": {
+      "telegram": {
+        "capability": "telegram",
+        "label": "Telegram progress notification",
+        "enabled": false,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "status": "disabled",
+        "token_env": "YOU***KEN",
+        "token": {
+          "key": "YOU***KEN",
+          "label": "Telegram Bot Token",
+          "required": false,
+          "present": true,
+          "source": "bridge-env:YOUTUBE_WIKI_TG_TOKEN",
+          "masked_value": "787***JDA",
+          "value": null
+        },
+        "chat_id": {
+          "key": "YOU***_ID",
+          "label": "Telegram Chat ID",
+          "required": false,
+          "present": true,
+          "source": "bridge-env:YOUTUBE_WIKI_TG_CHAT_ID",
+          "masked_value": "693***500",
+          "value": "6938920500"
+        },
+        "probe": {
+          "enabled": false,
+          "explicit_confirmation_required": true,
+          "side_effect": "sends a Telegram test message"
+        }
+      },
+      "github": {
+        "capability": "git",
+        "label": "GitHub workspace persistence",
+        "enabled": false,
+        "required": false,
+        "status": "disabled",
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "paths": [
+          "raw/node-runs/{run_id}/outputs/**"
+        ],
+        "token": {
+          "key": "GIT***KEN",
+          "label": "GitHub Token",
+          "required": false,
+          "present": true,
+          "source": "bridge-env:GITHUB_TOKEN",
+          "masked_value": "ghp***qtP",
+          "value": null
+        }
+      }
+    },
+    "runtime_context": {
+      "runtime_id": "youtube-wiki",
+      "channel_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc",
+      "spi_base_url": "https://runtime-152-32-214-95.chxyka.ccwu.cc/api/sop",
+      "registry_path": "/root/.sop/registry.json",
+      "health": {
+        "spi": "ok",
+        "registry": "ok",
+        "channel": "ok",
+        "instances": "ok"
+      },
+      "hermes_webhook_url": ""
+    },
+    "instance_context": {
+      "instance_id": "wiki-sop-new-instance",
+      "status": "ready",
+      "repo": "skkeoriw/wiki-sop-new-instance",
+      "repo_branch": "main",
+      "wiki_local_path": "/root/wiki/wiki-sop-new-instance",
+      "workspace_status": "ready",
+      "registry_status": "enabled",
+      "run_index_path": "/root/wiki/wiki-sop-new-instance/.sop/run-index.sqlite",
+      "run_index_status": "ready",
+      "capabilities": {
+        "workspace": "ok",
+        "sop_yaml": "ok",
+        "run_index": "ok",
+        "git": "configured",
+        "telegram": "configured",
+        "notebooklm": "configured",
+        "vertex": "configured",
+        "tunnel": "ok"
+      }
+    },
+    "definition_defaults": {
+      "git": {
+        "enabled": true,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "paths": [
+          "raw/node-runs/{run_id}/outputs/**"
+        ]
+      },
+      "telegram": {
+        "enabled": false,
+        "required": false
+      }
+    },
+    "capability_overrides": {
+      "git": {
+        "enabled": false,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "paths": [
+          "raw/node-runs/{run_id}/outputs/**"
+        ]
+      },
+      "telegram": {
+        "enabled": false,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run"
+      }
+    },
+    "definition_scope_reports": {},
+    "config_sources": {
+      "runtime_env_file": "/root/.agent-brain-plugins.env",
+      "runtime_env_file_present": true,
+      "runtime_env_file_keys": [
+        "BRIDGE_PORT",
+        "GITHUB_TOKEN",
+        "GOOGLE_PROJECT_ID",
+        "HERMES_WEBHOOK_PORT",
+        "HERMES_WEBHOOK_TOKEN",
+        "NOTEBOOKLM_BRIDGE_TOKEN",
+        "NOTEBOOKLM_BRIDGE_URL",
+        "NOTEBOOKLM_CLIENT_ID",
+        "VERTEX_LOCATION",
+        "WEBHOOK_PUBLIC_HOST",
+        "WIKI_DEEPSEEK_MODEL",
+        "WIKI_LLM_PROVIDER",
+        "WIKI_VERTEX_MODEL",
+        "YOUTUBE_CONTENT_API_TOKEN",
+        "YOUTUBE_CONTENT_API_URL",
+        "YOUTUBE_RESEARCH_WORKFLOW_TOKEN",
+        "YOUTUBE_RESEARCH_WORKFLOW_URL",
+        "YOUTUBE_WIKI_TG_CHAT_ID",
+        "YOUTUBE_WIKI_TG_TOKEN"
+      ],
+      "node_run_override_keys": [],
+      "capability_override_keys": [
+        "git",
+        "telegram"
+      ],
+      "settings_backend": "file",
+      "instance_settings_keys": [
+        "WIKI_LLM_API_KEY",
+        "WIKI_LLM_BASE_URL",
+        "WIKI_LLM_MODEL"
+      ],
+      "runtime_settings_keys": [],
+      "global_settings_keys": [],
+      "precedence": [
+        "node-run-overrides",
+        "instance-settings",
+        "runtime-settings",
+        "global-settings",
+        "bridge-env",
+        "runtime-env-file",
+        "defaults"
+      ]
+    },
+    "capability_probes": {
+      "telegram": {
+        "capability": "telegram",
+        "label": "Telegram progress notification",
+        "status": "disabled",
+        "required": false,
+        "enabled": false
+      },
+      "github": {
+        "capability": "git",
+        "label": "GitHub workspace persistence",
+        "status": "disabled",
+        "required": false,
+        "enabled": false
+      }
+    },
+    "fix_suggestions": [],
+    "node_capabilities": {
+      "git": {
+        "enabled": true,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "paths": [
+          "raw/node-runs/{run_id}/outputs/**"
+        ]
+      },
+      "telegram": {
+        "enabled": false,
+        "required": false
+      },
+      "sse": {
+        "enabled": true,
+        "required": true
+      }
+    },
+    "inner_steps": [
+      {
+        "id": "pre",
+        "title": "执行前",
+        "status": "done",
+        "summary": "Node Run 上下文、输入和运行配置已准备，并交给 stage runner on_start。",
+        "started_at": "2026-06-29T17:57:13.410782+00:00",
+        "finished_at": "",
+        "detail": {
+          "mode": "real-node",
+          "input_source": "manual",
+          "resolved_inputs": [
+            {
+              "name": "prompt",
+              "source": "",
+              "required": true,
+              "resolved": true,
+              "value": "生成一张小猫睡觉的照片",
+              "provenance": "manual",
+              "reason": ""
+            }
+          ],
+          "pending_materialization_inputs": [],
+          "missing_inputs": [],
+          "config_status": "done",
+          "command": [],
+          "stage_hook": "on_start"
+        }
+      },
+      {
+        "id": "doing",
+        "title": "执行中",
+        "status": "running",
+        "summary": "Skill / agent 业务仍在执行。",
+        "started_at": "",
+        "finished_at": "",
+        "elapsed_ms": null,
+        "detail": {
+          "command": [],
+          "returncode": null,
+          "timed_out": false,
+          "log_path": "",
+          "stdout_tail": "",
+          "stderr_tail": ""
+        }
+      },
+      {
+        "id": "post",
+        "title": "执行后",
+        "status": "waiting",
+        "summary": "stage_runner on_done/on_failed、输出校验、Git/TG capability 和 bridge 结果收集已归档。",
+        "started_at": "",
+        "finished_at": "2026-06-29T17:57:13.437457+00:00",
+        "detail": {
+          "stage_hooks": [
+            "on_done/on_failed",
+            "forward_next"
+          ],
+          "validation": {},
+          "actual_outputs": {},
+          "business_artifact_count": 0,
+          "capabilities": {},
+          "forward_next": ""
+        }
+      }
+    ],
+    "real_execution": {
+      "status": "failed",
+      "summary": "The ChatGPT remote image service connected to a browser worker and submitted the prompt successfully, but failed at the download stage. The generated image appeared (visible at ~40s), but the dialog for download confirmation was not found within the 10s timeout — possibly a ChatGPT UI change or transient browser state. The remote browser worker (worker-1, CDP port 9333) was logged in and active.",
+      "started_at": "2026-06-29T17:57:13.410782+00:00",
+      "finished_at": "2026-06-29T17:58:48Z",
+      "elapsed_ms": 0,
+      "actual_outputs": {},
+      "artifacts": [
+        {
+          "id": "1255f7712fb861a3",
+          "producer": "chatgpt-remote-image-service-nrmj",
+          "output": "manifest",
+          "type": "file",
+          "format": "json",
+          "path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json",
+          "title": "manifest.json",
+          "size": 1427,
+          "mime_type": "application/json",
+          "tags": [],
+          "metadata": {},
+          "resolution": "node-run-output-manifest",
+          "preview": "{\n  \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\",\n  \"workflow_id\": \"youtube-research-wiki\",\n  \"node_id\": \"chatgpt-remote-image-service-nrmj\",\n  \"status\": \"failed\",\n  \"files\": [],\n  \"summary\": {\n    \"prompt\": \"生成一张小猫睡觉的照片\",\n    \"taskId\": \"3d4c127b-ef8c-4189-8c36-3fcb5b39db4c\",\n    \"result\": \"The remote service failed at the download dialog phase. The prompt was submitted and image was generated (visible at ~40s), but the browser could not locate the download confirmation dialog ([role=\\\"dialog\\\"]) within timeout.\"\n  },\n  \"error\": {\n    \"taskId\": \"3d4c127b-ef8c-4189-8c36-3fcb5b39db4c\",\n    \"status\": \"failed\",\n    \"stage\": \"  - waiting for locator('[role=\\\"dialog\\\"]').last() to be visible\",\n    \"error\": \"Worker exited with code 1\",\n    \"recentLogs\": [\n      \"stage.connectBrowser done (933ms)\",\n      \"stage.preparePage done (1794ms)\",\n      \"stage.waitComposer done (5465ms)\",\n      \"stage.enterImageMode done (7304ms)\",\n      \"stage.fillPrompt done (7599ms)\",\n      \"stage.waitSendEnabled done (7745ms)\",\n      \"stage.snapshotExistingGeneratedImages done (7752ms, count=0)\",\n      \"stage.clickSend -> sentMs=8420ms\",\n      \"stage.waitForGeneratedImage -> generatedVisibleMs=40256ms\",\n      \"stage.downloadImage -> FAILED: locator('[role=\\\"dialog\\\"]').last() timeout 10s\",\n      \"Worker exited with code 1\"\n    ]\n  },\n  \"created_at\": \"2026-06-29T17:58:48Z\"\n}\n",
+          "preview_truncated": false
+        }
+      ],
+      "business_artifacts": [],
+      "core_outputs": [],
+      "relay_package": {
+        "kind": "relay-package",
+        "output_directory": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs",
+        "manifest_path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json",
+        "item_count": 0,
+        "items": []
+      },
+      "execution_evidence": {
+        "artifacts": [
+          {
+            "id": "c34a2dc3ac606c8e",
+            "producer": "chatgpt-remote-image-service-nrmj",
+            "output": "agent_request",
+            "type": "node-run.agent.request",
+            "format": "markdown",
+            "path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/request.md",
+            "title": "Rendered Agent Request",
+            "size": 2123,
+            "mime_type": "application/octet-stream",
+            "tags": [],
+            "metadata": {},
+            "resolution": "node-run-agent",
+            "preview": "Use skill chatgpt-remote-image-service to execute this Node Execution Request.\n\n# Node Execution Request\n\nRuntime context:\n- runtime_id: youtube-wiki\n- instance_id: wiki-sop-new-instance\n- workflow_id: youtube-research-wiki\n- node_id: chatgpt-remote-image-service-nrmj\n- node_run_id: node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\n\nInput contract:\n- entry_inputs: {\n  \"prompt\": \"生成一张小猫睡觉的照片\"\n}\n- input_manifest_path: raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources/manifest.json\n- input_directory: raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources\n- source_url: https://www.youtube.com/watch?v=dQw4w9WgXcQ\n- Only use files listed in the input manifest unless the selected skill already has a stricter rule.\n\nRelay context:\nNo upstream relay context was provided for this run.\n\nApproved Edge Handoff Guide:\nNo approved Edge Handoff Guide was resolved for this run.\n\nOutput contract:\n- output_directory: raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs\n- output_manifest_path: raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json\n- receipt_path: raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/receipt.json\n- Do not report success unless the declared output manifest and receipt are written or the runtime wrapper writes equivalent state that the adapter can verify.\n\nExecution command:\n```bash\n\n```\nIf the execution command is empty, execute the selected skill directly from this request: read entry_inputs, input_directory, input_manifest and the approved handoff guide, then write outputs to output_directory and output_manifest_path.\n\n\nExecution rules:\n- Use the selected skill only: chatgpt-remote-image-service.\n- Run the command from the Instance workspace unless the skill has an equivalent deterministic wrapper.\n- Preserve the provided environment variables.\n- Do not invent paths.\n- If execution fails, return the failure and include stderr/log guidance.\n",
+            "preview_truncated": false
+          },
+          {
+            "id": "7219e977d4595642",
+            "producer": "chatgpt-remote-image-service-nrmj",
+            "output": "agent_executor",
+            "type": "node-run.agent.executor",
+            "format": "json",
+            "path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/executor.json",
+            "title": "Agent Executor Metadata",
+            "size": 1193,
+            "mime_type": "application/json",
+            "tags": [],
+            "metadata": {},
+            "resolution": "node-run-agent",
+            "preview": "{\n  \"version\": 1,\n  \"executor\": \"hermes\",\n  \"requested_skill\": \"chatgpt-remote-image-service\",\n  \"node_id\": \"chatgpt-remote-image-service-nrmj\",\n  \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\",\n  \"runtime_id\": \"youtube-wiki\",\n  \"instance_id\": \"wiki-sop-new-instance\",\n  \"workflow_id\": \"youtube-research-wiki\",\n  \"template_source\": \"default\",\n  \"template_version\": \"hermes-agent-executor.v1\",\n  \"request_path\": \"raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/request.md\",\n  \"response_path\": \"raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/response.txt\",\n  \"receipt_path\": \"raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/receipt.json\",\n  \"input_manifest_path\": \"raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources/manifest.json\",\n  \"output_manifest_path\": \"raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json\",\n  \"node_execution_guide\": {},\n  \"stage_command\": [],\n  \"stage_command_preview\": \"\",\n  \"created_at\": \"2026-06-29T17:57:14.449302+00:00\"\n}\n",
+            "preview_truncated": false
+          },
+          {
+            "id": "b92ced57858cb5fc",
+            "producer": "chatgpt-remote-image-service-nrmj",
+            "output": "agent_response",
+            "type": "node-run.agent.response",
+            "format": "text",
+            "path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/response.txt",
+            "title": "Hermes Agent Response",
+            "size": 1712,
+            "mime_type": "text/plain",
+            "tags": [],
+            "metadata": {},
+            "resolution": "node-run-agent",
+            "preview": "## Execution Result: FAILED\n\n**Node run:** `node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467`\n\n### What happened\n\nThe `chatgpt-remote-image.sh` script (from the `devops/chatgpt-remote-image-service` skill) was called with `--prompt \"生成一张小猫睡觉的照片\"`.\n\nThe remote service:\n1. Connected to a browser worker (worker-1, CDP port 9333, logged in) — 933ms\n2. Opened ChatGPT, entered image mode, filled the prompt — 8420ms\n3. Submitted and waited for generation — image appeared at ~40s\n4. **Failed** at the `downloadImage` stage: `locator('[role=\"dialog\"]').last()` timed out after 10s\n5. Worker exited with code 1\n\n### Root cause\n\nThe generated image **was** produced (visible at 40,256ms), but the download dialog selector `[role=\"dialog\"]` didn't match anything within the 10s timeout. This is likely a **ChatGPT UI change** or a transient state issue where the dialog wasn't in a locatable state when Playwright tried to interact with it. The remote endpoint's browser automation code expects a dialog element to click for download but couldn't find one.\n\n### Outputs written\n\n- `raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/receipt.json`\n- `raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json`\n\n### Possible remediation\n\n- **Retry** — this could be transient; the prompt and browser connection worked fine\n- **Check the remote service** — the download dialog selector `[role=\"dialog\"]` may need updating if ChatGPT changed its UI\n- **Check `/health`** on the endpoint to see if worker-1 experienced issues (the script did print the health summary to stderr but not to stdout)\n",
+            "preview_truncated": false
+          },
+          {
+            "id": "039dfed92955a0ec",
+            "producer": "chatgpt-remote-image-service-nrmj",
+            "output": "agent_receipt",
+            "type": "node-run.agent.receipt",
+            "format": "json",
+            "path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/receipt.json",
+            "title": "Agent Execution Receipt",
+            "size": 1112,
+            "mime_type": "application/json",
+            "tags": [],
+            "metadata": {},
+            "resolution": "node-run-agent",
+            "preview": "{\n  \"runtime_id\": \"youtube-wiki\",\n  \"instance_id\": \"wiki-sop-new-instance\",\n  \"workflow_id\": \"youtube-research-wiki\",\n  \"node_id\": \"chatgpt-remote-image-service-nrmj\",\n  \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\",\n  \"executed_at\": \"2026-06-29T17:57:56Z\",\n  \"completed_at\": \"2026-06-29T17:58:48Z\",\n  \"status\": \"failed\",\n  \"skill\": \"chatgpt-remote-image-service\",\n  \"entry_inputs\": {\n    \"prompt\": \"生成一张小猫睡觉的照片\"\n  },\n  \"error\": {\n    \"taskId\": \"3d4c127b-ef8c-4189-8c36-3fcb5b39db4c\",\n    \"status\": \"failed\",\n    \"stage\": \"waiting for locator('[role=\\\"dialog\\\"]').last() to be visible\",\n    \"error\": \"Worker exited with code 1\",\n    \"summary\": \"The ChatGPT remote image service connected to a browser worker and submitted the prompt successfully, but failed at the download stage. The generated image appeared (visible at ~40s), but the dialog for download confirmation was not found within the 10s timeout — possibly a ChatGPT UI change or transient browser state. The remote browser worker (worker-1, CDP port 9333) was logged in and active.\"\n  }\n}\n",
+            "preview_truncated": false
+          },
+          {
+            "id": "2f1df375f1919199",
+            "producer": "chatgpt-remote-image-service-nrmj",
+            "output": "node_run_result",
+            "type": "file",
+            "format": "json",
+            "path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/result.json",
+            "title": "Node Run Result",
+            "size": 76735,
+            "mime_type": "application/json",
+            "tags": [],
+            "metadata": {},
+            "resolution": "execution-evidence",
+            "preview": "{\n  \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\",\n  \"pipeline_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\",\n  \"runtime_id\": \"youtube-wiki\",\n  \"instance_id\": \"wiki-sop-new-instance\",\n  \"workflow_id\": \"youtube-research-wiki\",\n  \"node_id\": \"chatgpt-remote-image-service-nrmj\",\n  \"node_title\": \"Chatgpt Remote Image Service\",\n  \"status\": \"running\",\n  \"mode\": \"real-node\",\n  \"input_source\": \"manual\",\n  \"relay_mode\": \"\",\n  \"selected_outputs\": [],\n  \"relay_mappings\": [],\n  \"source_node_run_id\": \"\",\n  \"relay_selection\": {},\n  \"edge_contract\": {},\n  \"node_execution_guide\": {},\n  \"workflow_revision\": {\n    \"version\": 1,\n    \"hash\": \"db8b2fa2b5347cd5\",\n    \"node_count\": 7,\n    \"edge_count\": 3,\n    \"nodes\": {\n      \"chatgpt-remote-image-service-nrmj\": {\n        \"title\": \"Chatgpt Remote Image Service\",\n        \"skill\": {\n          \"id\": \"chatgpt-remote-image-service\",\n          \"source\": \"skill-installer\",\n          \"install_command\": \"bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')\",\n          \"source_digest\": {\n            \"installer_url\": \"https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544\",\n            \"zip_url\": \"https://skill.vyibc.com/chatgpt-remote-image-service-20260629010255.zip\",\n            \"files\": [\n              {\n                \"path\": \"chatgpt-remote-image-service/agents/openai.yaml\",\n                \"bytes\": 227,\n                \"truncated\": false\n              },\n              {\n                \"path\": \"chatgpt-remote-image-service/scripts/chatgpt-remote-image.sh\",\n                \"bytes\": 5390,\n                \"truncated\": false\n              },\n              {\n                \"path\": \"chatgpt-remote-image-service/SKILL.md\",\n                \"bytes\": 3484,\n                \"truncated\": false\n              }\n            ]\n          }\n        },\n        \"mode\": \"\",\n        \"needs\": [],\n        \"inputs\": {},\n        \"optional_inputs\": {},\n        \"outputs\": {\n          \"root\": \"raw/node-runs/{run_id}/outputs\",\n          \"manifest\": \"raw/node-runs/{run_id}/outputs/manifest.json\",\n          \"expected\": {\n            \"result\": {\n              \"description\": \"Skill execution result summary.\",\n              \"relayable\": true\n            },\n            \"image_url\": {\n              \"description\": \"Result value mentioned in skill source as `imageUrl`.\",\n              \"value_type\": \"url\",\n              \"relayable\": true,\n              \"evidence\": \"source result marker imageUrl\"\n            },\n            \"public_image_url\": {\n              \"description\": \"Result value mentioned in skill source as `publicImageUrl`.\",\n              \"value_type\": \"url\",\n              \"relayable\": true,\n              \"evidence\": \"source result marker publicImageUrl\"\n            },\n            \"status\": {\n              \"description\": \"Result value mentioned in skill source as `status`.\",\n              \"value_type\": \"text\",\n              \"relayable\": true,\n              \"evidence\": \"source result marker status\"\n            },\n            \"task_id\": {\n              \"description\": \"Result value mentioned in skill source as `taskId`.\",\n              \"value_type\": \"text\",\n              \"relayable\": true,\n              \"evidence\": \"source result marker taskId\"\n            },\n            \"status_json\": {\n              \"description\": \"Runtime value captured by script variable `status_json`.\",\n              \"value_type\": \"json\",\n              \"relayable\": false,\n              \"evidence\": \"source script variable status_json\"\n            },\n            \"submit_json\": {\n              \"description\": \"Runtime value captured by script variable `submit_json`.\",\n              \"value_type\": \"json\",\n              \"relayable\": true,\n              \"evidence\": \"source script variable submit_json\"\n            },\n            \"generated_images\": {\n              \"description\": \"Generated image files or public image URLs.\",\n              \"value_type\": \"image\",\n              \"relayable\": true\n            },\n            \"images\": {\n              \"description\": \"Generated image files.\",\n              \"relayable\": true\n            }\n          }\n        },\n        \"capabilities\": {\n          \"git\": {\n            \"enabled\": true,\n            \"required\": false\n          },\n          \"telegram\": {\n            \"enabled\": false,\n            \"required\": false\n          },\n          \"sse\": {\n            \"enabled\": true,\n            \"required\": true\n          }\n        }\n      },\n      \"notebooklm-research\": {\n        \"title\": \"NotebookLM 研究\",\n        \"skill\": \"sop-notebooklm-research\",\n        \"mode\": \"blocking\",\n        \"needs\": [\n          \"youtube-fetch\"\n        ],\n        \"inputs\": {\n          \"source_url\": \"youtube-fetch.outputs.source_url\",\n          \"metadata_file\": \"youtube-fetch.outputs.metadata_file\"\n        },\n        \"optional_inputs\": {},\n        \"outputs\": {\n          \"reports\": \"raw/notebooklm-analysis/*.md\",\n          \"mindmaps\": \"raw/notebooklm-mindmaps/*.json\"\n        },\n        \"capabilities\": {}\n      },\n      \"retry\": {\n        \"title\": \"手动重试\",\n        \"skill\": \"sop-retry\",\n        \"mode\": \"manual\",\n        \"needs\": [],\n        \"inputs\": {},\n        \"optional_inputs\": {},\n        \"outputs\": {},\n        \"capabilities\": {}\n      },\n      \"tg-notify\": {\n        \"title\": \"Telegram 通知\",\n        \"skill\": \"sop-tg-notify\",\n        \"mode\": \"blocking\",\n        \"needs\": [\n          \"wiki-build\"\n        ],\n        \"inputs\": {\n          \"index\": {\n            \"from\": \"wiki-build.outputs.index\",\n            \"required\": true,\n            \"kind\": \"file\",\n            \"type\": \"file\",\n            \"value_type\": \"markdown\"\n          }\n        },\n        \"optional_inputs\": {\n          \"message\": {\n            \"from\": \"edge.message\",\n            \"required\": false,\n            \"kind\": \"scalar\",\n            \"type\": \"string\",\n            \"value_type\": \"text\",\n            \"resolvers\": [\n              {\n                \"id\": \"direct-text\",\n                \"kind\": \"direct\"\n              },\n              {\n                \"id\": \"metadata-title\",\n                \"kind\": \"json_path\",\n                \"path\": \"$.title\"\n              },\n              {\n                \"id\": \"metadata-description\",\n                \"kind\": \"json_path\",\n                \"path\": \"$.description\"\n              }\n            ]\n          }\n        },\n        \"outputs\": {\n          \"telegram_message\": {\n            \"path\": \"logs/pipeline-runs/pipe-{run_id}.json\",\n            \"kind\": \"file\",\n            \"type\": \"file\",\n            \"value_type\": \"json\",\n            \"relayable\": false\n          }\n        },\n        \"capabilities\": {}\n      },\n      \"wiki-build\": {\n        \"title\": \"Wiki 知识图谱构建\",\n        \"skill\": \"sop-wiki-build\",\n        \"mode\": \"blocking\",\n        \"needs\": [\n          \"notebooklm-research\"\n        ],\n        \"inputs\": {\n          \"reports\": {\n            \"from\": \"notebooklm-research.outputs.reports\",\n            \"kind\": \"files\",\n            \"type\": \"files\",\n            \"value_type\": \"markdown\"\n          }\n        },\n        \"optional_inputs\": {\n          \"deep_research\": {\n            \"from\": \"youtube-deep-research.outputs.analysis_file\",\n            \"required\": false,\n            \"kind\": \"files\",\n            \"type\": \"files\",\n            \"value_type\": \"markdown\"\n          }\n        },\n        \"outputs\": {\n          \"index\": {\n            \"path\": \"index.md\",\n            \"kind\": \"file\",\n            \"type\": \"file\",\n            \"value_type\": \"markdown\",\n            \"relayable\": true\n          },\n          \"pages\": {\n            \"path\": \"wiki/**\",\n            \"kind\": \"files\",\n            \"type\": \"files\",\n            \"value_type\": \"markdown\",\n            \"relayable\": true\n          }\n        },\n        \"capabilities\": {}\n      },\n      \"youtube-deep-research\": {\n        \"title\": \"YouTube 深度研究\",\n        \"skill\": \"sop-youtube-deep-research\",\n        \"mode\": \"sidecar\",\n        \"needs\": [\n          \"youtube-fetch\"\n        ],\n        \"inputs\": {\n          \"source_url\": {\n            \"from\": \"youtube-fetch.outputs.source_url\",\n            \"kind\": \"scalar\",\n            \"type\": \"string\",\n            \"value_type\": \"url\",\n            \"resolvers\": [\n              {\n                \"id\": \"direct-url\",\n                \"kind\": \"direct\"\n              },\n              {\n                \"id\": \"metadata-source-url\",\n                \"kind\": \"json_path\",\n                \"path\": \"$.source_url\"\n              },\n              {\n                \"id\": \"metadata-youtube-url\",\n                \"kind\": \"json_path\",\n                \"path\": \"$.youtube_url\"\n              },\n              {\n                \"id\": \"text-url\",\n                \"kind\": \"regex\",\n                \"pattern\": \"https?://(?:www\\\\.)?(?:youtube\\\\.com/watch\\\\?v=[A-Za-z0-9_-]+[^\\\\s\\\"'<>)]*|youtu\\\\.be/[A-Za-z0-9_-]+[^\\\\s\\\"'<>)]*)\"\n              }\n            ]\n          }\n        },\n        \"optional_inputs\": {},\n        \"outputs\": {\n          \"analysis_file\": {\n            \"path\": \"raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md\",\n            \"kind\": \"file\",\n            \"type\": \"file\",\n            \"value_type\": \"markdown\",\n            \"relayable\": true,\n            \"role\": \"wiki-source\"\n          },\n          \"transcript_file\": {\n            \"path\": \"raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt\",\n            \"kind\": \"file\",\n            \"type\": \"file\",\n            \"value_type\": \"text\",\n            \"relayable\": true,\n            \"role\": \"transcript\"\n          }\n        },\n        \"capabilities\": {\n          \"git\": {\n            \"enabled\": true,\n            \"required\": false,\n            \"managed_by\": \"runtime-harness\",\n            \"editable\": true,\n            \"save_scope\": \"node-definition\",\n            \"description\": \"Persist this node's workspace outputs to the current Instance repo.\",\n            \"paths\": [\n              \"raw/youtube-deep-research/{pipeline_id}/outputs/**\",\n              \"raw/youtube-deep-research/{pipeline_id}/raw/**\"\n            ]\n          },\n          \"telegram\": {\n            \"enabled\": true,\n            \"required\": false,\n            \"managed_by\": \"runtime-harness\",\n            \"editable\": true,\n            \"save_scope\": \"node-definition\",\n            \"description\": \"Send progress notifications through the current Instance Telegram config.\",\n            \"trigger\": \"stage-lifecycle\",\n            \"triggers\": [\n              \"start\",\n              \"done\",\n              \"failed\"\n            ]\n          }\n        }\n      },\n      \"youtube-fetch\": {\n        \"title\": \"YouTube 元数据获取\",\n        \"skill\": \"sop-youtube-fetch\",\n        \"mode\": \"blocking\",\n        \"needs\": [],\n        \"inputs\": {\n          \"source_url\": {\n            \"from\": \"context.source_url\",\n            \"kind\": \"scalar\",\n            \"type\": \"string\",\n            \"value_type\": \"url\"\n          }\n        },\n        \"optional_inputs\": {},\n        \"outputs\": {\n          \"source_url\": {\n            \"from\": \"context.source_url\",\n            \"kind\": \"scalar\",\n            \"type\": \"string\",\n            \"value_type\": \"url\",\n            \"relayable\": true\n          },\n          \"metadata_file\": {\n            \"from\": \"context.stage_b_fetch.meta_file\",\n            \"kind\": \"file\",\n            \"type\": \"file\",\n            \"value_type\": \"json\",\n            \"relayable\": true\n          }\n        },\n        \"capabilities\": {}\n      }\n    },\n    \"edges\": [\n      {\n        \"id\": \"edge-youtube-fetch-to-youtube-deep-research\",\n        \"from\": \"youtube-fetch\",\n        \"to\": \"youtube-deep-research\",\n        \"relay\": {\n          \"intent\": {\n            \"title\": \"将视频地址交给深度研究节点\",\n            \"brief\": \"下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。\"\n          },\n          \"bindings\": [\n            {\n              \"target_input\": \"source_url\",\n              \"required\": true,\n              \"source\": {\n                \"node\": \"youtube-fetch\",\n                \"output\": \"source_url\",\n                \"extractor\": {\n                  \"id\": \"direct-url\",\n                  \"kind\": \"direct\"\n                }\n              }\n            }\n          ],\n          \"resolver\": {\n            \"strategy\": \"explicit_first\",\n            \"fallback\": \"block\"\n          },\n          \"validation\": {\n            \"on_missing_required\": \"block\",\n            \"on_multiple_candidates\": \"needs_review\",\n            \"on_type_mismatch\": \"block\"\n          }\n        }\n      },\n      {\n        \"id\": \"edge-youtube-fetch-title-to-tg-notify\",\n        \"from\": \"youtube-fetch\",\n        \"to\": \"tg-notify\",\n        \"relay\": {\n          \"intent\": {\n            \"title\": \"将视频标题作为通知内容\",\n            \"brief\": \"这条边只用于测试或自定义工作流，将 metadata_file 中的视频标题提取成 Telegram 文本消息。\"\n          },\n          \"bindings\": [\n            {\n              \"target_input\": \"message\",\n              \"required\": true,\n              \"source\": {\n                \"node\": \"youtube-fetch\",\n                \"output\": \"metadata_file\",\n                \"extractor\": {\n                  \"id\": \"metadata-title\",\n                  \"kind\": \"json_path\",\n                  \"path\": \"$.title\"\n                }\n              }\n            }\n          ],\n          \"resolver\": {\n            \"strategy\": \"explicit_first\",\n            \"fallback\": \"needs_review\"\n          },\n          \"validation\": {\n            \"on_missing_required\": \"block\",\n            \"on_multiple_candidates\": \"needs_review\",\n            \"on_type_mismatch\": \"block\"\n          }\n        }\n      },\n      {\n        \"id\": \"edge-youtube-deep-research-to-wiki-build\",\n        \"from\": \"youtube-deep-research\",\n        \"to\": \"wiki-build\",\n        \"relay\": {\n          \"intent\": {\n            \"title\": \"将深度研究产物交给 Wiki 构建节点\",\n            \"brief\": \"将 analysis_file 作为 Wiki 构建的 deep_research 补充材料；transcript_file 可在自定义边中作为补充上下文。\"\n          },\n          \"bindings\": [\n            {\n              \"target_input\": \"deep_research\",\n              \"required\": false,\n              \"source\": {\n                \"node\": \"youtube-deep-research\",\n                \"output\": \"analysis_file\",\n                \"extractor\": {\n                  \"id\": \"direct-file\",\n                  \"kind\": \"direct\"\n                }\n              }\n            }\n          ],\n          \"resolver\": {\n            \"strategy\": \"explicit_first\",\n            \"fallback\": \"needs_review\"\n          },\n          \"validation\": {\n            \"on_missing_required\": \"needs_review\",\n            \"on_multiple_candidates\": \"needs_review\",\n            \"on_type_mismatch\": \"needs_review\"\n          }\n        }\n      }\n    ]\n  },\n  \"relay_context\": {},\n  \"relay_context_brief\": \"\",\n  \"resolution_trace\": [],\n  \"started_at\": \"2026-06-29T17:57:13.410782+00:00\",\n  \"finished_at\": \"\",\n  \"elapsed_ms\": 282,\n  \"created_from\": \"manual\",\n  \"retry_of\": \"\",\n  \"pending\": true,\n  \"reason\": \"\",\n  \"steps\": [\n    {\n      \"id\": \"create-run\",\n      \"title\": \"Create node run workspace\",\n      \"status\": \"done\",\n      \"summary\": \"Node Run record is allocated independently from Workflow Run.\",\n      \"detail\": {\n        \"storage\": \"raw/node-runs/{node_run_id}\"\n      },\n      \"started_at\": \"2026-06-29T17:57:13.410782+00:00\",\n      \"elapsed_ms\": 35,\n      \"finished_at\": \"2026-06-29T17:57:13.445782+00:00\"\n    },\n    {\n      \"id\": \"load-definition\",\n      \"title\": \"Load node definition\",\n      \"status\": \"done\",\n      \"summary\": \"Loaded chatgpt-remote-image-service-nrmj from youtube-research-wiki.\",\n      \"detail\": {\n        \"workflow_id\": \"youtube-research-wiki\",\n        \"node_id\": \"chatgpt-remote-image-service-nrmj\",\n        \"node_title\": \"Chatgpt Remote Image Service\"\n      },\n      \"started_at\": \"2026-06-29T17:57:13.445782+00:00\",\n      \"elapsed_ms\": 35,\n      \"finished_at\": \"2026-06-29T17:57:13.480782+00:00\"\n    },\n    {\n      \"id\": \"resolve-context\",\n      \"title\": \"Resolve Runtime / Instance / Workflow context\",\n      \"status\": \"done\",\n      \"summary\": \"youtube-wiki · wiki-sop-new-instance · youtube-research-wiki\",\n      \"detail\": {\n        \"run",
+            "preview_truncated": true
+          },
+          {
+            "id": "44451bcef2205f2d",
+            "producer": "chatgpt-remote-image-service-nrmj",
+            "output": "node_run_events",
+            "type": "file",
+            "format": "jsonl",
+            "path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/events.jsonl",
+            "title": "Node Run Events",
+            "size": 4458,
+            "mime_type": "application/octet-stream",
+            "tags": [],
+            "metadata": {},
+            "resolution": "execution-evidence",
+            "preview": "{\"sequence\": 1, \"event\": \"node_run.step.done\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"create-run\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Create node run workspace\", \"summary\": \"Node Run record is allocated independently from Workflow Run.\"}}\n{\"sequence\": 2, \"event\": \"node_run.step.done\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"load-definition\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Load node definition\", \"summary\": \"Loaded chatgpt-remote-image-service-nrmj from youtube-research-wiki.\"}}\n{\"sequence\": 3, \"event\": \"node_run.step.done\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"resolve-context\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Resolve Runtime / Instance / Workflow context\", \"summary\": \"youtube-wiki · wiki-sop-new-instance · youtube-research-wiki\"}}\n{\"sequence\": 4, \"event\": \"node_run.step.done\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"resolve-inputs\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Resolve node inputs\", \"summary\": \"1 resolved, 0 pending relay, 0 missing.\"}}\n{\"sequence\": 5, \"event\": \"node_run.step.done\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"resolve-config\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Resolve execution config\", \"summary\": \"Runtime, Instance and capability config resolved.\"}}\n{\"sequence\": 6, \"event\": \"node_run.step.waiting\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"generate-agent-request\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Generate Agent Request\", \"summary\": \"Waiting to render the Hermes skill request.\"}}\n{\"sequence\": 7, \"event\": \"node_run.step.skipped\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"probe-capabilities\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Probe attached capabilities\", \"summary\": \"Capability probes are explicit. Telegram send probes require user confirmation.\"}}\n{\"sequence\": 8, \"event\": \"node_run.step.done\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"build-execution-plan\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Build node execution plan\", \"summary\": \"Prepared real-node execution plan.\"}}\n{\"sequence\": 9, \"event\": \"node_run.step.running\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"execute-or-dry-run\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Execute or dry-run node\", \"summary\": \"Real stage wrapper is running in the background.\"}}\n{\"sequence\": 10, \"event\": \"node_run.step.waiting\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"validate-outputs\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Validate declared outputs\", \"summary\": \"Waiting for the real node to produce declared outputs.\"}}\n{\"sequence\": 11, \"event\": \"node_run.step.skipped\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"persist-to-github\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Persist to GitHub\", \"summary\": \"GitHub persistence is not attached for this Node Run.\"}}\n{\"sequence\": 12, \"event\": \"node_run.step.skipped\", \"node_run_id\": \"node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467\", \"node_id\": \"chatgpt-remote-image-service-nrmj\", \"step_id\": \"send-telegram-notification\", \"ts\": \"2026-06-29T17:57:13.437457+00:00\", \"data\": {\"title\": \"Send Telegram notification\", \"summary\": \"Telegram notification is not attached for this Node Run.\"}}\n",
+            "preview_truncated": false
+          }
+        ],
+        "count": 6
+      },
+      "output_categories": {
+        "core_outputs": {
+          "title": "核心输出",
+          "description": "节点声明 outputs 对应的业务结果。",
+          "files": [],
+          "count": 0
+        },
+        "raw_files": {
+          "title": "节点原始文件",
+          "description": "节点 Skill/Worker 产生的原始响应、字幕和中间文件。",
+          "files": [],
+          "count": 0
+        },
+        "run_records": {
+          "title": "运行记录",
+          "description": "Node Run 工作台、事件、状态和 capability 记录。",
+          "files": [
+            "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/executor.json",
+            "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/receipt.json",
+            "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/request.md",
+            "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/response.txt",
+            "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/events.jsonl",
+            "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/input.json",
+            "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources/0001.txt",
+            "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources/manifest.json",
+            "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json",
+            "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/request.json",
+            "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/result.json"
+          ],
+          "count": 11
+        },
+        "node_run_outputs": {
+          "title": "统一输出目录",
+          "description": "本次 Node Run 写入标准 outputs 目录的可中继产物，供下游节点作为目录输入。",
+          "files": [
+            "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json"
+          ],
+          "count": 1
+        }
+      },
+      "input_directory": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources",
+      "input_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources/manifest.json",
+      "output_directory": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs",
+      "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json",
+      "validation": {
+        "status": "failed",
+        "missing_outputs": [],
+        "unexpected_outputs": [],
+        "business_output_status": {
+          "status": "missing_business_outputs",
+          "expected_outputs": [
+            "result",
+            "image_url",
+            "public_image_url",
+            "status",
+            "task_id",
+            "status_json",
+            "submit_json",
+            "generated_images",
+            "images"
+          ],
+          "required_outputs": [],
+          "present_outputs": [],
+          "missing_required_outputs": [],
+          "business_outputs": {},
+          "business_artifact_count": 0
+        },
+        "execution_status": "failed",
+        "error": {
+          "taskId": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+          "status": "failed",
+          "stage": "waiting for locator('[role=\"dialog\"]').last() to be visible",
+          "error": "Worker exited with code 1",
+          "summary": "The ChatGPT remote image service connected to a browser worker and submitted the prompt successfully, but failed at the download stage. The generated image appeared (visible at ~40s), but the dialog for download confirmation was not found within the 10s timeout — possibly a ChatGPT UI change or transient browser state. The remote browser worker (worker-1, CDP port 9333) was logged in and active."
+        }
+      },
+      "business_output_status": {
+        "status": "missing_business_outputs",
+        "expected_outputs": [
+          "result",
+          "image_url",
+          "public_image_url",
+          "status",
+          "task_id",
+          "status_json",
+          "submit_json",
+          "generated_images",
+          "images"
+        ],
+        "required_outputs": [],
+        "present_outputs": [],
+        "missing_required_outputs": [],
+        "business_outputs": {},
+        "business_artifact_count": 0
+      },
+      "capabilities": {},
+      "agent_request": {
+        "request_path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/request.md",
+        "version": 1,
+        "executor": "hermes",
+        "requested_skill": "chatgpt-remote-image-service",
+        "node_id": "chatgpt-remote-image-service-nrmj",
+        "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+        "runtime_id": "youtube-wiki",
+        "instance_id": "wiki-sop-new-instance",
+        "workflow_id": "youtube-research-wiki",
+        "template_source": "default",
+        "template_version": "hermes-agent-executor.v1",
+        "response_path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/response.txt",
+        "receipt_path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/receipt.json",
+        "input_manifest_path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources/manifest.json",
+        "output_manifest_path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json",
+        "node_execution_guide": {},
+        "stage_command": [],
+        "stage_command_preview": "",
+        "created_at": "2026-06-29T17:57:14.449302+00:00"
+      },
+      "detail": {
+        "receipt": {
+          "runtime_id": "youtube-wiki",
+          "instance_id": "wiki-sop-new-instance",
+          "workflow_id": "youtube-research-wiki",
+          "node_id": "chatgpt-remote-image-service-nrmj",
+          "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+          "executed_at": "2026-06-29T17:57:56Z",
+          "completed_at": "2026-06-29T17:58:48Z",
+          "status": "failed",
+          "skill": "chatgpt-remote-image-service",
+          "entry_inputs": {
+            "prompt": "生成一张小猫睡觉的照片"
+          },
+          "error": {
+            "taskId": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+            "status": "failed",
+            "stage": "waiting for locator('[role=\"dialog\"]').last() to be visible",
+            "error": "Worker exited with code 1",
+            "summary": "The ChatGPT remote image service connected to a browser worker and submitted the prompt successfully, but failed at the download stage. The generated image appeared (visible at ~40s), but the dialog for download confirmation was not found within the 10s timeout — possibly a ChatGPT UI change or transient browser state. The remote browser worker (worker-1, CDP port 9333) was logged in and active."
+          }
+        },
+        "manifest_status": "failed",
+        "manifest_summary": {
+          "prompt": "生成一张小猫睡觉的照片",
+          "taskId": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+          "result": "The remote service failed at the download dialog phase. The prompt was submitted and image was generated (visible at ~40s), but the browser could not locate the download confirmation dialog ([role=\"dialog\"]) within timeout."
+        },
+        "manifest_error": {
+          "taskId": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+          "status": "failed",
+          "stage": "  - waiting for locator('[role=\"dialog\"]').last() to be visible",
+          "error": "Worker exited with code 1",
+          "recentLogs": [
+            "stage.connectBrowser done (933ms)",
+            "stage.preparePage done (1794ms)",
+            "stage.waitComposer done (5465ms)",
+            "stage.enterImageMode done (7304ms)",
+            "stage.fillPrompt done (7599ms)",
+            "stage.waitSendEnabled done (7745ms)",
+            "stage.snapshotExistingGeneratedImages done (7752ms, count=0)",
+            "stage.clickSend -> sentMs=8420ms",
+            "stage.waitForGeneratedImage -> generatedVisibleMs=40256ms",
+            "stage.downloadImage -> FAILED: locator('[role=\"dialog\"]').last() timeout 10s",
+            "Worker exited with code 1"
+          ]
+        },
+        "response_path": "raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/response.txt",
+        "actual_outputs": {},
+        "validation": {
+          "status": "failed",
+          "missing_outputs": [],
+          "unexpected_outputs": [],
+          "business_output_status": {
+            "status": "missing_business_outputs",
+            "expected_outputs": [
+              "result",
+              "image_url",
+              "public_image_url",
+              "status",
+              "task_id",
+              "status_json",
+              "submit_json",
+              "generated_images",
+              "images"
+            ],
+            "required_outputs": [],
+            "present_outputs": [],
+            "missing_required_outputs": [],
+            "business_outputs": {},
+            "business_artifact_count": 0
+          },
+          "execution_status": "failed",
+          "error": {
+            "taskId": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+            "status": "failed",
+            "stage": "waiting for locator('[role=\"dialog\"]').last() to be visible",
+            "error": "Worker exited with code 1",
+            "summary": "The ChatGPT remote image service connected to a browser worker and submitted the prompt successfully, but failed at the download stage. The generated image appeared (visible at ~40s), but the dialog for download confirmation was not found within the 10s timeout — possibly a ChatGPT UI change or transient browser state. The remote browser worker (worker-1, CDP port 9333) was logged in and active."
+          }
+        }
+      }
+    }
+  }
+}

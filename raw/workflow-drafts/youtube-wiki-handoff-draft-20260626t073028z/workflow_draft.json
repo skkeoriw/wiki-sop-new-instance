@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "draft_type": "workflow_draft",
+  "draft_id": "youtube-wiki-handoff-draft-20260626t073028z",
+  "workflow_id": "youtube-research-wiki",
+  "name": "youtube-wiki-handoff-draft",
+  "goal": "YouTube 元数据获取 agent 将视频来源交给深度研究 agent，深度研究 agent 再把研究上下文交给 wiki-build agent 生成 wiki 页面。",
+  "created_at": "2026-06-26T07:30:28Z",
+  "runtime_id": "youtube-wiki",
+  "instance_id": "wiki-sop-new-instance",
+  "draft": {
+    "name": "youtube-wiki-handoff-draft",
+    "goal": "YouTube 元数据获取 agent 将视频来源交给深度研究 agent，深度研究 agent 再把研究上下文交给 wiki-build agent 生成 wiki 页面。",
+    "nodes": [
+      {
+        "nodeId": "youtube-fetch",
+        "signature": "{\"nodeId\":\"youtube-fetch\",\"title\":\"YouTube 元数据获取\",\"needs\":[],\"inputs\":[\"source_url\"],\"optionalInputs\":[],\"outputs\":[\"metadata_file\",\"source_url\"]}"
+      },
+      {
+        "nodeId": "youtube-deep-research",
+        "signature": "{\"nodeId\":\"youtube-deep-research\",\"title\":\"YouTube 深度研究\",\"needs\":[\"youtube-fetch\"],\"inputs\":[\"source_url\"],\"optionalInputs\":[],\"outputs\":[\"analysis_file\",\"transcript_file\"]}"
+      },
+      {
+        "nodeId": "wiki-build",
+        "signature": "{\"nodeId\":\"wiki-build\",\"title\":\"Wiki 知识图谱构建\",\"needs\":[\"notebooklm-research\"],\"inputs\":[\"deep_research\",\"reports\"],\"optionalInputs\":[\"deep_research\"],\"outputs\":[\"index\",\"pages\"]}"
+      }
+    ],
+    "edges": [
+      {
+        "id": "youtube-fetch-to-youtube-deep-research-1782459027373",
+        "from": "youtube-fetch",
+        "to": "youtube-deep-research",
+        "sourceIntent": "metadata_file: file; source_url: string",
+        "targetIntent": "source_url: string",
+        "instruction": "把上游视频 URL 交给深度研究节点，metadata 只作为可选上下文。",
+        "fromSignature": "{\"nodeId\":\"youtube-fetch\",\"title\":\"YouTube 元数据获取\",\"needs\":[],\"inputs\":[\"source_url\"],\"optionalInputs\":[],\"outputs\":[\"metadata_file\",\"source_url\"]}",
+        "toSignature": "{\"nodeId\":\"youtube-deep-research\",\"title\":\"YouTube 深度研究\",\"needs\":[\"youtube-fetch\"],\"inputs\":[\"source_url\"],\"optionalInputs\":[],\"outputs\":[\"analysis_file\",\"transcript_file\"]}",
+        "relayMode": "auto_by_target_inputs",
+        "relayMappings": []
+      },
+      {
+        "id": "youtube-deep-research-to-wiki-build-1782459027374",
+        "from": "youtube-deep-research",
+        "to": "wiki-build",
+        "sourceIntent": "analysis_file: file; transcript_file: file",
+        "targetIntent": "deep_research: files; reports: files",
+        "instruction": "把深度研究生成的分析文档交给 wiki-build，作为补充研究材料。",
+        "fromSignature": "{\"nodeId\":\"youtube-deep-research\",\"title\":\"YouTube 深度研究\",\"needs\":[\"youtube-fetch\"],\"inputs\":[\"source_url\"],\"optionalInputs\":[],\"outputs\":[\"analysis_file\",\"transcript_file\"]}",
+        "toSignature": "{\"nodeId\":\"wiki-build\",\"title\":\"Wiki 知识图谱构建\",\"needs\":[\"notebooklm-research\"],\"inputs\":[\"deep_research\",\"reports\"],\"optionalInputs\":[\"deep_research\"],\"outputs\":[\"index\",\"pages\"]}",
+        "relayMode": "auto_by_target_inputs",
+        "relayMappings": []
+      }
+    ],
+    "positions": {
+      "youtube-fetch": {
+        "x": 0,
+        "y": 0
+      },
+      "youtube-deep-research": {
+        "x": 292,
+        "y": 96
+      },
+      "wiki-build": {
+        "x": 584,
+        "y": 0
+      }
+    }
+  },
+  "edge_count": 2,
+  "ready_edge_count": 0,
+  "runtime_sop_status": "not_generated",
+  "active_runtime_sop_changed": false,
+  "production_dag_changed": false
+}

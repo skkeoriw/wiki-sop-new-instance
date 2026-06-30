@@ -1,0 +1,558 @@
+{
+  "status": "passed",
+  "execution_status": "done",
+  "business_output_status": {
+    "status": "passed",
+    "expected_outputs": [
+      "result",
+      "status",
+      "metadata_json",
+      "source_url_txt",
+      "result_json"
+    ],
+    "required_outputs": [],
+    "present_outputs": [
+      "result"
+    ],
+    "missing_required_outputs": [],
+    "business_outputs": {
+      "result": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs/result.json"
+      ]
+    },
+    "business_artifact_count": 1
+  },
+  "probe_id": "youtube-metadata-fetch-probe-20260630T093629Z-0bd1f4",
+  "draft_id": "youtube-metadata-fetch-1782810583",
+  "node_id": "youtube-metadata-fetch",
+  "node_run_id": "node-run-youtube-metadata-fetch-20260630T093629-ddded2",
+  "http_status": 200,
+  "mode": "node-draft-probe-run",
+  "manual_inputs": {
+    "source_url": "https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s"
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": false
+    },
+    "telegram": {
+      "enabled": false
+    }
+  },
+  "result": {
+    "node_run_id": "node-run-youtube-metadata-fetch-20260630T093629-ddded2",
+    "status": "done",
+    "pending": false,
+    "started_at": "2026-06-30T09:36:29.666709+00:00",
+    "finished_at": "2026-06-30T09:43:00.811250+00:00",
+    "elapsed_ms": 390846,
+    "validation": {
+      "status": "passed",
+      "missing_outputs": [],
+      "unexpected_outputs": [],
+      "business_output_status": {
+        "status": "passed",
+        "expected_outputs": [
+          "result",
+          "status",
+          "metadata_json",
+          "source_url_txt",
+          "result_json"
+        ],
+        "required_outputs": [],
+        "present_outputs": [
+          "result"
+        ],
+        "missing_required_outputs": [],
+        "business_outputs": {
+          "result": [
+            "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs/result.json"
+          ]
+        },
+        "business_artifact_count": 2
+      },
+      "success_evidence": {
+        "passed": false,
+        "signals": [
+          {
+            "source": "output_artifacts",
+            "count": 1
+          }
+        ],
+        "failures": [
+          {
+            "source": "manifest.status",
+            "status": "failed"
+          },
+          {
+            "source": "receipt.status",
+            "status": "failed"
+          }
+        ]
+      }
+    },
+    "output_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs/manifest.json",
+    "output_directory": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs",
+    "actual_outputs": {
+      "result": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs/result.json"
+      ],
+      "status": [],
+      "metadata_json": [],
+      "source_url_txt": [],
+      "result_json": []
+    },
+    "business_artifacts": [
+      {
+        "id": "77dd2221711766e4",
+        "producer": "youtube-metadata-fetch",
+        "output": "result",
+        "type": "file",
+        "format": "json",
+        "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs/result.json",
+        "title": "result.json",
+        "size": 956,
+        "mime_type": "application/json",
+        "tags": [],
+        "metadata": {
+          "manifest_item": {
+            "path": "result.json",
+            "output_name": "result",
+            "value_type": "json",
+            "description": "Execution result with failure details"
+          }
+        },
+        "resolution": "node-run-output-manifest",
+        "preview": "{\n  \"status\": \"failed\",\n  \"source_url\": \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\",\n  \"error\": \"metadata API HTTP 403: Cloudflare Error 1010 - access denied, browser signature banned by site owner\",\n  \"error_detail\": {\n    \"type\": \"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1010/\",\n    \"title\": \"Error 1010: Access denied\",\n    \"status\": 403,\n    \"detail\": \"The site owner has blocked access based on your browser's signature.\",\n    \"error_code\": 1010,\n    \"error_name\": \"browser_signature_banned\",\n    \"error_category\": \"access_denied\",\n    \"cloudflare_error\": true,\n    \"retryable\": false,\n    \"owner_action_required\": true,\n    \"what_you_should_do\": \"Do not retry. The downstream YouTube content API (Cloudflare Workers) has banned this environment's user-agent. The site owner must whitelist this worker's UA or deploy a new API endpoint.\"\n  },\n  \"fetched_at\": \"2026-06-30T09:37:29Z\"\n}\n",
+        "preview_truncated": false
+      }
+    ],
+    "core_outputs": [
+      {
+        "name": "result",
+        "kind": "file",
+        "type": "file",
+        "value": [
+          "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs/result.json"
+        ],
+        "files": [
+          "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs/result.json"
+        ],
+        "artifacts": [
+          {
+            "id": "77dd2221711766e4",
+            "producer": "youtube-metadata-fetch",
+            "output": "result",
+            "type": "file",
+            "format": "json",
+            "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs/result.json",
+            "title": "result.json",
+            "size": 956,
+            "mime_type": "application/json",
+            "tags": [],
+            "metadata": {
+              "manifest_item": {
+                "path": "result.json",
+                "output_name": "result",
+                "value_type": "json",
+                "description": "Execution result with failure details"
+              }
+            },
+            "resolution": "node-run-output-manifest",
+            "preview": "{\n  \"status\": \"failed\",\n  \"source_url\": \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\",\n  \"error\": \"metadata API HTTP 403: Cloudflare Error 1010 - access denied, browser signature banned by site owner\",\n  \"error_detail\": {\n    \"type\": \"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1010/\",\n    \"title\": \"Error 1010: Access denied\",\n    \"status\": 403,\n    \"detail\": \"The site owner has blocked access based on your browser's signature.\",\n    \"error_code\": 1010,\n    \"error_name\": \"browser_signature_banned\",\n    \"error_category\": \"access_denied\",\n    \"cloudflare_error\": true,\n    \"retryable\": false,\n    \"owner_action_required\": true,\n    \"what_you_should_do\": \"Do not retry. The downstream YouTube content API (Cloudflare Workers) has banned this environment's user-agent. The site owner must whitelist this worker's UA or deploy a new API endpoint.\"\n  },\n  \"fetched_at\": \"2026-06-30T09:37:29Z\"\n}\n",
+            "preview_truncated": false
+          }
+        ],
+        "declared": {
+          "description": "Skill execution result summary.",
+          "relayable": true
+        }
+      },
+      {
+        "name": "status",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `status`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker status"
+        }
+      },
+      {
+        "name": "metadata_json",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Output file `metadata.json` produced or documented by the skill.",
+          "value_type": "json",
+          "relayable": true,
+          "evidence": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py: metadata.json"
+        }
+      },
+      {
+        "name": "source_url_txt",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Output file `source-url.txt` produced or documented by the skill.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py: source-url.txt"
+        }
+      },
+      {
+        "name": "result_json",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Output file `result.json` produced or documented by the skill.",
+          "value_type": "json",
+          "relayable": true,
+          "evidence": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py: result.json"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "id": "create-run",
+        "title": "Create node run workspace",
+        "status": "done",
+        "summary": "Node Run record is allocated independently from Workflow Run.",
+        "started_at": "2026-06-30T09:36:29.666709+00:00",
+        "finished_at": "2026-06-30T09:36:29.701709+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "load-definition",
+        "title": "Load node definition",
+        "status": "done",
+        "summary": "Loaded youtube-metadata-fetch from youtube-research-wiki.",
+        "started_at": "2026-06-30T09:36:29.701709+00:00",
+        "finished_at": "2026-06-30T09:36:29.736709+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-context",
+        "title": "Resolve Runtime / Instance / Workflow context",
+        "status": "done",
+        "summary": "youtube-wiki · wiki-sop-new-instance · youtube-research-wiki",
+        "started_at": "2026-06-30T09:36:29.736709+00:00",
+        "finished_at": "2026-06-30T09:36:29.771709+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-inputs",
+        "title": "Resolve node inputs",
+        "status": "done",
+        "summary": "0 resolved, 0 pending relay, 0 missing.",
+        "started_at": "2026-06-30T09:36:29.771709+00:00",
+        "finished_at": "2026-06-30T09:36:29.806709+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-config",
+        "title": "Resolve execution config",
+        "status": "done",
+        "summary": "Runtime, Instance and capability config resolved.",
+        "started_at": "2026-06-30T09:36:29.806709+00:00",
+        "finished_at": "2026-06-30T09:36:29.841709+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "generate-agent-request",
+        "title": "Generate Agent Request",
+        "status": "done",
+        "summary": "Hermes Agent Request was rendered and saved for this Node Run.",
+        "started_at": "2026-06-30T09:36:29.841709+00:00",
+        "finished_at": "2026-06-30T09:36:29.876709+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "probe-capabilities",
+        "title": "Probe attached capabilities",
+        "status": "skipped",
+        "summary": "Capability probes are explicit. Telegram send probes require user confirmation.",
+        "started_at": "2026-06-30T09:36:29.876709+00:00",
+        "finished_at": "2026-06-30T09:36:29.900709+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "build-execution-plan",
+        "title": "Build node execution plan",
+        "status": "done",
+        "summary": "Prepared real-node execution plan.",
+        "started_at": "2026-06-30T09:36:29.911709+00:00",
+        "finished_at": "2026-06-30T09:36:29.946709+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "execute-or-dry-run",
+        "title": "Execute or dry-run node",
+        "status": "done",
+        "summary": "Real node execution finished and declared business outputs were found.",
+        "started_at": "2026-06-30T09:36:30.293641+00:00",
+        "finished_at": "2026-06-30T09:43:00.787789+00:00",
+        "elapsed_ms": 390494
+      },
+      {
+        "id": "validate-outputs",
+        "title": "Validate declared outputs",
+        "status": "done",
+        "summary": "Declared business outputs were found.",
+        "started_at": "2026-06-30T09:36:29.981709+00:00",
+        "finished_at": "2026-06-30T09:36:30.016709+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "persist-to-github",
+        "title": "Persist to GitHub",
+        "status": "skipped",
+        "summary": "GitHub persistence is not attached for this Node Run.",
+        "started_at": "2026-06-30T09:36:30.016709+00:00",
+        "finished_at": "2026-06-30T09:36:30.040709+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "send-telegram-notification",
+        "title": "Send Telegram notification",
+        "status": "skipped",
+        "summary": "Telegram notification is not attached for this Node Run.",
+        "started_at": "2026-06-30T09:36:30.051709+00:00",
+        "finished_at": "2026-06-30T09:36:30.075709+00:00",
+        "elapsed_ms": 24
+      }
+    ]
+  },
+  "manifest": {
+    "version": 1,
+    "kind": "output",
+    "node_run_id": "node-run-youtube-metadata-fetch-20260630T093629-ddded2",
+    "node_id": "youtube-metadata-fetch",
+    "created_at": "2026-06-30T09:37:29Z",
+    "status": "failed",
+    "items": [
+      {
+        "path": "result.json",
+        "output_name": "result",
+        "value_type": "json",
+        "description": "Execution result with failure details"
+      }
+    ],
+    "errors": [
+      {
+        "code": "API_403_FORBIDDEN",
+        "message": "Cloudflare Error 1010: browser signature banned by site owner",
+        "detail": "The downstream YouTube content API at youtube-content-parse.hb67egcim4.workers.dev returned HTTP 403 with error_code 1010. This is not a transient failure — the UA is blocked.",
+        "retryable": false,
+        "owner_action_required": true
+      }
+    ]
+  },
+  "output_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs/manifest.json",
+  "manifest_records": [
+    {
+      "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs/result.json",
+      "output_name": "result",
+      "value_type": "json",
+      "description": "Execution result with failure details",
+      "output": "result"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "passed",
+      "expected_outputs": [
+        "result",
+        "status",
+        "metadata_json",
+        "source_url_txt",
+        "result_json"
+      ],
+      "required_outputs": [],
+      "present_outputs": [
+        "result"
+      ],
+      "missing_required_outputs": [],
+      "business_outputs": {
+        "result": [
+          "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs/result.json"
+        ]
+      },
+      "business_artifact_count": 2
+    },
+    "success_evidence": {
+      "passed": false,
+      "signals": [
+        {
+          "source": "output_artifacts",
+          "count": 1
+        }
+      ],
+      "failures": [
+        {
+          "source": "manifest.status",
+          "status": "failed"
+        },
+        {
+          "source": "receipt.status",
+          "status": "failed"
+        }
+      ]
+    }
+  },
+  "actual_outputs": {
+    "result": [
+      "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs/result.json"
+    ],
+    "status": [],
+    "metadata_json": [],
+    "source_url_txt": [],
+    "result_json": []
+  },
+  "business_outputs": {
+    "result": [
+      "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs/result.json"
+    ]
+  },
+  "business_artifacts": [
+    {
+      "id": "77dd2221711766e4",
+      "producer": "youtube-metadata-fetch",
+      "output": "result",
+      "type": "file",
+      "format": "json",
+      "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs/result.json",
+      "title": "result.json",
+      "size": 956,
+      "mime_type": "application/json",
+      "tags": [],
+      "metadata": {
+        "manifest_item": {
+          "path": "result.json",
+          "output_name": "result",
+          "value_type": "json",
+          "description": "Execution result with failure details"
+        }
+      },
+      "resolution": "node-run-output-manifest",
+      "preview": "{\n  \"status\": \"failed\",\n  \"source_url\": \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\",\n  \"error\": \"metadata API HTTP 403: Cloudflare Error 1010 - access denied, browser signature banned by site owner\",\n  \"error_detail\": {\n    \"type\": \"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1010/\",\n    \"title\": \"Error 1010: Access denied\",\n    \"status\": 403,\n    \"detail\": \"The site owner has blocked access based on your browser's signature.\",\n    \"error_code\": 1010,\n    \"error_name\": \"browser_signature_banned\",\n    \"error_category\": \"access_denied\",\n    \"cloudflare_error\": true,\n    \"retryable\": false,\n    \"owner_action_required\": true,\n    \"what_you_should_do\": \"Do not retry. The downstream YouTube content API (Cloudflare Workers) has banned this environment's user-agent. The site owner must whitelist this worker's UA or deploy a new API endpoint.\"\n  },\n  \"fetched_at\": \"2026-06-30T09:37:29Z\"\n}\n",
+      "preview_truncated": false
+    }
+  ],
+  "core_outputs": [
+    {
+      "name": "result",
+      "kind": "file",
+      "type": "file",
+      "value": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs/result.json"
+      ],
+      "files": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs/result.json"
+      ],
+      "artifacts": [
+        {
+          "id": "77dd2221711766e4",
+          "producer": "youtube-metadata-fetch",
+          "output": "result",
+          "type": "file",
+          "format": "json",
+          "path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs/result.json",
+          "title": "result.json",
+          "size": 956,
+          "mime_type": "application/json",
+          "tags": [],
+          "metadata": {
+            "manifest_item": {
+              "path": "result.json",
+              "output_name": "result",
+              "value_type": "json",
+              "description": "Execution result with failure details"
+            }
+          },
+          "resolution": "node-run-output-manifest",
+          "preview": "{\n  \"status\": \"failed\",\n  \"source_url\": \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\",\n  \"error\": \"metadata API HTTP 403: Cloudflare Error 1010 - access denied, browser signature banned by site owner\",\n  \"error_detail\": {\n    \"type\": \"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1xxx-errors/error-1010/\",\n    \"title\": \"Error 1010: Access denied\",\n    \"status\": 403,\n    \"detail\": \"The site owner has blocked access based on your browser's signature.\",\n    \"error_code\": 1010,\n    \"error_name\": \"browser_signature_banned\",\n    \"error_category\": \"access_denied\",\n    \"cloudflare_error\": true,\n    \"retryable\": false,\n    \"owner_action_required\": true,\n    \"what_you_should_do\": \"Do not retry. The downstream YouTube content API (Cloudflare Workers) has banned this environment's user-agent. The site owner must whitelist this worker's UA or deploy a new API endpoint.\"\n  },\n  \"fetched_at\": \"2026-06-30T09:37:29Z\"\n}\n",
+          "preview_truncated": false
+        }
+      ],
+      "declared": {
+        "description": "Skill execution result summary.",
+        "relayable": true
+      }
+    },
+    {
+      "name": "status",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `status`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker status"
+      }
+    },
+    {
+      "name": "metadata_json",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Output file `metadata.json` produced or documented by the skill.",
+        "value_type": "json",
+        "relayable": true,
+        "evidence": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py: metadata.json"
+      }
+    },
+    {
+      "name": "source_url_txt",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Output file `source-url.txt` produced or documented by the skill.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py: source-url.txt"
+      }
+    },
+    {
+      "name": "result_json",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Output file `result.json` produced or documented by the skill.",
+        "value_type": "json",
+        "relayable": true,
+        "evidence": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py: result.json"
+      }
+    }
+  ],
+  "created_at": "2026-06-30T09:36:29.675281+00:00",
+  "reconciled_at": "2026-06-30T15:17:14.944520+00:00"
+}

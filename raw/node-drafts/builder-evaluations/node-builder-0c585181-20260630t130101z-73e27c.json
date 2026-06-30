@@ -1,0 +1,1143 @@
+{
+  "ok": true,
+  "status": "done",
+  "http_status": 200,
+  "mode": "node-builder-agent-evaluation-job",
+  "evaluation_id": "node-builder-0c585181-20260630T130101Z-73e27c",
+  "sop_id": "wiki-sop-new-instance",
+  "instance_id": "wiki-sop-new-instance",
+  "started_at": "2026-06-30T13:01:01.384495+00:00",
+  "finished_at": "2026-06-30T13:02:00.662026+00:00",
+  "result": {
+    "ok": true,
+    "mode": "node-builder-agent-evaluation",
+    "request": {
+      "skill_install_command": " bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451') ",
+      "user_instruction": "转换成不绑定上下游的 Runtime Node；首节点测试允许直接输入 source_url，保留超时、轮询间隔和是否包含 transcript 等配置。",
+      "fetch_metadata": true,
+      "async_job": true,
+      "runtime_id": "youtube-wiki",
+      "instance_id": "wiki-sop-new-instance"
+    },
+    "config": {
+      "base_url": {
+        "key": "WIKI_LLM_BASE_URL",
+        "label": "Node Builder LLM Base URL",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_BASE_URL",
+        "masked_value": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "value": "https://api-proxy.chxyka.ccwu.cc/v1"
+      },
+      "api_key": {
+        "key": "WIKI_LLM_API_KEY",
+        "label": "Node Builder LLM API Key",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_API_KEY",
+        "masked_value": "ah-***c68",
+        "value": null
+      },
+      "model": {
+        "key": "WIKI_LLM_MODEL",
+        "label": "Node Builder LLM Model",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_MODEL",
+        "masked_value": "deepseek-v4-pro",
+        "value": "deepseek-v4-pro"
+      },
+      "settings_backend": "file",
+      "precedence": [
+        "node-run-overrides",
+        "instance-settings",
+        "runtime-settings",
+        "global-settings",
+        "bridge-env",
+        "runtime-env-file"
+      ]
+    },
+    "evaluation": {
+      "status": "blocked",
+      "summary": "Node Builder Agent 无法完成 AI 评估。",
+      "skill_identity": {
+        "skill_id": "youtube-deep-research",
+        "title": "Youtube Deep Research",
+        "description": "转换成不绑定上下游的 Runtime Node；首节点测试允许直接输入 source_url，保留超时、轮询间隔和是否包含 transcript 等配置。",
+        "installer_url": "https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451",
+        "trusted_source": true
+      },
+      "node_draft": {
+        "schema": "node-definition/v1",
+        "id": "youtube-deep-research",
+        "title": "Youtube Deep Research",
+        "description": "转换成不绑定上下游的 Runtime Node；首节点测试允许直接输入 source_url，保留超时、轮询间隔和是否包含 transcript 等配置。",
+        "version": "0.1-runtime-draft",
+        "skill": {
+          "id": "youtube-deep-research",
+          "source": "skill-installer",
+          "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451')",
+          "source_digest": {
+            "installer_url": "https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451",
+            "zip_url": "https://skill.vyibc.com/youtube-deep-research/release/youtube-deep-research-20260630125451.zip?ts=20260630125451",
+            "files": [
+              {
+                "path": "youtube-deep-research/SKILL.md",
+                "bytes": 2904,
+                "truncated": false
+              },
+              {
+                "path": "youtube-deep-research/agents/openai.yaml",
+                "bytes": 254,
+                "truncated": false
+              },
+              {
+                "path": "youtube-deep-research/scripts/youtube-deep-research.sh",
+                "bytes": 2451,
+                "truncated": false
+              },
+              {
+                "path": "youtube-deep-research/scripts/youtube_deep_research.py",
+                "bytes": 10820,
+                "truncated": false
+              }
+            ]
+          }
+        },
+        "executor": {
+          "type": "agent-skill",
+          "agent": "hermes",
+          "skill": "youtube-deep-research",
+          "request_template": "node-execution-request/v1"
+        },
+        "entry": {
+          "inputs": {
+            "include_transcript": {
+              "required": false,
+              "input_kind": "text",
+              "value_type": "text",
+              "label": "Include Transcript",
+              "description": "Value for CLI option --include-transcript.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --include-transcript -> $INCLUDE_TRANSCRIPT",
+              "cli_option": "--include-transcript"
+            },
+            "output_dir": {
+              "required": false,
+              "input_kind": "directory",
+              "value_type": "text",
+              "label": "Output Dir",
+              "description": "Runtime-managed value for CLI option --output-dir; normally injected by the Node Run workspace instead of user input.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --output-dir -> $OUTPUT_DIR",
+              "cli_option": "--output-dir",
+              "runtime_managed": true,
+              "ui_group": "runtime"
+            },
+            "poll_interval": {
+              "required": false,
+              "input_kind": "number",
+              "value_type": "number",
+              "label": "Poll Interval",
+              "description": "Value for CLI option --poll-interval.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --poll-interval -> $POLL_INTERVAL",
+              "cli_option": "--poll-interval"
+            },
+            "source_url": {
+              "required": true,
+              "input_kind": "url",
+              "value_type": "url",
+              "label": "Source Url",
+              "description": "Value for CLI option --source-url.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --source-url -> $SOURCE_URL",
+              "cli_option": "--source-url"
+            },
+            "timeout_seconds": {
+              "required": false,
+              "input_kind": "number",
+              "value_type": "number",
+              "label": "Timeout Seconds",
+              "description": "Value for CLI option --timeout-seconds.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --timeout-seconds -> $TIMEOUT_SECONDS",
+              "cli_option": "--timeout-seconds"
+            },
+            "workflow_token": {
+              "required": false,
+              "input_kind": "text",
+              "value_type": "text",
+              "label": "Workflow Token",
+              "description": "Value for CLI option --workflow-token.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-token -> $WORKFLOW_TOKEN",
+              "cli_option": "--workflow-token"
+            },
+            "workflow_url": {
+              "required": false,
+              "input_kind": "url",
+              "value_type": "url",
+              "label": "Workflow Url",
+              "description": "Value for CLI option --workflow-url.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-url -> $WORKFLOW_URL",
+              "cli_option": "--workflow-url"
+            }
+          }
+        },
+        "handoff": {
+          "accepts": {
+            "upstream_outputs_dir": {
+              "required": false,
+              "description": "一个或多个上游 Node 的标准输出目录。"
+            },
+            "instruction": {
+              "required": true,
+              "description": "Edge Handoff Agent 或用户提供的交接说明。"
+            },
+            "context": {
+              "required": false,
+              "description": "运行上下文或补充说明。"
+            }
+          },
+          "produces": {
+            "outputs_dir": "raw/node-runs/{run_id}/outputs",
+            "manifest": "raw/node-runs/{run_id}/outputs/manifest.json"
+          }
+        },
+        "outputs": {
+          "root": "raw/node-runs/{run_id}/outputs",
+          "manifest": "raw/node-runs/{run_id}/outputs/manifest.json",
+          "expected": {
+            "result": {
+              "description": "Skill execution result summary.",
+              "relayable": true
+            },
+            "status": {
+              "description": "Result value mentioned in skill source as `status`.",
+              "value_type": "text",
+              "relayable": true,
+              "evidence": "source result marker status"
+            }
+          }
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false
+          },
+          "telegram": {
+            "enabled": false,
+            "required": false
+          },
+          "sse": {
+            "enabled": true,
+            "required": true
+          }
+        },
+        "ui": {
+          "category": "custom"
+        },
+        "coverage_report": {
+          "status": "passed",
+          "covered_inputs": [
+            {
+              "input": "include_transcript",
+              "option": "--include-transcript",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --include-transcript -> $INCLUDE_TRANSCRIPT"
+            },
+            {
+              "input": "output_dir",
+              "option": "--output-dir",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --output-dir -> $OUTPUT_DIR"
+            },
+            {
+              "input": "poll_interval",
+              "option": "--poll-interval",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --poll-interval -> $POLL_INTERVAL"
+            },
+            {
+              "input": "source_url",
+              "option": "--source-url",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --source-url -> $SOURCE_URL"
+            },
+            {
+              "input": "timeout_seconds",
+              "option": "--timeout-seconds",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --timeout-seconds -> $TIMEOUT_SECONDS"
+            },
+            {
+              "input": "workflow_token",
+              "option": "--workflow-token",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-token -> $WORKFLOW_TOKEN"
+            },
+            {
+              "input": "workflow_url",
+              "option": "--workflow-url",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-url -> $WORKFLOW_URL"
+            }
+          ],
+          "missing_inputs": [],
+          "source_files_read": [
+            "youtube-deep-research/SKILL.md",
+            "youtube-deep-research/agents/openai.yaml",
+            "youtube-deep-research/scripts/youtube-deep-research.sh",
+            "youtube-deep-research/scripts/youtube_deep_research.py"
+          ],
+          "errors": []
+        }
+      },
+      "missing_fields": [],
+      "risks": [
+        {
+          "code": "ai_evaluation_failed",
+          "message": "LLM response message.content was empty"
+        }
+      ],
+      "assumptions": [
+        "No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics."
+      ],
+      "test_plan": [
+        "校验 node-definition/v1 字段和安全路径。",
+        "检查 skill install command 格式和来源。",
+        "验证 Hermes 可识别 skill youtube-deep-research.",
+        "生成 Node Execution Request 预览。",
+        "执行草稿测试并校验 outputs_dir/manifest.json。",
+        "发布到当前 Runtime 后通过真实 Node Run 再测一次。"
+      ],
+      "metadata_probe": {
+        "attempted": true,
+        "items": [
+          {
+            "url": "https://skill.vyibc.com/install-youtube-deep-research.json",
+            "ok": false,
+            "error": "HTTP Error 404: Not Found"
+          },
+          {
+            "url": "https://skill.vyibc.com/install-youtube-deep-research.manifest.json",
+            "ok": false,
+            "error": "HTTP Error 404: Not Found"
+          },
+          {
+            "url": "https://skill.vyibc.com/install-youtube-deep-research.skill.json",
+            "ok": false,
+            "error": "HTTP Error 404: Not Found"
+          }
+        ]
+      },
+      "source_digest": {
+        "attempted": true,
+        "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451')",
+        "installer_url": "https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451",
+        "zip_url": "https://skill.vyibc.com/youtube-deep-research/release/youtube-deep-research-20260630125451.zip?ts=20260630125451",
+        "trusted_source": true,
+        "files": [
+          {
+            "path": "youtube-deep-research/SKILL.md",
+            "bytes": 2904,
+            "truncated": false
+          },
+          {
+            "path": "youtube-deep-research/agents/openai.yaml",
+            "bytes": 254,
+            "truncated": false
+          },
+          {
+            "path": "youtube-deep-research/scripts/youtube-deep-research.sh",
+            "bytes": 2451,
+            "truncated": false
+          },
+          {
+            "path": "youtube-deep-research/scripts/youtube_deep_research.py",
+            "bytes": 10820,
+            "truncated": false
+          }
+        ],
+        "cli_options": [
+          {
+            "option": "--include-transcript",
+            "variable": "INCLUDE_TRANSCRIPT",
+            "input_name": "include_transcript",
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Include Transcript",
+            "description": "Value for CLI option --include-transcript.",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --include-transcript -> $INCLUDE_TRANSCRIPT"
+          },
+          {
+            "option": "--output-dir",
+            "variable": "OUTPUT_DIR",
+            "input_name": "output_dir",
+            "required": false,
+            "input_kind": "directory",
+            "value_type": "text",
+            "label": "Output Dir",
+            "description": "Value for CLI option --output-dir.",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --output-dir -> $OUTPUT_DIR"
+          },
+          {
+            "option": "--poll-interval",
+            "variable": "POLL_INTERVAL",
+            "input_name": "poll_interval",
+            "required": false,
+            "input_kind": "number",
+            "value_type": "number",
+            "label": "Poll Interval",
+            "description": "Value for CLI option --poll-interval.",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --poll-interval -> $POLL_INTERVAL"
+          },
+          {
+            "option": "--source-url",
+            "variable": "SOURCE_URL",
+            "input_name": "source_url",
+            "required": true,
+            "input_kind": "url",
+            "value_type": "url",
+            "label": "Source Url",
+            "description": "Value for CLI option --source-url.",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --source-url -> $SOURCE_URL"
+          },
+          {
+            "option": "--timeout-seconds",
+            "variable": "TIMEOUT_SECONDS",
+            "input_name": "timeout_seconds",
+            "required": false,
+            "input_kind": "number",
+            "value_type": "number",
+            "label": "Timeout Seconds",
+            "description": "Value for CLI option --timeout-seconds.",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --timeout-seconds -> $TIMEOUT_SECONDS"
+          },
+          {
+            "option": "--workflow-token",
+            "variable": "WORKFLOW_TOKEN",
+            "input_name": "workflow_token",
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Workflow Token",
+            "description": "Value for CLI option --workflow-token.",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-token -> $WORKFLOW_TOKEN"
+          },
+          {
+            "option": "--workflow-url",
+            "variable": "WORKFLOW_URL",
+            "input_name": "workflow_url",
+            "required": false,
+            "input_kind": "url",
+            "value_type": "url",
+            "label": "Workflow Url",
+            "description": "Value for CLI option --workflow-url.",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-url -> $WORKFLOW_URL"
+          }
+        ],
+        "installer_script_preview": "#!/usr/bin/env bash\n# Auto-generated one-click install script for: youtube-deep-research\nset -euo pipefail\n\nSKILL_NAME=youtube-deep-research\nZIP_URL='https://skill.vyibc.com/youtube-deep-research/release/youtube-deep-research-20260630125451.zip?ts=20260630125451'\nMANAGED_YOUTUBE_RESEARCH_WORKFLOW_URL=https://youtube-research-workflow.hb67egcim4.workers.dev\nMANAGED_YOUTUBE_RESEARCH_WORKFLOW_TOKEN=yt-research-token-2026\n\nTARGET=\"${1:-}\"\nif [[ -z \"$TARGET\" ]]; then\n  echo \"Select install target for ${SKILL_NAME}:\"\n  echo \"  1) Codex        (~/.codex/skills/)\"\n  echo \"  2) Cursor       (~/.cursor/\n...[truncated for Node Builder]"
+      },
+      "coverage_report": {
+        "status": "passed",
+        "covered_inputs": [
+          {
+            "input": "include_transcript",
+            "option": "--include-transcript",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --include-transcript -> $INCLUDE_TRANSCRIPT"
+          },
+          {
+            "input": "output_dir",
+            "option": "--output-dir",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --output-dir -> $OUTPUT_DIR"
+          },
+          {
+            "input": "poll_interval",
+            "option": "--poll-interval",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --poll-interval -> $POLL_INTERVAL"
+          },
+          {
+            "input": "source_url",
+            "option": "--source-url",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --source-url -> $SOURCE_URL"
+          },
+          {
+            "input": "timeout_seconds",
+            "option": "--timeout-seconds",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --timeout-seconds -> $TIMEOUT_SECONDS"
+          },
+          {
+            "input": "workflow_token",
+            "option": "--workflow-token",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-token -> $WORKFLOW_TOKEN"
+          },
+          {
+            "input": "workflow_url",
+            "option": "--workflow-url",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-url -> $WORKFLOW_URL"
+          }
+        ],
+        "missing_inputs": [],
+        "source_files_read": [
+          "youtube-deep-research/SKILL.md",
+          "youtube-deep-research/agents/openai.yaml",
+          "youtube-deep-research/scripts/youtube-deep-research.sh",
+          "youtube-deep-research/scripts/youtube_deep_research.py"
+        ],
+        "errors": []
+      },
+      "agent": {
+        "provider": "openai-compatible",
+        "model": "deepseek-v4-pro",
+        "used_ai": false,
+        "error": "LLM response message.content was empty"
+      },
+      "trace": {
+        "trace_schema": "node-builder-agent-trace/v1",
+        "request": {
+          "skill_install_command": " bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451') ",
+          "user_instruction": "转换成不绑定上下游的 Runtime Node；首节点测试允许直接输入 source_url，保留超时、轮询间隔和是否包含 transcript 等配置。",
+          "fetch_metadata": true,
+          "async_job": true,
+          "runtime_id": "youtube-wiki",
+          "instance_id": "wiki-sop-new-instance"
+        },
+        "config": {
+          "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+          "model": "deepseek-v4-pro",
+          "api_key": "ah-***c68"
+        },
+        "started_at": "2026-06-30T13:01:06Z",
+        "llm_request": {
+          "model": "deepseek-v4-pro",
+          "temperature": 0.0,
+          "max_tokens": 4096,
+          "stream": false,
+          "response_format": {
+            "type": "json_object"
+          },
+          "messages": [
+            {
+              "role": "system",
+              "content_preview": "",
+              "content_chars": 0
+            },
+            {
+              "role": "user",
+              "content_preview": "",
+              "content_chars": 0
+            }
+          ]
+        },
+        "attempts": [
+          {
+            "status": "response",
+            "duration_ms": 54330,
+            "raw_response_preview": ""
+          }
+        ]
+      },
+      "evaluated_at": "2026-06-30T13:01:06Z"
+    },
+    "trace": {
+      "trace_schema": "node-builder-agent-trace/v1",
+      "request": {
+        "skill_install_command": " bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451') ",
+        "user_instruction": "转换成不绑定上下游的 Runtime Node；首节点测试允许直接输入 source_url，保留超时、轮询间隔和是否包含 transcript 等配置。",
+        "fetch_metadata": true,
+        "async_job": true,
+        "runtime_id": "youtube-wiki",
+        "instance_id": "wiki-sop-new-instance"
+      },
+      "config": {
+        "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "model": "deepseek-v4-pro",
+        "api_key": "ah-***c68"
+      },
+      "started_at": "2026-06-30T13:01:06Z",
+      "llm_request": {
+        "model": "deepseek-v4-pro",
+        "temperature": 0.0,
+        "max_tokens": 4096,
+        "stream": false,
+        "response_format": {
+          "type": "json_object"
+        },
+        "messages": [
+          {
+            "role": "system",
+            "content_preview": "",
+            "content_chars": 0
+          },
+          {
+            "role": "user",
+            "content_preview": "",
+            "content_chars": 0
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "status": "response",
+          "duration_ms": 54330,
+          "raw_response_preview": ""
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  "request": {
+    "skill_install_command": " bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451') ",
+    "user_instruction": "转换成不绑定上下游的 Runtime Node；首节点测试允许直接输入 source_url，保留超时、轮询间隔和是否包含 transcript 等配置。",
+    "fetch_metadata": true,
+    "async_job": true,
+    "runtime_id": "youtube-wiki",
+    "instance_id": "wiki-sop-new-instance"
+  },
+  "config": {
+    "base_url": {
+      "key": "WIKI_LLM_BASE_URL",
+      "label": "Node Builder LLM Base URL",
+      "required": true,
+      "present": true,
+      "source": "instance-settings:WIKI_LLM_BASE_URL",
+      "masked_value": "https://api-proxy.chxyka.ccwu.cc/v1",
+      "value": "https://api-proxy.chxyka.ccwu.cc/v1"
+    },
+    "api_key": {
+      "key": "WIKI_LLM_API_KEY",
+      "label": "Node Builder LLM API Key",
+      "required": true,
+      "present": true,
+      "source": "instance-settings:WIKI_LLM_API_KEY",
+      "masked_value": "ah-***c68",
+      "value": null
+    },
+    "model": {
+      "key": "WIKI_LLM_MODEL",
+      "label": "Node Builder LLM Model",
+      "required": true,
+      "present": true,
+      "source": "instance-settings:WIKI_LLM_MODEL",
+      "masked_value": "deepseek-v4-pro",
+      "value": "deepseek-v4-pro"
+    },
+    "settings_backend": "file",
+    "precedence": [
+      "node-run-overrides",
+      "instance-settings",
+      "runtime-settings",
+      "global-settings",
+      "bridge-env",
+      "runtime-env-file"
+    ]
+  },
+  "evaluation": {
+    "status": "blocked",
+    "summary": "Node Builder Agent 无法完成 AI 评估。",
+    "skill_identity": {
+      "skill_id": "youtube-deep-research",
+      "title": "Youtube Deep Research",
+      "description": "转换成不绑定上下游的 Runtime Node；首节点测试允许直接输入 source_url，保留超时、轮询间隔和是否包含 transcript 等配置。",
+      "installer_url": "https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451",
+      "trusted_source": true
+    },
+    "node_draft": {
+      "schema": "node-definition/v1",
+      "id": "youtube-deep-research",
+      "title": "Youtube Deep Research",
+      "description": "转换成不绑定上下游的 Runtime Node；首节点测试允许直接输入 source_url，保留超时、轮询间隔和是否包含 transcript 等配置。",
+      "version": "0.1-runtime-draft",
+      "skill": {
+        "id": "youtube-deep-research",
+        "source": "skill-installer",
+        "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451')",
+        "source_digest": {
+          "installer_url": "https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451",
+          "zip_url": "https://skill.vyibc.com/youtube-deep-research/release/youtube-deep-research-20260630125451.zip?ts=20260630125451",
+          "files": [
+            {
+              "path": "youtube-deep-research/SKILL.md",
+              "bytes": 2904,
+              "truncated": false
+            },
+            {
+              "path": "youtube-deep-research/agents/openai.yaml",
+              "bytes": 254,
+              "truncated": false
+            },
+            {
+              "path": "youtube-deep-research/scripts/youtube-deep-research.sh",
+              "bytes": 2451,
+              "truncated": false
+            },
+            {
+              "path": "youtube-deep-research/scripts/youtube_deep_research.py",
+              "bytes": 10820,
+              "truncated": false
+            }
+          ]
+        }
+      },
+      "executor": {
+        "type": "agent-skill",
+        "agent": "hermes",
+        "skill": "youtube-deep-research",
+        "request_template": "node-execution-request/v1"
+      },
+      "entry": {
+        "inputs": {
+          "include_transcript": {
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Include Transcript",
+            "description": "Value for CLI option --include-transcript.",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --include-transcript -> $INCLUDE_TRANSCRIPT",
+            "cli_option": "--include-transcript"
+          },
+          "output_dir": {
+            "required": false,
+            "input_kind": "directory",
+            "value_type": "text",
+            "label": "Output Dir",
+            "description": "Runtime-managed value for CLI option --output-dir; normally injected by the Node Run workspace instead of user input.",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --output-dir -> $OUTPUT_DIR",
+            "cli_option": "--output-dir",
+            "runtime_managed": true,
+            "ui_group": "runtime"
+          },
+          "poll_interval": {
+            "required": false,
+            "input_kind": "number",
+            "value_type": "number",
+            "label": "Poll Interval",
+            "description": "Value for CLI option --poll-interval.",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --poll-interval -> $POLL_INTERVAL",
+            "cli_option": "--poll-interval"
+          },
+          "source_url": {
+            "required": true,
+            "input_kind": "url",
+            "value_type": "url",
+            "label": "Source Url",
+            "description": "Value for CLI option --source-url.",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --source-url -> $SOURCE_URL",
+            "cli_option": "--source-url"
+          },
+          "timeout_seconds": {
+            "required": false,
+            "input_kind": "number",
+            "value_type": "number",
+            "label": "Timeout Seconds",
+            "description": "Value for CLI option --timeout-seconds.",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --timeout-seconds -> $TIMEOUT_SECONDS",
+            "cli_option": "--timeout-seconds"
+          },
+          "workflow_token": {
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Workflow Token",
+            "description": "Value for CLI option --workflow-token.",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-token -> $WORKFLOW_TOKEN",
+            "cli_option": "--workflow-token"
+          },
+          "workflow_url": {
+            "required": false,
+            "input_kind": "url",
+            "value_type": "url",
+            "label": "Workflow Url",
+            "description": "Value for CLI option --workflow-url.",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-url -> $WORKFLOW_URL",
+            "cli_option": "--workflow-url"
+          }
+        }
+      },
+      "handoff": {
+        "accepts": {
+          "upstream_outputs_dir": {
+            "required": false,
+            "description": "一个或多个上游 Node 的标准输出目录。"
+          },
+          "instruction": {
+            "required": true,
+            "description": "Edge Handoff Agent 或用户提供的交接说明。"
+          },
+          "context": {
+            "required": false,
+            "description": "运行上下文或补充说明。"
+          }
+        },
+        "produces": {
+          "outputs_dir": "raw/node-runs/{run_id}/outputs",
+          "manifest": "raw/node-runs/{run_id}/outputs/manifest.json"
+        }
+      },
+      "outputs": {
+        "root": "raw/node-runs/{run_id}/outputs",
+        "manifest": "raw/node-runs/{run_id}/outputs/manifest.json",
+        "expected": {
+          "result": {
+            "description": "Skill execution result summary.",
+            "relayable": true
+          },
+          "status": {
+            "description": "Result value mentioned in skill source as `status`.",
+            "value_type": "text",
+            "relayable": true,
+            "evidence": "source result marker status"
+          }
+        }
+      },
+      "capabilities": {
+        "git": {
+          "enabled": true,
+          "required": false
+        },
+        "telegram": {
+          "enabled": false,
+          "required": false
+        },
+        "sse": {
+          "enabled": true,
+          "required": true
+        }
+      },
+      "ui": {
+        "category": "custom"
+      },
+      "coverage_report": {
+        "status": "passed",
+        "covered_inputs": [
+          {
+            "input": "include_transcript",
+            "option": "--include-transcript",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --include-transcript -> $INCLUDE_TRANSCRIPT"
+          },
+          {
+            "input": "output_dir",
+            "option": "--output-dir",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --output-dir -> $OUTPUT_DIR"
+          },
+          {
+            "input": "poll_interval",
+            "option": "--poll-interval",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --poll-interval -> $POLL_INTERVAL"
+          },
+          {
+            "input": "source_url",
+            "option": "--source-url",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --source-url -> $SOURCE_URL"
+          },
+          {
+            "input": "timeout_seconds",
+            "option": "--timeout-seconds",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --timeout-seconds -> $TIMEOUT_SECONDS"
+          },
+          {
+            "input": "workflow_token",
+            "option": "--workflow-token",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-token -> $WORKFLOW_TOKEN"
+          },
+          {
+            "input": "workflow_url",
+            "option": "--workflow-url",
+            "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-url -> $WORKFLOW_URL"
+          }
+        ],
+        "missing_inputs": [],
+        "source_files_read": [
+          "youtube-deep-research/SKILL.md",
+          "youtube-deep-research/agents/openai.yaml",
+          "youtube-deep-research/scripts/youtube-deep-research.sh",
+          "youtube-deep-research/scripts/youtube_deep_research.py"
+        ],
+        "errors": []
+      }
+    },
+    "missing_fields": [],
+    "risks": [
+      {
+        "code": "ai_evaluation_failed",
+        "message": "LLM response message.content was empty"
+      }
+    ],
+    "assumptions": [
+      "No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics."
+    ],
+    "test_plan": [
+      "校验 node-definition/v1 字段和安全路径。",
+      "检查 skill install command 格式和来源。",
+      "验证 Hermes 可识别 skill youtube-deep-research.",
+      "生成 Node Execution Request 预览。",
+      "执行草稿测试并校验 outputs_dir/manifest.json。",
+      "发布到当前 Runtime 后通过真实 Node Run 再测一次。"
+    ],
+    "metadata_probe": {
+      "attempted": true,
+      "items": [
+        {
+          "url": "https://skill.vyibc.com/install-youtube-deep-research.json",
+          "ok": false,
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://skill.vyibc.com/install-youtube-deep-research.manifest.json",
+          "ok": false,
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://skill.vyibc.com/install-youtube-deep-research.skill.json",
+          "ok": false,
+          "error": "HTTP Error 404: Not Found"
+        }
+      ]
+    },
+    "source_digest": {
+      "attempted": true,
+      "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451')",
+      "installer_url": "https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451",
+      "zip_url": "https://skill.vyibc.com/youtube-deep-research/release/youtube-deep-research-20260630125451.zip?ts=20260630125451",
+      "trusted_source": true,
+      "files": [
+        {
+          "path": "youtube-deep-research/SKILL.md",
+          "bytes": 2904,
+          "truncated": false
+        },
+        {
+          "path": "youtube-deep-research/agents/openai.yaml",
+          "bytes": 254,
+          "truncated": false
+        },
+        {
+          "path": "youtube-deep-research/scripts/youtube-deep-research.sh",
+          "bytes": 2451,
+          "truncated": false
+        },
+        {
+          "path": "youtube-deep-research/scripts/youtube_deep_research.py",
+          "bytes": 10820,
+          "truncated": false
+        }
+      ],
+      "cli_options": [
+        {
+          "option": "--include-transcript",
+          "variable": "INCLUDE_TRANSCRIPT",
+          "input_name": "include_transcript",
+          "required": false,
+          "input_kind": "text",
+          "value_type": "text",
+          "label": "Include Transcript",
+          "description": "Value for CLI option --include-transcript.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --include-transcript -> $INCLUDE_TRANSCRIPT"
+        },
+        {
+          "option": "--output-dir",
+          "variable": "OUTPUT_DIR",
+          "input_name": "output_dir",
+          "required": false,
+          "input_kind": "directory",
+          "value_type": "text",
+          "label": "Output Dir",
+          "description": "Value for CLI option --output-dir.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --output-dir -> $OUTPUT_DIR"
+        },
+        {
+          "option": "--poll-interval",
+          "variable": "POLL_INTERVAL",
+          "input_name": "poll_interval",
+          "required": false,
+          "input_kind": "number",
+          "value_type": "number",
+          "label": "Poll Interval",
+          "description": "Value for CLI option --poll-interval.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --poll-interval -> $POLL_INTERVAL"
+        },
+        {
+          "option": "--source-url",
+          "variable": "SOURCE_URL",
+          "input_name": "source_url",
+          "required": true,
+          "input_kind": "url",
+          "value_type": "url",
+          "label": "Source Url",
+          "description": "Value for CLI option --source-url.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --source-url -> $SOURCE_URL"
+        },
+        {
+          "option": "--timeout-seconds",
+          "variable": "TIMEOUT_SECONDS",
+          "input_name": "timeout_seconds",
+          "required": false,
+          "input_kind": "number",
+          "value_type": "number",
+          "label": "Timeout Seconds",
+          "description": "Value for CLI option --timeout-seconds.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --timeout-seconds -> $TIMEOUT_SECONDS"
+        },
+        {
+          "option": "--workflow-token",
+          "variable": "WORKFLOW_TOKEN",
+          "input_name": "workflow_token",
+          "required": false,
+          "input_kind": "text",
+          "value_type": "text",
+          "label": "Workflow Token",
+          "description": "Value for CLI option --workflow-token.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-token -> $WORKFLOW_TOKEN"
+        },
+        {
+          "option": "--workflow-url",
+          "variable": "WORKFLOW_URL",
+          "input_name": "workflow_url",
+          "required": false,
+          "input_kind": "url",
+          "value_type": "url",
+          "label": "Workflow Url",
+          "description": "Value for CLI option --workflow-url.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-url -> $WORKFLOW_URL"
+        }
+      ],
+      "installer_script_preview": "#!/usr/bin/env bash\n# Auto-generated one-click install script for: youtube-deep-research\nset -euo pipefail\n\nSKILL_NAME=youtube-deep-research\nZIP_URL='https://skill.vyibc.com/youtube-deep-research/release/youtube-deep-research-20260630125451.zip?ts=20260630125451'\nMANAGED_YOUTUBE_RESEARCH_WORKFLOW_URL=https://youtube-research-workflow.hb67egcim4.workers.dev\nMANAGED_YOUTUBE_RESEARCH_WORKFLOW_TOKEN=yt-research-token-2026\n\nTARGET=\"${1:-}\"\nif [[ -z \"$TARGET\" ]]; then\n  echo \"Select install target for ${SKILL_NAME}:\"\n  echo \"  1) Codex        (~/.codex/skills/)\"\n  echo \"  2) Cursor       (~/.cursor/\n...[truncated for Node Builder]"
+    },
+    "coverage_report": {
+      "status": "passed",
+      "covered_inputs": [
+        {
+          "input": "include_transcript",
+          "option": "--include-transcript",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --include-transcript -> $INCLUDE_TRANSCRIPT"
+        },
+        {
+          "input": "output_dir",
+          "option": "--output-dir",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --output-dir -> $OUTPUT_DIR"
+        },
+        {
+          "input": "poll_interval",
+          "option": "--poll-interval",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --poll-interval -> $POLL_INTERVAL"
+        },
+        {
+          "input": "source_url",
+          "option": "--source-url",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --source-url -> $SOURCE_URL"
+        },
+        {
+          "input": "timeout_seconds",
+          "option": "--timeout-seconds",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --timeout-seconds -> $TIMEOUT_SECONDS"
+        },
+        {
+          "input": "workflow_token",
+          "option": "--workflow-token",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-token -> $WORKFLOW_TOKEN"
+        },
+        {
+          "input": "workflow_url",
+          "option": "--workflow-url",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-url -> $WORKFLOW_URL"
+        }
+      ],
+      "missing_inputs": [],
+      "source_files_read": [
+        "youtube-deep-research/SKILL.md",
+        "youtube-deep-research/agents/openai.yaml",
+        "youtube-deep-research/scripts/youtube-deep-research.sh",
+        "youtube-deep-research/scripts/youtube_deep_research.py"
+      ],
+      "errors": []
+    },
+    "agent": {
+      "provider": "openai-compatible",
+      "model": "deepseek-v4-pro",
+      "used_ai": false,
+      "error": "LLM response message.content was empty"
+    },
+    "trace": {
+      "trace_schema": "node-builder-agent-trace/v1",
+      "request": {
+        "skill_install_command": " bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451') ",
+        "user_instruction": "转换成不绑定上下游的 Runtime Node；首节点测试允许直接输入 source_url，保留超时、轮询间隔和是否包含 transcript 等配置。",
+        "fetch_metadata": true,
+        "async_job": true,
+        "runtime_id": "youtube-wiki",
+        "instance_id": "wiki-sop-new-instance"
+      },
+      "config": {
+        "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "model": "deepseek-v4-pro",
+        "api_key": "ah-***c68"
+      },
+      "started_at": "2026-06-30T13:01:06Z",
+      "llm_request": {
+        "model": "deepseek-v4-pro",
+        "temperature": 0.0,
+        "max_tokens": 4096,
+        "stream": false,
+        "response_format": {
+          "type": "json_object"
+        },
+        "messages": [
+          {
+            "role": "system",
+            "content_preview": "",
+            "content_chars": 0
+          },
+          {
+            "role": "user",
+            "content_preview": "",
+            "content_chars": 0
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "status": "response",
+          "duration_ms": 54330,
+          "raw_response_preview": ""
+        }
+      ]
+    },
+    "evaluated_at": "2026-06-30T13:01:06Z"
+  },
+  "trace": {
+    "trace_schema": "node-builder-agent-trace/v1",
+    "request": {
+      "skill_install_command": " bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451') ",
+      "user_instruction": "转换成不绑定上下游的 Runtime Node；首节点测试允许直接输入 source_url，保留超时、轮询间隔和是否包含 transcript 等配置。",
+      "fetch_metadata": true,
+      "async_job": true,
+      "runtime_id": "youtube-wiki",
+      "instance_id": "wiki-sop-new-instance"
+    },
+    "config": {
+      "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+      "model": "deepseek-v4-pro",
+      "api_key": "ah-***c68"
+    },
+    "started_at": "2026-06-30T13:01:06Z",
+    "llm_request": {
+      "model": "deepseek-v4-pro",
+      "temperature": 0.0,
+      "max_tokens": 4096,
+      "stream": false,
+      "response_format": {
+        "type": "json_object"
+      },
+      "messages": [
+        {
+          "role": "system",
+          "content_preview": "",
+          "content_chars": 0
+        },
+        {
+          "role": "user",
+          "content_preview": "",
+          "content_chars": 0
+        }
+      ]
+    },
+    "attempts": [
+      {
+        "status": "response",
+        "duration_ms": 54330,
+        "raw_response_preview": ""
+      }
+    ]
+  },
+  "stderr": ""
+}

@@ -1,0 +1,346 @@
+{
+  "ok": true,
+  "status": "done",
+  "http_status": 200,
+  "mode": "edge-handoff-agent-evaluation-job",
+  "evaluation_id": "edge-eval-youtube-fetch-to-tg-notify-1782439277217-20260626T023516Z-cf68f6",
+  "sop_id": "test-instance",
+  "workflow_id": "youtube-research-wiki",
+  "edge_id": "youtube-fetch-to-tg-notify-1782439277217",
+  "started_at": "2026-06-26T02:35:16.912765+00:00",
+  "finished_at": "2026-06-26T02:35:35.040811+00:00",
+  "result": {
+    "ok": true,
+    "sop_id": "test-instance",
+    "workflow_id": "youtube-research-wiki",
+    "edge_id": "youtube-fetch-to-tg-notify-1782439277217",
+    "mode": "edge-handoff-agent-evaluation",
+    "request": {
+      "runtime_id": "youtube-wiki",
+      "instance_id": "test-instance",
+      "workflow_id": "youtube-research-wiki",
+      "edge_id": "youtube-fetch-to-tg-notify-1782439277217",
+      "phase": "design",
+      "workflow_goal": "",
+      "edge_handoff_instruction": "从上游 metadata_file 的 title 字段生成 Telegram message；如果 metadata_file 没有 title，则阻断。source_url 只作为补充上下文。",
+      "edge": {
+        "id": "youtube-fetch-to-tg-notify-1782439277217",
+        "from": "youtube-fetch",
+        "to": "tg-notify"
+      },
+      "upstream": {
+        "node_id": "youtube-fetch",
+        "title": "YouTube 元数据获取",
+        "skill_id": "sop-youtube-fetch",
+        "skill_summary": "---\nname: sop-youtube-fetch\ndescription: \"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\"\nversion: 1.0.0\n---",
+        "skill_readme": "---\nname: sop-youtube-fetch\ndescription: \"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\"\nversion: 1.0.0\n---",
+        "inputs": {
+          "source_url": {
+            "required": true,
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "from": "context.source_url",
+            "accepts": [
+              "scalar:url",
+              "file:text"
+            ],
+            "resolvers": [
+              {
+                "id": "direct-url",
+                "kind": "direct"
+              },
+              {
+                "id": "text-url",
+                "kind": "regex",
+                "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+              }
+            ]
+          }
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "source_url": {
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "relayable": true,
+            "path": "raw/node-runs/{pipeline_id}/outputs/files/source-url.txt"
+          },
+          "metadata_file": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": true,
+            "path": "raw/node-runs/{pipeline_id}/outputs/files/metadata.json"
+          }
+        },
+        "executor": {
+          "type": "agent-skill",
+          "agent": "hermes",
+          "skill": "sop-youtube-fetch",
+          "entry": "scripts/run_youtube_fetch.sh",
+          "webhook_route": "sop-youtube-fetch"
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "paths": [
+              "raw/node-runs/{pipeline_id}/outputs/files/**",
+              "raw/youtube-metadata/**"
+            ]
+          },
+          "telegram": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "trigger": "stage-lifecycle",
+            "triggers": [
+              "start",
+              "done",
+              "failed"
+            ]
+          },
+          "sse": {
+            "enabled": true,
+            "required": true
+          }
+        },
+        "infra": {
+          "tg_notify": true,
+          "log_record": true
+        }
+      },
+      "downstream": {
+        "node_id": "tg-notify",
+        "title": "Telegram 通知",
+        "skill_id": "sop-tg-notify",
+        "skill_summary": "---\nname: sop-tg-notify\ndescription: \"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\"\nversion: 2.1.0\n---",
+        "skill_readme": "---\nname: sop-tg-notify\ndescription: \"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\"\nversion: 2.1.0\n---",
+        "inputs": {
+          "message": {
+            "required": true,
+            "kind": "object",
+            "type": "object",
+            "value_type": "text",
+            "from": "edge.message",
+            "accepts": [
+              "scalar:text",
+              "object",
+              "file:text",
+              "file:markdown",
+              "file:json"
+            ],
+            "resolvers": [
+              {
+                "id": "direct-text",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-title",
+                "kind": "json_path",
+                "path": "$.title"
+              },
+              {
+                "id": "metadata-description",
+                "kind": "json_path",
+                "path": "$.description"
+              }
+            ]
+          }
+        },
+        "optional_inputs": {
+          "index": {
+            "required": false,
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "from": "wiki-build.outputs.index",
+            "accepts": [
+              "file:markdown",
+              "file:text"
+            ]
+          }
+        },
+        "outputs": {
+          "telegram_message": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": false,
+            "path": "logs/pipeline-runs/pipe-{run_id}.json"
+          }
+        },
+        "executor": {
+          "type": "agent-skill",
+          "agent": "hermes",
+          "skill": "sop-tg-notify",
+          "entry": "scripts/run_tg_notify.sh",
+          "webhook_route": "sop-tg-notify"
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false
+          },
+          "telegram": {
+            "enabled": true,
+            "required": false
+          },
+          "sse": {
+            "enabled": true,
+            "required": true
+          }
+        },
+        "infra": {
+          "tg_notify": true,
+          "log_record": true
+        }
+      }
+    },
+    "config": {
+      "base_url": {
+        "key": "WIKI_LLM_BASE_URL",
+        "label": "Edge Handoff LLM Base URL",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_BASE_URL",
+        "masked_value": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "value": "https://api-proxy.chxyka.ccwu.cc/v1"
+      },
+      "api_key": {
+        "key": "WIKI_LLM_API_KEY",
+        "label": "Edge Handoff LLM API Key",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_API_KEY",
+        "masked_value": "ah-***c68",
+        "value": null
+      },
+      "model": {
+        "key": "EDGE_HANDOFF_LLM_MODEL",
+        "label": "Edge Handoff LLM Model",
+        "required": true,
+        "present": true,
+        "source": "bridge-env:WIKI_DEEPSEEK_MODEL:fallback-from-deepseek-v4-flash",
+        "masked_value": "deepseek-v4-pro",
+        "value": "deepseek-v4-pro"
+      },
+      "settings_backend": "file",
+      "precedence": [
+        "node-run-overrides",
+        "instance-settings",
+        "runtime-settings",
+        "global-settings",
+        "bridge-env",
+        "runtime-env-file"
+      ],
+      "sync_budget": {
+        "public_timeout_budget_seconds": 25,
+        "mode": "async",
+        "llm_timeout_seconds": 75,
+        "llm_attempts": 1,
+        "evaluator_timeout_seconds": 90
+      }
+    },
+    "evaluation": {
+      "status": "ready",
+      "score": 0.92,
+      "confidence": 0.88,
+      "summary": "Handoff clear: use metadata_file title as message via resolver metadata-title, block if missing.",
+      "decision": "can_run",
+      "scores": {
+        "intent_clarity": 1.0,
+        "skill_fit": 0.88,
+        "artifact_usability": 0.88,
+        "guide_completeness": 0.94,
+        "risk": 0.12
+      },
+      "blocking_reasons": [],
+      "warnings": [
+        "source_url available as supplementary context but not directly mapped per instruction"
+      ],
+      "required_user_inputs": [],
+      "suggested_edge_instruction": "",
+      "resolved_handoff": {
+        "relay_mappings": [
+          {
+            "source_output": "metadata_file",
+            "target_input": "message",
+            "resolver": "metadata-title"
+          }
+        ]
+      },
+      "node_execution_guide": {
+        "format": "markdown",
+        "prompt": "Use skill sop-tg-notify to execute this downstream node.\n\nNode Execution Guide\n- Edge: youtube-fetch -> tg-notify\n- Evaluation summary: Edge Handoff Instruction 已说明泛化输入的消费方式，可生成下游节点执行指导文档。\n- Edge Handoff Instruction: 从上游 metadata_file 的 title 字段生成 Telegram message；如果 metadata_file 没有 title，则阻断。source_url 只作为补充上下文。\n\nUpstream artifacts\n- source_url: raw/node-runs/{pipeline_id}/outputs/files/source-url.txt\n- metadata_file: raw/node-runs/{pipeline_id}/outputs/files/metadata.json\n\nExecution rules\n- Use only the resolved Edge inputs and materialized artifacts listed here.\n- If a required artifact cannot be read, fail before executing the downstream skill.\n- Do not silently fall back to stale pipeline context or unrelated historical artifacts.\n- Preserve the downstream skill boundary; this guide shapes execution but does not replace the skill."
+      },
+      "test_plan": [
+        "物化 Edge 输入",
+        "执行下游 skill",
+        "校验声明输出",
+        "记录 edge evaluation 和 guide"
+      ],
+      "agent": {
+        "provider": "openai-compatible",
+        "model": "deepseek-v4-pro",
+        "used_ai": true
+      },
+      "evaluated_at": "2026-06-26T02:35:34Z",
+      "evaluated_instruction_signature": "74b6d42f2cd14e98",
+      "evaluated_edge_signature": "a67c5d2fc5131a35",
+      "evaluated_instruction": "从上游 metadata_file 的 title 字段生成 Telegram message；如果 metadata_file 没有 title，则阻断。source_url 只作为补充上下文。"
+    },
+    "stderr": ""
+  },
+  "evaluation": {
+    "status": "ready",
+    "score": 0.92,
+    "confidence": 0.88,
+    "summary": "Handoff clear: use metadata_file title as message via resolver metadata-title, block if missing.",
+    "decision": "can_run",
+    "scores": {
+      "intent_clarity": 1.0,
+      "skill_fit": 0.88,
+      "artifact_usability": 0.88,
+      "guide_completeness": 0.94,
+      "risk": 0.12
+    },
+    "blocking_reasons": [],
+    "warnings": [
+      "source_url available as supplementary context but not directly mapped per instruction"
+    ],
+    "required_user_inputs": [],
+    "suggested_edge_instruction": "",
+    "resolved_handoff": {
+      "relay_mappings": [
+        {
+          "source_output": "metadata_file",
+          "target_input": "message",
+          "resolver": "metadata-title"
+        }
+      ]
+    },
+    "node_execution_guide": {
+      "format": "markdown",
+      "prompt": "Use skill sop-tg-notify to execute this downstream node.\n\nNode Execution Guide\n- Edge: youtube-fetch -> tg-notify\n- Evaluation summary: Edge Handoff Instruction 已说明泛化输入的消费方式，可生成下游节点执行指导文档。\n- Edge Handoff Instruction: 从上游 metadata_file 的 title 字段生成 Telegram message；如果 metadata_file 没有 title，则阻断。source_url 只作为补充上下文。\n\nUpstream artifacts\n- source_url: raw/node-runs/{pipeline_id}/outputs/files/source-url.txt\n- metadata_file: raw/node-runs/{pipeline_id}/outputs/files/metadata.json\n\nExecution rules\n- Use only the resolved Edge inputs and materialized artifacts listed here.\n- If a required artifact cannot be read, fail before executing the downstream skill.\n- Do not silently fall back to stale pipeline context or unrelated historical artifacts.\n- Preserve the downstream skill boundary; this guide shapes execution but does not replace the skill."
+    },
+    "test_plan": [
+      "物化 Edge 输入",
+      "执行下游 skill",
+      "校验声明输出",
+      "记录 edge evaluation 和 guide"
+    ],
+    "agent": {
+      "provider": "openai-compatible",
+      "model": "deepseek-v4-pro",
+      "used_ai": true
+    },
+    "evaluated_at": "2026-06-26T02:35:34Z",
+    "evaluated_instruction_signature": "74b6d42f2cd14e98",
+    "evaluated_edge_signature": "a67c5d2fc5131a35",
+    "evaluated_instruction": "从上游 metadata_file 的 title 字段生成 Telegram message；如果 metadata_file 没有 title，则阻断。source_url 只作为补充上下文。"
+  }
+}

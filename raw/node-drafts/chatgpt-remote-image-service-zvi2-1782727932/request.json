@@ -1,0 +1,7 @@
+{
+  "runtime_id": "youtube-wiki",
+  "instance_id": "wiki-sop-new-instance",
+  "skill_install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+  "user_instruction": "",
+  "fetch_metadata": true
+}

@@ -1,0 +1,24 @@
+## Result: FAILED
+
+Both attempts failed with the same error. Here's what happened:
+
+**What succeeded:**
+- The remote service accepted the task and the ChatGPT browser worker started
+- The prompt "生成一张小猫睡觉的照片" was submitted and ChatGPT generated the image (~37-43s wait)
+- The generated image was detected in the UI (`generatedVisibleMs=37484`)
+
+**What failed:**
+- The `downloadImage` stage consistently times out waiting for `[role="dialog"].last()` to be visible (10s timeout)
+- The save-image dialog that ChatGPT shows after generation doesn't match what the automation expects
+
+**Task IDs (both attempts):**
+1. `675d0564-9c52-4f81-8697-faeb66096ee7` — failed at downloadImage
+2. `3d78accf-3036-4d6b-b066-645dcd3d1a7f` — failed at downloadImage
+
+**Root cause analysis:** This is a locator mismatch in the remote service's browser automation script. The ChatGPT UI likely changed the save/download dialog structure — the selector `[role="dialog"].last()` no longer matches anything visible on the page within 10 seconds. The worker (`worker-1`, cdpPort `9333`) does the browser automation correctly through all prior stages (fillPrompt → clickSend → waitForGeneratedImage) but the download step's locator is stale.
+
+**Output written:**
+- `raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T174831-480b13/outputs/manifest.json`
+- `raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T174831-480b13/agent/receipt.json`
+
+**Guidance:** The remote service operator needs to update the download dialog locator in the Playwright automation script. The `[role="dialog"]` selector on ChatGPT's generated-image save UI is no longer working — possibly the dialog role attribute changed, or the download flow now uses a different UI pattern (e.g., a toolbar button instead of a dialog).

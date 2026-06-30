@@ -1,0 +1,57 @@
+schema: node-definition/v1
+id: chatgpt-remote-image-service
+title: ChatGPT 远程生图服务
+description: 通过外部生图 skill 生成图片；上游关系由 Workflow Edge 决定。
+version: 0.1-draft
+skill:
+  id: chatgpt-remote-image-service
+  install_command: bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')
+  source: install-command
+executor:
+  type: agent-skill
+  agent: hermes
+  skill: chatgpt-remote-image-service
+  entry: scripts/run_chatgpt_remote_image_service.sh
+mode: blocking
+entry_inputs:
+  prompt:
+    type: string
+    kind: scalar
+    value_type: text
+    required: true
+handoff:
+  accepts:
+  - role: upstream_outputs_dir
+    required: false
+  - role: instruction
+    required: true
+  - role: context
+    required: false
+  produces:
+    outputs_dir: raw/node-runs/{run_id}/outputs
+    manifest: raw/node-runs/{run_id}/outputs/manifest.json
+inputs:
+  prompt:
+    type: string
+    kind: scalar
+    value_type: text
+    required: true
+outputs:
+  result:
+    type: file
+    kind: file
+    value_type: json
+    relayable: true
+    path: raw/node-runs/{run_id}/outputs/outputs/result.json
+capabilities:
+  git:
+    enabled: true
+    required: false
+  telegram:
+    enabled: true
+    required: false
+  sse:
+    enabled: true
+    required: true
+ui:
+  category: custom

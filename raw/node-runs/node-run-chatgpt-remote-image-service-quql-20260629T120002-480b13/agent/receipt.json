@@ -1,0 +1,34 @@
+{
+  "runtime_id": "youtube-wiki",
+  "instance_id": "wiki-sop-new-instance",
+  "workflow_id": "youtube-research-wiki",
+  "node_id": "chatgpt-remote-image-service-quql",
+  "node_run_id": "node-run-chatgpt-remote-image-service-quql-20260629T120002-480b13",
+  "executed_at": "2026-06-29T12:01:45Z",
+  "execution_model": "deepseek-v4-flash",
+  "skill_used": "devops/chatgpt-remote-image-service",
+  "outcome": "failed",
+  "summary": "Task 9c8bd9f4-3239-4d0e-b4e7-634218d06463: prompt '生成一张小猫睡觉的照片' was submitted to the remote ChatGPT image service. ChatGPT generated the image successfully (generatedVisibleMs: 50581), but the downloadImage stage failed — the browser worker timed out waiting for a download dialog locator '[role=\"dialog\"]' to be visible. No public image URL was returned.",
+  "response_summary": "The image was generated but could not be retrieved. The remote browser worker on worker-2 (CDP port 9334) timed out during the download step. This is a transient service-side issue — the download dialog didn't appear within 10s. A retry may succeed if the service's download mechanism is in a better state.",
+  "input_values": {
+    "prompt": "生成一张小猫睡觉的照片"
+  },
+  "result_values": {
+    "task_id": "9c8bd9f4-3239-4d0e-b4e7-634218d06463",
+    "status": "failed",
+    "stage": "downloadImage",
+    "error": "Worker exited with code 1 - locator.waitFor: Timeout 10000ms exceeded. waiting for locator('[role=\"dialog\"]').last() to be visible",
+    "timings": {
+      "connectedMs": 1521,
+      "pageReadyMs": 3404,
+      "sentMs": 12265,
+      "generatedVisibleMs": 50581
+    }
+  },
+  "will_retry": false,
+  "edge_outputs": {
+    "image_url": null,
+    "public_image_url": null,
+    "generated_images": []
+  }
+}

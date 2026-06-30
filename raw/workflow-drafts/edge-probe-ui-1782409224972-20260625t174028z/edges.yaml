@@ -1,0 +1,79 @@
+- id: youtube-fetch-to-youtube-deep-research-probe-1782409224972
+  from: youtube-fetch
+  to: youtube-deep-research
+  relay:
+    mode: auto_by_target_inputs
+    mappings: []
+    handoff_instruction: 从上游 outputs 中读取 metadata_file 的 source_url 字段传给下游节点，忽略 source_url
+      输出。
+    node_execution_guide:
+      format: markdown
+      prompt: 'Use skill sop-youtube-deep-research to execute this downstream node.
+
+
+        Node Execution Guide
+
+        - Edge: youtube-fetch -> youtube-deep-research
+
+        - Evaluation summary: Instruction explicitly specifies to extract source_url
+        from metadata_file and ignore direct source_url output.
+
+        - Edge Handoff Instruction: 从上游 outputs 中读取 metadata_file 的 source_url 字段传给下游节点，忽略
+        source_url 输出。
+
+
+        Upstream artifacts
+
+        - metadata_file: raw/node-runs/{pipeline_id}/outputs/files/metadata.json
+
+
+        Execution rules
+
+        - Use only the resolved Edge artifacts; do not use other upstream outputs.
+
+        - Extract source_url from metadata_file using json_path `$.source_url`.
+
+        - Provide the extracted source_url as input to downstream node.
+
+        - Ignore the direct source_url output from youtube-fetch.
+
+
+        Execution steps
+
+        1. Locate metadata_file at the path above.
+
+        2. Read the JSON and extract the value at key ''source_url''.
+
+        3. Pass this value as the input ''source_url'' to youtube-deep-research.
+
+        4. Do not use the direct source_url from youtube-fetch''s outputs.
+
+
+        Expected output from downstream: analysis_file and transcript_file.'
+    evaluation:
+      status: ready
+      score: 0.95
+      confidence: 0.9
+      summary: Instruction explicitly specifies to extract source_url from metadata_file
+        and ignore direct source_url output. Clear mapping.
+      decision: can_run
+      evaluated_at: '2026-06-25T17:40:55Z'
+      agent:
+        provider: openai-compatible
+        model: deepseek-v4-flash
+        used_ai: true
+    resolved_handoff:
+      primary_artifacts:
+      - from: youtube-fetch.outputs.metadata_file
+        role: primary_source
+        reason: Edge handoff instruction specifies to extract source_url from metadata_file.
+      supporting_artifacts: []
+      downstream_inputs:
+      - to: youtube-deep-research.inputs.source_url
+        construction: Extract $.source_url from metadata_file (JSON file) via json_path
+          resolver.
+    test_plan:
+    - 物化 Edge 输入：读取 metadata.json 并提取 source_url
+    - 执行下游 skill：sop-youtube-deep-research 以上述 source_url 为输入
+    - 校验声明输出：analysis_file 和 transcript_file 存在
+    - 记录 edge evaluation 和 guide

@@ -1,0 +1,259 @@
+schema: node-definition/v1
+id: youtube-metadata-fetch
+title: Youtube Metadata Fetch
+description: 将该 Skill 构建为独立的 YouTube 元数据获取 Runtime Node。用户输入 source_url 后调用配置的 YouTube
+  内容 API 获取元数据，并输出 metadata.json、source-url.txt、result.json；不得绑定固定上下游或 Edge 交接逻辑。
+version: 0.1-runtime-draft
+skill:
+  id: youtube-metadata-fetch
+  source: skill-installer
+  install_command: bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426')
+  source_digest:
+    installer_url: https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426
+    zip_url: https://skill.vyibc.com/youtube-metadata-fetch/release/youtube-metadata-fetch-20260630075426.zip?ts=20260630075426
+    files:
+    - path: youtube-metadata-fetch/SKILL.md
+      bytes: 2000
+      truncated: false
+    - path: youtube-metadata-fetch/agents/openai.yaml
+      bytes: 247
+      truncated: false
+    - path: youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh
+      bytes: 1813
+      truncated: false
+    - path: youtube-metadata-fetch/scripts/youtube_metadata_fetch.py
+      bytes: 5344
+      truncated: false
+executor:
+  type: agent-skill
+  agent: hermes
+  skill: youtube-metadata-fetch
+  request_template: node-execution-request/v1
+entry:
+  inputs:
+    api_token:
+      required: false
+      input_kind: text
+      value_type: text
+      label: Api Token
+      description: Value for CLI option --api-token.
+      evidence: 'youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option
+        --api-token -> $API_TOKEN'
+      cli_option: --api-token
+    api_url:
+      required: false
+      input_kind: url
+      value_type: url
+      label: Api Url
+      description: Value for CLI option --api-url.
+      evidence: 'youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option
+        --api-url -> $API_URL'
+      cli_option: --api-url
+    include_raw:
+      required: false
+      input_kind: text
+      value_type: text
+      label: Include Raw
+      description: Value for CLI option --include-raw.
+      evidence: 'youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option
+        --include-raw -> $INCLUDE_RAW'
+      cli_option: --include-raw
+    output_dir:
+      required: false
+      input_kind: directory
+      value_type: text
+      label: Output Dir
+      description: Runtime-managed value for CLI option --output-dir; normally injected
+        by the Node Run workspace instead of user input.
+      evidence: 'youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option
+        --output-dir -> $OUTPUT_DIR'
+      cli_option: --output-dir
+      runtime_managed: true
+      ui_group: runtime
+    output_json:
+      required: false
+      input_kind: text
+      value_type: text
+      label: Output Json
+      description: Runtime-managed value for CLI option --output-json; normally injected
+        by the Node Run workspace instead of user input.
+      evidence: 'youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option
+        --output-json -> $OUTPUT_JSON'
+      cli_option: --output-json
+      runtime_managed: true
+      ui_group: runtime
+    source_url:
+      required: true
+      input_kind: url
+      value_type: url
+      label: Source Url
+      description: Value for CLI option --source-url.
+      evidence: 'youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option
+        --source-url -> $SOURCE_URL'
+      cli_option: --source-url
+    timeout_seconds:
+      required: false
+      input_kind: number
+      value_type: number
+      label: Timeout Seconds
+      description: Value for CLI option --timeout-seconds.
+      evidence: 'youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option
+        --timeout-seconds -> $TIMEOUT_SECONDS'
+      cli_option: --timeout-seconds
+handoff:
+  accepts:
+    upstream_outputs_dir:
+      required: false
+      description: 一个或多个上游 Node 的标准输出目录。
+    instruction:
+      required: true
+      description: Edge Handoff Agent 或用户提供的交接说明。
+    context:
+      required: false
+      description: 运行上下文或补充说明。
+  produces:
+    outputs_dir: raw/node-runs/{run_id}/outputs
+    manifest: raw/node-runs/{run_id}/outputs/manifest.json
+outputs:
+  metadata_json:
+    kind: file
+    type: file
+    value_type: json
+    relayable: true
+    path: raw/node-runs/{run_id}/outputs/metadata.json
+    fields:
+      resolved_path:
+        type: string
+        sample: raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json
+      size_bytes:
+        type: integer
+        sample: 434
+      relayable:
+        type: boolean
+        sample: true
+      description:
+        type: string
+        sample: Normalized YouTube metadata JSON
+  source_url_txt:
+    kind: file
+    type: file
+    value_type: text
+    relayable: true
+    path: raw/node-runs/{run_id}/outputs/source-url.txt
+    fields:
+      resolved_path:
+        type: string
+        sample: raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt
+      size_bytes:
+        type: integer
+        sample: 50
+      relayable:
+        type: boolean
+        sample: true
+      description:
+        type: string
+        sample: Source URL text file
+  result_json:
+    kind: file
+    type: file
+    value_type: json
+    relayable: true
+    path: raw/node-runs/{run_id}/outputs/result.json
+    fields:
+      resolved_path:
+        type: string
+        sample: raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json
+      size_bytes:
+        type: integer
+        sample: 724
+      relayable:
+        type: boolean
+        sample: true
+      description:
+        type: string
+        sample: Execution result with metadata inline
+capabilities:
+  git:
+    enabled: true
+    required: false
+  telegram:
+    enabled: false
+    required: false
+  sse:
+    enabled: true
+    required: true
+ui:
+  category: custom
+coverage_report:
+  status: passed
+  covered_inputs:
+  - input: api_token
+    option: --api-token
+    evidence: 'youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --api-token
+      -> $API_TOKEN'
+  - input: api_url
+    option: --api-url
+    evidence: 'youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --api-url
+      -> $API_URL'
+  - input: include_raw
+    option: --include-raw
+    evidence: 'youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --include-raw
+      -> $INCLUDE_RAW'
+  - input: output_dir
+    option: --output-dir
+    evidence: 'youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --output-dir
+      -> $OUTPUT_DIR'
+  - input: output_json
+    option: --output-json
+    evidence: 'youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --output-json
+      -> $OUTPUT_JSON'
+  - input: source_url
+    option: --source-url
+    evidence: 'youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --source-url
+      -> $SOURCE_URL'
+  - input: timeout_seconds
+    option: --timeout-seconds
+    evidence: 'youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh: option --timeout-seconds
+      -> $TIMEOUT_SECONDS'
+  missing_inputs: []
+  source_files_read:
+  - youtube-metadata-fetch/SKILL.md
+  - youtube-metadata-fetch/agents/openai.yaml
+  - youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh
+  - youtube-metadata-fetch/scripts/youtube_metadata_fetch.py
+  errors: []
+contract_summary:
+  primary_outputs: []
+  artifact_outputs: []
+  auxiliary_outputs:
+  - source_url_txt
+  diagnostic_outputs:
+  - metadata_json
+  - result_json
+  aliases: {}
+  recommended_edge_outputs: []
+agent_review:
+  summary: Contract review classified runtime-observed outputs into primary, artifact,
+    auxiliary and diagnostic groups.
+  warnings:
+  - code: contract_review_ai_fallback
+    message: The read operation timed out
+  risks: []
+  recommendations:
+  - Run Probe and synthesize contract before publishing.
+  - Keep JSON status payloads as diagnostics unless a downstream Edge explicitly requests
+    them.
+  agent:
+    provider: openai-compatible
+    model: deepseek-v4-pro
+    used_ai: false
+    fallback: deterministic-contract-review
+    error: The read operation timed out
+analysis:
+  contract_synthesis:
+    source: node-draft-probe
+    probe_id: youtube-metadata-fetch-probe-20260630T110258Z-e0c927
+    node_run_id: node-run-youtube-metadata-fetch-20260630T110258-1c02da
+    manifest_record_count: 3
+    node_builder_contract_review: true
+    synthesized_at: '2026-06-30T11:10:16.675686+00:00'

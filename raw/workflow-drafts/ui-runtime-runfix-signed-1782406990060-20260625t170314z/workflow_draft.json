@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "draft_type": "workflow_draft",
+  "draft_id": "ui-runtime-runfix-signed-1782406990060-20260625t170314z",
+  "workflow_id": "youtube-research-wiki",
+  "name": "ui-runtime-runfix-signed-1782406990060",
+  "goal": "Verify draft workflow run writes to instance workspace after runtime snapshot fix.",
+  "created_at": "2026-06-25T17:03:36Z",
+  "runtime_id": "youtube-wiki",
+  "instance_id": "test-instance",
+  "draft": {
+    "name": "ui-runtime-runfix-signed-1782406990060",
+    "goal": "Verify draft workflow run writes to instance workspace after runtime snapshot fix.",
+    "nodes": [
+      {
+        "nodeId": "youtube-fetch",
+        "signature": "{\"nodeId\":\"youtube-fetch\",\"title\":\"YouTube 元数据获取\",\"needs\":[],\"inputs\":[\"source_url\"],\"optionalInputs\":[],\"outputs\":[\"metadata_file\",\"source_url\"]}"
+      },
+      {
+        "nodeId": "youtube-deep-research",
+        "signature": "{\"nodeId\":\"youtube-deep-research\",\"title\":\"YouTube 深度研究\",\"needs\":[\"youtube-fetch\"],\"inputs\":[\"source_url\"],\"optionalInputs\":[],\"outputs\":[\"analysis_file\",\"transcript_file\"]}"
+      }
+    ],
+    "edges": [
+      {
+        "id": "youtube-fetch-to-youtube-deep-research-runfix-signed-1782406990060",
+        "from": "youtube-fetch",
+        "to": "youtube-deep-research",
+        "sourceIntent": "metadata_file: file; source_url: string",
+        "targetIntent": "source_url: string",
+        "instruction": "把上游 source_url 交给 YouTube 深度研究节点；metadata_file 只作为可选上下文，不作为主输入。",
+        "fromSignature": "{\"nodeId\":\"youtube-fetch\",\"title\":\"YouTube 元数据获取\",\"needs\":[],\"inputs\":[\"source_url\"],\"optionalInputs\":[],\"outputs\":[\"metadata_file\",\"source_url\"]}",
+        "toSignature": "{\"nodeId\":\"youtube-deep-research\",\"title\":\"YouTube 深度研究\",\"needs\":[\"youtube-fetch\"],\"inputs\":[\"source_url\"],\"optionalInputs\":[],\"outputs\":[\"analysis_file\",\"transcript_file\"]}",
+        "relayMode": "auto_by_target_inputs",
+        "relayMappings": []
+      }
+    ],
+    "positions": {
+      "youtube-fetch": {
+        "x": 0,
+        "y": 0
+      },
+      "youtube-deep-research": {
+        "x": 292,
+        "y": 0
+      }
+    }
+  },
+  "edge_count": 1,
+  "ready_edge_count": 1,
+  "runtime_sop_status": "not_generated",
+  "active_runtime_sop_changed": false,
+  "production_dag_changed": false
+}

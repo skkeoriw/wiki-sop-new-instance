@@ -1,0 +1,1959 @@
+{
+  "status": "synthesized",
+  "draft_id": "youtube-deep-research-dxky-1782824532",
+  "node_id": "youtube-deep-research-dxky",
+  "probe_id": "youtube-deep-research-dxky-probe-20260630T130319Z-3167d8",
+  "node_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+  "outputs": {
+    "analysis_file": {
+      "kind": "file",
+      "type": "file",
+      "value_type": "markdown",
+      "relayable": true,
+      "path": "raw/node-runs/{run_id}/outputs/outputs/analysis.md",
+      "fields": {
+        "media_type": {
+          "type": "string",
+          "sample": "text/markdown"
+        },
+        "relayable": {
+          "type": "boolean",
+          "sample": true
+        },
+        "role": {
+          "type": "string",
+          "sample": "wiki-source"
+        }
+      }
+    },
+    "transcript_file": {
+      "kind": "file",
+      "type": "file",
+      "value_type": "text",
+      "relayable": true,
+      "path": "raw/node-runs/{run_id}/outputs/outputs/transcript.txt",
+      "fields": {
+        "media_type": {
+          "type": "string",
+          "sample": "text/plain"
+        },
+        "relayable": {
+          "type": "boolean",
+          "sample": true
+        },
+        "role": {
+          "type": "string",
+          "sample": "transcript"
+        }
+      }
+    },
+    "start": {
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "relayable": true,
+      "path": "raw/node-runs/{run_id}/outputs/artifacts/start.json",
+      "fields": {
+        "media_type": {
+          "type": "string",
+          "sample": "application/json"
+        },
+        "relayable": {
+          "type": "boolean",
+          "sample": false
+        },
+        "role": {
+          "type": "string",
+          "sample": "diagnostic"
+        }
+      }
+    },
+    "status": {
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "relayable": true,
+      "path": "raw/node-runs/{run_id}/outputs/artifacts/status.json",
+      "fields": {
+        "media_type": {
+          "type": "string",
+          "sample": "application/json"
+        },
+        "relayable": {
+          "type": "boolean",
+          "sample": false
+        },
+        "role": {
+          "type": "string",
+          "sample": "diagnostic"
+        }
+      }
+    },
+    "transcript": {
+      "kind": "files",
+      "type": "files",
+      "value_type": "mixed",
+      "relayable": true,
+      "path": "raw/node-runs/{run_id}/outputs/artifacts/**",
+      "fields": {
+        "media_type": {
+          "type": "string",
+          "sample": "text/vtt"
+        },
+        "relayable": {
+          "type": "boolean",
+          "sample": false
+        },
+        "role": {
+          "type": "string",
+          "sample": "diagnostic"
+        }
+      }
+    },
+    "worker_analysis": {
+      "kind": "file",
+      "type": "file",
+      "value_type": "md",
+      "relayable": true,
+      "path": "raw/node-runs/{run_id}/outputs/artifacts/worker-analysis.md",
+      "fields": {
+        "media_type": {
+          "type": "string",
+          "sample": "text/markdown"
+        },
+        "relayable": {
+          "type": "boolean",
+          "sample": false
+        },
+        "role": {
+          "type": "string",
+          "sample": "diagnostic"
+        }
+      }
+    }
+  },
+  "node_model": {
+    "schema": "node-definition/v1",
+    "id": "youtube-deep-research-dxky",
+    "title": "Youtube Deep Research",
+    "description": "转换成不绑定上下游的 Runtime Node；首节点测试允许直接输入 source_url，保留超时、轮询间隔和是否包含 transcript 等配置。",
+    "version": "0.1-runtime-draft",
+    "skill": {
+      "id": "youtube-deep-research",
+      "source": "skill-installer",
+      "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451')",
+      "source_digest": {
+        "installer_url": "https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451",
+        "zip_url": "https://skill.vyibc.com/youtube-deep-research/release/youtube-deep-research-20260630125451.zip?ts=20260630125451",
+        "files": [
+          {
+            "path": "youtube-deep-research/SKILL.md",
+            "bytes": 2904,
+            "truncated": false
+          },
+          {
+            "path": "youtube-deep-research/agents/openai.yaml",
+            "bytes": 254,
+            "truncated": false
+          },
+          {
+            "path": "youtube-deep-research/scripts/youtube-deep-research.sh",
+            "bytes": 2451,
+            "truncated": false
+          },
+          {
+            "path": "youtube-deep-research/scripts/youtube_deep_research.py",
+            "bytes": 10820,
+            "truncated": false
+          }
+        ]
+      }
+    },
+    "executor": {
+      "type": "agent-skill",
+      "agent": "hermes",
+      "skill": "youtube-deep-research",
+      "request_template": "node-execution-request/v1"
+    },
+    "entry": {
+      "inputs": {
+        "include_transcript": {
+          "required": false,
+          "input_kind": "text",
+          "value_type": "text",
+          "label": "Include Transcript",
+          "description": "Value for CLI option --include-transcript.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --include-transcript -> $INCLUDE_TRANSCRIPT",
+          "cli_option": "--include-transcript"
+        },
+        "output_dir": {
+          "required": false,
+          "input_kind": "directory",
+          "value_type": "text",
+          "label": "Output Dir",
+          "description": "Runtime-managed value for CLI option --output-dir; normally injected by the Node Run workspace instead of user input.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --output-dir -> $OUTPUT_DIR",
+          "cli_option": "--output-dir",
+          "runtime_managed": true,
+          "ui_group": "runtime"
+        },
+        "poll_interval": {
+          "required": false,
+          "input_kind": "number",
+          "value_type": "number",
+          "label": "Poll Interval",
+          "description": "Value for CLI option --poll-interval.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --poll-interval -> $POLL_INTERVAL",
+          "cli_option": "--poll-interval"
+        },
+        "source_url": {
+          "required": true,
+          "input_kind": "url",
+          "value_type": "url",
+          "label": "Source Url",
+          "description": "Value for CLI option --source-url.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --source-url -> $SOURCE_URL",
+          "cli_option": "--source-url"
+        },
+        "timeout_seconds": {
+          "required": false,
+          "input_kind": "number",
+          "value_type": "number",
+          "label": "Timeout Seconds",
+          "description": "Value for CLI option --timeout-seconds.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --timeout-seconds -> $TIMEOUT_SECONDS",
+          "cli_option": "--timeout-seconds"
+        },
+        "workflow_token": {
+          "required": false,
+          "input_kind": "text",
+          "value_type": "text",
+          "label": "Workflow Token",
+          "description": "Value for CLI option --workflow-token.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-token -> $WORKFLOW_TOKEN",
+          "cli_option": "--workflow-token"
+        },
+        "workflow_url": {
+          "required": false,
+          "input_kind": "url",
+          "value_type": "url",
+          "label": "Workflow Url",
+          "description": "Value for CLI option --workflow-url.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-url -> $WORKFLOW_URL",
+          "cli_option": "--workflow-url"
+        }
+      }
+    },
+    "handoff": {
+      "accepts": {
+        "upstream_outputs_dir": {
+          "required": false,
+          "description": "一个或多个上游 Node 的标准输出目录。"
+        },
+        "instruction": {
+          "required": true,
+          "description": "Edge Handoff Agent 或用户提供的交接说明。"
+        },
+        "context": {
+          "required": false,
+          "description": "运行上下文或补充说明。"
+        }
+      },
+      "produces": {
+        "outputs_dir": "raw/node-runs/{run_id}/outputs",
+        "manifest": "raw/node-runs/{run_id}/outputs/manifest.json"
+      }
+    },
+    "outputs": {
+      "analysis_file": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "markdown",
+        "relayable": true,
+        "path": "raw/node-runs/{run_id}/outputs/outputs/analysis.md",
+        "fields": {
+          "media_type": {
+            "type": "string",
+            "sample": "text/markdown"
+          },
+          "relayable": {
+            "type": "boolean",
+            "sample": true
+          },
+          "role": {
+            "type": "string",
+            "sample": "wiki-source"
+          }
+        }
+      },
+      "transcript_file": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "text",
+        "relayable": true,
+        "path": "raw/node-runs/{run_id}/outputs/outputs/transcript.txt",
+        "fields": {
+          "media_type": {
+            "type": "string",
+            "sample": "text/plain"
+          },
+          "relayable": {
+            "type": "boolean",
+            "sample": true
+          },
+          "role": {
+            "type": "string",
+            "sample": "transcript"
+          }
+        }
+      },
+      "start": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "json",
+        "relayable": true,
+        "path": "raw/node-runs/{run_id}/outputs/artifacts/start.json",
+        "fields": {
+          "media_type": {
+            "type": "string",
+            "sample": "application/json"
+          },
+          "relayable": {
+            "type": "boolean",
+            "sample": false
+          },
+          "role": {
+            "type": "string",
+            "sample": "diagnostic"
+          }
+        }
+      },
+      "status": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "json",
+        "relayable": true,
+        "path": "raw/node-runs/{run_id}/outputs/artifacts/status.json",
+        "fields": {
+          "media_type": {
+            "type": "string",
+            "sample": "application/json"
+          },
+          "relayable": {
+            "type": "boolean",
+            "sample": false
+          },
+          "role": {
+            "type": "string",
+            "sample": "diagnostic"
+          }
+        }
+      },
+      "transcript": {
+        "kind": "files",
+        "type": "files",
+        "value_type": "mixed",
+        "relayable": true,
+        "path": "raw/node-runs/{run_id}/outputs/artifacts/**",
+        "fields": {
+          "media_type": {
+            "type": "string",
+            "sample": "text/vtt"
+          },
+          "relayable": {
+            "type": "boolean",
+            "sample": false
+          },
+          "role": {
+            "type": "string",
+            "sample": "diagnostic"
+          }
+        }
+      },
+      "worker_analysis": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "md",
+        "relayable": true,
+        "path": "raw/node-runs/{run_id}/outputs/artifacts/worker-analysis.md",
+        "fields": {
+          "media_type": {
+            "type": "string",
+            "sample": "text/markdown"
+          },
+          "relayable": {
+            "type": "boolean",
+            "sample": false
+          },
+          "role": {
+            "type": "string",
+            "sample": "diagnostic"
+          }
+        }
+      }
+    },
+    "capabilities": {
+      "git": {
+        "enabled": true,
+        "required": false
+      },
+      "telegram": {
+        "enabled": false,
+        "required": false
+      },
+      "sse": {
+        "enabled": true,
+        "required": true
+      }
+    },
+    "ui": {
+      "category": "custom"
+    },
+    "coverage_report": {
+      "status": "passed",
+      "covered_inputs": [
+        {
+          "input": "include_transcript",
+          "option": "--include-transcript",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --include-transcript -> $INCLUDE_TRANSCRIPT"
+        },
+        {
+          "input": "output_dir",
+          "option": "--output-dir",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --output-dir -> $OUTPUT_DIR"
+        },
+        {
+          "input": "poll_interval",
+          "option": "--poll-interval",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --poll-interval -> $POLL_INTERVAL"
+        },
+        {
+          "input": "source_url",
+          "option": "--source-url",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --source-url -> $SOURCE_URL"
+        },
+        {
+          "input": "timeout_seconds",
+          "option": "--timeout-seconds",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --timeout-seconds -> $TIMEOUT_SECONDS"
+        },
+        {
+          "input": "workflow_token",
+          "option": "--workflow-token",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-token -> $WORKFLOW_TOKEN"
+        },
+        {
+          "input": "workflow_url",
+          "option": "--workflow-url",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-url -> $WORKFLOW_URL"
+        }
+      ],
+      "missing_inputs": [],
+      "source_files_read": [
+        "youtube-deep-research/SKILL.md",
+        "youtube-deep-research/agents/openai.yaml",
+        "youtube-deep-research/scripts/youtube-deep-research.sh",
+        "youtube-deep-research/scripts/youtube_deep_research.py"
+      ],
+      "errors": []
+    },
+    "contract_summary": {
+      "primary_outputs": [],
+      "artifact_outputs": [],
+      "auxiliary_outputs": [
+        "analysis_file",
+        "transcript_file",
+        "transcript",
+        "worker_analysis"
+      ],
+      "diagnostic_outputs": [
+        "start",
+        "status"
+      ],
+      "aliases": {},
+      "recommended_edge_outputs": []
+    },
+    "agent_review": {
+      "summary": "Contract review classified runtime-observed outputs into primary, artifact, auxiliary and diagnostic groups.",
+      "warnings": [
+        {
+          "code": "contract_review_ai_fallback",
+          "message": "The read operation timed out"
+        }
+      ],
+      "risks": [],
+      "recommendations": [
+        "Run Probe and synthesize contract before publishing.",
+        "Keep JSON status payloads as diagnostics unless a downstream Edge explicitly requests them."
+      ],
+      "agent": {
+        "provider": "openai-compatible",
+        "model": "deepseek-v4-pro",
+        "used_ai": false,
+        "fallback": "deterministic-contract-review",
+        "error": "The read operation timed out"
+      }
+    },
+    "analysis": {
+      "contract_synthesis": {
+        "source": "node-draft-probe",
+        "probe_id": "youtube-deep-research-dxky-probe-20260630T130319Z-3167d8",
+        "node_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "manifest_record_count": 9,
+        "node_builder_contract_review": true,
+        "synthesized_at": "2026-06-30T13:10:13.496507+00:00"
+      }
+    }
+  },
+  "contract_summary": {
+    "primary_outputs": [],
+    "artifact_outputs": [],
+    "auxiliary_outputs": [
+      "analysis_file",
+      "transcript_file",
+      "transcript",
+      "worker_analysis"
+    ],
+    "diagnostic_outputs": [
+      "start",
+      "status"
+    ],
+    "aliases": {},
+    "recommended_edge_outputs": []
+  },
+  "agent_review": {
+    "summary": "Contract review classified runtime-observed outputs into primary, artifact, auxiliary and diagnostic groups.",
+    "warnings": [
+      {
+        "code": "contract_review_ai_fallback",
+        "message": "The read operation timed out"
+      }
+    ],
+    "risks": [],
+    "recommendations": [
+      "Run Probe and synthesize contract before publishing.",
+      "Keep JSON status payloads as diagnostics unless a downstream Edge explicitly requests them."
+    ],
+    "agent": {
+      "provider": "openai-compatible",
+      "model": "deepseek-v4-pro",
+      "used_ai": false,
+      "fallback": "deterministic-contract-review",
+      "error": "The read operation timed out"
+    }
+  },
+  "evidence": {
+    "probe_id": "youtube-deep-research-dxky-probe-20260630T130319Z-3167d8",
+    "node_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+    "manifest_record_count": 9,
+    "source": "node-draft-probe"
+  },
+  "node": {
+    "schema": "node-definition/v1",
+    "id": "youtube-deep-research-dxky",
+    "title": "Youtube Deep Research",
+    "description": "转换成不绑定上下游的 Runtime Node；首节点测试允许直接输入 source_url，保留超时、轮询间隔和是否包含 transcript 等配置。",
+    "version": "0.1-runtime-draft",
+    "skill": {
+      "id": "youtube-deep-research",
+      "source": "skill-installer",
+      "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451')",
+      "source_digest": {
+        "installer_url": "https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451",
+        "zip_url": "https://skill.vyibc.com/youtube-deep-research/release/youtube-deep-research-20260630125451.zip?ts=20260630125451",
+        "files": [
+          {
+            "path": "youtube-deep-research/SKILL.md",
+            "bytes": 2904,
+            "truncated": false
+          },
+          {
+            "path": "youtube-deep-research/agents/openai.yaml",
+            "bytes": 254,
+            "truncated": false
+          },
+          {
+            "path": "youtube-deep-research/scripts/youtube-deep-research.sh",
+            "bytes": 2451,
+            "truncated": false
+          },
+          {
+            "path": "youtube-deep-research/scripts/youtube_deep_research.py",
+            "bytes": 10820,
+            "truncated": false
+          }
+        ]
+      }
+    },
+    "executor": {
+      "type": "agent-skill",
+      "agent": "hermes",
+      "skill": "youtube-deep-research",
+      "request_template": "node-execution-request/v1"
+    },
+    "entry": {
+      "inputs": {
+        "include_transcript": {
+          "required": false,
+          "input_kind": "text",
+          "value_type": "text",
+          "label": "Include Transcript",
+          "description": "Value for CLI option --include-transcript.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --include-transcript -> $INCLUDE_TRANSCRIPT",
+          "cli_option": "--include-transcript"
+        },
+        "output_dir": {
+          "required": false,
+          "input_kind": "directory",
+          "value_type": "text",
+          "label": "Output Dir",
+          "description": "Runtime-managed value for CLI option --output-dir; normally injected by the Node Run workspace instead of user input.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --output-dir -> $OUTPUT_DIR",
+          "cli_option": "--output-dir",
+          "runtime_managed": true,
+          "ui_group": "runtime"
+        },
+        "poll_interval": {
+          "required": false,
+          "input_kind": "number",
+          "value_type": "number",
+          "label": "Poll Interval",
+          "description": "Value for CLI option --poll-interval.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --poll-interval -> $POLL_INTERVAL",
+          "cli_option": "--poll-interval"
+        },
+        "source_url": {
+          "required": true,
+          "input_kind": "url",
+          "value_type": "url",
+          "label": "Source Url",
+          "description": "Value for CLI option --source-url.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --source-url -> $SOURCE_URL",
+          "cli_option": "--source-url"
+        },
+        "timeout_seconds": {
+          "required": false,
+          "input_kind": "number",
+          "value_type": "number",
+          "label": "Timeout Seconds",
+          "description": "Value for CLI option --timeout-seconds.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --timeout-seconds -> $TIMEOUT_SECONDS",
+          "cli_option": "--timeout-seconds"
+        },
+        "workflow_token": {
+          "required": false,
+          "input_kind": "text",
+          "value_type": "text",
+          "label": "Workflow Token",
+          "description": "Value for CLI option --workflow-token.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-token -> $WORKFLOW_TOKEN",
+          "cli_option": "--workflow-token"
+        },
+        "workflow_url": {
+          "required": false,
+          "input_kind": "url",
+          "value_type": "url",
+          "label": "Workflow Url",
+          "description": "Value for CLI option --workflow-url.",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-url -> $WORKFLOW_URL",
+          "cli_option": "--workflow-url"
+        }
+      }
+    },
+    "handoff": {
+      "accepts": {
+        "upstream_outputs_dir": {
+          "required": false,
+          "description": "一个或多个上游 Node 的标准输出目录。"
+        },
+        "instruction": {
+          "required": true,
+          "description": "Edge Handoff Agent 或用户提供的交接说明。"
+        },
+        "context": {
+          "required": false,
+          "description": "运行上下文或补充说明。"
+        }
+      },
+      "produces": {
+        "outputs_dir": "raw/node-runs/{run_id}/outputs",
+        "manifest": "raw/node-runs/{run_id}/outputs/manifest.json"
+      }
+    },
+    "outputs": {
+      "analysis_file": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "markdown",
+        "relayable": true,
+        "path": "raw/node-runs/{run_id}/outputs/outputs/analysis.md",
+        "fields": {
+          "media_type": {
+            "type": "string",
+            "sample": "text/markdown"
+          },
+          "relayable": {
+            "type": "boolean",
+            "sample": true
+          },
+          "role": {
+            "type": "string",
+            "sample": "wiki-source"
+          }
+        }
+      },
+      "transcript_file": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "text",
+        "relayable": true,
+        "path": "raw/node-runs/{run_id}/outputs/outputs/transcript.txt",
+        "fields": {
+          "media_type": {
+            "type": "string",
+            "sample": "text/plain"
+          },
+          "relayable": {
+            "type": "boolean",
+            "sample": true
+          },
+          "role": {
+            "type": "string",
+            "sample": "transcript"
+          }
+        }
+      },
+      "start": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "json",
+        "relayable": true,
+        "path": "raw/node-runs/{run_id}/outputs/artifacts/start.json",
+        "fields": {
+          "media_type": {
+            "type": "string",
+            "sample": "application/json"
+          },
+          "relayable": {
+            "type": "boolean",
+            "sample": false
+          },
+          "role": {
+            "type": "string",
+            "sample": "diagnostic"
+          }
+        }
+      },
+      "status": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "json",
+        "relayable": true,
+        "path": "raw/node-runs/{run_id}/outputs/artifacts/status.json",
+        "fields": {
+          "media_type": {
+            "type": "string",
+            "sample": "application/json"
+          },
+          "relayable": {
+            "type": "boolean",
+            "sample": false
+          },
+          "role": {
+            "type": "string",
+            "sample": "diagnostic"
+          }
+        }
+      },
+      "transcript": {
+        "kind": "files",
+        "type": "files",
+        "value_type": "mixed",
+        "relayable": true,
+        "path": "raw/node-runs/{run_id}/outputs/artifacts/**",
+        "fields": {
+          "media_type": {
+            "type": "string",
+            "sample": "text/vtt"
+          },
+          "relayable": {
+            "type": "boolean",
+            "sample": false
+          },
+          "role": {
+            "type": "string",
+            "sample": "diagnostic"
+          }
+        }
+      },
+      "worker_analysis": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "md",
+        "relayable": true,
+        "path": "raw/node-runs/{run_id}/outputs/artifacts/worker-analysis.md",
+        "fields": {
+          "media_type": {
+            "type": "string",
+            "sample": "text/markdown"
+          },
+          "relayable": {
+            "type": "boolean",
+            "sample": false
+          },
+          "role": {
+            "type": "string",
+            "sample": "diagnostic"
+          }
+        }
+      }
+    },
+    "capabilities": {
+      "git": {
+        "enabled": true,
+        "required": false
+      },
+      "telegram": {
+        "enabled": false,
+        "required": false
+      },
+      "sse": {
+        "enabled": true,
+        "required": true
+      }
+    },
+    "ui": {
+      "category": "custom"
+    },
+    "coverage_report": {
+      "status": "passed",
+      "covered_inputs": [
+        {
+          "input": "include_transcript",
+          "option": "--include-transcript",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --include-transcript -> $INCLUDE_TRANSCRIPT"
+        },
+        {
+          "input": "output_dir",
+          "option": "--output-dir",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --output-dir -> $OUTPUT_DIR"
+        },
+        {
+          "input": "poll_interval",
+          "option": "--poll-interval",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --poll-interval -> $POLL_INTERVAL"
+        },
+        {
+          "input": "source_url",
+          "option": "--source-url",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --source-url -> $SOURCE_URL"
+        },
+        {
+          "input": "timeout_seconds",
+          "option": "--timeout-seconds",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --timeout-seconds -> $TIMEOUT_SECONDS"
+        },
+        {
+          "input": "workflow_token",
+          "option": "--workflow-token",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-token -> $WORKFLOW_TOKEN"
+        },
+        {
+          "input": "workflow_url",
+          "option": "--workflow-url",
+          "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-url -> $WORKFLOW_URL"
+        }
+      ],
+      "missing_inputs": [],
+      "source_files_read": [
+        "youtube-deep-research/SKILL.md",
+        "youtube-deep-research/agents/openai.yaml",
+        "youtube-deep-research/scripts/youtube-deep-research.sh",
+        "youtube-deep-research/scripts/youtube_deep_research.py"
+      ],
+      "errors": []
+    },
+    "contract_summary": {
+      "primary_outputs": [],
+      "artifact_outputs": [],
+      "auxiliary_outputs": [
+        "analysis_file",
+        "transcript_file",
+        "transcript",
+        "worker_analysis"
+      ],
+      "diagnostic_outputs": [
+        "start",
+        "status"
+      ],
+      "aliases": {},
+      "recommended_edge_outputs": []
+    },
+    "agent_review": {
+      "summary": "Contract review classified runtime-observed outputs into primary, artifact, auxiliary and diagnostic groups.",
+      "warnings": [
+        {
+          "code": "contract_review_ai_fallback",
+          "message": "The read operation timed out"
+        }
+      ],
+      "risks": [],
+      "recommendations": [
+        "Run Probe and synthesize contract before publishing.",
+        "Keep JSON status payloads as diagnostics unless a downstream Edge explicitly requests them."
+      ],
+      "agent": {
+        "provider": "openai-compatible",
+        "model": "deepseek-v4-pro",
+        "used_ai": false,
+        "fallback": "deterministic-contract-review",
+        "error": "The read operation timed out"
+      }
+    },
+    "analysis": {
+      "contract_synthesis": {
+        "source": "node-draft-probe",
+        "probe_id": "youtube-deep-research-dxky-probe-20260630T130319Z-3167d8",
+        "node_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "manifest_record_count": 9,
+        "node_builder_contract_review": true,
+        "synthesized_at": "2026-06-30T13:10:13.496507+00:00"
+      }
+    }
+  },
+  "validation": {
+    "schema_id": "node-draft-schema/v1",
+    "status": "passed",
+    "errors": [],
+    "missing_fields": [],
+    "production_dag_changed": false,
+    "node_builder": true,
+    "contract_synthesis": "passed",
+    "output_count": 6,
+    "node_builder_contract_review": true
+  },
+  "node_builder_contract_review": {
+    "ok": true,
+    "mode": "node-builder-agent-evaluation",
+    "request": {
+      "evaluation_mode": "contract_review",
+      "draft_id": "youtube-deep-research-dxky-1782824532",
+      "node_id": "youtube-deep-research-dxky",
+      "node_draft": {
+        "schema": "node-definition/v1",
+        "id": "youtube-deep-research-dxky",
+        "title": "Youtube Deep Research",
+        "description": "转换成不绑定上下游的 Runtime Node；首节点测试允许直接输入 source_url，保留超时、轮询间隔和是否包含 transcript 等配置。",
+        "version": "0.1-runtime-draft",
+        "skill": {
+          "id": "youtube-deep-research",
+          "source": "skill-installer",
+          "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451')",
+          "source_digest": {
+            "installer_url": "https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451",
+            "zip_url": "https://skill.vyibc.com/youtube-deep-research/release/youtube-deep-research-20260630125451.zip?ts=20260630125451",
+            "files": [
+              {
+                "path": "youtube-deep-research/SKILL.md",
+                "bytes": 2904,
+                "truncated": false
+              },
+              {
+                "path": "youtube-deep-research/agents/openai.yaml",
+                "bytes": 254,
+                "truncated": false
+              },
+              {
+                "path": "youtube-deep-research/scripts/youtube-deep-research.sh",
+                "bytes": 2451,
+                "truncated": false
+              },
+              {
+                "path": "youtube-deep-research/scripts/youtube_deep_research.py",
+                "bytes": 10820,
+                "truncated": false
+              }
+            ]
+          }
+        },
+        "executor": {
+          "type": "agent-skill",
+          "agent": "hermes",
+          "skill": "youtube-deep-research",
+          "request_template": "node-execution-request/v1"
+        },
+        "entry": {
+          "inputs": {
+            "include_transcript": {
+              "required": false,
+              "input_kind": "text",
+              "value_type": "text",
+              "label": "Include Transcript",
+              "description": "Value for CLI option --include-transcript.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --include-transcript -> $INCLUDE_TRANSCRIPT",
+              "cli_option": "--include-transcript"
+            },
+            "output_dir": {
+              "required": false,
+              "input_kind": "directory",
+              "value_type": "text",
+              "label": "Output Dir",
+              "description": "Runtime-managed value for CLI option --output-dir; normally injected by the Node Run workspace instead of user input.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --output-dir -> $OUTPUT_DIR",
+              "cli_option": "--output-dir",
+              "runtime_managed": true,
+              "ui_group": "runtime"
+            },
+            "poll_interval": {
+              "required": false,
+              "input_kind": "number",
+              "value_type": "number",
+              "label": "Poll Interval",
+              "description": "Value for CLI option --poll-interval.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --poll-interval -> $POLL_INTERVAL",
+              "cli_option": "--poll-interval"
+            },
+            "source_url": {
+              "required": true,
+              "input_kind": "url",
+              "value_type": "url",
+              "label": "Source Url",
+              "description": "Value for CLI option --source-url.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --source-url -> $SOURCE_URL",
+              "cli_option": "--source-url"
+            },
+            "timeout_seconds": {
+              "required": false,
+              "input_kind": "number",
+              "value_type": "number",
+              "label": "Timeout Seconds",
+              "description": "Value for CLI option --timeout-seconds.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --timeout-seconds -> $TIMEOUT_SECONDS",
+              "cli_option": "--timeout-seconds"
+            },
+            "workflow_token": {
+              "required": false,
+              "input_kind": "text",
+              "value_type": "text",
+              "label": "Workflow Token",
+              "description": "Value for CLI option --workflow-token.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-token -> $WORKFLOW_TOKEN",
+              "cli_option": "--workflow-token"
+            },
+            "workflow_url": {
+              "required": false,
+              "input_kind": "url",
+              "value_type": "url",
+              "label": "Workflow Url",
+              "description": "Value for CLI option --workflow-url.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-url -> $WORKFLOW_URL",
+              "cli_option": "--workflow-url"
+            }
+          }
+        },
+        "handoff": {
+          "accepts": {
+            "upstream_outputs_dir": {
+              "required": false,
+              "description": "一个或多个上游 Node 的标准输出目录。"
+            },
+            "instruction": {
+              "required": true,
+              "description": "Edge Handoff Agent 或用户提供的交接说明。"
+            },
+            "context": {
+              "required": false,
+              "description": "运行上下文或补充说明。"
+            }
+          },
+          "produces": {
+            "outputs_dir": "raw/node-runs/{run_id}/outputs",
+            "manifest": "raw/node-runs/{run_id}/outputs/manifest.json"
+          }
+        },
+        "outputs": {
+          "analysis_file": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "relayable": true,
+            "path": "raw/node-runs/{run_id}/outputs/outputs/analysis.md",
+            "fields": {
+              "media_type": {
+                "type": "string",
+                "sample": "text/markdown"
+              },
+              "relayable": {
+                "type": "boolean",
+                "sample": true
+              },
+              "role": {
+                "type": "string",
+                "sample": "wiki-source"
+              }
+            }
+          },
+          "transcript_file": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "text",
+            "relayable": true,
+            "path": "raw/node-runs/{run_id}/outputs/outputs/transcript.txt",
+            "fields": {
+              "media_type": {
+                "type": "string",
+                "sample": "text/plain"
+              },
+              "relayable": {
+                "type": "boolean",
+                "sample": true
+              },
+              "role": {
+                "type": "string",
+                "sample": "transcript"
+              }
+            }
+          },
+          "start": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": true,
+            "path": "raw/node-runs/{run_id}/outputs/artifacts/start.json",
+            "fields": {
+              "media_type": {
+                "type": "string",
+                "sample": "application/json"
+              },
+              "relayable": {
+                "type": "boolean",
+                "sample": false
+              },
+              "role": {
+                "type": "string",
+                "sample": "diagnostic"
+              }
+            }
+          },
+          "status": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": true,
+            "path": "raw/node-runs/{run_id}/outputs/artifacts/status.json",
+            "fields": {
+              "media_type": {
+                "type": "string",
+                "sample": "application/json"
+              },
+              "relayable": {
+                "type": "boolean",
+                "sample": false
+              },
+              "role": {
+                "type": "string",
+                "sample": "diagnostic"
+              }
+            }
+          },
+          "transcript": {
+            "kind": "files",
+            "type": "files",
+            "value_type": "mixed",
+            "relayable": true,
+            "path": "raw/node-runs/{run_id}/outputs/artifacts/**",
+            "fields": {
+              "media_type": {
+                "type": "string",
+                "sample": "text/vtt"
+              },
+              "relayable": {
+                "type": "boolean",
+                "sample": false
+              },
+              "role": {
+                "type": "string",
+                "sample": "diagnostic"
+              }
+            }
+          },
+          "worker_analysis": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "md",
+            "relayable": true,
+            "path": "raw/node-runs/{run_id}/outputs/artifacts/worker-analysis.md",
+            "fields": {
+              "media_type": {
+                "type": "string",
+                "sample": "text/markdown"
+              },
+              "relayable": {
+                "type": "boolean",
+                "sample": false
+              },
+              "role": {
+                "type": "string",
+                "sample": "diagnostic"
+              }
+            }
+          }
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false
+          },
+          "telegram": {
+            "enabled": false,
+            "required": false
+          },
+          "sse": {
+            "enabled": true,
+            "required": true
+          }
+        },
+        "ui": {
+          "category": "custom"
+        },
+        "coverage_report": {
+          "status": "passed",
+          "covered_inputs": [
+            {
+              "input": "include_transcript",
+              "option": "--include-transcript",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --include-transcript -> $INCLUDE_TRANSCRIPT"
+            },
+            {
+              "input": "output_dir",
+              "option": "--output-dir",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --output-dir -> $OUTPUT_DIR"
+            },
+            {
+              "input": "poll_interval",
+              "option": "--poll-interval",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --poll-interval -> $POLL_INTERVAL"
+            },
+            {
+              "input": "source_url",
+              "option": "--source-url",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --source-url -> $SOURCE_URL"
+            },
+            {
+              "input": "timeout_seconds",
+              "option": "--timeout-seconds",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --timeout-seconds -> $TIMEOUT_SECONDS"
+            },
+            {
+              "input": "workflow_token",
+              "option": "--workflow-token",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-token -> $WORKFLOW_TOKEN"
+            },
+            {
+              "input": "workflow_url",
+              "option": "--workflow-url",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-url -> $WORKFLOW_URL"
+            }
+          ],
+          "missing_inputs": [],
+          "source_files_read": [
+            "youtube-deep-research/SKILL.md",
+            "youtube-deep-research/agents/openai.yaml",
+            "youtube-deep-research/scripts/youtube-deep-research.sh",
+            "youtube-deep-research/scripts/youtube_deep_research.py"
+          ],
+          "errors": []
+        }
+      },
+      "observed_outputs": {
+        "analysis_file": {
+          "kind": "file",
+          "type": "file",
+          "value_type": "markdown",
+          "relayable": true,
+          "path": "raw/node-runs/{run_id}/outputs/outputs/analysis.md",
+          "fields": {
+            "media_type": {
+              "type": "string",
+              "sample": "text/markdown"
+            },
+            "relayable": {
+              "type": "boolean",
+              "sample": true
+            },
+            "role": {
+              "type": "string",
+              "sample": "wiki-source"
+            }
+          }
+        },
+        "transcript_file": {
+          "kind": "file",
+          "type": "file",
+          "value_type": "text",
+          "relayable": true,
+          "path": "raw/node-runs/{run_id}/outputs/outputs/transcript.txt",
+          "fields": {
+            "media_type": {
+              "type": "string",
+              "sample": "text/plain"
+            },
+            "relayable": {
+              "type": "boolean",
+              "sample": true
+            },
+            "role": {
+              "type": "string",
+              "sample": "transcript"
+            }
+          }
+        },
+        "start": {
+          "kind": "file",
+          "type": "file",
+          "value_type": "json",
+          "relayable": true,
+          "path": "raw/node-runs/{run_id}/outputs/artifacts/start.json",
+          "fields": {
+            "media_type": {
+              "type": "string",
+              "sample": "application/json"
+            },
+            "relayable": {
+              "type": "boolean",
+              "sample": false
+            },
+            "role": {
+              "type": "string",
+              "sample": "diagnostic"
+            }
+          }
+        },
+        "status": {
+          "kind": "file",
+          "type": "file",
+          "value_type": "json",
+          "relayable": true,
+          "path": "raw/node-runs/{run_id}/outputs/artifacts/status.json",
+          "fields": {
+            "media_type": {
+              "type": "string",
+              "sample": "application/json"
+            },
+            "relayable": {
+              "type": "boolean",
+              "sample": false
+            },
+            "role": {
+              "type": "string",
+              "sample": "diagnostic"
+            }
+          }
+        },
+        "transcript": {
+          "kind": "files",
+          "type": "files",
+          "value_type": "mixed",
+          "relayable": true,
+          "path": "raw/node-runs/{run_id}/outputs/artifacts/**",
+          "fields": {
+            "media_type": {
+              "type": "string",
+              "sample": "text/vtt"
+            },
+            "relayable": {
+              "type": "boolean",
+              "sample": false
+            },
+            "role": {
+              "type": "string",
+              "sample": "diagnostic"
+            }
+          }
+        },
+        "worker_analysis": {
+          "kind": "file",
+          "type": "file",
+          "value_type": "md",
+          "relayable": true,
+          "path": "raw/node-runs/{run_id}/outputs/artifacts/worker-analysis.md",
+          "fields": {
+            "media_type": {
+              "type": "string",
+              "sample": "text/markdown"
+            },
+            "relayable": {
+              "type": "boolean",
+              "sample": false
+            },
+            "role": {
+              "type": "string",
+              "sample": "diagnostic"
+            }
+          }
+        }
+      },
+      "probe": {
+        "probe_id": "youtube-deep-research-dxky-probe-20260630T130319Z-3167d8",
+        "node_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "manifest_record_count": 9,
+        "source": "node-draft-probe"
+      },
+      "user_instruction": "",
+      "allow_fallback": true,
+      "runtime_id": "youtube-wiki",
+      "instance_id": "wiki-sop-new-instance",
+      "skill_install_command": "",
+      "fetch_metadata": true
+    },
+    "config": {
+      "base_url": {
+        "key": "WIKI_LLM_BASE_URL",
+        "label": "Node Builder LLM Base URL",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_BASE_URL",
+        "masked_value": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "value": "https://api-proxy.chxyka.ccwu.cc/v1"
+      },
+      "api_key": {
+        "key": "WIKI_LLM_API_KEY",
+        "label": "Node Builder LLM API Key",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_API_KEY",
+        "masked_value": "ah-***c68",
+        "value": null
+      },
+      "model": {
+        "key": "WIKI_LLM_MODEL",
+        "label": "Node Builder LLM Model",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_MODEL",
+        "masked_value": "deepseek-v4-pro",
+        "value": "deepseek-v4-pro"
+      },
+      "settings_backend": "file",
+      "precedence": [
+        "node-run-overrides",
+        "instance-settings",
+        "runtime-settings",
+        "global-settings",
+        "bridge-env",
+        "runtime-env-file"
+      ]
+    },
+    "evaluation": {
+      "status": "reviewed",
+      "summary": "Contract review classified runtime-observed outputs into primary, artifact, auxiliary and diagnostic groups.",
+      "node_model": {
+        "schema": "node-definition/v1",
+        "id": "youtube-deep-research-dxky",
+        "title": "Youtube Deep Research",
+        "description": "转换成不绑定上下游的 Runtime Node；首节点测试允许直接输入 source_url，保留超时、轮询间隔和是否包含 transcript 等配置。",
+        "version": "0.1-runtime-draft",
+        "skill": {
+          "id": "youtube-deep-research",
+          "source": "skill-installer",
+          "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451')",
+          "source_digest": {
+            "installer_url": "https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451",
+            "zip_url": "https://skill.vyibc.com/youtube-deep-research/release/youtube-deep-research-20260630125451.zip?ts=20260630125451",
+            "files": [
+              {
+                "path": "youtube-deep-research/SKILL.md",
+                "bytes": 2904,
+                "truncated": false
+              },
+              {
+                "path": "youtube-deep-research/agents/openai.yaml",
+                "bytes": 254,
+                "truncated": false
+              },
+              {
+                "path": "youtube-deep-research/scripts/youtube-deep-research.sh",
+                "bytes": 2451,
+                "truncated": false
+              },
+              {
+                "path": "youtube-deep-research/scripts/youtube_deep_research.py",
+                "bytes": 10820,
+                "truncated": false
+              }
+            ]
+          }
+        },
+        "executor": {
+          "type": "agent-skill",
+          "agent": "hermes",
+          "skill": "youtube-deep-research",
+          "request_template": "node-execution-request/v1"
+        },
+        "entry": {
+          "inputs": {
+            "include_transcript": {
+              "required": false,
+              "input_kind": "text",
+              "value_type": "text",
+              "label": "Include Transcript",
+              "description": "Value for CLI option --include-transcript.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --include-transcript -> $INCLUDE_TRANSCRIPT",
+              "cli_option": "--include-transcript"
+            },
+            "output_dir": {
+              "required": false,
+              "input_kind": "directory",
+              "value_type": "text",
+              "label": "Output Dir",
+              "description": "Runtime-managed value for CLI option --output-dir; normally injected by the Node Run workspace instead of user input.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --output-dir -> $OUTPUT_DIR",
+              "cli_option": "--output-dir",
+              "runtime_managed": true,
+              "ui_group": "runtime"
+            },
+            "poll_interval": {
+              "required": false,
+              "input_kind": "number",
+              "value_type": "number",
+              "label": "Poll Interval",
+              "description": "Value for CLI option --poll-interval.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --poll-interval -> $POLL_INTERVAL",
+              "cli_option": "--poll-interval"
+            },
+            "source_url": {
+              "required": true,
+              "input_kind": "url",
+              "value_type": "url",
+              "label": "Source Url",
+              "description": "Value for CLI option --source-url.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --source-url -> $SOURCE_URL",
+              "cli_option": "--source-url"
+            },
+            "timeout_seconds": {
+              "required": false,
+              "input_kind": "number",
+              "value_type": "number",
+              "label": "Timeout Seconds",
+              "description": "Value for CLI option --timeout-seconds.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --timeout-seconds -> $TIMEOUT_SECONDS",
+              "cli_option": "--timeout-seconds"
+            },
+            "workflow_token": {
+              "required": false,
+              "input_kind": "text",
+              "value_type": "text",
+              "label": "Workflow Token",
+              "description": "Value for CLI option --workflow-token.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-token -> $WORKFLOW_TOKEN",
+              "cli_option": "--workflow-token"
+            },
+            "workflow_url": {
+              "required": false,
+              "input_kind": "url",
+              "value_type": "url",
+              "label": "Workflow Url",
+              "description": "Value for CLI option --workflow-url.",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-url -> $WORKFLOW_URL",
+              "cli_option": "--workflow-url"
+            }
+          }
+        },
+        "handoff": {
+          "accepts": {
+            "upstream_outputs_dir": {
+              "required": false,
+              "description": "一个或多个上游 Node 的标准输出目录。"
+            },
+            "instruction": {
+              "required": true,
+              "description": "Edge Handoff Agent 或用户提供的交接说明。"
+            },
+            "context": {
+              "required": false,
+              "description": "运行上下文或补充说明。"
+            }
+          },
+          "produces": {
+            "outputs_dir": "raw/node-runs/{run_id}/outputs",
+            "manifest": "raw/node-runs/{run_id}/outputs/manifest.json"
+          }
+        },
+        "outputs": {
+          "analysis_file": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "relayable": true,
+            "path": "raw/node-runs/{run_id}/outputs/outputs/analysis.md",
+            "fields": {
+              "media_type": {
+                "type": "string",
+                "sample": "text/markdown"
+              },
+              "relayable": {
+                "type": "boolean",
+                "sample": true
+              },
+              "role": {
+                "type": "string",
+                "sample": "wiki-source"
+              }
+            }
+          },
+          "transcript_file": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "text",
+            "relayable": true,
+            "path": "raw/node-runs/{run_id}/outputs/outputs/transcript.txt",
+            "fields": {
+              "media_type": {
+                "type": "string",
+                "sample": "text/plain"
+              },
+              "relayable": {
+                "type": "boolean",
+                "sample": true
+              },
+              "role": {
+                "type": "string",
+                "sample": "transcript"
+              }
+            }
+          },
+          "start": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": true,
+            "path": "raw/node-runs/{run_id}/outputs/artifacts/start.json",
+            "fields": {
+              "media_type": {
+                "type": "string",
+                "sample": "application/json"
+              },
+              "relayable": {
+                "type": "boolean",
+                "sample": false
+              },
+              "role": {
+                "type": "string",
+                "sample": "diagnostic"
+              }
+            }
+          },
+          "status": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": true,
+            "path": "raw/node-runs/{run_id}/outputs/artifacts/status.json",
+            "fields": {
+              "media_type": {
+                "type": "string",
+                "sample": "application/json"
+              },
+              "relayable": {
+                "type": "boolean",
+                "sample": false
+              },
+              "role": {
+                "type": "string",
+                "sample": "diagnostic"
+              }
+            }
+          },
+          "transcript": {
+            "kind": "files",
+            "type": "files",
+            "value_type": "mixed",
+            "relayable": true,
+            "path": "raw/node-runs/{run_id}/outputs/artifacts/**",
+            "fields": {
+              "media_type": {
+                "type": "string",
+                "sample": "text/vtt"
+              },
+              "relayable": {
+                "type": "boolean",
+                "sample": false
+              },
+              "role": {
+                "type": "string",
+                "sample": "diagnostic"
+              }
+            }
+          },
+          "worker_analysis": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "md",
+            "relayable": true,
+            "path": "raw/node-runs/{run_id}/outputs/artifacts/worker-analysis.md",
+            "fields": {
+              "media_type": {
+                "type": "string",
+                "sample": "text/markdown"
+              },
+              "relayable": {
+                "type": "boolean",
+                "sample": false
+              },
+              "role": {
+                "type": "string",
+                "sample": "diagnostic"
+              }
+            }
+          }
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false
+          },
+          "telegram": {
+            "enabled": false,
+            "required": false
+          },
+          "sse": {
+            "enabled": true,
+            "required": true
+          }
+        },
+        "ui": {
+          "category": "custom"
+        },
+        "coverage_report": {
+          "status": "passed",
+          "covered_inputs": [
+            {
+              "input": "include_transcript",
+              "option": "--include-transcript",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --include-transcript -> $INCLUDE_TRANSCRIPT"
+            },
+            {
+              "input": "output_dir",
+              "option": "--output-dir",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --output-dir -> $OUTPUT_DIR"
+            },
+            {
+              "input": "poll_interval",
+              "option": "--poll-interval",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --poll-interval -> $POLL_INTERVAL"
+            },
+            {
+              "input": "source_url",
+              "option": "--source-url",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --source-url -> $SOURCE_URL"
+            },
+            {
+              "input": "timeout_seconds",
+              "option": "--timeout-seconds",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --timeout-seconds -> $TIMEOUT_SECONDS"
+            },
+            {
+              "input": "workflow_token",
+              "option": "--workflow-token",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-token -> $WORKFLOW_TOKEN"
+            },
+            {
+              "input": "workflow_url",
+              "option": "--workflow-url",
+              "evidence": "youtube-deep-research/scripts/youtube-deep-research.sh: option --workflow-url -> $WORKFLOW_URL"
+            }
+          ],
+          "missing_inputs": [],
+          "source_files_read": [
+            "youtube-deep-research/SKILL.md",
+            "youtube-deep-research/agents/openai.yaml",
+            "youtube-deep-research/scripts/youtube-deep-research.sh",
+            "youtube-deep-research/scripts/youtube_deep_research.py"
+          ],
+          "errors": []
+        },
+        "contract_summary": {
+          "primary_outputs": [],
+          "artifact_outputs": [],
+          "auxiliary_outputs": [
+            "analysis_file",
+            "transcript_file",
+            "transcript",
+            "worker_analysis"
+          ],
+          "diagnostic_outputs": [
+            "start",
+            "status"
+          ],
+          "aliases": {},
+          "recommended_edge_outputs": []
+        },
+        "agent_review": {
+          "summary": "Contract review classified runtime-observed outputs into primary, artifact, auxiliary and diagnostic groups.",
+          "warnings": [
+            {
+              "code": "contract_review_ai_fallback",
+              "message": "The read operation timed out"
+            }
+          ],
+          "risks": [],
+          "recommendations": [
+            "Run Probe and synthesize contract before publishing.",
+            "Keep JSON status payloads as diagnostics unless a downstream Edge explicitly requests them."
+          ],
+          "agent": {
+            "provider": "openai-compatible",
+            "model": "deepseek-v4-pro",
+            "used_ai": false,
+            "fallback": "deterministic-contract-review",
+            "error": "The read operation timed out"
+          }
+        },
+        "analysis": {
+          "contract_synthesis": {
+            "source": "node-draft-probe",
+            "probe_id": "youtube-deep-research-dxky-probe-20260630T130319Z-3167d8",
+            "node_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+            "manifest_record_count": 9,
+            "node_builder_contract_review": true,
+            "synthesized_at": "2026-06-30T13:10:13.496507+00:00"
+          }
+        }
+      },
+      "contract_summary": {
+        "primary_outputs": [],
+        "artifact_outputs": [],
+        "auxiliary_outputs": [
+          "analysis_file",
+          "transcript_file",
+          "transcript",
+          "worker_analysis"
+        ],
+        "diagnostic_outputs": [
+          "start",
+          "status"
+        ],
+        "aliases": {},
+        "recommended_edge_outputs": []
+      },
+      "agent_review": {
+        "summary": "Contract review classified runtime-observed outputs into primary, artifact, auxiliary and diagnostic groups.",
+        "warnings": [
+          {
+            "code": "contract_review_ai_fallback",
+            "message": "The read operation timed out"
+          }
+        ],
+        "risks": [],
+        "recommendations": [
+          "Run Probe and synthesize contract before publishing.",
+          "Keep JSON status payloads as diagnostics unless a downstream Edge explicitly requests them."
+        ],
+        "agent": {
+          "provider": "openai-compatible",
+          "model": "deepseek-v4-pro",
+          "used_ai": false,
+          "fallback": "deterministic-contract-review",
+          "error": "The read operation timed out"
+        }
+      },
+      "missing_fields": [],
+      "evidence": {
+        "probe_id": "youtube-deep-research-dxky-probe-20260630T130319Z-3167d8",
+        "node_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "manifest_record_count": 9
+      },
+      "trace": {
+        "trace_schema": "node-builder-contract-review-trace/v1",
+        "request": {
+          "runtime_id": "youtube-wiki",
+          "instance_id": "wiki-sop-new-instance",
+          "draft_id": "youtube-deep-research-dxky-1782824532",
+          "node_id": "youtube-deep-research-dxky",
+          "evaluation_mode": "contract_review",
+          "probe": {
+            "probe_id": "youtube-deep-research-dxky-probe-20260630T130319Z-3167d8",
+            "node_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+            "manifest_record_count": 9,
+            "source": "node-draft-probe"
+          }
+        },
+        "config": {
+          "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+          "model": "deepseek-v4-pro",
+          "api_key": "ah-***c68"
+        },
+        "started_at": "2026-06-30T13:10:03Z",
+        "error": "The read operation timed out",
+        "llm_request": {
+          "model": "deepseek-v4-pro",
+          "temperature": 0.0,
+          "max_tokens": 4096,
+          "stream": false,
+          "response_format": {
+            "type": "json_object"
+          },
+          "messages": [
+            {
+              "role": "system",
+              "content_preview": "Return strict JSON in message.content only. No prose.",
+              "content_chars": 53
+            },
+            {
+              "role": "user",
+              "content_preview": "You are the SOP Node Builder Agent in contract_review mode. Return strict JSON only, no markdown.\nYou are NOT creating a fresh Node Draft. You are reviewing a Node Draft after a real Probe Run. Use the observed Probe outputs as evidence and produce the final node-definition/v1 contract view.\n\nRequired JSON keys: status, summary, node_model, contract_summary, agent_review, missing_fields, evidence. Allowed status: reviewed, needs_user_input, blocked.\n\nContract summary rules:\n- primary_outputs are the main business values a downstream Edge should normally consume.\n- artifact_outputs are file/image/directory artifacts that are useful downstream.\n- auxiliary_outputs are useful metadata such as task_id, status, result, message or summary.\n- diagnostic_outputs are execution/debug payloads such as submit_json/status_json/log-like objects.\n- aliases maps duplicate compatibility names to canonica",
+              "content_chars": 2232
+            }
+          ]
+        }
+      },
+      "evaluated_at": "2026-06-30T13:10:03Z"
+    },
+    "trace": {
+      "trace_schema": "node-builder-contract-review-trace/v1",
+      "request": {
+        "runtime_id": "youtube-wiki",
+        "instance_id": "wiki-sop-new-instance",
+        "draft_id": "youtube-deep-research-dxky-1782824532",
+        "node_id": "youtube-deep-research-dxky",
+        "evaluation_mode": "contract_review",
+        "probe": {
+          "probe_id": "youtube-deep-research-dxky-probe-20260630T130319Z-3167d8",
+          "node_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+          "manifest_record_count": 9,
+          "source": "node-draft-probe"
+        }
+      },
+      "config": {
+        "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "model": "deepseek-v4-pro",
+        "api_key": "ah-***c68"
+      },
+      "started_at": "2026-06-30T13:10:03Z",
+      "error": "The read operation timed out",
+      "llm_request": {
+        "model": "deepseek-v4-pro",
+        "temperature": 0.0,
+        "max_tokens": 4096,
+        "stream": false,
+        "response_format": {
+          "type": "json_object"
+        },
+        "messages": [
+          {
+            "role": "system",
+            "content_preview": "Return strict JSON in message.content only. No prose.",
+            "content_chars": 53
+          },
+          {
+            "role": "user",
+            "content_preview": "You are the SOP Node Builder Agent in contract_review mode. Return strict JSON only, no markdown.\nYou are NOT creating a fresh Node Draft. You are reviewing a Node Draft after a real Probe Run. Use the observed Probe outputs as evidence and produce the final node-definition/v1 contract view.\n\nRequired JSON keys: status, summary, node_model, contract_summary, agent_review, missing_fields, evidence. Allowed status: reviewed, needs_user_input, blocked.\n\nContract summary rules:\n- primary_outputs are the main business values a downstream Edge should normally consume.\n- artifact_outputs are file/image/directory artifacts that are useful downstream.\n- auxiliary_outputs are useful metadata such as task_id, status, result, message or summary.\n- diagnostic_outputs are execution/debug payloads such as submit_json/status_json/log-like objects.\n- aliases maps duplicate compatibility names to canonica",
+            "content_chars": 2232
+          }
+        ]
+      }
+    },
+    "stderr": ""
+  },
+  "synthesized_at": "2026-06-30T13:10:13.512265+00:00"
+}

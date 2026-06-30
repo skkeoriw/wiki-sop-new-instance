@@ -1,0 +1,83 @@
+- id: youtube-fetch-to-youtube-deep-research-ui-1782406114250
+  from: youtube-fetch
+  to: youtube-deep-research
+  relay:
+    mode: auto_by_target_inputs
+    mappings: []
+    handoff_instruction: 把上游 source_url 交给 YouTube 深度研究节点；metadata_file 只作为可选上下文，不作为主输入。
+    node_execution_guide:
+      format: markdown
+      prompt: 'Use skill sop-youtube-deep-research to execute this downstream node.
+
+
+        Node Execution Guide
+
+        - Edge: youtube-fetch -> youtube-deep-research
+
+        - Evaluation summary: 上下游之间有明确的 source_url 传递关系，metadata_file 作为可选上下文，手顺清晰，可直接执行。
+
+        - Edge Handoff Instruction: 把上游 source_url 交给 YouTube 深度研究节点；metadata_file
+        只作为可选上下文，不作为主输入。
+
+
+        Upstream artifacts
+
+        - source_url: raw/node-runs/{pipeline_id}/outputs/files/source-url.txt
+
+        - metadata_file: raw/node-runs/{pipeline_id}/outputs/files/metadata.json
+
+
+        Downstream inputs
+
+        - source_url: 必选，从 upstream source_url 文件读取或直接传递文件路径；支持 scalar:url, file:text,
+        file:json 格式。
+
+
+        Execution rules
+
+        - 使用 resolved Edge inputs 中的 source_url 作为下游主输入。
+
+        - metadata_file 作为可选上下文，可在下游节点中通过环境变量或参数引用，但不强制。
+
+        - 遵循下游 skill 的标准执行流程。
+
+
+        Steps
+
+        1. 定位上游 source_url 文件路径。
+
+        2. 解析文件内容，获取 URL 或直接传递文件路径给下游。
+
+        3. 调用下游 skill（sop-youtube-deep-research）执行，传入 source_url。
+
+        4. 如果 metadata_file 存在，可将其路径作为可选参数传递给下游。
+
+        5. 记录执行结果，校验下游输出。'
+    evaluation:
+      status: ready
+      score: 0.95
+      confidence: 0.9
+      summary: 上下游之间有明确的 source_url 传递关系，metadata_file 作为可选上下文，手顺清晰，可直接执行。
+      decision: can_run
+      evaluated_at: '2026-06-25T16:48:49Z'
+      agent:
+        provider: openai-compatible
+        model: deepseek-v4-flash
+        used_ai: true
+    resolved_handoff:
+      primary_artifacts:
+      - from: youtube-fetch.outputs.source_url
+        role: primary_source
+        reason: 上游声明的可交付产物，下游必需输入。
+      supporting_artifacts:
+      - from: youtube-fetch.outputs.metadata_file
+        role: supporting_context
+        reason: 不作为主输入，但可作为可选上下文传递给下游。
+      downstream_inputs:
+      - to: youtube-deep-research.inputs.source_url
+        construction: 由上游 outputs.source_url 文件路径直接构造或内容传递。
+    test_plan:
+    - 物化 Edge 输入
+    - 执行下游 skill
+    - 校验声明输出
+    - 记录 edge evaluation 和 guide

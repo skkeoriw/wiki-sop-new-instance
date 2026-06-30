@@ -1,0 +1,911 @@
+{
+  "status": "passed",
+  "execution_status": "done",
+  "business_output_status": {
+    "status": "passed",
+    "expected_outputs": [
+      "result",
+      "status"
+    ],
+    "required_outputs": [],
+    "present_outputs": [
+      "result",
+      "status"
+    ],
+    "missing_required_outputs": [],
+    "business_outputs": {
+      "result": "youtube-deep-research-dxky",
+      "status": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json"
+    },
+    "business_artifact_count": 1
+  },
+  "probe_id": "youtube-deep-research-dxky-probe-20260630T130319Z-3167d8",
+  "draft_id": "youtube-deep-research-dxky-1782824532",
+  "node_id": "youtube-deep-research-dxky",
+  "node_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+  "http_status": 200,
+  "mode": "node-draft-probe-run",
+  "manual_inputs": {
+    "include_transcript": "",
+    "poll_interval": "",
+    "source_url": "https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s",
+    "timeout_seconds": "",
+    "workflow_token": "",
+    "workflow_url": ""
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": false
+    },
+    "telegram": {
+      "enabled": false
+    }
+  },
+  "result": {
+    "node_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+    "status": "done",
+    "pending": false,
+    "started_at": "2026-06-30T13:03:19.142274+00:00",
+    "finished_at": "2026-06-30T13:15:14.508661+00:00",
+    "elapsed_ms": 714919,
+    "validation": {
+      "status": "passed",
+      "missing_outputs": [],
+      "unexpected_outputs": [],
+      "business_output_status": {
+        "status": "passed",
+        "expected_outputs": [
+          "result",
+          "status"
+        ],
+        "required_outputs": [],
+        "present_outputs": [
+          "result",
+          "status"
+        ],
+        "missing_required_outputs": [],
+        "business_outputs": {
+          "result": "youtube-deep-research-dxky",
+          "status": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json"
+        },
+        "business_artifact_count": 11
+      },
+      "success_evidence": {
+        "passed": true,
+        "signals": [
+          {
+            "source": "manifest.status",
+            "status": "done"
+          },
+          {
+            "source": "receipt.status",
+            "status": "done"
+          },
+          {
+            "source": "output_artifacts",
+            "count": 17
+          },
+          {
+            "source": "receipt",
+            "status": "success"
+          }
+        ],
+        "failures": []
+      }
+    },
+    "output_manifest": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/manifest.json",
+    "output_directory": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs",
+    "actual_outputs": {
+      "result": "youtube-deep-research-dxky",
+      "status": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json"
+    },
+    "business_artifacts": [
+      {
+        "id": "fd860a3a0cf9f28d",
+        "producer": "youtube-deep-research-dxky",
+        "output": "status",
+        "type": "file",
+        "format": "json",
+        "path": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json",
+        "title": "status.json",
+        "size": 9175,
+        "mime_type": "application/json",
+        "tags": [],
+        "metadata": {
+          "manifest_item": {
+            "name": "status",
+            "output": "status",
+            "path": "artifacts/status.json",
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "media_type": "application/json",
+            "relayable": false,
+            "role": "diagnostic",
+            "source": "node-run",
+            "source_node": "youtube-deep-research",
+            "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+            "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/status.json"
+          },
+          "public_url": ""
+        },
+        "resolution": "node-run-output-manifest",
+        "preview": "{\n  \"id\": \"b2d4f2e3-f80d-4812-adc2-d1ac62b90a15\",\n  \"youtube_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s\",\n  \"video_id\": null,\n  \"status\": \"completed\",\n  \"audio_url\": null,\n  \"r2_key\": null,\n  \"model_used\": \"gateway\",\n  \"summary\": \"Andrej Karpathy 在访谈中揭示2024年12月AI编程能力突变，催生“氛围编程”向“代理工程”的进化。他提出软件3.0范式——LLM作为可编程计算机，并强调可验证性是AI能力跃迁的引擎。同时指出人类审美、判断与理解仍不可替代，未来将迈向完全神经计算与代理原生世界。\",\n  \"key_points\": [\n    \"2024年12月AI模型能力飞跃，Andrej Karpathy 体验到从偶尔纠错到完全信任的“氛围编程”转变。\",\n    \"软件3.0范式：编程从编写显式规则（1.0）和训练神经网络（2.0）进化到通过提示与上下文窗口操控LLM解释器。\",\n    \"AI在可验证领域（如数学、代码）因强化学习而快速进步，但能力分布不均，呈现“锯齿状智能”。\",\n    \"“代理工程”要求在不牺牲软件质量的前提下，高效协调多代理，实现超越10倍工程师的效率提升。\",\n    \"人类理解不可外包：审美、判断、设计等高层思维仍是核心，而API细节等可交给代理。\"\n  ],\n  \"titles\": [\n    \"AI编程已进入“代理工程”时代：Andrej Karpathy 深度访谈\",\n    \"从氛围编码到神经计算机：Andrej Karpathy 解读软件3.0范式\",\n    \"可验证性驱动AI飞跃，但人类理解仍是终极瓶颈\"\n  ],\n  \"description\": \"Andrej Karpathy 与主持人探讨AI最新变革：2024年末AI模型能力突变，开启“氛围编程”新阶段，并催生“代理工程”的理念。他详细阐述软件3.0范式——LLM作为新型计算机，提示词成为编程核心。通过Menu Gen等实例，展示旧范式正被颠覆。对话聚焦可验证性如何加速AI发展，同时指出锯齿状智能的局限，强调人类在审美、判断与理解上的不可替代性。对未来代理原生环境和教育提出深刻见解，是理解AI编程与产业趋势的必看内容。\",\n  \"tags\": \"Andrej Karpathy, AI编程, 氛围编程, 代理工程, 软件3.0, LLM, 可验证性, 锯齿智能, 教育, 未来趋势\",\n  \"clip_suggestions\": [\n    {\n      \"start\": \"00:00:47\",\n      \"end\": \"00:01:42\",\n      \"reason\": \"Andrej 讲述2024年12月AI能力突变，从需要不断纠正到完全信任，引发氛围编码，是核心转折点。\"\n    },\n    {\n      \"start\": \"00:02:30\",\n      \"end\": \"00:03:28\",\n      \"reason\": \"清晰解释软件1.0到3.0的范式转移，LLM作为可编程计算机，适合传播技术概念。\"\n    },\n    {\n      \"start\": \"00:04:52\",\n      \"end\": \"00:06:19\",\n      \"reason\": \"Menu Gen 案例惊艳对比，传统App vs 直接图像渲染，完美展示软件3.0颠覆性。\"\n    },\n    {\n      \"start\": \"00:06:33\",\n      \"end\": \"00:07:20\",\n      \"reason\": \"信息处理自动化的新机会，超越编程的局限性，点明未来可能。\"\n    },\n    {\n      \"start\": \"00:10:00\",\n      \"end\": \"00:10:35\",\n      \"reason\": \"可验证性概念精炼阐述，解释为何AI在特定领域飞速进步。\"\n    },\n    {\n      \"start\": \"00:11:24\",\n      \"end\": \"00:12:17\",\n      \"reason\": \"锯齿智能的典型例子（草莓字母、50米车程），生动说明模型局限性。\"\n    },\n    {\n      \"start\": \"00:13:37\",\n      \"end\": \"00:14:46\",\n      \"reason\": \"对创业者的实用建议：在可验证领域自建RL环境微调，商业价值高。\"\n    },\n    {\n      \"start\": \"00:15:46\",\n      \"end\": \"00:17:18\",\n      \"reason\": \"氛围编码 vs 代理工程定义清晰，10x工程师的放大效应，适合引述分享。\"\n    },\n    {\n      \"start\": \"00:19:28\",\n      \"end\": \"00:21:58\",\n      \"reason\": \"代理犯错实例（邮箱匹配），强调人类负责设计与判断，细节外包，深入浅出。\"\n    },\n    {\n      \"start\": \"00:23:33\",\n      \"end\": \"00:24:29\",\n      \"reason\": \"“动物vs幽灵”的哲学比喻，重塑对AI的认知，引发思考。\"\n    },\n    {\n      \"start\": \"00:25:18\",\n      \"end\": \"00:27:16\",\n      \"reason\": \"未来原生代理环境展望，传感器与执行器重构基础设施，设想大胆。\"\n    },\n    {\n      \"start\": \"00:28:03\",\n      \"end\": \"00:29:29\",\n      \"reason\": \"教育终极一问：“理解不可外包”，LLM知识库增强认知，结尾点睛。\"\n    }\n  ],\n  \"detected_lang\": \"en\",\n  \"translate_lang\": \"zh\",\n  \"tts_url\": null,\n  \"error\": null,\n  \"created_at\": \"2026-06-30 13:05:43\",\n  \"updated_at\": \"2026-06-30 13:09:10\",\n  \"chunks\": [\n    {\n      \"chunk_index\": 0,\n      \"start_sec\": 0,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_000.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_000.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/0\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/0?translated=1\"\n    },\n    {\n      \"chunk_index\": 1,\n      \"start_sec\": 300,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_001.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_001.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/1\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/1?translated=1\"\n    },\n    {\n      \"chunk_index\": 2,\n      \"start_sec\": 600,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_002.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_002.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/2\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/2?translated=1\"\n    },\n    {\n      \"chunk_index\": 3,\n      \"start_sec\": 900,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_003.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_003.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/3\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/3?translated=1\"\n    },\n    {\n      \"chunk_index\": 4,\n      \"start_sec\": 1200,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_004.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_004.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/4\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/4?translated=1\"\n    },\n    {\n      \"chunk_index\": 5,\n      \"start_sec\": 1500,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_005.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_005.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/5\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/5?translated=1\"\n    }\n  ],\n  \"files\": {\n    \"transcript_json\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript\",\n    \"transcript_txt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=txt\",\n    \"transcript_srt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=srt\",\n    \"transcript_vtt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=vtt\",\n    \"transcript_csv\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=csv\",\n    \"analysis_md\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=md\",\n    \"translated_json\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?translated=1\",\n    \"translated_srt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=srt&translated=1\",\n    \"translated_vtt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=vtt&translated=1\",\n    \"translated_txt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=txt&translated=1\"\n  }\n}",
+        "preview_truncated": false
+      }
+    ],
+    "core_outputs": [
+      {
+        "name": "result",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": "youtube-deep-research-dxky",
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Skill execution result summary.",
+          "relayable": true
+        }
+      },
+      {
+        "name": "status",
+        "kind": "file",
+        "type": "file",
+        "value": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json",
+        "files": [
+          "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json"
+        ],
+        "artifacts": [
+          {
+            "id": "fd860a3a0cf9f28d",
+            "producer": "youtube-deep-research-dxky",
+            "output": "status",
+            "type": "file",
+            "format": "json",
+            "path": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json",
+            "title": "status.json",
+            "size": 9175,
+            "mime_type": "application/json",
+            "tags": [],
+            "metadata": {
+              "manifest_item": {
+                "name": "status",
+                "output": "status",
+                "path": "artifacts/status.json",
+                "kind": "file",
+                "type": "file",
+                "value_type": "json",
+                "media_type": "application/json",
+                "relayable": false,
+                "role": "diagnostic",
+                "source": "node-run",
+                "source_node": "youtube-deep-research",
+                "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+                "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/status.json"
+              },
+              "public_url": ""
+            },
+            "resolution": "node-run-output-manifest",
+            "preview": "{\n  \"id\": \"b2d4f2e3-f80d-4812-adc2-d1ac62b90a15\",\n  \"youtube_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s\",\n  \"video_id\": null,\n  \"status\": \"completed\",\n  \"audio_url\": null,\n  \"r2_key\": null,\n  \"model_used\": \"gateway\",\n  \"summary\": \"Andrej Karpathy 在访谈中揭示2024年12月AI编程能力突变，催生“氛围编程”向“代理工程”的进化。他提出软件3.0范式——LLM作为可编程计算机，并强调可验证性是AI能力跃迁的引擎。同时指出人类审美、判断与理解仍不可替代，未来将迈向完全神经计算与代理原生世界。\",\n  \"key_points\": [\n    \"2024年12月AI模型能力飞跃，Andrej Karpathy 体验到从偶尔纠错到完全信任的“氛围编程”转变。\",\n    \"软件3.0范式：编程从编写显式规则（1.0）和训练神经网络（2.0）进化到通过提示与上下文窗口操控LLM解释器。\",\n    \"AI在可验证领域（如数学、代码）因强化学习而快速进步，但能力分布不均，呈现“锯齿状智能”。\",\n    \"“代理工程”要求在不牺牲软件质量的前提下，高效协调多代理，实现超越10倍工程师的效率提升。\",\n    \"人类理解不可外包：审美、判断、设计等高层思维仍是核心，而API细节等可交给代理。\"\n  ],\n  \"titles\": [\n    \"AI编程已进入“代理工程”时代：Andrej Karpathy 深度访谈\",\n    \"从氛围编码到神经计算机：Andrej Karpathy 解读软件3.0范式\",\n    \"可验证性驱动AI飞跃，但人类理解仍是终极瓶颈\"\n  ],\n  \"description\": \"Andrej Karpathy 与主持人探讨AI最新变革：2024年末AI模型能力突变，开启“氛围编程”新阶段，并催生“代理工程”的理念。他详细阐述软件3.0范式——LLM作为新型计算机，提示词成为编程核心。通过Menu Gen等实例，展示旧范式正被颠覆。对话聚焦可验证性如何加速AI发展，同时指出锯齿状智能的局限，强调人类在审美、判断与理解上的不可替代性。对未来代理原生环境和教育提出深刻见解，是理解AI编程与产业趋势的必看内容。\",\n  \"tags\": \"Andrej Karpathy, AI编程, 氛围编程, 代理工程, 软件3.0, LLM, 可验证性, 锯齿智能, 教育, 未来趋势\",\n  \"clip_suggestions\": [\n    {\n      \"start\": \"00:00:47\",\n      \"end\": \"00:01:42\",\n      \"reason\": \"Andrej 讲述2024年12月AI能力突变，从需要不断纠正到完全信任，引发氛围编码，是核心转折点。\"\n    },\n    {\n      \"start\": \"00:02:30\",\n      \"end\": \"00:03:28\",\n      \"reason\": \"清晰解释软件1.0到3.0的范式转移，LLM作为可编程计算机，适合传播技术概念。\"\n    },\n    {\n      \"start\": \"00:04:52\",\n      \"end\": \"00:06:19\",\n      \"reason\": \"Menu Gen 案例惊艳对比，传统App vs 直接图像渲染，完美展示软件3.0颠覆性。\"\n    },\n    {\n      \"start\": \"00:06:33\",\n      \"end\": \"00:07:20\",\n      \"reason\": \"信息处理自动化的新机会，超越编程的局限性，点明未来可能。\"\n    },\n    {\n      \"start\": \"00:10:00\",\n      \"end\": \"00:10:35\",\n      \"reason\": \"可验证性概念精炼阐述，解释为何AI在特定领域飞速进步。\"\n    },\n    {\n      \"start\": \"00:11:24\",\n      \"end\": \"00:12:17\",\n      \"reason\": \"锯齿智能的典型例子（草莓字母、50米车程），生动说明模型局限性。\"\n    },\n    {\n      \"start\": \"00:13:37\",\n      \"end\": \"00:14:46\",\n      \"reason\": \"对创业者的实用建议：在可验证领域自建RL环境微调，商业价值高。\"\n    },\n    {\n      \"start\": \"00:15:46\",\n      \"end\": \"00:17:18\",\n      \"reason\": \"氛围编码 vs 代理工程定义清晰，10x工程师的放大效应，适合引述分享。\"\n    },\n    {\n      \"start\": \"00:19:28\",\n      \"end\": \"00:21:58\",\n      \"reason\": \"代理犯错实例（邮箱匹配），强调人类负责设计与判断，细节外包，深入浅出。\"\n    },\n    {\n      \"start\": \"00:23:33\",\n      \"end\": \"00:24:29\",\n      \"reason\": \"“动物vs幽灵”的哲学比喻，重塑对AI的认知，引发思考。\"\n    },\n    {\n      \"start\": \"00:25:18\",\n      \"end\": \"00:27:16\",\n      \"reason\": \"未来原生代理环境展望，传感器与执行器重构基础设施，设想大胆。\"\n    },\n    {\n      \"start\": \"00:28:03\",\n      \"end\": \"00:29:29\",\n      \"reason\": \"教育终极一问：“理解不可外包”，LLM知识库增强认知，结尾点睛。\"\n    }\n  ],\n  \"detected_lang\": \"en\",\n  \"translate_lang\": \"zh\",\n  \"tts_url\": null,\n  \"error\": null,\n  \"created_at\": \"2026-06-30 13:05:43\",\n  \"updated_at\": \"2026-06-30 13:09:10\",\n  \"chunks\": [\n    {\n      \"chunk_index\": 0,\n      \"start_sec\": 0,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_000.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_000.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/0\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/0?translated=1\"\n    },\n    {\n      \"chunk_index\": 1,\n      \"start_sec\": 300,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_001.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_001.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/1\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/1?translated=1\"\n    },\n    {\n      \"chunk_index\": 2,\n      \"start_sec\": 600,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_002.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_002.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/2\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/2?translated=1\"\n    },\n    {\n      \"chunk_index\": 3,\n      \"start_sec\": 900,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_003.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_003.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/3\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/3?translated=1\"\n    },\n    {\n      \"chunk_index\": 4,\n      \"start_sec\": 1200,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_004.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_004.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/4\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/4?translated=1\"\n    },\n    {\n      \"chunk_index\": 5,\n      \"start_sec\": 1500,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_005.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_005.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/5\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/5?translated=1\"\n    }\n  ],\n  \"files\": {\n    \"transcript_json\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript\",\n    \"transcript_txt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=txt\",\n    \"transcript_srt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=srt\",\n    \"transcript_vtt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=vtt\",\n    \"transcript_csv\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=csv\",\n    \"analysis_md\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=md\",\n    \"translated_json\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?translated=1\",\n    \"translated_srt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=srt&translated=1\",\n    \"translated_vtt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=vtt&translated=1\",\n    \"translated_txt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=txt&translated=1\"\n  }\n}",
+            "preview_truncated": false
+          }
+        ],
+        "declared": {
+          "description": "Result value mentioned in skill source as `status`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker status"
+        }
+      }
+    ],
+    "steps": [
+      {
+        "id": "create-run",
+        "title": "Create node run workspace",
+        "status": "done",
+        "summary": "Node Run record is allocated independently from Workflow Run.",
+        "started_at": "2026-06-30T13:03:19.142274+00:00",
+        "finished_at": "2026-06-30T13:03:19.177274+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "load-definition",
+        "title": "Load node definition",
+        "status": "done",
+        "summary": "Loaded youtube-deep-research-dxky from youtube-research-wiki.",
+        "started_at": "2026-06-30T13:03:19.177274+00:00",
+        "finished_at": "2026-06-30T13:03:19.212274+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-context",
+        "title": "Resolve Runtime / Instance / Workflow context",
+        "status": "done",
+        "summary": "youtube-wiki · wiki-sop-new-instance · youtube-research-wiki",
+        "started_at": "2026-06-30T13:03:19.212274+00:00",
+        "finished_at": "2026-06-30T13:03:19.247274+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-inputs",
+        "title": "Resolve node inputs",
+        "status": "done",
+        "summary": "1 resolved, 0 pending relay, 0 missing.",
+        "started_at": "2026-06-30T13:03:19.247274+00:00",
+        "finished_at": "2026-06-30T13:03:19.282274+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-config",
+        "title": "Resolve execution config",
+        "status": "done",
+        "summary": "Runtime, Instance and capability config resolved.",
+        "started_at": "2026-06-30T13:03:19.282274+00:00",
+        "finished_at": "2026-06-30T13:03:19.317274+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "generate-agent-request",
+        "title": "Generate Agent Request",
+        "status": "done",
+        "summary": "Hermes Agent Request was rendered and saved for this Node Run.",
+        "started_at": "2026-06-30T13:03:19.317274+00:00",
+        "finished_at": "2026-06-30T13:03:19.352274+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "probe-capabilities",
+        "title": "Probe attached capabilities",
+        "status": "skipped",
+        "summary": "Capability probes are explicit. Telegram send probes require user confirmation.",
+        "started_at": "2026-06-30T13:03:19.352274+00:00",
+        "finished_at": "2026-06-30T13:03:19.376274+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "build-execution-plan",
+        "title": "Build node execution plan",
+        "status": "done",
+        "summary": "Prepared real-node execution plan.",
+        "started_at": "2026-06-30T13:03:19.387274+00:00",
+        "finished_at": "2026-06-30T13:03:19.422274+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "execute-or-dry-run",
+        "title": "Execute or dry-run node",
+        "status": "done",
+        "summary": "Real node execution finished and declared business outputs were found.",
+        "started_at": "2026-06-30T13:03:19.895218+00:00",
+        "finished_at": "2026-06-30T13:15:14.462549+00:00",
+        "elapsed_ms": 714567
+      },
+      {
+        "id": "validate-outputs",
+        "title": "Validate declared outputs",
+        "status": "done",
+        "summary": "Declared business outputs were found.",
+        "started_at": "2026-06-30T13:03:19.457274+00:00",
+        "finished_at": "2026-06-30T13:03:19.492274+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "persist-to-github",
+        "title": "Persist to GitHub",
+        "status": "skipped",
+        "summary": "GitHub persistence is not attached for this Node Run.",
+        "started_at": "2026-06-30T13:03:19.492274+00:00",
+        "finished_at": "2026-06-30T13:03:19.516274+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "send-telegram-notification",
+        "title": "Send Telegram notification",
+        "status": "skipped",
+        "summary": "Telegram notification is not attached for this Node Run.",
+        "started_at": "2026-06-30T13:03:19.527274+00:00",
+        "finished_at": "2026-06-30T13:03:19.551274+00:00",
+        "elapsed_ms": 24
+      }
+    ]
+  },
+  "manifest": {
+    "schema": "node-output-manifest/v1",
+    "version": 1,
+    "kind": "output",
+    "node_id": "youtube-deep-research",
+    "node_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+    "run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+    "outputs_dir": "/root/wiki/wiki-sop-new-instance/raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs",
+    "status": "done",
+    "created_at": "2026-06-30T13:09:16Z",
+    "produced": [
+      {
+        "name": "analysis_file",
+        "output": "analysis_file",
+        "path": "outputs/analysis.md",
+        "kind": "file",
+        "type": "file",
+        "value_type": "markdown",
+        "media_type": "text/markdown",
+        "relayable": true,
+        "role": "wiki-source",
+        "source": "node-run",
+        "source_node": "youtube-deep-research",
+        "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/analysis.md"
+      },
+      {
+        "name": "transcript_file",
+        "output": "transcript_file",
+        "path": "outputs/transcript.txt",
+        "kind": "file",
+        "type": "file",
+        "value_type": "text",
+        "media_type": "text/plain",
+        "relayable": true,
+        "role": "transcript",
+        "source": "node-run",
+        "source_node": "youtube-deep-research",
+        "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/transcript.txt"
+      }
+    ],
+    "artifacts": [
+      {
+        "name": "start",
+        "output": "start",
+        "path": "artifacts/start.json",
+        "kind": "file",
+        "type": "file",
+        "value_type": "json",
+        "media_type": "application/json",
+        "relayable": false,
+        "role": "diagnostic",
+        "source": "node-run",
+        "source_node": "youtube-deep-research",
+        "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/start.json"
+      },
+      {
+        "name": "status",
+        "output": "status",
+        "path": "artifacts/status.json",
+        "kind": "file",
+        "type": "file",
+        "value_type": "json",
+        "media_type": "application/json",
+        "relayable": false,
+        "role": "diagnostic",
+        "source": "node-run",
+        "source_node": "youtube-deep-research",
+        "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/status.json"
+      },
+      {
+        "name": "transcript",
+        "output": "transcript",
+        "path": "artifacts/transcript.json",
+        "kind": "file",
+        "type": "file",
+        "value_type": "json",
+        "media_type": "application/json",
+        "relayable": false,
+        "role": "diagnostic",
+        "source": "node-run",
+        "source_node": "youtube-deep-research",
+        "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.json"
+      },
+      {
+        "name": "transcript",
+        "output": "transcript",
+        "path": "artifacts/transcript.srt",
+        "kind": "file",
+        "type": "file",
+        "value_type": "srt",
+        "media_type": "text/plain",
+        "relayable": false,
+        "role": "diagnostic",
+        "source": "node-run",
+        "source_node": "youtube-deep-research",
+        "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.srt"
+      },
+      {
+        "name": "transcript",
+        "output": "transcript",
+        "path": "artifacts/transcript.txt",
+        "kind": "file",
+        "type": "file",
+        "value_type": "txt",
+        "media_type": "text/plain",
+        "relayable": false,
+        "role": "diagnostic",
+        "source": "node-run",
+        "source_node": "youtube-deep-research",
+        "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.txt"
+      },
+      {
+        "name": "transcript",
+        "output": "transcript",
+        "path": "artifacts/transcript.vtt",
+        "kind": "file",
+        "type": "file",
+        "value_type": "vtt",
+        "media_type": "text/vtt",
+        "relayable": false,
+        "role": "diagnostic",
+        "source": "node-run",
+        "source_node": "youtube-deep-research",
+        "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.vtt"
+      },
+      {
+        "name": "worker_analysis",
+        "output": "worker_analysis",
+        "path": "artifacts/worker-analysis.md",
+        "kind": "file",
+        "type": "file",
+        "value_type": "md",
+        "media_type": "text/markdown",
+        "relayable": false,
+        "role": "diagnostic",
+        "source": "node-run",
+        "source_node": "youtube-deep-research",
+        "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/worker-analysis.md"
+      }
+    ],
+    "logs": [],
+    "items": [
+      {
+        "name": "analysis_file",
+        "output": "analysis_file",
+        "path": "outputs/analysis.md",
+        "kind": "file",
+        "type": "file",
+        "value_type": "markdown",
+        "media_type": "text/markdown",
+        "relayable": true,
+        "role": "wiki-source",
+        "source": "node-run",
+        "source_node": "youtube-deep-research",
+        "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/analysis.md"
+      },
+      {
+        "name": "transcript_file",
+        "output": "transcript_file",
+        "path": "outputs/transcript.txt",
+        "kind": "file",
+        "type": "file",
+        "value_type": "text",
+        "media_type": "text/plain",
+        "relayable": true,
+        "role": "transcript",
+        "source": "node-run",
+        "source_node": "youtube-deep-research",
+        "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/transcript.txt"
+      },
+      {
+        "name": "start",
+        "output": "start",
+        "path": "artifacts/start.json",
+        "kind": "file",
+        "type": "file",
+        "value_type": "json",
+        "media_type": "application/json",
+        "relayable": false,
+        "role": "diagnostic",
+        "source": "node-run",
+        "source_node": "youtube-deep-research",
+        "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/start.json"
+      },
+      {
+        "name": "status",
+        "output": "status",
+        "path": "artifacts/status.json",
+        "kind": "file",
+        "type": "file",
+        "value_type": "json",
+        "media_type": "application/json",
+        "relayable": false,
+        "role": "diagnostic",
+        "source": "node-run",
+        "source_node": "youtube-deep-research",
+        "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/status.json"
+      },
+      {
+        "name": "transcript",
+        "output": "transcript",
+        "path": "artifacts/transcript.json",
+        "kind": "file",
+        "type": "file",
+        "value_type": "json",
+        "media_type": "application/json",
+        "relayable": false,
+        "role": "diagnostic",
+        "source": "node-run",
+        "source_node": "youtube-deep-research",
+        "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.json"
+      },
+      {
+        "name": "transcript",
+        "output": "transcript",
+        "path": "artifacts/transcript.srt",
+        "kind": "file",
+        "type": "file",
+        "value_type": "srt",
+        "media_type": "text/plain",
+        "relayable": false,
+        "role": "diagnostic",
+        "source": "node-run",
+        "source_node": "youtube-deep-research",
+        "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.srt"
+      },
+      {
+        "name": "transcript",
+        "output": "transcript",
+        "path": "artifacts/transcript.txt",
+        "kind": "file",
+        "type": "file",
+        "value_type": "txt",
+        "media_type": "text/plain",
+        "relayable": false,
+        "role": "diagnostic",
+        "source": "node-run",
+        "source_node": "youtube-deep-research",
+        "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.txt"
+      },
+      {
+        "name": "transcript",
+        "output": "transcript",
+        "path": "artifacts/transcript.vtt",
+        "kind": "file",
+        "type": "file",
+        "value_type": "vtt",
+        "media_type": "text/vtt",
+        "relayable": false,
+        "role": "diagnostic",
+        "source": "node-run",
+        "source_node": "youtube-deep-research",
+        "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.vtt"
+      },
+      {
+        "name": "worker_analysis",
+        "output": "worker_analysis",
+        "path": "artifacts/worker-analysis.md",
+        "kind": "file",
+        "type": "file",
+        "value_type": "md",
+        "media_type": "text/markdown",
+        "relayable": false,
+        "role": "diagnostic",
+        "source": "node-run",
+        "source_node": "youtube-deep-research",
+        "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+        "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/worker-analysis.md"
+      },
+      {
+        "output": "result",
+        "value": "youtube-deep-research-dxky",
+        "value_type": "text",
+        "kind": "scalar",
+        "source": "node-run-text-evidence"
+      }
+    ],
+    "metadata": {
+      "source_url": "https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s",
+      "schema_note": "Downstream edges receive this outputs_dir plus the Edge Handoff Instruction."
+    }
+  },
+  "output_manifest": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/manifest.json",
+  "manifest_records": [
+    {
+      "name": "analysis_file",
+      "output": "analysis_file",
+      "path": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/outputs/analysis.md",
+      "kind": "file",
+      "type": "file",
+      "value_type": "markdown",
+      "media_type": "text/markdown",
+      "relayable": true,
+      "role": "wiki-source",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/analysis.md"
+    },
+    {
+      "name": "transcript_file",
+      "output": "transcript_file",
+      "path": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/outputs/transcript.txt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "text",
+      "media_type": "text/plain",
+      "relayable": true,
+      "role": "transcript",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/transcript.txt"
+    },
+    {
+      "name": "start",
+      "output": "start",
+      "path": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/start.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "media_type": "application/json",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/start.json"
+    },
+    {
+      "name": "status",
+      "output": "status",
+      "path": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "media_type": "application/json",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/status.json"
+    },
+    {
+      "name": "transcript",
+      "output": "transcript",
+      "path": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/transcript.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "media_type": "application/json",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.json"
+    },
+    {
+      "name": "transcript",
+      "output": "transcript",
+      "path": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/transcript.srt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "srt",
+      "media_type": "text/plain",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.srt"
+    },
+    {
+      "name": "transcript",
+      "output": "transcript",
+      "path": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/transcript.txt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "txt",
+      "media_type": "text/plain",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.txt"
+    },
+    {
+      "name": "transcript",
+      "output": "transcript",
+      "path": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/transcript.vtt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "vtt",
+      "media_type": "text/vtt",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.vtt"
+    },
+    {
+      "name": "worker_analysis",
+      "output": "worker_analysis",
+      "path": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/worker-analysis.md",
+      "kind": "file",
+      "type": "file",
+      "value_type": "md",
+      "media_type": "text/markdown",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/worker-analysis.md"
+    },
+    {
+      "output": "result",
+      "value": "youtube-deep-research-dxky",
+      "value_type": "text",
+      "kind": "scalar",
+      "source": "node-run-text-evidence",
+      "path": ""
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "passed",
+      "expected_outputs": [
+        "result",
+        "status"
+      ],
+      "required_outputs": [],
+      "present_outputs": [
+        "result",
+        "status"
+      ],
+      "missing_required_outputs": [],
+      "business_outputs": {
+        "result": "youtube-deep-research-dxky",
+        "status": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json"
+      },
+      "business_artifact_count": 11
+    },
+    "success_evidence": {
+      "passed": true,
+      "signals": [
+        {
+          "source": "manifest.status",
+          "status": "done"
+        },
+        {
+          "source": "receipt.status",
+          "status": "done"
+        },
+        {
+          "source": "output_artifacts",
+          "count": 17
+        },
+        {
+          "source": "receipt",
+          "status": "success"
+        }
+      ],
+      "failures": []
+    }
+  },
+  "actual_outputs": {
+    "result": "youtube-deep-research-dxky",
+    "status": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json"
+  },
+  "business_outputs": {
+    "result": "youtube-deep-research-dxky",
+    "status": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json"
+  },
+  "business_artifacts": [
+    {
+      "id": "fd860a3a0cf9f28d",
+      "producer": "youtube-deep-research-dxky",
+      "output": "status",
+      "type": "file",
+      "format": "json",
+      "path": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json",
+      "title": "status.json",
+      "size": 9175,
+      "mime_type": "application/json",
+      "tags": [],
+      "metadata": {
+        "manifest_item": {
+          "name": "status",
+          "output": "status",
+          "path": "artifacts/status.json",
+          "kind": "file",
+          "type": "file",
+          "value_type": "json",
+          "media_type": "application/json",
+          "relayable": false,
+          "role": "diagnostic",
+          "source": "node-run",
+          "source_node": "youtube-deep-research",
+          "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+          "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/status.json"
+        },
+        "public_url": ""
+      },
+      "resolution": "node-run-output-manifest",
+      "preview": "{\n  \"id\": \"b2d4f2e3-f80d-4812-adc2-d1ac62b90a15\",\n  \"youtube_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s\",\n  \"video_id\": null,\n  \"status\": \"completed\",\n  \"audio_url\": null,\n  \"r2_key\": null,\n  \"model_used\": \"gateway\",\n  \"summary\": \"Andrej Karpathy 在访谈中揭示2024年12月AI编程能力突变，催生“氛围编程”向“代理工程”的进化。他提出软件3.0范式——LLM作为可编程计算机，并强调可验证性是AI能力跃迁的引擎。同时指出人类审美、判断与理解仍不可替代，未来将迈向完全神经计算与代理原生世界。\",\n  \"key_points\": [\n    \"2024年12月AI模型能力飞跃，Andrej Karpathy 体验到从偶尔纠错到完全信任的“氛围编程”转变。\",\n    \"软件3.0范式：编程从编写显式规则（1.0）和训练神经网络（2.0）进化到通过提示与上下文窗口操控LLM解释器。\",\n    \"AI在可验证领域（如数学、代码）因强化学习而快速进步，但能力分布不均，呈现“锯齿状智能”。\",\n    \"“代理工程”要求在不牺牲软件质量的前提下，高效协调多代理，实现超越10倍工程师的效率提升。\",\n    \"人类理解不可外包：审美、判断、设计等高层思维仍是核心，而API细节等可交给代理。\"\n  ],\n  \"titles\": [\n    \"AI编程已进入“代理工程”时代：Andrej Karpathy 深度访谈\",\n    \"从氛围编码到神经计算机：Andrej Karpathy 解读软件3.0范式\",\n    \"可验证性驱动AI飞跃，但人类理解仍是终极瓶颈\"\n  ],\n  \"description\": \"Andrej Karpathy 与主持人探讨AI最新变革：2024年末AI模型能力突变，开启“氛围编程”新阶段，并催生“代理工程”的理念。他详细阐述软件3.0范式——LLM作为新型计算机，提示词成为编程核心。通过Menu Gen等实例，展示旧范式正被颠覆。对话聚焦可验证性如何加速AI发展，同时指出锯齿状智能的局限，强调人类在审美、判断与理解上的不可替代性。对未来代理原生环境和教育提出深刻见解，是理解AI编程与产业趋势的必看内容。\",\n  \"tags\": \"Andrej Karpathy, AI编程, 氛围编程, 代理工程, 软件3.0, LLM, 可验证性, 锯齿智能, 教育, 未来趋势\",\n  \"clip_suggestions\": [\n    {\n      \"start\": \"00:00:47\",\n      \"end\": \"00:01:42\",\n      \"reason\": \"Andrej 讲述2024年12月AI能力突变，从需要不断纠正到完全信任，引发氛围编码，是核心转折点。\"\n    },\n    {\n      \"start\": \"00:02:30\",\n      \"end\": \"00:03:28\",\n      \"reason\": \"清晰解释软件1.0到3.0的范式转移，LLM作为可编程计算机，适合传播技术概念。\"\n    },\n    {\n      \"start\": \"00:04:52\",\n      \"end\": \"00:06:19\",\n      \"reason\": \"Menu Gen 案例惊艳对比，传统App vs 直接图像渲染，完美展示软件3.0颠覆性。\"\n    },\n    {\n      \"start\": \"00:06:33\",\n      \"end\": \"00:07:20\",\n      \"reason\": \"信息处理自动化的新机会，超越编程的局限性，点明未来可能。\"\n    },\n    {\n      \"start\": \"00:10:00\",\n      \"end\": \"00:10:35\",\n      \"reason\": \"可验证性概念精炼阐述，解释为何AI在特定领域飞速进步。\"\n    },\n    {\n      \"start\": \"00:11:24\",\n      \"end\": \"00:12:17\",\n      \"reason\": \"锯齿智能的典型例子（草莓字母、50米车程），生动说明模型局限性。\"\n    },\n    {\n      \"start\": \"00:13:37\",\n      \"end\": \"00:14:46\",\n      \"reason\": \"对创业者的实用建议：在可验证领域自建RL环境微调，商业价值高。\"\n    },\n    {\n      \"start\": \"00:15:46\",\n      \"end\": \"00:17:18\",\n      \"reason\": \"氛围编码 vs 代理工程定义清晰，10x工程师的放大效应，适合引述分享。\"\n    },\n    {\n      \"start\": \"00:19:28\",\n      \"end\": \"00:21:58\",\n      \"reason\": \"代理犯错实例（邮箱匹配），强调人类负责设计与判断，细节外包，深入浅出。\"\n    },\n    {\n      \"start\": \"00:23:33\",\n      \"end\": \"00:24:29\",\n      \"reason\": \"“动物vs幽灵”的哲学比喻，重塑对AI的认知，引发思考。\"\n    },\n    {\n      \"start\": \"00:25:18\",\n      \"end\": \"00:27:16\",\n      \"reason\": \"未来原生代理环境展望，传感器与执行器重构基础设施，设想大胆。\"\n    },\n    {\n      \"start\": \"00:28:03\",\n      \"end\": \"00:29:29\",\n      \"reason\": \"教育终极一问：“理解不可外包”，LLM知识库增强认知，结尾点睛。\"\n    }\n  ],\n  \"detected_lang\": \"en\",\n  \"translate_lang\": \"zh\",\n  \"tts_url\": null,\n  \"error\": null,\n  \"created_at\": \"2026-06-30 13:05:43\",\n  \"updated_at\": \"2026-06-30 13:09:10\",\n  \"chunks\": [\n    {\n      \"chunk_index\": 0,\n      \"start_sec\": 0,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_000.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_000.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/0\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/0?translated=1\"\n    },\n    {\n      \"chunk_index\": 1,\n      \"start_sec\": 300,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_001.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_001.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/1\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/1?translated=1\"\n    },\n    {\n      \"chunk_index\": 2,\n      \"start_sec\": 600,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_002.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_002.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/2\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/2?translated=1\"\n    },\n    {\n      \"chunk_index\": 3,\n      \"start_sec\": 900,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_003.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_003.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/3\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/3?translated=1\"\n    },\n    {\n      \"chunk_index\": 4,\n      \"start_sec\": 1200,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_004.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_004.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/4\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/4?translated=1\"\n    },\n    {\n      \"chunk_index\": 5,\n      \"start_sec\": 1500,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_005.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_005.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/5\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/5?translated=1\"\n    }\n  ],\n  \"files\": {\n    \"transcript_json\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript\",\n    \"transcript_txt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=txt\",\n    \"transcript_srt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=srt\",\n    \"transcript_vtt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=vtt\",\n    \"transcript_csv\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=csv\",\n    \"analysis_md\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=md\",\n    \"translated_json\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?translated=1\",\n    \"translated_srt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=srt&translated=1\",\n    \"translated_vtt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=vtt&translated=1\",\n    \"translated_txt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=txt&translated=1\"\n  }\n}",
+      "preview_truncated": false
+    }
+  ],
+  "core_outputs": [
+    {
+      "name": "result",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": "youtube-deep-research-dxky",
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Skill execution result summary.",
+        "relayable": true
+      }
+    },
+    {
+      "name": "status",
+      "kind": "file",
+      "type": "file",
+      "value": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json",
+      "files": [
+        "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json"
+      ],
+      "artifacts": [
+        {
+          "id": "fd860a3a0cf9f28d",
+          "producer": "youtube-deep-research-dxky",
+          "output": "status",
+          "type": "file",
+          "format": "json",
+          "path": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json",
+          "title": "status.json",
+          "size": 9175,
+          "mime_type": "application/json",
+          "tags": [],
+          "metadata": {
+            "manifest_item": {
+              "name": "status",
+              "output": "status",
+              "path": "artifacts/status.json",
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "media_type": "application/json",
+              "relayable": false,
+              "role": "diagnostic",
+              "source": "node-run",
+              "source_node": "youtube-deep-research",
+              "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+              "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/status.json"
+            },
+            "public_url": ""
+          },
+          "resolution": "node-run-output-manifest",
+          "preview": "{\n  \"id\": \"b2d4f2e3-f80d-4812-adc2-d1ac62b90a15\",\n  \"youtube_url\": \"https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s\",\n  \"video_id\": null,\n  \"status\": \"completed\",\n  \"audio_url\": null,\n  \"r2_key\": null,\n  \"model_used\": \"gateway\",\n  \"summary\": \"Andrej Karpathy 在访谈中揭示2024年12月AI编程能力突变，催生“氛围编程”向“代理工程”的进化。他提出软件3.0范式——LLM作为可编程计算机，并强调可验证性是AI能力跃迁的引擎。同时指出人类审美、判断与理解仍不可替代，未来将迈向完全神经计算与代理原生世界。\",\n  \"key_points\": [\n    \"2024年12月AI模型能力飞跃，Andrej Karpathy 体验到从偶尔纠错到完全信任的“氛围编程”转变。\",\n    \"软件3.0范式：编程从编写显式规则（1.0）和训练神经网络（2.0）进化到通过提示与上下文窗口操控LLM解释器。\",\n    \"AI在可验证领域（如数学、代码）因强化学习而快速进步，但能力分布不均，呈现“锯齿状智能”。\",\n    \"“代理工程”要求在不牺牲软件质量的前提下，高效协调多代理，实现超越10倍工程师的效率提升。\",\n    \"人类理解不可外包：审美、判断、设计等高层思维仍是核心，而API细节等可交给代理。\"\n  ],\n  \"titles\": [\n    \"AI编程已进入“代理工程”时代：Andrej Karpathy 深度访谈\",\n    \"从氛围编码到神经计算机：Andrej Karpathy 解读软件3.0范式\",\n    \"可验证性驱动AI飞跃，但人类理解仍是终极瓶颈\"\n  ],\n  \"description\": \"Andrej Karpathy 与主持人探讨AI最新变革：2024年末AI模型能力突变，开启“氛围编程”新阶段，并催生“代理工程”的理念。他详细阐述软件3.0范式——LLM作为新型计算机，提示词成为编程核心。通过Menu Gen等实例，展示旧范式正被颠覆。对话聚焦可验证性如何加速AI发展，同时指出锯齿状智能的局限，强调人类在审美、判断与理解上的不可替代性。对未来代理原生环境和教育提出深刻见解，是理解AI编程与产业趋势的必看内容。\",\n  \"tags\": \"Andrej Karpathy, AI编程, 氛围编程, 代理工程, 软件3.0, LLM, 可验证性, 锯齿智能, 教育, 未来趋势\",\n  \"clip_suggestions\": [\n    {\n      \"start\": \"00:00:47\",\n      \"end\": \"00:01:42\",\n      \"reason\": \"Andrej 讲述2024年12月AI能力突变，从需要不断纠正到完全信任，引发氛围编码，是核心转折点。\"\n    },\n    {\n      \"start\": \"00:02:30\",\n      \"end\": \"00:03:28\",\n      \"reason\": \"清晰解释软件1.0到3.0的范式转移，LLM作为可编程计算机，适合传播技术概念。\"\n    },\n    {\n      \"start\": \"00:04:52\",\n      \"end\": \"00:06:19\",\n      \"reason\": \"Menu Gen 案例惊艳对比，传统App vs 直接图像渲染，完美展示软件3.0颠覆性。\"\n    },\n    {\n      \"start\": \"00:06:33\",\n      \"end\": \"00:07:20\",\n      \"reason\": \"信息处理自动化的新机会，超越编程的局限性，点明未来可能。\"\n    },\n    {\n      \"start\": \"00:10:00\",\n      \"end\": \"00:10:35\",\n      \"reason\": \"可验证性概念精炼阐述，解释为何AI在特定领域飞速进步。\"\n    },\n    {\n      \"start\": \"00:11:24\",\n      \"end\": \"00:12:17\",\n      \"reason\": \"锯齿智能的典型例子（草莓字母、50米车程），生动说明模型局限性。\"\n    },\n    {\n      \"start\": \"00:13:37\",\n      \"end\": \"00:14:46\",\n      \"reason\": \"对创业者的实用建议：在可验证领域自建RL环境微调，商业价值高。\"\n    },\n    {\n      \"start\": \"00:15:46\",\n      \"end\": \"00:17:18\",\n      \"reason\": \"氛围编码 vs 代理工程定义清晰，10x工程师的放大效应，适合引述分享。\"\n    },\n    {\n      \"start\": \"00:19:28\",\n      \"end\": \"00:21:58\",\n      \"reason\": \"代理犯错实例（邮箱匹配），强调人类负责设计与判断，细节外包，深入浅出。\"\n    },\n    {\n      \"start\": \"00:23:33\",\n      \"end\": \"00:24:29\",\n      \"reason\": \"“动物vs幽灵”的哲学比喻，重塑对AI的认知，引发思考。\"\n    },\n    {\n      \"start\": \"00:25:18\",\n      \"end\": \"00:27:16\",\n      \"reason\": \"未来原生代理环境展望，传感器与执行器重构基础设施，设想大胆。\"\n    },\n    {\n      \"start\": \"00:28:03\",\n      \"end\": \"00:29:29\",\n      \"reason\": \"教育终极一问：“理解不可外包”，LLM知识库增强认知，结尾点睛。\"\n    }\n  ],\n  \"detected_lang\": \"en\",\n  \"translate_lang\": \"zh\",\n  \"tts_url\": null,\n  \"error\": null,\n  \"created_at\": \"2026-06-30 13:05:43\",\n  \"updated_at\": \"2026-06-30 13:09:10\",\n  \"chunks\": [\n    {\n      \"chunk_index\": 0,\n      \"start_sec\": 0,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_000.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_000.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/0\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/0?translated=1\"\n    },\n    {\n      \"chunk_index\": 1,\n      \"start_sec\": 300,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_001.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_001.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/1\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/1?translated=1\"\n    },\n    {\n      \"chunk_index\": 2,\n      \"start_sec\": 600,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_002.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_002.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/2\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/2?translated=1\"\n    },\n    {\n      \"chunk_index\": 3,\n      \"start_sec\": 900,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_003.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_003.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/3\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/3?translated=1\"\n    },\n    {\n      \"chunk_index\": 4,\n      \"start_sec\": 1200,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_004.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_004.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/4\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/4?translated=1\"\n    },\n    {\n      \"chunk_index\": 5,\n      \"start_sec\": 1500,\n      \"r2_key\": \"audio/96jN2OCOfLs_chunk_005.mp4\",\n      \"url\": \"https://youtube-audio.hb67egcim4.workers.dev/file/audio/96jN2OCOfLs_chunk_005.mp4\",\n      \"status\": \"done\",\n      \"transcript_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/5\",\n      \"translated_url\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/chunk/5?translated=1\"\n    }\n  ],\n  \"files\": {\n    \"transcript_json\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript\",\n    \"transcript_txt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=txt\",\n    \"transcript_srt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=srt\",\n    \"transcript_vtt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=vtt\",\n    \"transcript_csv\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=csv\",\n    \"analysis_md\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=md\",\n    \"translated_json\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?translated=1\",\n    \"translated_srt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=srt&translated=1\",\n    \"translated_vtt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=vtt&translated=1\",\n    \"translated_txt\": \"https://youtube-research-workflow.hb67egcim4.workers.dev/job/b2d4f2e3-f80d-4812-adc2-d1ac62b90a15/transcript?format=txt&translated=1\"\n  }\n}",
+          "preview_truncated": false
+        }
+      ],
+      "declared": {
+        "description": "Result value mentioned in skill source as `status`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker status"
+      }
+    }
+  ],
+  "created_at": "2026-06-30T13:03:19.151115+00:00",
+  "reconciled_at": "2026-06-30T15:17:14.793249+00:00"
+}

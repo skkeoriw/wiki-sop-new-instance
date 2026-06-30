@@ -1,0 +1,21 @@
+{
+  "runtime_id": "youtube-wiki",
+  "instance_id": "wiki-sop-new-instance",
+  "workflow_id": "youtube-research-wiki",
+  "node_id": "chatgpt-remote-image-service-nrmj",
+  "node_run_id": "node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467",
+  "executed_at": "2026-06-29T17:57:56Z",
+  "completed_at": "2026-06-29T17:58:48Z",
+  "status": "failed",
+  "skill": "chatgpt-remote-image-service",
+  "entry_inputs": {
+    "prompt": "生成一张小猫睡觉的照片"
+  },
+  "error": {
+    "taskId": "3d4c127b-ef8c-4189-8c36-3fcb5b39db4c",
+    "status": "failed",
+    "stage": "waiting for locator('[role=\"dialog\"]').last() to be visible",
+    "error": "Worker exited with code 1",
+    "summary": "The ChatGPT remote image service connected to a browser worker and submitted the prompt successfully, but failed at the download stage. The generated image appeared (visible at ~40s), but the dialog for download confirmation was not found within the 10s timeout — possibly a ChatGPT UI change or transient browser state. The remote browser worker (worker-1, CDP port 9333) was logged in and active."
+  }
+}

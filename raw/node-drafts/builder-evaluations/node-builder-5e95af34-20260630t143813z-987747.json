@@ -1,0 +1,1309 @@
+{
+  "ok": true,
+  "status": "done",
+  "http_status": 200,
+  "mode": "node-builder-agent-evaluation-job",
+  "evaluation_id": "node-builder-5e95af34-20260630T143813Z-987747",
+  "sop_id": "wiki-sop-new-instance",
+  "instance_id": "wiki-sop-new-instance",
+  "started_at": "2026-06-30T14:38:13.920852+00:00",
+  "finished_at": "2026-06-30T14:39:19.866399+00:00",
+  "result": {
+    "ok": true,
+    "mode": "node-builder-agent-evaluation",
+    "request": {
+      "skill_install_command": "  bash <(curl -fsSL 'https://skill.vyibc.com/install-article-writer.sh?ts=20260630130909')",
+      "user_instruction": "分析这个 Skill 如何成为不绑定上下游的 Runtime Node；首节点或单节点 Probe Run 允许用户直接输入 prompt。",
+      "fetch_metadata": true,
+      "async_job": true,
+      "runtime_id": "youtube-wiki",
+      "instance_id": "wiki-sop-new-instance"
+    },
+    "config": {
+      "base_url": {
+        "key": "WIKI_LLM_BASE_URL",
+        "label": "Node Builder LLM Base URL",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_BASE_URL",
+        "masked_value": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "value": "https://api-proxy.chxyka.ccwu.cc/v1"
+      },
+      "api_key": {
+        "key": "WIKI_LLM_API_KEY",
+        "label": "Node Builder LLM API Key",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_API_KEY",
+        "masked_value": "ah-***c68",
+        "value": null
+      },
+      "model": {
+        "key": "WIKI_LLM_MODEL",
+        "label": "Node Builder LLM Model",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_MODEL",
+        "masked_value": "deepseek-v4-pro",
+        "value": "deepseek-v4-pro"
+      },
+      "settings_backend": "file",
+      "precedence": [
+        "node-run-overrides",
+        "instance-settings",
+        "runtime-settings",
+        "global-settings",
+        "bridge-env",
+        "runtime-env-file"
+      ]
+    },
+    "evaluation": {
+      "status": "ready",
+      "summary": "Node Builder used deterministic source analysis because the LLM evaluation response was not usable. Probe Run is required before Runtime publish.",
+      "skill_identity": {
+        "skill_id": "article-writer",
+        "title": "Article Writer",
+        "description": "分析这个 Skill 如何成为不绑定上下游的 Runtime Node；首节点或单节点 Probe Run 允许用户直接输入 prompt。",
+        "installer_url": "https://skill.vyibc.com/install-article-writer.sh?ts=20260630130909",
+        "trusted_source": true
+      },
+      "node_draft": {
+        "schema": "node-definition/v1",
+        "id": "article-writer",
+        "title": "Article Writer",
+        "description": "分析这个 Skill 如何成为不绑定上下游的 Runtime Node；首节点或单节点 Probe Run 允许用户直接输入 prompt。",
+        "version": "0.1-runtime-draft",
+        "skill": {
+          "id": "article-writer",
+          "source": "skill-installer",
+          "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-article-writer.sh?ts=20260630130909')",
+          "source_digest": {
+            "installer_url": "https://skill.vyibc.com/install-article-writer.sh?ts=20260630130909",
+            "zip_url": "https://skill.vyibc.com/article-writer/release/article-writer-20260630130909.zip?ts=20260630130909",
+            "files": [
+              {
+                "path": "article-writer/SKILL.md",
+                "bytes": 2854,
+                "truncated": false
+              },
+              {
+                "path": "article-writer/agents/openai.yaml",
+                "bytes": 246,
+                "truncated": false
+              },
+              {
+                "path": "article-writer/scripts/article-writer.sh",
+                "bytes": 2184,
+                "truncated": false
+              },
+              {
+                "path": "article-writer/scripts/article_writer.py",
+                "bytes": 10795,
+                "truncated": false
+              }
+            ]
+          }
+        },
+        "executor": {
+          "type": "agent-skill",
+          "agent": "hermes",
+          "skill": "article-writer",
+          "request_template": "node-execution-request/v1"
+        },
+        "entry": {
+          "inputs": {
+            "audience": {
+              "required": false,
+              "input_kind": "text",
+              "value_type": "text",
+              "label": "Audience",
+              "description": "Value for CLI option --audience.",
+              "evidence": "article-writer/scripts/article-writer.sh: option --audience -> $AUDIENCE",
+              "cli_option": "--audience"
+            },
+            "material_text": {
+              "required": false,
+              "input_kind": "text",
+              "value_type": "text",
+              "label": "Material Text",
+              "description": "Value for CLI option --material-text.",
+              "evidence": "article-writer/scripts/article-writer.sh: option --material-text -> $MATERIAL_TEXT",
+              "cli_option": "--material-text"
+            },
+            "materials_dir": {
+              "required": false,
+              "input_kind": "directory",
+              "value_type": "text",
+              "label": "Materials Dir",
+              "description": "Value for CLI option --materials-dir.",
+              "evidence": "article-writer/scripts/article-writer.sh: option --materials-dir -> $MATERIALS_DIR",
+              "cli_option": "--materials-dir"
+            },
+            "max_material_chars": {
+              "required": false,
+              "input_kind": "text",
+              "value_type": "text",
+              "label": "Max Material Chars",
+              "description": "Value for CLI option --max-material-chars.",
+              "evidence": "article-writer/scripts/article-writer.sh: option --max-material-chars -> $MAX_MATERIAL_CHARS",
+              "cli_option": "--max-material-chars"
+            },
+            "output_dir": {
+              "required": false,
+              "input_kind": "directory",
+              "value_type": "text",
+              "label": "Output Dir",
+              "description": "Runtime-managed value for CLI option --output-dir; normally injected by the Node Run workspace instead of user input.",
+              "evidence": "article-writer/scripts/article-writer.sh: option --output-dir -> $OUTPUT_DIR",
+              "cli_option": "--output-dir",
+              "runtime_managed": true,
+              "ui_group": "runtime"
+            },
+            "output_name": {
+              "required": false,
+              "input_kind": "text",
+              "value_type": "text",
+              "label": "Output Name",
+              "description": "Value for CLI option --output-name.",
+              "evidence": "article-writer/scripts/article-writer.sh: option --output-name -> $OUTPUT_NAME",
+              "cli_option": "--output-name"
+            },
+            "prompt": {
+              "required": true,
+              "input_kind": "text",
+              "value_type": "text",
+              "label": "Prompt",
+              "description": "Task prompt or user instruction passed to the skill.",
+              "evidence": "article-writer/scripts/article-writer.sh: option --prompt -> $PROMPT",
+              "cli_option": "--prompt",
+              "example": "生成一张小猫睡觉的照片"
+            },
+            "style": {
+              "required": false,
+              "input_kind": "text",
+              "value_type": "text",
+              "label": "Style",
+              "description": "Value for CLI option --style.",
+              "evidence": "article-writer/scripts/article-writer.sh: option --style -> $STYLE",
+              "cli_option": "--style"
+            },
+            "title": {
+              "required": false,
+              "input_kind": "text",
+              "value_type": "text",
+              "label": "Title",
+              "description": "Value for CLI option --title.",
+              "evidence": "article-writer/scripts/article-writer.sh: option --title -> $TITLE",
+              "cli_option": "--title"
+            }
+          }
+        },
+        "handoff": {
+          "accepts": {
+            "upstream_outputs_dir": {
+              "required": false,
+              "description": "一个或多个上游 Node 的标准输出目录。"
+            },
+            "instruction": {
+              "required": true,
+              "description": "Edge Handoff Agent 或用户提供的交接说明。"
+            },
+            "context": {
+              "required": false,
+              "description": "运行上下文或补充说明。"
+            }
+          },
+          "produces": {
+            "outputs_dir": "raw/node-runs/{run_id}/outputs",
+            "manifest": "raw/node-runs/{run_id}/outputs/manifest.json"
+          }
+        },
+        "outputs": {
+          "root": "raw/node-runs/{run_id}/outputs",
+          "manifest": "raw/node-runs/{run_id}/outputs/manifest.json",
+          "expected": {
+            "result": {
+              "description": "Skill execution result summary.",
+              "relayable": true
+            },
+            "status": {
+              "description": "Result value mentioned in skill source as `status`.",
+              "value_type": "text",
+              "relayable": true,
+              "evidence": "source result marker status"
+            },
+            "article_md": {
+              "description": "Output file `article.md` produced or documented by the skill.",
+              "value_type": "markdown",
+              "relayable": true,
+              "evidence": "article-writer/scripts/article-writer.sh: article.md"
+            }
+          }
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false
+          },
+          "telegram": {
+            "enabled": false,
+            "required": false
+          },
+          "sse": {
+            "enabled": true,
+            "required": true
+          }
+        },
+        "ui": {
+          "category": "custom"
+        },
+        "coverage_report": {
+          "status": "passed",
+          "covered_inputs": [
+            {
+              "input": "audience",
+              "option": "--audience",
+              "evidence": "article-writer/scripts/article-writer.sh: option --audience -> $AUDIENCE"
+            },
+            {
+              "input": "material_text",
+              "option": "--material-text",
+              "evidence": "article-writer/scripts/article-writer.sh: option --material-text -> $MATERIAL_TEXT"
+            },
+            {
+              "input": "materials_dir",
+              "option": "--materials-dir",
+              "evidence": "article-writer/scripts/article-writer.sh: option --materials-dir -> $MATERIALS_DIR"
+            },
+            {
+              "input": "max_material_chars",
+              "option": "--max-material-chars",
+              "evidence": "article-writer/scripts/article-writer.sh: option --max-material-chars -> $MAX_MATERIAL_CHARS"
+            },
+            {
+              "input": "output_dir",
+              "option": "--output-dir",
+              "evidence": "article-writer/scripts/article-writer.sh: option --output-dir -> $OUTPUT_DIR"
+            },
+            {
+              "input": "output_name",
+              "option": "--output-name",
+              "evidence": "article-writer/scripts/article-writer.sh: option --output-name -> $OUTPUT_NAME"
+            },
+            {
+              "input": "prompt",
+              "option": "--prompt",
+              "evidence": "article-writer/scripts/article-writer.sh: option --prompt -> $PROMPT"
+            },
+            {
+              "input": "style",
+              "option": "--style",
+              "evidence": "article-writer/scripts/article-writer.sh: option --style -> $STYLE"
+            },
+            {
+              "input": "title",
+              "option": "--title",
+              "evidence": "article-writer/scripts/article-writer.sh: option --title -> $TITLE"
+            }
+          ],
+          "missing_inputs": [],
+          "source_files_read": [
+            "article-writer/SKILL.md",
+            "article-writer/agents/openai.yaml",
+            "article-writer/scripts/article-writer.sh",
+            "article-writer/scripts/article_writer.py"
+          ],
+          "errors": []
+        }
+      },
+      "missing_fields": [],
+      "risks": [
+        {
+          "code": "ai_evaluation_unparsed",
+          "message": "Node Builder LLM evaluation returned an unusable response. The deterministic source analysis was used instead; run Probe before publishing.",
+          "detail": "Node Builder LLM returned invalid JSON: Expecting ',' delimiter: line 56 column 8 (char 2908); repair failed: LLM response did not contain a JSON object"
+        }
+      ],
+      "assumptions": [
+        "No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics."
+      ],
+      "test_plan": [
+        "校验 node-definition/v1 字段和安全路径。",
+        "检查 skill install command 格式和来源。",
+        "验证 Hermes 可识别 skill article-writer.",
+        "生成 Node Execution Request 预览。",
+        "执行草稿测试并校验 outputs_dir/manifest.json。",
+        "发布到当前 Runtime 后通过真实 Node Run 再测一次。"
+      ],
+      "metadata_probe": {
+        "attempted": true,
+        "items": [
+          {
+            "url": "https://skill.vyibc.com/install-article-writer.json",
+            "ok": false,
+            "error": "HTTP Error 404: Not Found"
+          },
+          {
+            "url": "https://skill.vyibc.com/install-article-writer.manifest.json",
+            "ok": false,
+            "error": "HTTP Error 404: Not Found"
+          },
+          {
+            "url": "https://skill.vyibc.com/install-article-writer.skill.json",
+            "ok": false,
+            "error": "HTTP Error 404: Not Found"
+          }
+        ]
+      },
+      "source_digest": {
+        "attempted": true,
+        "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-article-writer.sh?ts=20260630130909')",
+        "installer_url": "https://skill.vyibc.com/install-article-writer.sh?ts=20260630130909",
+        "zip_url": "https://skill.vyibc.com/article-writer/release/article-writer-20260630130909.zip?ts=20260630130909",
+        "trusted_source": true,
+        "files": [
+          {
+            "path": "article-writer/SKILL.md",
+            "bytes": 2854,
+            "truncated": false
+          },
+          {
+            "path": "article-writer/agents/openai.yaml",
+            "bytes": 246,
+            "truncated": false
+          },
+          {
+            "path": "article-writer/scripts/article-writer.sh",
+            "bytes": 2184,
+            "truncated": false
+          },
+          {
+            "path": "article-writer/scripts/article_writer.py",
+            "bytes": 10795,
+            "truncated": false
+          }
+        ],
+        "cli_options": [
+          {
+            "option": "--audience",
+            "variable": "AUDIENCE",
+            "input_name": "audience",
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Audience",
+            "description": "Value for CLI option --audience.",
+            "evidence": "article-writer/scripts/article-writer.sh: option --audience -> $AUDIENCE"
+          },
+          {
+            "option": "--material-text",
+            "variable": "MATERIAL_TEXT",
+            "input_name": "material_text",
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Material Text",
+            "description": "Value for CLI option --material-text.",
+            "evidence": "article-writer/scripts/article-writer.sh: option --material-text -> $MATERIAL_TEXT"
+          },
+          {
+            "option": "--materials-dir",
+            "variable": "MATERIALS_DIR",
+            "input_name": "materials_dir",
+            "required": false,
+            "input_kind": "directory",
+            "value_type": "text",
+            "label": "Materials Dir",
+            "description": "Value for CLI option --materials-dir.",
+            "evidence": "article-writer/scripts/article-writer.sh: option --materials-dir -> $MATERIALS_DIR"
+          },
+          {
+            "option": "--max-material-chars",
+            "variable": "MAX_MATERIAL_CHARS",
+            "input_name": "max_material_chars",
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Max Material Chars",
+            "description": "Value for CLI option --max-material-chars.",
+            "evidence": "article-writer/scripts/article-writer.sh: option --max-material-chars -> $MAX_MATERIAL_CHARS"
+          },
+          {
+            "option": "--output-dir",
+            "variable": "OUTPUT_DIR",
+            "input_name": "output_dir",
+            "required": false,
+            "input_kind": "directory",
+            "value_type": "text",
+            "label": "Output Dir",
+            "description": "Value for CLI option --output-dir.",
+            "evidence": "article-writer/scripts/article-writer.sh: option --output-dir -> $OUTPUT_DIR"
+          },
+          {
+            "option": "--output-name",
+            "variable": "OUTPUT_NAME",
+            "input_name": "output_name",
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Output Name",
+            "description": "Value for CLI option --output-name.",
+            "evidence": "article-writer/scripts/article-writer.sh: option --output-name -> $OUTPUT_NAME"
+          },
+          {
+            "option": "--prompt",
+            "variable": "PROMPT",
+            "input_name": "prompt",
+            "required": true,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Prompt",
+            "description": "Task prompt or user instruction passed to the skill.",
+            "evidence": "article-writer/scripts/article-writer.sh: option --prompt -> $PROMPT"
+          },
+          {
+            "option": "--style",
+            "variable": "STYLE",
+            "input_name": "style",
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Style",
+            "description": "Value for CLI option --style.",
+            "evidence": "article-writer/scripts/article-writer.sh: option --style -> $STYLE"
+          },
+          {
+            "option": "--title",
+            "variable": "TITLE",
+            "input_name": "title",
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Title",
+            "description": "Value for CLI option --title.",
+            "evidence": "article-writer/scripts/article-writer.sh: option --title -> $TITLE"
+          }
+        ],
+        "installer_script_preview": "#!/usr/bin/env bash\n# Auto-generated one-click install script for: article-writer\nset -euo pipefail\n\nSKILL_NAME=article-writer\nZIP_URL='https://skill.vyibc.com/article-writer/release/article-writer-20260630130909.zip?ts=20260630130909'\n\nTARGET=\"${1:-}\"\nif [[ -z \"$TARGET\" ]]; then\n  echo \"Select install target for ${SKILL_NAME}:\"\n  echo \"  1) Codex        (~/.codex/skills/)\"\n  echo \"  2) Cursor       (~/.cursor/skills/)\"\n  echo \"  3) Claude       (~/.claude/skills/)\"\n  echo \"  4) Gemini       (~/.gemini/skills/)\"\n  echo \"  5) Antigravity  (~/.gemini/antigravity/skills/)\"\n  echo \"  6) Copilot\n..\n...[truncated for Node Builder]"
+      },
+      "coverage_report": {
+        "status": "passed",
+        "covered_inputs": [
+          {
+            "input": "audience",
+            "option": "--audience",
+            "evidence": "article-writer/scripts/article-writer.sh: option --audience -> $AUDIENCE"
+          },
+          {
+            "input": "material_text",
+            "option": "--material-text",
+            "evidence": "article-writer/scripts/article-writer.sh: option --material-text -> $MATERIAL_TEXT"
+          },
+          {
+            "input": "materials_dir",
+            "option": "--materials-dir",
+            "evidence": "article-writer/scripts/article-writer.sh: option --materials-dir -> $MATERIALS_DIR"
+          },
+          {
+            "input": "max_material_chars",
+            "option": "--max-material-chars",
+            "evidence": "article-writer/scripts/article-writer.sh: option --max-material-chars -> $MAX_MATERIAL_CHARS"
+          },
+          {
+            "input": "output_dir",
+            "option": "--output-dir",
+            "evidence": "article-writer/scripts/article-writer.sh: option --output-dir -> $OUTPUT_DIR"
+          },
+          {
+            "input": "output_name",
+            "option": "--output-name",
+            "evidence": "article-writer/scripts/article-writer.sh: option --output-name -> $OUTPUT_NAME"
+          },
+          {
+            "input": "prompt",
+            "option": "--prompt",
+            "evidence": "article-writer/scripts/article-writer.sh: option --prompt -> $PROMPT"
+          },
+          {
+            "input": "style",
+            "option": "--style",
+            "evidence": "article-writer/scripts/article-writer.sh: option --style -> $STYLE"
+          },
+          {
+            "input": "title",
+            "option": "--title",
+            "evidence": "article-writer/scripts/article-writer.sh: option --title -> $TITLE"
+          }
+        ],
+        "missing_inputs": [],
+        "source_files_read": [
+          "article-writer/SKILL.md",
+          "article-writer/agents/openai.yaml",
+          "article-writer/scripts/article-writer.sh",
+          "article-writer/scripts/article_writer.py"
+        ],
+        "errors": []
+      },
+      "agent": {
+        "provider": "openai-compatible",
+        "model": "deepseek-v4-pro",
+        "used_ai": false,
+        "fallback": "deterministic-source-analysis",
+        "error": "Node Builder LLM returned invalid JSON: Expecting ',' delimiter: line 56 column 8 (char 2908); repair failed: LLM response did not contain a JSON object"
+      },
+      "trace": {
+        "trace_schema": "node-builder-agent-trace/v1",
+        "request": {
+          "skill_install_command": "  bash <(curl -fsSL 'https://skill.vyibc.com/install-article-writer.sh?ts=20260630130909')",
+          "user_instruction": "分析这个 Skill 如何成为不绑定上下游的 Runtime Node；首节点或单节点 Probe Run 允许用户直接输入 prompt。",
+          "fetch_metadata": true,
+          "async_job": true,
+          "runtime_id": "youtube-wiki",
+          "instance_id": "wiki-sop-new-instance"
+        },
+        "config": {
+          "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+          "model": "deepseek-v4-pro",
+          "api_key": "ah-***c68"
+        },
+        "started_at": "2026-06-30T14:38:18Z",
+        "parse_error": "Expecting ',' delimiter: line 56 column 8 (char 2908)",
+        "repair_error": "LLM response did not contain a JSON object",
+        "llm_request": {
+          "model": "deepseek-v4-pro",
+          "temperature": 0.0,
+          "max_tokens": 4096,
+          "stream": false,
+          "response_format": {
+            "type": "json_object"
+          },
+          "messages": [
+            {
+              "role": "system",
+              "content_preview": "",
+              "content_chars": 0
+            },
+            {
+              "role": "user",
+              "content_preview": "",
+              "content_chars": 0
+            }
+          ]
+        },
+        "attempts": [
+          {
+            "status": "response",
+            "duration_ms": 38517,
+            "raw_response_preview": ""
+          },
+          {
+            "status": "repair-response",
+            "duration_ms": 23295,
+            "raw_response_preview": ""
+          }
+        ]
+      },
+      "evaluated_at": "2026-06-30T14:39:19Z"
+    },
+    "trace": {
+      "trace_schema": "node-builder-agent-trace/v1",
+      "request": {
+        "skill_install_command": "  bash <(curl -fsSL 'https://skill.vyibc.com/install-article-writer.sh?ts=20260630130909')",
+        "user_instruction": "分析这个 Skill 如何成为不绑定上下游的 Runtime Node；首节点或单节点 Probe Run 允许用户直接输入 prompt。",
+        "fetch_metadata": true,
+        "async_job": true,
+        "runtime_id": "youtube-wiki",
+        "instance_id": "wiki-sop-new-instance"
+      },
+      "config": {
+        "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "model": "deepseek-v4-pro",
+        "api_key": "ah-***c68"
+      },
+      "started_at": "2026-06-30T14:38:18Z",
+      "parse_error": "Expecting ',' delimiter: line 56 column 8 (char 2908)",
+      "repair_error": "LLM response did not contain a JSON object",
+      "llm_request": {
+        "model": "deepseek-v4-pro",
+        "temperature": 0.0,
+        "max_tokens": 4096,
+        "stream": false,
+        "response_format": {
+          "type": "json_object"
+        },
+        "messages": [
+          {
+            "role": "system",
+            "content_preview": "",
+            "content_chars": 0
+          },
+          {
+            "role": "user",
+            "content_preview": "",
+            "content_chars": 0
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "status": "response",
+          "duration_ms": 38517,
+          "raw_response_preview": ""
+        },
+        {
+          "status": "repair-response",
+          "duration_ms": 23295,
+          "raw_response_preview": ""
+        }
+      ]
+    },
+    "stderr": ""
+  },
+  "request": {
+    "skill_install_command": "  bash <(curl -fsSL 'https://skill.vyibc.com/install-article-writer.sh?ts=20260630130909')",
+    "user_instruction": "分析这个 Skill 如何成为不绑定上下游的 Runtime Node；首节点或单节点 Probe Run 允许用户直接输入 prompt。",
+    "fetch_metadata": true,
+    "async_job": true,
+    "runtime_id": "youtube-wiki",
+    "instance_id": "wiki-sop-new-instance"
+  },
+  "config": {
+    "base_url": {
+      "key": "WIKI_LLM_BASE_URL",
+      "label": "Node Builder LLM Base URL",
+      "required": true,
+      "present": true,
+      "source": "instance-settings:WIKI_LLM_BASE_URL",
+      "masked_value": "https://api-proxy.chxyka.ccwu.cc/v1",
+      "value": "https://api-proxy.chxyka.ccwu.cc/v1"
+    },
+    "api_key": {
+      "key": "WIKI_LLM_API_KEY",
+      "label": "Node Builder LLM API Key",
+      "required": true,
+      "present": true,
+      "source": "instance-settings:WIKI_LLM_API_KEY",
+      "masked_value": "ah-***c68",
+      "value": null
+    },
+    "model": {
+      "key": "WIKI_LLM_MODEL",
+      "label": "Node Builder LLM Model",
+      "required": true,
+      "present": true,
+      "source": "instance-settings:WIKI_LLM_MODEL",
+      "masked_value": "deepseek-v4-pro",
+      "value": "deepseek-v4-pro"
+    },
+    "settings_backend": "file",
+    "precedence": [
+      "node-run-overrides",
+      "instance-settings",
+      "runtime-settings",
+      "global-settings",
+      "bridge-env",
+      "runtime-env-file"
+    ]
+  },
+  "evaluation": {
+    "status": "ready",
+    "summary": "Node Builder used deterministic source analysis because the LLM evaluation response was not usable. Probe Run is required before Runtime publish.",
+    "skill_identity": {
+      "skill_id": "article-writer",
+      "title": "Article Writer",
+      "description": "分析这个 Skill 如何成为不绑定上下游的 Runtime Node；首节点或单节点 Probe Run 允许用户直接输入 prompt。",
+      "installer_url": "https://skill.vyibc.com/install-article-writer.sh?ts=20260630130909",
+      "trusted_source": true
+    },
+    "node_draft": {
+      "schema": "node-definition/v1",
+      "id": "article-writer",
+      "title": "Article Writer",
+      "description": "分析这个 Skill 如何成为不绑定上下游的 Runtime Node；首节点或单节点 Probe Run 允许用户直接输入 prompt。",
+      "version": "0.1-runtime-draft",
+      "skill": {
+        "id": "article-writer",
+        "source": "skill-installer",
+        "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-article-writer.sh?ts=20260630130909')",
+        "source_digest": {
+          "installer_url": "https://skill.vyibc.com/install-article-writer.sh?ts=20260630130909",
+          "zip_url": "https://skill.vyibc.com/article-writer/release/article-writer-20260630130909.zip?ts=20260630130909",
+          "files": [
+            {
+              "path": "article-writer/SKILL.md",
+              "bytes": 2854,
+              "truncated": false
+            },
+            {
+              "path": "article-writer/agents/openai.yaml",
+              "bytes": 246,
+              "truncated": false
+            },
+            {
+              "path": "article-writer/scripts/article-writer.sh",
+              "bytes": 2184,
+              "truncated": false
+            },
+            {
+              "path": "article-writer/scripts/article_writer.py",
+              "bytes": 10795,
+              "truncated": false
+            }
+          ]
+        }
+      },
+      "executor": {
+        "type": "agent-skill",
+        "agent": "hermes",
+        "skill": "article-writer",
+        "request_template": "node-execution-request/v1"
+      },
+      "entry": {
+        "inputs": {
+          "audience": {
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Audience",
+            "description": "Value for CLI option --audience.",
+            "evidence": "article-writer/scripts/article-writer.sh: option --audience -> $AUDIENCE",
+            "cli_option": "--audience"
+          },
+          "material_text": {
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Material Text",
+            "description": "Value for CLI option --material-text.",
+            "evidence": "article-writer/scripts/article-writer.sh: option --material-text -> $MATERIAL_TEXT",
+            "cli_option": "--material-text"
+          },
+          "materials_dir": {
+            "required": false,
+            "input_kind": "directory",
+            "value_type": "text",
+            "label": "Materials Dir",
+            "description": "Value for CLI option --materials-dir.",
+            "evidence": "article-writer/scripts/article-writer.sh: option --materials-dir -> $MATERIALS_DIR",
+            "cli_option": "--materials-dir"
+          },
+          "max_material_chars": {
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Max Material Chars",
+            "description": "Value for CLI option --max-material-chars.",
+            "evidence": "article-writer/scripts/article-writer.sh: option --max-material-chars -> $MAX_MATERIAL_CHARS",
+            "cli_option": "--max-material-chars"
+          },
+          "output_dir": {
+            "required": false,
+            "input_kind": "directory",
+            "value_type": "text",
+            "label": "Output Dir",
+            "description": "Runtime-managed value for CLI option --output-dir; normally injected by the Node Run workspace instead of user input.",
+            "evidence": "article-writer/scripts/article-writer.sh: option --output-dir -> $OUTPUT_DIR",
+            "cli_option": "--output-dir",
+            "runtime_managed": true,
+            "ui_group": "runtime"
+          },
+          "output_name": {
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Output Name",
+            "description": "Value for CLI option --output-name.",
+            "evidence": "article-writer/scripts/article-writer.sh: option --output-name -> $OUTPUT_NAME",
+            "cli_option": "--output-name"
+          },
+          "prompt": {
+            "required": true,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Prompt",
+            "description": "Task prompt or user instruction passed to the skill.",
+            "evidence": "article-writer/scripts/article-writer.sh: option --prompt -> $PROMPT",
+            "cli_option": "--prompt",
+            "example": "生成一张小猫睡觉的照片"
+          },
+          "style": {
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Style",
+            "description": "Value for CLI option --style.",
+            "evidence": "article-writer/scripts/article-writer.sh: option --style -> $STYLE",
+            "cli_option": "--style"
+          },
+          "title": {
+            "required": false,
+            "input_kind": "text",
+            "value_type": "text",
+            "label": "Title",
+            "description": "Value for CLI option --title.",
+            "evidence": "article-writer/scripts/article-writer.sh: option --title -> $TITLE",
+            "cli_option": "--title"
+          }
+        }
+      },
+      "handoff": {
+        "accepts": {
+          "upstream_outputs_dir": {
+            "required": false,
+            "description": "一个或多个上游 Node 的标准输出目录。"
+          },
+          "instruction": {
+            "required": true,
+            "description": "Edge Handoff Agent 或用户提供的交接说明。"
+          },
+          "context": {
+            "required": false,
+            "description": "运行上下文或补充说明。"
+          }
+        },
+        "produces": {
+          "outputs_dir": "raw/node-runs/{run_id}/outputs",
+          "manifest": "raw/node-runs/{run_id}/outputs/manifest.json"
+        }
+      },
+      "outputs": {
+        "root": "raw/node-runs/{run_id}/outputs",
+        "manifest": "raw/node-runs/{run_id}/outputs/manifest.json",
+        "expected": {
+          "result": {
+            "description": "Skill execution result summary.",
+            "relayable": true
+          },
+          "status": {
+            "description": "Result value mentioned in skill source as `status`.",
+            "value_type": "text",
+            "relayable": true,
+            "evidence": "source result marker status"
+          },
+          "article_md": {
+            "description": "Output file `article.md` produced or documented by the skill.",
+            "value_type": "markdown",
+            "relayable": true,
+            "evidence": "article-writer/scripts/article-writer.sh: article.md"
+          }
+        }
+      },
+      "capabilities": {
+        "git": {
+          "enabled": true,
+          "required": false
+        },
+        "telegram": {
+          "enabled": false,
+          "required": false
+        },
+        "sse": {
+          "enabled": true,
+          "required": true
+        }
+      },
+      "ui": {
+        "category": "custom"
+      },
+      "coverage_report": {
+        "status": "passed",
+        "covered_inputs": [
+          {
+            "input": "audience",
+            "option": "--audience",
+            "evidence": "article-writer/scripts/article-writer.sh: option --audience -> $AUDIENCE"
+          },
+          {
+            "input": "material_text",
+            "option": "--material-text",
+            "evidence": "article-writer/scripts/article-writer.sh: option --material-text -> $MATERIAL_TEXT"
+          },
+          {
+            "input": "materials_dir",
+            "option": "--materials-dir",
+            "evidence": "article-writer/scripts/article-writer.sh: option --materials-dir -> $MATERIALS_DIR"
+          },
+          {
+            "input": "max_material_chars",
+            "option": "--max-material-chars",
+            "evidence": "article-writer/scripts/article-writer.sh: option --max-material-chars -> $MAX_MATERIAL_CHARS"
+          },
+          {
+            "input": "output_dir",
+            "option": "--output-dir",
+            "evidence": "article-writer/scripts/article-writer.sh: option --output-dir -> $OUTPUT_DIR"
+          },
+          {
+            "input": "output_name",
+            "option": "--output-name",
+            "evidence": "article-writer/scripts/article-writer.sh: option --output-name -> $OUTPUT_NAME"
+          },
+          {
+            "input": "prompt",
+            "option": "--prompt",
+            "evidence": "article-writer/scripts/article-writer.sh: option --prompt -> $PROMPT"
+          },
+          {
+            "input": "style",
+            "option": "--style",
+            "evidence": "article-writer/scripts/article-writer.sh: option --style -> $STYLE"
+          },
+          {
+            "input": "title",
+            "option": "--title",
+            "evidence": "article-writer/scripts/article-writer.sh: option --title -> $TITLE"
+          }
+        ],
+        "missing_inputs": [],
+        "source_files_read": [
+          "article-writer/SKILL.md",
+          "article-writer/agents/openai.yaml",
+          "article-writer/scripts/article-writer.sh",
+          "article-writer/scripts/article_writer.py"
+        ],
+        "errors": []
+      }
+    },
+    "missing_fields": [],
+    "risks": [
+      {
+        "code": "ai_evaluation_unparsed",
+        "message": "Node Builder LLM evaluation returned an unusable response. The deterministic source analysis was used instead; run Probe before publishing.",
+        "detail": "Node Builder LLM returned invalid JSON: Expecting ',' delimiter: line 56 column 8 (char 2908); repair failed: LLM response did not contain a JSON object"
+      }
+    ],
+    "assumptions": [
+      "No fixed upstream/downstream binding is added; Edge Handoff owns handoff semantics."
+    ],
+    "test_plan": [
+      "校验 node-definition/v1 字段和安全路径。",
+      "检查 skill install command 格式和来源。",
+      "验证 Hermes 可识别 skill article-writer.",
+      "生成 Node Execution Request 预览。",
+      "执行草稿测试并校验 outputs_dir/manifest.json。",
+      "发布到当前 Runtime 后通过真实 Node Run 再测一次。"
+    ],
+    "metadata_probe": {
+      "attempted": true,
+      "items": [
+        {
+          "url": "https://skill.vyibc.com/install-article-writer.json",
+          "ok": false,
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://skill.vyibc.com/install-article-writer.manifest.json",
+          "ok": false,
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "url": "https://skill.vyibc.com/install-article-writer.skill.json",
+          "ok": false,
+          "error": "HTTP Error 404: Not Found"
+        }
+      ]
+    },
+    "source_digest": {
+      "attempted": true,
+      "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-article-writer.sh?ts=20260630130909')",
+      "installer_url": "https://skill.vyibc.com/install-article-writer.sh?ts=20260630130909",
+      "zip_url": "https://skill.vyibc.com/article-writer/release/article-writer-20260630130909.zip?ts=20260630130909",
+      "trusted_source": true,
+      "files": [
+        {
+          "path": "article-writer/SKILL.md",
+          "bytes": 2854,
+          "truncated": false
+        },
+        {
+          "path": "article-writer/agents/openai.yaml",
+          "bytes": 246,
+          "truncated": false
+        },
+        {
+          "path": "article-writer/scripts/article-writer.sh",
+          "bytes": 2184,
+          "truncated": false
+        },
+        {
+          "path": "article-writer/scripts/article_writer.py",
+          "bytes": 10795,
+          "truncated": false
+        }
+      ],
+      "cli_options": [
+        {
+          "option": "--audience",
+          "variable": "AUDIENCE",
+          "input_name": "audience",
+          "required": false,
+          "input_kind": "text",
+          "value_type": "text",
+          "label": "Audience",
+          "description": "Value for CLI option --audience.",
+          "evidence": "article-writer/scripts/article-writer.sh: option --audience -> $AUDIENCE"
+        },
+        {
+          "option": "--material-text",
+          "variable": "MATERIAL_TEXT",
+          "input_name": "material_text",
+          "required": false,
+          "input_kind": "text",
+          "value_type": "text",
+          "label": "Material Text",
+          "description": "Value for CLI option --material-text.",
+          "evidence": "article-writer/scripts/article-writer.sh: option --material-text -> $MATERIAL_TEXT"
+        },
+        {
+          "option": "--materials-dir",
+          "variable": "MATERIALS_DIR",
+          "input_name": "materials_dir",
+          "required": false,
+          "input_kind": "directory",
+          "value_type": "text",
+          "label": "Materials Dir",
+          "description": "Value for CLI option --materials-dir.",
+          "evidence": "article-writer/scripts/article-writer.sh: option --materials-dir -> $MATERIALS_DIR"
+        },
+        {
+          "option": "--max-material-chars",
+          "variable": "MAX_MATERIAL_CHARS",
+          "input_name": "max_material_chars",
+          "required": false,
+          "input_kind": "text",
+          "value_type": "text",
+          "label": "Max Material Chars",
+          "description": "Value for CLI option --max-material-chars.",
+          "evidence": "article-writer/scripts/article-writer.sh: option --max-material-chars -> $MAX_MATERIAL_CHARS"
+        },
+        {
+          "option": "--output-dir",
+          "variable": "OUTPUT_DIR",
+          "input_name": "output_dir",
+          "required": false,
+          "input_kind": "directory",
+          "value_type": "text",
+          "label": "Output Dir",
+          "description": "Value for CLI option --output-dir.",
+          "evidence": "article-writer/scripts/article-writer.sh: option --output-dir -> $OUTPUT_DIR"
+        },
+        {
+          "option": "--output-name",
+          "variable": "OUTPUT_NAME",
+          "input_name": "output_name",
+          "required": false,
+          "input_kind": "text",
+          "value_type": "text",
+          "label": "Output Name",
+          "description": "Value for CLI option --output-name.",
+          "evidence": "article-writer/scripts/article-writer.sh: option --output-name -> $OUTPUT_NAME"
+        },
+        {
+          "option": "--prompt",
+          "variable": "PROMPT",
+          "input_name": "prompt",
+          "required": true,
+          "input_kind": "text",
+          "value_type": "text",
+          "label": "Prompt",
+          "description": "Task prompt or user instruction passed to the skill.",
+          "evidence": "article-writer/scripts/article-writer.sh: option --prompt -> $PROMPT"
+        },
+        {
+          "option": "--style",
+          "variable": "STYLE",
+          "input_name": "style",
+          "required": false,
+          "input_kind": "text",
+          "value_type": "text",
+          "label": "Style",
+          "description": "Value for CLI option --style.",
+          "evidence": "article-writer/scripts/article-writer.sh: option --style -> $STYLE"
+        },
+        {
+          "option": "--title",
+          "variable": "TITLE",
+          "input_name": "title",
+          "required": false,
+          "input_kind": "text",
+          "value_type": "text",
+          "label": "Title",
+          "description": "Value for CLI option --title.",
+          "evidence": "article-writer/scripts/article-writer.sh: option --title -> $TITLE"
+        }
+      ],
+      "installer_script_preview": "#!/usr/bin/env bash\n# Auto-generated one-click install script for: article-writer\nset -euo pipefail\n\nSKILL_NAME=article-writer\nZIP_URL='https://skill.vyibc.com/article-writer/release/article-writer-20260630130909.zip?ts=20260630130909'\n\nTARGET=\"${1:-}\"\nif [[ -z \"$TARGET\" ]]; then\n  echo \"Select install target for ${SKILL_NAME}:\"\n  echo \"  1) Codex        (~/.codex/skills/)\"\n  echo \"  2) Cursor       (~/.cursor/skills/)\"\n  echo \"  3) Claude       (~/.claude/skills/)\"\n  echo \"  4) Gemini       (~/.gemini/skills/)\"\n  echo \"  5) Antigravity  (~/.gemini/antigravity/skills/)\"\n  echo \"  6) Copilot\n..\n...[truncated for Node Builder]"
+    },
+    "coverage_report": {
+      "status": "passed",
+      "covered_inputs": [
+        {
+          "input": "audience",
+          "option": "--audience",
+          "evidence": "article-writer/scripts/article-writer.sh: option --audience -> $AUDIENCE"
+        },
+        {
+          "input": "material_text",
+          "option": "--material-text",
+          "evidence": "article-writer/scripts/article-writer.sh: option --material-text -> $MATERIAL_TEXT"
+        },
+        {
+          "input": "materials_dir",
+          "option": "--materials-dir",
+          "evidence": "article-writer/scripts/article-writer.sh: option --materials-dir -> $MATERIALS_DIR"
+        },
+        {
+          "input": "max_material_chars",
+          "option": "--max-material-chars",
+          "evidence": "article-writer/scripts/article-writer.sh: option --max-material-chars -> $MAX_MATERIAL_CHARS"
+        },
+        {
+          "input": "output_dir",
+          "option": "--output-dir",
+          "evidence": "article-writer/scripts/article-writer.sh: option --output-dir -> $OUTPUT_DIR"
+        },
+        {
+          "input": "output_name",
+          "option": "--output-name",
+          "evidence": "article-writer/scripts/article-writer.sh: option --output-name -> $OUTPUT_NAME"
+        },
+        {
+          "input": "prompt",
+          "option": "--prompt",
+          "evidence": "article-writer/scripts/article-writer.sh: option --prompt -> $PROMPT"
+        },
+        {
+          "input": "style",
+          "option": "--style",
+          "evidence": "article-writer/scripts/article-writer.sh: option --style -> $STYLE"
+        },
+        {
+          "input": "title",
+          "option": "--title",
+          "evidence": "article-writer/scripts/article-writer.sh: option --title -> $TITLE"
+        }
+      ],
+      "missing_inputs": [],
+      "source_files_read": [
+        "article-writer/SKILL.md",
+        "article-writer/agents/openai.yaml",
+        "article-writer/scripts/article-writer.sh",
+        "article-writer/scripts/article_writer.py"
+      ],
+      "errors": []
+    },
+    "agent": {
+      "provider": "openai-compatible",
+      "model": "deepseek-v4-pro",
+      "used_ai": false,
+      "fallback": "deterministic-source-analysis",
+      "error": "Node Builder LLM returned invalid JSON: Expecting ',' delimiter: line 56 column 8 (char 2908); repair failed: LLM response did not contain a JSON object"
+    },
+    "trace": {
+      "trace_schema": "node-builder-agent-trace/v1",
+      "request": {
+        "skill_install_command": "  bash <(curl -fsSL 'https://skill.vyibc.com/install-article-writer.sh?ts=20260630130909')",
+        "user_instruction": "分析这个 Skill 如何成为不绑定上下游的 Runtime Node；首节点或单节点 Probe Run 允许用户直接输入 prompt。",
+        "fetch_metadata": true,
+        "async_job": true,
+        "runtime_id": "youtube-wiki",
+        "instance_id": "wiki-sop-new-instance"
+      },
+      "config": {
+        "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "model": "deepseek-v4-pro",
+        "api_key": "ah-***c68"
+      },
+      "started_at": "2026-06-30T14:38:18Z",
+      "parse_error": "Expecting ',' delimiter: line 56 column 8 (char 2908)",
+      "repair_error": "LLM response did not contain a JSON object",
+      "llm_request": {
+        "model": "deepseek-v4-pro",
+        "temperature": 0.0,
+        "max_tokens": 4096,
+        "stream": false,
+        "response_format": {
+          "type": "json_object"
+        },
+        "messages": [
+          {
+            "role": "system",
+            "content_preview": "",
+            "content_chars": 0
+          },
+          {
+            "role": "user",
+            "content_preview": "",
+            "content_chars": 0
+          }
+        ]
+      },
+      "attempts": [
+        {
+          "status": "response",
+          "duration_ms": 38517,
+          "raw_response_preview": ""
+        },
+        {
+          "status": "repair-response",
+          "duration_ms": 23295,
+          "raw_response_preview": ""
+        }
+      ]
+    },
+    "evaluated_at": "2026-06-30T14:39:19Z"
+  },
+  "trace": {
+    "trace_schema": "node-builder-agent-trace/v1",
+    "request": {
+      "skill_install_command": "  bash <(curl -fsSL 'https://skill.vyibc.com/install-article-writer.sh?ts=20260630130909')",
+      "user_instruction": "分析这个 Skill 如何成为不绑定上下游的 Runtime Node；首节点或单节点 Probe Run 允许用户直接输入 prompt。",
+      "fetch_metadata": true,
+      "async_job": true,
+      "runtime_id": "youtube-wiki",
+      "instance_id": "wiki-sop-new-instance"
+    },
+    "config": {
+      "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+      "model": "deepseek-v4-pro",
+      "api_key": "ah-***c68"
+    },
+    "started_at": "2026-06-30T14:38:18Z",
+    "parse_error": "Expecting ',' delimiter: line 56 column 8 (char 2908)",
+    "repair_error": "LLM response did not contain a JSON object",
+    "llm_request": {
+      "model": "deepseek-v4-pro",
+      "temperature": 0.0,
+      "max_tokens": 4096,
+      "stream": false,
+      "response_format": {
+        "type": "json_object"
+      },
+      "messages": [
+        {
+          "role": "system",
+          "content_preview": "",
+          "content_chars": 0
+        },
+        {
+          "role": "user",
+          "content_preview": "",
+          "content_chars": 0
+        }
+      ]
+    },
+    "attempts": [
+      {
+        "status": "response",
+        "duration_ms": 38517,
+        "raw_response_preview": ""
+      },
+      {
+        "status": "repair-response",
+        "duration_ms": 23295,
+        "raw_response_preview": ""
+      }
+    ]
+  },
+  "stderr": ""
+}

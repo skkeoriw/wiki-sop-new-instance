@@ -1,0 +1,32 @@
+**Node Execution Result: FAILED**
+
+**Node:** `chatgpt-remote-image-service-nrmj`
+**Run ID:** `node-run-chatgpt-remote-image-service-nrmj-20260629T174927-480b13`
+**Status:** `failed`
+
+**What happened:**
+1. Loaded the `chatgpt-remote-image.sh` skill script from `/root/.hermes/skills/devops/chatgpt-remote-image-service/`
+2. Ran with `--prompt "生成一张小猫睡觉的照片"` — pure prompt, no reference image
+3. The task was accepted by the remote service (taskId: `b20b47e1-491d-4b42-a56f-119c401cd57d`) on worker-2 (CDP port 9334)
+
+**Progress through stages:**
+| Stage | Result |
+|---|---|
+| parseArgs | ✓ |
+| importPlaywright | ✓ |
+| connectBrowser | ✓ (1326ms) |
+| preparePage | ✓ (2772ms) |
+| waitComposer | ✓ (7014ms) |
+| enterImageMode | ✓ (8671ms) |
+| fillPrompt | ✓ (9034ms) |
+| clickSend | ✓ (10323ms) |
+| waitForGeneratedImage | ✓ (39745ms — image was generated) |
+| **downloadImage** | **✗ FAILED** |
+
+**Root cause:** The remote browser worker successfully sent the prompt to ChatGPT and the image was generated (visible at +39.7s), but the automation script failed waiting for `locator('[role="dialog"]').last() to be visible` with a 10s timeout. The download dialog element expected by Playwright didn't appear, likely due to a UI change in the ChatGPT interface or a transient modal issue on that browser.
+
+**Written outputs:**
+- `raw/node-runs/.../outputs/manifest.json` — full failure manifest with error details
+- `raw/node-runs/.../agent/receipt.json` — execution receipt
+
+**Guidance:** This is a remote service-side automation issue, not a skill invocation issue. The Chrome browser worker on the remote service may need its ChatGPT session refreshed (login state), or the service operator should check whether ChatGPT's UI has changed the download dialog selector. The service health endpoint (`/health`) showed loginRequired=false, so the worker is logged in, but the download automation may be broken by a ChatGPT UI update.

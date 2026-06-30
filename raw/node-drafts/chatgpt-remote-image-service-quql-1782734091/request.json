@@ -1,0 +1,7 @@
+{
+  "runtime_id": "youtube-wiki",
+  "instance_id": "wiki-sop-new-instance",
+  "skill_install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')",
+  "user_instruction": "分析这个 Skill 如何成为不绑定上下游的 Runtime Node；首节点或单节点 Probe Run 允许用户直接输入 prompt。",
+  "fetch_metadata": true
+}

@@ -1,0 +1,6 @@
+{
+  "schema_id": "node-draft-schema/v1",
+  "status": "passed",
+  "missing_fields": [],
+  "production_dag_changed": false
+}

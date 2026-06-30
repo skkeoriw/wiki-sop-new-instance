@@ -1,0 +1,45 @@
+{
+  "trace_schema": "node-builder-agent-trace/v1",
+  "request": {
+    "skill_install_command": " bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451') ",
+    "user_instruction": "转换成不绑定上下游的 Runtime Node；首节点测试允许直接输入 source_url，保留超时、轮询间隔和是否包含 transcript 等配置。",
+    "fetch_metadata": true,
+    "async_job": true,
+    "runtime_id": "youtube-wiki",
+    "instance_id": "wiki-sop-new-instance"
+  },
+  "config": {
+    "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+    "model": "deepseek-v4-pro",
+    "api_key": "ah-***c68"
+  },
+  "started_at": "2026-06-30T13:01:06Z",
+  "llm_request": {
+    "model": "deepseek-v4-pro",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "stream": false,
+    "response_format": {
+      "type": "json_object"
+    },
+    "messages": [
+      {
+        "role": "system",
+        "content_preview": "",
+        "content_chars": 0
+      },
+      {
+        "role": "user",
+        "content_preview": "",
+        "content_chars": 0
+      }
+    ]
+  },
+  "attempts": [
+    {
+      "status": "response",
+      "duration_ms": 54330,
+      "raw_response_preview": ""
+    }
+  ]
+}

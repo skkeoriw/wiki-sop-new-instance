@@ -1,0 +1,779 @@
+{
+  "ok": true,
+  "status": "done",
+  "http_status": 200,
+  "mode": "edge-handoff-agent-evaluation-job",
+  "evaluation_id": "edge-eval-youtube-fetch-to-tg-notify-1782439277217-20260626T040044Z-c4b535",
+  "sop_id": "test-instance",
+  "workflow_id": "youtube-research-wiki",
+  "edge_id": "youtube-fetch-to-tg-notify-1782439277217",
+  "started_at": "2026-06-26T04:00:44.025924+00:00",
+  "finished_at": "2026-06-26T04:01:16.664495+00:00",
+  "result": {
+    "ok": true,
+    "sop_id": "test-instance",
+    "workflow_id": "youtube-research-wiki",
+    "edge_id": "youtube-fetch-to-tg-notify-1782439277217",
+    "mode": "edge-handoff-agent-evaluation",
+    "request": {
+      "runtime_id": "youtube-wiki",
+      "instance_id": "test-instance",
+      "workflow_id": "youtube-research-wiki",
+      "edge_id": "youtube-fetch-to-tg-notify-1782439277217",
+      "phase": "design",
+      "workflow_goal": "Fetch YouTube source material, research it deeply, then build wiki-ready pages through explicit agent handoffs.",
+      "edge_handoff_instruction": "说明如何把 source_url 交给 message：主输入是什么、如何转换、哪些产物只作为补充上下文。",
+      "edge": {
+        "id": "youtube-fetch-to-tg-notify-1782439277217",
+        "from": "youtube-fetch",
+        "to": "tg-notify",
+        "sourceIntent": "metadata_file: file; source_url: string",
+        "targetIntent": "message: object",
+        "instruction": "说明如何把 source_url 交给 message：主输入是什么、如何转换、哪些产物只作为补充上下文。",
+        "fromSignature": "{\"nodeId\":\"youtube-fetch\",\"title\":\"YouTube 元数据获取\",\"needs\":[],\"inputs\":[\"source_url\"],\"optionalInputs\":[],\"outputs\":[\"metadata_file\",\"source_url\"]}",
+        "toSignature": "{\"nodeId\":\"tg-notify\",\"title\":\"Telegram 通知\",\"needs\":[\"wiki-build\"],\"inputs\":[\"message\"],\"optionalInputs\":[\"index\"],\"outputs\":[\"telegram_message\"]}",
+        "relayMode": "auto_by_target_inputs",
+        "relayMappings": []
+      },
+      "upstream": {
+        "node_id": "youtube-fetch",
+        "title": "YouTube 元数据获取",
+        "skill_id": "sop-youtube-fetch",
+        "skill_summary": "---\nname: sop-youtube-fetch\ndescription: \"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\"\nversion: 1.0.0\n---",
+        "skill_readme": "---\nname: sop-youtube-fetch\ndescription: \"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\"\nversion: 1.0.0\n---",
+        "inputs": {
+          "source_url": {
+            "required": true,
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "from": "context.source_url",
+            "accepts": [
+              "scalar:url",
+              "file:text"
+            ],
+            "resolvers": [
+              {
+                "id": "direct-url",
+                "kind": "direct"
+              },
+              {
+                "id": "text-url",
+                "kind": "regex",
+                "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+              }
+            ]
+          }
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "source_url": {
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "relayable": true,
+            "path": "raw/node-runs/{pipeline_id}/outputs/files/source-url.txt"
+          },
+          "metadata_file": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": true,
+            "path": "raw/node-runs/{pipeline_id}/outputs/files/metadata.json"
+          }
+        },
+        "executor": {
+          "type": "agent-skill",
+          "agent": "hermes",
+          "skill": "sop-youtube-fetch",
+          "entry": "scripts/run_youtube_fetch.sh",
+          "webhook_route": "sop-youtube-fetch"
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "paths": [
+              "raw/node-runs/{pipeline_id}/outputs/files/**",
+              "raw/youtube-metadata/**"
+            ]
+          },
+          "telegram": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "trigger": "stage-lifecycle",
+            "triggers": [
+              "start",
+              "done",
+              "failed"
+            ]
+          },
+          "sse": {
+            "enabled": true,
+            "required": true
+          }
+        },
+        "infra": {
+          "tg_notify": true,
+          "log_record": true
+        },
+        "description": ""
+      },
+      "downstream": {
+        "node_id": "tg-notify",
+        "title": "Telegram 通知",
+        "skill_id": "sop-tg-notify",
+        "skill_summary": "---\nname: sop-tg-notify\ndescription: \"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\"\nversion: 2.1.0\n---",
+        "skill_readme": "---\nname: sop-tg-notify\ndescription: \"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\"\nversion: 2.1.0\n---",
+        "inputs": {
+          "message": {
+            "required": true,
+            "kind": "object",
+            "type": "object",
+            "value_type": "text",
+            "from": "edge.message",
+            "accepts": [
+              "scalar:text",
+              "object",
+              "file:text",
+              "file:markdown",
+              "file:json"
+            ],
+            "resolvers": [
+              {
+                "id": "direct-text",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-title",
+                "kind": "json_path",
+                "path": "$.title"
+              },
+              {
+                "id": "metadata-description",
+                "kind": "json_path",
+                "path": "$.description"
+              }
+            ]
+          }
+        },
+        "optional_inputs": {
+          "index": {
+            "required": false,
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "from": "wiki-build.outputs.index",
+            "accepts": [
+              "file:markdown",
+              "file:text"
+            ]
+          }
+        },
+        "outputs": {
+          "telegram_message": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": false,
+            "path": "logs/pipeline-runs/pipe-{run_id}.json"
+          }
+        },
+        "executor": {
+          "type": "agent-skill",
+          "agent": "hermes",
+          "skill": "sop-tg-notify",
+          "entry": "scripts/run_tg_notify.sh",
+          "webhook_route": "sop-tg-notify"
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false
+          },
+          "telegram": {
+            "enabled": true,
+            "required": false
+          },
+          "sse": {
+            "enabled": true,
+            "required": true
+          }
+        },
+        "infra": {
+          "tg_notify": true,
+          "log_record": true
+        },
+        "description": ""
+      }
+    },
+    "config": {
+      "base_url": {
+        "key": "WIKI_LLM_BASE_URL",
+        "label": "Edge Handoff LLM Base URL",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_BASE_URL",
+        "masked_value": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "value": "https://api-proxy.chxyka.ccwu.cc/v1"
+      },
+      "api_key": {
+        "key": "WIKI_LLM_API_KEY",
+        "label": "Edge Handoff LLM API Key",
+        "required": true,
+        "present": true,
+        "source": "instance-settings:WIKI_LLM_API_KEY",
+        "masked_value": "ah-***c68",
+        "value": null
+      },
+      "model": {
+        "key": "EDGE_HANDOFF_LLM_MODEL",
+        "label": "Edge Handoff LLM Model",
+        "required": true,
+        "present": true,
+        "source": "bridge-env:WIKI_DEEPSEEK_MODEL:fallback-from-deepseek-v4-flash",
+        "masked_value": "deepseek-v4-pro",
+        "value": "deepseek-v4-pro"
+      },
+      "settings_backend": "file",
+      "precedence": [
+        "node-run-overrides",
+        "instance-settings",
+        "runtime-settings",
+        "global-settings",
+        "bridge-env",
+        "runtime-env-file"
+      ],
+      "sync_budget": {
+        "public_timeout_budget_seconds": 25,
+        "mode": "async",
+        "llm_timeout_seconds": 75,
+        "llm_attempts": 1,
+        "evaluator_timeout_seconds": 90
+      }
+    },
+    "evaluation": {
+      "status": "blocked",
+      "score": 0.0,
+      "confidence": 0.0,
+      "summary": "Edge Handoff Agent 无法完成 AI 评估。",
+      "decision": "cannot_run",
+      "scores": {
+        "intent_clarity": 0.1,
+        "skill_fit": 0.1,
+        "artifact_usability": 0.1,
+        "guide_completeness": 0.05,
+        "risk": 0.88
+      },
+      "blocking_reasons": [
+        {
+          "code": "ai_evaluation_failed",
+          "message": "LLM response did not contain a JSON object: "
+        }
+      ],
+      "warnings": [],
+      "required_user_inputs": [],
+      "suggested_edge_instruction": "",
+      "resolved_handoff": {},
+      "node_execution_guide": {
+        "format": "markdown",
+        "prompt": ""
+      },
+      "test_plan": [
+        "查看 Agent Trace 的请求和原始回复。",
+        "修复 Edge Handoff LLM/Hermes 配置或应用推荐说明后重新评估。"
+      ],
+      "agent": {
+        "provider": "openai-compatible",
+        "model": "deepseek-v4-pro",
+        "used_ai": false,
+        "error": "LLM response did not contain a JSON object: "
+      },
+      "trace": {
+        "trace_schema": "edge-handoff-agent-trace/v1",
+        "started_at": "2026-06-26T04:00:44Z",
+        "request": {
+          "runtime_id": "youtube-wiki",
+          "instance_id": "test-instance",
+          "workflow_id": "youtube-research-wiki",
+          "edge_id": "youtube-fetch-to-tg-notify-1782439277217",
+          "phase": "design",
+          "workflow_goal": "Fetch YouTube source material, research it deeply, then build wiki-ready pages through explicit agent handoffs.",
+          "edge_handoff_instruction": "说明如何把 source_url 交给 message：主输入是什么、如何转换、哪些产物只作为补充上下文。",
+          "edge": {
+            "id": "youtube-fetch-to-tg-notify-1782439277217",
+            "from": "youtube-fetch",
+            "to": "tg-notify",
+            "sourceIntent": "metadata_file: file; source_url: string",
+            "targetIntent": "message: object",
+            "instruction": "说明如何把 source_url 交给 message：主输入是什么、如何转换、哪些产物只作为补充上下文。",
+            "relayMode": "auto_by_target_inputs",
+            "relayMappings": []
+          },
+          "upstream": {
+            "node_id": "youtube-fetch",
+            "title": "YouTube 元数据获取",
+            "skill_id": "sop-youtube-fetch",
+            "skill_summary": "---\nname: sop-youtube-fetch\ndescription: \"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\"\nversion: 1.0.0\n---",
+            "inputs": {
+              "source_url": {
+                "kind": "scalar",
+                "type": "string",
+                "value_type": "url",
+                "required": true,
+                "from": "context.source_url",
+                "accepts": [
+                  "scalar:url",
+                  "file:text"
+                ],
+                "resolvers": [
+                  {
+                    "id": "direct-url",
+                    "kind": "direct"
+                  },
+                  {
+                    "id": "text-url",
+                    "kind": "regex"
+                  }
+                ]
+              }
+            },
+            "outputs": {
+              "source_url": {
+                "kind": "scalar",
+                "type": "string",
+                "value_type": "url",
+                "relayable": true,
+                "path": "raw/node-runs/{pipeline_id}/outputs/files/source-url.txt"
+              },
+              "metadata_file": {
+                "kind": "file",
+                "type": "file",
+                "value_type": "json",
+                "relayable": true,
+                "path": "raw/node-runs/{pipeline_id}/outputs/files/metadata.json"
+              }
+            },
+            "capabilities": [
+              "git",
+              "sse",
+              "telegram"
+            ]
+          },
+          "downstream": {
+            "node_id": "tg-notify",
+            "title": "Telegram 通知",
+            "skill_id": "sop-tg-notify",
+            "skill_summary": "---\nname: sop-tg-notify\ndescription: \"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\"\nversion: 2.1.0\n---",
+            "inputs": {
+              "message": {
+                "kind": "object",
+                "type": "object",
+                "value_type": "text",
+                "required": true,
+                "from": "edge.message",
+                "accepts": [
+                  "scalar:text",
+                  "object",
+                  "file:text",
+                  "file:markdown",
+                  "file:json"
+                ],
+                "resolvers": [
+                  {
+                    "id": "direct-text",
+                    "kind": "direct"
+                  },
+                  {
+                    "id": "metadata-title",
+                    "kind": "json_path",
+                    "path": "$.title"
+                  },
+                  {
+                    "id": "metadata-description",
+                    "kind": "json_path",
+                    "path": "$.description"
+                  }
+                ]
+              },
+              "index": {
+                "kind": "file",
+                "type": "file",
+                "value_type": "markdown",
+                "required": false,
+                "from": "wiki-build.outputs.index",
+                "accepts": [
+                  "file:markdown",
+                  "file:text"
+                ]
+              }
+            },
+            "outputs": {
+              "telegram_message": {
+                "kind": "file",
+                "type": "file",
+                "value_type": "json",
+                "relayable": false,
+                "path": "logs/pipeline-runs/pipe-{run_id}.json"
+              }
+            },
+            "capabilities": [
+              "git",
+              "sse",
+              "telegram"
+            ]
+          }
+        },
+        "baseline": {
+          "status": "trial_ready",
+          "summary": "Edge Handoff Instruction 已说明泛化输入的消费方式，可生成下游节点执行指导文档。",
+          "decision": "can_run_with_review",
+          "blocking_reasons": [],
+          "required_user_inputs": [],
+          "resolved_handoff": {
+            "primary_artifacts": [
+              {
+                "from": "youtube-fetch.outputs.source_url",
+                "role": "available_output",
+                "reason": "上游声明的可交付产物。"
+              },
+              {
+                "from": "youtube-fetch.outputs.metadata_file",
+                "role": "available_output",
+                "reason": "上游声明的可交付产物。"
+              }
+            ],
+            "supporting_artifacts": [],
+            "relay_mappings": [],
+            "downstream_inputs": [
+              {
+                "to": "tg-notify.inputs.message",
+                "construction": "需要 Edge Handoff Agent 生成结构化 relay_mappings。"
+              },
+              {
+                "to": "tg-notify.inputs.index",
+                "construction": "需要 Edge Handoff Agent 生成结构化 relay_mappings。"
+              }
+            ]
+          }
+        },
+        "llm": {
+          "provider": "openai-compatible",
+          "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+          "model": "deepseek-v4-pro",
+          "timeout_seconds": 75,
+          "attempts": 1
+        },
+        "attempts": [],
+        "llm_request": {
+          "model": "deepseek-v4-pro",
+          "messages": [
+            {
+              "role": "system",
+              "content": "Return strict JSON only. No markdown."
+            },
+            {
+              "role": "user",
+              "content": "You are the SOP Edge Handoff Agent. Return strict JSON only.\nReview whether the upstream node can hand off to the downstream node. Do not generate long guides; the runtime will compile the final Node Execution Guide. If the handoff intent is unclear, return needs_instruction. Keep the response compact; do not copy skill docs or repeat the full request. Return less than 700 JSON characters.\n\nRequired JSON keys: status, summary, warnings, required_user_inputs. Optional keys: blocking_reasons, suggested_edge_instruction, resolved_handoff. When status is blocked, incompatible, or needs_instruction, include suggested_edge_instruction if a concise user-editable handoff instruction could fix it.\nWhen status is ready or trial_ready, resolved_handoff should include relay_mappings: an array of objects with source_output, target_input, and resolver. Use resolver ids declared by the downstream input contract; do not invent business logic outside the contracts.\n\nAllowed statuses: ['blocked', 'incompatible', 'needs_instruction', 'ready', 'trial_ready']\n\nRequest JSON:\n{\n  \"runtime_id\": \"youtube-wiki\",\n  \"instance_id\": \"test-instance\",\n  \"workflow_id\": \"youtube-research-wiki\",\n  \"edge_id\": \"youtube-fetch-to-tg-notify-1782439277217\",\n  \"phase\": \"design\",\n  \"workflow_goal\": \"Fetch YouTube source material, research it deeply, then build wiki-ready pages through explicit agent handoffs.\",\n  \"edge_handoff_instruction\": \"说明如何把 source_url 交给 message：主输入是什么、如何转换、哪些产物只作为补充上下文。\",\n  \"edge\": {\n    \"id\": \"youtube-fetch-to-tg-notify-1782439277217\",\n    \"from\": \"youtube-fetch\",\n    \"to\": \"tg-notify\",\n    \"sourceIntent\": \"metadata_file: file; source_url: string\",\n    \"targetIntent\": \"message: object\",\n    \"instruction\": \"说明如何把 source_url 交给 message：主输入是什么、如何转换、哪些产物只作为补充上下文。\",\n    \"relayMode\": \"auto_by_target_inputs\",\n    \"relayMappings\": []\n  },\n  \"upstream\": {\n    \"node_id\": \"youtube-fetch\",\n    \"title\": \"YouTube 元数据获取\",\n    \"skill_id\": \"sop-youtube-fetch\",\n    \"skill_summary\": \"---\\nname: sop-youtube-fetch\\ndescription: \\\"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\\\"\\nversion: 1.0.0\\n---\",\n    \"inputs\": {\n      \"source_url\": {\n        \"kind\": \"scalar\",\n        \"type\": \"string\",\n        \"value_type\": \"url\",\n        \"required\": true,\n        \"from\": \"context.source_url\",\n        \"accepts\": [\n          \"scalar:url\",\n          \"file:text\"\n        ],\n        \"resolvers\": [\n          {\n            \"id\": \"direct-url\",\n            \"kind\": \"direct\"\n          },\n          {\n            \"id\": \"text-url\",\n            \"kind\": \"regex\"\n          }\n        ]\n      }\n    },\n    \"outputs\": {\n      \"source_url\": {\n        \"kind\": \"scalar\",\n        \"type\": \"string\",\n        \"value_type\": \"url\",\n        \"relayable\": true,\n        \"path\": \"raw/node-runs/{pipeline_id}/outputs/files/source-url.txt\"\n      },\n      \"metadata_file\": {\n        \"kind\": \"file\",\n        \"type\": \"file\",\n        \"value_type\": \"json\",\n        \"relayable\": true,\n        \"path\": \"raw/node-runs/{pipeline_id}/outputs/files/metadata.json\"\n      }\n    },\n    \"capabilities\": [\n      \"git\",\n      \"sse\",\n      \"telegram\"\n    ]\n  },\n  \"downstream\": {\n    \"node_id\": \"tg-notify\",\n    \"title\": \"Telegram 通知\",\n    \"skill_id\": \"sop-tg-notify\",\n    \"skill_summary\": \"---\\nname: sop-tg-notify\\ndescription: \\\"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\\\"\\nversion: 2.1.0\\n---\",\n    \"inputs\": {\n      \"message\": {\n        \"kind\": \"object\",\n        \"type\": \"object\",\n        \"value_type\": \"text\",\n        \"required\": true,\n        \"from\": \"edge.message\",\n        \"accepts\": [\n          \"scalar:text\",\n          \"object\",\n          \"file:text\",\n          \"file:markdown\",\n          \"file:json\"\n        ],\n        \"resolvers\": [\n          {\n            \"id\": \"direct-text\",\n            \"kind\": \"direct\"\n          },\n          {\n            \"id\": \"metadata-title\",\n            \"kind\": \"json_path\",\n            \"path\": \"$.title\"\n          },\n          {\n            \"id\": \"metadata-description\",\n            \"kind\": \"json_path\",\n            \"path\": \"$.description\"\n          }\n        ]\n      },\n      \"index\": {\n        \"kind\": \"file\",\n        \"type\": \"file\",\n        \"value_type\": \"markdown\",\n        \"required\": false,\n        \"from\": \"wiki-build.outputs.index\",\n        \"accepts\": [\n          \"file:markdown\",\n          \"file:text\"\n        ]\n      }\n    },\n    \"outputs\": {\n      \"telegram_message\": {\n        \"kind\": \"file\",\n        \"type\": \"file\",\n        \"value_type\": \"json\",\n        \"relayable\": false,\n        \"path\": \"logs/pipeline-runs/pipe-{run_id}.json\"\n      }\n    },\n    \"capabilities\": [\n      \"git\",\n      \"sse\",\n      \"telegram\"\n    ]\n  }\n}\n\nA deterministic baseline is provided for calibration. Only override it when the handoff is actually unclear or unsafe:\n{\n  \"status\": \"trial_ready\",\n  \"summary\": \"Edge Handoff Instruction 已说明泛化输入的消费方式，可生成下游节点执行指导文档。\",\n  \"decision\": \"can_run_with_review\",\n  \"blocking_reasons\": [],\n  \"required_user_inputs\": [],\n  \"resolved_handoff\": {\n    \"primary_artifacts\": [\n      {\n        \"from\": \"youtube-fetch.outputs.source_url\",\n        \"role\": \"available_output\",\n        \"reason\": \"上游声明的可交付产物。\"\n      },\n      {\n        \"from\": \"youtube-fetch.outputs.metadata_file\",\n        \"role\": \"available_output\",\n        \"reason\": \"上游声明的可交付产物。\"\n      }\n    ],\n    \"supporting_artifacts\": [],\n    \"relay_mappings\": [],\n    \"downstream_inputs\": [\n      {\n        \"to\": \"tg-notify.inputs.message\",\n        \"construction\": \"需要 Edge Handoff Agent 生成结构化 relay_mappings。\"\n      },\n      {\n        \"to\": \"tg-notify.inputs.index\",\n        \"construction\": \"需要 Edge Handoff Agent 生成结构化 relay_mappings。\"\n      }\n    ]\n  }\n}"
+            }
+          ],
+          "temperature": 0.0,
+          "max_tokens": 1024,
+          "stream": true
+        },
+        "llm_content": "",
+        "repair_request": {
+          "model": "deepseek-v4-pro",
+          "messages": [
+            {
+              "role": "system",
+              "content": "Return strict JSON only. No prose."
+            },
+            {
+              "role": "user",
+              "content": "Convert the previous Edge Handoff Agent response into strict JSON.\nRequired keys: status, summary, warnings, required_user_inputs.\nIf status is blocked, incompatible, or needs_instruction and a user instruction could fix it, include suggested_edge_instruction.\nIf the previous response describes concrete source-to-target handoff, include resolved_handoff.relay_mappings with source_output, target_input, resolver.\nAllowed statuses: ['blocked', 'incompatible', 'needs_instruction', 'ready', 'trial_ready']\nIf the text says the handoff is runnable, use status ready or trial_ready.\nIf the text says clarification is needed, use needs_instruction.\nPrevious response:\n"
+            }
+          ],
+          "temperature": 0,
+          "max_tokens": 512,
+          "response_format": {
+            "type": "json_object"
+          },
+          "stream": false
+        },
+        "repair_response": "{\"id\":\"9e947d18-acca-4ebb-9101-58db188ce478\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"status\\\": \\\"needs_instruction\\\",\\n  \\\"summary\\\": \\\"No previous Edge\",\"reasoning_content\":\"We are given: \\\"Convert the previous Edge Handoff Agent response into strict JSON. Required keys: status, summary, warnings, required_user_inputs. ... Previous response:\\\"\\n\\nBut the previous response is empty or missing. The user likely forgot to include the actual previous response. Since there is no previous response provided, we cannot extract any details. The instruction says \\\"Convert the previous Edge Handoff Agent response into strict JSON.\\\" but there's no text to convert. I need to output JSON only. But it's impossible without the previous response. I must assume the previous response is not provided. However, the prompt says \\\"Previous response:\\\" and then nothing. So I'll treat it as if there is no response. Possibly the user expects me to return a JSON with an error or default? The instruction says: \\\"Reply with JSON object ONLY.\\\" So I'll output a minimal JSON indicating that no previous response was provided. But the required keys are: status, summary, warnings, required_user_inputs. And if status is blocked, incompatible, or needs_instruction and a user instruction could fix it, include suggested_edge_instruction. If previous response describes concrete source-to-target handoff, include resolved_handoff.relay_mappings. But since there's no previous response, I'll set status to something like \\\"blocked\\\" or \\\"incompatible\\\"? Possibly it's \\\"needs_instruction\\\" because there is no response to convert. I'll set status to \\\"needs_instruction\\\", summary to something like \\\"No previous response provided.\\\", warnings as empty list, required_user_inputs as [\\\"previous_response_text\\\"]. Also include suggested_edge_instruction to ask for the previous response. That seems reasonable.\\n\\nBut let's check allowed statuses: ['blocked', 'incompatible', 'needs_instruction', 'ready', 'trial_ready']. \\\"needs_instruction\\\" fits because we need the user to provide the previous response. So I'll output that.\\n\\nThus JSON:\\n\\n{\\n  \\\"status\\\": \\\"needs_instruction\\\",\\n  \\\"summary\\\": \\\"No previous Edge Handoff Agent response was provided to convert.\\\",\\n  \\\"warnings\\\": [],\\n  \\\"required_user_inputs\\\": [\\\"previous_response_text\\\"],\\n  \\\"suggested_edge_instruction\\\": \\\"Please provide the previous Edge Handoff Agent response text that needs to be converted to JSON.\\\"\\n}\\n\\nNo resolved_handoff because there's no handoff description.\",\"reasoning\":\"We are given: \\\"Convert the previous Edge Handoff Agent response into strict JSON. Required keys: status, summary, warnings, required_user_inputs. ... Previous response:\\\"\\n\\nBut the previous response is empty or missing. The user likely forgot to include the actual previous response. Since there is no previous response provided, we cannot extract any details. The instruction says \\\"Convert the previous Edge Handoff Agent response into strict JSON.\\\" but there's no text to convert. I need to output JSON only. But it's impossible without the previous response. I must assume the previous response is not provided. However, the prompt says \\\"Previous response:\\\" and then nothing. So I'll treat it as if there is no response. Possibly the user expects me to return a JSON with an error or default? The instruction says: \\\"Reply with JSON object ONLY.\\\" So I'll output a minimal JSON indicating that no previous response was provided. But the required keys are: status, summary, warnings, required_user_inputs. And if status is blocked, incompatible, or needs_instruction and a user instruction could fix it, include suggested_edge_instruction. If previous response describes concrete source-to-target handoff, include resolved_handoff.relay_mappings. But since there's no previous response, I'll set status to something like \\\"blocked\\\" or \\\"incompatible\\\"? Possibly it's \\\"needs_instruction\\\" because there is no response to convert. I'll set status to \\\"needs_instruction\\\", summary to something like \\\"No previous response provided.\\\", warnings as empty list, required_user_inputs as [\\\"previous_response_text\\\"]. Also include suggested_edge_instruction to ask for the previous response. That seems reasonable.\\n\\nBut let's check allowed statuses: ['blocked', 'incompatible', 'needs_instruction', 'ready', 'trial_ready']. \\\"needs_instruction\\\" fits because we need the user to provide the previous response. So I'll output that.\\n\\nThus JSON:\\n\\n{\\n  \\\"status\\\": \\\"needs_instruction\\\",\\n  \\\"summary\\\": \\\"No previous Edge Handoff Agent response was provided to convert.\\\",\\n  \\\"warnings\\\": [],\\n  \\\"required_user_inputs\\\": [\\\"previous_response_text\\\"],\\n  \\\"suggested_edge_instruction\\\": \\\"Please provide the previous Edge Handoff Agent response text that needs to be converted to JSON.\\\"\\n}\\n\\nNo resolved_handoff because there's no handoff description.\"},\"finish_reason\":\"length\",\"logprobs\":null}],\"object\":\"chat.completion\",\"created\":1782446468,\"model\":\"deepseek-v4-pro\",\"usage\":{\"prompt_tokens\":177,\"completion_tokens\":512,\"total_tokens\":689,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":128},\"completion_tokens_details\":{\"audio_tokens\":0,\"reasoning_tokens\":492,\"accepted_prediction_tokens\":0,\"rejected_prediction_tokens\":0}},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+        "repair_duration_ms": 13650,
+        "repair_content": "{\n  \"status\": \"needs_instruction\",\n  \"summary\": \"No previous Edge",
+        "error": "LLM response did not contain a JSON object: ",
+        "repair_error": "LLM response did not contain a JSON object"
+      },
+      "evaluated_at": "2026-06-26T04:01:16Z",
+      "evaluated_instruction_signature": "1b750f5a6f5961c6",
+      "evaluated_edge_signature": "8feab915bdec2269",
+      "evaluated_instruction": "说明如何把 source_url 交给 message：主输入是什么、如何转换、哪些产物只作为补充上下文。"
+    },
+    "stderr": ""
+  },
+  "evaluation": {
+    "status": "blocked",
+    "score": 0.0,
+    "confidence": 0.0,
+    "summary": "Edge Handoff Agent 无法完成 AI 评估。",
+    "decision": "cannot_run",
+    "scores": {
+      "intent_clarity": 0.1,
+      "skill_fit": 0.1,
+      "artifact_usability": 0.1,
+      "guide_completeness": 0.05,
+      "risk": 0.88
+    },
+    "blocking_reasons": [
+      {
+        "code": "ai_evaluation_failed",
+        "message": "LLM response did not contain a JSON object: "
+      }
+    ],
+    "warnings": [],
+    "required_user_inputs": [],
+    "suggested_edge_instruction": "",
+    "resolved_handoff": {},
+    "node_execution_guide": {
+      "format": "markdown",
+      "prompt": ""
+    },
+    "test_plan": [
+      "查看 Agent Trace 的请求和原始回复。",
+      "修复 Edge Handoff LLM/Hermes 配置或应用推荐说明后重新评估。"
+    ],
+    "agent": {
+      "provider": "openai-compatible",
+      "model": "deepseek-v4-pro",
+      "used_ai": false,
+      "error": "LLM response did not contain a JSON object: "
+    },
+    "trace": {
+      "trace_schema": "edge-handoff-agent-trace/v1",
+      "started_at": "2026-06-26T04:00:44Z",
+      "request": {
+        "runtime_id": "youtube-wiki",
+        "instance_id": "test-instance",
+        "workflow_id": "youtube-research-wiki",
+        "edge_id": "youtube-fetch-to-tg-notify-1782439277217",
+        "phase": "design",
+        "workflow_goal": "Fetch YouTube source material, research it deeply, then build wiki-ready pages through explicit agent handoffs.",
+        "edge_handoff_instruction": "说明如何把 source_url 交给 message：主输入是什么、如何转换、哪些产物只作为补充上下文。",
+        "edge": {
+          "id": "youtube-fetch-to-tg-notify-1782439277217",
+          "from": "youtube-fetch",
+          "to": "tg-notify",
+          "sourceIntent": "metadata_file: file; source_url: string",
+          "targetIntent": "message: object",
+          "instruction": "说明如何把 source_url 交给 message：主输入是什么、如何转换、哪些产物只作为补充上下文。",
+          "relayMode": "auto_by_target_inputs",
+          "relayMappings": []
+        },
+        "upstream": {
+          "node_id": "youtube-fetch",
+          "title": "YouTube 元数据获取",
+          "skill_id": "sop-youtube-fetch",
+          "skill_summary": "---\nname: sop-youtube-fetch\ndescription: \"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\"\nversion: 1.0.0\n---",
+          "inputs": {
+            "source_url": {
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "url",
+              "required": true,
+              "from": "context.source_url",
+              "accepts": [
+                "scalar:url",
+                "file:text"
+              ],
+              "resolvers": [
+                {
+                  "id": "direct-url",
+                  "kind": "direct"
+                },
+                {
+                  "id": "text-url",
+                  "kind": "regex"
+                }
+              ]
+            }
+          },
+          "outputs": {
+            "source_url": {
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "url",
+              "relayable": true,
+              "path": "raw/node-runs/{pipeline_id}/outputs/files/source-url.txt"
+            },
+            "metadata_file": {
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "relayable": true,
+              "path": "raw/node-runs/{pipeline_id}/outputs/files/metadata.json"
+            }
+          },
+          "capabilities": [
+            "git",
+            "sse",
+            "telegram"
+          ]
+        },
+        "downstream": {
+          "node_id": "tg-notify",
+          "title": "Telegram 通知",
+          "skill_id": "sop-tg-notify",
+          "skill_summary": "---\nname: sop-tg-notify\ndescription: \"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\"\nversion: 2.1.0\n---",
+          "inputs": {
+            "message": {
+              "kind": "object",
+              "type": "object",
+              "value_type": "text",
+              "required": true,
+              "from": "edge.message",
+              "accepts": [
+                "scalar:text",
+                "object",
+                "file:text",
+                "file:markdown",
+                "file:json"
+              ],
+              "resolvers": [
+                {
+                  "id": "direct-text",
+                  "kind": "direct"
+                },
+                {
+                  "id": "metadata-title",
+                  "kind": "json_path",
+                  "path": "$.title"
+                },
+                {
+                  "id": "metadata-description",
+                  "kind": "json_path",
+                  "path": "$.description"
+                }
+              ]
+            },
+            "index": {
+              "kind": "file",
+              "type": "file",
+              "value_type": "markdown",
+              "required": false,
+              "from": "wiki-build.outputs.index",
+              "accepts": [
+                "file:markdown",
+                "file:text"
+              ]
+            }
+          },
+          "outputs": {
+            "telegram_message": {
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "relayable": false,
+              "path": "logs/pipeline-runs/pipe-{run_id}.json"
+            }
+          },
+          "capabilities": [
+            "git",
+            "sse",
+            "telegram"
+          ]
+        }
+      },
+      "baseline": {
+        "status": "trial_ready",
+        "summary": "Edge Handoff Instruction 已说明泛化输入的消费方式，可生成下游节点执行指导文档。",
+        "decision": "can_run_with_review",
+        "blocking_reasons": [],
+        "required_user_inputs": [],
+        "resolved_handoff": {
+          "primary_artifacts": [
+            {
+              "from": "youtube-fetch.outputs.source_url",
+              "role": "available_output",
+              "reason": "上游声明的可交付产物。"
+            },
+            {
+              "from": "youtube-fetch.outputs.metadata_file",
+              "role": "available_output",
+              "reason": "上游声明的可交付产物。"
+            }
+          ],
+          "supporting_artifacts": [],
+          "relay_mappings": [],
+          "downstream_inputs": [
+            {
+              "to": "tg-notify.inputs.message",
+              "construction": "需要 Edge Handoff Agent 生成结构化 relay_mappings。"
+            },
+            {
+              "to": "tg-notify.inputs.index",
+              "construction": "需要 Edge Handoff Agent 生成结构化 relay_mappings。"
+            }
+          ]
+        }
+      },
+      "llm": {
+        "provider": "openai-compatible",
+        "base_url": "https://api-proxy.chxyka.ccwu.cc/v1",
+        "model": "deepseek-v4-pro",
+        "timeout_seconds": 75,
+        "attempts": 1
+      },
+      "attempts": [],
+      "llm_request": {
+        "model": "deepseek-v4-pro",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Return strict JSON only. No markdown."
+          },
+          {
+            "role": "user",
+            "content": "You are the SOP Edge Handoff Agent. Return strict JSON only.\nReview whether the upstream node can hand off to the downstream node. Do not generate long guides; the runtime will compile the final Node Execution Guide. If the handoff intent is unclear, return needs_instruction. Keep the response compact; do not copy skill docs or repeat the full request. Return less than 700 JSON characters.\n\nRequired JSON keys: status, summary, warnings, required_user_inputs. Optional keys: blocking_reasons, suggested_edge_instruction, resolved_handoff. When status is blocked, incompatible, or needs_instruction, include suggested_edge_instruction if a concise user-editable handoff instruction could fix it.\nWhen status is ready or trial_ready, resolved_handoff should include relay_mappings: an array of objects with source_output, target_input, and resolver. Use resolver ids declared by the downstream input contract; do not invent business logic outside the contracts.\n\nAllowed statuses: ['blocked', 'incompatible', 'needs_instruction', 'ready', 'trial_ready']\n\nRequest JSON:\n{\n  \"runtime_id\": \"youtube-wiki\",\n  \"instance_id\": \"test-instance\",\n  \"workflow_id\": \"youtube-research-wiki\",\n  \"edge_id\": \"youtube-fetch-to-tg-notify-1782439277217\",\n  \"phase\": \"design\",\n  \"workflow_goal\": \"Fetch YouTube source material, research it deeply, then build wiki-ready pages through explicit agent handoffs.\",\n  \"edge_handoff_instruction\": \"说明如何把 source_url 交给 message：主输入是什么、如何转换、哪些产物只作为补充上下文。\",\n  \"edge\": {\n    \"id\": \"youtube-fetch-to-tg-notify-1782439277217\",\n    \"from\": \"youtube-fetch\",\n    \"to\": \"tg-notify\",\n    \"sourceIntent\": \"metadata_file: file; source_url: string\",\n    \"targetIntent\": \"message: object\",\n    \"instruction\": \"说明如何把 source_url 交给 message：主输入是什么、如何转换、哪些产物只作为补充上下文。\",\n    \"relayMode\": \"auto_by_target_inputs\",\n    \"relayMappings\": []\n  },\n  \"upstream\": {\n    \"node_id\": \"youtube-fetch\",\n    \"title\": \"YouTube 元数据获取\",\n    \"skill_id\": \"sop-youtube-fetch\",\n    \"skill_summary\": \"---\\nname: sop-youtube-fetch\\ndescription: \\\"SOP Stage B: 获取 YouTube 视频元数据，写入 raw/youtube-metadata/，直接触发 Stage C (notebooklm-research)。\\\"\\nversion: 1.0.0\\n---\",\n    \"inputs\": {\n      \"source_url\": {\n        \"kind\": \"scalar\",\n        \"type\": \"string\",\n        \"value_type\": \"url\",\n        \"required\": true,\n        \"from\": \"context.source_url\",\n        \"accepts\": [\n          \"scalar:url\",\n          \"file:text\"\n        ],\n        \"resolvers\": [\n          {\n            \"id\": \"direct-url\",\n            \"kind\": \"direct\"\n          },\n          {\n            \"id\": \"text-url\",\n            \"kind\": \"regex\"\n          }\n        ]\n      }\n    },\n    \"outputs\": {\n      \"source_url\": {\n        \"kind\": \"scalar\",\n        \"type\": \"string\",\n        \"value_type\": \"url\",\n        \"relayable\": true,\n        \"path\": \"raw/node-runs/{pipeline_id}/outputs/files/source-url.txt\"\n      },\n      \"metadata_file\": {\n        \"kind\": \"file\",\n        \"type\": \"file\",\n        \"value_type\": \"json\",\n        \"relayable\": true,\n        \"path\": \"raw/node-runs/{pipeline_id}/outputs/files/metadata.json\"\n      }\n    },\n    \"capabilities\": [\n      \"git\",\n      \"sse\",\n      \"telegram\"\n    ]\n  },\n  \"downstream\": {\n    \"node_id\": \"tg-notify\",\n    \"title\": \"Telegram 通知\",\n    \"skill_id\": \"sop-tg-notify\",\n    \"skill_summary\": \"---\\nname: sop-tg-notify\\ndescription: \\\"SOP Stage D: 读取 pipeline-context.json，组装完整 pipeline 运行报告，发送富文本 Telegram 通知。\\\"\\nversion: 2.1.0\\n---\",\n    \"inputs\": {\n      \"message\": {\n        \"kind\": \"object\",\n        \"type\": \"object\",\n        \"value_type\": \"text\",\n        \"required\": true,\n        \"from\": \"edge.message\",\n        \"accepts\": [\n          \"scalar:text\",\n          \"object\",\n          \"file:text\",\n          \"file:markdown\",\n          \"file:json\"\n        ],\n        \"resolvers\": [\n          {\n            \"id\": \"direct-text\",\n            \"kind\": \"direct\"\n          },\n          {\n            \"id\": \"metadata-title\",\n            \"kind\": \"json_path\",\n            \"path\": \"$.title\"\n          },\n          {\n            \"id\": \"metadata-description\",\n            \"kind\": \"json_path\",\n            \"path\": \"$.description\"\n          }\n        ]\n      },\n      \"index\": {\n        \"kind\": \"file\",\n        \"type\": \"file\",\n        \"value_type\": \"markdown\",\n        \"required\": false,\n        \"from\": \"wiki-build.outputs.index\",\n        \"accepts\": [\n          \"file:markdown\",\n          \"file:text\"\n        ]\n      }\n    },\n    \"outputs\": {\n      \"telegram_message\": {\n        \"kind\": \"file\",\n        \"type\": \"file\",\n        \"value_type\": \"json\",\n        \"relayable\": false,\n        \"path\": \"logs/pipeline-runs/pipe-{run_id}.json\"\n      }\n    },\n    \"capabilities\": [\n      \"git\",\n      \"sse\",\n      \"telegram\"\n    ]\n  }\n}\n\nA deterministic baseline is provided for calibration. Only override it when the handoff is actually unclear or unsafe:\n{\n  \"status\": \"trial_ready\",\n  \"summary\": \"Edge Handoff Instruction 已说明泛化输入的消费方式，可生成下游节点执行指导文档。\",\n  \"decision\": \"can_run_with_review\",\n  \"blocking_reasons\": [],\n  \"required_user_inputs\": [],\n  \"resolved_handoff\": {\n    \"primary_artifacts\": [\n      {\n        \"from\": \"youtube-fetch.outputs.source_url\",\n        \"role\": \"available_output\",\n        \"reason\": \"上游声明的可交付产物。\"\n      },\n      {\n        \"from\": \"youtube-fetch.outputs.metadata_file\",\n        \"role\": \"available_output\",\n        \"reason\": \"上游声明的可交付产物。\"\n      }\n    ],\n    \"supporting_artifacts\": [],\n    \"relay_mappings\": [],\n    \"downstream_inputs\": [\n      {\n        \"to\": \"tg-notify.inputs.message\",\n        \"construction\": \"需要 Edge Handoff Agent 生成结构化 relay_mappings。\"\n      },\n      {\n        \"to\": \"tg-notify.inputs.index\",\n        \"construction\": \"需要 Edge Handoff Agent 生成结构化 relay_mappings。\"\n      }\n    ]\n  }\n}"
+          }
+        ],
+        "temperature": 0.0,
+        "max_tokens": 1024,
+        "stream": true
+      },
+      "llm_content": "",
+      "repair_request": {
+        "model": "deepseek-v4-pro",
+        "messages": [
+          {
+            "role": "system",
+            "content": "Return strict JSON only. No prose."
+          },
+          {
+            "role": "user",
+            "content": "Convert the previous Edge Handoff Agent response into strict JSON.\nRequired keys: status, summary, warnings, required_user_inputs.\nIf status is blocked, incompatible, or needs_instruction and a user instruction could fix it, include suggested_edge_instruction.\nIf the previous response describes concrete source-to-target handoff, include resolved_handoff.relay_mappings with source_output, target_input, resolver.\nAllowed statuses: ['blocked', 'incompatible', 'needs_instruction', 'ready', 'trial_ready']\nIf the text says the handoff is runnable, use status ready or trial_ready.\nIf the text says clarification is needed, use needs_instruction.\nPrevious response:\n"
+          }
+        ],
+        "temperature": 0,
+        "max_tokens": 512,
+        "response_format": {
+          "type": "json_object"
+        },
+        "stream": false
+      },
+      "repair_response": "{\"id\":\"9e947d18-acca-4ebb-9101-58db188ce478\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"status\\\": \\\"needs_instruction\\\",\\n  \\\"summary\\\": \\\"No previous Edge\",\"reasoning_content\":\"We are given: \\\"Convert the previous Edge Handoff Agent response into strict JSON. Required keys: status, summary, warnings, required_user_inputs. ... Previous response:\\\"\\n\\nBut the previous response is empty or missing. The user likely forgot to include the actual previous response. Since there is no previous response provided, we cannot extract any details. The instruction says \\\"Convert the previous Edge Handoff Agent response into strict JSON.\\\" but there's no text to convert. I need to output JSON only. But it's impossible without the previous response. I must assume the previous response is not provided. However, the prompt says \\\"Previous response:\\\" and then nothing. So I'll treat it as if there is no response. Possibly the user expects me to return a JSON with an error or default? The instruction says: \\\"Reply with JSON object ONLY.\\\" So I'll output a minimal JSON indicating that no previous response was provided. But the required keys are: status, summary, warnings, required_user_inputs. And if status is blocked, incompatible, or needs_instruction and a user instruction could fix it, include suggested_edge_instruction. If previous response describes concrete source-to-target handoff, include resolved_handoff.relay_mappings. But since there's no previous response, I'll set status to something like \\\"blocked\\\" or \\\"incompatible\\\"? Possibly it's \\\"needs_instruction\\\" because there is no response to convert. I'll set status to \\\"needs_instruction\\\", summary to something like \\\"No previous response provided.\\\", warnings as empty list, required_user_inputs as [\\\"previous_response_text\\\"]. Also include suggested_edge_instruction to ask for the previous response. That seems reasonable.\\n\\nBut let's check allowed statuses: ['blocked', 'incompatible', 'needs_instruction', 'ready', 'trial_ready']. \\\"needs_instruction\\\" fits because we need the user to provide the previous response. So I'll output that.\\n\\nThus JSON:\\n\\n{\\n  \\\"status\\\": \\\"needs_instruction\\\",\\n  \\\"summary\\\": \\\"No previous Edge Handoff Agent response was provided to convert.\\\",\\n  \\\"warnings\\\": [],\\n  \\\"required_user_inputs\\\": [\\\"previous_response_text\\\"],\\n  \\\"suggested_edge_instruction\\\": \\\"Please provide the previous Edge Handoff Agent response text that needs to be converted to JSON.\\\"\\n}\\n\\nNo resolved_handoff because there's no handoff description.\",\"reasoning\":\"We are given: \\\"Convert the previous Edge Handoff Agent response into strict JSON. Required keys: status, summary, warnings, required_user_inputs. ... Previous response:\\\"\\n\\nBut the previous response is empty or missing. The user likely forgot to include the actual previous response. Since there is no previous response provided, we cannot extract any details. The instruction says \\\"Convert the previous Edge Handoff Agent response into strict JSON.\\\" but there's no text to convert. I need to output JSON only. But it's impossible without the previous response. I must assume the previous response is not provided. However, the prompt says \\\"Previous response:\\\" and then nothing. So I'll treat it as if there is no response. Possibly the user expects me to return a JSON with an error or default? The instruction says: \\\"Reply with JSON object ONLY.\\\" So I'll output a minimal JSON indicating that no previous response was provided. But the required keys are: status, summary, warnings, required_user_inputs. And if status is blocked, incompatible, or needs_instruction and a user instruction could fix it, include suggested_edge_instruction. If previous response describes concrete source-to-target handoff, include resolved_handoff.relay_mappings. But since there's no previous response, I'll set status to something like \\\"blocked\\\" or \\\"incompatible\\\"? Possibly it's \\\"needs_instruction\\\" because there is no response to convert. I'll set status to \\\"needs_instruction\\\", summary to something like \\\"No previous response provided.\\\", warnings as empty list, required_user_inputs as [\\\"previous_response_text\\\"]. Also include suggested_edge_instruction to ask for the previous response. That seems reasonable.\\n\\nBut let's check allowed statuses: ['blocked', 'incompatible', 'needs_instruction', 'ready', 'trial_ready']. \\\"needs_instruction\\\" fits because we need the user to provide the previous response. So I'll output that.\\n\\nThus JSON:\\n\\n{\\n  \\\"status\\\": \\\"needs_instruction\\\",\\n  \\\"summary\\\": \\\"No previous Edge Handoff Agent response was provided to convert.\\\",\\n  \\\"warnings\\\": [],\\n  \\\"required_user_inputs\\\": [\\\"previous_response_text\\\"],\\n  \\\"suggested_edge_instruction\\\": \\\"Please provide the previous Edge Handoff Agent response text that needs to be converted to JSON.\\\"\\n}\\n\\nNo resolved_handoff because there's no handoff description.\"},\"finish_reason\":\"length\",\"logprobs\":null}],\"object\":\"chat.completion\",\"created\":1782446468,\"model\":\"deepseek-v4-pro\",\"usage\":{\"prompt_tokens\":177,\"completion_tokens\":512,\"total_tokens\":689,\"prompt_tokens_details\":{\"audio_tokens\":0,\"cached_tokens\":128},\"completion_tokens_details\":{\"audio_tokens\":0,\"reasoning_tokens\":492,\"accepted_prediction_tokens\":0,\"rejected_prediction_tokens\":0}},\"system_fingerprint\":\"fp_9954b31ca7_prod0820_fp8_kvcache_20260402\"}",
+      "repair_duration_ms": 13650,
+      "repair_content": "{\n  \"status\": \"needs_instruction\",\n  \"summary\": \"No previous Edge",
+      "error": "LLM response did not contain a JSON object: ",
+      "repair_error": "LLM response did not contain a JSON object"
+    },
+    "evaluated_at": "2026-06-26T04:01:16Z",
+    "evaluated_instruction_signature": "1b750f5a6f5961c6",
+    "evaluated_edge_signature": "8feab915bdec2269",
+    "evaluated_instruction": "说明如何把 source_url 交给 message：主输入是什么、如何转换、哪些产物只作为补充上下文。"
+  }
+}

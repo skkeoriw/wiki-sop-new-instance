@@ -1,0 +1,85 @@
+- id: youtube-fetch-to-youtube-deep-research-runfix-final-1782407155320
+  from: youtube-fetch
+  to: youtube-deep-research
+  relay:
+    mode: auto_by_target_inputs
+    mappings: []
+    handoff_instruction: 把上游 source_url 交给 YouTube 深度研究节点；metadata_file 只作为可选上下文，不作为主输入。
+    node_execution_guide:
+      format: markdown
+      prompt: 'Use skill sop-youtube-deep-research to execute this downstream node.
+
+
+        ## Node Execution Guide
+
+        - Edge: youtube-fetch -> youtube-deep-research
+
+        - Evaluation summary: 上游 youtube-fetch 输出 source_url 直接匹配下游 youtube-deep-research
+        必需输入，metadata_file 作为可选上下文可附带但不作为主输入，手顺明确，可执行。
+
+        - Edge Handoff Instruction: 把上游 source_url 交给 YouTube 深度研究节点；metadata_file
+        只作为可选上下文，不作为主输入。
+
+
+        ## Upstream Artifacts
+
+        - source_url: `raw/node-runs/{pipeline_id}/outputs/files/source-url.txt` (scalar,
+        url)
+
+        - metadata_file: `raw/node-runs/{pipeline_id}/outputs/files/metadata.json`
+        (file, json, optional context)
+
+
+        ## Execution Rules
+
+        - Use only the resolved Edge inputs: source_url from upstream.
+
+        - Do **not** force metadata_file as main input; it may be passed as optional
+        context if downstream skill supports it, but not required.
+
+        - Downstream node expects source_url as a URL string; read from the source-url.txt
+        file.
+
+        - After execution, downstream outputs analysis_file and transcript_file as
+        specified.
+
+
+        ## Step-by-step
+
+        1. Read source_url from upstream artifact: `raw/node-runs/{pipeline_id}/outputs/files/source-url.txt`
+
+        2. Optionally, if downstream skill accepts additional context, pass metadata_file
+        as a supporting artifact (e.g., as an environment variable or extra input).
+
+        3. Execute skill `sop-youtube-deep-research` with the source_url.
+
+        4. Verify outputs: analysis_file and transcript_file are created in `raw/youtube-deep-research/{pipeline_id}/outputs/`.'
+    evaluation:
+      status: ready
+      score: 0.95
+      confidence: 0.9
+      summary: 上游 youtube-fetch 输出 source_url 直接匹配下游 youtube-deep-research 必需输入，metadata_file
+        作为可选上下文可附带但不作为主输入，手顺明确，可执行。
+      decision: can_run
+      evaluated_at: '2026-06-25T17:06:11Z'
+      agent:
+        provider: openai-compatible
+        model: deepseek-v4-flash
+        used_ai: true
+    resolved_handoff:
+      primary_artifacts:
+      - from: youtube-fetch.outputs.source_url
+        role: primary_source
+        reason: 下游必需输入，上游显式输出且 relayable，直接匹配。
+      supporting_artifacts:
+      - from: youtube-fetch.outputs.metadata_file
+        role: supporting_context
+        reason: 手顺明确不作为主输入，但可作为可选上下文传递给下游。
+      downstream_inputs:
+      - to: youtube-deep-research.inputs.source_url
+        construction: 从 upstream.outputs.source_url 文件路径读取内容直接赋值。
+    test_plan:
+    - 物化 Edge 输入：读取 upstream.outputs.source_url 文件内容，得到 URL。
+    - 执行下游 skill：以 source_url 为主输入，可选传入 metadata_file 作为上下文。
+    - 校验声明输出：检查 analysis_file（markdown）和 transcript_file（text）是否生成且非空。
+    - 记录 edge evaluation 和 guide 到运行日志。

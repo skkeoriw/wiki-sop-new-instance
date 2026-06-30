@@ -1,0 +1,15 @@
+[
+  {
+    "edge_id": "youtube-fetch-to-youtube-deep-research-ui-1782406114250",
+    "source": "youtube-fetch",
+    "target": "youtube-deep-research",
+    "validation": {
+      "schema_id": "workflow-edge-draft-schema/v1",
+      "status": "passed",
+      "errors": [],
+      "missing_fields": [],
+      "production_dag_changed": false,
+      "workflow_id": "youtube-research-wiki"
+    }
+  }
+]

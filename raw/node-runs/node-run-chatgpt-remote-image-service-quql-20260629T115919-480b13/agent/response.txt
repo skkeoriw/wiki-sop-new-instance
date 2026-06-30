@@ -1,0 +1,25 @@
+## Node Execution Complete
+
+**Node:** `chatgpt-remote-image-service-quql`
+**Run ID:** `node-run-chatgpt-remote-image-service-quql-20260629T115919-480b13`
+**Status:** ✅ succeeded (52s)
+
+### What happened
+
+The skill submitted a pure-prompt generation to the remote ChatGPT image service (`https://chatgpt-image.vyibc.com`). The browser worker (worker-1, CDP port 9333) drove the task through all stages: import Playwright → connect browser → enter image mode → fill prompt → click send → wait for generation → download → upload to R2.
+
+### Outputs
+
+| Output | Value |
+|---|---|
+| **publicImageUrl** | `https://resource.vyibc.com/8a630322-1e4f-4751-9f22-fa2c467fb758.png` |
+| **taskId** | `8a630322-1e4f-4751-9f22-fa2c467fb758` |
+| **chatgptUrl** | `https://chatgpt.com/c/6a425e4d-a570-83ea-9eac-3e29c63a4921` |
+| **status** | `succeeded` |
+| **worker** | `worker-1` |
+| **timing** | connected=1.7s, page=3.1s, sent=14.7s, generated=48.9s, uploaded=52.0s |
+
+### Files written
+
+- **Output manifest:** `raw/node-runs/.../outputs/manifest.json`
+- **Receipt:** `raw/node-runs/.../agent/receipt.json`

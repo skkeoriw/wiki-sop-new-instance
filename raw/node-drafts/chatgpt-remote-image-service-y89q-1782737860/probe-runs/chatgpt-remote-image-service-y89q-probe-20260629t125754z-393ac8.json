@@ -1,0 +1,962 @@
+{
+  "status": "passed",
+  "probe_id": "chatgpt-remote-image-service-y89q-probe-20260629T125754Z-393ac8",
+  "draft_id": "chatgpt-remote-image-service-y89q-1782737860",
+  "node_id": "chatgpt-remote-image-service-y89q",
+  "node_run_id": "node-run-chatgpt-remote-image-service-y89q-20260629T125753-4b8467",
+  "http_status": 200,
+  "mode": "node-draft-probe-run",
+  "manual_inputs": {
+    "api_url": "",
+    "reference_image_file": "",
+    "reference_image_url": "",
+    "poll_interval": "",
+    "prompt": "生成一张小猫睡觉的照片",
+    "timeout_seconds": "",
+    "upload_name": ""
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": false
+    },
+    "telegram": {
+      "enabled": false
+    }
+  },
+  "result": {
+    "node_run_id": "node-run-chatgpt-remote-image-service-y89q-20260629T125753-4b8467",
+    "status": "done",
+    "pending": false,
+    "started_at": "2026-06-29T12:57:53.992026+00:00",
+    "finished_at": "2026-06-29T13:05:09.893583+00:00",
+    "elapsed_ms": 435214,
+    "validation": {
+      "status": "passed",
+      "missing_outputs": [],
+      "unexpected_outputs": [],
+      "business_output_status": {
+        "status": "passed",
+        "expected_outputs": [
+          "result",
+          "image_url",
+          "public_image_url",
+          "status",
+          "task_id",
+          "status_json",
+          "submit_json",
+          "generated_images",
+          "images"
+        ],
+        "required_outputs": [],
+        "present_outputs": [
+          "result",
+          "image_url",
+          "public_image_url",
+          "status",
+          "task_id",
+          "generated_images",
+          "images"
+        ],
+        "missing_required_outputs": [],
+        "business_outputs": {
+          "result": {
+            "description": "Skill execution result summary.",
+            "value": "Image generation succeeded for prompt '生成一张小猫睡觉的照片'",
+            "relayable": true
+          },
+          "image_url": {
+            "description": "Result value mentioned in skill source as `imageUrl`.",
+            "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+            "value_type": "url",
+            "relayable": true
+          },
+          "public_image_url": {
+            "description": "Result value mentioned in skill source as `publicImageUrl`.",
+            "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+            "value_type": "url",
+            "relayable": true
+          },
+          "status": {
+            "description": "Result value mentioned in skill source as `status`.",
+            "value": "succeeded",
+            "value_type": "text",
+            "relayable": true
+          },
+          "task_id": {
+            "description": "Result value mentioned in skill source as `taskId`.",
+            "value": "9adc4749-b0fd-4911-8c7f-25a5176191a4",
+            "value_type": "text",
+            "relayable": true
+          },
+          "generated_images": {
+            "description": "Generated image files or public image URLs.",
+            "value": [
+              "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+            ],
+            "value_type": "image",
+            "relayable": true
+          },
+          "images": {
+            "description": "Generated image files.",
+            "value": [
+              "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+            ],
+            "relayable": true
+          }
+        },
+        "business_artifact_count": 0
+      }
+    },
+    "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-y89q-20260629T125753-4b8467/outputs/manifest.json",
+    "output_directory": "raw/node-runs/node-run-chatgpt-remote-image-service-y89q-20260629T125753-4b8467/outputs",
+    "actual_outputs": {
+      "result": {
+        "description": "Skill execution result summary.",
+        "value": "Image generation succeeded for prompt '生成一张小猫睡觉的照片'",
+        "relayable": true
+      },
+      "image_url": {
+        "description": "Result value mentioned in skill source as `imageUrl`.",
+        "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+        "value_type": "url",
+        "relayable": true
+      },
+      "public_image_url": {
+        "description": "Result value mentioned in skill source as `publicImageUrl`.",
+        "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+        "value_type": "url",
+        "relayable": true
+      },
+      "status": {
+        "description": "Result value mentioned in skill source as `status`.",
+        "value": "succeeded",
+        "value_type": "text",
+        "relayable": true
+      },
+      "task_id": {
+        "description": "Result value mentioned in skill source as `taskId`.",
+        "value": "9adc4749-b0fd-4911-8c7f-25a5176191a4",
+        "value_type": "text",
+        "relayable": true
+      },
+      "generated_images": {
+        "description": "Generated image files or public image URLs.",
+        "value": [
+          "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+        ],
+        "value_type": "image",
+        "relayable": true
+      },
+      "images": {
+        "description": "Generated image files.",
+        "value": [
+          "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+        ],
+        "relayable": true
+      },
+      "status_json": [],
+      "submit_json": []
+    },
+    "business_artifacts": [],
+    "core_outputs": [
+      {
+        "name": "result",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "description": "Skill execution result summary.",
+          "value": "Image generation succeeded for prompt '生成一张小猫睡觉的照片'",
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Skill execution result summary.",
+          "relayable": true
+        }
+      },
+      {
+        "name": "image_url",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "description": "Result value mentioned in skill source as `imageUrl`.",
+          "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+          "value_type": "url",
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `imageUrl`.",
+          "value_type": "url",
+          "relayable": true,
+          "evidence": "source result marker imageUrl"
+        }
+      },
+      {
+        "name": "public_image_url",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "description": "Result value mentioned in skill source as `publicImageUrl`.",
+          "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+          "value_type": "url",
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `publicImageUrl`.",
+          "value_type": "url",
+          "relayable": true,
+          "evidence": "source result marker publicImageUrl"
+        }
+      },
+      {
+        "name": "status",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "description": "Result value mentioned in skill source as `status`.",
+          "value": "succeeded",
+          "value_type": "text",
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `status`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker status"
+        }
+      },
+      {
+        "name": "task_id",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "description": "Result value mentioned in skill source as `taskId`.",
+          "value": "9adc4749-b0fd-4911-8c7f-25a5176191a4",
+          "value_type": "text",
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Result value mentioned in skill source as `taskId`.",
+          "value_type": "text",
+          "relayable": true,
+          "evidence": "source result marker taskId"
+        }
+      },
+      {
+        "name": "status_json",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Runtime value captured by script variable `status_json`.",
+          "value_type": "json",
+          "relayable": false,
+          "evidence": "source script variable status_json"
+        }
+      },
+      {
+        "name": "submit_json",
+        "kind": "files",
+        "type": "files",
+        "value": [],
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Runtime value captured by script variable `submit_json`.",
+          "value_type": "json",
+          "relayable": true,
+          "evidence": "source script variable submit_json"
+        }
+      },
+      {
+        "name": "generated_images",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "description": "Generated image files or public image URLs.",
+          "value": [
+            "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+          ],
+          "value_type": "image",
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Generated image files or public image URLs.",
+          "value_type": "image",
+          "relayable": true
+        }
+      },
+      {
+        "name": "images",
+        "kind": "scalar",
+        "type": "scalar",
+        "value": {
+          "description": "Generated image files.",
+          "value": [
+            "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+          ],
+          "relayable": true
+        },
+        "files": [],
+        "artifacts": [],
+        "declared": {
+          "description": "Generated image files.",
+          "relayable": true
+        }
+      }
+    ],
+    "steps": [
+      {
+        "id": "create-run",
+        "title": "Create node run workspace",
+        "status": "done",
+        "summary": "Node Run record is allocated independently from Workflow Run.",
+        "started_at": "2026-06-29T12:57:53.992026+00:00",
+        "finished_at": "2026-06-29T12:57:54.027026+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "load-definition",
+        "title": "Load node definition",
+        "status": "done",
+        "summary": "Loaded chatgpt-remote-image-service-y89q from youtube-research-wiki.",
+        "started_at": "2026-06-29T12:57:54.027026+00:00",
+        "finished_at": "2026-06-29T12:57:54.062026+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-context",
+        "title": "Resolve Runtime / Instance / Workflow context",
+        "status": "done",
+        "summary": "youtube-wiki · wiki-sop-new-instance · youtube-research-wiki",
+        "started_at": "2026-06-29T12:57:54.062026+00:00",
+        "finished_at": "2026-06-29T12:57:54.097026+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-inputs",
+        "title": "Resolve node inputs",
+        "status": "done",
+        "summary": "1 resolved, 0 pending relay, 0 missing.",
+        "started_at": "2026-06-29T12:57:54.097026+00:00",
+        "finished_at": "2026-06-29T12:57:54.132026+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "resolve-config",
+        "title": "Resolve execution config",
+        "status": "done",
+        "summary": "Runtime, Instance and capability config resolved.",
+        "started_at": "2026-06-29T12:57:54.132026+00:00",
+        "finished_at": "2026-06-29T12:57:54.167026+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "generate-agent-request",
+        "title": "Generate Agent Request",
+        "status": "done",
+        "summary": "Hermes Agent Request was rendered and saved for this Node Run.",
+        "started_at": "2026-06-29T12:57:54.167026+00:00",
+        "finished_at": "2026-06-29T12:57:54.202026+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "probe-capabilities",
+        "title": "Probe attached capabilities",
+        "status": "skipped",
+        "summary": "Capability probes are explicit. Telegram send probes require user confirmation.",
+        "started_at": "2026-06-29T12:57:54.202026+00:00",
+        "finished_at": "2026-06-29T12:57:54.226026+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "build-execution-plan",
+        "title": "Build node execution plan",
+        "status": "done",
+        "summary": "Prepared real-node execution plan.",
+        "started_at": "2026-06-29T12:57:54.237026+00:00",
+        "finished_at": "2026-06-29T12:57:54.272026+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "execute-or-dry-run",
+        "title": "Execute or dry-run node",
+        "status": "done",
+        "summary": "Real node execution finished and output manifest was found.",
+        "started_at": "2026-06-29T12:57:53.992026+00:00",
+        "finished_at": "2026-06-29T13:05:09.893583+00:00",
+        "elapsed_ms": 0
+      },
+      {
+        "id": "validate-outputs",
+        "title": "Validate declared outputs",
+        "status": "done",
+        "summary": "Declared business outputs were found.",
+        "started_at": "2026-06-29T12:57:54.307026+00:00",
+        "finished_at": "2026-06-29T12:57:54.342026+00:00",
+        "elapsed_ms": 35
+      },
+      {
+        "id": "persist-to-github",
+        "title": "Persist to GitHub",
+        "status": "skipped",
+        "summary": "GitHub persistence is not attached for this Node Run.",
+        "started_at": "2026-06-29T12:57:54.342026+00:00",
+        "finished_at": "2026-06-29T12:57:54.366026+00:00",
+        "elapsed_ms": 24
+      },
+      {
+        "id": "send-telegram-notification",
+        "title": "Send Telegram notification",
+        "status": "skipped",
+        "summary": "Telegram notification is not attached for this Node Run.",
+        "started_at": "2026-06-29T12:57:54.377026+00:00",
+        "finished_at": "2026-06-29T12:57:54.401026+00:00",
+        "elapsed_ms": 24
+      }
+    ]
+  },
+  "manifest": {
+    "version": 1,
+    "kind": "output",
+    "node_run_id": "node-run-chatgpt-remote-image-service-y89q-20260629T125753-4b8467",
+    "node_id": "chatgpt-remote-image-service-y89q",
+    "created_at": "2026-06-29T12:59:40Z",
+    "status": "succeeded",
+    "outputs": {
+      "result": {
+        "description": "Skill execution result summary.",
+        "value": "Image generation succeeded for prompt '生成一张小猫睡觉的照片'",
+        "relayable": true
+      },
+      "image_url": {
+        "description": "Result value mentioned in skill source as `imageUrl`.",
+        "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+        "value_type": "url",
+        "relayable": true
+      },
+      "public_image_url": {
+        "description": "Result value mentioned in skill source as `publicImageUrl`.",
+        "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+        "value_type": "url",
+        "relayable": true
+      },
+      "status": {
+        "description": "Result value mentioned in skill source as `status`.",
+        "value": "succeeded",
+        "value_type": "text",
+        "relayable": true
+      },
+      "task_id": {
+        "description": "Result value mentioned in skill source as `taskId`.",
+        "value": "9adc4749-b0fd-4911-8c7f-25a5176191a4",
+        "value_type": "text",
+        "relayable": true
+      },
+      "generated_images": {
+        "description": "Generated image files or public image URLs.",
+        "value": [
+          "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+        ],
+        "value_type": "image",
+        "relayable": true
+      },
+      "images": {
+        "description": "Generated image files.",
+        "value": [
+          "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+        ],
+        "relayable": true
+      }
+    },
+    "output_directory": "raw/node-runs/node-run-chatgpt-remote-image-service-y89q-20260629T125753-4b8467/outputs"
+  },
+  "manifest_records": [
+    {
+      "description": "Skill execution result summary.",
+      "value": "Image generation succeeded for prompt '生成一张小猫睡觉的照片'",
+      "relayable": true,
+      "name": "result",
+      "output": "result",
+      "path": ""
+    },
+    {
+      "description": "Result value mentioned in skill source as `imageUrl`.",
+      "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+      "value_type": "url",
+      "relayable": true,
+      "name": "image_url",
+      "output": "image_url",
+      "path": ""
+    },
+    {
+      "description": "Result value mentioned in skill source as `publicImageUrl`.",
+      "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+      "value_type": "url",
+      "relayable": true,
+      "name": "public_image_url",
+      "output": "public_image_url",
+      "path": ""
+    },
+    {
+      "description": "Result value mentioned in skill source as `status`.",
+      "value": "succeeded",
+      "value_type": "text",
+      "relayable": true,
+      "name": "status",
+      "output": "status",
+      "path": ""
+    },
+    {
+      "description": "Result value mentioned in skill source as `taskId`.",
+      "value": "9adc4749-b0fd-4911-8c7f-25a5176191a4",
+      "value_type": "text",
+      "relayable": true,
+      "name": "task_id",
+      "output": "task_id",
+      "path": ""
+    },
+    {
+      "description": "Generated image files or public image URLs.",
+      "value": [
+        "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+      ],
+      "value_type": "image",
+      "relayable": true,
+      "name": "generated_images",
+      "output": "generated_images",
+      "path": ""
+    },
+    {
+      "description": "Generated image files.",
+      "value": [
+        "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+      ],
+      "relayable": true,
+      "name": "images",
+      "output": "images",
+      "path": ""
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "passed",
+      "expected_outputs": [
+        "result",
+        "image_url",
+        "public_image_url",
+        "status",
+        "task_id",
+        "status_json",
+        "submit_json",
+        "generated_images",
+        "images"
+      ],
+      "required_outputs": [],
+      "present_outputs": [
+        "result",
+        "image_url",
+        "public_image_url",
+        "status",
+        "task_id",
+        "generated_images",
+        "images"
+      ],
+      "missing_required_outputs": [],
+      "business_outputs": {
+        "result": {
+          "description": "Skill execution result summary.",
+          "value": "Image generation succeeded for prompt '生成一张小猫睡觉的照片'",
+          "relayable": true
+        },
+        "image_url": {
+          "description": "Result value mentioned in skill source as `imageUrl`.",
+          "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+          "value_type": "url",
+          "relayable": true
+        },
+        "public_image_url": {
+          "description": "Result value mentioned in skill source as `publicImageUrl`.",
+          "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+          "value_type": "url",
+          "relayable": true
+        },
+        "status": {
+          "description": "Result value mentioned in skill source as `status`.",
+          "value": "succeeded",
+          "value_type": "text",
+          "relayable": true
+        },
+        "task_id": {
+          "description": "Result value mentioned in skill source as `taskId`.",
+          "value": "9adc4749-b0fd-4911-8c7f-25a5176191a4",
+          "value_type": "text",
+          "relayable": true
+        },
+        "generated_images": {
+          "description": "Generated image files or public image URLs.",
+          "value": [
+            "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+          ],
+          "value_type": "image",
+          "relayable": true
+        },
+        "images": {
+          "description": "Generated image files.",
+          "value": [
+            "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+          ],
+          "relayable": true
+        }
+      },
+      "business_artifact_count": 0
+    }
+  },
+  "created_at": "2026-06-29T12:57:54.033728+00:00",
+  "actual_outputs": {
+    "result": {
+      "description": "Skill execution result summary.",
+      "value": "Image generation succeeded for prompt '生成一张小猫睡觉的照片'",
+      "relayable": true
+    },
+    "image_url": {
+      "description": "Result value mentioned in skill source as `imageUrl`.",
+      "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+      "value_type": "url",
+      "relayable": true
+    },
+    "public_image_url": {
+      "description": "Result value mentioned in skill source as `publicImageUrl`.",
+      "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+      "value_type": "url",
+      "relayable": true
+    },
+    "status": {
+      "description": "Result value mentioned in skill source as `status`.",
+      "value": "succeeded",
+      "value_type": "text",
+      "relayable": true
+    },
+    "task_id": {
+      "description": "Result value mentioned in skill source as `taskId`.",
+      "value": "9adc4749-b0fd-4911-8c7f-25a5176191a4",
+      "value_type": "text",
+      "relayable": true
+    },
+    "generated_images": {
+      "description": "Generated image files or public image URLs.",
+      "value": [
+        "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+      ],
+      "value_type": "image",
+      "relayable": true
+    },
+    "images": {
+      "description": "Generated image files.",
+      "value": [
+        "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+      ],
+      "relayable": true
+    },
+    "status_json": [],
+    "submit_json": []
+  },
+  "reconciled_at": "2026-06-30T15:17:15.821493+00:00",
+  "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-y89q-20260629T125753-4b8467/outputs/manifest.json",
+  "execution_status": "done",
+  "business_output_status": {
+    "status": "passed",
+    "expected_outputs": [
+      "result",
+      "image_url",
+      "public_image_url",
+      "status",
+      "task_id",
+      "status_json",
+      "submit_json",
+      "generated_images",
+      "images"
+    ],
+    "required_outputs": [],
+    "present_outputs": [
+      "result",
+      "image_url",
+      "public_image_url",
+      "status",
+      "task_id",
+      "generated_images",
+      "images"
+    ],
+    "missing_required_outputs": [],
+    "business_outputs": {
+      "result": {
+        "description": "Skill execution result summary.",
+        "value": "Image generation succeeded for prompt '生成一张小猫睡觉的照片'",
+        "relayable": true
+      },
+      "image_url": {
+        "description": "Result value mentioned in skill source as `imageUrl`.",
+        "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+        "value_type": "url",
+        "relayable": true
+      },
+      "public_image_url": {
+        "description": "Result value mentioned in skill source as `publicImageUrl`.",
+        "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+        "value_type": "url",
+        "relayable": true
+      },
+      "status": {
+        "description": "Result value mentioned in skill source as `status`.",
+        "value": "succeeded",
+        "value_type": "text",
+        "relayable": true
+      },
+      "task_id": {
+        "description": "Result value mentioned in skill source as `taskId`.",
+        "value": "9adc4749-b0fd-4911-8c7f-25a5176191a4",
+        "value_type": "text",
+        "relayable": true
+      },
+      "generated_images": {
+        "description": "Generated image files or public image URLs.",
+        "value": [
+          "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+        ],
+        "value_type": "image",
+        "relayable": true
+      },
+      "images": {
+        "description": "Generated image files.",
+        "value": [
+          "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+        ],
+        "relayable": true
+      }
+    },
+    "business_artifact_count": 0
+  },
+  "business_outputs": {
+    "result": {
+      "description": "Skill execution result summary.",
+      "value": "Image generation succeeded for prompt '生成一张小猫睡觉的照片'",
+      "relayable": true
+    },
+    "image_url": {
+      "description": "Result value mentioned in skill source as `imageUrl`.",
+      "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+      "value_type": "url",
+      "relayable": true
+    },
+    "public_image_url": {
+      "description": "Result value mentioned in skill source as `publicImageUrl`.",
+      "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+      "value_type": "url",
+      "relayable": true
+    },
+    "status": {
+      "description": "Result value mentioned in skill source as `status`.",
+      "value": "succeeded",
+      "value_type": "text",
+      "relayable": true
+    },
+    "task_id": {
+      "description": "Result value mentioned in skill source as `taskId`.",
+      "value": "9adc4749-b0fd-4911-8c7f-25a5176191a4",
+      "value_type": "text",
+      "relayable": true
+    },
+    "generated_images": {
+      "description": "Generated image files or public image URLs.",
+      "value": [
+        "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+      ],
+      "value_type": "image",
+      "relayable": true
+    },
+    "images": {
+      "description": "Generated image files.",
+      "value": [
+        "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+      ],
+      "relayable": true
+    }
+  },
+  "business_artifacts": [],
+  "core_outputs": [
+    {
+      "name": "result",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "description": "Skill execution result summary.",
+        "value": "Image generation succeeded for prompt '生成一张小猫睡觉的照片'",
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Skill execution result summary.",
+        "relayable": true
+      }
+    },
+    {
+      "name": "image_url",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "description": "Result value mentioned in skill source as `imageUrl`.",
+        "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+        "value_type": "url",
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `imageUrl`.",
+        "value_type": "url",
+        "relayable": true,
+        "evidence": "source result marker imageUrl"
+      }
+    },
+    {
+      "name": "public_image_url",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "description": "Result value mentioned in skill source as `publicImageUrl`.",
+        "value": "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png",
+        "value_type": "url",
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `publicImageUrl`.",
+        "value_type": "url",
+        "relayable": true,
+        "evidence": "source result marker publicImageUrl"
+      }
+    },
+    {
+      "name": "status",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "description": "Result value mentioned in skill source as `status`.",
+        "value": "succeeded",
+        "value_type": "text",
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `status`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker status"
+      }
+    },
+    {
+      "name": "task_id",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "description": "Result value mentioned in skill source as `taskId`.",
+        "value": "9adc4749-b0fd-4911-8c7f-25a5176191a4",
+        "value_type": "text",
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Result value mentioned in skill source as `taskId`.",
+        "value_type": "text",
+        "relayable": true,
+        "evidence": "source result marker taskId"
+      }
+    },
+    {
+      "name": "status_json",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Runtime value captured by script variable `status_json`.",
+        "value_type": "json",
+        "relayable": false,
+        "evidence": "source script variable status_json"
+      }
+    },
+    {
+      "name": "submit_json",
+      "kind": "files",
+      "type": "files",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Runtime value captured by script variable `submit_json`.",
+        "value_type": "json",
+        "relayable": true,
+        "evidence": "source script variable submit_json"
+      }
+    },
+    {
+      "name": "generated_images",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "description": "Generated image files or public image URLs.",
+        "value": [
+          "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+        ],
+        "value_type": "image",
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Generated image files or public image URLs.",
+        "value_type": "image",
+        "relayable": true
+      }
+    },
+    {
+      "name": "images",
+      "kind": "scalar",
+      "type": "scalar",
+      "value": {
+        "description": "Generated image files.",
+        "value": [
+          "https://resource.vyibc.com/9adc4749-b0fd-4911-8c7f-25a5176191a4.png"
+        ],
+        "relayable": true
+      },
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "description": "Generated image files.",
+        "relayable": true
+      }
+    }
+  ]
+}

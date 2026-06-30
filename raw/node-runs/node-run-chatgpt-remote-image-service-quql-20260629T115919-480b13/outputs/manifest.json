@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-chatgpt-remote-image-service-quql-20260629T115919-480b13",
+  "node_id": "chatgpt-remote-image-service-quql",
+  "created_at": "2026-06-29T12:00:52Z",
+  "items": [
+    {
+      "output_name": "result",
+      "value_type": "json",
+      "value_preview": "任务成功完成",
+      "data": {
+        "taskId": "8a630322-1e4f-4751-9f22-fa2c467fb758",
+        "status": "succeeded",
+        "stage": "uploadedMs"
+      }
+    },
+    {
+      "output_name": "public_image_url",
+      "value_type": "url",
+      "value_preview": "https://resource.vyibc.com/8a630322-1e4f-4751-9f22-fa2c467fb758.png",
+      "data": "https://resource.vyibc.com/8a630322-1e4f-4751-9f22-fa2c467fb758.png"
+    },
+    {
+      "output_name": "image_url",
+      "value_type": "url",
+      "value_preview": "https://resource.vyibc.com/8a630322-1e4f-4751-9f22-fa2c467fb758.png",
+      "data": "https://resource.vyibc.com/8a630322-1e4f-4751-9f22-fa2c467fb758.png"
+    },
+    {
+      "output_name": "task_id",
+      "value_type": "text",
+      "value_preview": "8a630322-1e4f-4751-9f22-fa2c467fb758",
+      "data": "8a630322-1e4f-4751-9f22-fa2c467fb758"
+    },
+    {
+      "output_name": "status",
+      "value_type": "text",
+      "value_preview": "succeeded",
+      "data": "succeeded"
+    },
+    {
+      "output_name": "generated_images",
+      "value_type": "image",
+      "value_preview": "https://resource.vyibc.com/8a630322-1e4f-4751-9f22-fa2c467fb758.png",
+      "data": "https://resource.vyibc.com/8a630322-1e4f-4751-9f22-fa2c467fb758.png"
+    },
+    {
+      "output_name": "images",
+      "value_type": "image",
+      "value_preview": "https://resource.vyibc.com/8a630322-1e4f-4751-9f22-fa2c467fb758.png",
+      "data": "https://resource.vyibc.com/8a630322-1e4f-4751-9f22-fa2c467fb758.png"
+    }
+  ]
+}

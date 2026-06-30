@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "draft_type": "workflow_draft",
+  "draft_id": "ui-runtime-publish-1782406114250-20260625t164838z",
+  "workflow_id": "youtube-research-wiki",
+  "name": "ui-runtime-publish-1782406114250",
+  "goal": "Verify runtime-local workflow draft publishing from UI.",
+  "created_at": "2026-06-25T16:48:51Z",
+  "runtime_id": "youtube-wiki",
+  "instance_id": "test-instance",
+  "draft": {
+    "name": "ui-runtime-publish-1782406114250",
+    "goal": "Verify runtime-local workflow draft publishing from UI.",
+    "nodes": [
+      {
+        "nodeId": "youtube-fetch",
+        "signature": ""
+      },
+      {
+        "nodeId": "youtube-deep-research",
+        "signature": ""
+      }
+    ],
+    "edges": [
+      {
+        "id": "youtube-fetch-to-youtube-deep-research-ui-1782406114250",
+        "from": "youtube-fetch",
+        "to": "youtube-deep-research",
+        "sourceIntent": "source_url and metadata_file",
+        "targetIntent": "source_url",
+        "instruction": "把上游 source_url 交给 YouTube 深度研究节点；metadata_file 只作为可选上下文，不作为主输入。",
+        "fromSignature": "",
+        "toSignature": "",
+        "relayMode": "auto_by_target_inputs",
+        "relayMappings": []
+      }
+    ],
+    "positions": {
+      "youtube-fetch": {
+        "x": 0,
+        "y": 0
+      },
+      "youtube-deep-research": {
+        "x": 292,
+        "y": 0
+      }
+    }
+  },
+  "edge_count": 1,
+  "ready_edge_count": 1,
+  "runtime_sop_status": "runtime_sop_ready",
+  "active_runtime_sop_changed": false,
+  "production_dag_changed": false,
+  "runtime_sop_path": "/root/wiki/wiki-sop-new-instance/raw/workflow-drafts/ui-runtime-publish-1782406114250-20260625t164838z/runtime_sop.yaml",
+  "updated_at": "2026-06-25T16:48:51Z",
+  "hash_after": "13c6512ed96759dc",
+  "published_runtime_workflow": {
+    "status": "published",
+    "workflow_id": "youtube-research-wiki-ui-runtime-publish-1782406114250-20260625t164838z",
+    "source_workflow_id": "youtube-research-wiki",
+    "name": "youtube-research-wiki-ui-runtime-publish-1782406114250-20260625t164838z",
+    "title": "ui-runtime-publish-1782406114250",
+    "description": "Verify runtime-local workflow draft publishing from UI.",
+    "version": "runtime-local-20260625T164851Z",
+    "sop_type": "youtube-research-wiki",
+    "interpreter": "generic-dag",
+    "workflow_type": "business",
+    "definition_source": "runtime-local-published",
+    "draft_id": "ui-runtime-publish-1782406114250-20260625t164838z",
+    "draft_path": "/root/wiki/wiki-sop-new-instance/raw/workflow-drafts/ui-runtime-publish-1782406114250-20260625t164838z",
+    "runtime_sop_source": "/root/wiki/wiki-sop-new-instance/raw/workflow-drafts/ui-runtime-publish-1782406114250-20260625t164838z/runtime_sop.yaml",
+    "runtime_sop_path": "/root/wiki/wiki-sop-new-instance/raw/runtime-workflows/youtube-research-wiki-ui-runtime-publish-1782406114250-20260625t164838z/sop.yaml",
+    "node_count": 6,
+    "edge_count": 3,
+    "instance_id": "test-instance",
+    "runtime_id": "youtube-wiki",
+    "published_at": "2026-06-25T16:48:51Z",
+    "active_runtime_sop_changed": false,
+    "production_dag_changed": false,
+    "repo_first_required": false
+  },
+  "runtime_publish_status": "published"
+}

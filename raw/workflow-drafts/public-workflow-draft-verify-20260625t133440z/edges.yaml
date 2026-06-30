@@ -1,0 +1,29 @@
+- id: youtube-fetch-to-youtube-deep-research-public-api-verify
+  from: youtube-fetch
+  to: youtube-deep-research
+  relay:
+    mode: auto_by_target_inputs
+    mappings: []
+    handoff_instruction: 把上游 source_url 交给 YouTube 深度研究节点，metadata 只作为可选上下文。
+    node_execution_guide:
+      format: markdown
+      prompt: Use skill sop-youtube-deep-research to execute this downstream node.
+        Read the materialized source_url from the upstream youtube-fetch output and
+        use it as the target video URL.
+    evaluation:
+      status: ready
+      score: 0.92
+      confidence: 0.88
+      summary: source_url 可以稳定传给下游。
+      decision: can_run
+      evaluated_at: null
+      agent:
+        provider: openai-compatible
+        model: deepseek-v4-flash
+        used_ai: true
+    resolved_handoff:
+      primary_artifacts:
+      - from: youtube-fetch.outputs.source_url
+    test_plan:
+    - 物化 source_url
+    - 执行下游 skill

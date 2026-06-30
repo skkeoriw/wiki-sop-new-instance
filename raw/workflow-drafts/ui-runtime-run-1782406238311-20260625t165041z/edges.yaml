@@ -1,0 +1,87 @@
+- id: youtube-fetch-to-youtube-deep-research-run-1782406238311
+  from: youtube-fetch
+  to: youtube-deep-research
+  relay:
+    mode: auto_by_target_inputs
+    mappings: []
+    handoff_instruction: 把上游 source_url 交给 YouTube 深度研究节点；metadata_file 只作为可选上下文，不作为主输入。
+    node_execution_guide:
+      format: markdown
+      prompt: 'Use skill sop-youtube-deep-research to execute this downstream node.
+
+
+        Node Execution Guide
+
+        - Edge: youtube-fetch -> youtube-deep-research
+
+        - Evaluation summary: 上下游存在显式引用，可稳定生成节点执行指导文档。
+
+        - Edge Handoff Instruction: 把上游 source_url 交给 YouTube 深度研究节点；metadata_file
+        只作为可选上下文，不作为主输入。
+
+
+        Upstream artifacts
+
+        - source_url: raw/node-runs/{pipeline_id}/outputs/files/source-url.txt
+
+        - metadata_file: raw/node-runs/{pipeline_id}/outputs/files/metadata.json
+
+
+        Execution rules
+
+        - Use only the resolved Edge inputs (source_url) as the primary input for
+        the downstream node.
+
+        - metadata_file is available as optional supporting context; it should not
+        be used as the main input or required artifact.
+
+        - Construct the downstream input ''source_url'' from the upstream output file
+        path.
+
+        - If the downstream node expects the source_url directly, read the content
+        of source-url.txt and pass it as a scalar URL.
+
+        - The metadata_file can be passed as an optional file argument if the downstream
+        skill supports it, but it is not mandatory.
+
+
+        Test plan steps
+
+        1. Resolve upstream artifacts: source_url and metadata_file.
+
+        2. Construct downstream input source_url from the upstream source_url.
+
+        3. Execute downstream skill sop-youtube-deep-research with the resolved input.
+
+        4. Verify that the downstream node produces expected outputs (analysis_file
+        and transcript_file).
+
+        5. Record the edge evaluation and guide for future runs.'
+    evaluation:
+      status: ready
+      score: 0.92
+      confidence: 0.86
+      summary: 上下游存在显式引用，可稳定生成节点执行指导文档。
+      decision: can_run
+      evaluated_at: '2026-06-25T16:50:58Z'
+      agent:
+        provider: openai-compatible
+        model: deepseek-v4-flash
+        used_ai: true
+    resolved_handoff:
+      primary_artifacts:
+      - from: youtube-fetch.outputs.source_url
+        role: primary_source
+        reason: 上游声明的可交付产物。
+      supporting_artifacts:
+      - from: youtube-fetch.outputs.metadata_file
+        role: supporting_context
+        reason: 该产物适合作为补充上下文，不应默认成为下游主输入。
+      downstream_inputs:
+      - to: youtube-deep-research.inputs.source_url
+        construction: 由显式契约直接构造。
+    test_plan:
+    - 物化 Edge 输入
+    - 执行下游 skill
+    - 校验声明输出
+    - 记录 edge evaluation 和 guide

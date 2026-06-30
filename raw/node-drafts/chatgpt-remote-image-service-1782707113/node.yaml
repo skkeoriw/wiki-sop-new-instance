@@ -1,0 +1,63 @@
+schema: node-definition/v1
+id: chatgpt-remote-image-service
+title: ChatGPT Remote Image Service
+description: Executes the chatgpt-remote-image-service skill to generate images from
+  text prompts. Designed as a Runtime Node without fixed upstream/downstream bindings;
+  first-node testing allows direct prompt input.
+version: 0.1-runtime-draft
+skill:
+  id: chatgpt-remote-image-service
+  source: skill-installer
+  install_command: bash <(curl -fsSL 'https://skill.vyibc.com/install-chatgpt-remote-image-service.sh?v=202606251544')
+executor:
+  type: agent-skill
+  agent: hermes
+  skill: chatgpt-remote-image-service
+  request_template: node-execution-request/v1
+entry:
+  inputs:
+    prompt:
+      required: true
+      value_type: text
+      description: The text prompt describing the image to generate. Used when testing
+        the node manually or as the first node in a pipeline.
+      example: 生成一张小猫睡觉的照片
+handoff:
+  accepts:
+    upstream_outputs_dir:
+      required: false
+      description: Optional directory containing outputs from upstream nodes. Not
+        required for first-node execution.
+    instruction:
+      required: true
+      description: Instructions from the Edge Handoff Agent or user, specifying what
+        to do with the upstream context.
+    context:
+      required: false
+      description: Additional runtime context, such as parameters or metadata.
+  produces:
+    outputs_dir: raw/node-runs/{run_id}/outputs
+    manifest: raw/node-runs/{run_id}/outputs/manifest.json
+outputs:
+  root: raw/node-runs/{run_id}/outputs
+  manifest: raw/node-runs/{run_id}/outputs/manifest.json
+  expected:
+    result:
+      description: Summary of the skill execution, including status and any generated
+        image metadata.
+      relayable: true
+    images:
+      description: The generated image files (e.g., PNG, JPEG).
+      relayable: true
+capabilities:
+  git:
+    enabled: true
+    required: false
+  telegram:
+    enabled: false
+    required: false
+  sse:
+    enabled: true
+    required: true
+ui:
+  category: generation

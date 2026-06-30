@@ -1,0 +1,8 @@
+{
+  "status": "published",
+  "node_id": "youtube-metadata-fetch",
+  "runtime_catalog_path": "/root/.sop/node-catalog/youtube-metadata-fetch/node.yaml",
+  "visible_in_nodes_api": true,
+  "published_at": "2026-06-30T11:10:37.821555+00:00",
+  "message": "Node is published to the current Runtime catalog. Source repo is unchanged."
+}

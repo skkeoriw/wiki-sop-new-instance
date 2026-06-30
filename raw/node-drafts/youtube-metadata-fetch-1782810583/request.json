@@ -1,0 +1,8 @@
+{
+  "skill_install_command": "  bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426')",
+  "user_instruction": "  将该 Skill 构建为独立的 YouTube 元数据获取 Runtime Node。用户输入 source_url 后调用配置的 YouTube 内容 API 获取元数据，并输出 metadata.json、source-url.txt、result.json；不得绑定固定上下游或 Edge 交接逻辑。",
+  "fetch_metadata": true,
+  "async_job": true,
+  "runtime_id": "youtube-wiki",
+  "instance_id": "wiki-sop-new-instance"
+}
