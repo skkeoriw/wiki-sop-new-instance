@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260630T062421Z-bd7beb",
+  "node_id": "chatgpt-remote-image-service-vs2q",
+  "created_at": "2026-06-30T06:26:32Z",
+  "items": [
+    {
+      "name": "publicImageUrl",
+      "path": "sources/public_image_url.txt",
+      "value_type": "url",
+      "value_preview": "https://resource.vyibc.com/cd260cc2-f90a-4e92-bcf1-b338e96e25bf.png",
+      "resolved_value": "https://resource.vyibc.com/cd260cc2-f90a-4e92-bcf1-b338e96e25bf.png"
+    },
+    {
+      "name": "taskId",
+      "path": "sources/task_id.txt",
+      "value_type": "text",
+      "value_preview": "cd260cc2-f90a-4e92-bcf1-b338e96e25bf",
+      "resolved_value": "cd260cc2-f90a-4e92-bcf1-b338e96e25bf"
+    },
+    {
+      "name": "chatgptUrl",
+      "path": "sources/chatgpt_url.txt",
+      "value_type": "url",
+      "value_preview": "https://chatgpt.com/c/6a43616e-e2e4-83ea-82b8-a45352a7ccf7",
+      "resolved_value": "https://chatgpt.com/c/6a43616e-e2e4-83ea-82b8-a45352a7ccf7"
+    }
+  ],
+  "summary": {
+    "status": "succeeded",
+    "task_count": 1,
+    "succeeded": 1,
+    "failed": 0,
+    "total_time_seconds": 51
+  }
+}

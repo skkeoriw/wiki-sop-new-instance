@@ -1,0 +1,40 @@
+{
+  "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260630T062421Z-bd7beb",
+  "mode": "real-node",
+  "input_source": "manual",
+  "pipeline_id": "",
+  "source_node_run_id": "",
+  "relay_mode": "",
+  "selected_outputs": [],
+  "relay_mappings": [],
+  "relay_instruction": "",
+  "manual_inputs": {
+    "prompt": "小狗睡觉的图片"
+  },
+  "overrides": {},
+  "capability_overrides": {
+    "git": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run",
+      "paths": []
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run"
+    }
+  },
+  "retry_of": "",
+  "_definition_scope_reports": {
+    "instance_override": {
+      "status": "unchanged",
+      "changed": {}
+    },
+    "project_default_request": {
+      "status": "skipped"
+    }
+  }
+}

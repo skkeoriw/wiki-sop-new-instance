@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "executor": "hermes",
+  "requested_skill": "chatgpt-remote-image-service",
+  "executed_skill": "chatgpt-remote-image-service",
+  "node_id": "chatgpt-remote-image-service-vs2q",
+  "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260630T062421Z-bd7beb",
+  "request_id": "node-run-chatgpt-remote-image-service-vs2q-20260630T062421Z-bd7beb",
+  "status": "done",
+  "returncode": 0,
+  "timed_out": false,
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "passed",
+      "expected_outputs": [
+        "result",
+        "task_id",
+        "status",
+        "public_image_url",
+        "image_url",
+        "generated_images",
+        "images",
+        "submit_json",
+        "status_json"
+      ],
+      "required_outputs": [],
+      "present_outputs": [
+        "task_id",
+        "status",
+        "public_image_url",
+        "image_url",
+        "generated_images"
+      ],
+      "missing_required_outputs": [],
+      "business_outputs": {
+        "task_id": "cd260cc2-f90a-4e92-bcf1-b338e96e25bf",
+        "status": "succeeded",
+        "public_image_url": "https://resource.vyibc.com/cd260cc2-f90a-4e92-bcf1-b338e96e25bf.png",
+        "image_url": "https://resource.vyibc.com/cd260cc2-f90a-4e92-bcf1-b338e96e25bf.png",
+        "generated_images": "https://resource.vyibc.com/cd260cc2-f90a-4e92-bcf1-b338e96e25bf.png"
+      },
+      "business_artifact_count": 3
+    },
+    "success_evidence": {
+      "passed": true,
+      "signals": [
+        {
+          "source": "manifest.summary.status",
+          "status": "succeeded"
+        },
+        {
+          "source": "receipt.status",
+          "status": "succeeded"
+        },
+        {
+          "source": "manifest.items",
+          "output": "public_image_url",
+          "kind": "url"
+        },
+        {
+          "source": "manifest.items",
+          "output": "public_image_url",
+          "kind": "image"
+        },
+        {
+          "source": "manifest.items",
+          "output": "chatgpt_url",
+          "kind": "url"
+        },
+        {
+          "source": "output_artifacts",
+          "count": 3
+        },
+        {
+          "source": "receipt",
+          "status": "success"
+        }
+      ],
+      "failures": []
+    }
+  },
+  "business_output_status": {
+    "status": "passed",
+    "expected_outputs": [
+      "result",
+      "task_id",
+      "status",
+      "public_image_url",
+      "image_url",
+      "generated_images",
+      "images",
+      "submit_json",
+      "status_json"
+    ],
+    "required_outputs": [],
+    "present_outputs": [
+      "task_id",
+      "status",
+      "public_image_url",
+      "image_url",
+      "generated_images"
+    ],
+    "missing_required_outputs": [],
+    "business_outputs": {
+      "task_id": "cd260cc2-f90a-4e92-bcf1-b338e96e25bf",
+      "status": "succeeded",
+      "public_image_url": "https://resource.vyibc.com/cd260cc2-f90a-4e92-bcf1-b338e96e25bf.png",
+      "image_url": "https://resource.vyibc.com/cd260cc2-f90a-4e92-bcf1-b338e96e25bf.png",
+      "generated_images": "https://resource.vyibc.com/cd260cc2-f90a-4e92-bcf1-b338e96e25bf.png"
+    },
+    "business_artifact_count": 3
+  },
+  "input_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260630T062421Z-bd7beb/inputs/sources/manifest.json",
+  "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260630T062421Z-bd7beb/outputs/manifest.json",
+  "started_at": "2026-06-30T06:24:27.837765+00:00",
+  "finished_at": "2026-06-30T06:32:08.915436+00:00",
+  "legacy_fallback": false,
+  "error": ""
+}

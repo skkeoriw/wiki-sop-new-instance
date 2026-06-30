@@ -1,0 +1,24 @@
+## ✅ Node Execution Complete
+
+**Node Run:** `node-run-chatgpt-remote-image-service-vs2q-20260630T062421Z-bd7beb`
+
+**Status:** succeeded (51 seconds)
+
+### Execution Log
+Ran the skill's bundled CLI script which submitted a pure-prompt generation to the remote ChatGPT image service at `https://chatgpt-image.vyibc.com`. The service connected to a browser worker (port 9333), entered image mode, submitted the prompt, waited for generation (~37s), downloaded and uploaded the result to R2.
+
+### Outputs
+
+| Output | Value |
+|--------|-------|
+| **publicImageUrl** | `https://resource.vyibc.com/cd260cc2-f90a-4e92-bcf1-b338e96e25bf.png` |
+| **taskId** | `cd260cc2-f90a-4e92-bcf1-b338e96e25bf` |
+| **chatgptUrl** | `https://chatgpt.com/c/6a43616e-e2e4-83ea-82b8-a45352a7ccf7` |
+
+### Files Written
+
+- `outputs/manifest.json` — declared output manifest
+- `outputs/sources/public_image_url.txt` — generated image URL
+- `outputs/sources/task_id.txt` — task ID
+- `outputs/sources/chatgpt_url.txt` — ChatGPT conversation URL
+- `agent/receipt.json` — execution receipt
