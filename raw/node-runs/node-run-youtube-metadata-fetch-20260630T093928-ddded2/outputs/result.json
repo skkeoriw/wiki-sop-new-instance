@@ -1,0 +1,26 @@
+{
+  "status": "succeeded",
+  "metadata_file": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093928-ddded2/outputs/metadata.json",
+  "source_url_file": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093928-ddded2/outputs/source-url.txt",
+  "metadata": {
+    "video_id": "dQw4w9WgXcQ",
+    "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+    "author": "Rick Astley",
+    "published_at": "2009-10-25T06:57:33Z",
+    "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+    "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "fetched_at": "2026-06-30T09:40:29Z",
+    "raw": {
+      "success": true,
+      "data": {
+        "video_id": "dQw4w9WgXcQ",
+        "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+        "author": "Rick Astley",
+        "published_at": "2009-10-25T06:57:33Z",
+        "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg"
+      }
+    }
+  }
+}

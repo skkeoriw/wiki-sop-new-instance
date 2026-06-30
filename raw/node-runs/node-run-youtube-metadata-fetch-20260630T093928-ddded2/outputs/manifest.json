@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-youtube-metadata-fetch-20260630T093928-ddded2",
+  "node_id": "youtube-metadata-fetch",
+  "created_at": "2026-06-30T09:40:29Z",
+  "status": "succeeded",
+  "items": [
+    {
+      "name": "metadata_json",
+      "path": "metadata.json",
+      "type": "file",
+      "value_type": "json",
+      "description": "Normalized YouTube video metadata"
+    },
+    {
+      "name": "source_url_txt",
+      "path": "source-url.txt",
+      "type": "file",
+      "value_type": "text",
+      "description": "Source URL text file"
+    },
+    {
+      "name": "result_json",
+      "path": "result.json",
+      "type": "file",
+      "value_type": "json",
+      "description": "Execution result summary with metadata"
+    }
+  ],
+  "resolved_outputs": {
+    "result": {
+      "status": "succeeded",
+      "video_id": "dQw4w9WgXcQ",
+      "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)"
+    },
+    "status": "succeeded",
+    "metadata_json": {
+      "video_id": "dQw4w9WgXcQ",
+      "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)",
+      "author": "Rick Astley",
+      "published_at": "2009-10-25T06:57:33Z",
+      "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+      "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "fetched_at": "2026-06-30T09:40:29Z"
+    },
+    "source_url_txt": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "result_json": {
+      "status": "succeeded",
+      "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "metadata_file": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093928-ddded2/outputs/metadata.json",
+      "source_url_file": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093928-ddded2/outputs/source-url.txt",
+      "result_file": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093928-ddded2/outputs/result.json"
+    }
+  },
+  "edge_contract": {
+    "relayable": {
+      "result": {
+        "description": "Skill execution result summary.",
+        "relayable": true
+      },
+      "status": {
+        "description": "Result value mentioned in skill source as `status`.",
+        "value_type": "text",
+        "relayable": true
+      },
+      "metadata_json": {
+        "description": "Output file `metadata.json` produced or documented by the skill.",
+        "value_type": "json",
+        "relayable": true
+      },
+      "source_url_txt": {
+        "description": "Output file `source-url.txt` produced or documented by the skill.",
+        "value_type": "text",
+        "relayable": true
+      },
+      "result_json": {
+        "description": "Output file `result.json` produced or documented by the skill.",
+        "value_type": "json",
+        "relayable": true
+      }
+    }
+  }
+}

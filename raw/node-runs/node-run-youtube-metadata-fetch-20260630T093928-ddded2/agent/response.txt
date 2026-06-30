@@ -1,0 +1,23 @@
+Node execution complete. Here's the summary:
+
+**Node Execution: youtube-metadata-fetch** — SUCCEEDED
+
+**Input resolution chain:**
+- `0001.txt` → path chain resolved to `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
+
+**Output files written:**
+- `outputs/metadata.json` — normalized metadata (video_id, title, author, published_at, thumbnail, etc.)
+- `outputs/source-url.txt` — the source URL
+- `outputs/result.json` — full execution result with metadata
+- `outputs/manifest.json` — output manifest (3 items declared)
+- `agent/receipt.json` — execution receipt
+
+**Metadata fetched:**
+| Field | Value |
+|-------|-------|
+| video_id | dQw4w9WgXcQ |
+| title | Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster) |
+| author | Rick Astley |
+| published_at | 2009-10-25T06:57:33Z |
+| youtube_url | https://www.youtube.com/watch?v=dQw4w9WgXcQ |
+| fetched_at | 2026-06-30T09:40:29Z |
