@@ -1,5 +1,5 @@
 {
-  "instance_id": "agent-runtime-hermes-smoke",
+  "instance_id": "agent-runtime-openclaw-smoke",
   "workspace_kind": "execution-workspace",
   "repo": "skkeoriw/wiki-sop-new-instance",
   "runtime_id": "runtime-206-189-196-65",
