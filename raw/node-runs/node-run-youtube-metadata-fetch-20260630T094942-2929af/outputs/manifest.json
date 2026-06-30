@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-youtube-metadata-fetch-20260630T094942-2929af",
+  "node_id": "youtube-metadata-fetch",
+  "created_at": "2026-06-30T09:50:45Z",
+  "root": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T094942-2929af/outputs",
+  "items": [
+    {
+      "name": "metadata_json",
+      "path": "metadata.json",
+      "absolute_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T094942-2929af/outputs/metadata.json",
+      "value_type": "json",
+      "description": "Normalized YouTube metadata JSON",
+      "relayable": true
+    },
+    {
+      "name": "source_url_txt",
+      "path": "source-url.txt",
+      "absolute_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T094942-2929af/outputs/source-url.txt",
+      "value_type": "text",
+      "description": "Source URL text file",
+      "relayable": true
+    },
+    {
+      "name": "result_json",
+      "path": "result.json",
+      "absolute_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T094942-2929af/outputs/result.json",
+      "value_type": "json",
+      "description": "Skill execution result summary with metadata",
+      "relayable": true
+    }
+  ],
+  "summary": {
+    "status": "succeeded",
+    "total_files": 3,
+    "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+    "video_id": "Ahfe-BW1cFc",
+    "title": "永久免费云服务器！16G内存、双核CPU、50~500G硬盘空间，HuggingFace Spaces 跑AI项目、部署实用工具，还能SSH远程管理？ | 零度解说",
+    "author": "零度解说"
+  }
+}
