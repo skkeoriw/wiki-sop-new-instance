@@ -1,0 +1,2368 @@
+{
+  "transcript": "we're so excited for our very first special guest he has helped build modern AI then explain modern AI and then occasionally rename modern AI he actually helped co-found open AI right inside of this office was the one who actually got autopilot working at Tesla back in the day and he has a rare gift of making the most complex technical shifts feel both accessible and inevitable you all know him for having coined the term vibe coding last year but just in the last few months he said something even more startling that he's never felt more behind as a programmer that's what we're starting today thank you Andre for joining us yeah hello excited to be hearing to kick us off okay so just a couple months ago you said that you've never felt more behind as a programmer that's startling to hear from you of all people can you help us unpack that was that feeling exhilarating or unsettling oh yeah mixture of both for sure well first of all I guess like as many of you I've been using agentic tools like cloud code adjacent things for a while maybe over the last year as it came out and it was very good at you know chunks of code and sometimes it would mess up and you have to edit them and it was kind of helpful and then I would say December was this clear point where for me I was on a break so I had a bit more time I think many other people were similar and I just started to notice that with the latest models the chunks just came out fine and then I kept asking for more and just came out fine and then I can't remember the last time I corrected it and then I was I just you know trusted the system more and more and then I was vibe coding and so it was kind of a I do think that was a very stark transition I think that a lot of people actually I trust you I tried to stress this on Twitter and or X because I think a lot of people experienced AI last year as chat GPT adjacent thing but you really had to look again and you had to look as of December because things have changed fundamentally and especially on this like agentic coherent workflow that really started to actually work and so I would say that yeah it was just that realization that really had me go down their whole rabbit hole of just you know infinity side project my side projects folder is like extremely full with lots of random things and just by coding all the time so yeah that kind of happened in December I would say and I was looking at the repercussions of that sense you've talked a lot about this idea of LLMs as a new computer that it isn't just better software it's a whole new computing paradigm and software 1.0 was explicit rules software 2.0 was learned weights software 3.0 is this if that's actually true what does a team build differently the day they actually believe this right so yeah exactly so software 1.0 I'm writing code software 2.0 I'm actually programming by creating data sets and training training neural networks so the programming is kind of like arranging data sets and maybe some objectives and neural network architectures and then what happened is that basically if you train one of these GPT models or LLMs on a sufficiently large set of tasks implicit basically implicitly because by training on the internet you have to multitask all the things that are in the data set these actually become kind of like a programmable computer in a certain sense so software 3.0 is kind of about you know your programming now turns to prompting and what's in the context window is your lever over the interpreter that is the LLM that is kind of like interpreting your context and performing computation in the digital information space so I guess yeah that's kind of the transition and I think there's a few examples of that really drove it home for me and maybe that might be instructive also for example when you when openclaw came out when you want to install openclaw you would expect that normally this is a bash script like a shell script so run the shell script to run to install openclaw but the thing is that in order to target lots of different platforms and lots of different types of computers you might run an openclaw these shell scripts usually ballooned up and become extremely complex but the thing is you're still stuck in a software 1.0 universe of wanting to write the code and actually the openclaw installation is a is a copy paste of a bunch of text that you're supposed to give to your agent so basically it's it's a little skill of you know copy paste this and give it to your agent and it will install openclaw and the reason this is a lot more powerful is you're working now in the software 3.0 paradigm where you don't have to precisely spell out you know all the individual details of that setup the agent has its own intelligence that it packages up and then it kind of follows the instructions and it looks at your environment your computer and it kind of like performs intelligent actions to make things work and debug things in the loop and it's just like so much more powerful right so I think that's a very different kind of like way of thinking about it it's just like what is the piece of text to copy paste to your agent that's the programming paradigm now I think one more maybe example that comes to mind that is even more extreme than that is when I was building menu gen so menu gen gen is this idea where you you come to a restaurant they give you a menu you There's no pictures usually, so I don't know what any of these things are. Usually, like 30% of the things, I have no idea what they are, 50%. So I wanted to take a photo of the restaurant menu and to get pictures of what those things might look like in a generic sense. And so I built, I videcoded this app that basically lets you upload a photo, and it does all this stuff, and it runs on Vercel, and it basically re-renders the menu, and it gives you all the items, and it gives you a picture that it uses an image generator for to basically OCR all the different titles, use the image generator to get pictures of them, and then shows it to you. And then I saw the Software 3.0 version of this, which blew my mind, which is literally just take your photo, give it to Gemini, and say, use Nano Banana to overlay the things onto the menu. And Nano Banana basically returned an image that is exactly the picture of the menu that I took, but it actually put into the pixels, it rendered the different things in the menu. And this blew my mind, because actually all of my menu gen is spurious. It's working in the old paradigm. That app shouldn't exist. And yeah, the Software 3.0 paradigm is a lot more kind of raw. It just, your neural network is doing more and more of the work, and your prompt or context is just the image, and the output is an image, and there's no need to have any of the app in between. So, I think that people have to kind of like reframe, you know, not to work in the existing paradigm of what things existed, and just think about it as a speed-up of what exists. It's actually like new things are available now. And going back to your programming question, it's not even, I think that's also an example of working in the old mindset, because it's not just about programming and programming becoming faster. This is more general information processing that is automatable now. So, it's not just even about code. So, previous code worked over kind of like structured data, right? And you write code over structured data. But like, for example, with my LLM Knowledge Bases project, basically, you get LLMs to create wikis for your organization, for you in person, et cetera. This is not even a program. This is not something that could exist before, because there was no code that would create a knowledge base based on a bunch of facts. But now, you can just take these documents and basically recompile them in a different way and reorder them and create something that is new and interesting as a reframing of the data. And so, these are new things that weren't possible. And so, I think this is something that I keep trying to get back to as to not only what can we do that existed that is faster now, but I think there's new opportunities of just things that couldn't be possible before. And I almost think that that's more exciting. I love the menu-gen progression and dichotomy that you laid out. And I think even, I'm sure many folks here followed your own progression of programming from last October to early January, February this year. If you extrapolate that further, what is the 2026 equivalent for building websites in the 90s, building mobile apps in the 2010s, building SaaS in the last cloud era? What will look completely obvious in hindsight that is still mostly unbuilt today? Well, going with the example of menu-gen, I guess, so a lot of this code shouldn't exist and it's just neural network doing most of the work. I do think that the extrapolation looks very weird because you could basically imagine, I don't think, yeah, so you could imagine completely neural computers in a certain sense. You feed raw videos, like imagine a device, it takes raw videos or audio into basically what's a neural net. And uses diffusion to render a UI that is kind of like, you know, unique for that moment in a certain sense. And I kind of feel like in the early days of computing, actually, people were a little bit confused as to whether computers would look like calculators or computers would look like neural nets. And in the 50s and 60s, it was not really obvious which way it would go. And of course, we went down the calculator path and ended up building classical computing. And then neural nets are currently running virtualized on existing computers. But you could imagine, I think, that a lot of this will flip and that the neural net becomes kind of like the host process. And the CPU has become kind of like the co-processor. So we saw the diagram of, you know, intelligence compute is going to, of neural networks is going to take over and become the dominant spend of flops. So you could imagine something really weird and foreign when neural nets are doing most of the heavy lifting. They're using tool use as just like, you know, historical appendage for some kinds of deterministic tasks. But what's really running the show is these neural nets that are networked in a certain way. So you could imagine something extremely foreign as the extrapolation. But I think we're going to probably get there sort of piece by piece. And I don't, yeah, that progression is TBD, I would say. I'd love to talk a little bit about this concept of verifiability. The fact that AI will automate faster and more easily domains where the output can be verified. If that framework is right, what work is about to move much faster than people realize? And what professions do we have that people actually think are safe, but that are actually highly verifiable? Yeah, so I spent some time writing about verifiability and basically like traditional computers can easily automate what you can specify in code and kind of this latest round of LLMs can easily automate what you can verify in a certain sense. Because the way this works is that when frontier labs are training these LLMs, these are giant reinforcement learning environments, so they are given verification rewards. And then because of the way that these models are trained, they end up basically progressing and creating these like jagged entities that really peak in capability in kind of like verifiable domains like math and code and adjacent. And kind of like stagnate and are a little bit, you know, rough around the edges when things are not kind of like in that space. So I think the reason I wrote about verifiability is I'm trying to understand why these things are so jagged. And some of it has to do with how the labs train the models, but I think some of it also has to do with the focus of the labs and what they happen to put into the data distribution. Because some things basically are significantly more valuable in economy and end up creating more environments because the labs wanted to work in those settings. So I think code is a good example of that. There's probably lots of verifiable environments that you could think about that happen not to make it into the mix because they're just not that useful to have the capability around. But I think to me the big, I guess like the big mystery is the favorite example for a while was that how many letters R are in a strawberry and the models would famously get this wrong. And it's an example of jaggedness. The models now patch this, I think. But the new one is I want to go to a car wash to wash my car and it's 50 meters away. Should I drive or should I walk? And state-of-the-art models today will tell you to walk because it's so close. How is it possible that state-of-the-art Opus 4.7 will simultaneously refactor 100,000 line code base or find zero-day vulnerabilities and yet tells me to walk to this car wash? This is insane. And to whatever extent these models remain jagged, it's an indication that number one, maybe something slightly off. Or number two, you need to actually be in the loop a little bit and you need to treat them as tools. And you do have to kind of stay in touch with what they're doing. And so I think all of my writing, long story short about verifiability, just trying to understand why these things are jagged. Is there any pattern to it? And I think it's some kind of a combination of verifiable plus labs care. Maybe one more anecdote that is instructive is from GPT 3.5 to GPT 4, people noticed that chess improved a lot. And I think a lot of people thought, oh, well, it's just a progression of the capabilities. But actually it's more that, I think this is public information, I think I saw it on the internet, a huge amount of like data of chess made it into the pre-chaining set. And just because it's in the data distribution, basically the model improved a lot more than it would just by default. So someone at OpenAI decided to add this data and now you have a capability that just peaked a lot more. And so that's why I think I'm stressing this dimension of it as we are slightly at the mercy of whatever the labs are doing, whatever they happen to put into the mix. And you have to actually explore this thing that they give you that has no manual. And it works in certain settings but maybe not in some settings. And you have to kind of explore it a little bit. And if you're in the circuits that were part of the RL, you fly. And if you're in the circuits that are out of the data distribution, you're going to struggle. And you have to kind of figure out which circuits you're in in your application. And if you're not in the circuits, then you have to really look at fine-tuning and doing some of your own work because it's not going to necessarily come out of the LL, out of the box. I'd love to come back to the concept of jagged intelligence in a little bit. If you were a founder today and thinking about building a company, you are trying to solve a problem that you think is tractable, something that is a domain that is verifiable. But you look around and you think, oh, my gosh, well, the labs have really, really started getting to escape velocity in the ones that seem most obvious, math, coding, and others. What would your advice be to the founders in the audience? So I think maybe that comes to the previous question of, I do think that verifiability, because it, let me think. So verifiability makes something tractable in the current paradigm, because you can throw a huge amount of RL at it. So maybe one way to see it is that that remains true even if the labs are not focusing on it directly. So if you are in a verifiable setting where you could create these RL environments or examples, then that actually sets you up to potentially do your own fine-tuning, and you might benefit from that. But that is fundamentally technology that just works. You can pull a lever. If you have a huge amount of diverse data sets of RL environments, et cetera, you can use your favorite fine-tuning framework and pull the lever and get something that actually works pretty well. So I don't know what the examples of this might be. But I do think there are some very valuable reinforcement learning environments that people could think of that I think are not part of the... Yeah, I don't want to give away the answer, but there is one domain that I think is very, oh, okay, sorry. I don't mean to vague post on the stage, but there are some examples of this. On the flip side, what do you think still feels automatable, only from a distance? I do think that ultimately almost everything can be made verifiable to some extent. Some things easier than others, because even for things like writing or so on, you can imagine having a council of LLM judges and probably get something reasonable from this kind of an approach. So it's more about what's easy or hard. So I do think that ultimately, yeah, I think everything is automatable. Amazing, okay. So last year you coined the term vibe coding, and today we're in a world that feels a little bit more serious, more organic engineering. What do you think is the difference between the two, and what would you actually call what we're in today? Yeah, so I would say vibe coding is about raising the floor for everyone in terms of what they can do in software. So the floor rises, everyone can vibe code anything, and that's amazing, incredible. But then I would say agentic engineering is about preserving the quality bar of what existed before in professional software. So you're not allowed to introduce vulnerabilities due to vibe coding. You're still responsible for your software, just as before, but can you go faster? And spoiler is you can, but how do you do that properly? And so to me, agentic engineering, I call it that because I do think it's kind of like an engineering discipline. You have these agents, which are these like spiky entities. They're a bit fallible, a little bit stochastic, but they are extremely powerful. And it's how do you coordinate them to go faster without sacrificing your quality bar? And doing that well and correctly is the realm of agentic engineering. So I kind of see them as different. Like one is about maybe raising the floor, and the other is about extrapolating. And what I'm seeing, I think, is there is a very high ceiling on agentic engineer capability. And, you know, people used to talk about the 10x engineer previously. I think that this has magnified a lot more. 10x is not the speed up you gain. And I think it does seem to me like people who are very good at this peak a lot more than 10x from my perspective right now. I really like that framing. One thing that when Sam Allman came to AI Ascent last year, one memorable thing he said was that people of different generations use ChatGPT differently. So if you're in your 30s, you use it as a Google search replacement. But if you're in your teens, ChatGPT is your gateway to the Internet. What is the parallel here in coding today? If we were to watch two people code using OpenClaw, CloudCode, CodeX, one you'd consider mediocre at it, and one you would consider fully AI native, how would you describe the difference? I mean, I think it's just trying to get the most out of the tools that are available, utilizing all of their features, investing into your own kind of setup. So just like previously, all the engineers are used to basically getting the most out of the tools you use. Either it's Vim or VS Code, or now it's, you know, CloudCode or Codex or so on. So just investing into your setup and utilizing a lot of the, you know, tools that are available to you. And I think it just kind of looks like that. I do think that maybe related thought is a lot of people are maybe hiring for this, right, because they want to hire strong agentic engineers. I do think that what I'm seeing is that, you know, most people have still not refactored their hiring process for agentic engineer capability, right? Like if you're giving out puzzles to solve, then this is still the old paradigm. I would say that hiring has to look like give me a really big project and see someone implement that big project. Like let's write, say, a Twitter clone for agents and then make it really good, make it really secure, and then have some agents simulate some activity on this Twitter. And then I'm going to use 10 Codex 5.4 X high to try to break your website that you deployed. And they're going to try to basically break it, and they should not be able to break it. And so maybe it looks like that, right? And so, yeah, watching people in that setting and building bigger projects and utilizing the tooling is maybe what I would look at for the most part. And as agents do more, what human skill do you think becomes more valuable, not less? So, yeah, it's a good question. I think, well, right now the answer is that the agents are kind of like these intern entities, right? So it's remarkable. You basically still have to be in charge of the aesthetics, the judgment, the taste, and a little bit of oversight. Maybe one of my favorite examples of, like, the weirdness of agents is for Menugen. You sign up with a Google account, but you purchase credits using a Stripe account. You sign up with a Google account. and both of them have email addresses. And my agent actually tries to basically, like when you purchase credits, it assigned it using the email address from Stripe to the Google email address. Like there wasn't a persistent user ID for people. It was trying to match up the email addresses but you could use different email address for your Stripe and your Google and basically would not associate the funds. And so this is the kind of thing that these agents still will make mistakes about. It's like, why would you use email addresses to try to cross correlate the funds? They can be arbitrary. You can use different emails, et cetera. Like this is such a weird thing to do. So I think people have to be in charge of this spec, this plan, and I actually don't even like the plan mode. I would, I mean, obviously it's very useful but I think there's something more general here where you have to work with your agent to design a spec that is very detailed and maybe it's basically the docs and then get the agents to write them. And you're in charge of the oversight and the top level categories but the agents are doing a lot of the under the hood. And so I think you're not caring about some of the details. So as an example also with arrays or tensors in neural networks, there's a ton of details between PyTorch and NumPy and all the different like pandas and so on for all the different little API details. And I already forgot about the keep dims versus keep dim or whether it's dim or axis or reshape or permute or transpose. I don't remember this stuff anymore, right? Because you don't have to. This is the kind of details that are handled by the intern because they have very good recall. But you still have to know, for example, that there's underlying tensor, there's an underlying view, and then you can manipulate view of the same storage or you can have different storage which should be less efficient. And so you still have to have an understanding of what this stuff is doing and some of the fundamentals so that you're not copying memory around unnecessarily and so on. But the details of the APIs are not handed off. So you're in charge of the taste, the engineering, the design, and that it makes sense, and that you're asking for the right things, and that you're saying that, okay, these have to be unique user IDs that we're going to tie everything to. And so you're doing some of the design and development and the engineers are doing the fill in the blanks. And that's currently kind of like where we are, and I think that's what everyone, of course, is seeing, I think, right now. Do you think there's a chance that this taste and judgment matters less over time, or will the ceiling just keep rising? Yeah, it's a good question. I would say, I mean, I'm hoping that it improves. I think probably the reason it doesn't improve right now is, again, it's not part of the RL. There's probably no aesthetics cost or reward, or it's not good enough or something like that. I do think that when you actually look at the code, sometimes I get a little bit of a heart attack because it's not like super amazing code necessarily all the time, and it's very bloaty, and there's a lot of copy-paste, and there's awkward abstractions that are brittle, and like it works, but it's just really gross. And I do hope that this can improve in future models. A good example also is this micro-GPT project, where I was trying to simplify LLM training to be as simple as possible. The models hate this. They can't do it. I kept trying to prompt an LLM to simplify more, simplify more, and it just can't, you feel like you're outside of the RL circuits. It feels like you're obviously, you know, you're pulling teeth. It's not like light speed. So I do think that people still remain in charge of this, but I do think that there's nothing fundamental, again, that's preventing it. It's just the labs haven't done it yet almost. So I'd love to come back to this idea of jagged forms of intelligence. You wrote a little bit about this with a very thought-provoking piece around animals versus ghosts, and the idea is that we're not building animals. We are summoning ghosts, and these are jagged forms of intelligence that are shaped by data and reward functions, but not by intrinsic motivation or fun or curiosity or empowerment, things that kind of came about via evolution. Why does that framing matter, and what does it actually change about how you build and deploy and evaluate or even trust them? Yeah, so, yeah, I think the reason I wrote about this is because I'm trying to wrap my head around what these things are, right? Because if you have a good model of what they are or are not, then you're going to be more competent at using them. And I do think that, I don't know if it has, I'm not sure if it actually has like real power. I think it's a little bit of philosophizing, but I do think that, I think it's just coming to terms with the fact that these things are not, you know, animal intelligences. Like if you yell at them, they're not going to work better or worse, or it doesn't have any impact. And it's all just kind of like these statistical simulation circuits where the substrate is pre-training, so like statistics, and then, but then there's RL bolting on top, so it kind of like increases the appendages. And maybe it's just kind of like, a mindset of what I'm coming into or what's likely to work or not likely to work or how to modify it. But I don't actually, I don't know that I have like, here are the five obvious outcomes of how to make your system better. It's more just being suspicious of it and figuring it out over time. That's where it starts. Okay, so you are so deep in working with agents that don't just chat. They have real permissions. They have local context. They actually take action on your behalf. What does the world look like when we all start to live in that world? Yeah, I think a lot of people probably here are excited about what this native agentic environment looks like. And everything has to be rewritten. Everything is still fundamentally written for humans and has to be moved around. I still use, most of the time when I use different frameworks or libraries or things like that, they still have docs that are fundamentally written for humans. This is my favorite pet peeve. Like I don't, why are people still telling me what to do? Like I don't want to do anything. What is the thing I should copy paste to my agent? Like, so it's just every time I'm told, you know, go to this URL or something like that, it's just like, oh, you know. So everyone is, I think, excited about how do we decompose the workloads that need to happen into fundamentally sensors over the world, actuators over the world. How do we make it agent native? Basically yeah, around data structures that are very legible to the LLMs. So I think, yeah, I'm hoping that there's a lot of agent first infrastructure out there. And that, you know, for Menugen, famously, when I wrote the, not, I'm not sure how famously, but when I wrote the blog post about Menugen, a lot of the work, or a lot of the trouble was not even writing the code for Menugen. It was deploying it in Vercel because I had to work with all these different services and I just string them up and I had to go to their settings and the menus and, you know, configure my DNS and it was just so annoying. And so that's a good example of, I would hope that Menugen, that I could give a prompt to an LLM, build Menugen, and that I didn't have to touch anything and it's deployed in that same way on the internet. I think that would be a good kind of a test for whether or not a lot of our infrastructure is becoming more and more agent native. And then ultimately I would say, yeah, I do think we're going towards a world where there's agent representation for people and for organizations. And, you know, I'll have my agent talk to your agent to figure out some of the details of our meetings or things like that. So, I do think that that's roughly where things are going. But, yeah, I think everyone here is excited about that. I really like the visual analogy of sensors and actuators. I actually hadn't thought about that. It's super interesting. Right. Okay. I think we have to end on a question about education because you are probably one of the very best in the world at making complex technical concepts simple and deeply thoughtful about how we design education around it. What still remains worth learning deeply when intelligence gets cheap as we move into the next era of AI? Yeah. There was a tweet that blew my mind recently and I keep thinking about it like every other day. It was something along the lines of you can outsource your thinking, but you can't outsource your understanding. I think that's really nicely put. So, yeah, because I still, I'm still part of the system and I still have to, somehow information still has to make it into my brain. And I feel like I'm becoming a bottleneck of just even knowing what are we trying to build? Why is it worth doing? How do I direct, you know, how do I direct my agents and so on? So, I do still think that ultimately something has to direct the thinking and the processing and so on. And that's still kind of fundamentally constrained somehow by understanding. And this is one reason I also was very excited about all the LLM knowledge bases, because I feel like that's a way for me to process information. And anytime I see a different projection onto information, I always like feel like I gain insight. So, it's really just a lot of prompts for me to do synthetic data generation kind of over some fixed data. So, I really enjoy, whenever I read an article, I have my, you know, my wiki that's being built up from these articles. And I love asking questions about things or, and I think that ultimately these are tools to enhance understanding in a certain way. And this is still kind of like a bit of a bottleneck because then you can't direct the, you can't be a good director if you still, because the LLM certainly don't excel at understanding. You still are uniquely in charge of that. So, yeah, I think tools to that effect, I think are incredibly interesting and exciting. I'm excited to be back here in a couple years and to see if we've been fully automated out of the loop and they actually take care of understanding as well. Thank you so much for joining us, Andre. We really appreciate it.",
+  "segments": [
+    {
+      "start": 1.62,
+      "end": 6.56,
+      "text": " we're so excited for our very first special guest he has helped build modern"
+    },
+    {
+      "start": 6.56,
+      "end": 14.7,
+      "text": " AI then explain modern AI and then occasionally rename modern AI he"
+    },
+    {
+      "start": 14.7,
+      "end": 18.5,
+      "text": " actually helped co-found open AI right inside of this office was the one who"
+    },
+    {
+      "start": 18.5,
+      "end": 23.66,
+      "text": " actually got autopilot working at Tesla back in the day and he has a rare gift"
+    },
+    {
+      "start": 23.66,
+      "end": 28.56,
+      "text": " of making the most complex technical shifts feel both accessible and"
+    },
+    {
+      "start": 28.56,
+      "end": 33.4,
+      "text": " inevitable you all know him for having coined the term vibe coding last year"
+    },
+    {
+      "start": 33.4,
+      "end": 38.5,
+      "text": " but just in the last few months he said something even more startling that he's"
+    },
+    {
+      "start": 38.5,
+      "end": 42.86,
+      "text": " never felt more behind as a programmer that's what we're starting today thank"
+    },
+    {
+      "start": 42.86,
+      "end": 47.28,
+      "text": " you Andre for joining us yeah hello excited to be hearing to kick us off okay"
+    },
+    {
+      "start": 47.28,
+      "end": 51.26,
+      "text": " so just a couple months ago you said that you've never felt more behind as a"
+    },
+    {
+      "start": 51.26,
+      "end": 55.82,
+      "text": " programmer that's startling to hear from you of all people can you help us unpack"
+    },
+    {
+      "start": 55.82,
+      "end": 61.28,
+      "text": " that was that feeling exhilarating or unsettling oh yeah mixture of both for"
+    },
+    {
+      "start": 61.28,
+      "end": 67.68,
+      "text": " sure well first of all I guess like as many of you I've been using agentic tools"
+    },
+    {
+      "start": 67.68,
+      "end": 71.22,
+      "text": " like cloud code adjacent things for a while maybe over the last year as it came"
+    },
+    {
+      "start": 71.22,
+      "end": 74.62,
+      "text": " out and it was very good at you know chunks of code and sometimes it would"
+    },
+    {
+      "start": 74.62,
+      "end": 77.86,
+      "text": " mess up and you have to edit them and it was kind of helpful and then I would say"
+    },
+    {
+      "start": 77.86,
+      "end": 82.5,
+      "text": " December was this clear point where for me I was on a break so I had a bit more"
+    },
+    {
+      "start": 82.5,
+      "end": 86.68,
+      "text": " time I think many other people were similar and I just started to notice"
+    },
+    {
+      "start": 86.68,
+      "end": 89.92,
+      "text": " that with the latest models the chunks just came out fine and then I kept"
+    },
+    {
+      "start": 89.92,
+      "end": 92.72,
+      "text": " asking for more and just came out fine and then I can't remember the last time"
+    },
+    {
+      "start": 92.72,
+      "end": 96.7,
+      "text": " I corrected it and then I was I just you know trusted the system more and more"
+    },
+    {
+      "start": 96.7,
+      "end": 102.56,
+      "text": " and then I was vibe coding and so it was kind of a I do think that was a very"
+    },
+    {
+      "start": 102.56,
+      "end": 105.88,
+      "text": " stark transition I think that a lot of people actually I trust you I tried to"
+    },
+    {
+      "start": 105.88,
+      "end": 112,
+      "text": " stress this on Twitter and or X because I think a lot of people experienced AI last year as"
+    },
+    {
+      "start": 112,
+      "end": 116.28,
+      "text": " chat GPT adjacent thing but you really had to look again and you had to look as"
+    },
+    {
+      "start": 116.28,
+      "end": 120.5,
+      "text": " of December because things have changed fundamentally and especially on this like"
+    },
+    {
+      "start": 120.5,
+      "end": 127.1,
+      "text": " agentic coherent workflow that really started to actually work and so I would"
+    },
+    {
+      "start": 127.1,
+      "end": 133.22,
+      "text": " say that yeah it was just that realization that really had me go down their"
+    },
+    {
+      "start": 133.22,
+      "end": 137.34,
+      "text": " whole rabbit hole of just you know infinity side project my side projects"
+    },
+    {
+      "start": 137.34,
+      "end": 141.7,
+      "text": " folder is like extremely full with lots of random things and just by coding all the"
+    },
+    {
+      "start": 141.7,
+      "end": 145.86,
+      "text": " time so yeah that kind of happened in December I would say and I was looking"
+    },
+    {
+      "start": 145.86,
+      "end": 150.2,
+      "text": " at the repercussions of that sense you've talked a lot about this idea of"
+    },
+    {
+      "start": 150.2,
+      "end": 155.34,
+      "text": " LLMs as a new computer that it isn't just better software it's a whole new"
+    },
+    {
+      "start": 155.34,
+      "end": 161.24,
+      "text": " computing paradigm and software 1.0 was explicit rules software 2.0 was learned"
+    },
+    {
+      "start": 161.24,
+      "end": 167.26,
+      "text": " weights software 3.0 is this if that's actually true what does a team build"
+    },
+    {
+      "start": 167.26,
+      "end": 173.26,
+      "text": " differently the day they actually believe this right so yeah exactly so software"
+    },
+    {
+      "start": 173.26,
+      "end": 177.84,
+      "text": " 1.0 I'm writing code software 2.0 I'm actually programming by creating data sets"
+    },
+    {
+      "start": 177.84,
+      "end": 181.46,
+      "text": " and training training neural networks so the programming is kind of like arranging"
+    },
+    {
+      "start": 181.46,
+      "end": 184.56,
+      "text": " data sets and maybe some objectives and neural network architectures and then"
+    },
+    {
+      "start": 184.56,
+      "end": 189.04,
+      "text": " what happened is that basically if you train one of these GPT models or LLMs on a"
+    },
+    {
+      "start": 189.04,
+      "end": 193.74,
+      "text": " sufficiently large set of tasks implicit basically implicitly because by"
+    },
+    {
+      "start": 193.74,
+      "end": 196.18,
+      "text": " training on the internet you have to multitask all the things that are in the"
+    },
+    {
+      "start": 196.18,
+      "end": 199.84,
+      "text": " data set these actually become kind of like a programmable computer in a certain"
+    },
+    {
+      "start": 199.84,
+      "end": 204.32,
+      "text": " sense so software 3.0 is kind of about you know your programming now turns to"
+    },
+    {
+      "start": 204.32,
+      "end": 208.84,
+      "text": " prompting and what's in the context window is your lever over the interpreter"
+    },
+    {
+      "start": 208.84,
+      "end": 212.68,
+      "text": " that is the LLM that is kind of like interpreting your context and performing"
+    },
+    {
+      "start": 212.68,
+      "end": 218.42,
+      "text": " computation in the digital information space so I guess yeah that's kind of the"
+    },
+    {
+      "start": 218.42,
+      "end": 222.32,
+      "text": " transition and I think there's a few examples of that really drove it home for me and"
+    },
+    {
+      "start": 222.32,
+      "end": 226.96,
+      "text": " maybe that might be instructive also for example when you when openclaw came out"
+    },
+    {
+      "start": 227.8,
+      "end": 230.84,
+      "text": " when you want to install openclaw you would expect that normally this is a"
+    },
+    {
+      "start": 230.84,
+      "end": 234.98,
+      "text": " bash script like a shell script so run the shell script to run to install openclaw"
+    },
+    {
+      "start": 235.94,
+      "end": 239.38,
+      "text": " but the thing is that in order to target lots of different platforms and lots of"
+    },
+    {
+      "start": 239.38,
+      "end": 242.52,
+      "text": " different types of computers you might run an openclaw these shell scripts"
+    },
+    {
+      "start": 242.52,
+      "end": 245.62,
+      "text": " usually ballooned up and become extremely complex but the thing is you're still"
+    },
+    {
+      "start": 245.62,
+      "end": 249.26,
+      "text": " stuck in a software 1.0 universe of wanting to write the code and actually the"
+    },
+    {
+      "start": 249.26,
+      "end": 253.82,
+      "text": " openclaw installation is a is a copy paste of a bunch of text that you're"
+    },
+    {
+      "start": 253.82,
+      "end": 257.36,
+      "text": " supposed to give to your agent so basically it's it's a little skill of"
+    },
+    {
+      "start": 257.92,
+      "end": 260.66,
+      "text": " you know copy paste this and give it to your agent and it will install openclaw"
+    },
+    {
+      "start": 260.66,
+      "end": 263.58,
+      "text": " and the reason this is a lot more powerful is you're working now in the"
+    },
+    {
+      "start": 263.58,
+      "end": 267.78,
+      "text": " software 3.0 paradigm where you don't have to precisely spell out you know all"
+    },
+    {
+      "start": 267.78,
+      "end": 271,
+      "text": " the individual details of that setup the agent has its own intelligence that it"
+    },
+    {
+      "start": 271,
+      "end": 274.78,
+      "text": " packages up and then it kind of follows the instructions and it looks at your"
+    },
+    {
+      "start": 274.78,
+      "end": 277.82,
+      "text": " environment your computer and it kind of like performs intelligent actions to"
+    },
+    {
+      "start": 277.82,
+      "end": 281.16,
+      "text": " make things work and debug things in the loop and it's just like so much more"
+    },
+    {
+      "start": 281.16,
+      "end": 285.2,
+      "text": " powerful right so I think that's a very different kind of like way of thinking"
+    },
+    {
+      "start": 285.2,
+      "end": 288.1,
+      "text": " about it it's just like what is the piece of text to copy paste to your agent"
+    },
+    {
+      "start": 288.1,
+      "end": 292.38,
+      "text": " that's the programming paradigm now I think one more maybe example that comes to"
+    },
+    {
+      "start": 292.38,
+      "end": 297.14,
+      "text": " mind that is even more extreme than that is when I was building menu gen so menu gen"
+    },
+    {
+      "start": 297.14,
+      "end": 301.96,
+      "text": " gen is this idea where you you come to a restaurant they give you a menu"
+    },
+    {
+      "start": 301.96,
+      "end": 302.16,
+      "text": " you"
+    },
+    {
+      "start": 300,
+      "end": 302.62,
+      "text": " There's no pictures usually, so I don't know what any of these things are."
+    },
+    {
+      "start": 303.2,
+      "end": 306.72,
+      "text": " Usually, like 30% of the things, I have no idea what they are, 50%."
+    },
+    {
+      "start": 306.72,
+      "end": 309.3,
+      "text": " So I wanted to take a photo of the restaurant menu"
+    },
+    {
+      "start": 309.3,
+      "end": 313.28,
+      "text": " and to get pictures of what those things might look like in a generic sense."
+    },
+    {
+      "start": 313.68,
+      "end": 317.22,
+      "text": " And so I built, I videcoded this app that basically lets you upload a photo,"
+    },
+    {
+      "start": 317.26,
+      "end": 319.68,
+      "text": " and it does all this stuff, and it runs on Vercel,"
+    },
+    {
+      "start": 319.76,
+      "end": 323.06,
+      "text": " and it basically re-renders the menu,"
+    },
+    {
+      "start": 323.12,
+      "end": 325.62,
+      "text": " and it gives you all the items, and it gives you a picture"
+    },
+    {
+      "start": 325.62,
+      "end": 331.94,
+      "text": " that it uses an image generator for to basically OCR all the different titles,"
+    },
+    {
+      "start": 332.46,
+      "end": 334.92,
+      "text": " use the image generator to get pictures of them, and then shows it to you."
+    },
+    {
+      "start": 335.14,
+      "end": 339.58,
+      "text": " And then I saw the Software 3.0 version of this, which blew my mind,"
+    },
+    {
+      "start": 339.66,
+      "end": 342.48,
+      "text": " which is literally just take your photo, give it to Gemini,"
+    },
+    {
+      "start": 342.66,
+      "end": 347.38,
+      "text": " and say, use Nano Banana to overlay the things onto the menu."
+    },
+    {
+      "start": 348.18,
+      "end": 350.32,
+      "text": " And Nano Banana basically returned an image"
+    },
+    {
+      "start": 350.32,
+      "end": 352.24,
+      "text": " that is exactly the picture of the menu that I took,"
+    },
+    {
+      "start": 352.24,
+      "end": 356.36,
+      "text": " but it actually put into the pixels, it rendered the different things in the menu."
+    },
+    {
+      "start": 357.04,
+      "end": 361.84,
+      "text": " And this blew my mind, because actually all of my menu gen is spurious."
+    },
+    {
+      "start": 362.16,
+      "end": 363.36,
+      "text": " It's working in the old paradigm."
+    },
+    {
+      "start": 363.62,
+      "end": 364.72,
+      "text": " That app shouldn't exist."
+    },
+    {
+      "start": 365.9,
+      "end": 369.54,
+      "text": " And yeah, the Software 3.0 paradigm is a lot more kind of raw."
+    },
+    {
+      "start": 369.74,
+      "end": 373.24,
+      "text": " It just, your neural network is doing more and more of the work,"
+    },
+    {
+      "start": 373.34,
+      "end": 377,
+      "text": " and your prompt or context is just the image, and the output is an image,"
+    },
+    {
+      "start": 377.12,
+      "end": 379.34,
+      "text": " and there's no need to have any of the app in between."
+    },
+    {
+      "start": 380.94,
+      "end": 384.92,
+      "text": " So, I think that people have to kind of like reframe, you know,"
+    },
+    {
+      "start": 385,
+      "end": 388.12,
+      "text": " not to work in the existing paradigm of what things existed,"
+    },
+    {
+      "start": 388.24,
+      "end": 390.24,
+      "text": " and just think about it as a speed-up of what exists."
+    },
+    {
+      "start": 390.84,
+      "end": 393.02,
+      "text": " It's actually like new things are available now."
+    },
+    {
+      "start": 393.38,
+      "end": 395.56,
+      "text": " And going back to your programming question, it's not even,"
+    },
+    {
+      "start": 395.8,
+      "end": 398.52,
+      "text": " I think that's also an example of working in the old mindset,"
+    },
+    {
+      "start": 398.58,
+      "end": 400.88,
+      "text": " because it's not just about programming and programming becoming faster."
+    },
+    {
+      "start": 401.1,
+      "end": 404.1,
+      "text": " This is more general information processing that is automatable now."
+    },
+    {
+      "start": 404.32,
+      "end": 406.7,
+      "text": " So, it's not just even about code."
+    },
+    {
+      "start": 406.7,
+      "end": 410.32,
+      "text": " So, previous code worked over kind of like structured data, right?"
+    },
+    {
+      "start": 410.52,
+      "end": 412.3,
+      "text": " And you write code over structured data."
+    },
+    {
+      "start": 412.48,
+      "end": 414.82,
+      "text": " But like, for example, with my LLM Knowledge Bases project,"
+    },
+    {
+      "start": 415.96,
+      "end": 418.9,
+      "text": " basically, you get LLMs to create wikis for your organization,"
+    },
+    {
+      "start": 419,
+      "end": 420.16,
+      "text": " for you in person, et cetera."
+    },
+    {
+      "start": 420.38,
+      "end": 421.28,
+      "text": " This is not even a program."
+    },
+    {
+      "start": 421.42,
+      "end": 422.78,
+      "text": " This is not something that could exist before,"
+    },
+    {
+      "start": 422.82,
+      "end": 426.34,
+      "text": " because there was no code that would create a knowledge base"
+    },
+    {
+      "start": 426.34,
+      "end": 427.4,
+      "text": " based on a bunch of facts."
+    },
+    {
+      "start": 427.54,
+      "end": 429.08,
+      "text": " But now, you can just take these documents"
+    },
+    {
+      "start": 429.08,
+      "end": 432.52,
+      "text": " and basically recompile them in a different way"
+    },
+    {
+      "start": 432.52,
+      "end": 435.94,
+      "text": " and reorder them and create something that is new and interesting"
+    },
+    {
+      "start": 435.94,
+      "end": 437.52,
+      "text": " as a reframing of the data."
+    },
+    {
+      "start": 437.9,
+      "end": 440.76,
+      "text": " And so, these are new things that weren't possible."
+    },
+    {
+      "start": 441.18,
+      "end": 444.92,
+      "text": " And so, I think this is something that I keep trying to get back to"
+    },
+    {
+      "start": 444.92,
+      "end": 448.3,
+      "text": " as to not only what can we do that existed that is faster now,"
+    },
+    {
+      "start": 448.42,
+      "end": 451.48,
+      "text": " but I think there's new opportunities of just things"
+    },
+    {
+      "start": 451.48,
+      "end": 452.84,
+      "text": " that couldn't be possible before."
+    },
+    {
+      "start": 452.84,
+      "end": 454.18,
+      "text": " And I almost think that that's more exciting."
+    },
+    {
+      "start": 454.6,
+      "end": 459,
+      "text": " I love the menu-gen progression and dichotomy that you laid out."
+    },
+    {
+      "start": 459.14,
+      "end": 461.24,
+      "text": " And I think even, I'm sure many folks here"
+    },
+    {
+      "start": 461.24,
+      "end": 462.68,
+      "text": " followed your own progression of programming"
+    },
+    {
+      "start": 462.68,
+      "end": 467.06,
+      "text": " from last October to early January, February this year."
+    },
+    {
+      "start": 467.36,
+      "end": 469.08,
+      "text": " If you extrapolate that further,"
+    },
+    {
+      "start": 469.26,
+      "end": 474.62,
+      "text": " what is the 2026 equivalent for building websites in the 90s,"
+    },
+    {
+      "start": 474.72,
+      "end": 477.2,
+      "text": " building mobile apps in the 2010s,"
+    },
+    {
+      "start": 477.36,
+      "end": 479.78,
+      "text": " building SaaS in the last cloud era?"
+    },
+    {
+      "start": 479.78,
+      "end": 482.72,
+      "text": " What will look completely obvious in hindsight"
+    },
+    {
+      "start": 482.72,
+      "end": 484.68,
+      "text": " that is still mostly unbuilt today?"
+    },
+    {
+      "start": 487.04,
+      "end": 489.24,
+      "text": " Well, going with the example of menu-gen, I guess,"
+    },
+    {
+      "start": 489.42,
+      "end": 491.04,
+      "text": " so a lot of this code shouldn't exist"
+    },
+    {
+      "start": 491.04,
+      "end": 493.16,
+      "text": " and it's just neural network doing most of the work."
+    },
+    {
+      "start": 493.88,
+      "end": 496.56,
+      "text": " I do think that the extrapolation looks very weird"
+    },
+    {
+      "start": 496.56,
+      "end": 498.16,
+      "text": " because you could basically imagine,"
+    },
+    {
+      "start": 498.9,
+      "end": 500.26,
+      "text": " I don't think, yeah,"
+    },
+    {
+      "start": 500.34,
+      "end": 502.58,
+      "text": " so you could imagine completely neural computers"
+    },
+    {
+      "start": 502.58,
+      "end": 503.4,
+      "text": " in a certain sense."
+    },
+    {
+      "start": 503.64,
+      "end": 506.7,
+      "text": " You feed raw videos, like imagine a device,"
+    },
+    {
+      "start": 506.7,
+      "end": 508.26,
+      "text": " it takes raw videos or audio"
+    },
+    {
+      "start": 508.26,
+      "end": 509.72,
+      "text": " into basically what's a neural net."
+    },
+    {
+      "start": 509.78,
+      "end": 512.46,
+      "text": " And uses diffusion to render a UI"
+    },
+    {
+      "start": 512.46,
+      "end": 513.84,
+      "text": " that is kind of like, you know,"
+    },
+    {
+      "start": 514.48,
+      "end": 516.22,
+      "text": " unique for that moment in a certain sense."
+    },
+    {
+      "start": 517.44,
+      "end": 518.72,
+      "text": " And I kind of feel like"
+    },
+    {
+      "start": 518.72,
+      "end": 520.48,
+      "text": " in the early days of computing, actually,"
+    },
+    {
+      "start": 520.58,
+      "end": 521.54,
+      "text": " people were a little bit confused"
+    },
+    {
+      "start": 521.54,
+      "end": 523.92,
+      "text": " as to whether computers would look like calculators"
+    },
+    {
+      "start": 523.92,
+      "end": 525.44,
+      "text": " or computers would look like neural nets."
+    },
+    {
+      "start": 525.6,
+      "end": 526.74,
+      "text": " And in the 50s and 60s,"
+    },
+    {
+      "start": 526.76,
+      "end": 528.86,
+      "text": " it was not really obvious which way it would go."
+    },
+    {
+      "start": 529.04,
+      "end": 530.64,
+      "text": " And of course, we went down the calculator path"
+    },
+    {
+      "start": 530.64,
+      "end": 532.26,
+      "text": " and ended up building classical computing."
+    },
+    {
+      "start": 532.54,
+      "end": 534.62,
+      "text": " And then neural nets are currently running virtualized"
+    },
+    {
+      "start": 534.62,
+      "end": 535.46,
+      "text": " on existing computers."
+    },
+    {
+      "start": 535.66,
+      "end": 537.08,
+      "text": " But you could imagine, I think,"
+    },
+    {
+      "start": 537.08,
+      "end": 538.72,
+      "text": " that a lot of this will flip"
+    },
+    {
+      "start": 538.72,
+      "end": 540.04,
+      "text": " and that the neural net becomes kind of like"
+    },
+    {
+      "start": 540.04,
+      "end": 541.06,
+      "text": " the host process."
+    },
+    {
+      "start": 541.8,
+      "end": 544.1,
+      "text": " And the CPU has become kind of like the co-processor."
+    },
+    {
+      "start": 544.52,
+      "end": 546.28,
+      "text": " So we saw the diagram of, you know,"
+    },
+    {
+      "start": 546.34,
+      "end": 547.46,
+      "text": " intelligence compute is going to,"
+    },
+    {
+      "start": 547.54,
+      "end": 548.96,
+      "text": " of neural networks is going to take over"
+    },
+    {
+      "start": 548.96,
+      "end": 551.56,
+      "text": " and become the dominant spend of flops."
+    },
+    {
+      "start": 551.78,
+      "end": 553.9,
+      "text": " So you could imagine something really weird"
+    },
+    {
+      "start": 553.9,
+      "end": 556.2,
+      "text": " and foreign when neural nets are doing"
+    },
+    {
+      "start": 556.2,
+      "end": 556.9,
+      "text": " most of the heavy lifting."
+    },
+    {
+      "start": 557.1,
+      "end": 559.14,
+      "text": " They're using tool use as just like, you know,"
+    },
+    {
+      "start": 560.26,
+      "end": 561.58,
+      "text": " historical appendage for some kinds"
+    },
+    {
+      "start": 561.58,
+      "end": 562.64,
+      "text": " of deterministic tasks."
+    },
+    {
+      "start": 562.92,
+      "end": 564.3,
+      "text": " But what's really running the show"
+    },
+    {
+      "start": 564.3,
+      "end": 566.58,
+      "text": " is these neural nets that are networked"
+    },
+    {
+      "start": 566.58,
+      "end": 567.18,
+      "text": " in a certain way."
+    },
+    {
+      "start": 567.98,
+      "end": 569.7,
+      "text": " So you could imagine something extremely foreign"
+    },
+    {
+      "start": 569.7,
+      "end": 570.56,
+      "text": " as the extrapolation."
+    },
+    {
+      "start": 570.82,
+      "end": 572.58,
+      "text": " But I think we're going to probably get there"
+    },
+    {
+      "start": 572.58,
+      "end": 573.68,
+      "text": " sort of piece by piece."
+    },
+    {
+      "start": 574.18,
+      "end": 577.28,
+      "text": " And I don't, yeah, that progression is TBD,"
+    },
+    {
+      "start": 577.36,
+      "end": 577.7,
+      "text": " I would say."
+    },
+    {
+      "start": 578.82,
+      "end": 580.14,
+      "text": " I'd love to talk a little bit about"
+    },
+    {
+      "start": 580.86,
+      "end": 582.58,
+      "text": " this concept of verifiability."
+    },
+    {
+      "start": 582.82,
+      "end": 584.68,
+      "text": " The fact that AI will automate faster"
+    },
+    {
+      "start": 584.68,
+      "end": 586.56,
+      "text": " and more easily domains"
+    },
+    {
+      "start": 586.56,
+      "end": 588.08,
+      "text": " where the output can be verified."
+    },
+    {
+      "start": 588.78,
+      "end": 590.42,
+      "text": " If that framework is right,"
+    },
+    {
+      "start": 590.64,
+      "end": 592.44,
+      "text": " what work is about to move much faster"
+    },
+    {
+      "start": 592.44,
+      "end": 593.38,
+      "text": " than people realize?"
+    },
+    {
+      "start": 593.64,
+      "end": 595.72,
+      "text": " And what professions do we have"
+    },
+    {
+      "start": 595.72,
+      "end": 597.5,
+      "text": " that people actually think are safe,"
+    },
+    {
+      "start": 597.6,
+      "end": 599.44,
+      "text": " but that are actually highly verifiable?"
+    },
+    {
+      "start": 600,
+      "end": 616.48,
+      "text": " Yeah, so I spent some time writing about verifiability and basically like traditional computers can easily automate what you can specify in code and kind of this latest round of LLMs can easily automate what you can verify in a certain sense."
+    },
+    {
+      "start": 616.78,
+      "end": 623.86,
+      "text": " Because the way this works is that when frontier labs are training these LLMs, these are giant reinforcement learning environments, so they are given verification rewards."
+    },
+    {
+      "start": 623.86,
+      "end": 635.8,
+      "text": " And then because of the way that these models are trained, they end up basically progressing and creating these like jagged entities that really peak in capability in kind of like verifiable domains like math and code and adjacent."
+    },
+    {
+      "start": 636.22,
+      "end": 642.8,
+      "text": " And kind of like stagnate and are a little bit, you know, rough around the edges when things are not kind of like in that space."
+    },
+    {
+      "start": 643.18,
+      "end": 647.38,
+      "text": " So I think the reason I wrote about verifiability is I'm trying to understand why these things are so jagged."
+    },
+    {
+      "start": 648.14,
+      "end": 656.8,
+      "text": " And some of it has to do with how the labs train the models, but I think some of it also has to do with the focus of the labs and what they happen to put into the data distribution."
+    },
+    {
+      "start": 657.46,
+      "end": 663.78,
+      "text": " Because some things basically are significantly more valuable in economy and end up creating more environments because the labs wanted to work in those settings."
+    },
+    {
+      "start": 663.96,
+      "end": 665.5,
+      "text": " So I think code is a good example of that."
+    },
+    {
+      "start": 665.7,
+      "end": 671.6,
+      "text": " There's probably lots of verifiable environments that you could think about that happen not to make it into the mix because they're just not that useful to have the capability around."
+    },
+    {
+      "start": 672.82,
+      "end": 683.08,
+      "text": " But I think to me the big, I guess like the big mystery is the favorite example for a while was that how many letters R are in a strawberry and the models would famously get this wrong."
+    },
+    {
+      "start": 683.24,
+      "end": 684.46,
+      "text": " And it's an example of jaggedness."
+    },
+    {
+      "start": 684.76,
+      "end": 686.38,
+      "text": " The models now patch this, I think."
+    },
+    {
+      "start": 686.52,
+      "end": 691.24,
+      "text": " But the new one is I want to go to a car wash to wash my car and it's 50 meters away."
+    },
+    {
+      "start": 691.7,
+      "end": 693.16,
+      "text": " Should I drive or should I walk?"
+    },
+    {
+      "start": 693.82,
+      "end": 697.6,
+      "text": " And state-of-the-art models today will tell you to walk because it's so close."
+    },
+    {
+      "start": 697.6,
+      "end": 711.26,
+      "text": " How is it possible that state-of-the-art Opus 4.7 will simultaneously refactor 100,000 line code base or find zero-day vulnerabilities and yet tells me to walk to this car wash?"
+    },
+    {
+      "start": 711.46,
+      "end": 712.5,
+      "text": " This is insane."
+    },
+    {
+      "start": 713.2,
+      "end": 720.18,
+      "text": " And to whatever extent these models remain jagged, it's an indication that number one, maybe something slightly off."
+    },
+    {
+      "start": 721.18,
+      "end": 726.26,
+      "text": " Or number two, you need to actually be in the loop a little bit and you need to treat them as tools."
+    },
+    {
+      "start": 726.26,
+      "end": 729.14,
+      "text": " And you do have to kind of stay in touch with what they're doing."
+    },
+    {
+      "start": 729.84,
+      "end": 736.3,
+      "text": " And so I think all of my writing, long story short about verifiability, just trying to understand why these things are jagged."
+    },
+    {
+      "start": 736.44,
+      "end": 737.46,
+      "text": " Is there any pattern to it?"
+    },
+    {
+      "start": 737.6,
+      "end": 741.84,
+      "text": " And I think it's some kind of a combination of verifiable plus labs care."
+    },
+    {
+      "start": 742.28,
+      "end": 749.68,
+      "text": " Maybe one more anecdote that is instructive is from GPT 3.5 to GPT 4, people noticed that chess improved a lot."
+    },
+    {
+      "start": 749.68,
+      "end": 753.02,
+      "text": " And I think a lot of people thought, oh, well, it's just a progression of the capabilities."
+    },
+    {
+      "start": 753.42,
+      "end": 761.88,
+      "text": " But actually it's more that, I think this is public information, I think I saw it on the internet, a huge amount of like data of chess made it into the pre-chaining set."
+    },
+    {
+      "start": 762.66,
+      "end": 768.26,
+      "text": " And just because it's in the data distribution, basically the model improved a lot more than it would just by default."
+    },
+    {
+      "start": 769.08,
+      "end": 774.4,
+      "text": " So someone at OpenAI decided to add this data and now you have a capability that just peaked a lot more."
+    },
+    {
+      "start": 774.56,
+      "end": 782.86,
+      "text": " And so that's why I think I'm stressing this dimension of it as we are slightly at the mercy of whatever the labs are doing, whatever they happen to put into the mix."
+    },
+    {
+      "start": 782.86,
+      "end": 786.6,
+      "text": " And you have to actually explore this thing that they give you that has no manual."
+    },
+    {
+      "start": 786.94,
+      "end": 789.78,
+      "text": " And it works in certain settings but maybe not in some settings."
+    },
+    {
+      "start": 790.06,
+      "end": 792.62,
+      "text": " And you have to kind of explore it a little bit."
+    },
+    {
+      "start": 793.4,
+      "end": 796.42,
+      "text": " And if you're in the circuits that were part of the RL, you fly."
+    },
+    {
+      "start": 796.64,
+      "end": 800.6,
+      "text": " And if you're in the circuits that are out of the data distribution, you're going to struggle."
+    },
+    {
+      "start": 800.8,
+      "end": 804.14,
+      "text": " And you have to kind of figure out which circuits you're in in your application."
+    },
+    {
+      "start": 804.14,
+      "end": 812.94,
+      "text": " And if you're not in the circuits, then you have to really look at fine-tuning and doing some of your own work because it's not going to necessarily come out of the LL, out of the box."
+    },
+    {
+      "start": 813.98,
+      "end": 817.02,
+      "text": " I'd love to come back to the concept of jagged intelligence in a little bit."
+    },
+    {
+      "start": 817.5,
+      "end": 827.6,
+      "text": " If you were a founder today and thinking about building a company, you are trying to solve a problem that you think is tractable, something that is a domain that is verifiable."
+    },
+    {
+      "start": 827.6,
+      "end": 838.66,
+      "text": " But you look around and you think, oh, my gosh, well, the labs have really, really started getting to escape velocity in the ones that seem most obvious, math, coding, and others."
+    },
+    {
+      "start": 838.92,
+      "end": 841.58,
+      "text": " What would your advice be to the founders in the audience?"
+    },
+    {
+      "start": 845.96,
+      "end": 852.42,
+      "text": " So I think maybe that comes to the previous question of, I do think that verifiability, because it, let me think."
+    },
+    {
+      "start": 852.42,
+      "end": 858.42,
+      "text": " So verifiability makes something tractable in the current paradigm, because you can throw a huge amount of RL at it."
+    },
+    {
+      "start": 860.22,
+      "end": 865.74,
+      "text": " So maybe one way to see it is that that remains true even if the labs are not focusing on it directly."
+    },
+    {
+      "start": 865.92,
+      "end": 874.04,
+      "text": " So if you are in a verifiable setting where you could create these RL environments or examples, then that actually sets you up to potentially do your own fine-tuning, and you might benefit from that."
+    },
+    {
+      "start": 874.2,
+      "end": 876.1,
+      "text": " But that is fundamentally technology that just works."
+    },
+    {
+      "start": 876.18,
+      "end": 876.86,
+      "text": " You can pull a lever."
+    },
+    {
+      "start": 876.86,
+      "end": 886.82,
+      "text": " If you have a huge amount of diverse data sets of RL environments, et cetera, you can use your favorite fine-tuning framework and pull the lever and get something that actually works pretty well."
+    },
+    {
+      "start": 887.34,
+      "end": 890.6,
+      "text": " So I don't know what the examples of this might be."
+    },
+    {
+      "start": 891.72,
+      "end": 897.72,
+      "text": " But I do think there are some very valuable reinforcement learning environments that people could think of that I think are not part of the..."
+    },
+    {
+      "start": 900,
+      "end": 904.78,
+      "text": " Yeah, I don't want to give away the answer, but there is one domain that I think is very, oh, okay, sorry."
+    },
+    {
+      "start": 904.88,
+      "end": 908.72,
+      "text": " I don't mean to vague post on the stage, but there are some examples of this."
+    },
+    {
+      "start": 908.96,
+      "end": 912.98,
+      "text": " On the flip side, what do you think still feels automatable, only from a distance?"
+    },
+    {
+      "start": 914.54,
+      "end": 919.58,
+      "text": " I do think that ultimately almost everything can be made verifiable to some extent."
+    },
+    {
+      "start": 919.72,
+      "end": 924.78,
+      "text": " Some things easier than others, because even for things like writing or so on,"
+    },
+    {
+      "start": 924.78,
+      "end": 932.7,
+      "text": " you can imagine having a council of LLM judges and probably get something reasonable from this kind of an approach."
+    },
+    {
+      "start": 932.84,
+      "end": 934.76,
+      "text": " So it's more about what's easy or hard."
+    },
+    {
+      "start": 936.14,
+      "end": 944.06,
+      "text": " So I do think that ultimately, yeah, I think everything is automatable."
+    },
+    {
+      "start": 945.3,
+      "end": 946.04,
+      "text": " Amazing, okay."
+    },
+    {
+      "start": 946.48,
+      "end": 952.2,
+      "text": " So last year you coined the term vibe coding, and today we're in a world that feels a little bit more serious, more organic engineering."
+    },
+    {
+      "start": 952.2,
+      "end": 956.32,
+      "text": " What do you think is the difference between the two, and what would you actually call what we're in today?"
+    },
+    {
+      "start": 957.32,
+      "end": 962.32,
+      "text": " Yeah, so I would say vibe coding is about raising the floor for everyone in terms of what they can do in software."
+    },
+    {
+      "start": 962.7,
+      "end": 966.78,
+      "text": " So the floor rises, everyone can vibe code anything, and that's amazing, incredible."
+    },
+    {
+      "start": 967.1,
+      "end": 972.38,
+      "text": " But then I would say agentic engineering is about preserving the quality bar of what existed before in professional software."
+    },
+    {
+      "start": 972.64,
+      "end": 976.2,
+      "text": " So you're not allowed to introduce vulnerabilities due to vibe coding."
+    },
+    {
+      "start": 978.08,
+      "end": 981.72,
+      "text": " You're still responsible for your software, just as before, but can you go faster?"
+    },
+    {
+      "start": 982.08,
+      "end": 985.18,
+      "text": " And spoiler is you can, but how do you do that properly?"
+    },
+    {
+      "start": 985.6,
+      "end": 990,
+      "text": " And so to me, agentic engineering, I call it that because I do think it's kind of like an engineering discipline."
+    },
+    {
+      "start": 990.26,
+      "end": 992.54,
+      "text": " You have these agents, which are these like spiky entities."
+    },
+    {
+      "start": 992.54,
+      "end": 995.8,
+      "text": " They're a bit fallible, a little bit stochastic, but they are extremely powerful."
+    },
+    {
+      "start": 995.8,
+      "end": 1000.94,
+      "text": " And it's how do you coordinate them to go faster without sacrificing your quality bar?"
+    },
+    {
+      "start": 1001.28,
+      "end": 1007,
+      "text": " And doing that well and correctly is the realm of agentic engineering."
+    },
+    {
+      "start": 1008.1,
+      "end": 1009.56,
+      "text": " So I kind of see them as different."
+    },
+    {
+      "start": 1009.76,
+      "end": 1014.06,
+      "text": " Like one is about maybe raising the floor, and the other is about extrapolating."
+    },
+    {
+      "start": 1014.18,
+      "end": 1020.04,
+      "text": " And what I'm seeing, I think, is there is a very high ceiling on agentic engineer capability."
+    },
+    {
+      "start": 1020.04,
+      "end": 1023.16,
+      "text": " And, you know, people used to talk about the 10x engineer previously."
+    },
+    {
+      "start": 1023.28,
+      "end": 1025.46,
+      "text": " I think that this has magnified a lot more."
+    },
+    {
+      "start": 1026.04,
+      "end": 1029.48,
+      "text": " 10x is not the speed up you gain."
+    },
+    {
+      "start": 1030.38,
+      "end": 1038.1,
+      "text": " And I think it does seem to me like people who are very good at this peak a lot more than 10x from my perspective right now."
+    },
+    {
+      "start": 1038.24,
+      "end": 1039.24,
+      "text": " I really like that framing."
+    },
+    {
+      "start": 1040.5,
+      "end": 1047.94,
+      "text": " One thing that when Sam Allman came to AI Ascent last year, one memorable thing he said was that people of different generations use ChatGPT differently."
+    },
+    {
+      "start": 1047.94,
+      "end": 1051.4,
+      "text": " So if you're in your 30s, you use it as a Google search replacement."
+    },
+    {
+      "start": 1051.6,
+      "end": 1055.1,
+      "text": " But if you're in your teens, ChatGPT is your gateway to the Internet."
+    },
+    {
+      "start": 1055.42,
+      "end": 1057.84,
+      "text": " What is the parallel here in coding today?"
+    },
+    {
+      "start": 1057.84,
+      "end": 1069.5,
+      "text": " If we were to watch two people code using OpenClaw, CloudCode, CodeX, one you'd consider mediocre at it, and one you would consider fully AI native, how would you describe the difference?"
+    },
+    {
+      "start": 1071.34,
+      "end": 1079.82,
+      "text": " I mean, I think it's just trying to get the most out of the tools that are available, utilizing all of their features, investing into your own kind of setup."
+    },
+    {
+      "start": 1080.38,
+      "end": 1084.4,
+      "text": " So just like previously, all the engineers are used to basically getting the most out of the tools you use."
+    },
+    {
+      "start": 1084.5,
+      "end": 1089.34,
+      "text": " Either it's Vim or VS Code, or now it's, you know, CloudCode or Codex or so on."
+    },
+    {
+      "start": 1089.34,
+      "end": 1097.74,
+      "text": " So just investing into your setup and utilizing a lot of the, you know, tools that are available to you."
+    },
+    {
+      "start": 1099.06,
+      "end": 1100.84,
+      "text": " And I think it just kind of looks like that."
+    },
+    {
+      "start": 1101.04,
+      "end": 1111.98,
+      "text": " I do think that maybe related thought is a lot of people are maybe hiring for this, right, because they want to hire strong agentic engineers."
+    },
+    {
+      "start": 1111.98,
+      "end": 1123.22,
+      "text": " I do think that what I'm seeing is that, you know, most people have still not refactored their hiring process for agentic engineer capability, right?"
+    },
+    {
+      "start": 1123.48,
+      "end": 1127.02,
+      "text": " Like if you're giving out puzzles to solve, then this is still the old paradigm."
+    },
+    {
+      "start": 1127.22,
+      "end": 1133.06,
+      "text": " I would say that hiring has to look like give me a really big project and see someone implement that big project."
+    },
+    {
+      "start": 1133.06,
+      "end": 1143.82,
+      "text": " Like let's write, say, a Twitter clone for agents and then make it really good, make it really secure, and then have some agents simulate some activity on this Twitter."
+    },
+    {
+      "start": 1144.18,
+      "end": 1153.14,
+      "text": " And then I'm going to use 10 Codex 5.4 X high to try to break your website that you deployed."
+    },
+    {
+      "start": 1153.52,
+      "end": 1156.94,
+      "text": " And they're going to try to basically break it, and they should not be able to break it."
+    },
+    {
+      "start": 1157.14,
+      "end": 1158.8,
+      "text": " And so maybe it looks like that, right?"
+    },
+    {
+      "start": 1158.8,
+      "end": 1168.22,
+      "text": " And so, yeah, watching people in that setting and building bigger projects and utilizing the tooling is maybe what I would look at for the most part."
+    },
+    {
+      "start": 1168.66,
+      "end": 1173.68,
+      "text": " And as agents do more, what human skill do you think becomes more valuable, not less?"
+    },
+    {
+      "start": 1175.12,
+      "end": 1176.44,
+      "text": " So, yeah, it's a good question."
+    },
+    {
+      "start": 1176.62,
+      "end": 1181.48,
+      "text": " I think, well, right now the answer is that the agents are kind of like these intern entities, right?"
+    },
+    {
+      "start": 1181.48,
+      "end": 1183.38,
+      "text": " So it's remarkable."
+    },
+    {
+      "start": 1184.82,
+      "end": 1190.58,
+      "text": " You basically still have to be in charge of the aesthetics, the judgment, the taste, and a little bit of oversight."
+    },
+    {
+      "start": 1190.82,
+      "end": 1196.44,
+      "text": " Maybe one of my favorite examples of, like, the weirdness of agents is for Menugen."
+    },
+    {
+      "start": 1196.72,
+      "end": 1202.44,
+      "text": " You sign up with a Google account, but you purchase credits using a Stripe account."
+    },
+    {
+      "start": 1202.44,
+      "end": 1202.56,
+      "text": " You sign up with a Google account."
+    },
+    {
+      "start": 1200,
+      "end": 1201.28,
+      "text": " and both of them have email addresses."
+    },
+    {
+      "start": 1201.8,
+      "end": 1203.58,
+      "text": " And my agent actually tries to basically,"
+    },
+    {
+      "start": 1206.04,
+      "end": 1207.38,
+      "text": " like when you purchase credits,"
+    },
+    {
+      "start": 1207.6,
+      "end": 1210.3,
+      "text": " it assigned it using the email address from Stripe"
+    },
+    {
+      "start": 1210.3,
+      "end": 1212.28,
+      "text": " to the Google email address."
+    },
+    {
+      "start": 1212.44,
+      "end": 1216.2,
+      "text": " Like there wasn't a persistent user ID for people."
+    },
+    {
+      "start": 1216.4,
+      "end": 1218.1,
+      "text": " It was trying to match up the email addresses"
+    },
+    {
+      "start": 1218.1,
+      "end": 1219.38,
+      "text": " but you could use different email address"
+    },
+    {
+      "start": 1219.38,
+      "end": 1220.4,
+      "text": " for your Stripe and your Google"
+    },
+    {
+      "start": 1220.4,
+      "end": 1223.24,
+      "text": " and basically would not associate the funds."
+    },
+    {
+      "start": 1223.56,
+      "end": 1224.7,
+      "text": " And so this is the kind of thing"
+    },
+    {
+      "start": 1224.7,
+      "end": 1227.1,
+      "text": " that these agents still will make mistakes about."
+    },
+    {
+      "start": 1227.26,
+      "end": 1228.68,
+      "text": " It's like, why would you use email addresses"
+    },
+    {
+      "start": 1228.68,
+      "end": 1230.04,
+      "text": " to try to cross correlate the funds?"
+    },
+    {
+      "start": 1230.2,
+      "end": 1231.02,
+      "text": " They can be arbitrary."
+    },
+    {
+      "start": 1231.22,
+      "end": 1232.58,
+      "text": " You can use different emails, et cetera."
+    },
+    {
+      "start": 1233,
+      "end": 1234.76,
+      "text": " Like this is such a weird thing to do."
+    },
+    {
+      "start": 1234.94,
+      "end": 1237.58,
+      "text": " So I think people have to be in charge of this spec,"
+    },
+    {
+      "start": 1237.8,
+      "end": 1241.4,
+      "text": " this plan, and I actually don't even like the plan mode."
+    },
+    {
+      "start": 1241.58,
+      "end": 1243.82,
+      "text": " I would, I mean, obviously it's very useful"
+    },
+    {
+      "start": 1243.82,
+      "end": 1245.24,
+      "text": " but I think there's something more general here"
+    },
+    {
+      "start": 1245.24,
+      "end": 1246.7,
+      "text": " where you have to work with your agent"
+    },
+    {
+      "start": 1246.7,
+      "end": 1248.58,
+      "text": " to design a spec that is very detailed"
+    },
+    {
+      "start": 1248.58,
+      "end": 1251.2,
+      "text": " and maybe it's basically the docs"
+    },
+    {
+      "start": 1251.2,
+      "end": 1253.12,
+      "text": " and then get the agents to write them."
+    },
+    {
+      "start": 1253.22,
+      "end": 1254.62,
+      "text": " And you're in charge of the oversight"
+    },
+    {
+      "start": 1254.62,
+      "end": 1256.26,
+      "text": " and the top level categories"
+    },
+    {
+      "start": 1256.76,
+      "end": 1258.28,
+      "text": " but the agents are doing a lot of the under the hood."
+    },
+    {
+      "start": 1258.68,
+      "end": 1261.44,
+      "text": " And so I think you're not caring about some of the details."
+    },
+    {
+      "start": 1261.7,
+      "end": 1265.12,
+      "text": " So as an example also with arrays or tensors"
+    },
+    {
+      "start": 1265.12,
+      "end": 1268.24,
+      "text": " in neural networks, there's a ton of details"
+    },
+    {
+      "start": 1268.24,
+      "end": 1269.7,
+      "text": " between PyTorch and NumPy"
+    },
+    {
+      "start": 1269.7,
+      "end": 1271.32,
+      "text": " and all the different like pandas and so on"
+    },
+    {
+      "start": 1271.32,
+      "end": 1273.06,
+      "text": " for all the different little API details."
+    },
+    {
+      "start": 1273.26,
+      "end": 1276.46,
+      "text": " And I already forgot about the keep dims versus keep dim"
+    },
+    {
+      "start": 1276.46,
+      "end": 1278.44,
+      "text": " or whether it's dim or axis or reshape"
+    },
+    {
+      "start": 1278.44,
+      "end": 1279.46,
+      "text": " or permute or transpose."
+    },
+    {
+      "start": 1279.68,
+      "end": 1280.9,
+      "text": " I don't remember this stuff anymore, right?"
+    },
+    {
+      "start": 1281.06,
+      "end": 1281.82,
+      "text": " Because you don't have to."
+    },
+    {
+      "start": 1282.02,
+      "end": 1284,
+      "text": " This is the kind of details that are handled by the intern"
+    },
+    {
+      "start": 1284,
+      "end": 1285.34,
+      "text": " because they have very good recall."
+    },
+    {
+      "start": 1285.76,
+      "end": 1287.52,
+      "text": " But you still have to know, for example,"
+    },
+    {
+      "start": 1287.7,
+      "end": 1291.22,
+      "text": " that there's underlying tensor, there's an underlying view,"
+    },
+    {
+      "start": 1291.5,
+      "end": 1293.76,
+      "text": " and then you can manipulate view of the same storage"
+    },
+    {
+      "start": 1293.76,
+      "end": 1294.92,
+      "text": " or you can have different storage"
+    },
+    {
+      "start": 1294.92,
+      "end": 1296.12,
+      "text": " which should be less efficient."
+    },
+    {
+      "start": 1296.36,
+      "end": 1297.72,
+      "text": " And so you still have to have an understanding"
+    },
+    {
+      "start": 1297.72,
+      "end": 1300.7,
+      "text": " of what this stuff is doing and some of the fundamentals"
+    },
+    {
+      "start": 1301.82,
+      "end": 1304.72,
+      "text": " so that you're not copying memory around unnecessarily and so on."
+    },
+    {
+      "start": 1304.72,
+      "end": 1308.34,
+      "text": " But the details of the APIs are not handed off."
+    },
+    {
+      "start": 1308.62,
+      "end": 1311.86,
+      "text": " So you're in charge of the taste, the engineering, the design,"
+    },
+    {
+      "start": 1312.4,
+      "end": 1314.92,
+      "text": " and that it makes sense, and that you're asking for the right things,"
+    },
+    {
+      "start": 1314.98,
+      "end": 1317.82,
+      "text": " and that you're saying that, okay, these have to be unique user IDs"
+    },
+    {
+      "start": 1317.82,
+      "end": 1318.88,
+      "text": " that we're going to tie everything to."
+    },
+    {
+      "start": 1320.28,
+      "end": 1323.16,
+      "text": " And so you're doing some of the design and development"
+    },
+    {
+      "start": 1323.16,
+      "end": 1325.04,
+      "text": " and the engineers are doing the fill in the blanks."
+    },
+    {
+      "start": 1325.22,
+      "end": 1326.84,
+      "text": " And that's currently kind of like where we are,"
+    },
+    {
+      "start": 1326.92,
+      "end": 1329.02,
+      "text": " and I think that's what everyone, of course, is seeing,"
+    },
+    {
+      "start": 1329.14,
+      "end": 1330.14,
+      "text": " I think, right now."
+    },
+    {
+      "start": 1330.14,
+      "end": 1334.08,
+      "text": " Do you think there's a chance that this taste and judgment"
+    },
+    {
+      "start": 1334.08,
+      "end": 1337.22,
+      "text": " matters less over time, or will the ceiling just keep rising?"
+    },
+    {
+      "start": 1338.26,
+      "end": 1339.16,
+      "text": " Yeah, it's a good question."
+    },
+    {
+      "start": 1339.32,
+      "end": 1345.48,
+      "text": " I would say, I mean, I'm hoping that it improves."
+    },
+    {
+      "start": 1345.62,
+      "end": 1348,
+      "text": " I think probably the reason it doesn't improve right now is,"
+    },
+    {
+      "start": 1348.08,
+      "end": 1349.22,
+      "text": " again, it's not part of the RL."
+    },
+    {
+      "start": 1349.42,
+      "end": 1352.38,
+      "text": " There's probably no aesthetics cost or reward,"
+    },
+    {
+      "start": 1352.5,
+      "end": 1354.6,
+      "text": " or it's not good enough or something like that."
+    },
+    {
+      "start": 1356.6,
+      "end": 1358.46,
+      "text": " I do think that when you actually look at the code,"
+    },
+    {
+      "start": 1358.56,
+      "end": 1359.96,
+      "text": " sometimes I get a little bit of a heart attack"
+    },
+    {
+      "start": 1359.96,
+      "end": 1363.16,
+      "text": " because it's not like super amazing code necessarily all the time,"
+    },
+    {
+      "start": 1363.26,
+      "end": 1364.92,
+      "text": " and it's very bloaty, and there's a lot of copy-paste,"
+    },
+    {
+      "start": 1365,
+      "end": 1366.82,
+      "text": " and there's awkward abstractions that are brittle,"
+    },
+    {
+      "start": 1367.02,
+      "end": 1369.54,
+      "text": " and like it works, but it's just really gross."
+    },
+    {
+      "start": 1370.88,
+      "end": 1373.76,
+      "text": " And I do hope that this can improve in future models."
+    },
+    {
+      "start": 1374.16,
+      "end": 1377.56,
+      "text": " A good example also is this micro-GPT project,"
+    },
+    {
+      "start": 1377.86,
+      "end": 1380.52,
+      "text": " where I was trying to simplify LLM training"
+    },
+    {
+      "start": 1380.52,
+      "end": 1381.86,
+      "text": " to be as simple as possible."
+    },
+    {
+      "start": 1382.1,
+      "end": 1383.14,
+      "text": " The models hate this."
+    },
+    {
+      "start": 1383.24,
+      "end": 1384.02,
+      "text": " They can't do it."
+    },
+    {
+      "start": 1384.14,
+      "end": 1387.7,
+      "text": " I kept trying to prompt an LLM to simplify more,"
+    },
+    {
+      "start": 1387.76,
+      "end": 1389.38,
+      "text": " simplify more, and it just can't,"
+    },
+    {
+      "start": 1389.94,
+      "end": 1392.14,
+      "text": " you feel like you're outside of the RL circuits."
+    },
+    {
+      "start": 1392.42,
+      "end": 1394.08,
+      "text": " It feels like you're obviously,"
+    },
+    {
+      "start": 1394.68,
+      "end": 1395.84,
+      "text": " you know, you're pulling teeth."
+    },
+    {
+      "start": 1396.08,
+      "end": 1397.54,
+      "text": " It's not like light speed."
+    },
+    {
+      "start": 1398.4,
+      "end": 1402.22,
+      "text": " So I do think that people still remain in charge of this,"
+    },
+    {
+      "start": 1402.32,
+      "end": 1403.9,
+      "text": " but I do think that there's nothing fundamental,"
+    },
+    {
+      "start": 1403.9,
+      "end": 1404.84,
+      "text": " again, that's preventing it."
+    },
+    {
+      "start": 1404.92,
+      "end": 1406.34,
+      "text": " It's just the labs haven't done it yet almost."
+    },
+    {
+      "start": 1407.62,
+      "end": 1412.72,
+      "text": " So I'd love to come back to this idea of jagged forms of intelligence."
+    },
+    {
+      "start": 1413.08,
+      "end": 1416.04,
+      "text": " You wrote a little bit about this with a very thought-provoking piece"
+    },
+    {
+      "start": 1416.04,
+      "end": 1417.42,
+      "text": " around animals versus ghosts,"
+    },
+    {
+      "start": 1418.24,
+      "end": 1420.88,
+      "text": " and the idea is that we're not building animals."
+    },
+    {
+      "start": 1420.88,
+      "end": 1422.14,
+      "text": " We are summoning ghosts,"
+    },
+    {
+      "start": 1422.66,
+      "end": 1427.88,
+      "text": " and these are jagged forms of intelligence that are shaped by data and reward functions,"
+    },
+    {
+      "start": 1427.88,
+      "end": 1432.04,
+      "text": " but not by intrinsic motivation or fun or curiosity or empowerment,"
+    },
+    {
+      "start": 1433.28,
+      "end": 1435.86,
+      "text": " things that kind of came about via evolution."
+    },
+    {
+      "start": 1436.86,
+      "end": 1444.44,
+      "text": " Why does that framing matter, and what does it actually change about how you build and deploy and evaluate or even trust them?"
+    },
+    {
+      "start": 1446.34,
+      "end": 1452.52,
+      "text": " Yeah, so, yeah, I think the reason I wrote about this is because I'm trying to wrap my head around what these things are, right?"
+    },
+    {
+      "start": 1452.64,
+      "end": 1454.92,
+      "text": " Because if you have a good model of what they are or are not,"
+    },
+    {
+      "start": 1455.02,
+      "end": 1457.36,
+      "text": " then you're going to be more competent at using them."
+    },
+    {
+      "start": 1458.42,
+      "end": 1461.38,
+      "text": " And I do think that, I don't know if it has,"
+    },
+    {
+      "start": 1461.96,
+      "end": 1464.52,
+      "text": " I'm not sure if it actually has like real power."
+    },
+    {
+      "start": 1465.34,
+      "end": 1467.12,
+      "text": " I think it's a little bit of philosophizing,"
+    },
+    {
+      "start": 1468.52,
+      "end": 1469.72,
+      "text": " but I do think that,"
+    },
+    {
+      "start": 1471.58,
+      "end": 1474.42,
+      "text": " I think it's just coming to terms with the fact that"
+    },
+    {
+      "start": 1474.42,
+      "end": 1476.5,
+      "text": " these things are not, you know, animal intelligences."
+    },
+    {
+      "start": 1476.66,
+      "end": 1477.54,
+      "text": " Like if you yell at them,"
+    },
+    {
+      "start": 1477.58,
+      "end": 1479.36,
+      "text": " they're not going to work better or worse,"
+    },
+    {
+      "start": 1479.42,
+      "end": 1480.56,
+      "text": " or it doesn't have any impact."
+    },
+    {
+      "start": 1482.62,
+      "end": 1485.76,
+      "text": " And it's all just kind of like these statistical simulation circuits"
+    },
+    {
+      "start": 1486.46,
+      "end": 1489.26,
+      "text": " where the substrate is pre-training,"
+    },
+    {
+      "start": 1489.38,
+      "end": 1490.4,
+      "text": " so like statistics,"
+    },
+    {
+      "start": 1490.94,
+      "end": 1493.18,
+      "text": " and then, but then there's RL bolting on top,"
+    },
+    {
+      "start": 1493.24,
+      "end": 1495.86,
+      "text": " so it kind of like increases the appendages."
+    },
+    {
+      "start": 1496.62,
+      "end": 1497.96,
+      "text": " And maybe it's just kind of like,"
+    },
+    {
+      "start": 1500,
+      "end": 1504.2,
+      "text": " a mindset of what I'm coming into or what's likely to work or not likely to work or how"
+    },
+    {
+      "start": 1504.2,
+      "end": 1508.48,
+      "text": " to modify it. But I don't actually, I don't know that I have like, here are the five obvious"
+    },
+    {
+      "start": 1508.48,
+      "end": 1512.48,
+      "text": " outcomes of how to make your system better. It's more just being suspicious of it and"
+    },
+    {
+      "start": 1513.34,
+      "end": 1518.12,
+      "text": " figuring it out over time. That's where it starts. Okay, so you are so deep in working"
+    },
+    {
+      "start": 1518.12,
+      "end": 1523.2,
+      "text": " with agents that don't just chat. They have real permissions. They have local context."
+    },
+    {
+      "start": 1523.5,
+      "end": 1528.18,
+      "text": " They actually take action on your behalf. What does the world look like when we all start"
+    },
+    {
+      "start": 1528.18,
+      "end": 1534.7,
+      "text": " to live in that world? Yeah, I think a lot of people probably here are excited about what"
+    },
+    {
+      "start": 1534.7,
+      "end": 1540.28,
+      "text": " this native agentic environment looks like. And everything has to be rewritten. Everything"
+    },
+    {
+      "start": 1540.28,
+      "end": 1545.3,
+      "text": " is still fundamentally written for humans and has to be moved around. I still use, most"
+    },
+    {
+      "start": 1545.3,
+      "end": 1548.62,
+      "text": " of the time when I use different frameworks or libraries or things like that, they still"
+    },
+    {
+      "start": 1548.62,
+      "end": 1552.92,
+      "text": " have docs that are fundamentally written for humans. This is my favorite pet peeve. Like"
+    },
+    {
+      "start": 1552.92,
+      "end": 1556.98,
+      "text": " I don't, why are people still telling me what to do? Like I don't want to do anything. What"
+    },
+    {
+      "start": 1556.98,
+      "end": 1562.68,
+      "text": " is the thing I should copy paste to my agent? Like, so it's just every time I'm told, you"
+    },
+    {
+      "start": 1562.68,
+      "end": 1568.84,
+      "text": " know, go to this URL or something like that, it's just like, oh, you know. So everyone"
+    },
+    {
+      "start": 1568.84,
+      "end": 1573.32,
+      "text": " is, I think, excited about how do we decompose the workloads that need to happen into fundamentally"
+    },
+    {
+      "start": 1573.32,
+      "end": 1586.96,
+      "text": " sensors over the world, actuators over the world. How do we make it agent native? Basically"
+    },
+    {
+      "start": 1587.46,
+      "end": 1592.62,
+      "text": " yeah, around data structures that are very legible to the LLMs. So I think, yeah, I'm hoping"
+    },
+    {
+      "start": 1592.62,
+      "end": 1597.08,
+      "text": " that there's a lot of agent first infrastructure out there. And that, you know, for Menugen,"
+    },
+    {
+      "start": 1597.42,
+      "end": 1601.08,
+      "text": " famously, when I wrote the, not, I'm not sure how famously, but when I wrote the blog post"
+    },
+    {
+      "start": 1601.08,
+      "end": 1606.3,
+      "text": " about Menugen, a lot of the work, or a lot of the trouble was not even writing the code"
+    },
+    {
+      "start": 1606.3,
+      "end": 1609.38,
+      "text": " for Menugen. It was deploying it in Vercel because I had to work with all these different"
+    },
+    {
+      "start": 1609.38,
+      "end": 1613.66,
+      "text": " services and I just string them up and I had to go to their settings and the menus and, you"
+    },
+    {
+      "start": 1613.66,
+      "end": 1618.58,
+      "text": " know, configure my DNS and it was just so annoying. And so that's a good example of,"
+    },
+    {
+      "start": 1618.66,
+      "end": 1623.64,
+      "text": " I would hope that Menugen, that I could give a prompt to an LLM, build Menugen, and that"
+    },
+    {
+      "start": 1623.64,
+      "end": 1628.02,
+      "text": " I didn't have to touch anything and it's deployed in that same way on the internet. I think that"
+    },
+    {
+      "start": 1628.02,
+      "end": 1632.34,
+      "text": " would be a good kind of a test for whether or not a lot of our infrastructure is becoming"
+    },
+    {
+      "start": 1632.34,
+      "end": 1636.64,
+      "text": " more and more agent native. And then ultimately I would say, yeah, I do think we're going towards"
+    },
+    {
+      "start": 1636.64,
+      "end": 1641.36,
+      "text": " a world where there's agent representation for people and for organizations."
+    },
+    {
+      "start": 1643.64,
+      "end": 1647.84,
+      "text": " And, you know, I'll have my agent talk to your agent to figure out some of the details"
+    },
+    {
+      "start": 1647.84,
+      "end": 1653.92,
+      "text": " of our meetings or things like that. So, I do think that that's roughly where things"
+    },
+    {
+      "start": 1653.92,
+      "end": 1656.7,
+      "text": " are going. But, yeah, I think everyone here is excited about that."
+    },
+    {
+      "start": 1656.84,
+      "end": 1660.74,
+      "text": " I really like the visual analogy of sensors and actuators. I actually hadn't thought about"
+    },
+    {
+      "start": 1660.74,
+      "end": 1661.64,
+      "text": " that. It's super interesting."
+    },
+    {
+      "start": 1661.84,
+      "end": 1661.96,
+      "text": " Right."
+    },
+    {
+      "start": 1662.5,
+      "end": 1667.42,
+      "text": " Okay. I think we have to end on a question about education because you are probably one"
+    },
+    {
+      "start": 1667.42,
+      "end": 1672.16,
+      "text": " of the very best in the world at making complex technical concepts simple and deeply thoughtful"
+    },
+    {
+      "start": 1672.16,
+      "end": 1680.2,
+      "text": " about how we design education around it. What still remains worth learning deeply when intelligence"
+    },
+    {
+      "start": 1680.2,
+      "end": 1683.48,
+      "text": " gets cheap as we move into the next era of AI?"
+    },
+    {
+      "start": 1683.86,
+      "end": 1688.6,
+      "text": " Yeah. There was a tweet that blew my mind recently and I keep thinking about it like every other"
+    },
+    {
+      "start": 1688.6,
+      "end": 1693.04,
+      "text": " day. It was something along the lines of you can outsource your thinking, but you can't"
+    },
+    {
+      "start": 1693.04,
+      "end": 1694.04,
+      "text": " outsource your understanding."
+    },
+    {
+      "start": 1696.28,
+      "end": 1697.6,
+      "text": " I think that's really nicely put."
+    },
+    {
+      "start": 1698.58,
+      "end": 1704.66,
+      "text": " So, yeah, because I still, I'm still part of the system and I still have to, somehow information"
+    },
+    {
+      "start": 1704.66,
+      "end": 1708.32,
+      "text": " still has to make it into my brain. And I feel like I'm becoming a bottleneck of just even knowing"
+    },
+    {
+      "start": 1708.32,
+      "end": 1712.3,
+      "text": " what are we trying to build? Why is it worth doing? How do I direct, you know, how do I direct"
+    },
+    {
+      "start": 1712.3,
+      "end": 1718.24,
+      "text": " my agents and so on? So, I do still think that ultimately something has to direct the thinking"
+    },
+    {
+      "start": 1718.24,
+      "end": 1723.88,
+      "text": " and the processing and so on. And that's still kind of fundamentally constrained somehow by"
+    },
+    {
+      "start": 1723.88,
+      "end": 1727.54,
+      "text": " understanding. And this is one reason I also was very excited about all the LLM knowledge bases,"
+    },
+    {
+      "start": 1727.7,
+      "end": 1732.1,
+      "text": " because I feel like that's a way for me to process information. And anytime I see a different"
+    },
+    {
+      "start": 1732.1,
+      "end": 1737.02,
+      "text": " projection onto information, I always like feel like I gain insight. So, it's really just a lot of"
+    },
+    {
+      "start": 1737.02,
+      "end": 1742.66,
+      "text": " prompts for me to do synthetic data generation kind of over some fixed data. So, I really enjoy,"
+    },
+    {
+      "start": 1742.88,
+      "end": 1746.78,
+      "text": " whenever I read an article, I have my, you know, my wiki that's being built up from these articles."
+    },
+    {
+      "start": 1747.08,
+      "end": 1753.76,
+      "text": " And I love asking questions about things or, and I think that ultimately these are tools to enhance"
+    },
+    {
+      "start": 1753.76,
+      "end": 1758.12,
+      "text": " understanding in a certain way. And this is still kind of like a bit of a bottleneck because then you"
+    },
+    {
+      "start": 1758.12,
+      "end": 1764.64,
+      "text": " can't direct the, you can't be a good director if you still, because the LLM certainly don't excel at"
+    },
+    {
+      "start": 1764.64,
+      "end": 1769.78,
+      "text": " understanding. You still are uniquely in charge of that. So, yeah, I think tools to that effect,"
+    },
+    {
+      "start": 1769.8,
+      "end": 1773.5,
+      "text": " I think are incredibly interesting and exciting. I'm excited to be back here in a couple years"
+    },
+    {
+      "start": 1773.5,
+      "end": 1778.04,
+      "text": " and to see if we've been fully automated out of the loop and they actually take care of"
+    },
+    {
+      "start": 1778.04,
+      "end": 1781.76,
+      "text": " understanding as well. Thank you so much for joining us, Andre. We really appreciate it."
+    }
+  ],
+  "detected_lang": "en",
+  "translate_lang": "zh",
+  "has_translation": true
+}

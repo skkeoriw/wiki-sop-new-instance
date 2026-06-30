@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "executor": "hermes",
+  "requested_skill": "youtube-deep-research",
+  "executed_skill": "youtube-deep-research",
+  "node_id": "youtube-deep-research-dxky",
+  "node_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+  "request_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+  "status": "done",
+  "returncode": 0,
+  "timed_out": false,
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "passed",
+      "expected_outputs": [
+        "result",
+        "status"
+      ],
+      "required_outputs": [],
+      "present_outputs": [
+        "result",
+        "status"
+      ],
+      "missing_required_outputs": [],
+      "business_outputs": {
+        "result": "youtube-deep-research-dxky",
+        "status": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json"
+      },
+      "business_artifact_count": 10
+    },
+    "success_evidence": {
+      "passed": true,
+      "signals": [
+        {
+          "source": "manifest.status",
+          "status": "done"
+        },
+        {
+          "source": "receipt.status",
+          "status": "done"
+        },
+        {
+          "source": "output_artifacts",
+          "count": 17
+        },
+        {
+          "source": "receipt",
+          "status": "success"
+        }
+      ],
+      "failures": []
+    }
+  },
+  "business_output_status": {
+    "status": "passed",
+    "expected_outputs": [
+      "result",
+      "status"
+    ],
+    "required_outputs": [],
+    "present_outputs": [
+      "result",
+      "status"
+    ],
+    "missing_required_outputs": [],
+    "business_outputs": {
+      "result": "youtube-deep-research-dxky",
+      "status": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json"
+    },
+    "business_artifact_count": 10
+  },
+  "input_manifest": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/inputs/sources/manifest.json",
+  "output_manifest": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/manifest.json",
+  "started_at": "2026-06-30T13:03:19.895218+00:00",
+  "finished_at": "2026-06-30T13:15:14.462549+00:00",
+  "legacy_fallback": false,
+  "error": ""
+}

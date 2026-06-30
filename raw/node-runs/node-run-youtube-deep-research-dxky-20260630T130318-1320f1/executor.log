@@ -1,0 +1,28 @@
+Node execution **completed successfully**. Here's the summary:
+
+## Execution Result: youtube-deep-research-dxky ✅
+
+**Source URL**: https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s  
+**Job ID**: `b2d4f2e3-f80d-4812-adc2-d1ac62b90a15`  
+**Status**: completed (all 6/6 chunks done)  
+**Detected language**: en
+
+### Pipeline Progression
+```
+pending → downloading → transcribing → translating → analyzing → completed
+```
+
+### Outputs Written
+
+| File | Path | Size |
+|---|---|---|
+| **Manifest** | `outputs/manifest.json` | ✅ Schema v1, 2 produced items, 7 artifacts |
+| **Report** | `outputs/report.json` | ✅ Status "done" |
+| **Receipt** | `agent/receipt.json` | ✅ Full execution summary |
+| **Analysis (MD)** | `outputs/outputs/analysis.md` | 49 KB — includes summary, key points, clip suggestions, full transcript |
+| **Transcript** | `outputs/outputs/transcript.txt` | 31 KB |
+| **Worker artifacts** | `outputs/artifacts/` | start.json, status.json, transcript.json/.srt/.txt/.vtt, worker-analysis.md |
+| **Worker raw** | `raw/youtube-deep-research/...` | Full raw copy preserved |
+
+### Analysis Content
+The research covered Andrej Karpathy's interview on "Agent Engineering" — AI programming's paradigm shift from vibe coding to agent engineering (软件3.0 / Software 3.0 paradigm). Key topics: LLM as programmable computer, verifiability as AI progress engine, jagged intelligence, and the future of neural-native computing.
