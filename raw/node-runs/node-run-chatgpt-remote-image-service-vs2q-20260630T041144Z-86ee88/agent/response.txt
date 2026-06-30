@@ -1,0 +1,21 @@
+Node execution completed successfully. Here's the summary:
+
+## Node Run Result: SUCCESS
+
+**Skill**: `chatgpt-remote-image-service` (pure prompt generation)
+
+**Input**: `prompt = "生成一张小猫睡觉的照片"` (no reference image)
+
+**Execution**: Submitted to `https://chatgpt-image.vyibc.com/generate`, task progressed through all stages (prepare → fill prompt → generate → download → upload), completed in ~49 seconds.
+
+**Outputs**:
+
+| Item | Path/URL |
+|------|----------|
+| Public image URL | `https://resource.vyibc.com/ec6b42aa-7777-4948-8d11-c6a7bc12e510.png` |
+| Local PNG (2.4 MB) | `.../outputs/generated_image.png` |
+| ChatGPT thread | `https://chatgpt.com/c/6a434285-b37c-83ea-9b7b-998411f82252` |
+
+**Written artifacts**:
+- `.../outputs/manifest.json` — declares `status: completed` with image metadata and full execution timings
+- `.../agent/receipt.json` — agent receipt with task ID, worker ID, and summary

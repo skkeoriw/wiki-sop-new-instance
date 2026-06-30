@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260630T041144Z-86ee88",
+  "node_id": "chatgpt-remote-image-service-vs2q",
+  "created_at": "2026-06-30T04:14:38Z",
+  "status": "completed",
+  "outputs": {
+    "publicImageUrl": "https://resource.vyibc.com/ec6b42aa-7777-4948-8d11-c6a7bc12e510.png",
+    "taskId": "ec6b42aa-7777-4948-8d11-c6a7bc12e510",
+    "chatgptUrl": "https://chatgpt.com/c/6a434285-b37c-83ea-9b7b-998411f82252",
+    "workerId": "worker-1"
+  },
+  "output_files": [
+    {
+      "path": "generated_image.png",
+      "size_bytes": 2492912,
+      "content_type": "image/png",
+      "source_url": "https://resource.vyibc.com/ec6b42aa-7777-4948-8d11-c6a7bc12e510.png",
+      "description": "Generated image via ChatGPT Remote Image Service"
+    }
+  ],
+  "summary": {
+    "prompt": "生成一张小猫睡觉的照片",
+    "generated": true,
+    "public_url": "https://resource.vyibc.com/ec6b42aa-7777-4948-8d11-c6a7bc12e510.png"
+  },
+  "execution": {
+    "skill": "chatgpt-remote-image-service",
+    "duration_seconds": 49,
+    "timings": {
+      "connectedMs": 902,
+      "pageReadyMs": 1900,
+      "sentMs": 9082,
+      "generatedVisibleMs": 35984,
+      "downloadedMs": 48209,
+      "uploadedMs": 48834
+    },
+    "stages": [
+      "parseArgs",
+      "importPlaywright",
+      "connectBrowser",
+      "preparePage",
+      "waitComposer",
+      "enterImageMode",
+      "fillPrompt",
+      "waitSendEnabled",
+      "snapshotExistingGeneratedImages",
+      "clickSend",
+      "waitForGeneratedImage",
+      "downloadImage",
+      "uploadImage"
+    ]
+  },
+  "items": [
+    {
+      "value": "https://resource.vyibc.com/ec6b42aa-7777-4948-8d11-c6a7bc12e510.png",
+      "name": "publicImageUrl",
+      "output": "publicImageUrl"
+    },
+    {
+      "value": "ec6b42aa-7777-4948-8d11-c6a7bc12e510",
+      "name": "taskId",
+      "output": "taskId"
+    },
+    {
+      "value": "https://chatgpt.com/c/6a434285-b37c-83ea-9b7b-998411f82252",
+      "name": "chatgptUrl",
+      "output": "chatgptUrl"
+    },
+    {
+      "value": "worker-1",
+      "name": "workerId",
+      "output": "workerId"
+    },
+    {
+      "output": "result",
+      "value": "SUCCESS",
+      "value_type": "text",
+      "kind": "scalar",
+      "source": "node-run-text-evidence"
+    },
+    {
+      "output": "status",
+      "value": "completed`",
+      "value_type": "text",
+      "kind": "scalar",
+      "source": "node-run-text-evidence"
+    },
+    {
+      "output": "public_image_url",
+      "value": "https://chatgpt.com/c/6a434285-b37c-83ea-9b7b-998411f82252`",
+      "value_type": "url",
+      "kind": "scalar",
+      "source": "node-run-text-evidence"
+    },
+    {
+      "output": "image_url",
+      "value": "https://chatgpt.com/c/6a434285-b37c-83ea-9b7b-998411f82252`",
+      "value_type": "url",
+      "kind": "scalar",
+      "source": "node-run-text-evidence"
+    }
+  ]
+}
