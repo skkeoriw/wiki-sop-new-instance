@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-youtube-metadata-fetch-20260630T091116-e554eb",
+  "node_id": "youtube-metadata-fetch",
+  "created_at": "2026-06-30T09:12:06Z",
+  "status": "failed",
+  "error": "metadata API HTTP 403: Cloudflare Error 1010 — access denied (browser signature banned). The worker at youtube-content-parse.hb67egcim4.workers.dev blocked the request. Error indicates the YouTube content parse Workers endpoint has been banned by Cloudflare/YouTube.",
+  "outputs": {},
+  "expected": {
+    "result": null,
+    "status": "failed",
+    "metadata_json": null,
+    "source_url_txt": null,
+    "result_json": null
+  },
+  "items": [
+    {
+      "output": "result",
+      "value": "FAILED",
+      "value_type": "text",
+      "kind": "scalar",
+      "source": "node-run-text-evidence"
+    }
+  ]
+}

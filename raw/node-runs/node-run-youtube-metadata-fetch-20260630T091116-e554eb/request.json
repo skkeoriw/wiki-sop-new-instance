@@ -1,0 +1,20 @@
+{
+  "schema": "node-execution-request/v1",
+  "runtime_id": "youtube-wiki",
+  "instance_id": "wiki-sop-new-instance",
+  "workflow_id": "youtube-research-wiki",
+  "node_id": "youtube-metadata-fetch",
+  "run_id": "node-run-youtube-metadata-fetch-20260630T091116-e554eb",
+  "entry_inputs": {
+    "source_url": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T091116-e554eb/inputs/sources/0001.txt"
+  },
+  "handoff_sources": [],
+  "handoff_instruction": "",
+  "input_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T091116-e554eb/inputs/sources/manifest.json",
+  "input_directory": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T091116-e554eb/inputs/sources",
+  "outputs_dir": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T091116-e554eb/outputs",
+  "output_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T091116-e554eb/outputs/manifest.json",
+  "edge_contract": {},
+  "node_execution_guide": {},
+  "created_at": "2026-06-30T09:11:17.428710+00:00"
+}

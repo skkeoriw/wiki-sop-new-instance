@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "executor": "hermes",
+  "requested_skill": "youtube-metadata-fetch",
+  "executed_skill": "youtube-metadata-fetch",
+  "node_id": "youtube-metadata-fetch",
+  "node_run_id": "node-run-youtube-metadata-fetch-20260630T091116-e554eb",
+  "request_id": "node-run-youtube-metadata-fetch-20260630T091116-e554eb",
+  "status": "done",
+  "returncode": 0,
+  "timed_out": false,
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "passed",
+      "expected_outputs": [
+        "result",
+        "status",
+        "metadata_json",
+        "source_url_txt",
+        "result_json"
+      ],
+      "required_outputs": [],
+      "present_outputs": [
+        "result"
+      ],
+      "missing_required_outputs": [],
+      "business_outputs": {
+        "result": "FAILED"
+      },
+      "business_artifact_count": 0
+    },
+    "success_evidence": {
+      "passed": false,
+      "signals": [],
+      "failures": [
+        {
+          "source": "manifest.status",
+          "status": "failed"
+        },
+        {
+          "source": "receipt.status",
+          "status": "failed"
+        }
+      ]
+    }
+  },
+  "business_output_status": {
+    "status": "passed",
+    "expected_outputs": [
+      "result",
+      "status",
+      "metadata_json",
+      "source_url_txt",
+      "result_json"
+    ],
+    "required_outputs": [],
+    "present_outputs": [
+      "result"
+    ],
+    "missing_required_outputs": [],
+    "business_outputs": {
+      "result": "FAILED"
+    },
+    "business_artifact_count": 0
+  },
+  "input_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T091116-e554eb/inputs/sources/manifest.json",
+  "output_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T091116-e554eb/outputs/manifest.json",
+  "started_at": "2026-06-30T09:11:17.426393+00:00",
+  "finished_at": "2026-06-30T09:17:34.116159+00:00",
+  "legacy_fallback": false,
+  "error": ""
+}

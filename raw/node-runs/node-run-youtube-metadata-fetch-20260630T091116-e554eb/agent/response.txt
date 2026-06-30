@@ -1,0 +1,25 @@
+## Execution Complete — Failed
+
+**Node:** `youtube-metadata-fetch` | **Run:** `node-run-youtube-metadata-fetch-20260630T091116-e554eb`
+**Source URL:** `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
+
+### Result: FAILED
+
+The skill's API call to `youtube-content-parse.hb67egcim4.workers.dev` returned HTTP **403** with Cloudflare **Error 1010** (`browser_signature_banned`).
+
+The error payload includes an explicit `owner_action_required: true` and advises **"Do not retry. Your user-agent has been banned by the site owner."**
+
+### Guidance
+
+The `youtube-content-parse` Cloudflare Worker has been blocked by whatever upstream it proxies (likely YouTube's anti-bot protections). This is not a transient failure — the existing worker endpoint is effectively dead for now. Options:
+
+1. **Deploy a new Cloudflare Worker** with a fresh user-agent / browser signature that isn't banned.
+2. **Switch to a different metadata provider** (e.g., an alternative YouTube metadata API or scraping approach) and update `YOUTUBE_CONTENT_API_URL`.
+3. **Re-authenticate** if there's a credentials/account-based path that might bypass the signature check.
+
+### Files Written
+
+| File | Path |
+|------|------|
+| Output manifest | `raw/node-runs/node-run-youtube-metadata-fetch-20260630T091116-e554eb/outputs/manifest.json` |
+| Agent receipt | `raw/node-runs/node-run-youtube-metadata-fetch-20260630T091116-e554eb/agent/receipt.json` |
