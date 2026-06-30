@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "executor": "hermes",
+  "requested_skill": "chatgpt-remote-image-service",
+  "executed_skill": "chatgpt-remote-image-service",
+  "node_id": "chatgpt-remote-image-service-vs2q",
+  "node_run_id": "node-run-chatgpt-remote-image-service-vs2q-20260630T024155-4b8467",
+  "request_id": "node-run-chatgpt-remote-image-service-vs2q-20260630T024155-4b8467",
+  "status": "done",
+  "returncode": 0,
+  "timed_out": false,
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "passed",
+      "expected_outputs": [
+        "result",
+        "images",
+        "image_url",
+        "public_image_url",
+        "status",
+        "task_id",
+        "status_json",
+        "submit_json",
+        "generated_images"
+      ],
+      "required_outputs": [],
+      "present_outputs": [
+        "result",
+        "images",
+        "image_url",
+        "public_image_url",
+        "status",
+        "task_id",
+        "status_json",
+        "submit_json",
+        "generated_images"
+      ],
+      "missing_required_outputs": [],
+      "business_outputs": {
+        "result": "Image generated successfully via ChatGPT remote image service. Prompt: 生成一张小猫睡觉的照片",
+        "images": "generated_image.png",
+        "image_url": "https://resource.vyibc.com/d599c328-521d-4814-ab43-dfc522db836a.png",
+        "public_image_url": "https://resource.vyibc.com/d599c328-521d-4814-ab43-dfc522db836a.png",
+        "status": "succeeded",
+        "task_id": "d599c328-521d-4814-ab43-dfc522db836a",
+        "status_json": "Final task status JSON",
+        "submit_json": "Submit response JSON (taskId)",
+        "generated_images": "https://resource.vyibc.com/d599c328-521d-4814-ab43-dfc522db836a.png"
+      },
+      "business_artifact_count": 0
+    }
+  },
+  "business_output_status": {
+    "status": "passed",
+    "expected_outputs": [
+      "result",
+      "images",
+      "image_url",
+      "public_image_url",
+      "status",
+      "task_id",
+      "status_json",
+      "submit_json",
+      "generated_images"
+    ],
+    "required_outputs": [],
+    "present_outputs": [
+      "result",
+      "images",
+      "image_url",
+      "public_image_url",
+      "status",
+      "task_id",
+      "status_json",
+      "submit_json",
+      "generated_images"
+    ],
+    "missing_required_outputs": [],
+    "business_outputs": {
+      "result": "Image generated successfully via ChatGPT remote image service. Prompt: 生成一张小猫睡觉的照片",
+      "images": "generated_image.png",
+      "image_url": "https://resource.vyibc.com/d599c328-521d-4814-ab43-dfc522db836a.png",
+      "public_image_url": "https://resource.vyibc.com/d599c328-521d-4814-ab43-dfc522db836a.png",
+      "status": "succeeded",
+      "task_id": "d599c328-521d-4814-ab43-dfc522db836a",
+      "status_json": "Final task status JSON",
+      "submit_json": "Submit response JSON (taskId)",
+      "generated_images": "https://resource.vyibc.com/d599c328-521d-4814-ab43-dfc522db836a.png"
+    },
+    "business_artifact_count": 0
+  },
+  "input_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260630T024155-4b8467/inputs/sources/manifest.json",
+  "output_manifest": "raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260630T024155-4b8467/outputs/manifest.json",
+  "started_at": "2026-06-30T02:41:57.117415+00:00",
+  "finished_at": "2026-06-30T02:49:25.011700+00:00",
+  "legacy_fallback": false,
+  "error": ""
+}

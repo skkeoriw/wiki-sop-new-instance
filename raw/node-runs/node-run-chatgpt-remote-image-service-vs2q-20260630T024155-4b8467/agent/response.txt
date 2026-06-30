@@ -1,0 +1,19 @@
+**Node Execution Complete — Success**
+
+**Skill:** chatgpt-remote-image-service (pure prompt mode)
+
+**Result:** Image of a sleeping kitten generated successfully via remote ChatGPT browser worker.
+
+| Field | Value |
+|---|---|
+| taskId | `d599c328-521d-4814-ab43-dfc522db836a` |
+| status | `succeeded` |
+| publicImageUrl | `https://resource.vyibc.com/d599c328-521d-4814-ab43-dfc522db836a.png` |
+| localImage | `outputs/generated_image.png` (2,123,344 bytes) |
+| chatgptUrl | `https://chatgpt.com/c/6a432d2e-3a30-83ea-b58d-d0ed7e87b4e9` |
+| timing | ~53s total (connect→page→generate→download→upload) |
+
+**Written artifacts:**
+- `outputs/manifest.json` — declared output manifest with all expected fields (result, task_id, status, public_image_url, image_url, generated_images, images, submit_json, status_json)
+- `agent/receipt.json` — execution receipt with status = succeeded
+- `outputs/generated_image.png` — local copy of the generated image
