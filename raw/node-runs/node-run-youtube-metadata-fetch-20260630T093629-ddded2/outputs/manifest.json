@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-youtube-metadata-fetch-20260630T093629-ddded2",
+  "node_id": "youtube-metadata-fetch",
+  "created_at": "2026-06-30T09:37:29Z",
+  "status": "failed",
+  "items": [
+    {
+      "path": "result.json",
+      "output_name": "result",
+      "value_type": "json",
+      "description": "Execution result with failure details"
+    }
+  ],
+  "errors": [
+    {
+      "code": "API_403_FORBIDDEN",
+      "message": "Cloudflare Error 1010: browser signature banned by site owner",
+      "detail": "The downstream YouTube content API at youtube-content-parse.hb67egcim4.workers.dev returned HTTP 403 with error_code 1010. This is not a transient failure — the UA is blocked.",
+      "retryable": false,
+      "owner_action_required": true
+    }
+  ]
+}

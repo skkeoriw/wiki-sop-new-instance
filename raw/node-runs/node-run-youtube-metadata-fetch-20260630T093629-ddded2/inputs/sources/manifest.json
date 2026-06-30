@@ -1,0 +1,485 @@
+{
+  "version": 1,
+  "kind": "input",
+  "node_run_id": "node-run-youtube-metadata-fetch-20260630T093629-ddded2",
+  "node_id": "youtube-metadata-fetch",
+  "source_mode": "manual",
+  "created_at": "2026-06-30T09:36:30Z",
+  "items": [
+    {
+      "path": "0001.txt",
+      "source": "manual",
+      "value_type": "text",
+      "source_path": "",
+      "source_node": "",
+      "source_run_id": "",
+      "source_output": "",
+      "input_name": "source_url",
+      "target_input": "source_url",
+      "value_preview": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T091116-e554eb/inputs/sources/0001.txt",
+      "materialized_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/inputs/sources/0001.txt"
+    }
+  ],
+  "selected_outputs": [],
+  "matched_outputs": [],
+  "relay_mappings": [],
+  "input_validation": {
+    "status": "passed",
+    "errors": [],
+    "resolved_values": {
+      "source_url": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/inputs/sources/0001.txt"
+    },
+    "resolutions": [
+      {
+        "input": "source_url",
+        "source_outputs": [
+          null
+        ],
+        "materialized_paths": [
+          "raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/inputs/sources/0001.txt"
+        ]
+      }
+    ]
+  },
+  "edge_contract": {},
+  "node_execution_guide": {},
+  "workflow_revision": {
+    "version": 1,
+    "hash": "f30496d73717bf88",
+    "node_count": 7,
+    "edge_count": 3,
+    "nodes": {
+      "notebooklm-research": {
+        "title": "NotebookLM 研究",
+        "skill": "sop-notebooklm-research",
+        "mode": "blocking",
+        "needs": [
+          "youtube-fetch"
+        ],
+        "inputs": {
+          "source_url": "youtube-fetch.outputs.source_url",
+          "metadata_file": "youtube-fetch.outputs.metadata_file"
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "reports": "raw/notebooklm-analysis/*.md",
+          "mindmaps": "raw/notebooklm-mindmaps/*.json"
+        },
+        "capabilities": {}
+      },
+      "retry": {
+        "title": "手动重试",
+        "skill": "sop-retry",
+        "mode": "manual",
+        "needs": [],
+        "inputs": {},
+        "optional_inputs": {},
+        "outputs": {},
+        "capabilities": {}
+      },
+      "tg-notify": {
+        "title": "Telegram 通知",
+        "skill": "sop-tg-notify",
+        "mode": "blocking",
+        "needs": [
+          "wiki-build"
+        ],
+        "inputs": {
+          "index": {
+            "from": "wiki-build.outputs.index",
+            "required": true,
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown"
+          }
+        },
+        "optional_inputs": {
+          "message": {
+            "from": "edge.message",
+            "required": false,
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "text",
+            "resolvers": [
+              {
+                "id": "direct-text",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-title",
+                "kind": "json_path",
+                "path": "$.title"
+              },
+              {
+                "id": "metadata-description",
+                "kind": "json_path",
+                "path": "$.description"
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "telegram_message": {
+            "path": "logs/pipeline-runs/pipe-{run_id}.json",
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": false
+          }
+        },
+        "capabilities": {}
+      },
+      "wiki-build": {
+        "title": "Wiki 知识图谱构建",
+        "skill": "sop-wiki-build",
+        "mode": "blocking",
+        "needs": [
+          "notebooklm-research"
+        ],
+        "inputs": {
+          "reports": {
+            "from": "notebooklm-research.outputs.reports",
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown"
+          }
+        },
+        "optional_inputs": {
+          "deep_research": {
+            "from": "youtube-deep-research.outputs.analysis_file",
+            "required": false,
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown"
+          }
+        },
+        "outputs": {
+          "index": {
+            "path": "index.md",
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "relayable": true
+          },
+          "pages": {
+            "path": "wiki/**",
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown",
+            "relayable": true
+          }
+        },
+        "capabilities": {}
+      },
+      "youtube-deep-research": {
+        "title": "YouTube 深度研究",
+        "skill": "sop-youtube-deep-research",
+        "mode": "sidecar",
+        "needs": [
+          "youtube-fetch"
+        ],
+        "inputs": {
+          "source_url": {
+            "from": "youtube-fetch.outputs.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "resolvers": [
+              {
+                "id": "direct-url",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-source-url",
+                "kind": "json_path",
+                "path": "$.source_url"
+              },
+              {
+                "id": "metadata-youtube-url",
+                "kind": "json_path",
+                "path": "$.youtube_url"
+              },
+              {
+                "id": "text-url",
+                "kind": "regex",
+                "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+              }
+            ]
+          }
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "analysis_file": {
+            "path": "raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md",
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "relayable": true,
+            "role": "wiki-source"
+          },
+          "transcript_file": {
+            "path": "raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt",
+            "kind": "file",
+            "type": "file",
+            "value_type": "text",
+            "relayable": true,
+            "role": "transcript"
+          }
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "editable": true,
+            "save_scope": "node-definition",
+            "description": "Persist this node's workspace outputs to the current Instance repo.",
+            "paths": [
+              "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+              "raw/youtube-deep-research/{pipeline_id}/raw/**"
+            ]
+          },
+          "telegram": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "editable": true,
+            "save_scope": "node-definition",
+            "description": "Send progress notifications through the current Instance Telegram config.",
+            "trigger": "stage-lifecycle",
+            "triggers": [
+              "start",
+              "done",
+              "failed"
+            ]
+          }
+        }
+      },
+      "youtube-fetch": {
+        "title": "YouTube 元数据获取",
+        "skill": "sop-youtube-fetch",
+        "mode": "blocking",
+        "needs": [],
+        "inputs": {
+          "source_url": {
+            "from": "context.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url"
+          }
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "source_url": {
+            "from": "context.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "relayable": true
+          },
+          "metadata_file": {
+            "from": "context.stage_b_fetch.meta_file",
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": true
+          }
+        },
+        "capabilities": {}
+      },
+      "youtube-metadata-fetch": {
+        "title": "Youtube Metadata Fetch",
+        "skill": {
+          "id": "youtube-metadata-fetch",
+          "source": "skill-installer",
+          "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426')",
+          "source_digest": {
+            "installer_url": "https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630075426",
+            "zip_url": "https://skill.vyibc.com/youtube-metadata-fetch/release/youtube-metadata-fetch-20260630075426.zip?ts=20260630075426",
+            "files": [
+              {
+                "path": "youtube-metadata-fetch/SKILL.md",
+                "bytes": 2000,
+                "truncated": false
+              },
+              {
+                "path": "youtube-metadata-fetch/agents/openai.yaml",
+                "bytes": 247,
+                "truncated": false
+              },
+              {
+                "path": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh",
+                "bytes": 1813,
+                "truncated": false
+              },
+              {
+                "path": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py",
+                "bytes": 5344,
+                "truncated": false
+              }
+            ]
+          }
+        },
+        "mode": "",
+        "needs": [],
+        "inputs": {},
+        "optional_inputs": {},
+        "outputs": {
+          "root": "raw/node-runs/{run_id}/outputs",
+          "manifest": "raw/node-runs/{run_id}/outputs/manifest.json",
+          "expected": {
+            "result": {
+              "description": "Skill execution result summary.",
+              "relayable": true
+            },
+            "status": {
+              "description": "Result value mentioned in skill source as `status`.",
+              "value_type": "text",
+              "relayable": true,
+              "evidence": "source result marker status"
+            },
+            "metadata_json": {
+              "description": "Output file `metadata.json` produced or documented by the skill.",
+              "value_type": "json",
+              "relayable": true,
+              "evidence": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py: metadata.json"
+            },
+            "source_url_txt": {
+              "description": "Output file `source-url.txt` produced or documented by the skill.",
+              "value_type": "text",
+              "relayable": true,
+              "evidence": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py: source-url.txt"
+            },
+            "result_json": {
+              "description": "Output file `result.json` produced or documented by the skill.",
+              "value_type": "json",
+              "relayable": true,
+              "evidence": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py: result.json"
+            }
+          }
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false
+          },
+          "telegram": {
+            "enabled": false,
+            "required": false
+          },
+          "sse": {
+            "enabled": true,
+            "required": true
+          }
+        }
+      }
+    },
+    "edges": [
+      {
+        "id": "edge-youtube-fetch-to-youtube-deep-research",
+        "from": "youtube-fetch",
+        "to": "youtube-deep-research",
+        "relay": {
+          "intent": {
+            "title": "将视频地址交给深度研究节点",
+            "brief": "下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。"
+          },
+          "bindings": [
+            {
+              "target_input": "source_url",
+              "required": true,
+              "source": {
+                "node": "youtube-fetch",
+                "output": "source_url",
+                "extractor": {
+                  "id": "direct-url",
+                  "kind": "direct"
+                }
+              }
+            }
+          ],
+          "resolver": {
+            "strategy": "explicit_first",
+            "fallback": "block"
+          },
+          "validation": {
+            "on_missing_required": "block",
+            "on_multiple_candidates": "needs_review",
+            "on_type_mismatch": "block"
+          }
+        }
+      },
+      {
+        "id": "edge-youtube-fetch-title-to-tg-notify",
+        "from": "youtube-fetch",
+        "to": "tg-notify",
+        "relay": {
+          "intent": {
+            "title": "将视频标题作为通知内容",
+            "brief": "这条边只用于测试或自定义工作流，将 metadata_file 中的视频标题提取成 Telegram 文本消息。"
+          },
+          "bindings": [
+            {
+              "target_input": "message",
+              "required": true,
+              "source": {
+                "node": "youtube-fetch",
+                "output": "metadata_file",
+                "extractor": {
+                  "id": "metadata-title",
+                  "kind": "json_path",
+                  "path": "$.title"
+                }
+              }
+            }
+          ],
+          "resolver": {
+            "strategy": "explicit_first",
+            "fallback": "needs_review"
+          },
+          "validation": {
+            "on_missing_required": "block",
+            "on_multiple_candidates": "needs_review",
+            "on_type_mismatch": "block"
+          }
+        }
+      },
+      {
+        "id": "edge-youtube-deep-research-to-wiki-build",
+        "from": "youtube-deep-research",
+        "to": "wiki-build",
+        "relay": {
+          "intent": {
+            "title": "将深度研究产物交给 Wiki 构建节点",
+            "brief": "将 analysis_file 作为 Wiki 构建的 deep_research 补充材料；transcript_file 可在自定义边中作为补充上下文。"
+          },
+          "bindings": [
+            {
+              "target_input": "deep_research",
+              "required": false,
+              "source": {
+                "node": "youtube-deep-research",
+                "output": "analysis_file",
+                "extractor": {
+                  "id": "direct-file",
+                  "kind": "direct"
+                }
+              }
+            }
+          ],
+          "resolver": {
+            "strategy": "explicit_first",
+            "fallback": "needs_review"
+          },
+          "validation": {
+            "on_missing_required": "needs_review",
+            "on_multiple_candidates": "needs_review",
+            "on_type_mismatch": "needs_review"
+          }
+        }
+      }
+    ]
+  },
+  "relay_context": {},
+  "resolution_trace": []
+}
