@@ -1,0 +1,15 @@
+{
+  "status": "succeeded",
+  "metadata_file": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json",
+  "source_url_file": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt",
+  "metadata": {
+    "video_id": "96jN2OCOfLs",
+    "title": "Andrej Karpathy: From Vibe Coding to Agentic Engineering w/ Stephanie Zhan",
+    "author": "Sequoia Capital",
+    "published_at": "2026-04-29T15:21:18Z",
+    "youtube_url": "https://www.youtube.com/watch?v=96jN2OCOfLs",
+    "thumbnail": "https://i.ytimg.com/vi/96jN2OCOfLs/hqdefault.jpg",
+    "source_url": "https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s",
+    "fetched_at": "2026-06-30T11:03:57Z"
+  }
+}

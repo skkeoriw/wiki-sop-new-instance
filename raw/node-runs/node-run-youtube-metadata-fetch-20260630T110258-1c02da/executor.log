@@ -1,0 +1,20 @@
+**Node Execution Complete** — `node-run-youtube-metadata-fetch-20260630T110258-1c02da` ✓
+
+**Input:** `https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s`
+
+**Result:** succeeded
+
+| Field | Value |
+|-------|-------|
+| Video ID | `96jN2OCOfLs` |
+| Title | *Andrej Karpathy: From Vibe Coding to Agentic Engineering w/ Stephanie Zhan* |
+| Author | Sequoia Capital |
+| Published | 2026-04-29T15:21:18Z |
+| Status | succeeded |
+
+**Outputs produced:**
+- `.../outputs/metadata.json` — normalized metadata (434 bytes)
+- `.../outputs/source-url.txt` — source URL (50 bytes)
+- `.../outputs/result.json` — execution result with inline metadata (724 bytes)
+- `.../outputs/manifest.json` — output manifest with relayable entries
+- `.../agent/receipt.json` — agent execution receipt

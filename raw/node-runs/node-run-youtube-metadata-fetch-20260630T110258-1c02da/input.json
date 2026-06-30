@@ -1,0 +1,31 @@
+{
+  "mode": "real-node",
+  "input_source": "manual",
+  "manual_inputs": {
+    "api_token": "",
+    "api_url": "",
+    "include_raw": "",
+    "source_url": "https://www.youtube.com/watch?v=96jN2OCOfLs&t=90s",
+    "timeout_seconds": ""
+  },
+  "sync": false,
+  "capability_overrides": {
+    "git": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run",
+      "paths": []
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run"
+    }
+  },
+  "node_run_id": "",
+  "source": "node-draft-probe",
+  "_skip_definition_scope_reports": true,
+  "_definition_scope_reports": {}
+}

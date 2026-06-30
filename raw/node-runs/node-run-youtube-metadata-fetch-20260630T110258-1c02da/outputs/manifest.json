@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-youtube-metadata-fetch-20260630T110258-1c02da",
+  "node_id": "youtube-metadata-fetch",
+  "created_at": "2026-06-30T11:03:57Z",
+  "items": [
+    {
+      "path": "metadata.json",
+      "output_name": "metadata_json",
+      "value_type": "json",
+      "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/metadata.json",
+      "size_bytes": 434,
+      "relayable": true,
+      "description": "Normalized YouTube metadata JSON"
+    },
+    {
+      "path": "source-url.txt",
+      "output_name": "source_url_txt",
+      "value_type": "text",
+      "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/source-url.txt",
+      "size_bytes": 50,
+      "relayable": true,
+      "description": "Source URL text file"
+    },
+    {
+      "path": "result.json",
+      "output_name": "result_json",
+      "value_type": "json",
+      "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/result.json",
+      "size_bytes": 724,
+      "relayable": true,
+      "description": "Execution result with metadata inline"
+    },
+    {
+      "output_name": "status",
+      "value_type": "text",
+      "resolved_value": "succeeded",
+      "relayable": true,
+      "description": "Execution status"
+    },
+    {
+      "output_name": "result",
+      "value_type": "text",
+      "resolved_value": "succeeded",
+      "relayable": true,
+      "description": "Skill execution result summary"
+    }
+  ]
+}
