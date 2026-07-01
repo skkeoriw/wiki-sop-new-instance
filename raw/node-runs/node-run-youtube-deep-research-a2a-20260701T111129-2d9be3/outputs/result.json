@@ -1,0 +1,29 @@
+{
+  "status": "succeeded",
+  "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+  "job_id": "50b8b52c-1709-4f58-8a16-3bf026a9e165",
+  "workflow_status": "completed",
+  "fetched_at": "2026-07-01T11:14:08Z",
+  "worker_files": {
+    "transcript_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/50b8b52c-1709-4f58-8a16-3bf026a9e165/transcript",
+    "transcript_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/50b8b52c-1709-4f58-8a16-3bf026a9e165/transcript?format=txt",
+    "transcript_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/50b8b52c-1709-4f58-8a16-3bf026a9e165/transcript?format=srt",
+    "transcript_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/50b8b52c-1709-4f58-8a16-3bf026a9e165/transcript?format=vtt",
+    "transcript_csv": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/50b8b52c-1709-4f58-8a16-3bf026a9e165/transcript?format=csv",
+    "analysis_md": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/50b8b52c-1709-4f58-8a16-3bf026a9e165/transcript?format=md"
+  },
+  "written": {
+    "analysis_md": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/worker-analysis.md",
+    "transcript_txt": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.txt",
+    "transcript_srt": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.srt",
+    "transcript_vtt": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.vtt",
+    "transcript_json": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.json",
+    "analysis_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/analysis.md",
+    "status_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/status.json",
+    "start_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/start.json"
+  },
+  "analysis_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/analysis.md",
+  "transcript_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.txt",
+  "status_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/status.json",
+  "start_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/start.json"
+}

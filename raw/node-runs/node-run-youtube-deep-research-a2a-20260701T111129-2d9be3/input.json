@@ -1,0 +1,303 @@
+{
+  "mode": "real-node",
+  "input_source": "existing-node-run",
+  "manual_inputs": {},
+  "source_node_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af",
+  "relay_mode": "all_outputs",
+  "selected_outputs": [],
+  "relay_mappings": [],
+  "relay_instruction": "Use the upstream metadata JSON/source URL to run deep YouTube research for the same video. Prefer source_url/youtube_url from metadata_json.",
+  "sync": false,
+  "a2a": {
+    "protocol_version": "1.0",
+    "message": {
+      "messageId": "msg-edge-f8b4a20dde",
+      "message_id": "msg-edge-f8b4a20dde",
+      "contextId": "ctx-edge-2ee591d7",
+      "context_id": "ctx-edge-2ee591d7",
+      "role": "user",
+      "parts": [
+        {
+          "content": {
+            "$case": "text",
+            "value": "Use the upstream metadata JSON/source URL to run deep YouTube research for the same video. Prefer source_url/youtube_url from metadata_json."
+          },
+          "text": "Use the upstream metadata JSON/source URL to run deep YouTube research for the same video. Prefer source_url/youtube_url from metadata_json.",
+          "mediaType": "text/plain",
+          "media_type": "text/plain",
+          "filename": "handoff-instruction.txt",
+          "metadata": {}
+        },
+        {
+          "content": {
+            "$case": "data",
+            "value": {
+              "kind": "sop-edge-a2a-handoff/v1",
+              "workflow_id": "youtube-research-wiki",
+              "source_node_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af",
+              "source_node": "youtube-metadata-fetch-a2a",
+              "target_node": "youtube-deep-research-a2a",
+              "output_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/manifest.json",
+              "edge_contract": {
+                "id": "",
+                "from": "",
+                "to": "",
+                "intent": {
+                  "title": "",
+                  "brief": ""
+                },
+                "bindings": [],
+                "resolver": {},
+                "validation": {}
+              },
+              "relay_mode": "all_outputs",
+              "selected_outputs": [],
+              "relay_mappings": [],
+              "items": [
+                {
+                  "name": "metadata_json",
+                  "output_name": "metadata_json",
+                  "path": "metadata.json",
+                  "kind": "file",
+                  "type": "file",
+                  "value_type": "json",
+                  "materialized_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json",
+                  "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json",
+                  "absolute_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json",
+                  "size_bytes": 517,
+                  "relayable": true,
+                  "description": "Normalized YouTube metadata JSON.",
+                  "output": "metadata_json",
+                  "source_output": "metadata_json",
+                  "source_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json",
+                  "source_node": "youtube-metadata-fetch-a2a",
+                  "source_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af"
+                },
+                {
+                  "name": "source_url_txt",
+                  "output_name": "source_url_txt",
+                  "path": "source-url.txt",
+                  "kind": "file",
+                  "type": "file",
+                  "value_type": "url",
+                  "materialized_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt",
+                  "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt",
+                  "absolute_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt",
+                  "size_bytes": 44,
+                  "relayable": true,
+                  "description": "Echoed source URL.",
+                  "output": "source_url_txt",
+                  "source_output": "source_url_txt",
+                  "source_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt",
+                  "source_node": "youtube-metadata-fetch-a2a",
+                  "source_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af"
+                },
+                {
+                  "name": "result_json",
+                  "output_name": "result_json",
+                  "path": "result.json",
+                  "kind": "file",
+                  "type": "file",
+                  "value_type": "json",
+                  "materialized_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json",
+                  "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json",
+                  "absolute_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json",
+                  "size_bytes": 815,
+                  "relayable": true,
+                  "description": "Skill execution result JSON.",
+                  "output": "result_json",
+                  "source_output": "result_json",
+                  "source_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json",
+                  "source_node": "youtube-metadata-fetch-a2a",
+                  "source_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af"
+                }
+              ]
+            }
+          },
+          "data": {
+            "kind": "sop-edge-a2a-handoff/v1",
+            "workflow_id": "youtube-research-wiki",
+            "source_node_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af",
+            "source_node": "youtube-metadata-fetch-a2a",
+            "target_node": "youtube-deep-research-a2a",
+            "output_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/manifest.json",
+            "edge_contract": {
+              "id": "",
+              "from": "",
+              "to": "",
+              "intent": {
+                "title": "",
+                "brief": ""
+              },
+              "bindings": [],
+              "resolver": {},
+              "validation": {}
+            },
+            "relay_mode": "all_outputs",
+            "selected_outputs": [],
+            "relay_mappings": [],
+            "items": [
+              {
+                "name": "metadata_json",
+                "output_name": "metadata_json",
+                "path": "metadata.json",
+                "kind": "file",
+                "type": "file",
+                "value_type": "json",
+                "materialized_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json",
+                "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json",
+                "absolute_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json",
+                "size_bytes": 517,
+                "relayable": true,
+                "description": "Normalized YouTube metadata JSON.",
+                "output": "metadata_json",
+                "source_output": "metadata_json",
+                "source_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json",
+                "source_node": "youtube-metadata-fetch-a2a",
+                "source_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af"
+              },
+              {
+                "name": "source_url_txt",
+                "output_name": "source_url_txt",
+                "path": "source-url.txt",
+                "kind": "file",
+                "type": "file",
+                "value_type": "url",
+                "materialized_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt",
+                "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt",
+                "absolute_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt",
+                "size_bytes": 44,
+                "relayable": true,
+                "description": "Echoed source URL.",
+                "output": "source_url_txt",
+                "source_output": "source_url_txt",
+                "source_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt",
+                "source_node": "youtube-metadata-fetch-a2a",
+                "source_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af"
+              },
+              {
+                "name": "result_json",
+                "output_name": "result_json",
+                "path": "result.json",
+                "kind": "file",
+                "type": "file",
+                "value_type": "json",
+                "materialized_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json",
+                "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json",
+                "absolute_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json",
+                "size_bytes": 815,
+                "relayable": true,
+                "description": "Skill execution result JSON.",
+                "output": "result_json",
+                "source_output": "result_json",
+                "source_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json",
+                "source_node": "youtube-metadata-fetch-a2a",
+                "source_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af"
+              }
+            ]
+          },
+          "mediaType": "application/json",
+          "media_type": "application/json",
+          "filename": "edge-handoff.json",
+          "metadata": {}
+        },
+        {
+          "content": {
+            "$case": "text",
+            "value": "{\n  \"video_id\": \"Ahfe-BW1cFc\",\n  \"title\": \"永久免费云服务器！16G内存、双核CPU、50~500G硬盘空间，HuggingFace Spaces 跑AI项目、部署实用工具，还能SSH远程管理？ | 零度解说\",\n  \"author\": \"零度解说\",\n  \"published_at\": \"2025-08-25T12:19:26Z\",\n  \"youtube_url\": \"https://www.youtube.com/watch?v=Ahfe-BW1cFc\",\n  \"thumbnail\": \"https://i.ytimg.com/vi/Ahfe-BW1cFc/hqdefault.jpg\",\n  \"source_url\": \"https://www.youtube.com/watch?v=Ahfe-BW1cFc\",\n  \"fetched_at\": \"2026-07-01T10:54:01Z\"\n}\n"
+          },
+          "text": "{\n  \"video_id\": \"Ahfe-BW1cFc\",\n  \"title\": \"永久免费云服务器！16G内存、双核CPU、50~500G硬盘空间，HuggingFace Spaces 跑AI项目、部署实用工具，还能SSH远程管理？ | 零度解说\",\n  \"author\": \"零度解说\",\n  \"published_at\": \"2025-08-25T12:19:26Z\",\n  \"youtube_url\": \"https://www.youtube.com/watch?v=Ahfe-BW1cFc\",\n  \"thumbnail\": \"https://i.ytimg.com/vi/Ahfe-BW1cFc/hqdefault.jpg\",\n  \"source_url\": \"https://www.youtube.com/watch?v=Ahfe-BW1cFc\",\n  \"fetched_at\": \"2026-07-01T10:54:01Z\"\n}\n",
+          "mediaType": "application/json",
+          "media_type": "application/json",
+          "filename": "metadata.json",
+          "metadata": {}
+        },
+        {
+          "content": {
+            "$case": "text",
+            "value": "https://www.youtube.com/watch?v=Ahfe-BW1cFc\n"
+          },
+          "text": "https://www.youtube.com/watch?v=Ahfe-BW1cFc\n",
+          "mediaType": "text/plain",
+          "media_type": "text/plain",
+          "filename": "source-url.txt",
+          "metadata": {}
+        },
+        {
+          "content": {
+            "$case": "text",
+            "value": "{\n  \"status\": \"succeeded\",\n  \"metadata_file\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json\",\n  \"source_url_file\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt\",\n  \"metadata\": {\n    \"video_id\": \"Ahfe-BW1cFc\",\n    \"title\": \"永久免费云服务器！16G内存、双核CPU、50~500G硬盘空间，HuggingFace Spaces 跑AI项目、部署实用工具，还能SSH远程管理？ | 零度解说\",\n    \"author\": \"零度解说\",\n    \"published_at\": \"2025-08-25T12:19:26Z\",\n    \"youtube_url\": \"https://www.youtube.com/watch?v=Ahfe-BW1cFc\",\n    \"thumbnail\": \"https://i.ytimg.com/vi/Ahfe-BW1cFc/hqdefault.jpg\",\n    \"source_url\": \"https://www.youtube.com/watch?v=Ahfe-BW1cFc\",\n    \"fetched_at\": \"2026-07-01T10:54:01Z\"\n  }\n}\n"
+          },
+          "text": "{\n  \"status\": \"succeeded\",\n  \"metadata_file\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json\",\n  \"source_url_file\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt\",\n  \"metadata\": {\n    \"video_id\": \"Ahfe-BW1cFc\",\n    \"title\": \"永久免费云服务器！16G内存、双核CPU、50~500G硬盘空间，HuggingFace Spaces 跑AI项目、部署实用工具，还能SSH远程管理？ | 零度解说\",\n    \"author\": \"零度解说\",\n    \"published_at\": \"2025-08-25T12:19:26Z\",\n    \"youtube_url\": \"https://www.youtube.com/watch?v=Ahfe-BW1cFc\",\n    \"thumbnail\": \"https://i.ytimg.com/vi/Ahfe-BW1cFc/hqdefault.jpg\",\n    \"source_url\": \"https://www.youtube.com/watch?v=Ahfe-BW1cFc\",\n    \"fetched_at\": \"2026-07-01T10:54:01Z\"\n  }\n}\n",
+          "mediaType": "application/json",
+          "media_type": "application/json",
+          "filename": "result.json",
+          "metadata": {}
+        }
+      ],
+      "metadata": {
+        "source": "sop-edge-a2a-handoff",
+        "source_node_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af",
+        "source_node": "youtube-metadata-fetch-a2a",
+        "target_node": "youtube-deep-research-a2a"
+      },
+      "extensions": [],
+      "referenceTaskIds": []
+    },
+    "metadata": {
+      "source": "sop-edge-a2a-handoff",
+      "workflow_id": "youtube-research-wiki",
+      "edge_id": "",
+      "source_node_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af",
+      "source_node": "youtube-metadata-fetch-a2a",
+      "target_node": "youtube-deep-research-a2a",
+      "relay_mode": "all_outputs",
+      "selected_outputs": [],
+      "relay_mappings": [],
+      "relay_instruction": "Use the upstream metadata JSON/source URL to run deep YouTube research for the same video. Prefer source_url/youtube_url from metadata_json.",
+      "edge_contract": {
+        "id": "",
+        "from": "",
+        "to": "",
+        "intent": {
+          "title": "",
+          "brief": ""
+        },
+        "bindings": [],
+        "resolver": {},
+        "validation": {}
+      }
+    },
+    "relay": {
+      "source_node_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af",
+      "relay_mode": "all_outputs",
+      "selected_outputs": [],
+      "relay_mappings": [],
+      "relay_instruction": "Use the upstream metadata JSON/source URL to run deep YouTube research for the same video. Prefer source_url/youtube_url from metadata_json."
+    }
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run",
+      "paths": []
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run"
+    }
+  },
+  "_definition_scope_reports": {
+    "instance_override": {
+      "status": "unchanged",
+      "changed": {}
+    },
+    "project_default_request": {
+      "status": "skipped"
+    }
+  }
+}

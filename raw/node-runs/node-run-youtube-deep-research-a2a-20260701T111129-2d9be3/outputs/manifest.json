@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-youtube-deep-research-a2a-20260701T111129-2d9be3",
+  "node_id": "youtube-deep-research-a2a",
+  "workflow_id": "youtube-research-wiki",
+  "runtime_id": "runtime-206-189-196-65",
+  "instance_id": "agent-runtime-codex-smoke",
+  "status": "succeeded",
+  "created_at": "2026-07-01T11:15:14Z",
+  "root": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs",
+  "items": [
+    {
+      "name": "analysis_file",
+      "output_name": "analysis_file",
+      "path": "analysis.md",
+      "kind": "file",
+      "type": "file",
+      "value_type": "markdown",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/analysis.md",
+      "resolved_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/analysis.md",
+      "absolute_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/analysis.md",
+      "size_bytes": 31468,
+      "relayable": true,
+      "description": "Deep research analysis markdown for downstream wiki use.",
+      "role": "wiki-source"
+    },
+    {
+      "name": "transcript_file",
+      "output_name": "transcript_file",
+      "path": "transcript.txt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "text",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.txt",
+      "resolved_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.txt",
+      "absolute_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.txt",
+      "size_bytes": 12873,
+      "relayable": true,
+      "description": "Transcript text for downstream research use.",
+      "role": "transcript"
+    },
+    {
+      "name": "result_json",
+      "output_name": "result_json",
+      "path": "result.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/result.json",
+      "resolved_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/result.json",
+      "absolute_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/result.json",
+      "size_bytes": 2516,
+      "relayable": false,
+      "description": "Skill execution result JSON."
+    },
+    {
+      "name": "status_json",
+      "output_name": "status_json",
+      "path": "status.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/status.json",
+      "resolved_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/status.json",
+      "absolute_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/status.json",
+      "size_bytes": 5117,
+      "relayable": false,
+      "description": "Worker final status JSON."
+    },
+    {
+      "name": "start_json",
+      "output_name": "start_json",
+      "path": "start.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/start.json",
+      "resolved_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/start.json",
+      "absolute_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/start.json",
+      "size_bytes": 120,
+      "relayable": false,
+      "description": "Worker start response JSON."
+    },
+    {
+      "name": "worker_analysis_md",
+      "output_name": "worker_analysis_md",
+      "path": "worker-analysis.md",
+      "kind": "file",
+      "type": "file",
+      "value_type": "markdown",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/worker-analysis.md",
+      "resolved_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/worker-analysis.md",
+      "absolute_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/worker-analysis.md",
+      "size_bytes": 15336,
+      "relayable": false,
+      "description": "Raw worker analysis markdown."
+    },
+    {
+      "name": "transcript_json",
+      "output_name": "transcript_json",
+      "path": "transcript.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.json",
+      "resolved_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.json",
+      "absolute_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.json",
+      "size_bytes": 59575,
+      "relayable": false,
+      "description": "Transcript JSON returned by the worker."
+    },
+    {
+      "name": "transcript_srt",
+      "output_name": "transcript_srt",
+      "path": "transcript.srt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "text",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.srt",
+      "resolved_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.srt",
+      "absolute_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.srt",
+      "size_bytes": 29145,
+      "relayable": false,
+      "description": "Transcript SRT returned by the worker."
+    },
+    {
+      "name": "transcript_vtt",
+      "output_name": "transcript_vtt",
+      "path": "transcript.vtt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "text",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.vtt",
+      "resolved_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.vtt",
+      "absolute_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.vtt",
+      "size_bytes": 29153,
+      "relayable": false,
+      "description": "Transcript VTT returned by the worker."
+    }
+  ],
+  "outputs": {
+    "analysis_file": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/analysis.md"
+    ],
+    "transcript_file": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.txt"
+    ],
+    "result_json": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/result.json"
+    ],
+    "status_json": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/status.json"
+    ],
+    "start_json": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/start.json"
+    ],
+    "worker_analysis_md": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/worker-analysis.md"
+    ],
+    "transcript_json": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.json"
+    ],
+    "transcript_srt": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.srt"
+    ],
+    "transcript_vtt": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.vtt"
+    ]
+  },
+  "summary": {
+    "status": "succeeded",
+    "total_files": 9,
+    "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+    "youtube_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+    "video_id": "Ahfe-BW1cFc",
+    "title": "永久免费云服务器！16G内存、双核CPU、50~500G硬盘空间，HuggingFace Spaces 跑AI项目、部署实用工具，还能SSH远程管理？ | 零度解说",
+    "author": "零度解说",
+    "published_at": "2025-08-25T12:19:26Z",
+    "job_id": "50b8b52c-1709-4f58-8a16-3bf026a9e165",
+    "workflow_status": "completed",
+    "detected_lang": "zh",
+    "analysis_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/analysis.md",
+    "transcript_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/transcript.txt",
+    "summary": "本视频详细介绍了如何在Hugging Face上注册并永久免费使用云服务器，包括创建Space、选择SDK，以及部署文生图、图片反推提示词、一键抠图、一键扩图等实用开源项目。还展示了创建JupyterLab环境，利用免费GPU资源进行交互式开发。步骤详尽，适合零基础用户快速上手。"
+  }
+}

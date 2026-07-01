@@ -1,0 +1,46 @@
+{
+  "schema": "node-execution-request/v1",
+  "runtime_id": "runtime-206-189-196-65",
+  "instance_id": "agent-runtime-codex-smoke",
+  "workflow_id": "youtube-research-wiki",
+  "node_id": "youtube-deep-research-a2a",
+  "run_id": "node-run-youtube-deep-research-a2a-20260701T111129-2d9be3",
+  "entry_inputs": {
+    "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc"
+  },
+  "handoff_sources": [
+    {
+      "from_node": "youtube-metadata-fetch-a2a",
+      "from_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af",
+      "outputs_dir": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs",
+      "manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/manifest.json"
+    }
+  ],
+  "handoff_instruction": "Use the upstream metadata JSON/source URL to run deep YouTube research for the same video. Prefer source_url/youtube_url from metadata_json.",
+  "input_manifest": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/inputs/sources/manifest.json",
+  "input_directory": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/inputs/sources",
+  "outputs_dir": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs",
+  "output_manifest": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T111129-2d9be3/outputs/manifest.json",
+  "edge_contract": {
+    "id": "",
+    "from": "",
+    "to": "",
+    "intent": {
+      "title": "",
+      "brief": ""
+    },
+    "bindings": [],
+    "resolver": {},
+    "validation": {}
+  },
+  "node_execution_guide": {
+    "source": "missing",
+    "edge_id": "youtube-metadata-fetch-a2a-to-youtube-deep-research-a2a",
+    "source_node": "youtube-metadata-fetch-a2a",
+    "target_node": "youtube-deep-research-a2a",
+    "approved": false,
+    "prompt": "",
+    "format": "markdown"
+  },
+  "created_at": "2026-07-01T11:11:35.003408+00:00"
+}

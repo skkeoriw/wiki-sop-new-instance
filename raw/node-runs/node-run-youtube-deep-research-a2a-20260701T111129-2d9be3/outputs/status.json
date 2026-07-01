@@ -1,0 +1,96 @@
+{
+  "id": "50b8b52c-1709-4f58-8a16-3bf026a9e165",
+  "youtube_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+  "video_id": null,
+  "status": "completed",
+  "audio_url": null,
+  "r2_key": null,
+  "model_used": "gateway",
+  "summary": "本视频详细介绍了如何在Hugging Face上注册并永久免费使用云服务器，包括创建Space、选择SDK，以及部署文生图、图片反推提示词、一键抠图、一键扩图等实用开源项目。还展示了创建JupyterLab环境，利用免费GPU资源进行交互式开发。步骤详尽，适合零基础用户快速上手。",
+  "key_points": [
+    "注册Hugging Face后即可获得双核CPU、16G内存、50G硬盘的免费空间",
+    "支持Graio、Docker、静态空间三种类型，可灵活部署各类应用",
+    "推荐图片反推提示词、一键抠图、一键扩图等实用开源项目",
+    "通过创建JupyterLab空间，可使用Python和远程终端，扩展性强",
+    "利用免费共享GPU加速，适合个人学习和轻量项目"
+  ],
+  "titles": [
+    "永久免费！手把手教你玩转Hugging Face云服务器，这几个开源项目太实用了",
+    "零成本搭建AI工作台：Hugging Face免费GPU+抠图/扩图/反推提示词",
+    "别再花钱买云服务器了！Hugging Face免费空间还能跑Jupyter"
+  ],
+  "description": "Hugging Face不仅提供海量模型，还赠送永久免费云服务器！本视频带你从注册开始，一步步创建Space，选择Graio、Docker或静态空间，部署文生图、图片反推提示词、一键抠图、一键扩图等实用开源项目。更有JupyterLab远程终端，免费利用双核CPU、16G内存和共享GPU，零成本玩转AI开发。无论你是新手还是开发者，都能轻松上手，快来试试这些宝藏项目吧！",
+  "tags": "Hugging Face, 免费云服务器, 开源项目, 文生图, 一键抠图, 图片反推提示词, AI工具, 机器学习",
+  "clip_suggestions": [
+    {
+      "start": "00:01:30",
+      "end": "00:02:30",
+      "reason": "讲解创建空间的核心步骤，包括SDK选择和免费套餐，适合教学切片"
+    },
+    {
+      "start": "00:04:00",
+      "end": "00:04:46",
+      "reason": "演示文生图生成效果并引出后续开源项目，视觉冲击力强"
+    },
+    {
+      "start": "00:05:37",
+      "end": "00:06:30",
+      "reason": "图片反推提示词操作演示，展示AI反向生成描述词，实用且有吸引力"
+    },
+    {
+      "start": "00:07:31",
+      "end": "00:08:05",
+      "reason": "一键抠图去背效果惊艳，处理头发丝边缘干净，适合传播"
+    },
+    {
+      "start": "00:08:33",
+      "end": "00:09:20",
+      "reason": "一键扩图案例，融合度高且可指定原图位置，勾起用户尝试的兴趣"
+    },
+    {
+      "start": "00:10:49",
+      "end": "00:11:26",
+      "reason": "创建JupyterLab空间，展示终端和Python环境，拓展免费空间的玩法"
+    }
+  ],
+  "detected_lang": "zh",
+  "translate_lang": null,
+  "tts_url": null,
+  "error": null,
+  "created_at": "2026-07-01 11:12:14",
+  "updated_at": "2026-07-01 11:14:05",
+  "chunks": [
+    {
+      "chunk_index": 0,
+      "start_sec": 0,
+      "r2_key": "audio/Ahfe-BW1cFc_chunk_000.mp4",
+      "url": "https://youtube-audio.hb67egcim4.workers.dev/file/audio/Ahfe-BW1cFc_chunk_000.mp4",
+      "status": "done",
+      "transcript_url": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/50b8b52c-1709-4f58-8a16-3bf026a9e165/chunk/0"
+    },
+    {
+      "chunk_index": 1,
+      "start_sec": 300,
+      "r2_key": "audio/Ahfe-BW1cFc_chunk_001.mp4",
+      "url": "https://youtube-audio.hb67egcim4.workers.dev/file/audio/Ahfe-BW1cFc_chunk_001.mp4",
+      "status": "done",
+      "transcript_url": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/50b8b52c-1709-4f58-8a16-3bf026a9e165/chunk/1"
+    },
+    {
+      "chunk_index": 2,
+      "start_sec": 600,
+      "r2_key": "audio/Ahfe-BW1cFc_chunk_002.mp4",
+      "url": "https://youtube-audio.hb67egcim4.workers.dev/file/audio/Ahfe-BW1cFc_chunk_002.mp4",
+      "status": "done",
+      "transcript_url": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/50b8b52c-1709-4f58-8a16-3bf026a9e165/chunk/2"
+    }
+  ],
+  "files": {
+    "transcript_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/50b8b52c-1709-4f58-8a16-3bf026a9e165/transcript",
+    "transcript_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/50b8b52c-1709-4f58-8a16-3bf026a9e165/transcript?format=txt",
+    "transcript_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/50b8b52c-1709-4f58-8a16-3bf026a9e165/transcript?format=srt",
+    "transcript_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/50b8b52c-1709-4f58-8a16-3bf026a9e165/transcript?format=vtt",
+    "transcript_csv": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/50b8b52c-1709-4f58-8a16-3bf026a9e165/transcript?format=csv",
+    "analysis_md": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/50b8b52c-1709-4f58-8a16-3bf026a9e165/transcript?format=md"
+  }
+}
