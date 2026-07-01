@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af",
+  "node_id": "youtube-metadata-fetch-a2a",
+  "workflow_id": "youtube-research-wiki",
+  "runtime_id": "runtime-206-189-196-65",
+  "instance_id": "agent-runtime-codex-smoke",
+  "status": "succeeded",
+  "created_at": "2026-07-01T10:55:15Z",
+  "root": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs",
+  "items": [
+    {
+      "name": "metadata_json",
+      "output_name": "metadata_json",
+      "path": "metadata.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "materialized_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json",
+      "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json",
+      "absolute_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json",
+      "size_bytes": 517,
+      "relayable": true,
+      "description": "Normalized YouTube metadata JSON."
+    },
+    {
+      "name": "source_url_txt",
+      "output_name": "source_url_txt",
+      "path": "source-url.txt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "url",
+      "materialized_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt",
+      "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt",
+      "absolute_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt",
+      "size_bytes": 44,
+      "relayable": true,
+      "description": "Echoed source URL."
+    },
+    {
+      "name": "result_json",
+      "output_name": "result_json",
+      "path": "result.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "materialized_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json",
+      "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json",
+      "absolute_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json",
+      "size_bytes": 815,
+      "relayable": true,
+      "description": "Skill execution result JSON."
+    }
+  ],
+  "outputs": {
+    "metadata_json": [
+      "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json"
+    ],
+    "source_url_txt": [
+      "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt"
+    ],
+    "result_json": [
+      "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json"
+    ]
+  },
+  "summary": {
+    "status": "succeeded",
+    "total_files": 3,
+    "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+    "video_id": "Ahfe-BW1cFc",
+    "title": "永久免费云服务器！16G内存、双核CPU、50~500G硬盘空间，HuggingFace Spaces 跑AI项目、部署实用工具，还能SSH远程管理？ | 零度解说",
+    "author": "零度解说",
+    "published_at": "2025-08-25T12:19:26Z",
+    "youtube_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc"
+  }
+}
