@@ -1,0 +1,840 @@
+Execution failed.
+
+I ran:
+
+```bash
+/root/.codex/skills/youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh \
+  --source-url "https://www.youtube.com/watch?v=Ahfe-BW1cFc" \
+  --output-dir raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/outputs
+```
+
+The skill returned stderr:
+
+```json
+{"status": "failed", "error": "metadata API request failed: <urlopen error [Errno -3] Temporary failure in name resolution>"}
+```
+
+No `outputs/manifest.json` or `agent/receipt.json` was written. The runtime should retry in an environment with DNS/network access to the configured YouTube content API, and confirm `YOUTUBE_CONTENT_API_URL` plus token env vars are available.
+
+Reading additional input from stdin...
+OpenAI Codex v0.142.4
+--------
+workdir: /root/wiki/wiki-sop-new-instance
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: xhigh
+reasoning summaries: none
+session id: 019f1d43-640b-78b1-8406-d4a82623b09f
+--------
+user
+Use skill youtube-metadata-fetch to execute this Node Execution Request.
+
+# Node Execution Request
+
+Runtime context:
+- runtime_id: runtime-206-189-196-65
+- instance_id: agent-runtime-codex-smoke
+- workflow_id: youtube-research-wiki
+- node_id: youtube-metadata-fetch-a2a
+- node_run_id: node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af
+
+Input contract:
+- entry_inputs: {
+  "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc"
+}
+- input_manifest_path: raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/inputs/sources/manifest.json
+- input_directory: raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/inputs/sources
+- source_url: https://www.youtube.com/watch?v=Ahfe-BW1cFc
+- Only use files listed in the input manifest unless the selected skill already has a stricter rule.
+
+Relay context:
+No upstream relay context was provided for this run.
+
+Approved Edge Handoff Guide:
+No approved Edge Handoff Guide was resolved for this run.
+
+Output contract:
+- output_directory: raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/outputs
+- output_manifest_path: raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/outputs/manifest.json
+- receipt_path: raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/agent/receipt.json
+- Do not report success unless the declared output manifest and receipt are written or the runtime wrapper writes equivalent state that the adapter can verify.
+
+Execution command:
+```bash
+
+```
+If the execution command is empty, execute the selected skill directly from this request: read entry_inputs, input_directory, input_manifest and the approved handoff guide, then write outputs to output_directory and output_manifest_path.
+
+
+Execution rules:
+- Use the selected skill only: youtube-metadata-fetch.
+- Run the command from the Instance workspace unless the skill has an equivalent deterministic wrapper.
+- Preserve the provided environment variables.
+- Do not invent paths.
+- If execution fails, return the failure and include stderr/log guidance.
+
+codex
+I’m using `youtube-metadata-fetch` because the request explicitly names that skill and the node contract is for normalized YouTube metadata. I’ll read the skill instructions first, then inspect the declared input manifest and try to produce the required outputs within the workspace constraints.
+exec
+/bin/bash -lc "sed -n '1,240p' /root/.codex/skills/youtube-metadata-fetch/SKILL.md" in /root/wiki/wiki-sop-new-instance
+ succeeded in 1ms:
+---
+name: youtube-metadata-fetch
+description: Fetch normalized metadata for a YouTube video URL through the configured YouTube content API. This base skill is workflow-neutral and does not know about SOP nodes, upstream nodes, downstream nodes, pipeline context, git, Telegram, or edge handoff mappings.
+---
+
+# YouTube Metadata Fetch
+
+Use this skill when a runtime node or agent needs YouTube video metadata from a
+source URL.
+
+This is a base skill. It intentionally does not encode any SOP stage, node id,
+upstream dependency, downstream dependency, edge handoff, git commit, Telegram
+notification, or wiki repository contract.
+
+## Install Command
+
+```bash
+bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630100126')
+```
+
+## Inputs
+
+- `source_url` - required YouTube watch or youtu.be URL.
+- `api_url` - optional API base URL. Defaults to `YOUTUBE_CONTENT_API_URL`, then the managed YouTube content API endpoint.
+- `api_token` - optional bearer token. Defaults to `YOUTUBE_CONTENT_API_TOKEN`, then `YOUTUBE_RESEARCH_WORKFLOW_TOKEN`.
+- `timeout_seconds` - optional HTTP timeout. Defaults to `30`.
+- `output_dir` - optional directory for generated files.
+- `output_json` - optional explicit JSON output path.
+
+## Outputs
+
+The command returns normalized metadata as JSON and can write these files when
+`--output-dir` is provided:
+
+- `metadata.json`
+- `source-url.txt`
+- `result.json`
+
+The normalized JSON includes:
+
+- `video_id`
+- `title`
+- `author`
+- `published_at`
+- `youtube_url`
+- `thumbnail`
+- `source_url`
+- `fetched_at`
+
+## CLI
+
+```bash
+scripts/youtube-metadata-fetch.sh \
+  --source-url "https://www.youtube.com/watch?v=dQw4w9WgXcQ" \
+  --output-dir /tmp/youtube-metadata-output
+```
+
+With explicit API config:
+
+```bash
+scripts/youtube-metadata-fetch.sh \
+  --api-url "$YOUTUBE_CONTENT_API_URL" \
+  --api-token "$YOUTUBE_CONTENT_API_TOKEN" \
+  --source-url "https://youtu.be/dQw4w9WgXcQ"
+```
+
+The CLI also loads private runtime configuration from these files when present:
+
+- `<installed-skill>/.skill.env` generated by the installer for managed defaults.
+- `~/.agent-brain-plugins.env`
+- `~/agent-brain-plugins/youtube-wiki/env.shared`
+- `~/.hermes/.env`
+
+Runtime hosts can override installer defaults through private env files or the
+Runtime/Instance secret layer.
+
+## Runtime Node Guidance
+
+A node built from this skill should treat `source_url` as a manual or first-node
+input. If the node is downstream of another node, the edge handoff instruction
+should decide whether and how to provide the URL. The skill itself must not make
+that decision.
+
+codex
+The skill is a thin wrapper around a `scripts/youtube-metadata-fetch.sh` CLI. I’m checking the installed script and the node’s declared input manifest now, then I’ll invoke the CLI with the provided `source_url` and output directory.
+exec
+/bin/bash -lc 'find /root/.codex/skills/youtube-metadata-fetch -maxdepth 3 -type f | sort' in /root/wiki/wiki-sop-new-instance
+exec
+/bin/bash -lc "sed -n '1,260p' /root/.codex/skills/youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+#!/usr/bin/env bash
+set -euo pipefail
+
+load_private_env() {
+  local env_file script_dir
+  script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  for env_file in \
+    "$script_dir/../.skill.env" \
+    "$HOME/.agent-brain-plugins.env" \
+    "$HOME/agent-brain-plugins/youtube-wiki/env.shared" \
+    "$HOME/.hermes/.env"; do
+    if [[ -f "$env_file" ]]; then
+      set -a
+      # shellcheck source=/dev/null
+      source "$env_file"
+      set +a
+    fi
+  done
+}
+
+load_private_env
+
+SOURCE_URL=""
+API_URL="${YOUTUBE_CONTENT_API_URL:-https://youtube-content-parse.hb67egcim4.workers.dev}"
+API_TOKEN="${YOUTUBE_CONTENT_API_TOKEN:-${YOUTUBE_RESEARCH_WORKFLOW_TOKEN:-}}"
+TIMEOUT_SECONDS="${YOUTUBE_METADATA_TIMEOUT_SECONDS:-30}"
+OUTPUT_DIR=""
+OUTPUT_JSON=""
+INCLUDE_RAW="false"
+
+usage() {
+  cat >&2 <<'USAGE'
+Usage:
+  youtube-metadata-fetch.sh --source-url https://www.youtube.com/watch?v=... [options]
+
+Options:
+  --source-url URL          Required YouTube source URL.
+  --api-url URL             API base URL. Defaults to YOUTUBE_CONTENT_API_URL.
+  --api-token TOKEN         API bearer token. Defaults to YOUTUBE_CONTENT_API_TOKEN.
+  --timeout-seconds N       HTTP timeout seconds. Default: 30.
+  --output-dir DIR          Optional directory for metadata.json, source-url.txt, result.json.
+  --output-json FILE        Optional explicit metadata JSON file path.
+  --include-raw VALUE       true/false. Include raw API payload in result JSON.
+USAGE
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --source-url) SOURCE_URL="${2:-}"; shift 2 ;;
+    --api-url) API_URL="${2:-}"; shift 2 ;;
+    --api-token) API_TOKEN="${2:-}"; shift 2 ;;
+    --timeout-seconds) TIMEOUT_SECONDS="${2:-}"; shift 2 ;;
+    --output-dir) OUTPUT_DIR="${2:-}"; shift 2 ;;
+    --output-json) OUTPUT_JSON="${2:-}"; shift 2 ;;
+    --include-raw) INCLUDE_RAW="${2:-}"; shift 2 ;;
+    -h|--help) usage; exit 0 ;;
+    *) echo "Unknown argument: $1" >&2; usage; exit 2 ;;
+  esac
+done
+
+if [[ -z "$SOURCE_URL" ]]; then
+  echo "Missing --source-url" >&2
+  exit 2
+fi
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+exec python3 "$SCRIPT_DIR/youtube_metadata_fetch.py" \
+  --source-url "$SOURCE_URL" \
+  --api-url "$API_URL" \
+  --api-token "$API_TOKEN" \
+  --timeout-seconds "$TIMEOUT_SECONDS" \
+  --output-dir "$OUTPUT_DIR" \
+  --output-json "$OUTPUT_JSON" \
+  --include-raw "$INCLUDE_RAW"
+
+exec
+/bin/bash -lc "sed -n '1,220p' raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/inputs/sources/manifest.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+{
+  "version": 1,
+  "kind": "input",
+  "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af",
+  "node_id": "youtube-metadata-fetch-a2a",
+  "source_mode": "manual",
+  "created_at": "2026-07-01T10:39:42Z",
+  "items": [
+    {
+      "path": "0001.txt",
+      "source": "manual",
+      "value_type": "text",
+      "source_path": "",
+      "source_node": "",
+      "source_run_id": "",
+      "source_output": "",
+      "input_name": "source_url",
+      "target_input": "source_url",
+      "value_preview": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+      "materialized_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/inputs/sources/0001.txt",
+      "resolved_value": "https://www.youtube.com/watch?v=Ahfe-BW1cFc"
+    }
+  ],
+  "selected_outputs": [],
+  "matched_outputs": [],
+  "relay_mappings": [],
+  "input_validation": {
+    "status": "passed",
+    "errors": [],
+    "resolved_values": {
+      "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc"
+    },
+    "resolutions": [
+      {
+        "input": "source_url",
+        "source_outputs": [
+          null
+        ],
+        "materialized_paths": [
+          "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/inputs/sources/0001.txt"
+        ],
+        "value_preview": "https://www.youtube.com/watch?v=Ahfe-BW1cFc"
+      }
+    ]
+  },
+  "edge_contract": {},
+  "node_execution_guide": {},
+  "workflow_revision": {
+    "version": 1,
+    "hash": "649554350581b39d",
+    "node_count": 7,
+    "edge_count": 3,
+    "nodes": {
+      "notebooklm-research": {
+        "title": "NotebookLM 研究",
+        "skill": "sop-notebooklm-research",
+        "mode": "blocking",
+        "needs": [
+          "youtube-fetch"
+        ],
+        "inputs": {
+          "source_url": "youtube-fetch.outputs.source_url",
+          "metadata_file": "youtube-fetch.outputs.metadata_file"
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "reports": "raw/notebooklm-analysis/*.md",
+          "mindmaps": "raw/notebooklm-mindmaps/*.json"
+        },
+        "capabilities": {}
+      },
+      "retry": {
+        "title": "手动重试",
+        "skill": "sop-retry",
+        "mode": "manual",
+        "needs": [],
+        "inputs": {},
+        "optional_inputs": {},
+        "outputs": {},
+        "capabilities": {}
+      },
+      "tg-notify": {
+        "title": "Telegram 通知",
+        "skill": "sop-tg-notify",
+        "mode": "blocking",
+        "needs": [
+          "wiki-build"
+        ],
+        "inputs": {
+          "index": {
+            "from": "wiki-build.outputs.index",
+            "required": true,
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown"
+          }
+        },
+        "optional_inputs": {
+          "message": {
+            "from": "edge.message",
+            "required": false,
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "text",
+            "resolvers": [
+              {
+                "id": "direct-text",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-title",
+                "kind": "json_path",
+                "path": "$.title"
+              },
+              {
+                "id": "metadata-description",
+                "kind": "json_path",
+                "path": "$.description"
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "telegram_message": {
+            "path": "logs/pipeline-runs/pipe-{run_id}.json",
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": false
+          }
+        },
+        "capabilities": {}
+      },
+      "wiki-build": {
+        "title": "Wiki 知识图谱构建",
+        "skill": "sop-wiki-build",
+        "mode": "blocking",
+        "needs": [
+          "notebooklm-research"
+        ],
+        "inputs": {
+          "reports": {
+            "from": "notebooklm-research.outputs.reports",
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown"
+          }
+        },
+        "optional_inputs": {
+          "deep_research": {
+            "from": "youtube-deep-research.outputs.analysis_file",
+            "required": false,
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown"
+          }
+        },
+        "outputs": {
+          "index": {
+            "path": "index.md",
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "relayable": true
+          },
+          "pages": {
+            "path": "wiki/**",
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown",
+            "relayable": true
+          }
+        },
+        "capabilities": {}
+      },
+      "youtube-deep-research": {
+        "title": "YouTube 深度研究",
+        "skill": "sop-youtube-deep-research",
+        "mode": "sidecar",
+        "needs": [
+          "youtube-fetch"
+        ],
+        "inputs": {
+          "source_url": {
+            "from": "youtube-fetch.outputs.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "resolvers": [
+              {
+                "id": "direct-url",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-source-url",
+                "kind": "json_path",
+                "path": "$.source_url"
+              },
+              {
+                "id": "metadata-youtube-url",
+                "kind": "json_path",
+                "path": "$.youtube_url"
+              },
+              {
+                "id": "text-url",
+                "kind": "regex",
+                "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+              }
+            ]
+          }
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "analysis_file": {
+            "path": "raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md",
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "relayable": true,
+            "role": "wiki-source"
+
+ succeeded in 108ms:
+codex
+The manifest validates the manual `source_url`, and the installed CLI delegates to a Python helper. I’m reading that helper for its exact file-writing behavior and then I’ll run it against the declared output directory.
+exec
+/bin/bash -lc "sed -n '1,320p' /root/.codex/skills/youtube-metadata-fetch/scripts/youtube_metadata_fetch.py" in /root/wiki/wiki-sop-new-instance
+ succeeded in 109ms:
+codex
+The helper fetches from the configured YouTube content API first, then writes `metadata.json`, `source-url.txt`, and `result.json`. I’m invoking it from the instance workspace with the contract’s exact output directory.
+exec
+/bin/bash -lc '/root/.codex/skills/youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh --source-url "https://www.youtube.com/watch?v=Ahfe-BW1cFc" --output-dir raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/outputs' in /root/wiki/wiki-sop-new-instance
+ exited 1 in 234ms:
+{"status": "failed", "error": "metadata API request failed: <urlopen error [Errno -3] Temporary failure in name resolution>"}
+
+codex
+The CLI failed before any output writes because DNS resolution for the metadata API is unavailable in this runtime. I’m checking whether the contract paths already contain any wrapper state before I return the failure.
+exec
+/bin/bash -lc 'find raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af -maxdepth 3 -type f | sort' in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/agent/executor.json
+raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/agent/request.md
+raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/events.jsonl
+raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/input.json
+raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/inputs/sources/0001.txt
+raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/request.json
+raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/result.json
+
+exec
+/bin/bash -lc 'test -d raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/outputs && find raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/outputs -maxdepth 2 -type f -print | sort || true' in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+exec
+/bin/bash -lc "test -f raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/agent/receipt.json && sed -n '1,220p' raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/agent/receipt.json || true" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+codex
+There is no existing output manifest or receipt for this run. I’m looking at the runtime’s current request/result files only to see whether it already recorded the failed execution state.
+exec
+/bin/bash -lc "sed -n '1,260p' raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/result.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+{
+  "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af",
+  "pipeline_id": "node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af",
+  "runtime_id": "runtime-206-189-196-65",
+  "instance_id": "agent-runtime-codex-smoke",
+  "workflow_id": "youtube-research-wiki",
+  "node_id": "youtube-metadata-fetch-a2a",
+  "node_title": "YouTube Metadata Fetch A2A",
+  "status": "running",
+  "mode": "real-node",
+  "input_source": "manual",
+  "relay_mode": "",
+  "selected_outputs": [],
+  "relay_mappings": [],
+  "source_node_run_id": "",
+  "relay_selection": {},
+  "edge_contract": {},
+  "node_execution_guide": {},
+  "workflow_revision": {
+    "version": 1,
+    "hash": "649554350581b39d",
+    "node_count": 7,
+    "edge_count": 3,
+    "nodes": {
+      "notebooklm-research": {
+        "title": "NotebookLM 研究",
+        "skill": "sop-notebooklm-research",
+        "mode": "blocking",
+        "needs": [
+          "youtube-fetch"
+        ],
+        "inputs": {
+          "source_url": "youtube-fetch.outputs.source_url",
+          "metadata_file": "youtube-fetch.outputs.metadata_file"
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "reports": "raw/notebooklm-analysis/*.md",
+          "mindmaps": "raw/notebooklm-mindmaps/*.json"
+        },
+        "capabilities": {}
+      },
+      "retry": {
+        "title": "手动重试",
+        "skill": "sop-retry",
+        "mode": "manual",
+        "needs": [],
+        "inputs": {},
+        "optional_inputs": {},
+        "outputs": {},
+        "capabilities": {}
+      },
+      "tg-notify": {
+        "title": "Telegram 通知",
+        "skill": "sop-tg-notify",
+        "mode": "blocking",
+        "needs": [
+          "wiki-build"
+        ],
+        "inputs": {
+          "index": {
+            "from": "wiki-build.outputs.index",
+            "required": true,
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown"
+          }
+        },
+        "optional_inputs": {
+          "message": {
+            "from": "edge.message",
+            "required": false,
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "text",
+            "resolvers": [
+              {
+                "id": "direct-text",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-title",
+                "kind": "json_path",
+                "path": "$.title"
+              },
+              {
+                "id": "metadata-description",
+                "kind": "json_path",
+                "path": "$.description"
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "telegram_message": {
+            "path": "logs/pipeline-runs/pipe-{run_id}.json",
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": false
+          }
+        },
+        "capabilities": {}
+      },
+      "wiki-build": {
+        "title": "Wiki 知识图谱构建",
+        "skill": "sop-wiki-build",
+        "mode": "blocking",
+        "needs": [
+          "notebooklm-research"
+        ],
+        "inputs": {
+          "reports": {
+            "from": "notebooklm-research.outputs.reports",
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown"
+          }
+        },
+        "optional_inputs": {
+          "deep_research": {
+            "from": "youtube-deep-research.outputs.analysis_file",
+            "required": false,
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown"
+          }
+        },
+        "outputs": {
+          "index": {
+            "path": "index.md",
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "relayable": true
+          },
+          "pages": {
+            "path": "wiki/**",
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown",
+            "relayable": true
+          }
+        },
+        "capabilities": {}
+      },
+      "youtube-deep-research": {
+        "title": "YouTube 深度研究",
+        "skill": "sop-youtube-deep-research",
+        "mode": "sidecar",
+        "needs": [
+          "youtube-fetch"
+        ],
+        "inputs": {
+          "source_url": {
+            "from": "youtube-fetch.outputs.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "resolvers": [
+              {
+                "id": "direct-url",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-source-url",
+                "kind": "json_path",
+                "path": "$.source_url"
+              },
+              {
+                "id": "metadata-youtube-url",
+                "kind": "json_path",
+                "path": "$.youtube_url"
+              },
+              {
+                "id": "text-url",
+                "kind": "regex",
+                "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+              }
+            ]
+          }
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "analysis_file": {
+            "path": "raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md",
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "relayable": true,
+            "role": "wiki-source"
+          },
+          "transcript_file": {
+            "path": "raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt",
+            "kind": "file",
+            "type": "file",
+            "value_type": "text",
+            "relayable": true,
+            "role": "transcript"
+          }
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "editable": true,
+            "save_scope": "node-definition",
+            "description": "Persist this node's workspace outputs to the current Instance repo.",
+            "paths": [
+              "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+              "raw/youtube-deep-research/{pipeline_id}/raw/**"
+            ]
+          },
+          "telegram": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "editable": true,
+            "save_scope": "node-definition",
+            "description": "Send progress notifications through the current Instance Telegram config.",
+            "trigger": "stage-lifecycle",
+            "triggers": [
+              "start",
+              "done",
+              "failed"
+            ]
+          }
+        }
+      },
+      "youtube-fetch": {
+        "title": "YouTube 元数据获取",
+        "skill": "sop-youtube-fetch",
+        "mode": "blocking",
+        "needs": [],
+        "inputs": {
+          "source_url": {
+            "from": "context.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url"
+          }
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "source_url": {
+            "from": "context.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "relayable": true
+          },
+          "metadata_file": {
+            "from": "context.stage_b_fetch.meta_file",
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": true
+          }
+        },
+
+exec
+/bin/bash -lc "sed -n '1,260p' raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/request.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+{
+  "schema": "node-execution-request/v1",
+  "runtime_id": "runtime-206-189-196-65",
+  "instance_id": "agent-runtime-codex-smoke",
+  "workflow_id": "youtube-research-wiki",
+  "node_id": "youtube-metadata-fetch-a2a",
+  "run_id": "node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af",
+  "entry_inputs": {
+    "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc"
+  },
+  "handoff_sources": [],
+  "handoff_instruction": "",
+  "input_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/inputs/sources/manifest.json",
+  "input_directory": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/inputs/sources",
+  "outputs_dir": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/outputs",
+  "output_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/outputs/manifest.json",
+  "edge_contract": {},
+  "node_execution_guide": {},
+  "created_at": "2026-07-01T10:39:42.096904+00:00"
+}
+
+exec
+/bin/bash -lc "sed -n '1,220p' raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/agent/executor.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+{
+  "version": 1,
+  "executor": "codex",
+  "requested_skill": "youtube-metadata-fetch",
+  "node_id": "youtube-metadata-fetch-a2a",
+  "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af",
+  "runtime_id": "runtime-206-189-196-65",
+  "instance_id": "agent-runtime-codex-smoke",
+  "workflow_id": "youtube-research-wiki",
+  "template_source": "default",
+  "template_version": "agent-runtime-executor.v1",
+  "selected_agent_runtime": "codex",
+  "request_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/agent/request.md",
+  "response_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/agent/response.txt",
+  "receipt_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/agent/receipt.json",
+  "input_manifest_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/inputs/sources/manifest.json",
+  "output_manifest_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/outputs/manifest.json",
+  "node_execution_guide": {},
+  "stage_command": [],
+  "stage_command_preview": "",
+  "created_at": "2026-07-01T10:39:42.922482+00:00"
+}
+
+codex
+Execution failed.
+
+I ran:
+
+```bash
+/root/.codex/skills/youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh \
+  --source-url "https://www.youtube.com/watch?v=Ahfe-BW1cFc" \
+  --output-dir raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/outputs
+```
+
+The skill returned stderr:
+
+```json
+{"status": "failed", "error": "metadata API request failed: <urlopen error [Errno -3] Temporary failure in name resolution>"}
+```
+
+No `outputs/manifest.json` or `agent/receipt.json` was written. The runtime should retry in an environment with DNS/network access to the configured YouTube content API, and confirm `YOUTUBE_CONTENT_API_URL` plus token env vars are available.
+tokens used
+26,803
