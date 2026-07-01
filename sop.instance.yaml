@@ -1,4 +1,4 @@
-instance_id: agent-runtime-openclaw-smoke
+instance_id: agent-runtime-codex-smoke
 workspace_kind: execution-workspace
 sop_type: workspace
 repo: skkeoriw/wiki-sop-new-instance
