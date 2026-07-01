@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "executor": "codex",
+  "selected_agent_runtime": "codex",
+  "requested_skill": "youtube-deep-research",
+  "executed_skill": "youtube-deep-research",
+  "node_id": "youtube-deep-research-a2a",
+  "node_run_id": "node-run-youtube-deep-research-a2a-20260701T105646-d01cf2",
+  "request_id": "node-run-youtube-deep-research-a2a-20260701T105646-d01cf2",
+  "status": "done",
+  "returncode": 0,
+  "timed_out": false,
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "passed",
+      "expected_outputs": [
+        "analysis_md",
+        "transcript_txt",
+        "result_json",
+        "status_json",
+        "worker_analysis_md"
+      ],
+      "required_outputs": [],
+      "present_outputs": [
+        "analysis_md",
+        "transcript_txt",
+        "result_json",
+        "status_json",
+        "worker_analysis_md"
+      ],
+      "missing_required_outputs": [],
+      "business_outputs": {
+        "analysis_md": [
+          "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/analysis.md"
+        ],
+        "transcript_txt": [
+          "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.txt"
+        ],
+        "result_json": [
+          "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/result.json"
+        ],
+        "status_json": [
+          "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/status.json"
+        ],
+        "worker_analysis_md": [
+          "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/worker-analysis.md"
+        ]
+      },
+      "business_artifact_count": 0
+    },
+    "success_evidence": {
+      "passed": true,
+      "signals": [
+        {
+          "source": "manifest.status",
+          "status": "succeeded"
+        },
+        {
+          "source": "manifest.summary.status",
+          "status": "succeeded"
+        },
+        {
+          "source": "receipt.status",
+          "status": "done"
+        },
+        {
+          "source": "manifest.summary.source_url",
+          "output": "source_url",
+          "kind": "url"
+        },
+        {
+          "source": "output_artifacts",
+          "count": 9
+        },
+        {
+          "source": "receipt",
+          "status": "success"
+        }
+      ],
+      "failures": []
+    }
+  },
+  "business_output_status": {
+    "status": "passed",
+    "expected_outputs": [
+      "analysis_md",
+      "transcript_txt",
+      "result_json",
+      "status_json",
+      "worker_analysis_md"
+    ],
+    "required_outputs": [],
+    "present_outputs": [
+      "analysis_md",
+      "transcript_txt",
+      "result_json",
+      "status_json",
+      "worker_analysis_md"
+    ],
+    "missing_required_outputs": [],
+    "business_outputs": {
+      "analysis_md": [
+        "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/analysis.md"
+      ],
+      "transcript_txt": [
+        "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.txt"
+      ],
+      "result_json": [
+        "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/result.json"
+      ],
+      "status_json": [
+        "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/status.json"
+      ],
+      "worker_analysis_md": [
+        "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/worker-analysis.md"
+      ]
+    },
+    "business_artifact_count": 0
+  },
+  "input_manifest": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources/manifest.json",
+  "output_manifest": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/manifest.json",
+  "started_at": "2026-07-01T10:56:50.065941+00:00",
+  "finished_at": "2026-07-01T11:07:17.449795+00:00",
+  "legacy_fallback": false,
+  "error": ""
+}

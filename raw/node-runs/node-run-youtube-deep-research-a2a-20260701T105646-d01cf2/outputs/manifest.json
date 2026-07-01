@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-youtube-deep-research-a2a-20260701T105646-d01cf2",
+  "node_id": "youtube-deep-research-a2a",
+  "workflow_id": "youtube-research-wiki",
+  "runtime_id": "runtime-206-189-196-65",
+  "instance_id": "agent-runtime-codex-smoke",
+  "status": "succeeded",
+  "created_at": "2026-07-01T11:01:50Z",
+  "root": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs",
+  "items": [
+    {
+      "name": "analysis_md",
+      "output_name": "analysis_md",
+      "path": "analysis.md",
+      "kind": "file",
+      "type": "file",
+      "value_type": "markdown",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/analysis.md",
+      "resolved_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/analysis.md",
+      "absolute_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/analysis.md",
+      "size_bytes": 31011,
+      "relayable": true,
+      "description": "Deep research analysis markdown."
+    },
+    {
+      "name": "transcript_txt",
+      "output_name": "transcript_txt",
+      "path": "transcript.txt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "text",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.txt",
+      "resolved_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.txt",
+      "absolute_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.txt",
+      "size_bytes": 12783,
+      "relayable": true,
+      "description": "Transcript text when available."
+    },
+    {
+      "name": "result_json",
+      "output_name": "result_json",
+      "path": "result.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/result.json",
+      "resolved_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/result.json",
+      "absolute_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/result.json",
+      "size_bytes": 2516,
+      "relayable": true,
+      "description": "Skill execution result JSON."
+    },
+    {
+      "name": "status_json",
+      "output_name": "status_json",
+      "path": "status.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/status.json",
+      "resolved_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/status.json",
+      "absolute_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/status.json",
+      "size_bytes": 5005,
+      "relayable": true,
+      "description": "Worker status JSON."
+    },
+    {
+      "name": "worker_analysis_md",
+      "output_name": "worker_analysis_md",
+      "path": "worker-analysis.md",
+      "kind": "file",
+      "type": "file",
+      "value_type": "markdown",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/worker-analysis.md",
+      "resolved_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/worker-analysis.md",
+      "absolute_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/worker-analysis.md",
+      "size_bytes": 15081,
+      "relayable": true,
+      "description": "Worker-provided analysis markdown when available."
+    }
+  ],
+  "outputs": {
+    "analysis_md": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/analysis.md"
+    ],
+    "transcript_txt": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.txt"
+    ],
+    "result_json": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/result.json"
+    ],
+    "status_json": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/status.json"
+    ],
+    "worker_analysis_md": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/worker-analysis.md"
+    ]
+  },
+  "summary": {
+    "status": "succeeded",
+    "total_files": 5,
+    "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+    "job_id": "6d606717-df64-402d-95c5-3c1497c7870b",
+    "workflow_status": "completed",
+    "fetched_at": "2026-07-01T10:59:31Z",
+    "title": "白嫖Hugging Face云服务器，永久免费跑AI项目教程",
+    "analysis_md": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/analysis.md"
+    ],
+    "transcript_txt": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.txt"
+    ],
+    "result_json": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/result.json"
+    ],
+    "status_json": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/status.json"
+    ],
+    "worker_analysis_md": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/worker-analysis.md"
+    ]
+  }
+}

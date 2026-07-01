@@ -1,0 +1,2254 @@
+Executed `youtube-deep-research` successfully.
+
+Worker job `6d606717-df64-402d-95c5-3c1497c7870b` completed, and the node outputs were written under:
+
+`raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs`
+
+Wrote and verified:
+
+- [manifest.json](/root/wiki/wiki-sop-new-instance/raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/manifest.json)
+- [receipt.json](/root/wiki/wiki-sop-new-instance/raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/agent/receipt.json)
+
+Declared outputs present: `analysis_md`, `transcript_txt`, `result_json`, `status_json`, `worker_analysis_md`. Validation status: `passed`.
+
+Reading additional input from stdin...
+OpenAI Codex v0.142.4
+--------
+workdir: /root/wiki/wiki-sop-new-instance
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: danger-full-access
+reasoning effort: xhigh
+reasoning summaries: none
+session id: 019f1d53-1297-7ac3-8110-ea61f1da41b9
+--------
+user
+Use skill youtube-deep-research to execute this Node Execution Request.
+
+# Node Execution Request
+
+Runtime context:
+- runtime_id: runtime-206-189-196-65
+- instance_id: agent-runtime-codex-smoke
+- workflow_id: youtube-research-wiki
+- node_id: youtube-deep-research-a2a
+- node_run_id: node-run-youtube-deep-research-a2a-20260701T105646-d01cf2
+
+Input contract:
+- entry_inputs: {
+  "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+  "timeout_seconds": "300",
+  "poll_interval": "5"
+}
+- input_manifest_path: raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources/manifest.json
+- input_directory: raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources
+- source_url: https://www.youtube.com/watch?v=Ahfe-BW1cFc
+- Only use files listed in the input manifest unless the selected skill already has a stricter rule.
+
+Relay context:
+No upstream relay context was provided for this run.
+
+Approved Edge Handoff Guide:
+No approved Edge Handoff Guide was resolved for this run.
+
+Output contract:
+- output_directory: raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs
+- output_manifest_path: raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/manifest.json
+- receipt_path: raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/agent/receipt.json
+- Do not report success unless the declared output manifest and receipt are written or the runtime wrapper writes equivalent state that the adapter can verify.
+
+Execution command:
+```bash
+
+```
+If the execution command is empty, execute the selected skill directly from this request: read entry_inputs, input_directory, input_manifest and the approved handoff guide, then write outputs to output_directory and output_manifest_path.
+
+
+Execution rules:
+- Use the selected skill only: youtube-deep-research.
+- Run the command from the Instance workspace unless the skill has an equivalent deterministic wrapper.
+- Preserve the provided environment variables.
+- Do not invent paths.
+- If execution fails, return the failure and include stderr/log guidance.
+
+codex
+Using `youtube-deep-research` for this node run. I’ll read its instructions first, then run the workflow using the provided manifest and output paths.
+exec
+/bin/bash -lc "sed -n '1,240p' /root/.codex/skills/youtube-deep-research/SKILL.md" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+---
+name: youtube-deep-research
+description: Run YouTube deep research for a source URL through the configured YouTube research workflow Worker. This base skill is workflow-neutral and does not know about SOP nodes, upstream nodes, downstream nodes, pipeline context, git, Telegram, or edge handoff mappings.
+---
+
+# YouTube Deep Research
+
+Use this skill when a runtime node or agent needs a transcript, analysis
+markdown, and worker status for a YouTube video URL.
+
+This is a base skill. It intentionally does not encode any SOP stage, node id,
+upstream dependency, downstream dependency, edge handoff, git commit, Telegram
+notification, or wiki repository contract.
+
+## Install Command
+
+```bash
+bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451')
+```
+
+## Inputs
+
+- `source_url` - required YouTube watch or youtu.be URL.
+- `workflow_url` - optional Worker base URL. Defaults to `YOUTUBE_RESEARCH_WORKFLOW_URL`.
+- `workflow_token` - optional bearer token. Defaults to `YOUTUBE_RESEARCH_WORKFLOW_TOKEN`, then `YOUTUBE_CONTENT_API_TOKEN`.
+- `timeout_seconds` - optional workflow timeout. Defaults to `1200`.
+- `poll_interval` - optional poll interval. Defaults to `10`.
+- `output_dir` - optional directory for generated files.
+- `include_transcript` - optional true/false. Defaults to `true`.
+
+## Outputs
+
+The command returns a JSON summary and can write these files when `--output-dir`
+is provided:
+
+- `analysis.md`
+- `transcript.txt` when available
+- `result.json`
+- `status.json`
+- `start.json`
+- `worker-analysis.md` when available
+- `transcript.srt` / `transcript.vtt` / `transcript.json` when provided by the Worker
+
+The result JSON includes:
+
+- `status`
+- `source_url`
+- `job_id`
+- `workflow_status`
+- `analysis_file`
+- `transcript_file`
+- `status_file`
+- `start_file`
+- `worker_files`
+- `written`
+
+## CLI
+
+```bash
+scripts/youtube-deep-research.sh \
+  --source-url "https://www.youtube.com/watch?v=dQw4w9WgXcQ" \
+  --output-dir /tmp/youtube-deep-research-output
+```
+
+With explicit Worker config:
+
+```bash
+scripts/youtube-deep-research.sh \
+  --workflow-url "$YOUTUBE_RESEARCH_WORKFLOW_URL" \
+  --workflow-token "$YOUTUBE_RESEARCH_WORKFLOW_TOKEN" \
+  --source-url "https://youtu.be/dQw4w9WgXcQ"
+```
+
+The CLI also loads private runtime configuration from these files when present:
+
+- `<installed-skill>/.skill.env` generated by the installer for managed defaults.
+- `~/.agent-brain-plugins.env`
+- `~/agent-brain-plugins/youtube-wiki/env.shared`
+- `~/.hermes/.env`
+
+Runtime hosts can override installer defaults through private env files or the
+Runtime/Instance secret layer.
+
+## Runtime Node Guidance
+
+A node built from this skill should treat `source_url` as a manual or first-node
+input. If the node is downstream of another node, the edge handoff instruction
+should decide whether and how to provide the URL. The skill itself must not make
+that decision.
+
+exec
+/bin/bash -lc "wc -l /root/.codex/skills/youtube-deep-research/SKILL.md && sed -n '241,520p' /root/.codex/skills/youtube-deep-research/SKILL.md" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+89 /root/.codex/skills/youtube-deep-research/SKILL.md
+
+codex
+The skill exposes a shell wrapper that writes the expected analysis/status artifacts when given an output directory. I’m checking the node input manifest and the installed wrapper path before running it.
+exec
+/bin/bash -lc 'rg --files /root/.codex/skills/youtube-deep-research' in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+/root/.codex/skills/youtube-deep-research/SKILL.md
+/root/.codex/skills/youtube-deep-research/scripts/__pycache__/youtube_deep_research.cpython-312.pyc
+/root/.codex/skills/youtube-deep-research/scripts/youtube_deep_research.py
+/root/.codex/skills/youtube-deep-research/scripts/youtube-deep-research.sh
+/root/.codex/skills/youtube-deep-research/agents/openai.yaml
+
+exec
+/bin/bash -lc "sed -n '1,240p' raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources/manifest.json" in /root/wiki/wiki-sop-new-instance
+exec
+/bin/bash -lc 'find raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2 -maxdepth 3 -type f -print' in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/agent/request.md
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/agent/executor.json
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/result.json
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/input.json
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources/0002.txt
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources/0001.txt
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources/0003.txt
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/events.jsonl
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/request.json
+
+ succeeded in 0ms:
+{
+  "version": 1,
+  "kind": "input",
+  "node_run_id": "node-run-youtube-deep-research-a2a-20260701T105646-d01cf2",
+  "node_id": "youtube-deep-research-a2a",
+  "source_mode": "manual",
+  "created_at": "2026-07-01T10:56:50Z",
+  "items": [
+    {
+      "path": "0001.txt",
+      "source": "manual",
+      "value_type": "text",
+      "source_path": "",
+      "source_node": "",
+      "source_run_id": "",
+      "source_output": "",
+      "input_name": "source_url",
+      "target_input": "source_url",
+      "value_preview": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources/0001.txt",
+      "resolved_value": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+      "resolver": "direct-url"
+    },
+    {
+      "path": "0002.txt",
+      "source": "manual",
+      "value_type": "text",
+      "source_path": "",
+      "source_node": "",
+      "source_run_id": "",
+      "source_output": "",
+      "input_name": "timeout_seconds",
+      "target_input": "timeout_seconds",
+      "value_preview": "300",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources/0002.txt",
+      "resolved_value": "300"
+    },
+    {
+      "path": "0003.txt",
+      "source": "manual",
+      "value_type": "text",
+      "source_path": "",
+      "source_node": "",
+      "source_run_id": "",
+      "source_output": "",
+      "input_name": "poll_interval",
+      "target_input": "poll_interval",
+      "value_preview": "5",
+      "materialized_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources/0003.txt",
+      "resolved_value": "5"
+    }
+  ],
+  "selected_outputs": [],
+  "matched_outputs": [],
+  "relay_mappings": [],
+  "input_validation": {
+    "status": "passed",
+    "errors": [],
+    "resolved_values": {
+      "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+      "timeout_seconds": "300",
+      "poll_interval": "5"
+    },
+    "resolutions": [
+      {
+        "input": "source_url",
+        "source_output": "",
+        "materialized_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources/0001.txt",
+        "resolver": "direct-url",
+        "value_preview": "https://www.youtube.com/watch?v=Ahfe-BW1cFc"
+      },
+      {
+        "input": "timeout_seconds",
+        "source_outputs": [
+          null
+        ],
+        "materialized_paths": [
+          "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources/0002.txt"
+        ],
+        "value_preview": "300"
+      },
+      {
+        "input": "poll_interval",
+        "source_outputs": [
+          null
+        ],
+        "materialized_paths": [
+          "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources/0003.txt"
+        ],
+        "value_preview": "5"
+      }
+    ]
+  },
+  "edge_contract": {},
+  "node_execution_guide": {},
+  "workflow_revision": {
+    "version": 1,
+    "hash": "cef42ca06637d549",
+    "node_count": 7,
+    "edge_count": 3,
+    "nodes": {
+      "notebooklm-research": {
+        "title": "NotebookLM 研究",
+        "skill": "sop-notebooklm-research",
+        "mode": "blocking",
+        "needs": [
+          "youtube-fetch"
+        ],
+        "inputs": {
+          "source_url": "youtube-fetch.outputs.source_url",
+          "metadata_file": "youtube-fetch.outputs.metadata_file"
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "reports": "raw/notebooklm-analysis/*.md",
+          "mindmaps": "raw/notebooklm-mindmaps/*.json"
+        },
+        "capabilities": {}
+      },
+      "retry": {
+        "title": "手动重试",
+        "skill": "sop-retry",
+        "mode": "manual",
+        "needs": [],
+        "inputs": {},
+        "optional_inputs": {},
+        "outputs": {},
+        "capabilities": {}
+      },
+      "tg-notify": {
+        "title": "Telegram 通知",
+        "skill": "sop-tg-notify",
+        "mode": "blocking",
+        "needs": [
+          "wiki-build"
+        ],
+        "inputs": {
+          "index": {
+            "from": "wiki-build.outputs.index",
+            "required": true,
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown"
+          }
+        },
+        "optional_inputs": {
+          "message": {
+            "from": "edge.message",
+            "required": false,
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "text",
+            "resolvers": [
+              {
+                "id": "direct-text",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-title",
+                "kind": "json_path",
+                "path": "$.title"
+              },
+              {
+                "id": "metadata-description",
+                "kind": "json_path",
+                "path": "$.description"
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "telegram_message": {
+            "path": "logs/pipeline-runs/pipe-{run_id}.json",
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": false
+          }
+        },
+        "capabilities": {}
+      },
+      "wiki-build": {
+        "title": "Wiki 知识图谱构建",
+        "skill": "sop-wiki-build",
+        "mode": "blocking",
+        "needs": [
+          "notebooklm-research"
+        ],
+        "inputs": {
+          "reports": {
+            "from": "notebooklm-research.outputs.reports",
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown"
+          }
+        },
+        "optional_inputs": {
+          "deep_research": {
+            "from": "youtube-deep-research.outputs.analysis_file",
+            "required": false,
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown"
+          }
+        },
+        "outputs": {
+          "index": {
+            "path": "index.md",
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "relayable": true
+          },
+          "pages": {
+            "path": "wiki/**",
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown",
+            "relayable": true
+          }
+        },
+        "capabilities": {}
+      },
+      "youtube-deep-research": {
+        "title": "YouTube 深度研究",
+        "skill": "sop-youtube-deep-research",
+        "mode": "sidecar",
+        "needs": [
+          "youtube-fetch"
+        ],
+        "inputs": {
+          "source_url": {
+            "from": "youtube-fetch.outputs.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "resolvers": [
+              {
+                "id": "direct-url",
+                "kind": "direct"
+
+codex
+The input manifest resolves the URL and timing values exactly as in the request: URL `Ahfe-BW1cFc`, timeout `300`, poll interval `5`. Next I’m checking the wrapper options so the command matches the node contract without adding extra inputs.
+exec
+/bin/bash -lc "sed -n '1,220p' /root/.codex/skills/youtube-deep-research/scripts/youtube-deep-research.sh" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+#!/usr/bin/env bash
+set -euo pipefail
+
+load_private_env() {
+  local env_file script_dir
+  script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+  for env_file in \
+    "$script_dir/../.skill.env" \
+    "$HOME/.agent-brain-plugins.env" \
+    "$HOME/agent-brain-plugins/youtube-wiki/env.shared" \
+    "$HOME/.hermes/.env"; do
+    if [[ -f "$env_file" ]]; then
+      set -a
+      # shellcheck source=/dev/null
+      source "$env_file"
+      set +a
+    fi
+  done
+}
+
+load_private_env
+
+SOURCE_URL=""
+WORKFLOW_URL="${YOUTUBE_RESEARCH_WORKFLOW_URL:-}"
+WORKFLOW_TOKEN="${YOUTUBE_RESEARCH_WORKFLOW_TOKEN:-${YOUTUBE_CONTENT_API_TOKEN:-}}"
+TIMEOUT_SECONDS="${YOUTUBE_RESEARCH_WORKFLOW_TIMEOUT:-1200}"
+POLL_INTERVAL="${YOUTUBE_RESEARCH_WORKFLOW_POLL_INTERVAL:-10}"
+OUTPUT_DIR=""
+INCLUDE_TRANSCRIPT="true"
+
+usage() {
+  cat >&2 <<'USAGE'
+Usage:
+  youtube-deep-research.sh --source-url https://www.youtube.com/watch?v=... [options]
+
+Options:
+  --source-url URL          Required YouTube source URL.
+  --workflow-url URL        Worker base URL. Defaults to YOUTUBE_RESEARCH_WORKFLOW_URL.
+  --workflow-token TOKEN    Worker bearer token. Defaults to YOUTUBE_RESEARCH_WORKFLOW_TOKEN.
+  --timeout-seconds N       Workflow timeout seconds. Default: 1200.
+  --poll-interval N         Poll interval seconds. Default: 10.
+  --output-dir DIR          Optional directory for generated artifacts.
+  --include-transcript BOOL true/false. Include transcript text in analysis.md. Default: true.
+USAGE
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --source-url) SOURCE_URL="${2:-}"; shift 2 ;;
+    --workflow-url) WORKFLOW_URL="${2:-}"; shift 2 ;;
+    --workflow-token) WORKFLOW_TOKEN="${2:-}"; shift 2 ;;
+    --timeout-seconds) TIMEOUT_SECONDS="${2:-}"; shift 2 ;;
+    --poll-interval) POLL_INTERVAL="${2:-}"; shift 2 ;;
+    --output-dir) OUTPUT_DIR="${2:-}"; shift 2 ;;
+    --include-transcript) INCLUDE_TRANSCRIPT="${2:-}"; shift 2 ;;
+    -h|--help) usage; exit 0 ;;
+    *) echo "Unknown argument: $1" >&2; usage; exit 2 ;;
+  esac
+done
+
+if [[ -z "$SOURCE_URL" ]]; then
+  echo "Missing --source-url" >&2
+  exit 2
+fi
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+exec python3 "$SCRIPT_DIR/youtube_deep_research.py" \
+  --source-url "$SOURCE_URL" \
+  --workflow-url "$WORKFLOW_URL" \
+  --workflow-token "$WORKFLOW_TOKEN" \
+  --timeout-seconds "$TIMEOUT_SECONDS" \
+  --poll-interval "$POLL_INTERVAL" \
+  --output-dir "$OUTPUT_DIR" \
+  --include-transcript "$INCLUDE_TRANSCRIPT"
+
+exec
+/bin/bash -lc "sed -n '1,260p' /root/.codex/skills/youtube-deep-research/scripts/youtube_deep_research.py" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import re
+import sys
+import time
+import urllib.error
+import urllib.request
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+
+FINAL_OK = {"done", "completed", "complete", "success", "succeeded"}
+FINAL_BAD = {"failed", "error", "cancelled", "canceled"}
+YOUTUBE_URL_RE = re.compile(
+    r"https?://(?:www\.)?(?:youtube\.com/watch\?v=[A-Za-z0-9_-]+[^\s\"'<>)]*|youtu\.be/[A-Za-z0-9_-]+[^\s\"'<>)]*)"
+)
+
+
+def utc_now() -> str:
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def parse_bool(value: str) -> bool:
+    return str(value or "").strip().lower() in {"1", "true", "yes", "y", "on"}
+
+
+def validate_source_url(value: str) -> str:
+    source_url = str(value or "").strip()
+    if not source_url or not YOUTUBE_URL_RE.search(source_url):
+        raise RuntimeError("source_url must be a YouTube watch or youtu.be URL")
+    return source_url
+
+
+def request_json(url: str, token: str, method: str = "GET", data: dict[str, Any] | None = None, timeout: int = 120) -> dict[str, Any]:
+    payload = json.dumps(data).encode("utf-8") if data is not None else None
+    headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": os.environ.get("YOUTUBE_RESEARCH_WORKFLOW_USER_AGENT", "curl/8.7.1"),
+    }
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    req = urllib.request.Request(url, data=payload, method=method, headers=headers)
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"workflow API HTTP {exc.code}: {body or exc.reason}") from exc
+    except urllib.error.URLError as exc:
+        raise RuntimeError(f"workflow API request failed: {exc}") from exc
+
+
+def request_text(url: str, token: str, timeout: int = 180) -> str:
+    headers = {"User-Agent": os.environ.get("YOUTUBE_RESEARCH_WORKFLOW_USER_AGENT", "curl/8.7.1")}
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    req = urllib.request.Request(url, method="GET", headers=headers)
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return resp.read().decode("utf-8", errors="replace")
+    except urllib.error.HTTPError as exc:
+        body = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"workflow file HTTP {exc.code}: {body or exc.reason}") from exc
+    except urllib.error.URLError as exc:
+        raise RuntimeError(f"workflow file request failed: {exc}") from exc
+
+
+def poll_job(base_url: str, token: str, job_id: str, timeout_seconds: int, poll_interval: int) -> dict[str, Any]:
+    deadline = time.time() + max(5, timeout_seconds)
+    interval = max(1, poll_interval)
+    last: dict[str, Any] = {}
+    while time.time() < deadline:
+        last = request_json(f"{base_url.rstrip('/')}/status/{job_id}", token, method="GET")
+        status = str(last.get("status") or "").lower()
+        print(f"[youtube-deep-research] job={job_id} status={status or 'unknown'}", file=sys.stderr, flush=True)
+        if status in FINAL_OK:
+            return last
+        if status in FINAL_BAD:
+            raise RuntimeError(f"workflow failed: {last.get('error') or status}")
+        time.sleep(interval)
+    raise TimeoutError(f"workflow timeout after {timeout_seconds}s, last_status={last.get('status')}")
+
+
+def title_from_status(status: dict[str, Any]) -> str:
+    titles = status.get("titles")
+    if isinstance(titles, list) and titles:
+        return str(titles[0])
+    if isinstance(titles, str):
+        return titles
+    return str(status.get("youtube_url") or status.get("id") or "YouTube Deep Research")
+
+
+def markdown_from_status(status: dict[str, Any], downloaded: dict[str, str], include_transcript: bool) -> str:
+    lines = [
+        f"# YouTube Deep Research: {title_from_status(status)}",
+        "",
+        "## Basic Info",
+        "",
+        f"- YouTube: {status.get('youtube_url', '')}",
+        f"- Job ID: {status.get('id', '')}",
+        f"- Status: {status.get('status', '')}",
+        f"- Detected language: {status.get('detected_lang') or ''}",
+        f"- Model: {status.get('model_used') or ''}",
+        "",
+    ]
+    if status.get("summary"):
+        lines += ["## Summary", "", str(status["summary"]), ""]
+    key_points = status.get("key_points")
+    if key_points:
+        lines += ["## Key Points", ""]
+        if isinstance(key_points, list):
+            lines += [f"- {item}" for item in key_points]
+        else:
+            lines.append(str(key_points))
+        lines.append("")
+    clip_suggestions = status.get("clip_suggestions")
+    if clip_suggestions:
+        lines += ["## Clip Suggestions", ""]
+        if isinstance(clip_suggestions, list):
+            lines += [f"- {item}" for item in clip_suggestions]
+        else:
+            lines.append(str(clip_suggestions))
+        lines.append("")
+    files = status.get("files") or {}
+    if isinstance(files, dict) and files:
+        lines += ["## Worker Files", ""]
+        for key in sorted(files):
+            lines.append(f"- {key}: {files[key]}")
+        lines.append("")
+    chunks = status.get("chunks") or []
+    if isinstance(chunks, list) and chunks:
+        lines += ["## Chunk Status", ""]
+        for chunk in chunks:
+            if not isinstance(chunk, dict):
+                continue
+            lines.append(
+                f"- chunk {chunk.get('chunk_index')}: {chunk.get('status')} "
+                f"start={chunk.get('start_sec')} transcript={chunk.get('transcript_url') or ''}"
+            )
+        lines.append("")
+    if downloaded.get("analysis_md"):
+        lines += ["## Worker Analysis Markdown", "", downloaded["analysis_md"][:12000], ""]
+    if include_transcript and downloaded.get("transcript_txt"):
+        lines += ["## Transcript", "", downloaded["transcript_txt"][:30000], ""]
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def write_file(root: Path, name: str, content: str) -> str:
+    root.mkdir(parents=True, exist_ok=True)
+    path = root / name
+    path.write_text(content, encoding="utf-8")
+    return str(path)
+
+
+def write_json_file(root: Path, name: str, payload: dict[str, Any]) -> str:
+    return write_file(root, name, json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
+
+
+def run_research(args: argparse.Namespace) -> dict[str, Any]:
+    source_url = validate_source_url(args.source_url)
+    workflow_url = str(args.workflow_url or "").strip().rstrip("/")
+    workflow_token = str(args.workflow_token or "").strip()
+    if not workflow_url:
+        raise RuntimeError("workflow_url is required. Set --workflow-url or YOUTUBE_RESEARCH_WORKFLOW_URL.")
+    if not workflow_token:
+        raise RuntimeError("workflow_token is required. Set --workflow-token or YOUTUBE_RESEARCH_WORKFLOW_TOKEN.")
+
+    started = request_json(workflow_url, workflow_token, method="POST", data={"url": source_url})
+    job_id = str(started.get("job_id") or started.get("id") or "").strip()
+    if not job_id:
+        raise RuntimeError(f"missing job_id in workflow response: {started}")
+    status = poll_job(workflow_url, workflow_token, job_id, args.timeout_seconds, args.poll_interval)
+
+    downloaded: dict[str, str] = {}
+    worker_files = status.get("files") if isinstance(status.get("files"), dict) else {}
+    output_root = Path(args.output_dir).expanduser() if args.output_dir else None
+    written: dict[str, str] = {}
+
+    for key, filename in (
+        ("analysis_md", "worker-analysis.md"),
+        ("transcript_txt", "transcript.txt"),
+        ("transcript_srt", "transcript.srt"),
+        ("transcript_vtt", "transcript.vtt"),
+        ("transcript_json", "transcript.json"),
+    ):
+        url = worker_files.get(key) if isinstance(worker_files, dict) else ""
+        if not url:
+            continue
+        try:
+            text = request_text(str(url), workflow_token)
+            downloaded[key] = text
+            if output_root:
+                written[key] = write_file(output_root, filename, text)
+        except Exception as exc:
+            print(f"[youtube-deep-research] download {key} failed: {exc}", file=sys.stderr, flush=True)
+
+    analysis_md = markdown_from_status(status, downloaded, include_transcript=parse_bool(args.include_transcript))
+    result = {
+        "status": "succeeded",
+        "source_url": source_url,
+        "job_id": job_id,
+        "workflow_status": status.get("status", ""),
+        "fetched_at": utc_now(),
+        "worker_files": worker_files,
+        "written": written,
+    }
+    if output_root:
+        written["analysis_file"] = write_file(output_root, "analysis.md", analysis_md)
+        written["status_file"] = write_json_file(output_root, "status.json", status)
+        written["start_file"] = write_json_file(output_root, "start.json", started)
+        result["analysis_file"] = written["analysis_file"]
+        if "transcript_txt" in written:
+            result["transcript_file"] = written["transcript_txt"]
+        result["status_file"] = written["status_file"]
+        result["start_file"] = written["start_file"]
+        written["result_file"] = write_json_file(output_root, "result.json", result)
+        result["result_file"] = written["result_file"]
+    else:
+        result["analysis_markdown"] = analysis_md
+        if downloaded.get("transcript_txt"):
+            result["transcript_text"] = downloaded["transcript_txt"]
+    return result
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Run YouTube deep research through the configured Worker.")
+    parser.add_argument("--source-url", required=True)
+    parser.add_argument("--workflow-url", default=os.environ.get("YOUTUBE_RESEARCH_WORKFLOW_URL", ""))
+    parser.add_argument(
+        "--workflow-token",
+        default=os.environ.get("YOUTUBE_RESEARCH_WORKFLOW_TOKEN") or os.environ.get("YOUTUBE_CONTENT_API_TOKEN", ""),
+    )
+    parser.add_argument("--timeout-seconds", type=int, default=int(os.environ.get("YOUTUBE_RESEARCH_WORKFLOW_TIMEOUT", "1200")))
+    parser.add_argument("--poll-interval", type=int, default=int(os.environ.get("YOUTUBE_RESEARCH_WORKFLOW_POLL_INTERVAL", "10")))
+    parser.add_argument("--output-dir", default="")
+    parser.add_argument("--include-transcript", default="true")
+    args = parser.parse_args()
+    print(json.dumps(run_research(args), ensure_ascii=False, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main())
+    except Exception as exc:
+        print(json.dumps({"status": "failed", "error": str(exc)}, ensure_ascii=False), file=sys.stderr)
+        raise SystemExit(1)
+
+codex
+I’m starting the worker-backed deep research now. The wrapper will write its raw artifacts into the requested output directory, then I’ll build the node manifest and receipt around those files.
+exec
+/bin/bash -lc "/root/.codex/skills/youtube-deep-research/scripts/youtube-deep-research.sh --source-url 'https://www.youtube.com/watch?v=Ahfe-BW1cFc' --timeout-seconds 300 --poll-interval 5 --output-dir 'raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs'" in /root/wiki/wiki-sop-new-instance
+codex
+The worker accepted the job and is still in its download phase. I’ll keep polling until it reaches a final state or the 300-second node timeout is hit.
+codex
+The job has moved from downloading to transcribing, so the worker is making progress. I’m continuing to wait on the final worker status before writing the node-level manifest.
+codex
+Transcription completed and the worker is now analyzing the video. This is the last substantive phase before artifact download and local file writes.
+ succeeded in 116467ms:
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=pending
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=pending
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=downloading
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=downloading
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=downloading
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=downloading
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=transcribing
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=transcribing
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=transcribing
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=transcribing
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=transcribing
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=transcribing
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=transcribing
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=transcribing
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=transcribing
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=transcribing
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=analyzing
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=analyzing
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=analyzing
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=analyzing
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=analyzing
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=analyzing
+[youtube-deep-research] job=6d606717-df64-402d-95c5-3c1497c7870b status=completed
+{
+  "status": "succeeded",
+  "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+  "job_id": "6d606717-df64-402d-95c5-3c1497c7870b",
+  "workflow_status": "completed",
+  "fetched_at": "2026-07-01T10:59:31Z",
+  "worker_files": {
+    "transcript_json": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/6d606717-df64-402d-95c5-3c1497c7870b/transcript",
+    "transcript_txt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/6d606717-df64-402d-95c5-3c1497c7870b/transcript?format=txt",
+    "transcript_srt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/6d606717-df64-402d-95c5-3c1497c7870b/transcript?format=srt",
+    "transcript_vtt": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/6d606717-df64-402d-95c5-3c1497c7870b/transcript?format=vtt",
+    "transcript_csv": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/6d606717-df64-402d-95c5-3c1497c7870b/transcript?format=csv",
+    "analysis_md": "https://youtube-research-workflow.hb67egcim4.workers.dev/job/6d606717-df64-402d-95c5-3c1497c7870b/transcript?format=md"
+  },
+  "written": {
+    "analysis_md": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/worker-analysis.md",
+    "transcript_txt": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.txt",
+    "transcript_srt": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.srt",
+    "transcript_vtt": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.vtt",
+    "transcript_json": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.json",
+    "analysis_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/analysis.md",
+    "status_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/status.json",
+    "start_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/start.json",
+    "result_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/result.json"
+  },
+  "analysis_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/analysis.md",
+  "transcript_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.txt",
+  "status_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/status.json",
+  "start_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/start.json",
+  "result_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/result.json"
+}
+
+codex
+The worker completed and wrote the deep-research artifacts. I’m now matching the runtime’s manifest/receipt shape so the adapter can verify this node run cleanly.
+exec
+/bin/bash -lc "rg --files raw/node-runs -g 'manifest.json'" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T104940-2929af/outputs/manifest.json
+raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T104940-2929af/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-y89q-20260629T125753-4b8467/outputs/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T103504Z-9c0f37/outputs/manifest.json
+raw/node-runs/node-run-youtube-fetch-20260622T080125-03ff23/outputs/files/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-y89q-20260629T125753-4b8467/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T103504Z-9c0f37/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-fetch-20260622T080125-03ff23/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-quql-20260629T121727-4b8467/outputs/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T043559Z-4f2b55/outputs/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T043621Z-4f2b55/outputs/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T043621Z-4f2b55/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-quql-20260629T121727-4b8467/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T043559Z-4f2b55/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T081153Z-a99c2f/outputs/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T081153Z-a99c2f/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/outputs/files/manifest.json
+raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-deep-research-contract-negative-20260622T125418Z/inputs/sources/manifest.json
+raw/node-runs/node-run-wiki-build-20260622T054648Z-9b9c26/outputs/files/manifest.json
+raw/node-runs/node-run-wiki-build-20260622T054648Z-9b9c26/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/outputs/files/manifest.json
+raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/outputs/manifest.json
+raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T174927-480b13/outputs/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T174927-480b13/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-deep-research-20260622T091425Z-6a0670/outputs/files/manifest.json
+raw/node-runs/node-run-youtube-metadata-fetch-20260630T094942-2929af/outputs/manifest.json
+raw/node-runs/node-run-wiki-build-20260622T102610-5a3066/outputs/files/manifest.json
+raw/node-runs/node-run-wiki-build-20260622T102610-5a3066/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-deep-research-20260622T091425Z-6a0670/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-fetch-20260622T080623-03ff23/outputs/files/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T043558Z-4f2b55/outputs/manifest.json
+raw/node-runs/node-run-youtube-fetch-20260622T080623-03ff23/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T043558Z-4f2b55/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T074039Z-13c736/outputs/manifest.json
+raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/outputs/files/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T074039Z-13c736/inputs/sources/manifest.json
+raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-metadata-fetch-20260630T093928-ddded2/outputs/manifest.json
+raw/node-runs/node-run-youtube-metadata-fetch-20260630T093928-ddded2/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T103455Z-7ef517/outputs/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260630T041144Z-86ee88/outputs/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T103455Z-7ef517/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260630T041144Z-86ee88/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/outputs/files/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T184504-4b8467/outputs/manifest.json
+raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T184504-4b8467/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T043619Z-4f2b55/outputs/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-quql-20260629T120159-4b8467/outputs/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T043619Z-4f2b55/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-deep-research-contract-negative-20260622T125659Z/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-quql-20260629T120159-4b8467/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-quql-20260629T115919-480b13/outputs/manifest.json
+raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/outputs/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T184017-4b8467/outputs/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-quql-20260629T115919-480b13/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T184017-4b8467/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T080226Z-81eba7/outputs/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T192437-4b8467/outputs/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-verify-20260629T070123Z-8c8461/outputs/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T080226Z-81eba7/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T192437-4b8467/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/outputs/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-verify-20260629T070123Z-8c8461/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T091528Z-13c736/outputs/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175101-480b13/outputs/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T091528Z-13c736/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175101-480b13/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-deep-research-20260622T111234Z-a32a89/outputs/files/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-xo0r-20260629T161805-293abd/outputs/manifest.json
+raw/node-runs/node-run-youtube-deep-research-20260622T111234Z-a32a89/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-xo0r-20260629T161805-293abd/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-metadata-fetch-20260630T091116-e554eb/outputs/manifest.json
+raw/node-runs/node-run-youtube-metadata-fetch-20260630T091116-e554eb/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T102747Z-352352/outputs/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T182202-4b8467/outputs/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T102747Z-352352/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T182202-4b8467/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T074256Z-13c736/outputs/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260630T062421Z-bd7beb/outputs/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T074256Z-13c736/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260630T062421Z-bd7beb/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T074218Z-13c736/outputs/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T102746Z-102d1d/outputs/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T074218Z-13c736/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T102746Z-102d1d/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-deep-research-edge-guide-real-20260624T090739Z/outputs/files/manifest.json
+raw/node-runs/node-run-youtube-deep-research-edge-guide-real-20260624T090739Z/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-deep-research-io-protocol-20260622T030240Z/outputs/files/manifest.json
+raw/node-runs/node-run-youtube-deep-research-io-protocol-20260622T030240Z/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T102647Z-ae778e/outputs/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T043620Z-4f2b55/outputs/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T102647Z-ae778e/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-deep-research-20260622T102318-ecb0ee/outputs/files/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T043620Z-4f2b55/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T080020Z-13c736/outputs/manifest.json
+raw/node-runs/node-run-youtube-deep-research-20260622T102318-ecb0ee/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T080020Z-13c736/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T075600Z-13c736/outputs/manifest.json
+raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T075600Z-13c736/inputs/sources/manifest.json
+raw/node-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/outputs/files/manifest.json
+raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/inputs/sources/manifest.json
+raw/node-runs/node-run-wiki-build-relay-io-protocol-20260622T030602Z/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T074403Z-13c736/outputs/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-quql-20260629T120002-480b13/outputs/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T074403Z-13c736/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-quql-20260629T120002-480b13/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T080028Z-13c736/outputs/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467/outputs/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T080028Z-13c736/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/manifest.json
+raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources/manifest.json
+raw/node-runs/node-run-wiki-build-20260622T104220-5a3066/outputs/files/manifest.json
+raw/node-runs/node-run-youtube-deep-research-20260622T134854-341d02/outputs/files/manifest.json
+raw/node-runs/node-run-wiki-build-20260622T104220-5a3066/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T174831-480b13/outputs/manifest.json
+raw/node-runs/node-run-youtube-deep-research-20260622T134854-341d02/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T174831-480b13/inputs/sources/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260630T024155-4b8467/outputs/manifest.json
+raw/node-runs/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/outputs/files/manifest.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260630T024155-4b8467/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/outputs/files/manifest.json
+raw/node-runs/node-run-youtube-metadata-fetch-20260630T094942-2929af/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T102757Z-352352/outputs/manifest.json
+raw/node-runs/node-run-youtube-deep-research-edge-guide-audit-20260624T092756Z/outputs/files/manifest.json
+raw/node-runs/node-run-wiki-build-20260622T081128-775577/inputs/sources/manifest.json
+raw/node-runs/node-run-youtube-deep-research-edge-guide-audit-20260624T092756Z/inputs/sources/manifest.json
+raw/node-runs/node-run-a2a-smoke-echo-20260701T102757Z-352352/inputs/sources/manifest.json
+raw/node-runs/node-run-wiki-build-20260622T081128-775577/outputs/files/manifest.json
+
+exec
+/bin/bash -lc 'find raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs -maxdepth 1 -type f -print' in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.vtt
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/worker-analysis.md
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.json
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/status.json
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/analysis.md
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/result.json
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.txt
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/start.json
+raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.srt
+
+exec
+/bin/bash -lc "sed -n '1,260p' raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/manifest.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+{
+  "schema": "node-output-manifest/v1",
+  "version": 1,
+  "kind": "output",
+  "node_id": "youtube-deep-research",
+  "node_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+  "run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+  "outputs_dir": "/root/wiki/wiki-sop-new-instance/raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs",
+  "status": "done",
+  "created_at": "2026-06-30T13:09:16Z",
+  "produced": [
+    {
+      "name": "analysis_file",
+      "output": "analysis_file",
+      "path": "outputs/analysis.md",
+      "kind": "file",
+      "type": "file",
+      "value_type": "markdown",
+      "media_type": "text/markdown",
+      "relayable": true,
+      "role": "wiki-source",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/analysis.md"
+    },
+    {
+      "name": "transcript_file",
+      "output": "transcript_file",
+      "path": "outputs/transcript.txt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "text",
+      "media_type": "text/plain",
+      "relayable": true,
+      "role": "transcript",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/transcript.txt"
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "start",
+      "output": "start",
+      "path": "artifacts/start.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "media_type": "application/json",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/start.json"
+    },
+    {
+      "name": "status",
+      "output": "status",
+      "path": "artifacts/status.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "media_type": "application/json",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/status.json"
+    },
+    {
+      "name": "transcript",
+      "output": "transcript",
+      "path": "artifacts/transcript.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "media_type": "application/json",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.json"
+    },
+    {
+      "name": "transcript",
+      "output": "transcript",
+      "path": "artifacts/transcript.srt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "srt",
+      "media_type": "text/plain",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.srt"
+    },
+    {
+      "name": "transcript",
+      "output": "transcript",
+      "path": "artifacts/transcript.txt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "txt",
+      "media_type": "text/plain",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.txt"
+    },
+    {
+      "name": "transcript",
+      "output": "transcript",
+      "path": "artifacts/transcript.vtt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "vtt",
+      "media_type": "text/vtt",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.vtt"
+    },
+    {
+      "name": "worker_analysis",
+      "output": "worker_analysis",
+      "path": "artifacts/worker-analysis.md",
+      "kind": "file",
+      "type": "file",
+      "value_type": "md",
+      "media_type": "text/markdown",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/worker-analysis.md"
+    }
+  ],
+  "logs": [],
+  "items": [
+    {
+      "name": "analysis_file",
+      "output": "analysis_file",
+      "path": "outputs/analysis.md",
+      "kind": "file",
+      "type": "file",
+      "value_type": "markdown",
+      "media_type": "text/markdown",
+      "relayable": true,
+      "role": "wiki-source",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/analysis.md"
+    },
+    {
+      "name": "transcript_file",
+      "output": "transcript_file",
+      "path": "outputs/transcript.txt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "text",
+      "media_type": "text/plain",
+      "relayable": true,
+      "role": "transcript",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/transcript.txt"
+    },
+    {
+      "name": "start",
+      "output": "start",
+      "path": "artifacts/start.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "media_type": "application/json",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/start.json"
+    },
+    {
+      "name": "status",
+      "output": "status",
+      "path": "artifacts/status.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "media_type": "application/json",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/status.json"
+    },
+    {
+      "name": "transcript",
+      "output": "transcript",
+      "path": "artifacts/transcript.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "media_type": "application/json",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.json"
+    },
+    {
+      "name": "transcript",
+      "output": "transcript",
+      "path": "artifacts/transcript.srt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "srt",
+      "media_type": "text/plain",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.srt"
+    },
+    {
+      "name": "transcript",
+      "output": "transcript",
+      "path": "artifacts/transcript.txt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "txt",
+      "media_type": "text/plain",
+      "relayable": false,
+      "role": "diagnostic",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/raw/transcript.txt"
+    },
+    {
+      "name": "transcript",
+      "output": "transcript",
+      "path": "artifacts/transcript.vtt",
+
+exec
+/bin/bash -lc "sed -n '1,260p' raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/manifest.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af",
+  "node_id": "youtube-metadata-fetch-a2a",
+  "workflow_id": "youtube-research-wiki",
+  "runtime_id": "runtime-206-189-196-65",
+  "instance_id": "agent-runtime-codex-smoke",
+  "status": "succeeded",
+  "created_at": "2026-07-01T10:55:15Z",
+  "root": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs",
+  "items": [
+    {
+      "name": "metadata_json",
+      "output_name": "metadata_json",
+      "path": "metadata.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "materialized_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json",
+      "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json",
+      "absolute_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json",
+      "size_bytes": 517,
+      "relayable": true,
+      "description": "Normalized YouTube metadata JSON."
+    },
+    {
+      "name": "source_url_txt",
+      "output_name": "source_url_txt",
+      "path": "source-url.txt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "url",
+      "materialized_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt",
+      "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt",
+      "absolute_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt",
+      "size_bytes": 44,
+      "relayable": true,
+      "description": "Echoed source URL."
+    },
+    {
+      "name": "result_json",
+      "output_name": "result_json",
+      "path": "result.json",
+      "kind": "file",
+      "type": "file",
+      "value_type": "json",
+      "materialized_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json",
+      "resolved_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json",
+      "absolute_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json",
+      "size_bytes": 815,
+      "relayable": true,
+      "description": "Skill execution result JSON."
+    }
+  ],
+  "outputs": {
+    "metadata_json": [
+      "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json"
+    ],
+    "source_url_txt": [
+      "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt"
+    ],
+    "result_json": [
+      "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json"
+    ]
+  },
+  "summary": {
+    "status": "succeeded",
+    "total_files": 3,
+    "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+    "video_id": "Ahfe-BW1cFc",
+    "title": "永久免费云服务器！16G内存、双核CPU、50~500G硬盘空间，HuggingFace Spaces 跑AI项目、部署实用工具，还能SSH远程管理？ | 零度解说",
+    "author": "零度解说",
+    "published_at": "2025-08-25T12:19:26Z",
+    "youtube_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc"
+  }
+}
+
+exec
+/bin/bash -lc "rg --files raw/node-runs -g 'receipt.json'" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+raw/node-runs/node-run-chatgpt-remote-image-service-quql-20260629T121727-4b8467/agent/receipt.json
+raw/node-runs/node-run-youtube-fetch-20260622T134710-842f65/agent/receipt.json
+raw/node-runs/node-run-youtube-fetch-20260622T083527Z-cfe243/agent/receipt.json
+raw/node-runs/node-run-youtube-deep-research-20260622T091425Z-6a0670/agent/receipt.json
+raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T104940-2929af/agent/receipt.json
+raw/node-runs/node-run-youtube-fetch-20260622T080125-03ff23/agent/receipt.json
+raw/node-runs/node-run-wiki-build-20260622T135212-cc0bec/agent/receipt.json
+raw/node-runs/node-run-youtube-deep-research-contract-negative-20260622T125418Z/agent/receipt.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260630T041144Z-86ee88/agent/receipt.json
+raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T174927-480b13/agent/receipt.json
+raw/node-runs/node-run-chatgpt-remote-image-service-quql-20260629T115919-480b13/agent/receipt.json
+raw/node-runs/node-run-youtube-metadata-fetch-20260630T094942-2929af/agent/receipt.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T184504-4b8467/agent/receipt.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T192437-4b8467/agent/receipt.json
+raw/node-runs/node-run-youtube-metadata-fetch-20260630T110258-1c02da/agent/receipt.json
+raw/node-runs/node-run-wiki-build-20260622T081128-775577/agent/receipt.json
+raw/node-runs/node-run-chatgpt-remote-image-service-xo0r-20260629T161805-293abd/agent/receipt.json
+raw/node-runs/node-run-wiki-build-20260622T102610-5a3066/agent/receipt.json
+raw/node-runs/node-run-youtube-deep-research-edge-guide-audit-20260624T092756Z/agent/receipt.json
+raw/node-runs/node-run-youtube-fetch-20260622T080623-03ff23/agent/receipt.json
+raw/node-runs/node-run-youtube-metadata-fetch-20260630T093928-ddded2/agent/receipt.json
+raw/node-runs/node-run-youtube-fetch-20260622T111013Z-1c2b4d/agent/receipt.json
+raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T174831-480b13/agent/receipt.json
+raw/node-runs/node-run-youtube-deep-research-contract-negative-20260622T125659Z/agent/receipt.json
+raw/node-runs/node-run-youtube-deep-research-20260622T080753-a589d3/agent/receipt.json
+raw/node-runs/node-run-youtube-metadata-fetch-20260630T093629-ddded2/agent/receipt.json
+raw/node-runs/node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z/agent/receipt.json
+raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175712-4b8467/agent/receipt.json
+raw/node-runs/node-run-youtube-deep-research-20260622T111234Z-a32a89/agent/receipt.json
+raw/node-runs/node-run-youtube-deep-research-20260622T102318-ecb0ee/agent/receipt.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260630T062421Z-bd7beb/agent/receipt.json
+raw/node-runs/node-run-youtube-deep-research-edge-guide-real-20260624T090739Z/agent/receipt.json
+raw/node-runs/node-run-chatgpt-remote-image-service-quql-20260629T120159-4b8467/agent/receipt.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T182202-4b8467/agent/receipt.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T184017-4b8467/agent/receipt.json
+raw/node-runs/node-run-chatgpt-remote-image-service-verify-20260629T070123Z-8c8461/agent/receipt.json
+raw/node-runs/node-run-chatgpt-remote-image-service-nrmj-20260629T175101-480b13/agent/receipt.json
+raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/agent/receipt.json
+raw/node-runs/node-run-youtube-metadata-fetch-20260630T091116-e554eb/agent/receipt.json
+raw/node-runs/node-run-youtube-deep-research-20260622T134854-341d02/agent/receipt.json
+raw/node-runs/node-run-chatgpt-remote-image-service-y89q-20260629T125753-4b8467/agent/receipt.json
+raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T103938-2929af/agent/receipt.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260629T194826-4b8467/agent/receipt.json
+raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/agent/receipt.json
+raw/node-runs/node-run-wiki-build-20260622T104220-5a3066/agent/receipt.json
+raw/node-runs/node-run-chatgpt-remote-image-service-quql-20260629T120002-480b13/agent/receipt.json
+raw/node-runs/node-run-chatgpt-remote-image-service-vs2q-20260630T024155-4b8467/agent/receipt.json
+
+exec
+/bin/bash -lc "sed -n '1,220p' raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/agent/receipt.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+{
+  "version": 1,
+  "executor": "hermes",
+  "requested_skill": "youtube-deep-research",
+  "executed_skill": "youtube-deep-research",
+  "node_id": "youtube-deep-research-dxky",
+  "node_run_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+  "request_id": "node-run-youtube-deep-research-dxky-20260630T130318-1320f1",
+  "status": "done",
+  "returncode": 0,
+  "timed_out": false,
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "passed",
+      "expected_outputs": [
+        "result",
+        "status"
+      ],
+      "required_outputs": [],
+      "present_outputs": [
+        "result",
+        "status"
+      ],
+      "missing_required_outputs": [],
+      "business_outputs": {
+        "result": "youtube-deep-research-dxky",
+        "status": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json"
+      },
+      "business_artifact_count": 10
+    },
+    "success_evidence": {
+      "passed": true,
+      "signals": [
+        {
+          "source": "manifest.status",
+          "status": "done"
+        },
+        {
+          "source": "receipt.status",
+          "status": "done"
+        },
+        {
+          "source": "output_artifacts",
+          "count": 17
+        },
+        {
+          "source": "receipt",
+          "status": "success"
+        }
+      ],
+      "failures": []
+    }
+  },
+  "business_output_status": {
+    "status": "passed",
+    "expected_outputs": [
+      "result",
+      "status"
+    ],
+    "required_outputs": [],
+    "present_outputs": [
+      "result",
+      "status"
+    ],
+    "missing_required_outputs": [],
+    "business_outputs": {
+      "result": "youtube-deep-research-dxky",
+      "status": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/artifacts/status.json"
+    },
+    "business_artifact_count": 10
+  },
+  "input_manifest": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/inputs/sources/manifest.json",
+  "output_manifest": "raw/node-runs/node-run-youtube-deep-research-dxky-20260630T130318-1320f1/outputs/manifest.json",
+  "started_at": "2026-06-30T13:03:19.895218+00:00",
+  "finished_at": "2026-06-30T13:15:14.462549+00:00",
+  "legacy_fallback": false,
+  "error": ""
+}
+
+exec
+/bin/bash -lc "sed -n '1,220p' raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/agent/receipt.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+{
+  "version": 1,
+  "executor": "codex",
+  "selected_agent_runtime": "codex",
+  "requested_skill": "youtube-metadata-fetch",
+  "executed_skill": "youtube-metadata-fetch",
+  "node_id": "youtube-metadata-fetch-a2a",
+  "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af",
+  "request_id": "node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af",
+  "workflow_id": "youtube-research-wiki",
+  "runtime_id": "runtime-206-189-196-65",
+  "instance_id": "agent-runtime-codex-smoke",
+  "status": "done",
+  "returncode": 0,
+  "timed_out": false,
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "passed",
+      "expected_outputs": [
+        "metadata_json",
+        "source_url_txt",
+        "result_json"
+      ],
+      "required_outputs": [],
+      "present_outputs": [
+        "metadata_json",
+        "source_url_txt",
+        "result_json"
+      ],
+      "missing_required_outputs": [],
+      "business_outputs": {
+        "metadata_json": [
+          "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json"
+        ],
+        "source_url_txt": [
+          "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt"
+        ],
+        "result_json": [
+          "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json"
+        ]
+      },
+      "business_artifact_count": 3
+    },
+    "success_evidence": {
+      "passed": true,
+      "signals": [
+        {
+          "source": "manifest.status",
+          "status": "succeeded"
+        },
+        {
+          "source": "manifest.summary.status",
+          "status": "succeeded"
+        },
+        {
+          "source": "manifest.summary.source_url",
+          "output": "source_url",
+          "kind": "url"
+        },
+        {
+          "source": "output_artifacts",
+          "count": 3
+        },
+        {
+          "source": "receipt",
+          "status": "success"
+        }
+      ],
+      "failures": []
+    }
+  },
+  "business_output_status": {
+    "status": "passed",
+    "expected_outputs": [
+      "metadata_json",
+      "source_url_txt",
+      "result_json"
+    ],
+    "required_outputs": [],
+    "present_outputs": [
+      "metadata_json",
+      "source_url_txt",
+      "result_json"
+    ],
+    "missing_required_outputs": [],
+    "business_outputs": {
+      "metadata_json": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json"
+      ],
+      "source_url_txt": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt"
+      ],
+      "result_json": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json"
+      ]
+    },
+    "business_artifact_count": 3
+  },
+  "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+  "input_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/inputs/sources/manifest.json",
+  "output_directory": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs",
+  "output_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/manifest.json",
+  "output_manifest_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/manifest.json",
+  "started_at": "2026-07-01T10:54:01+00:00",
+  "finished_at": "2026-07-01T10:55:15.588407+00:00",
+  "legacy_fallback": false,
+  "error": ""
+}
+
+exec
+/bin/bash -lc "sed -n '1,220p' raw/node-runs/node-run-youtube-deep-research-20260622T134854-341d02/outputs/files/manifest.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-youtube-deep-research-20260622T134854-341d02",
+  "node_id": "youtube-deep-research",
+  "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  "created_at": "2026-06-22T13:51:08Z",
+  "items": [
+    {
+      "path": "analysis.md",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-20260622T134854-341d02",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/outputs/analysis.md",
+      "output": "analysis_file",
+      "value_type": "markdown"
+    },
+    {
+      "path": "transcript.txt",
+      "source": "node-run",
+      "source_node": "youtube-deep-research",
+      "source_run_id": "node-run-youtube-deep-research-20260622T134854-341d02",
+      "source_path": "raw/youtube-deep-research/node-run-youtube-deep-research-20260622T134854-341d02/outputs/transcript.txt",
+      "output": "transcript_file",
+      "value_type": "text"
+    }
+  ]
+}
+codex
+I found the current A2A manifest format from the immediately preceding metadata node. I’m using that shape here, with deep-research outputs marked for relay where downstream nodes expect them.
+exec
+/bin/bash -lc "jq '.workflow_revision.nodes[\"youtube-deep-research\"]' raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources/manifest.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+{
+  "title": "YouTube 深度研究",
+  "skill": "sop-youtube-deep-research",
+  "mode": "sidecar",
+  "needs": [
+    "youtube-fetch"
+  ],
+  "inputs": {
+    "source_url": {
+      "from": "youtube-fetch.outputs.source_url",
+      "kind": "scalar",
+      "type": "string",
+      "value_type": "url",
+      "resolvers": [
+        {
+          "id": "direct-url",
+          "kind": "direct"
+        },
+        {
+          "id": "metadata-source-url",
+          "kind": "json_path",
+          "path": "$.source_url"
+        },
+        {
+          "id": "metadata-youtube-url",
+          "kind": "json_path",
+          "path": "$.youtube_url"
+        },
+        {
+          "id": "text-url",
+          "kind": "regex",
+          "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+        }
+      ]
+    }
+  },
+  "optional_inputs": {},
+  "outputs": {
+    "analysis_file": {
+      "path": "raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md",
+      "kind": "file",
+      "type": "file",
+      "value_type": "markdown",
+      "relayable": true,
+      "role": "wiki-source"
+    },
+    "transcript_file": {
+      "path": "raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt",
+      "kind": "file",
+      "type": "file",
+      "value_type": "text",
+      "relayable": true,
+      "role": "transcript"
+    }
+  },
+  "capabilities": {
+    "git": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "editable": true,
+      "save_scope": "node-definition",
+      "description": "Persist this node's workspace outputs to the current Instance repo.",
+      "paths": [
+        "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+        "raw/youtube-deep-research/{pipeline_id}/raw/**"
+      ]
+    },
+    "telegram": {
+      "enabled": true,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "editable": true,
+      "save_scope": "node-definition",
+      "description": "Send progress notifications through the current Instance Telegram config.",
+      "trigger": "stage-lifecycle",
+      "triggers": [
+        "start",
+        "done",
+        "failed"
+      ]
+    }
+  }
+}
+
+exec
+/bin/bash -lc "jq '{status,source_url,job_id,workflow_status,fetched_at,analysis_file,transcript_file,status_file,start_file,result_file}' raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/result.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+{
+  "status": "succeeded",
+  "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+  "job_id": "6d606717-df64-402d-95c5-3c1497c7870b",
+  "workflow_status": "completed",
+  "fetched_at": "2026-07-01T10:59:31Z",
+  "analysis_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/analysis.md",
+  "transcript_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.txt",
+  "status_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/status.json",
+  "start_file": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/start.json",
+  "result_file": null
+}
+
+exec
+/bin/bash -lc 'wc -c raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/analysis.md raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.txt raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/result.json raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/status.json' in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+31011 raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/analysis.md
+12783 raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.txt
+ 2516 raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/result.json
+ 5005 raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/status.json
+51315 total
+
+exec
+/bin/bash -lc "jq 'keys, .created_at? // .started_at? // .queued_at? // empty' raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/start.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+[
+  "job_id",
+  "status",
+  "translate_to",
+  "tts"
+]
+
+exec
+/bin/bash -lc "jq '{id,status,youtube_url,created_at,updated_at,completed_at,titles,summary}' raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/status.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+{
+  "id": "6d606717-df64-402d-95c5-3c1497c7870b",
+  "status": "completed",
+  "youtube_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+  "created_at": "2026-07-01 10:57:35",
+  "updated_at": "2026-07-01 10:59:28",
+  "completed_at": null,
+  "titles": [
+    "白嫖Hugging Face云服务器，永久免费跑AI项目教程",
+    "零成本部署AI应用！Hugging Face免费空间实战指南",
+    "16G内存+50G硬盘免费领，这些开源工具让你瞬间解放双手"
+  ],
+  "summary": "本视频详细讲解如何永久免费使用Hugging Face云服务器，注册即可获得双核CPU、16G内存和50G硬盘，并展示多个实用开源项目：文生图、图片反推提示词、一键抠图去背、图片扩图等，手把手创建Space并部署应用，适合想零成本跑AI项目的开发者。"
+}
+
+exec
+/bin/bash -lc "sed -n '1,220p' raw/node-runs/node-run-a2a-smoke-echo-20260701T103504Z-9c0f37/outputs/manifest.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+{
+  "version": 1,
+  "kind": "output",
+  "node_run_id": "node-run-a2a-smoke-echo-20260701T103504Z-9c0f37",
+  "node_id": "a2a-smoke-echo",
+  "status": "succeeded",
+  "outputs": {
+    "result": "sop-a2a-node-ok\n\nUse the upstream smoke node output and return a downstream smoke response.\n{\"kind\": \"sop-edge-a2a-handoff/v1\", \"workflow_id\": \"workflow\", \"source_node_run_id\": \"node-run-a2a-smoke-echo-20260701T103455Z-7ef517\", \"source_node\": \"\", \"target_node\": \"a2a-smoke-echo\", \"output_manifest\": \"raw/node-runs/node-run-a2a-smoke-echo-20260701T103455Z-7ef517/outputs/manifest.json\", \"edge_contract\": {\"id\": \"\", \"from\": \"\", \"to\": \"\", \"intent\": {\"title\": \"\", \"brief\": \"\"}, \"bindings\": [], \"resolver\": {}, \"validation\": {}}, \"relay_mode\": \"all_outputs\", \"selected_outputs\": [], \"relay_mappings\": [], \"items\": [{\"path\": \"result.json\", \"source\": \"node-run\", \"source_run_id\": \"node-run-a2a-smoke-echo-20260701T103455Z-7ef517\", \"source_path\": \"raw/node-runs/node-run-a2a-smoke-echo-20260701T103455Z-7ef517/outputs/result.json\", \"value_type\": \"json\"}]}\n{\n  \"result\": \"sop-a2a-node-ok\\n\\nPrint exactly sop-a2a-node-ok.\",\n  \"status\": \"succeeded\",\n  \"a2a_task_id\": \"a2a-task-a2a-smoke-echo-20260701T103455Z-20878b70\",\n  \"node_run_id\": \"node-run-a2a-smoke-echo-20260701T103455Z-7ef517\"\n}",
+    "status": "succeeded",
+    "task_id": "a2a-task-a2a-smoke-echo-20260701T103504Z-9f46129a"
+  },
+  "items": [
+    {
+      "output": "result",
+      "value": "sop-a2a-node-ok\n\nUse the upstream smoke node output and return a downstream smoke response.\n{\"kind\": \"sop-edge-a2a-handoff/v1\", \"workflow_id\": \"workflow\", \"source_node_run_id\": \"node-run-a2a-smoke-echo-20260701T103455Z-7ef517\", \"source_node\": \"\", \"target_node\": \"a2a-smoke-echo\", \"output_manifest\": \"raw/node-runs/node-run-a2a-smoke-echo-20260701T103455Z-7ef517/outputs/manifest.json\", \"edge_contract\": {\"id\": \"\", \"from\": \"\", \"to\": \"\", \"intent\": {\"title\": \"\", \"brief\": \"\"}, \"bindings\": [], \"resolver\": {}, \"validation\": {}}, \"relay_mode\": \"all_outputs\", \"selected_outputs\": [], \"relay_mappings\": [], \"items\": [{\"path\": \"result.json\", \"source\": \"node-run\", \"source_run_id\": \"node-run-a2a-smoke-echo-20260701T103455Z-7ef517\", \"source_path\": \"raw/node-runs/node-run-a2a-smoke-echo-20260701T103455Z-7ef517/outputs/result.json\", \"value_type\": \"json\"}]}\n{\n  \"result\": \"sop-a2a-node-ok\\n\\nPrint exactly sop-a2a-node-ok.\",\n  \"status\": \"succeeded\",\n  \"a2a_task_id\": \"a2a-task-a2a-smoke-echo-20260701T103455Z-20878b70\",\n  \"node_run_id\": \"node-run-a2a-smoke-echo-20260701T103455Z-7ef517\"\n}",
+      "value_type": "text",
+      "kind": "scalar",
+      "source": "a2a-smoke"
+    },
+    {
+      "output": "status",
+      "value": "succeeded",
+      "value_type": "text",
+      "kind": "scalar",
+      "source": "a2a-smoke"
+    },
+    {
+      "output": "task_id",
+      "value": "a2a-task-a2a-smoke-echo-20260701T103504Z-9f46129a",
+      "value_type": "text",
+      "kind": "scalar",
+      "source": "a2a-smoke"
+    }
+  ]
+}
+
+exec
+/bin/bash -lc "jq '.workflow_revision.nodes[\"youtube-metadata-fetch-a2a\"] // .workflow_revision.nodes[\"youtube-metadata-fetch\"] // empty' raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/inputs/sources/manifest.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+{
+  "title": "YouTube Metadata Fetch A2A",
+  "skill": {
+    "id": "youtube-metadata-fetch",
+    "source": "skill-installer",
+    "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630100126')",
+    "source_digest": {
+      "installer_url": "https://skill.vyibc.com/install-youtube-metadata-fetch.sh?ts=20260630100126",
+      "files": [
+        {
+          "path": "youtube-metadata-fetch/SKILL.md",
+          "truncated": false
+        },
+        {
+          "path": "youtube-metadata-fetch/scripts/youtube-metadata-fetch.sh",
+          "truncated": false
+        },
+        {
+          "path": "youtube-metadata-fetch/scripts/youtube_metadata_fetch.py",
+          "truncated": false
+        }
+      ]
+    }
+  },
+  "mode": "",
+  "needs": [],
+  "inputs": {},
+  "optional_inputs": {},
+  "outputs": {
+    "root": "raw/node-runs/{run_id}/outputs",
+    "manifest": "raw/node-runs/{run_id}/outputs/manifest.json",
+    "expected": {
+      "metadata_json": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "json",
+        "relayable": true,
+        "description": "Normalized YouTube metadata JSON.",
+        "path": "raw/node-runs/{run_id}/outputs/metadata.json"
+      },
+      "source_url_txt": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "url",
+        "relayable": true,
+        "description": "Echoed source URL.",
+        "path": "raw/node-runs/{run_id}/outputs/source-url.txt"
+      },
+      "result_json": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "json",
+        "relayable": true,
+        "description": "Skill execution result JSON.",
+        "path": "raw/node-runs/{run_id}/outputs/result.json"
+      }
+    }
+  },
+  "capabilities": {
+    "git": {
+      "enabled": false,
+      "required": false
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false
+    },
+    "sse": {
+      "enabled": true,
+      "required": true
+    }
+  }
+}
+
+codex
+The current workflow revision declares `analysis_file` and `transcript_file` as the relayable outputs for this node. I’ll keep those as the business outputs and list the worker JSON/SRT/VTT files as non-relayable diagnostics.
+exec
+/bin/bash -lc "jq '.workflow_revision.nodes | keys' raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources/manifest.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+[
+  "notebooklm-research",
+  "retry",
+  "tg-notify",
+  "wiki-build",
+  "youtube-deep-research",
+  "youtube-deep-research-a2a",
+  "youtube-fetch"
+]
+
+codex
+There is a separate `youtube-deep-research-a2a` node definition in the manifest, so I’m switching the output declaration to that exact node rather than the similarly named sidecar node.
+exec
+/bin/bash -lc "jq '.workflow_revision.nodes[\"youtube-deep-research-a2a\"]' raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources/manifest.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+{
+  "title": "YouTube Deep Research A2A",
+  "skill": {
+    "id": "youtube-deep-research",
+    "source": "skill-installer",
+    "install_command": "bash <(curl -fsSL 'https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451')",
+    "source_digest": {
+      "installer_url": "https://skill.vyibc.com/install-youtube-deep-research.sh?ts=20260630125451",
+      "files": [
+        {
+          "path": "youtube-deep-research/SKILL.md",
+          "truncated": false
+        },
+        {
+          "path": "youtube-deep-research/scripts/youtube-deep-research.sh",
+          "truncated": false
+        },
+        {
+          "path": "youtube-deep-research/scripts/youtube_deep_research.py",
+          "truncated": false
+        }
+      ]
+    }
+  },
+  "mode": "",
+  "needs": [],
+  "inputs": {},
+  "optional_inputs": {},
+  "outputs": {
+    "root": "raw/node-runs/{run_id}/outputs",
+    "manifest": "raw/node-runs/{run_id}/outputs/manifest.json",
+    "expected": {
+      "analysis_md": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "markdown",
+        "relayable": true,
+        "description": "Deep research analysis markdown.",
+        "path": "raw/node-runs/{run_id}/outputs/analysis.md"
+      },
+      "transcript_txt": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "text",
+        "relayable": true,
+        "description": "Transcript text when available.",
+        "path": "raw/node-runs/{run_id}/outputs/transcript.txt"
+      },
+      "result_json": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "json",
+        "relayable": true,
+        "description": "Skill execution result JSON.",
+        "path": "raw/node-runs/{run_id}/outputs/result.json"
+      },
+      "status_json": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "json",
+        "relayable": true,
+        "description": "Worker status JSON.",
+        "path": "raw/node-runs/{run_id}/outputs/status.json"
+      },
+      "worker_analysis_md": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "markdown",
+        "relayable": true,
+        "required": false,
+        "description": "Worker-provided analysis markdown when available.",
+        "path": "raw/node-runs/{run_id}/outputs/worker-analysis.md"
+      }
+    }
+  },
+  "capabilities": {
+    "git": {
+      "enabled": false,
+      "required": false
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false
+    },
+    "sse": {
+      "enabled": true,
+      "required": true
+    }
+  }
+}
+
+codex
+I’m writing the manifest and receipt now. The manifest uses the A2A node’s declared output names: `analysis_md`, `transcript_txt`, `result_json`, `status_json`, and `worker_analysis_md`.
+exec
+/bin/bash -lc "python3 - <<'PY'
+from __future__ import annotations
+
+import json
+from datetime import datetime, timezone
+from pathlib import Path
+
+node_run_id = \"node-run-youtube-deep-research-a2a-20260701T105646-d01cf2\"
+node_id = \"youtube-deep-research-a2a\"
+workflow_id = \"youtube-research-wiki\"
+runtime_id = \"runtime-206-189-196-65\"
+instance_id = \"agent-runtime-codex-smoke\"
+source_url = \"https://www.youtube.com/watch?v=Ahfe-BW1cFc\"
+input_manifest_path = Path(\"raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/inputs/sources/manifest.json\")
+output_dir = Path(\"raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs\")
+output_manifest_path = output_dir / \"manifest.json\"
+receipt_path = Path(\"raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/agent/receipt.json\")
+
+manifest_in = json.loads(input_manifest_path.read_text(encoding=\"utf-8\"))
+expected = manifest_in[\"workflow_revision\"][\"nodes\"][node_id][\"outputs\"][\"expected\"]
+file_by_output = {
+    \"analysis_md\": \"analysis.md\",
+    \"transcript_txt\": \"transcript.txt\",
+    \"result_json\": \"result.json\",
+    \"status_json\": \"status.json\",
+    \"worker_analysis_md\": \"worker-analysis.md\",
+}
+
+result = json.loads((output_dir / \"result.json\").read_text(encoding=\"utf-8\"))
+status_json = json.loads((output_dir / \"status.json\").read_text(encoding=\"utf-8\"))
+now = datetime.now(timezone.utc).strftime(\"%Y-%m-%dT%H:%M:%SZ\")
+finished_at = datetime.now(timezone.utc).isoformat()
+
+items = []
+outputs = {}
+missing = []
+required_outputs = []
+for name, spec in expected.items():
+    if spec.get(\"required\", True):
+        required_outputs.append(name)
+    rel_name = file_by_output.get(name)
+    if not rel_name:
+        missing.append(name)
+        continue
+    path = output_dir / rel_name
+    if not path.exists():
+        if spec.get(\"required\", True):
+            missing.append(name)
+        continue
+    materialized = str(path)
+    item = {
+        \"name\": name,
+        \"output_name\": name,
+        \"path\": rel_name,
+        \"kind\": spec.get(\"kind\", \"file\"),
+        \"type\": spec.get(\"type\", \"file\"),
+        \"value_type\": spec.get(\"value_type\", \"text\"),
+        \"materialized_path\": materialized,
+        \"resolved_path\": materialized,
+        \"absolute_path\": materialized,
+        \"size_bytes\": path.stat().st_size,
+        \"relayable\": bool(spec.get(\"relayable\", False)),
+        \"description\": spec.get(\"description\", \"\"),
+    }
+    items.append(item)
+    outputs[name] = [materialized]
+
+present_outputs = [item[\"name\"] for item in items]
+missing_required_outputs = [name for name in required_outputs if name not in outputs]
+manifest = {
+    \"version\": 1,
+    \"kind\": \"output\",
+    \"node_run_id\": node_run_id,
+    \"node_id\": node_id,
+    \"workflow_id\": workflow_id,
+    \"runtime_id\": runtime_id,
+    \"instance_id\": instance_id,
+    \"status\": \"succeeded\" if not missing_required_outputs else \"failed\",
+    \"created_at\": now,
+    \"root\": str(output_dir),
+    \"items\": items,
+    \"outputs\": outputs,
+    \"summary\": {
+        \"status\": \"succeeded\" if not missing_required_outputs else \"failed\",
+        \"total_files\": len(items),
+        \"source_url\": source_url,
+        \"job_id\": result.get(\"job_id\") or status_json.get(\"id\"),
+        \"workflow_status\": result.get(\"workflow_status\") or status_json.get(\"status\"),
+        \"fetched_at\": result.get(\"fetched_at\"),
+        \"title\": (status_json.get(\"titles\") or [None])[0] if isinstance(status_json.get(\"titles\"), list) else status_json.get(\"titles\"),
+        \"analysis_md\": outputs.get(\"analysis_md\", []),
+        \"transcript_txt\": outputs.get(\"transcript_txt\", []),
+        \"result_json\": outputs.get(\"result_json\", []),
+        \"status_json\": outputs.get(\"status_json\", []),
+        \"worker_analysis_md\": outputs.get(\"worker_analysis_md\", []),
+    },
+}
+output_manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + \"\\n\", encoding=\"utf-8\")
+
+business_output_status = {
+    \"status\": \"passed\" if not missing_required_outputs else \"failed\",
+    \"expected_outputs\": list(expected.keys()),
+    \"required_outputs\": required_outputs,
+    \"present_outputs\": present_outputs,
+    \"missing_required_outputs\": missing_required_outputs,
+    \"business_outputs\": outputs,
+    \"business_artifact_count\": len(items),
+}
+receipt = {
+    \"version\": 1,
+    \"executor\": \"codex\",
+    \"selected_agent_runtime\": \"codex\",
+    \"requested_skill\": \"youtube-deep-research\",
+    \"executed_skill\": \"youtube-deep-research\",
+    \"node_id\": node_id,
+    \"node_run_id\": node_run_id,
+    \"request_id\": node_run_id,
+    \"workflow_id\": workflow_id,
+    \"runtime_id\": runtime_id,
+    \"instance_id\": instance_id,
+    \"status\": \"done\" if not missing_required_outputs else \"failed\",
+    \"returncode\": 0 if not missing_required_outputs else 1,
+    \"timed_out\": False,
+    \"validation\": {
+        \"status\": \"passed\" if not missing_required_outputs else \"failed\",
+        \"missing_outputs\": missing_required_outputs,
+        \"unexpected_outputs\": [],
+        \"business_output_status\": business_output_status,
+        \"success_evidence\": {
+            \"passed\": not missing_required_outputs,
+            \"signals\": [
+                {\"source\": \"manifest.status\", \"status\": manifest[\"status\"]},
+                {\"source\": \"manifest.summary.status\", \"status\": manifest[\"summary\"][\"status\"]},
+                {\"source\": \"manifest.summary.source_url\", \"output\": \"source_url\", \"kind\": \"url\"},
+                {\"source\": \"output_artifacts\", \"count\": len(items)},
+                {\"source\": \"receipt\", \"status\": \"success\" if not missing_required_outputs else \"failed\"},
+            ],
+            \"failures\": [] if not missing_required_outputs else missing_required_outputs,
+        },
+    },
+    \"business_output_status\": business_output_status,
+    \"source_url\": source_url,
+    \"input_manifest\": str(input_manifest_path),
+    \"output_directory\": str(output_dir),
+    \"output_manifest\": str(output_manifest_path),
+    \"output_manifest_path\": str(output_manifest_path),
+    \"started_at\": status_json.get(\"created_at\") or manifest_in.get(\"created_at\"),
+    \"finished_at\": finished_at,
+    \"legacy_fallback\": False,
+    \"error\": \"\" if not missing_required_outputs else \"Missing required outputs: \" + \", \".join(missing_required_outputs),
+}
+receipt_path.parent.mkdir(parents=True, exist_ok=True)
+receipt_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=2) + \"\\n\", encoding=\"utf-8\")
+
+if missing_required_outputs:
+    raise SystemExit(\"Missing required outputs: \" + \", \".join(missing_required_outputs))
+print(json.dumps({\"manifest\": str(output_manifest_path), \"receipt\": str(receipt_path), \"items\": present_outputs}, ensure_ascii=False, indent=2))
+PY" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+{
+  "manifest": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/manifest.json",
+  "receipt": "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/agent/receipt.json",
+  "items": [
+    "analysis_md",
+    "transcript_txt",
+    "result_json",
+    "status_json",
+    "worker_analysis_md"
+  ]
+}
+
+codex
+The manifest and receipt are written. I’m doing a final verification pass now: JSON validity, declared outputs, and required file presence.
+exec
+/bin/bash -lc "jq '{status, node_id, node_run_id, outputs: (.outputs | keys), summary}' raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/manifest.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+{
+  "status": "succeeded",
+  "node_id": "youtube-deep-research-a2a",
+  "node_run_id": "node-run-youtube-deep-research-a2a-20260701T105646-d01cf2",
+  "outputs": [
+    "analysis_md",
+    "result_json",
+    "status_json",
+    "transcript_txt",
+    "worker_analysis_md"
+  ],
+  "summary": {
+    "status": "succeeded",
+    "total_files": 5,
+    "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+    "job_id": "6d606717-df64-402d-95c5-3c1497c7870b",
+    "workflow_status": "completed",
+    "fetched_at": "2026-07-01T10:59:31Z",
+    "title": "白嫖Hugging Face云服务器，永久免费跑AI项目教程",
+    "analysis_md": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/analysis.md"
+    ],
+    "transcript_txt": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.txt"
+    ],
+    "result_json": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/result.json"
+    ],
+    "status_json": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/status.json"
+    ],
+    "worker_analysis_md": [
+      "raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/worker-analysis.md"
+    ]
+  }
+}
+
+exec
+/bin/bash -lc "jq '{status, returncode, timed_out, validation_status: .validation.status, missing: .validation.missing_outputs, outputs: .business_output_status.present_outputs}' raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/agent/receipt.json" in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+{
+  "status": "done",
+  "returncode": 0,
+  "timed_out": false,
+  "validation_status": "passed",
+  "missing": [],
+  "outputs": [
+    "analysis_md",
+    "transcript_txt",
+    "result_json",
+    "status_json",
+    "worker_analysis_md"
+  ]
+}
+
+exec
+/bin/bash -lc 'test -s raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/manifest.json && test -s raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/agent/receipt.json && test -s raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/analysis.md && test -s raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/transcript.txt && test -s raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/result.json && test -s raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/status.json && test -s raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/worker-analysis.md' in /root/wiki/wiki-sop-new-instance
+ succeeded in 0ms:
+codex
+Executed `youtube-deep-research` successfully.
+
+Worker job `6d606717-df64-402d-95c5-3c1497c7870b` completed, and the node outputs were written under:
+
+`raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs`
+
+Wrote and verified:
+
+- [manifest.json](/root/wiki/wiki-sop-new-instance/raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/outputs/manifest.json)
+- [receipt.json](/root/wiki/wiki-sop-new-instance/raw/node-runs/node-run-youtube-deep-research-a2a-20260701T105646-d01cf2/agent/receipt.json)
+
+Declared outputs present: `analysis_md`, `transcript_txt`, `result_json`, `status_json`, `worker_analysis_md`. Validation status: `passed`.
+tokens used
+77,808
