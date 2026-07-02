@@ -1,0 +1,3626 @@
+{
+  "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+  "pipeline_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+  "runtime_id": "runtime-206-189-196-65",
+  "instance_id": "agent-runtime-codex-smoke",
+  "workflow_id": "youtube-research-wiki",
+  "node_id": "youtube-metadata-fetch-a2a",
+  "node_title": "YouTube Metadata Fetch A2A",
+  "status": "failed",
+  "mode": "real-node",
+  "input_source": "manual",
+  "relay_mode": "",
+  "selected_outputs": [],
+  "relay_mappings": [],
+  "source_node_run_id": "",
+  "relay_selection": {},
+  "edge_contract": {},
+  "node_execution_guide": {},
+  "workflow_revision": {
+    "version": 1,
+    "hash": "3dec7fb576776346",
+    "node_count": 6,
+    "edge_count": 3,
+    "nodes": {
+      "notebooklm-research": {
+        "title": "NotebookLM 研究",
+        "skill": "sop-notebooklm-research",
+        "mode": "blocking",
+        "needs": [
+          "youtube-fetch"
+        ],
+        "inputs": {
+          "source_url": "youtube-fetch.outputs.source_url",
+          "metadata_file": "youtube-fetch.outputs.metadata_file"
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "reports": "raw/notebooklm-analysis/*.md",
+          "mindmaps": "raw/notebooklm-mindmaps/*.json"
+        },
+        "capabilities": {}
+      },
+      "retry": {
+        "title": "手动重试",
+        "skill": "sop-retry",
+        "mode": "manual",
+        "needs": [],
+        "inputs": {},
+        "optional_inputs": {},
+        "outputs": {},
+        "capabilities": {}
+      },
+      "tg-notify": {
+        "title": "Telegram 通知",
+        "skill": "sop-tg-notify",
+        "mode": "blocking",
+        "needs": [
+          "wiki-build"
+        ],
+        "inputs": {
+          "index": {
+            "from": "wiki-build.outputs.index",
+            "required": true,
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown"
+          }
+        },
+        "optional_inputs": {
+          "message": {
+            "from": "edge.message",
+            "required": false,
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "text",
+            "resolvers": [
+              {
+                "id": "direct-text",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-title",
+                "kind": "json_path",
+                "path": "$.title"
+              },
+              {
+                "id": "metadata-description",
+                "kind": "json_path",
+                "path": "$.description"
+              }
+            ]
+          }
+        },
+        "outputs": {
+          "telegram_message": {
+            "path": "logs/pipeline-runs/pipe-{run_id}.json",
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": false
+          }
+        },
+        "capabilities": {}
+      },
+      "wiki-build": {
+        "title": "Wiki 知识图谱构建",
+        "skill": "sop-wiki-build",
+        "mode": "blocking",
+        "needs": [
+          "notebooklm-research"
+        ],
+        "inputs": {
+          "reports": {
+            "from": "notebooklm-research.outputs.reports",
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown"
+          }
+        },
+        "optional_inputs": {
+          "deep_research": {
+            "from": "youtube-deep-research.outputs.analysis_file",
+            "required": false,
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown"
+          }
+        },
+        "outputs": {
+          "index": {
+            "path": "index.md",
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "relayable": true
+          },
+          "pages": {
+            "path": "wiki/**",
+            "kind": "files",
+            "type": "files",
+            "value_type": "markdown",
+            "relayable": true
+          }
+        },
+        "capabilities": {}
+      },
+      "youtube-deep-research": {
+        "title": "YouTube 深度研究",
+        "skill": "sop-youtube-deep-research",
+        "mode": "sidecar",
+        "needs": [
+          "youtube-fetch"
+        ],
+        "inputs": {
+          "source_url": {
+            "from": "youtube-fetch.outputs.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "resolvers": [
+              {
+                "id": "direct-url",
+                "kind": "direct"
+              },
+              {
+                "id": "metadata-source-url",
+                "kind": "json_path",
+                "path": "$.source_url"
+              },
+              {
+                "id": "metadata-youtube-url",
+                "kind": "json_path",
+                "path": "$.youtube_url"
+              },
+              {
+                "id": "text-url",
+                "kind": "regex",
+                "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+              }
+            ]
+          }
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "analysis_file": {
+            "path": "raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md",
+            "kind": "file",
+            "type": "file",
+            "value_type": "markdown",
+            "relayable": true,
+            "role": "wiki-source"
+          },
+          "transcript_file": {
+            "path": "raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt",
+            "kind": "file",
+            "type": "file",
+            "value_type": "text",
+            "relayable": true,
+            "role": "transcript"
+          }
+        },
+        "capabilities": {
+          "git": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "editable": true,
+            "save_scope": "node-definition",
+            "description": "Persist this node's workspace outputs to the current Instance repo.",
+            "paths": [
+              "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+              "raw/youtube-deep-research/{pipeline_id}/raw/**"
+            ]
+          },
+          "telegram": {
+            "enabled": true,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "editable": true,
+            "save_scope": "node-definition",
+            "description": "Send progress notifications through the current Instance Telegram config.",
+            "trigger": "stage-lifecycle",
+            "triggers": [
+              "start",
+              "done",
+              "failed"
+            ]
+          }
+        }
+      },
+      "youtube-fetch": {
+        "title": "YouTube 元数据获取",
+        "skill": "sop-youtube-fetch",
+        "mode": "blocking",
+        "needs": [],
+        "inputs": {
+          "source_url": {
+            "from": "context.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url"
+          }
+        },
+        "optional_inputs": {},
+        "outputs": {
+          "source_url": {
+            "from": "context.source_url",
+            "kind": "scalar",
+            "type": "string",
+            "value_type": "url",
+            "relayable": true
+          },
+          "metadata_file": {
+            "from": "context.stage_b_fetch.meta_file",
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": true
+          }
+        },
+        "capabilities": {}
+      }
+    },
+    "edges": [
+      {
+        "id": "edge-youtube-fetch-to-youtube-deep-research",
+        "from": "youtube-fetch",
+        "to": "youtube-deep-research",
+        "relay": {
+          "intent": {
+            "title": "将视频地址交给深度研究节点",
+            "brief": "下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。"
+          },
+          "bindings": [
+            {
+              "target_input": "source_url",
+              "required": true,
+              "source": {
+                "node": "youtube-fetch",
+                "output": "source_url",
+                "extractor": {
+                  "id": "direct-url",
+                  "kind": "direct"
+                }
+              }
+            }
+          ],
+          "resolver": {
+            "strategy": "explicit_first",
+            "fallback": "block"
+          },
+          "validation": {
+            "on_missing_required": "block",
+            "on_multiple_candidates": "needs_review",
+            "on_type_mismatch": "block"
+          }
+        }
+      },
+      {
+        "id": "edge-youtube-fetch-title-to-tg-notify",
+        "from": "youtube-fetch",
+        "to": "tg-notify",
+        "relay": {
+          "intent": {
+            "title": "将视频标题作为通知内容",
+            "brief": "这条边只用于测试或自定义工作流，将 metadata_file 中的视频标题提取成 Telegram 文本消息。"
+          },
+          "bindings": [
+            {
+              "target_input": "message",
+              "required": true,
+              "source": {
+                "node": "youtube-fetch",
+                "output": "metadata_file",
+                "extractor": {
+                  "id": "metadata-title",
+                  "kind": "json_path",
+                  "path": "$.title"
+                }
+              }
+            }
+          ],
+          "resolver": {
+            "strategy": "explicit_first",
+            "fallback": "needs_review"
+          },
+          "validation": {
+            "on_missing_required": "block",
+            "on_multiple_candidates": "needs_review",
+            "on_type_mismatch": "block"
+          }
+        }
+      },
+      {
+        "id": "edge-youtube-deep-research-to-wiki-build",
+        "from": "youtube-deep-research",
+        "to": "wiki-build",
+        "relay": {
+          "intent": {
+            "title": "将深度研究产物交给 Wiki 构建节点",
+            "brief": "将 analysis_file 作为 Wiki 构建的 deep_research 补充材料；transcript_file 可在自定义边中作为补充上下文。"
+          },
+          "bindings": [
+            {
+              "target_input": "deep_research",
+              "required": false,
+              "source": {
+                "node": "youtube-deep-research",
+                "output": "analysis_file",
+                "extractor": {
+                  "id": "direct-file",
+                  "kind": "direct"
+                }
+              }
+            }
+          ],
+          "resolver": {
+            "strategy": "explicit_first",
+            "fallback": "needs_review"
+          },
+          "validation": {
+            "on_missing_required": "needs_review",
+            "on_multiple_candidates": "needs_review",
+            "on_type_mismatch": "needs_review"
+          }
+        }
+      }
+    ]
+  },
+  "relay_context": {},
+  "relay_context_brief": "",
+  "resolution_trace": [],
+  "started_at": "2026-07-02T13:44:13.421689+00:00",
+  "finished_at": "2026-07-02T13:44:13.735732+00:00",
+  "elapsed_ms": 354,
+  "created_from": "manual",
+  "retry_of": "",
+  "pending": false,
+  "reason": "Hermes Agent Request was rendered and saved for this Node Run.",
+  "steps": [
+    {
+      "id": "create-run",
+      "title": "Create node run workspace",
+      "status": "done",
+      "summary": "Node Run record is allocated independently from Workflow Run.",
+      "detail": {
+        "storage": "raw/node-runs/{node_run_id}"
+      },
+      "started_at": "2026-07-02T13:44:13.421689+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-07-02T13:44:13.456689+00:00"
+    },
+    {
+      "id": "load-definition",
+      "title": "Load node definition",
+      "status": "done",
+      "summary": "Loaded youtube-metadata-fetch-a2a from youtube-research-wiki.",
+      "detail": {
+        "workflow_id": "youtube-research-wiki",
+        "node_id": "youtube-metadata-fetch-a2a",
+        "node_title": "YouTube Metadata Fetch A2A"
+      },
+      "started_at": "2026-07-02T13:44:13.456689+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-07-02T13:44:13.491689+00:00"
+    },
+    {
+      "id": "resolve-context",
+      "title": "Resolve Runtime / Instance / Workflow context",
+      "status": "done",
+      "summary": "runtime-206-189-196-65 · agent-runtime-codex-smoke · youtube-research-wiki",
+      "detail": {
+        "runtime": {
+          "runtime_id": "runtime-206-189-196-65",
+          "channel_url": "https://runtime-206-189-196-65.chxyka.ccwu.cc",
+          "spi_base_url": "https://runtime-206-189-196-65.chxyka.ccwu.cc/api/sop",
+          "registry_path": "/root/.sop/registry.json",
+          "health": {
+            "spi": "ok",
+            "registry": "ok",
+            "channel": "ok",
+            "instances": "ok"
+          },
+          "hermes_webhook_url": ""
+        },
+        "instance": {
+          "instance_id": "agent-runtime-codex-smoke",
+          "status": "ready",
+          "repo": "skkeoriw/wiki-sop-new-instance",
+          "repo_branch": "main",
+          "wiki_local_path": "/root/wiki/wiki-sop-new-instance",
+          "workspace_status": "ready",
+          "registry_status": "enabled",
+          "run_index_path": "/root/wiki/wiki-sop-new-instance/.sop/run-index.sqlite",
+          "run_index_status": "ready",
+          "capabilities": {
+            "workspace": "ok",
+            "sop_yaml": "ok",
+            "run_index": "ok",
+            "agent_runtime": {
+              "id": "codex",
+              "enabled": true,
+              "command": "/root/.nvm/versions/node/v22.23.1/bin/codex",
+              "command_status": "present",
+              "skill_dir": {
+                "status": "writable",
+                "path": "/root/.codex/skills",
+                "writable": true
+              },
+              "auth_mode": "manual",
+              "auth_status": "not_checked"
+            },
+            "git": "configured",
+            "telegram": "configured",
+            "notebooklm": "configured",
+            "vertex": "configured",
+            "tunnel": "ok"
+          }
+        },
+        "workflow_id": "youtube-research-wiki"
+      },
+      "started_at": "2026-07-02T13:44:13.491689+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-07-02T13:44:13.526689+00:00"
+    },
+    {
+      "id": "resolve-inputs",
+      "title": "Resolve node inputs",
+      "status": "done",
+      "summary": "1 resolved, 0 pending relay, 0 missing.",
+      "detail": {
+        "input_source": "manual",
+        "base_run_id": "",
+        "source_node_run_id": "",
+        "relay_mode": "",
+        "selected_outputs": [],
+        "relay_mappings": [],
+        "relay_selection": {},
+        "resolved_inputs": [
+          {
+            "name": "source_url",
+            "source": "",
+            "required": true,
+            "resolved": true,
+            "value": "Execute workflow node: YouTube Metadata Fetch.\nWorkflow instruction: Auto gateway real-with-fallback smoke.\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https://www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}",
+            "provenance": "manual",
+            "reason": ""
+          }
+        ],
+        "pending_materialization_inputs": [],
+        "missing_inputs": [],
+        "input_directory": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources",
+        "input_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources/manifest.json",
+        "input_resolution": {},
+        "materialized_inputs": []
+      },
+      "started_at": "2026-07-02T13:44:13.526689+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-07-02T13:44:13.561689+00:00"
+    },
+    {
+      "id": "resolve-config",
+      "title": "Resolve execution config",
+      "status": "done",
+      "summary": "Runtime, Instance and capability config resolved.",
+      "detail": {
+        "resolved_config": {
+          "telegram": {
+            "capability": "telegram",
+            "label": "Telegram progress notification",
+            "enabled": false,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "save_scope": "run",
+            "status": "disabled",
+            "token_env": "YOUTUBE_WIKI_TG_TOKEN",
+            "token": {
+              "key": "YOUTUBE_WIKI_TG_TOKEN",
+              "label": "Telegram Bot Token",
+              "required": false,
+              "present": true,
+              "source": "global-settings:YOUTUBE_WIKI_TG_TOKEN",
+              "masked_value": "795***qHY",
+              "value": null
+            },
+            "chat_id": {
+              "key": "YOUTUBE_WIKI_TG_CHAT_ID",
+              "label": "Telegram Chat ID",
+              "required": false,
+              "present": true,
+              "source": "global-settings:YOUTUBE_WIKI_TG_CHAT_ID",
+              "masked_value": "779***193",
+              "value": "7796171193"
+            },
+            "probe": {
+              "enabled": false,
+              "explicit_confirmation_required": true,
+              "side_effect": "sends a Telegram test message"
+            }
+          },
+          "github": {
+            "capability": "git",
+            "label": "GitHub workspace persistence",
+            "enabled": false,
+            "required": false,
+            "status": "disabled",
+            "managed_by": "runtime-harness",
+            "save_scope": "run",
+            "paths": [],
+            "token": {
+              "key": "GITHUB_TOKEN",
+              "label": "GitHub Token",
+              "required": false,
+              "present": true,
+              "source": "global-settings:GITHUB_TOKEN",
+              "masked_value": "ghp***qtP",
+              "value": null
+            }
+          }
+        },
+        "definition_defaults": {
+          "git": {
+            "enabled": false,
+            "required": false
+          },
+          "telegram": {
+            "enabled": false,
+            "required": false
+          }
+        },
+        "capability_overrides": {
+          "git": {
+            "enabled": false,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "save_scope": "run",
+            "paths": []
+          },
+          "telegram": {
+            "enabled": false,
+            "required": false,
+            "managed_by": "runtime-harness",
+            "save_scope": "run"
+          }
+        },
+        "definition_scope_reports": {
+          "instance_override": {
+            "status": "unchanged",
+            "changed": {}
+          },
+          "project_default_request": {
+            "status": "skipped"
+          }
+        }
+      },
+      "started_at": "2026-07-02T13:44:13.561689+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-07-02T13:44:13.596689+00:00"
+    },
+    {
+      "id": "generate-agent-request",
+      "title": "Generate Agent Request",
+      "status": "warning",
+      "summary": "Hermes Agent Request was rendered and saved for this Node Run.",
+      "detail": {
+        "rendered_request": "",
+        "executor": "codex",
+        "receipt": {
+          "version": 1,
+          "executor": "codex",
+          "selected_agent_runtime": "codex",
+          "requested_skill": "youtube-metadata-fetch",
+          "executed_skill": "youtube-metadata-fetch",
+          "node_id": "youtube-metadata-fetch-a2a",
+          "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+          "request_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+          "status": "failed",
+          "returncode": 1,
+          "timed_out": false,
+          "validation": {
+            "status": "passed",
+            "missing_outputs": [],
+            "unexpected_outputs": [],
+            "business_output_status": {
+              "status": "missing_business_outputs",
+              "expected_outputs": [
+                "metadata_json",
+                "source_url_txt",
+                "result_json"
+              ],
+              "required_outputs": [],
+              "present_outputs": [],
+              "missing_required_outputs": [],
+              "business_outputs": {},
+              "business_artifact_count": 0
+            },
+            "success_evidence": {
+              "passed": false,
+              "signals": [],
+              "failures": []
+            }
+          },
+          "business_output_status": {
+            "status": "missing_business_outputs",
+            "expected_outputs": [
+              "metadata_json",
+              "source_url_txt",
+              "result_json"
+            ],
+            "required_outputs": [],
+            "present_outputs": [],
+            "missing_required_outputs": [],
+            "business_outputs": {},
+            "business_artifact_count": 0
+          },
+          "input_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources/manifest.json",
+          "output_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json",
+          "started_at": "2026-07-02T13:44:13.605776+00:00",
+          "finished_at": "2026-07-02T13:44:13.608658+00:00",
+          "legacy_fallback": false,
+          "error": "[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}'"
+        }
+      },
+      "started_at": "2026-07-02T13:44:13.596689+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-07-02T13:44:13.631689+00:00"
+    },
+    {
+      "id": "probe-capabilities",
+      "title": "Probe attached capabilities",
+      "status": "skipped",
+      "summary": "Capability probes are explicit. Telegram send probes require user confirmation.",
+      "detail": {
+        "telegram": {
+          "capability": "telegram",
+          "label": "Telegram progress notification",
+          "status": "disabled",
+          "required": false,
+          "enabled": false
+        },
+        "github": {
+          "capability": "git",
+          "label": "GitHub workspace persistence",
+          "status": "disabled",
+          "required": false,
+          "enabled": false
+        }
+      },
+      "started_at": "2026-07-02T13:44:13.631689+00:00",
+      "elapsed_ms": 24,
+      "finished_at": "2026-07-02T13:44:13.655689+00:00"
+    },
+    {
+      "id": "build-execution-plan",
+      "title": "Build node execution plan",
+      "status": "done",
+      "summary": "Prepared real-node execution plan.",
+      "detail": {
+        "mode": "real-node",
+        "real_execution_enabled": true,
+        "reason": "Real execution will call the configured Agent Executor for this node."
+      },
+      "started_at": "2026-07-02T13:44:13.666689+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-07-02T13:44:13.701689+00:00"
+    },
+    {
+      "id": "execute-or-dry-run",
+      "title": "Execute or dry-run node",
+      "status": "failed",
+      "summary": "Real node execution failed.",
+      "detail": {
+        "executor": "codex",
+        "command": [],
+        "stage_command": [],
+        "returncode": 1,
+        "timeout_seconds": 1500,
+        "timed_out": false,
+        "log_path": "/root/wiki/wiki-sop-new-instance/raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/executor.log",
+        "context_path": "/root/wiki/wiki-sop-new-instance/raw/pipeline-context.json",
+        "context": {},
+        "stdout_tail": "",
+        "stderr_tail": "[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}'",
+        "input_resolution_error": {},
+        "agent_request": {
+          "rendered_request": "",
+          "receipt": {
+            "version": 1,
+            "executor": "codex",
+            "selected_agent_runtime": "codex",
+            "requested_skill": "youtube-metadata-fetch",
+            "executed_skill": "youtube-metadata-fetch",
+            "node_id": "youtube-metadata-fetch-a2a",
+            "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+            "request_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+            "status": "failed",
+            "returncode": 1,
+            "timed_out": false,
+            "validation": {
+              "status": "passed",
+              "missing_outputs": [],
+              "unexpected_outputs": [],
+              "business_output_status": {
+                "status": "missing_business_outputs",
+                "expected_outputs": [
+                  "metadata_json",
+                  "source_url_txt",
+                  "result_json"
+                ],
+                "required_outputs": [],
+                "present_outputs": [],
+                "missing_required_outputs": [],
+                "business_outputs": {},
+                "business_artifact_count": 0
+              },
+              "success_evidence": {
+                "passed": false,
+                "signals": [],
+                "failures": []
+              }
+            },
+            "business_output_status": {
+              "status": "missing_business_outputs",
+              "expected_outputs": [
+                "metadata_json",
+                "source_url_txt",
+                "result_json"
+              ],
+              "required_outputs": [],
+              "present_outputs": [],
+              "missing_required_outputs": [],
+              "business_outputs": {},
+              "business_artifact_count": 0
+            },
+            "input_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources/manifest.json",
+            "output_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json",
+            "started_at": "2026-07-02T13:44:13.605776+00:00",
+            "finished_at": "2026-07-02T13:44:13.608658+00:00",
+            "legacy_fallback": false,
+            "error": "[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}'"
+          }
+        },
+        "node_state": {},
+        "capabilities": {},
+        "actual_outputs": {
+          "metadata_json": [],
+          "source_url_txt": [],
+          "result_json": []
+        },
+        "core_outputs": [
+          {
+            "name": "metadata_json",
+            "kind": "files",
+            "type": "file",
+            "value": [],
+            "files": [],
+            "artifacts": [],
+            "declared": {
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "relayable": true,
+              "path": "raw/node-runs/{run_id}/outputs/metadata.json",
+              "fields": {
+                "resolved_path": {
+                  "type": "string",
+                  "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json"
+                },
+                "absolute_path": {
+                  "type": "string",
+                  "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json"
+                },
+                "size_bytes": {
+                  "type": "integer",
+                  "sample": 517
+                },
+                "relayable": {
+                  "type": "boolean",
+                  "sample": true
+                },
+                "description": {
+                  "type": "string",
+                  "sample": "Normalized YouTube metadata JSON."
+                }
+              }
+            }
+          },
+          {
+            "name": "source_url_txt",
+            "kind": "files",
+            "type": "file",
+            "value": [],
+            "files": [],
+            "artifacts": [],
+            "declared": {
+              "kind": "file",
+              "type": "file",
+              "value_type": "url",
+              "relayable": true,
+              "path": "raw/node-runs/{run_id}/outputs/source-url.txt",
+              "fields": {
+                "resolved_path": {
+                  "type": "string",
+                  "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt"
+                },
+                "absolute_path": {
+                  "type": "string",
+                  "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt"
+                },
+                "size_bytes": {
+                  "type": "integer",
+                  "sample": 44
+                },
+                "relayable": {
+                  "type": "boolean",
+                  "sample": true
+                },
+                "description": {
+                  "type": "string",
+                  "sample": "Echoed source URL."
+                }
+              }
+            }
+          },
+          {
+            "name": "result_json",
+            "kind": "files",
+            "type": "file",
+            "value": [],
+            "files": [],
+            "artifacts": [],
+            "declared": {
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "relayable": true,
+              "path": "raw/node-runs/{run_id}/outputs/result.json",
+              "fields": {
+                "resolved_path": {
+                  "type": "string",
+                  "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json"
+                },
+                "absolute_path": {
+                  "type": "string",
+                  "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json"
+                },
+                "size_bytes": {
+                  "type": "integer",
+                  "sample": 815
+                },
+                "relayable": {
+                  "type": "boolean",
+                  "sample": true
+                },
+                "description": {
+                  "type": "string",
+                  "sample": "Skill execution result JSON."
+                }
+              }
+            }
+          }
+        ],
+        "relay_package": {
+          "kind": "relay-package",
+          "output_directory": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs",
+          "manifest_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json",
+          "item_count": 0,
+          "items": []
+        },
+        "execution_evidence": {
+          "artifacts": [
+            {
+              "id": "85299a7648ecca28",
+              "producer": "youtube-metadata-fetch-a2a",
+              "output": "agent_receipt",
+              "type": "node-run.agent.receipt",
+              "format": "json",
+              "path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/agent/receipt.json",
+              "title": "Agent Execution Receipt",
+              "size": 2283,
+              "mime_type": "application/json",
+              "tags": [],
+              "metadata": {},
+              "resolution": "node-run-agent",
+              "preview": "{\n  \"version\": 1,\n  \"executor\": \"codex\",\n  \"selected_agent_runtime\": \"codex\",\n  \"requested_skill\": \"youtube-metadata-fetch\",\n  \"executed_skill\": \"youtube-metadata-fetch\",\n  \"node_id\": \"youtube-metadata-fetch-a2a\",\n  \"node_run_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"request_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"status\": \"failed\",\n  \"returncode\": 1,\n  \"timed_out\": false,\n  \"validation\": {\n    \"status\": \"passed\",\n    \"missing_outputs\": [],\n    \"unexpected_outputs\": [],\n    \"business_output_status\": {\n      \"status\": \"missing_business_outputs\",\n      \"expected_outputs\": [\n        \"metadata_json\",\n        \"source_url_txt\",\n        \"result_json\"\n      ],\n      \"required_outputs\": [],\n      \"present_outputs\": [],\n      \"missing_required_outputs\": [],\n      \"business_outputs\": {},\n      \"business_artifact_count\": 0\n    },\n    \"success_evidence\": {\n      \"passed\": false,\n      \"signals\": [],\n      \"failures\": []\n    }\n  },\n  \"business_output_status\": {\n    \"status\": \"missing_business_outputs\",\n    \"expected_outputs\": [\n      \"metadata_json\",\n      \"source_url_txt\",\n      \"result_json\"\n    ],\n    \"required_outputs\": [],\n    \"present_outputs\": [],\n    \"missing_required_outputs\": [],\n    \"business_outputs\": {},\n    \"business_artifact_count\": 0\n  },\n  \"input_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources/manifest.json\",\n  \"output_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json\",\n  \"started_at\": \"2026-07-02T13:44:13.605776+00:00\",\n  \"finished_at\": \"2026-07-02T13:44:13.608658+00:00\",\n  \"legacy_fallback\": false,\n  \"error\": \"[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\\\n{\\\"run_id\\\": \\\"youtube-research-a2a-flow-run-real-1782999845\\\", \\\"workflow_id\\\": \\\"youtube-research-a2a-flow\\\", \\\"workflow_version_id\\\": \\\"youtube-research-a2a-flow-v1782996873047\\\", \\\"node_ref\\\": \\\"metadata\\\", \\\"node_id\\\": \\\"youtube-metadata-fetch-a2a\\\", \\\"input\\\": {\\\"source_url\\\": \\\"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\\\", \\\"instruction\\\": \\\"Auto gateway real-with-fallback smoke.\\\"}}'\"\n}\n",
+              "preview_truncated": false
+            },
+            {
+              "id": "d4da660cf3afff18",
+              "producer": "youtube-metadata-fetch-a2a",
+              "output": "executor_log",
+              "type": "file",
+              "format": "log",
+              "path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/executor.log",
+              "title": "Executor Log",
+              "size": 539,
+              "mime_type": "application/octet-stream",
+              "tags": [],
+              "metadata": {},
+              "resolution": "execution-evidence",
+              "preview": "[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}'",
+              "preview_truncated": false
+            }
+          ],
+          "count": 2
+        },
+        "output_categories": {
+          "core_outputs": {
+            "title": "核心输出",
+            "description": "节点声明 outputs 对应的业务结果。",
+            "files": [],
+            "count": 0
+          },
+          "raw_files": {
+            "title": "节点原始文件",
+            "description": "节点 Skill/Worker 产生的原始响应、字幕和中间文件。",
+            "files": [],
+            "count": 0
+          },
+          "run_records": {
+            "title": "运行记录",
+            "description": "Node Run 工作台、事件、状态和 capability 记录。",
+            "files": [
+              "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/executor.log"
+            ],
+            "count": 1
+          },
+          "node_run_outputs": {
+            "title": "统一输出目录",
+            "description": "本次 Node Run 写入标准 outputs 目录的可中继产物，供下游节点作为目录输入。",
+            "files": [],
+            "count": 0
+          }
+        },
+        "node_run_result": {
+          "schema": "node-run-result/v1",
+          "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+          "node_id": "youtube-metadata-fetch-a2a",
+          "status": "unknown",
+          "success_evidence": {
+            "passed": false,
+            "signals": [],
+            "failures": []
+          },
+          "output_space": {
+            "outputs_dir": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs",
+            "manifest_path": ""
+          },
+          "named_outputs": {},
+          "actual_outputs": {
+            "metadata_json": [],
+            "source_url_txt": [],
+            "result_json": []
+          },
+          "artifacts": [
+            {
+              "id": "85299a7648ecca28",
+              "producer": "youtube-metadata-fetch-a2a",
+              "output": "agent_receipt",
+              "type": "node-run.agent.receipt",
+              "format": "json",
+              "path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/agent/receipt.json",
+              "title": "Agent Execution Receipt",
+              "size": 2283,
+              "mime_type": "application/json",
+              "tags": [],
+              "metadata": {},
+              "resolution": "node-run-agent",
+              "preview": "{\n  \"version\": 1,\n  \"executor\": \"codex\",\n  \"selected_agent_runtime\": \"codex\",\n  \"requested_skill\": \"youtube-metadata-fetch\",\n  \"executed_skill\": \"youtube-metadata-fetch\",\n  \"node_id\": \"youtube-metadata-fetch-a2a\",\n  \"node_run_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"request_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"status\": \"failed\",\n  \"returncode\": 1,\n  \"timed_out\": false,\n  \"validation\": {\n    \"status\": \"passed\",\n    \"missing_outputs\": [],\n    \"unexpected_outputs\": [],\n    \"business_output_status\": {\n      \"status\": \"missing_business_outputs\",\n      \"expected_outputs\": [\n        \"metadata_json\",\n        \"source_url_txt\",\n        \"result_json\"\n      ],\n      \"required_outputs\": [],\n      \"present_outputs\": [],\n      \"missing_required_outputs\": [],\n      \"business_outputs\": {},\n      \"business_artifact_count\": 0\n    },\n    \"success_evidence\": {\n      \"passed\": false,\n      \"signals\": [],\n      \"failures\": []\n    }\n  },\n  \"business_output_status\": {\n    \"status\": \"missing_business_outputs\",\n    \"expected_outputs\": [\n      \"metadata_json\",\n      \"source_url_txt\",\n      \"result_json\"\n    ],\n    \"required_outputs\": [],\n    \"present_outputs\": [],\n    \"missing_required_outputs\": [],\n    \"business_outputs\": {},\n    \"business_artifact_count\": 0\n  },\n  \"input_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources/manifest.json\",\n  \"output_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json\",\n  \"started_at\": \"2026-07-02T13:44:13.605776+00:00\",\n  \"finished_at\": \"2026-07-02T13:44:13.608658+00:00\",\n  \"legacy_fallback\": false,\n  \"error\": \"[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\\\n{\\\"run_id\\\": \\\"youtube-research-a2a-flow-run-real-1782999845\\\", \\\"workflow_id\\\": \\\"youtube-research-a2a-flow\\\", \\\"workflow_version_id\\\": \\\"youtube-research-a2a-flow-v1782996873047\\\", \\\"node_ref\\\": \\\"metadata\\\", \\\"node_id\\\": \\\"youtube-metadata-fetch-a2a\\\", \\\"input\\\": {\\\"source_url\\\": \\\"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\\\", \\\"instruction\\\": \\\"Auto gateway real-with-fallback smoke.\\\"}}'\"\n}\n",
+              "preview_truncated": false
+            }
+          ],
+          "diagnostics": {
+            "manifest_has_outputs": false,
+            "manifest_item_count": 0,
+            "manifest_output_file_count": 0,
+            "declared_output_count": 3
+          }
+        },
+        "validation": {
+          "status": "passed",
+          "missing_outputs": [],
+          "unexpected_outputs": [],
+          "business_output_status": {
+            "status": "missing_business_outputs",
+            "expected_outputs": [
+              "metadata_json",
+              "source_url_txt",
+              "result_json"
+            ],
+            "required_outputs": [],
+            "present_outputs": [],
+            "missing_required_outputs": [],
+            "business_outputs": {},
+            "business_artifact_count": 0
+          },
+          "success_evidence": {
+            "passed": false,
+            "signals": [],
+            "failures": []
+          }
+        },
+        "business_output_status": {
+          "status": "missing_business_outputs",
+          "expected_outputs": [
+            "metadata_json",
+            "source_url_txt",
+            "result_json"
+          ],
+          "required_outputs": [],
+          "present_outputs": [],
+          "missing_required_outputs": [],
+          "business_outputs": {},
+          "business_artifact_count": 0
+        }
+      },
+      "started_at": "2026-07-02T13:44:13.605776+00:00",
+      "finished_at": "2026-07-02T13:44:13.608658+00:00",
+      "elapsed_ms": 2
+    },
+    {
+      "id": "validate-outputs",
+      "title": "Validate declared outputs",
+      "status": "warning",
+      "summary": "Execution finished, but no business output was captured.",
+      "detail": {
+        "status": "passed",
+        "missing_outputs": [],
+        "unexpected_outputs": [],
+        "business_output_status": {
+          "status": "missing_business_outputs",
+          "expected_outputs": [
+            "metadata_json",
+            "source_url_txt",
+            "result_json"
+          ],
+          "required_outputs": [],
+          "present_outputs": [],
+          "missing_required_outputs": [],
+          "business_outputs": {},
+          "business_artifact_count": 0
+        },
+        "success_evidence": {
+          "passed": false,
+          "signals": [],
+          "failures": []
+        }
+      },
+      "started_at": "2026-07-02T13:44:13.736689+00:00",
+      "elapsed_ms": 35,
+      "finished_at": "2026-07-02T13:44:13.771689+00:00"
+    },
+    {
+      "id": "persist-to-github",
+      "title": "Persist to GitHub",
+      "status": "skipped",
+      "summary": "GitHub persistence is not attached for this Node Run.",
+      "detail": {},
+      "started_at": "2026-07-02T13:44:13.771689+00:00",
+      "elapsed_ms": 24,
+      "finished_at": "2026-07-02T13:44:13.795689+00:00"
+    },
+    {
+      "id": "send-telegram-notification",
+      "title": "Send Telegram notification",
+      "status": "skipped",
+      "summary": "Telegram notification is not attached for this Node Run.",
+      "detail": {},
+      "started_at": "2026-07-02T13:44:13.806689+00:00",
+      "elapsed_ms": 24,
+      "finished_at": "2026-07-02T13:44:13.830689+00:00"
+    }
+  ],
+  "inner_steps": [
+    {
+      "id": "pre",
+      "title": "执行前",
+      "status": "done",
+      "summary": "Node Run 上下文、输入和运行配置已准备，并交给 stage runner on_start。",
+      "started_at": "2026-07-02T13:44:13.421689+00:00",
+      "finished_at": "2026-07-02T13:44:13.605776+00:00",
+      "detail": {
+        "mode": "real-node",
+        "input_source": "manual",
+        "resolved_inputs": [
+          {
+            "name": "source_url",
+            "source": "",
+            "required": true,
+            "resolved": true,
+            "value": "Execute workflow node: YouTube Metadata Fetch.\nWorkflow instruction: Auto gateway real-with-fallback smoke.\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https://www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}",
+            "provenance": "manual",
+            "reason": ""
+          }
+        ],
+        "pending_materialization_inputs": [],
+        "missing_inputs": [],
+        "config_status": "done",
+        "command": [],
+        "stage_hook": "on_start"
+      }
+    },
+    {
+      "id": "doing",
+      "title": "执行中",
+      "status": "failed",
+      "summary": "Skill / agent 业务执行失败。",
+      "started_at": "2026-07-02T13:44:13.605776+00:00",
+      "finished_at": "2026-07-02T13:44:13.608658+00:00",
+      "elapsed_ms": 2,
+      "detail": {
+        "command": [],
+        "returncode": 1,
+        "timed_out": false,
+        "log_path": "/root/wiki/wiki-sop-new-instance/raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/executor.log",
+        "stdout_tail": "",
+        "stderr_tail": "[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}'"
+      }
+    },
+    {
+      "id": "post",
+      "title": "执行后",
+      "status": "failed",
+      "summary": "stage_runner on_done/on_failed、输出校验、Git/TG capability 和 bridge 结果收集已归档。",
+      "started_at": "2026-07-02T13:44:13.608658+00:00",
+      "finished_at": "2026-07-02T13:44:13.735732+00:00",
+      "detail": {
+        "stage_hooks": [
+          "on_done/on_failed",
+          "forward_next"
+        ],
+        "validation": {
+          "status": "passed",
+          "missing_outputs": [],
+          "unexpected_outputs": [],
+          "business_output_status": {
+            "status": "missing_business_outputs",
+            "expected_outputs": [
+              "metadata_json",
+              "source_url_txt",
+              "result_json"
+            ],
+            "required_outputs": [],
+            "present_outputs": [],
+            "missing_required_outputs": [],
+            "business_outputs": {},
+            "business_artifact_count": 0
+          },
+          "success_evidence": {
+            "passed": false,
+            "signals": [],
+            "failures": []
+          }
+        },
+        "actual_outputs": {
+          "metadata_json": [],
+          "source_url_txt": [],
+          "result_json": []
+        },
+        "business_artifact_count": 1,
+        "capabilities": {},
+        "forward_next": ""
+      }
+    }
+  ],
+  "events": [
+    {
+      "sequence": 1,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+      "node_id": "youtube-metadata-fetch-a2a",
+      "step_id": "create-run",
+      "ts": "2026-07-02T13:44:13.735732+00:00",
+      "data": {
+        "title": "Create node run workspace",
+        "summary": "Node Run record is allocated independently from Workflow Run."
+      }
+    },
+    {
+      "sequence": 2,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+      "node_id": "youtube-metadata-fetch-a2a",
+      "step_id": "load-definition",
+      "ts": "2026-07-02T13:44:13.735732+00:00",
+      "data": {
+        "title": "Load node definition",
+        "summary": "Loaded youtube-metadata-fetch-a2a from youtube-research-wiki."
+      }
+    },
+    {
+      "sequence": 3,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+      "node_id": "youtube-metadata-fetch-a2a",
+      "step_id": "resolve-context",
+      "ts": "2026-07-02T13:44:13.735732+00:00",
+      "data": {
+        "title": "Resolve Runtime / Instance / Workflow context",
+        "summary": "runtime-206-189-196-65 · agent-runtime-codex-smoke · youtube-research-wiki"
+      }
+    },
+    {
+      "sequence": 4,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+      "node_id": "youtube-metadata-fetch-a2a",
+      "step_id": "resolve-inputs",
+      "ts": "2026-07-02T13:44:13.735732+00:00",
+      "data": {
+        "title": "Resolve node inputs",
+        "summary": "1 resolved, 0 pending relay, 0 missing."
+      }
+    },
+    {
+      "sequence": 5,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+      "node_id": "youtube-metadata-fetch-a2a",
+      "step_id": "resolve-config",
+      "ts": "2026-07-02T13:44:13.735732+00:00",
+      "data": {
+        "title": "Resolve execution config",
+        "summary": "Runtime, Instance and capability config resolved."
+      }
+    },
+    {
+      "sequence": 6,
+      "event": "node_run.step.warning",
+      "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+      "node_id": "youtube-metadata-fetch-a2a",
+      "step_id": "generate-agent-request",
+      "ts": "2026-07-02T13:44:13.735732+00:00",
+      "data": {
+        "title": "Generate Agent Request",
+        "summary": "Hermes Agent Request was rendered and saved for this Node Run."
+      }
+    },
+    {
+      "sequence": 7,
+      "event": "node_run.step.skipped",
+      "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+      "node_id": "youtube-metadata-fetch-a2a",
+      "step_id": "probe-capabilities",
+      "ts": "2026-07-02T13:44:13.735732+00:00",
+      "data": {
+        "title": "Probe attached capabilities",
+        "summary": "Capability probes are explicit. Telegram send probes require user confirmation."
+      }
+    },
+    {
+      "sequence": 8,
+      "event": "node_run.step.done",
+      "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+      "node_id": "youtube-metadata-fetch-a2a",
+      "step_id": "build-execution-plan",
+      "ts": "2026-07-02T13:44:13.735732+00:00",
+      "data": {
+        "title": "Build node execution plan",
+        "summary": "Prepared real-node execution plan."
+      }
+    },
+    {
+      "sequence": 9,
+      "event": "node_run.step.failed",
+      "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+      "node_id": "youtube-metadata-fetch-a2a",
+      "step_id": "execute-or-dry-run",
+      "ts": "2026-07-02T13:44:13.735732+00:00",
+      "data": {
+        "title": "Execute or dry-run node",
+        "summary": "Real node execution failed."
+      }
+    },
+    {
+      "sequence": 10,
+      "event": "node_run.step.warning",
+      "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+      "node_id": "youtube-metadata-fetch-a2a",
+      "step_id": "validate-outputs",
+      "ts": "2026-07-02T13:44:13.735732+00:00",
+      "data": {
+        "title": "Validate declared outputs",
+        "summary": "Execution finished, but no business output was captured."
+      }
+    },
+    {
+      "sequence": 11,
+      "event": "node_run.step.skipped",
+      "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+      "node_id": "youtube-metadata-fetch-a2a",
+      "step_id": "persist-to-github",
+      "ts": "2026-07-02T13:44:13.735732+00:00",
+      "data": {
+        "title": "Persist to GitHub",
+        "summary": "GitHub persistence is not attached for this Node Run."
+      }
+    },
+    {
+      "sequence": 12,
+      "event": "node_run.step.skipped",
+      "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+      "node_id": "youtube-metadata-fetch-a2a",
+      "step_id": "send-telegram-notification",
+      "ts": "2026-07-02T13:44:13.735732+00:00",
+      "data": {
+        "title": "Send Telegram notification",
+        "summary": "Telegram notification is not attached for this Node Run."
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "node-run-result",
+      "producer": "youtube-metadata-fetch-a2a",
+      "type": "node-run.result",
+      "format": "json",
+      "path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/result.json",
+      "title": "Node Run diagnostic result",
+      "resolution": "recorded"
+    },
+    {
+      "id": "85299a7648ecca28",
+      "producer": "youtube-metadata-fetch-a2a",
+      "output": "agent_receipt",
+      "type": "node-run.agent.receipt",
+      "format": "json",
+      "path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/agent/receipt.json",
+      "title": "Agent Execution Receipt",
+      "size": 2283,
+      "mime_type": "application/json",
+      "tags": [],
+      "metadata": {},
+      "resolution": "node-run-agent",
+      "preview": "{\n  \"version\": 1,\n  \"executor\": \"codex\",\n  \"selected_agent_runtime\": \"codex\",\n  \"requested_skill\": \"youtube-metadata-fetch\",\n  \"executed_skill\": \"youtube-metadata-fetch\",\n  \"node_id\": \"youtube-metadata-fetch-a2a\",\n  \"node_run_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"request_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"status\": \"failed\",\n  \"returncode\": 1,\n  \"timed_out\": false,\n  \"validation\": {\n    \"status\": \"passed\",\n    \"missing_outputs\": [],\n    \"unexpected_outputs\": [],\n    \"business_output_status\": {\n      \"status\": \"missing_business_outputs\",\n      \"expected_outputs\": [\n        \"metadata_json\",\n        \"source_url_txt\",\n        \"result_json\"\n      ],\n      \"required_outputs\": [],\n      \"present_outputs\": [],\n      \"missing_required_outputs\": [],\n      \"business_outputs\": {},\n      \"business_artifact_count\": 0\n    },\n    \"success_evidence\": {\n      \"passed\": false,\n      \"signals\": [],\n      \"failures\": []\n    }\n  },\n  \"business_output_status\": {\n    \"status\": \"missing_business_outputs\",\n    \"expected_outputs\": [\n      \"metadata_json\",\n      \"source_url_txt\",\n      \"result_json\"\n    ],\n    \"required_outputs\": [],\n    \"present_outputs\": [],\n    \"missing_required_outputs\": [],\n    \"business_outputs\": {},\n    \"business_artifact_count\": 0\n  },\n  \"input_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources/manifest.json\",\n  \"output_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json\",\n  \"started_at\": \"2026-07-02T13:44:13.605776+00:00\",\n  \"finished_at\": \"2026-07-02T13:44:13.608658+00:00\",\n  \"legacy_fallback\": false,\n  \"error\": \"[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\\\n{\\\"run_id\\\": \\\"youtube-research-a2a-flow-run-real-1782999845\\\", \\\"workflow_id\\\": \\\"youtube-research-a2a-flow\\\", \\\"workflow_version_id\\\": \\\"youtube-research-a2a-flow-v1782996873047\\\", \\\"node_ref\\\": \\\"metadata\\\", \\\"node_id\\\": \\\"youtube-metadata-fetch-a2a\\\", \\\"input\\\": {\\\"source_url\\\": \\\"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\\\", \\\"instruction\\\": \\\"Auto gateway real-with-fallback smoke.\\\"}}'\"\n}\n",
+      "preview_truncated": false
+    }
+  ],
+  "actual_outputs": {
+    "metadata_json": [],
+    "source_url_txt": [],
+    "result_json": []
+  },
+  "core_outputs": [
+    {
+      "name": "metadata_json",
+      "kind": "files",
+      "type": "file",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "json",
+        "relayable": true,
+        "path": "raw/node-runs/{run_id}/outputs/metadata.json",
+        "fields": {
+          "resolved_path": {
+            "type": "string",
+            "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json"
+          },
+          "absolute_path": {
+            "type": "string",
+            "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "sample": 517
+          },
+          "relayable": {
+            "type": "boolean",
+            "sample": true
+          },
+          "description": {
+            "type": "string",
+            "sample": "Normalized YouTube metadata JSON."
+          }
+        }
+      }
+    },
+    {
+      "name": "source_url_txt",
+      "kind": "files",
+      "type": "file",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "url",
+        "relayable": true,
+        "path": "raw/node-runs/{run_id}/outputs/source-url.txt",
+        "fields": {
+          "resolved_path": {
+            "type": "string",
+            "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt"
+          },
+          "absolute_path": {
+            "type": "string",
+            "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "sample": 44
+          },
+          "relayable": {
+            "type": "boolean",
+            "sample": true
+          },
+          "description": {
+            "type": "string",
+            "sample": "Echoed source URL."
+          }
+        }
+      }
+    },
+    {
+      "name": "result_json",
+      "kind": "files",
+      "type": "file",
+      "value": [],
+      "files": [],
+      "artifacts": [],
+      "declared": {
+        "kind": "file",
+        "type": "file",
+        "value_type": "json",
+        "relayable": true,
+        "path": "raw/node-runs/{run_id}/outputs/result.json",
+        "fields": {
+          "resolved_path": {
+            "type": "string",
+            "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json"
+          },
+          "absolute_path": {
+            "type": "string",
+            "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "sample": 815
+          },
+          "relayable": {
+            "type": "boolean",
+            "sample": true
+          },
+          "description": {
+            "type": "string",
+            "sample": "Skill execution result JSON."
+          }
+        }
+      }
+    }
+  ],
+  "relay_package": {
+    "kind": "relay-package",
+    "output_directory": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs",
+    "manifest_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json",
+    "item_count": 0,
+    "items": []
+  },
+  "execution_evidence": {
+    "artifacts": [
+      {
+        "id": "85299a7648ecca28",
+        "producer": "youtube-metadata-fetch-a2a",
+        "output": "agent_receipt",
+        "type": "node-run.agent.receipt",
+        "format": "json",
+        "path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/agent/receipt.json",
+        "title": "Agent Execution Receipt",
+        "size": 2283,
+        "mime_type": "application/json",
+        "tags": [],
+        "metadata": {},
+        "resolution": "node-run-agent",
+        "preview": "{\n  \"version\": 1,\n  \"executor\": \"codex\",\n  \"selected_agent_runtime\": \"codex\",\n  \"requested_skill\": \"youtube-metadata-fetch\",\n  \"executed_skill\": \"youtube-metadata-fetch\",\n  \"node_id\": \"youtube-metadata-fetch-a2a\",\n  \"node_run_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"request_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"status\": \"failed\",\n  \"returncode\": 1,\n  \"timed_out\": false,\n  \"validation\": {\n    \"status\": \"passed\",\n    \"missing_outputs\": [],\n    \"unexpected_outputs\": [],\n    \"business_output_status\": {\n      \"status\": \"missing_business_outputs\",\n      \"expected_outputs\": [\n        \"metadata_json\",\n        \"source_url_txt\",\n        \"result_json\"\n      ],\n      \"required_outputs\": [],\n      \"present_outputs\": [],\n      \"missing_required_outputs\": [],\n      \"business_outputs\": {},\n      \"business_artifact_count\": 0\n    },\n    \"success_evidence\": {\n      \"passed\": false,\n      \"signals\": [],\n      \"failures\": []\n    }\n  },\n  \"business_output_status\": {\n    \"status\": \"missing_business_outputs\",\n    \"expected_outputs\": [\n      \"metadata_json\",\n      \"source_url_txt\",\n      \"result_json\"\n    ],\n    \"required_outputs\": [],\n    \"present_outputs\": [],\n    \"missing_required_outputs\": [],\n    \"business_outputs\": {},\n    \"business_artifact_count\": 0\n  },\n  \"input_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources/manifest.json\",\n  \"output_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json\",\n  \"started_at\": \"2026-07-02T13:44:13.605776+00:00\",\n  \"finished_at\": \"2026-07-02T13:44:13.608658+00:00\",\n  \"legacy_fallback\": false,\n  \"error\": \"[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\\\n{\\\"run_id\\\": \\\"youtube-research-a2a-flow-run-real-1782999845\\\", \\\"workflow_id\\\": \\\"youtube-research-a2a-flow\\\", \\\"workflow_version_id\\\": \\\"youtube-research-a2a-flow-v1782996873047\\\", \\\"node_ref\\\": \\\"metadata\\\", \\\"node_id\\\": \\\"youtube-metadata-fetch-a2a\\\", \\\"input\\\": {\\\"source_url\\\": \\\"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\\\", \\\"instruction\\\": \\\"Auto gateway real-with-fallback smoke.\\\"}}'\"\n}\n",
+        "preview_truncated": false
+      },
+      {
+        "id": "d4da660cf3afff18",
+        "producer": "youtube-metadata-fetch-a2a",
+        "output": "executor_log",
+        "type": "file",
+        "format": "log",
+        "path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/executor.log",
+        "title": "Executor Log",
+        "size": 539,
+        "mime_type": "application/octet-stream",
+        "tags": [],
+        "metadata": {},
+        "resolution": "execution-evidence",
+        "preview": "[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}'",
+        "preview_truncated": false
+      },
+      {
+        "id": "node-run-result",
+        "producer": "youtube-metadata-fetch-a2a",
+        "type": "node-run.result",
+        "format": "json",
+        "path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/result.json",
+        "title": "Node Run diagnostic result",
+        "resolution": "recorded"
+      }
+    ],
+    "count": 3
+  },
+  "output_categories": {
+    "core_outputs": {
+      "title": "核心输出",
+      "description": "节点声明 outputs 对应的业务结果。",
+      "files": [],
+      "count": 0
+    },
+    "raw_files": {
+      "title": "节点原始文件",
+      "description": "节点 Skill/Worker 产生的原始响应、字幕和中间文件。",
+      "files": [],
+      "count": 0
+    },
+    "run_records": {
+      "title": "运行记录",
+      "description": "Node Run 工作台、事件、状态和 capability 记录。",
+      "files": [
+        "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/executor.log"
+      ],
+      "count": 1
+    },
+    "node_run_outputs": {
+      "title": "统一输出目录",
+      "description": "本次 Node Run 写入标准 outputs 目录的可中继产物，供下游节点作为目录输入。",
+      "files": [],
+      "count": 0
+    }
+  },
+  "node_run_result": {
+    "schema": "node-run-result/v1",
+    "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+    "node_id": "youtube-metadata-fetch-a2a",
+    "status": "unknown",
+    "success_evidence": {
+      "passed": false,
+      "signals": [],
+      "failures": []
+    },
+    "output_space": {
+      "outputs_dir": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs",
+      "manifest_path": ""
+    },
+    "named_outputs": {},
+    "actual_outputs": {
+      "metadata_json": [],
+      "source_url_txt": [],
+      "result_json": []
+    },
+    "artifacts": [
+      {
+        "id": "85299a7648ecca28",
+        "producer": "youtube-metadata-fetch-a2a",
+        "output": "agent_receipt",
+        "type": "node-run.agent.receipt",
+        "format": "json",
+        "path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/agent/receipt.json",
+        "title": "Agent Execution Receipt",
+        "size": 2283,
+        "mime_type": "application/json",
+        "tags": [],
+        "metadata": {},
+        "resolution": "node-run-agent",
+        "preview": "{\n  \"version\": 1,\n  \"executor\": \"codex\",\n  \"selected_agent_runtime\": \"codex\",\n  \"requested_skill\": \"youtube-metadata-fetch\",\n  \"executed_skill\": \"youtube-metadata-fetch\",\n  \"node_id\": \"youtube-metadata-fetch-a2a\",\n  \"node_run_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"request_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"status\": \"failed\",\n  \"returncode\": 1,\n  \"timed_out\": false,\n  \"validation\": {\n    \"status\": \"passed\",\n    \"missing_outputs\": [],\n    \"unexpected_outputs\": [],\n    \"business_output_status\": {\n      \"status\": \"missing_business_outputs\",\n      \"expected_outputs\": [\n        \"metadata_json\",\n        \"source_url_txt\",\n        \"result_json\"\n      ],\n      \"required_outputs\": [],\n      \"present_outputs\": [],\n      \"missing_required_outputs\": [],\n      \"business_outputs\": {},\n      \"business_artifact_count\": 0\n    },\n    \"success_evidence\": {\n      \"passed\": false,\n      \"signals\": [],\n      \"failures\": []\n    }\n  },\n  \"business_output_status\": {\n    \"status\": \"missing_business_outputs\",\n    \"expected_outputs\": [\n      \"metadata_json\",\n      \"source_url_txt\",\n      \"result_json\"\n    ],\n    \"required_outputs\": [],\n    \"present_outputs\": [],\n    \"missing_required_outputs\": [],\n    \"business_outputs\": {},\n    \"business_artifact_count\": 0\n  },\n  \"input_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources/manifest.json\",\n  \"output_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json\",\n  \"started_at\": \"2026-07-02T13:44:13.605776+00:00\",\n  \"finished_at\": \"2026-07-02T13:44:13.608658+00:00\",\n  \"legacy_fallback\": false,\n  \"error\": \"[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\\\n{\\\"run_id\\\": \\\"youtube-research-a2a-flow-run-real-1782999845\\\", \\\"workflow_id\\\": \\\"youtube-research-a2a-flow\\\", \\\"workflow_version_id\\\": \\\"youtube-research-a2a-flow-v1782996873047\\\", \\\"node_ref\\\": \\\"metadata\\\", \\\"node_id\\\": \\\"youtube-metadata-fetch-a2a\\\", \\\"input\\\": {\\\"source_url\\\": \\\"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\\\", \\\"instruction\\\": \\\"Auto gateway real-with-fallback smoke.\\\"}}'\"\n}\n",
+        "preview_truncated": false
+      }
+    ],
+    "diagnostics": {
+      "manifest_has_outputs": false,
+      "manifest_item_count": 0,
+      "manifest_output_file_count": 0,
+      "declared_output_count": 3
+    }
+  },
+  "input_directory": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources",
+  "input_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources/manifest.json",
+  "output_directory": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs",
+  "output_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json",
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "failed_execution",
+      "expected_outputs": [
+        "metadata_json",
+        "source_url_txt",
+        "result_json"
+      ],
+      "required_outputs": [],
+      "present_outputs": [],
+      "missing_required_outputs": [],
+      "business_outputs": {},
+      "business_artifact_count": 0
+    },
+    "success_evidence": {
+      "passed": false,
+      "signals": [],
+      "failures": []
+    }
+  },
+  "business_output_status": {
+    "status": "failed_execution",
+    "expected_outputs": [
+      "metadata_json",
+      "source_url_txt",
+      "result_json"
+    ],
+    "required_outputs": [],
+    "present_outputs": [],
+    "missing_required_outputs": [],
+    "business_outputs": {},
+    "business_artifact_count": 0
+  },
+  "capabilities": {},
+  "agent_request": {
+    "rendered_request": "",
+    "executor": "codex",
+    "receipt": {
+      "version": 1,
+      "executor": "codex",
+      "selected_agent_runtime": "codex",
+      "requested_skill": "youtube-metadata-fetch",
+      "executed_skill": "youtube-metadata-fetch",
+      "node_id": "youtube-metadata-fetch-a2a",
+      "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+      "request_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+      "status": "failed",
+      "returncode": 1,
+      "timed_out": false,
+      "validation": {
+        "status": "passed",
+        "missing_outputs": [],
+        "unexpected_outputs": [],
+        "business_output_status": {
+          "status": "missing_business_outputs",
+          "expected_outputs": [
+            "metadata_json",
+            "source_url_txt",
+            "result_json"
+          ],
+          "required_outputs": [],
+          "present_outputs": [],
+          "missing_required_outputs": [],
+          "business_outputs": {},
+          "business_artifact_count": 0
+        },
+        "success_evidence": {
+          "passed": false,
+          "signals": [],
+          "failures": []
+        }
+      },
+      "business_output_status": {
+        "status": "missing_business_outputs",
+        "expected_outputs": [
+          "metadata_json",
+          "source_url_txt",
+          "result_json"
+        ],
+        "required_outputs": [],
+        "present_outputs": [],
+        "missing_required_outputs": [],
+        "business_outputs": {},
+        "business_artifact_count": 0
+      },
+      "input_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources/manifest.json",
+      "output_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json",
+      "started_at": "2026-07-02T13:44:13.605776+00:00",
+      "finished_at": "2026-07-02T13:44:13.608658+00:00",
+      "legacy_fallback": false,
+      "error": "[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}'"
+    }
+  },
+  "business_artifacts": [],
+  "runtime_context": {
+    "runtime_id": "runtime-206-189-196-65",
+    "channel_url": "https://runtime-206-189-196-65.chxyka.ccwu.cc",
+    "spi_base_url": "https://runtime-206-189-196-65.chxyka.ccwu.cc/api/sop",
+    "registry_path": "/root/.sop/registry.json",
+    "health": {
+      "spi": "ok",
+      "registry": "ok",
+      "channel": "ok",
+      "instances": "ok"
+    },
+    "hermes_webhook_url": ""
+  },
+  "instance_context": {
+    "instance_id": "agent-runtime-codex-smoke",
+    "status": "ready",
+    "repo": "skkeoriw/wiki-sop-new-instance",
+    "repo_branch": "main",
+    "wiki_local_path": "/root/wiki/wiki-sop-new-instance",
+    "workspace_status": "ready",
+    "registry_status": "enabled",
+    "run_index_path": "/root/wiki/wiki-sop-new-instance/.sop/run-index.sqlite",
+    "run_index_status": "ready",
+    "capabilities": {
+      "workspace": "ok",
+      "sop_yaml": "ok",
+      "run_index": "ok",
+      "agent_runtime": {
+        "id": "codex",
+        "enabled": true,
+        "command": "/root/.nvm/versions/node/v22.23.1/bin/codex",
+        "command_status": "present",
+        "skill_dir": {
+          "status": "writable",
+          "path": "/root/.codex/skills",
+          "writable": true
+        },
+        "auth_mode": "manual",
+        "auth_status": "not_checked"
+      },
+      "git": "configured",
+      "telegram": "configured",
+      "notebooklm": "configured",
+      "vertex": "configured",
+      "tunnel": "ok"
+    }
+  },
+  "definition_defaults": {
+    "git": {
+      "enabled": false,
+      "required": false
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false
+    }
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run",
+      "paths": []
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run"
+    }
+  },
+  "definition_scope_reports": {
+    "instance_override": {
+      "status": "unchanged",
+      "changed": {}
+    },
+    "project_default_request": {
+      "status": "skipped"
+    }
+  },
+  "environment_snapshot": [
+    {
+      "id": "telegram:YOUTUBE_WIKI_TG_TOKEN:global-settings:YOUTUBE_WIKI_TG_TOKEN",
+      "capability": "telegram",
+      "key": "YOUTUBE_WIKI_TG_TOKEN",
+      "label": "Telegram Bot Token",
+      "source": "global-settings:YOUTUBE_WIKI_TG_TOKEN",
+      "source_kind": "global-settings",
+      "present": true,
+      "required": false,
+      "secret": true,
+      "value": "795***qHY",
+      "status": "disabled",
+      "unit": "",
+      "category": "telegram"
+    },
+    {
+      "id": "telegram:YOUTUBE_WIKI_TG_CHAT_ID:global-settings:YOUTUBE_WIKI_TG_CHAT_ID",
+      "capability": "telegram",
+      "key": "YOUTUBE_WIKI_TG_CHAT_ID",
+      "label": "Telegram Chat ID",
+      "source": "global-settings:YOUTUBE_WIKI_TG_CHAT_ID",
+      "source_kind": "global-settings",
+      "present": true,
+      "required": false,
+      "secret": false,
+      "value": "779***193",
+      "status": "disabled",
+      "unit": "",
+      "category": "telegram"
+    },
+    {
+      "id": "git:GITHUB_TOKEN:global-settings:GITHUB_TOKEN",
+      "capability": "git",
+      "key": "GITHUB_TOKEN",
+      "label": "GitHub Token",
+      "source": "global-settings:GITHUB_TOKEN",
+      "source_kind": "global-settings",
+      "present": true,
+      "required": false,
+      "secret": true,
+      "value": "ghp***qtP",
+      "status": "disabled",
+      "unit": "",
+      "category": "github"
+    }
+  ],
+  "capability_results": [
+    {
+      "key": "git",
+      "capability": "git",
+      "label": "GitHub workspace persistence",
+      "status": "disabled",
+      "enabled": false,
+      "required": false,
+      "source": "config-resolution",
+      "reason": "",
+      "managed_by": "runtime-harness",
+      "detail": {
+        "capability": "git",
+        "label": "GitHub workspace persistence",
+        "status": "disabled",
+        "required": false,
+        "enabled": false,
+        "_source_key": "***"
+      }
+    },
+    {
+      "key": "telegram",
+      "capability": "telegram",
+      "label": "Telegram progress notification",
+      "status": "disabled",
+      "enabled": false,
+      "required": false,
+      "source": "config-resolution",
+      "reason": "",
+      "managed_by": "runtime-harness",
+      "detail": {
+        "capability": "telegram",
+        "label": "Telegram progress notification",
+        "status": "disabled",
+        "required": false,
+        "enabled": false,
+        "_source_key": "***"
+      }
+    }
+  ],
+  "issues": [],
+  "detail": {
+    "sop_id": "agent-runtime-codex-smoke",
+    "workflow_id": "youtube-research-wiki",
+    "instance_id": "agent-runtime-codex-smoke",
+    "node_id": "youtube-metadata-fetch-a2a",
+    "node_title": "YouTube Metadata Fetch A2A",
+    "mode": "real-node",
+    "input_source": "manual",
+    "base_run_id": "",
+    "source_node_run_id": "",
+    "relay_mode": "",
+    "selected_outputs": [],
+    "relay_mappings": [],
+    "relay_selection": {},
+    "edge_contract": {},
+    "node_execution_guide": {},
+    "workflow_revision": {
+      "version": 1,
+      "hash": "3dec7fb576776346",
+      "node_count": 6,
+      "edge_count": 3,
+      "nodes": {
+        "notebooklm-research": {
+          "title": "NotebookLM 研究",
+          "skill": "sop-notebooklm-research",
+          "mode": "blocking",
+          "needs": [
+            "youtube-fetch"
+          ],
+          "inputs": {
+            "source_url": "youtube-fetch.outputs.source_url",
+            "metadata_file": "youtube-fetch.outputs.metadata_file"
+          },
+          "optional_inputs": {},
+          "outputs": {
+            "reports": "raw/notebooklm-analysis/*.md",
+            "mindmaps": "raw/notebooklm-mindmaps/*.json"
+          },
+          "capabilities": {}
+        },
+        "retry": {
+          "title": "手动重试",
+          "skill": "sop-retry",
+          "mode": "manual",
+          "needs": [],
+          "inputs": {},
+          "optional_inputs": {},
+          "outputs": {},
+          "capabilities": {}
+        },
+        "tg-notify": {
+          "title": "Telegram 通知",
+          "skill": "sop-tg-notify",
+          "mode": "blocking",
+          "needs": [
+            "wiki-build"
+          ],
+          "inputs": {
+            "index": {
+              "from": "wiki-build.outputs.index",
+              "required": true,
+              "kind": "file",
+              "type": "file",
+              "value_type": "markdown"
+            }
+          },
+          "optional_inputs": {
+            "message": {
+              "from": "edge.message",
+              "required": false,
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "text",
+              "resolvers": [
+                {
+                  "id": "direct-text",
+                  "kind": "direct"
+                },
+                {
+                  "id": "metadata-title",
+                  "kind": "json_path",
+                  "path": "$.title"
+                },
+                {
+                  "id": "metadata-description",
+                  "kind": "json_path",
+                  "path": "$.description"
+                }
+              ]
+            }
+          },
+          "outputs": {
+            "telegram_message": {
+              "path": "logs/pipeline-runs/pipe-{run_id}.json",
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "relayable": false
+            }
+          },
+          "capabilities": {}
+        },
+        "wiki-build": {
+          "title": "Wiki 知识图谱构建",
+          "skill": "sop-wiki-build",
+          "mode": "blocking",
+          "needs": [
+            "notebooklm-research"
+          ],
+          "inputs": {
+            "reports": {
+              "from": "notebooklm-research.outputs.reports",
+              "kind": "files",
+              "type": "files",
+              "value_type": "markdown"
+            }
+          },
+          "optional_inputs": {
+            "deep_research": {
+              "from": "youtube-deep-research.outputs.analysis_file",
+              "required": false,
+              "kind": "files",
+              "type": "files",
+              "value_type": "markdown"
+            }
+          },
+          "outputs": {
+            "index": {
+              "path": "index.md",
+              "kind": "file",
+              "type": "file",
+              "value_type": "markdown",
+              "relayable": true
+            },
+            "pages": {
+              "path": "wiki/**",
+              "kind": "files",
+              "type": "files",
+              "value_type": "markdown",
+              "relayable": true
+            }
+          },
+          "capabilities": {}
+        },
+        "youtube-deep-research": {
+          "title": "YouTube 深度研究",
+          "skill": "sop-youtube-deep-research",
+          "mode": "sidecar",
+          "needs": [
+            "youtube-fetch"
+          ],
+          "inputs": {
+            "source_url": {
+              "from": "youtube-fetch.outputs.source_url",
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "url",
+              "resolvers": [
+                {
+                  "id": "direct-url",
+                  "kind": "direct"
+                },
+                {
+                  "id": "metadata-source-url",
+                  "kind": "json_path",
+                  "path": "$.source_url"
+                },
+                {
+                  "id": "metadata-youtube-url",
+                  "kind": "json_path",
+                  "path": "$.youtube_url"
+                },
+                {
+                  "id": "text-url",
+                  "kind": "regex",
+                  "pattern": "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=[A-Za-z0-9_-]+[^\\s\"'<>)]*|youtu\\.be/[A-Za-z0-9_-]+[^\\s\"'<>)]*)"
+                }
+              ]
+            }
+          },
+          "optional_inputs": {},
+          "outputs": {
+            "analysis_file": {
+              "path": "raw/youtube-deep-research/{pipeline_id}/outputs/analysis.md",
+              "kind": "file",
+              "type": "file",
+              "value_type": "markdown",
+              "relayable": true,
+              "role": "wiki-source"
+            },
+            "transcript_file": {
+              "path": "raw/youtube-deep-research/{pipeline_id}/outputs/transcript.txt",
+              "kind": "file",
+              "type": "file",
+              "value_type": "text",
+              "relayable": true,
+              "role": "transcript"
+            }
+          },
+          "capabilities": {
+            "git": {
+              "enabled": true,
+              "required": false,
+              "managed_by": "runtime-harness",
+              "editable": true,
+              "save_scope": "node-definition",
+              "description": "Persist this node's workspace outputs to the current Instance repo.",
+              "paths": [
+                "raw/youtube-deep-research/{pipeline_id}/outputs/**",
+                "raw/youtube-deep-research/{pipeline_id}/raw/**"
+              ]
+            },
+            "telegram": {
+              "enabled": true,
+              "required": false,
+              "managed_by": "runtime-harness",
+              "editable": true,
+              "save_scope": "node-definition",
+              "description": "Send progress notifications through the current Instance Telegram config.",
+              "trigger": "stage-lifecycle",
+              "triggers": [
+                "start",
+                "done",
+                "failed"
+              ]
+            }
+          }
+        },
+        "youtube-fetch": {
+          "title": "YouTube 元数据获取",
+          "skill": "sop-youtube-fetch",
+          "mode": "blocking",
+          "needs": [],
+          "inputs": {
+            "source_url": {
+              "from": "context.source_url",
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "url"
+            }
+          },
+          "optional_inputs": {},
+          "outputs": {
+            "source_url": {
+              "from": "context.source_url",
+              "kind": "scalar",
+              "type": "string",
+              "value_type": "url",
+              "relayable": true
+            },
+            "metadata_file": {
+              "from": "context.stage_b_fetch.meta_file",
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "relayable": true
+            }
+          },
+          "capabilities": {}
+        }
+      },
+      "edges": [
+        {
+          "id": "edge-youtube-fetch-to-youtube-deep-research",
+          "from": "youtube-fetch",
+          "to": "youtube-deep-research",
+          "relay": {
+            "intent": {
+              "title": "将视频地址交给深度研究节点",
+              "brief": "下游只需要一个可解析的 YouTube URL。优先使用 source_url；只有显式选择 metadata_file 时才从 JSON 字段提取 URL。"
+            },
+            "bindings": [
+              {
+                "target_input": "source_url",
+                "required": true,
+                "source": {
+                  "node": "youtube-fetch",
+                  "output": "source_url",
+                  "extractor": {
+                    "id": "direct-url",
+                    "kind": "direct"
+                  }
+                }
+              }
+            ],
+            "resolver": {
+              "strategy": "explicit_first",
+              "fallback": "block"
+            },
+            "validation": {
+              "on_missing_required": "block",
+              "on_multiple_candidates": "needs_review",
+              "on_type_mismatch": "block"
+            }
+          }
+        },
+        {
+          "id": "edge-youtube-fetch-title-to-tg-notify",
+          "from": "youtube-fetch",
+          "to": "tg-notify",
+          "relay": {
+            "intent": {
+              "title": "将视频标题作为通知内容",
+              "brief": "这条边只用于测试或自定义工作流，将 metadata_file 中的视频标题提取成 Telegram 文本消息。"
+            },
+            "bindings": [
+              {
+                "target_input": "message",
+                "required": true,
+                "source": {
+                  "node": "youtube-fetch",
+                  "output": "metadata_file",
+                  "extractor": {
+                    "id": "metadata-title",
+                    "kind": "json_path",
+                    "path": "$.title"
+                  }
+                }
+              }
+            ],
+            "resolver": {
+              "strategy": "explicit_first",
+              "fallback": "needs_review"
+            },
+            "validation": {
+              "on_missing_required": "block",
+              "on_multiple_candidates": "needs_review",
+              "on_type_mismatch": "block"
+            }
+          }
+        },
+        {
+          "id": "edge-youtube-deep-research-to-wiki-build",
+          "from": "youtube-deep-research",
+          "to": "wiki-build",
+          "relay": {
+            "intent": {
+              "title": "将深度研究产物交给 Wiki 构建节点",
+              "brief": "将 analysis_file 作为 Wiki 构建的 deep_research 补充材料；transcript_file 可在自定义边中作为补充上下文。"
+            },
+            "bindings": [
+              {
+                "target_input": "deep_research",
+                "required": false,
+                "source": {
+                  "node": "youtube-deep-research",
+                  "output": "analysis_file",
+                  "extractor": {
+                    "id": "direct-file",
+                    "kind": "direct"
+                  }
+                }
+              }
+            ],
+            "resolver": {
+              "strategy": "explicit_first",
+              "fallback": "needs_review"
+            },
+            "validation": {
+              "on_missing_required": "needs_review",
+              "on_multiple_candidates": "needs_review",
+              "on_type_mismatch": "needs_review"
+            }
+          }
+        }
+      ]
+    },
+    "relay_instruction": "",
+    "relay_context_brief": "",
+    "manual_inputs": {
+      "source_url": "Execute workflow node: YouTube Metadata Fetch.\nWorkflow instruction: Auto gateway real-with-fallback smoke.\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https://www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}"
+    },
+    "required_inputs": [
+      {
+        "name": "source_url",
+        "source": "",
+        "required": true,
+        "resolved": true,
+        "value": "Execute workflow node: YouTube Metadata Fetch.\nWorkflow instruction: Auto gateway real-with-fallback smoke.\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https://www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}",
+        "provenance": "manual",
+        "reason": ""
+      },
+      {
+        "name": "api_url",
+        "source": "",
+        "required": false,
+        "resolved": false,
+        "value": null,
+        "provenance": "",
+        "reason": "No source value resolved. Select an existing run, use generated fixture, or provide manual input."
+      },
+      {
+        "name": "api_token",
+        "source": "",
+        "required": false,
+        "resolved": false,
+        "value": null,
+        "provenance": "",
+        "reason": "No source value resolved. Select an existing run, use generated fixture, or provide manual input."
+      },
+      {
+        "name": "timeout_seconds",
+        "source": "",
+        "required": false,
+        "resolved": false,
+        "value": null,
+        "provenance": "",
+        "reason": "No source value resolved. Select an existing run, use generated fixture, or provide manual input."
+      },
+      {
+        "name": "include_raw",
+        "source": "",
+        "required": false,
+        "resolved": false,
+        "value": null,
+        "provenance": "",
+        "reason": "No source value resolved. Select an existing run, use generated fixture, or provide manual input."
+      }
+    ],
+    "optional_inputs": [],
+    "resolved_inputs": [
+      {
+        "name": "source_url",
+        "source": "",
+        "required": true,
+        "resolved": true,
+        "value": "Execute workflow node: YouTube Metadata Fetch.\nWorkflow instruction: Auto gateway real-with-fallback smoke.\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https://www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}",
+        "provenance": "manual",
+        "reason": ""
+      }
+    ],
+    "pending_materialization_inputs": [],
+    "missing_inputs": [],
+    "upstream_nodes": [],
+    "available_existing_runs": [
+      {
+        "pipeline_id": "node-run-youtube-fetch-20260622T134710-842f65",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T13:47:52Z",
+        "nodes": {
+          "youtube-fetch": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-fetch-20260622T083527Z-cfe243",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T08:36:00Z",
+        "nodes": {
+          "youtube-fetch": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-fetch-20260622T111013Z-1c2b4d",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T11:10:53Z",
+        "nodes": {
+          "youtube-fetch": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-fetch-20260622T080623-03ff23",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T08:06:57Z",
+        "nodes": {
+          "youtube-fetch": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-fetch-20260622T080125-03ff23",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T08:02:17Z",
+        "nodes": {
+          "youtube-fetch": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-io-protocol-20260622T030240Z",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T03:04:14Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-real-async-20260619T185359Z",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-19T18:55:22Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-edge-guide-real-20260624T090739Z",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-24T09:10:27Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-edge-guide-evidence-20260624T091945Z",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-24T09:22:01Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-edge-guide-audit-20260624T092756Z",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-24T09:30:52Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-capability-harness-fix-20260620T033459Z",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T03:36:44Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-capability-harness-20260620T032833Z",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-20T03:30:07Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260622T134854-341d02",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T13:51:09Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260622T111234Z-a32a89",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T11:14:42Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260622T102318-ecb0ee",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T10:25:14Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260622T091425Z-6a0670",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T09:17:29Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260622T080753-a589d3",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-22T08:10:17Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260621T173840-03ff23",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-21T17:40:13Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260621T151432Z-516f89",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-21T15:16:06Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      },
+      {
+        "pipeline_id": "node-run-youtube-deep-research-20260621T135318Z-01bc69",
+        "status": "running",
+        "source_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        "updated_at": "2026-06-21T13:54:51Z",
+        "nodes": {
+          "youtube-deep-research": "done"
+        },
+        "satisfies_upstream": true
+      }
+    ],
+    "side_effects": {
+      "writes_workspace": true,
+      "git_write": false,
+      "telegram": false,
+      "external_api": true,
+      "llm": false,
+      "skill": "youtube-metadata-fetch",
+      "default_mode": "preflight",
+      "real_execution_enabled": true
+    },
+    "actions": {
+      "preflight": {
+        "method": "POST",
+        "path": "/api/sop/agent-runtime-codex-smoke/nodes/youtube-metadata-fetch-a2a/tests",
+        "destructive": false,
+        "enabled": true
+      },
+      "real_execution": {
+        "enabled": true,
+        "reason": "Standard stage wrapper is available for real Node Run execution."
+      }
+    },
+    "status": "ready",
+    "runtime_id": "runtime-206-189-196-65",
+    "runtime_channel_url": "https://runtime-206-189-196-65.chxyka.ccwu.cc",
+    "workflow_name": "YouTube Wiki SOP",
+    "node_source": "runtime-catalog",
+    "resolved_config": {
+      "telegram": {
+        "capability": "telegram",
+        "label": "Telegram progress notification",
+        "enabled": false,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "status": "disabled",
+        "token_env": "YOU***KEN",
+        "token": {
+          "key": "YOU***KEN",
+          "label": "Telegram Bot Token",
+          "required": false,
+          "present": true,
+          "source": "global-settings:YOUTUBE_WIKI_TG_TOKEN",
+          "masked_value": "795***qHY",
+          "value": null
+        },
+        "chat_id": {
+          "key": "YOU***_ID",
+          "label": "Telegram Chat ID",
+          "required": false,
+          "present": true,
+          "source": "global-settings:YOUTUBE_WIKI_TG_CHAT_ID",
+          "masked_value": "779***193",
+          "value": "7796171193"
+        },
+        "probe": {
+          "enabled": false,
+          "explicit_confirmation_required": true,
+          "side_effect": "sends a Telegram test message"
+        }
+      },
+      "github": {
+        "capability": "git",
+        "label": "GitHub workspace persistence",
+        "enabled": false,
+        "required": false,
+        "status": "disabled",
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "paths": [],
+        "token": {
+          "key": "GIT***KEN",
+          "label": "GitHub Token",
+          "required": false,
+          "present": true,
+          "source": "global-settings:GITHUB_TOKEN",
+          "masked_value": "ghp***qtP",
+          "value": null
+        }
+      }
+    },
+    "runtime_context": {
+      "runtime_id": "runtime-206-189-196-65",
+      "channel_url": "https://runtime-206-189-196-65.chxyka.ccwu.cc",
+      "spi_base_url": "https://runtime-206-189-196-65.chxyka.ccwu.cc/api/sop",
+      "registry_path": "/root/.sop/registry.json",
+      "health": {
+        "spi": "ok",
+        "registry": "ok",
+        "channel": "ok",
+        "instances": "ok"
+      },
+      "hermes_webhook_url": ""
+    },
+    "instance_context": {
+      "instance_id": "agent-runtime-codex-smoke",
+      "status": "ready",
+      "repo": "skkeoriw/wiki-sop-new-instance",
+      "repo_branch": "main",
+      "wiki_local_path": "/root/wiki/wiki-sop-new-instance",
+      "workspace_status": "ready",
+      "registry_status": "enabled",
+      "run_index_path": "/root/wiki/wiki-sop-new-instance/.sop/run-index.sqlite",
+      "run_index_status": "ready",
+      "capabilities": {
+        "workspace": "ok",
+        "sop_yaml": "ok",
+        "run_index": "ok",
+        "agent_runtime": {
+          "id": "codex",
+          "enabled": true,
+          "command": "/root/.nvm/versions/node/v22.23.1/bin/codex",
+          "command_status": "present",
+          "skill_dir": {
+            "status": "writable",
+            "path": "/root/.codex/skills",
+            "writable": true
+          },
+          "auth_mode": "manual",
+          "auth_status": "not_checked"
+        },
+        "git": "configured",
+        "telegram": "configured",
+        "notebooklm": "configured",
+        "vertex": "configured",
+        "tunnel": "ok"
+      }
+    },
+    "definition_defaults": {
+      "git": {
+        "enabled": false,
+        "required": false
+      },
+      "telegram": {
+        "enabled": false,
+        "required": false
+      }
+    },
+    "capability_overrides": {
+      "git": {
+        "enabled": false,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run",
+        "paths": []
+      },
+      "telegram": {
+        "enabled": false,
+        "required": false,
+        "managed_by": "runtime-harness",
+        "save_scope": "run"
+      }
+    },
+    "definition_scope_reports": {
+      "instance_override": {
+        "status": "unchanged",
+        "changed": {}
+      },
+      "project_default_request": {
+        "status": "skipped"
+      }
+    },
+    "config_sources": {
+      "runtime_env_file": "/root/.agent-brain-plugins.env",
+      "runtime_env_file_present": true,
+      "runtime_env_file_keys": [
+        "BRIDGE_PORT",
+        "CLOUDFLARE_API_KEY",
+        "CLOUDFLARE_EMAIL",
+        "DEEPSEEK_API_KEY",
+        "GITHUB_TOKEN",
+        "GOOGLE_PROJECT_ID",
+        "HERMES_MODEL",
+        "HERMES_MODEL_BASE_URL",
+        "HERMES_MODEL_PROVIDER",
+        "HERMES_OPENAI_API_KEY",
+        "HERMES_SMOKE_ROUTE",
+        "HERMES_WEBHOOK_PORT",
+        "HERMES_WEBHOOK_TOKEN",
+        "HERMES_WEBHOOK_URL",
+        "NOTEBOOKLM_BRIDGE_TOKEN",
+        "NOTEBOOKLM_BRIDGE_URL",
+        "NOTEBOOKLM_CLIENT_ID",
+        "RUNTIME_SETTINGS_BACKEND",
+        "RUNTIME_SETTINGS_CLOUDFLARE_ACCOUNT_ID",
+        "RUNTIME_SETTINGS_CLOUDFLARE_API_KEY",
+        "RUNTIME_SETTINGS_CLOUDFLARE_EMAIL",
+        "RUNTIME_SETTINGS_D1_DATABASE_ID",
+        "RUNTIME_SETTINGS_D1_DATABASE_NAME",
+        "SOP_UI_URL",
+        "TUNNEL_API",
+        "VERTEX_LOCATION",
+        "WEBHOOK_PUBLIC_HOST",
+        "WIKI_DEEPSEEK_MODEL",
+        "WIKI_LLM_PROVIDER",
+        "WIKI_VERTEX_MODEL",
+        "YOUTUBE_CONTENT_API_TOKEN",
+        "YOUTUBE_CONTENT_API_URL",
+        "YOUTUBE_RESEARCH_WORKFLOW_TOKEN",
+        "YOUTUBE_RESEARCH_WORKFLOW_URL",
+        "YOUTUBE_WIKI_TG_CHAT_ID",
+        "YOUTUBE_WIKI_TG_TOKEN"
+      ],
+      "node_run_override_keys": [],
+      "capability_override_keys": [
+        "git",
+        "telegram"
+      ],
+      "settings_backend": "d1",
+      "instance_settings_keys": [],
+      "runtime_settings_keys": [],
+      "global_settings_keys": [
+        "AGENT_REPO",
+        "AUTO_DOMAIN_REPO",
+        "AUTO_DOMAIN_TUNNEL_REPO",
+        "BRIDGE_PORT",
+        "CLOUDFLARE_API_KEY",
+        "CLOUDFLARE_EMAIL",
+        "DEEPSEEK_API_KEY",
+        "GITHUB_SKKEORIW_TOKEN",
+        "GITHUB_TOKEN",
+        "GOOGLE_PROJECT_ID",
+        "HERMES_MODEL",
+        "HERMES_MODEL_BASE_URL",
+        "HERMES_MODEL_PROVIDER",
+        "HERMES_OPENAI_API_KEY",
+        "HERMES_SMOKE_ROUTE",
+        "HERMES_WEBHOOK_PORT",
+        "HERMES_WEBHOOK_TOKEN",
+        "HERMES_WEBHOOK_URL",
+        "NOTEBOOKLM_BRIDGE_TOKEN",
+        "NOTEBOOKLM_BRIDGE_URL",
+        "NOTEBOOKLM_CLIENT_ID",
+        "RUNTIME_SETTINGS_CLOUDFLARE_ACCOUNT_ID",
+        "RUNTIME_SETTINGS_D1_DATABASE_ID",
+        "RUNTIME_SETTINGS_D1_DATABASE_NAME",
+        "RUNTIME_TARGET_CHANNEL_URL",
+        "RUNTIME_TARGET_PRIVATE_KEY",
+        "RUNTIME_TARGET_RUNTIME_ID",
+        "RUNTIME_TARGET_SSH_COMMAND",
+        "SKILL_PUBLISHER_REPO",
+        "SKILL_REPO",
+        "SOP_UI_URL",
+        "TUNNEL_API",
+        "VERTEX_LOCATION",
+        "WEBHOOK_PUBLIC_HOST",
+        "WIKI_DEEPSEEK_MODEL",
+        "WIKI_LLM_PROVIDER",
+        "WIKI_VERTEX_MODEL",
+        "YOUTUBE_CONTENT_API_TOKEN",
+        "YOUTUBE_CONTENT_API_URL",
+        "YOUTUBE_RESEARCH_WORKFLOW_TOKEN",
+        "YOUTUBE_RESEARCH_WORKFLOW_URL",
+        "YOUTUBE_WIKI_TG_CHAT_ID",
+        "YOUTUBE_WIKI_TG_TOKEN"
+      ],
+      "precedence": [
+        "node-run-overrides",
+        "instance-settings",
+        "runtime-settings",
+        "global-settings",
+        "bridge-env",
+        "runtime-env-file",
+        "defaults"
+      ]
+    },
+    "capability_probes": {
+      "telegram": {
+        "capability": "telegram",
+        "label": "Telegram progress notification",
+        "status": "disabled",
+        "required": false,
+        "enabled": false
+      },
+      "github": {
+        "capability": "git",
+        "label": "GitHub workspace persistence",
+        "status": "disabled",
+        "required": false,
+        "enabled": false
+      }
+    },
+    "fix_suggestions": [],
+    "node_capabilities": {
+      "git": {
+        "enabled": false,
+        "required": false
+      },
+      "telegram": {
+        "enabled": false,
+        "required": false
+      },
+      "sse": {
+        "enabled": true,
+        "required": true
+      }
+    },
+    "inner_steps": [
+      {
+        "id": "pre",
+        "title": "执行前",
+        "status": "done",
+        "summary": "Node Run 上下文、输入和运行配置已准备，并交给 stage runner on_start。",
+        "started_at": "2026-07-02T13:44:13.421689+00:00",
+        "finished_at": "2026-07-02T13:44:13.605776+00:00",
+        "detail": {
+          "mode": "real-node",
+          "input_source": "manual",
+          "resolved_inputs": [
+            {
+              "name": "source_url",
+              "source": "",
+              "required": true,
+              "resolved": true,
+              "value": "Execute workflow node: YouTube Metadata Fetch.\nWorkflow instruction: Auto gateway real-with-fallback smoke.\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https://www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}",
+              "provenance": "manual",
+              "reason": ""
+            }
+          ],
+          "pending_materialization_inputs": [],
+          "missing_inputs": [],
+          "config_status": "done",
+          "command": [],
+          "stage_hook": "on_start"
+        }
+      },
+      {
+        "id": "doing",
+        "title": "执行中",
+        "status": "failed",
+        "summary": "Skill / agent 业务执行失败。",
+        "started_at": "2026-07-02T13:44:13.605776+00:00",
+        "finished_at": "2026-07-02T13:44:13.608658+00:00",
+        "elapsed_ms": 2,
+        "detail": {
+          "command": [],
+          "returncode": 1,
+          "timed_out": false,
+          "log_path": "/root/wiki/wiki-sop-new-instance/raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/executor.log",
+          "stdout_tail": "",
+          "stderr_tail": "[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}'"
+        }
+      },
+      {
+        "id": "post",
+        "title": "执行后",
+        "status": "failed",
+        "summary": "stage_runner on_done/on_failed、输出校验、Git/TG capability 和 bridge 结果收集已归档。",
+        "started_at": "2026-07-02T13:44:13.608658+00:00",
+        "finished_at": "2026-07-02T13:44:13.735732+00:00",
+        "detail": {
+          "stage_hooks": [
+            "on_done/on_failed",
+            "forward_next"
+          ],
+          "validation": {
+            "status": "passed",
+            "missing_outputs": [],
+            "unexpected_outputs": [],
+            "business_output_status": {
+              "status": "missing_business_outputs",
+              "expected_outputs": [
+                "metadata_json",
+                "source_url_txt",
+                "result_json"
+              ],
+              "required_outputs": [],
+              "present_outputs": [],
+              "missing_required_outputs": [],
+              "business_outputs": {},
+              "business_artifact_count": 0
+            },
+            "success_evidence": {
+              "passed": false,
+              "signals": [],
+              "failures": []
+            }
+          },
+          "actual_outputs": {
+            "metadata_json": [],
+            "source_url_txt": [],
+            "result_json": []
+          },
+          "business_artifact_count": 1,
+          "capabilities": {},
+          "forward_next": ""
+        }
+      }
+    ],
+    "real_execution": {
+      "status": "failed",
+      "summary": "Real node execution failed.",
+      "started_at": "2026-07-02T13:44:13.605776+00:00",
+      "finished_at": "2026-07-02T13:44:13.608658+00:00",
+      "elapsed_ms": 2,
+      "log_path": "/root/wiki/wiki-sop-new-instance/raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/executor.log",
+      "actual_outputs": {
+        "metadata_json": [],
+        "source_url_txt": [],
+        "result_json": []
+      },
+      "artifacts": [
+        {
+          "id": "85299a7648ecca28",
+          "producer": "youtube-metadata-fetch-a2a",
+          "output": "agent_receipt",
+          "type": "node-run.agent.receipt",
+          "format": "json",
+          "path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/agent/receipt.json",
+          "title": "Agent Execution Receipt",
+          "size": 2283,
+          "mime_type": "application/json",
+          "tags": [],
+          "metadata": {},
+          "resolution": "node-run-agent",
+          "preview": "{\n  \"version\": 1,\n  \"executor\": \"codex\",\n  \"selected_agent_runtime\": \"codex\",\n  \"requested_skill\": \"youtube-metadata-fetch\",\n  \"executed_skill\": \"youtube-metadata-fetch\",\n  \"node_id\": \"youtube-metadata-fetch-a2a\",\n  \"node_run_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"request_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"status\": \"failed\",\n  \"returncode\": 1,\n  \"timed_out\": false,\n  \"validation\": {\n    \"status\": \"passed\",\n    \"missing_outputs\": [],\n    \"unexpected_outputs\": [],\n    \"business_output_status\": {\n      \"status\": \"missing_business_outputs\",\n      \"expected_outputs\": [\n        \"metadata_json\",\n        \"source_url_txt\",\n        \"result_json\"\n      ],\n      \"required_outputs\": [],\n      \"present_outputs\": [],\n      \"missing_required_outputs\": [],\n      \"business_outputs\": {},\n      \"business_artifact_count\": 0\n    },\n    \"success_evidence\": {\n      \"passed\": false,\n      \"signals\": [],\n      \"failures\": []\n    }\n  },\n  \"business_output_status\": {\n    \"status\": \"missing_business_outputs\",\n    \"expected_outputs\": [\n      \"metadata_json\",\n      \"source_url_txt\",\n      \"result_json\"\n    ],\n    \"required_outputs\": [],\n    \"present_outputs\": [],\n    \"missing_required_outputs\": [],\n    \"business_outputs\": {},\n    \"business_artifact_count\": 0\n  },\n  \"input_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources/manifest.json\",\n  \"output_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json\",\n  \"started_at\": \"2026-07-02T13:44:13.605776+00:00\",\n  \"finished_at\": \"2026-07-02T13:44:13.608658+00:00\",\n  \"legacy_fallback\": false,\n  \"error\": \"[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\\\n{\\\"run_id\\\": \\\"youtube-research-a2a-flow-run-real-1782999845\\\", \\\"workflow_id\\\": \\\"youtube-research-a2a-flow\\\", \\\"workflow_version_id\\\": \\\"youtube-research-a2a-flow-v1782996873047\\\", \\\"node_ref\\\": \\\"metadata\\\", \\\"node_id\\\": \\\"youtube-metadata-fetch-a2a\\\", \\\"input\\\": {\\\"source_url\\\": \\\"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\\\", \\\"instruction\\\": \\\"Auto gateway real-with-fallback smoke.\\\"}}'\"\n}\n",
+          "preview_truncated": false
+        }
+      ],
+      "business_artifacts": [],
+      "core_outputs": [
+        {
+          "name": "metadata_json",
+          "kind": "files",
+          "type": "file",
+          "value": [],
+          "files": [],
+          "artifacts": [],
+          "declared": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": true,
+            "path": "raw/node-runs/{run_id}/outputs/metadata.json",
+            "fields": {
+              "resolved_path": {
+                "type": "string",
+                "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json"
+              },
+              "absolute_path": {
+                "type": "string",
+                "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json"
+              },
+              "size_bytes": {
+                "type": "integer",
+                "sample": 517
+              },
+              "relayable": {
+                "type": "boolean",
+                "sample": true
+              },
+              "description": {
+                "type": "string",
+                "sample": "Normalized YouTube metadata JSON."
+              }
+            }
+          }
+        },
+        {
+          "name": "source_url_txt",
+          "kind": "files",
+          "type": "file",
+          "value": [],
+          "files": [],
+          "artifacts": [],
+          "declared": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "url",
+            "relayable": true,
+            "path": "raw/node-runs/{run_id}/outputs/source-url.txt",
+            "fields": {
+              "resolved_path": {
+                "type": "string",
+                "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt"
+              },
+              "absolute_path": {
+                "type": "string",
+                "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt"
+              },
+              "size_bytes": {
+                "type": "integer",
+                "sample": 44
+              },
+              "relayable": {
+                "type": "boolean",
+                "sample": true
+              },
+              "description": {
+                "type": "string",
+                "sample": "Echoed source URL."
+              }
+            }
+          }
+        },
+        {
+          "name": "result_json",
+          "kind": "files",
+          "type": "file",
+          "value": [],
+          "files": [],
+          "artifacts": [],
+          "declared": {
+            "kind": "file",
+            "type": "file",
+            "value_type": "json",
+            "relayable": true,
+            "path": "raw/node-runs/{run_id}/outputs/result.json",
+            "fields": {
+              "resolved_path": {
+                "type": "string",
+                "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json"
+              },
+              "absolute_path": {
+                "type": "string",
+                "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json"
+              },
+              "size_bytes": {
+                "type": "integer",
+                "sample": 815
+              },
+              "relayable": {
+                "type": "boolean",
+                "sample": true
+              },
+              "description": {
+                "type": "string",
+                "sample": "Skill execution result JSON."
+              }
+            }
+          }
+        }
+      ],
+      "relay_package": {
+        "kind": "relay-package",
+        "output_directory": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs",
+        "manifest_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json",
+        "item_count": 0,
+        "items": []
+      },
+      "execution_evidence": {
+        "artifacts": [
+          {
+            "id": "85299a7648ecca28",
+            "producer": "youtube-metadata-fetch-a2a",
+            "output": "agent_receipt",
+            "type": "node-run.agent.receipt",
+            "format": "json",
+            "path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/agent/receipt.json",
+            "title": "Agent Execution Receipt",
+            "size": 2283,
+            "mime_type": "application/json",
+            "tags": [],
+            "metadata": {},
+            "resolution": "node-run-agent",
+            "preview": "{\n  \"version\": 1,\n  \"executor\": \"codex\",\n  \"selected_agent_runtime\": \"codex\",\n  \"requested_skill\": \"youtube-metadata-fetch\",\n  \"executed_skill\": \"youtube-metadata-fetch\",\n  \"node_id\": \"youtube-metadata-fetch-a2a\",\n  \"node_run_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"request_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"status\": \"failed\",\n  \"returncode\": 1,\n  \"timed_out\": false,\n  \"validation\": {\n    \"status\": \"passed\",\n    \"missing_outputs\": [],\n    \"unexpected_outputs\": [],\n    \"business_output_status\": {\n      \"status\": \"missing_business_outputs\",\n      \"expected_outputs\": [\n        \"metadata_json\",\n        \"source_url_txt\",\n        \"result_json\"\n      ],\n      \"required_outputs\": [],\n      \"present_outputs\": [],\n      \"missing_required_outputs\": [],\n      \"business_outputs\": {},\n      \"business_artifact_count\": 0\n    },\n    \"success_evidence\": {\n      \"passed\": false,\n      \"signals\": [],\n      \"failures\": []\n    }\n  },\n  \"business_output_status\": {\n    \"status\": \"missing_business_outputs\",\n    \"expected_outputs\": [\n      \"metadata_json\",\n      \"source_url_txt\",\n      \"result_json\"\n    ],\n    \"required_outputs\": [],\n    \"present_outputs\": [],\n    \"missing_required_outputs\": [],\n    \"business_outputs\": {},\n    \"business_artifact_count\": 0\n  },\n  \"input_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources/manifest.json\",\n  \"output_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json\",\n  \"started_at\": \"2026-07-02T13:44:13.605776+00:00\",\n  \"finished_at\": \"2026-07-02T13:44:13.608658+00:00\",\n  \"legacy_fallback\": false,\n  \"error\": \"[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\\\n{\\\"run_id\\\": \\\"youtube-research-a2a-flow-run-real-1782999845\\\", \\\"workflow_id\\\": \\\"youtube-research-a2a-flow\\\", \\\"workflow_version_id\\\": \\\"youtube-research-a2a-flow-v1782996873047\\\", \\\"node_ref\\\": \\\"metadata\\\", \\\"node_id\\\": \\\"youtube-metadata-fetch-a2a\\\", \\\"input\\\": {\\\"source_url\\\": \\\"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\\\", \\\"instruction\\\": \\\"Auto gateway real-with-fallback smoke.\\\"}}'\"\n}\n",
+            "preview_truncated": false
+          },
+          {
+            "id": "d4da660cf3afff18",
+            "producer": "youtube-metadata-fetch-a2a",
+            "output": "executor_log",
+            "type": "file",
+            "format": "log",
+            "path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/executor.log",
+            "title": "Executor Log",
+            "size": 539,
+            "mime_type": "application/octet-stream",
+            "tags": [],
+            "metadata": {},
+            "resolution": "execution-evidence",
+            "preview": "[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}'",
+            "preview_truncated": false
+          }
+        ],
+        "count": 2
+      },
+      "output_categories": {
+        "core_outputs": {
+          "title": "核心输出",
+          "description": "节点声明 outputs 对应的业务结果。",
+          "files": [],
+          "count": 0
+        },
+        "raw_files": {
+          "title": "节点原始文件",
+          "description": "节点 Skill/Worker 产生的原始响应、字幕和中间文件。",
+          "files": [],
+          "count": 0
+        },
+        "run_records": {
+          "title": "运行记录",
+          "description": "Node Run 工作台、事件、状态和 capability 记录。",
+          "files": [
+            "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/executor.log"
+          ],
+          "count": 1
+        },
+        "node_run_outputs": {
+          "title": "统一输出目录",
+          "description": "本次 Node Run 写入标准 outputs 目录的可中继产物，供下游节点作为目录输入。",
+          "files": [],
+          "count": 0
+        }
+      },
+      "node_run_result": {
+        "schema": "node-run-result/v1",
+        "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+        "node_id": "youtube-metadata-fetch-a2a",
+        "status": "unknown",
+        "success_evidence": {
+          "passed": false,
+          "signals": [],
+          "failures": []
+        },
+        "output_space": {
+          "outputs_dir": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs",
+          "manifest_path": ""
+        },
+        "named_outputs": {},
+        "actual_outputs": {
+          "metadata_json": [],
+          "source_url_txt": [],
+          "result_json": []
+        },
+        "artifacts": [
+          {
+            "id": "85299a7648ecca28",
+            "producer": "youtube-metadata-fetch-a2a",
+            "output": "agent_receipt",
+            "type": "node-run.agent.receipt",
+            "format": "json",
+            "path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/agent/receipt.json",
+            "title": "Agent Execution Receipt",
+            "size": 2283,
+            "mime_type": "application/json",
+            "tags": [],
+            "metadata": {},
+            "resolution": "node-run-agent",
+            "preview": "{\n  \"version\": 1,\n  \"executor\": \"codex\",\n  \"selected_agent_runtime\": \"codex\",\n  \"requested_skill\": \"youtube-metadata-fetch\",\n  \"executed_skill\": \"youtube-metadata-fetch\",\n  \"node_id\": \"youtube-metadata-fetch-a2a\",\n  \"node_run_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"request_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"status\": \"failed\",\n  \"returncode\": 1,\n  \"timed_out\": false,\n  \"validation\": {\n    \"status\": \"passed\",\n    \"missing_outputs\": [],\n    \"unexpected_outputs\": [],\n    \"business_output_status\": {\n      \"status\": \"missing_business_outputs\",\n      \"expected_outputs\": [\n        \"metadata_json\",\n        \"source_url_txt\",\n        \"result_json\"\n      ],\n      \"required_outputs\": [],\n      \"present_outputs\": [],\n      \"missing_required_outputs\": [],\n      \"business_outputs\": {},\n      \"business_artifact_count\": 0\n    },\n    \"success_evidence\": {\n      \"passed\": false,\n      \"signals\": [],\n      \"failures\": []\n    }\n  },\n  \"business_output_status\": {\n    \"status\": \"missing_business_outputs\",\n    \"expected_outputs\": [\n      \"metadata_json\",\n      \"source_url_txt\",\n      \"result_json\"\n    ],\n    \"required_outputs\": [],\n    \"present_outputs\": [],\n    \"missing_required_outputs\": [],\n    \"business_outputs\": {},\n    \"business_artifact_count\": 0\n  },\n  \"input_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources/manifest.json\",\n  \"output_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json\",\n  \"started_at\": \"2026-07-02T13:44:13.605776+00:00\",\n  \"finished_at\": \"2026-07-02T13:44:13.608658+00:00\",\n  \"legacy_fallback\": false,\n  \"error\": \"[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\\\n{\\\"run_id\\\": \\\"youtube-research-a2a-flow-run-real-1782999845\\\", \\\"workflow_id\\\": \\\"youtube-research-a2a-flow\\\", \\\"workflow_version_id\\\": \\\"youtube-research-a2a-flow-v1782996873047\\\", \\\"node_ref\\\": \\\"metadata\\\", \\\"node_id\\\": \\\"youtube-metadata-fetch-a2a\\\", \\\"input\\\": {\\\"source_url\\\": \\\"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\\\", \\\"instruction\\\": \\\"Auto gateway real-with-fallback smoke.\\\"}}'\"\n}\n",
+            "preview_truncated": false
+          }
+        ],
+        "diagnostics": {
+          "manifest_has_outputs": false,
+          "manifest_item_count": 0,
+          "manifest_output_file_count": 0,
+          "declared_output_count": 3
+        }
+      },
+      "input_directory": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources",
+      "input_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources/manifest.json",
+      "output_directory": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs",
+      "output_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json",
+      "validation": {
+        "status": "passed",
+        "missing_outputs": [],
+        "unexpected_outputs": [],
+        "business_output_status": {
+          "status": "missing_business_outputs",
+          "expected_outputs": [
+            "metadata_json",
+            "source_url_txt",
+            "result_json"
+          ],
+          "required_outputs": [],
+          "present_outputs": [],
+          "missing_required_outputs": [],
+          "business_outputs": {},
+          "business_artifact_count": 0
+        },
+        "success_evidence": {
+          "passed": false,
+          "signals": [],
+          "failures": []
+        }
+      },
+      "business_output_status": {
+        "status": "missing_business_outputs",
+        "expected_outputs": [
+          "metadata_json",
+          "source_url_txt",
+          "result_json"
+        ],
+        "required_outputs": [],
+        "present_outputs": [],
+        "missing_required_outputs": [],
+        "business_outputs": {},
+        "business_artifact_count": 0
+      },
+      "capabilities": {},
+      "agent_request": {
+        "rendered_request": "",
+        "executor": "codex",
+        "receipt": {
+          "version": 1,
+          "executor": "codex",
+          "selected_agent_runtime": "codex",
+          "requested_skill": "youtube-metadata-fetch",
+          "executed_skill": "youtube-metadata-fetch",
+          "node_id": "youtube-metadata-fetch-a2a",
+          "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+          "request_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+          "status": "failed",
+          "returncode": 1,
+          "timed_out": false,
+          "validation": {
+            "status": "passed",
+            "missing_outputs": [],
+            "unexpected_outputs": [],
+            "business_output_status": {
+              "status": "missing_business_outputs",
+              "expected_outputs": [
+                "metadata_json",
+                "source_url_txt",
+                "result_json"
+              ],
+              "required_outputs": [],
+              "present_outputs": [],
+              "missing_required_outputs": [],
+              "business_outputs": {},
+              "business_artifact_count": 0
+            },
+            "success_evidence": {
+              "passed": false,
+              "signals": [],
+              "failures": []
+            }
+          },
+          "business_output_status": {
+            "status": "missing_business_outputs",
+            "expected_outputs": [
+              "metadata_json",
+              "source_url_txt",
+              "result_json"
+            ],
+            "required_outputs": [],
+            "present_outputs": [],
+            "missing_required_outputs": [],
+            "business_outputs": {},
+            "business_artifact_count": 0
+          },
+          "input_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources/manifest.json",
+          "output_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json",
+          "started_at": "2026-07-02T13:44:13.605776+00:00",
+          "finished_at": "2026-07-02T13:44:13.608658+00:00",
+          "legacy_fallback": false,
+          "error": "[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}'"
+        }
+      },
+      "detail": {
+        "executor": "codex",
+        "command": [],
+        "stage_command": [],
+        "returncode": 1,
+        "timeout_seconds": 1500,
+        "timed_out": false,
+        "log_path": "/root/wiki/wiki-sop-new-instance/raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/executor.log",
+        "context_path": "/root/wiki/wiki-sop-new-instance/raw/pipeline-context.json",
+        "context": {},
+        "stdout_tail": "",
+        "stderr_tail": "[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}'",
+        "input_resolution_error": {},
+        "agent_request": {
+          "rendered_request": "",
+          "receipt": {
+            "version": 1,
+            "executor": "codex",
+            "selected_agent_runtime": "codex",
+            "requested_skill": "youtube-metadata-fetch",
+            "executed_skill": "youtube-metadata-fetch",
+            "node_id": "youtube-metadata-fetch-a2a",
+            "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+            "request_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+            "status": "failed",
+            "returncode": 1,
+            "timed_out": false,
+            "validation": {
+              "status": "passed",
+              "missing_outputs": [],
+              "unexpected_outputs": [],
+              "business_output_status": {
+                "status": "missing_business_outputs",
+                "expected_outputs": [
+                  "metadata_json",
+                  "source_url_txt",
+                  "result_json"
+                ],
+                "required_outputs": [],
+                "present_outputs": [],
+                "missing_required_outputs": [],
+                "business_outputs": {},
+                "business_artifact_count": 0
+              },
+              "success_evidence": {
+                "passed": false,
+                "signals": [],
+                "failures": []
+              }
+            },
+            "business_output_status": {
+              "status": "missing_business_outputs",
+              "expected_outputs": [
+                "metadata_json",
+                "source_url_txt",
+                "result_json"
+              ],
+              "required_outputs": [],
+              "present_outputs": [],
+              "missing_required_outputs": [],
+              "business_outputs": {},
+              "business_artifact_count": 0
+            },
+            "input_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources/manifest.json",
+            "output_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json",
+            "started_at": "2026-07-02T13:44:13.605776+00:00",
+            "finished_at": "2026-07-02T13:44:13.608658+00:00",
+            "legacy_fallback": false,
+            "error": "[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}'"
+          }
+        },
+        "node_state": {},
+        "capabilities": {},
+        "actual_outputs": {
+          "metadata_json": [],
+          "source_url_txt": [],
+          "result_json": []
+        },
+        "core_outputs": [
+          {
+            "name": "metadata_json",
+            "kind": "files",
+            "type": "file",
+            "value": [],
+            "files": [],
+            "artifacts": [],
+            "declared": {
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "relayable": true,
+              "path": "raw/node-runs/{run_id}/outputs/metadata.json",
+              "fields": {
+                "resolved_path": {
+                  "type": "string",
+                  "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json"
+                },
+                "absolute_path": {
+                  "type": "string",
+                  "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/metadata.json"
+                },
+                "size_bytes": {
+                  "type": "integer",
+                  "sample": 517
+                },
+                "relayable": {
+                  "type": "boolean",
+                  "sample": true
+                },
+                "description": {
+                  "type": "string",
+                  "sample": "Normalized YouTube metadata JSON."
+                }
+              }
+            }
+          },
+          {
+            "name": "source_url_txt",
+            "kind": "files",
+            "type": "file",
+            "value": [],
+            "files": [],
+            "artifacts": [],
+            "declared": {
+              "kind": "file",
+              "type": "file",
+              "value_type": "url",
+              "relayable": true,
+              "path": "raw/node-runs/{run_id}/outputs/source-url.txt",
+              "fields": {
+                "resolved_path": {
+                  "type": "string",
+                  "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt"
+                },
+                "absolute_path": {
+                  "type": "string",
+                  "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/source-url.txt"
+                },
+                "size_bytes": {
+                  "type": "integer",
+                  "sample": 44
+                },
+                "relayable": {
+                  "type": "boolean",
+                  "sample": true
+                },
+                "description": {
+                  "type": "string",
+                  "sample": "Echoed source URL."
+                }
+              }
+            }
+          },
+          {
+            "name": "result_json",
+            "kind": "files",
+            "type": "file",
+            "value": [],
+            "files": [],
+            "artifacts": [],
+            "declared": {
+              "kind": "file",
+              "type": "file",
+              "value_type": "json",
+              "relayable": true,
+              "path": "raw/node-runs/{run_id}/outputs/result.json",
+              "fields": {
+                "resolved_path": {
+                  "type": "string",
+                  "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json"
+                },
+                "absolute_path": {
+                  "type": "string",
+                  "sample": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260701T105316-2929af/outputs/result.json"
+                },
+                "size_bytes": {
+                  "type": "integer",
+                  "sample": 815
+                },
+                "relayable": {
+                  "type": "boolean",
+                  "sample": true
+                },
+                "description": {
+                  "type": "string",
+                  "sample": "Skill execution result JSON."
+                }
+              }
+            }
+          }
+        ],
+        "relay_package": {
+          "kind": "relay-package",
+          "output_directory": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs",
+          "manifest_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json",
+          "item_count": 0,
+          "items": []
+        },
+        "execution_evidence": {
+          "artifacts": [
+            {
+              "id": "85299a7648ecca28",
+              "producer": "youtube-metadata-fetch-a2a",
+              "output": "agent_receipt",
+              "type": "node-run.agent.receipt",
+              "format": "json",
+              "path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/agent/receipt.json",
+              "title": "Agent Execution Receipt",
+              "size": 2283,
+              "mime_type": "application/json",
+              "tags": [],
+              "metadata": {},
+              "resolution": "node-run-agent",
+              "preview": "{\n  \"version\": 1,\n  \"executor\": \"codex\",\n  \"selected_agent_runtime\": \"codex\",\n  \"requested_skill\": \"youtube-metadata-fetch\",\n  \"executed_skill\": \"youtube-metadata-fetch\",\n  \"node_id\": \"youtube-metadata-fetch-a2a\",\n  \"node_run_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"request_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"status\": \"failed\",\n  \"returncode\": 1,\n  \"timed_out\": false,\n  \"validation\": {\n    \"status\": \"passed\",\n    \"missing_outputs\": [],\n    \"unexpected_outputs\": [],\n    \"business_output_status\": {\n      \"status\": \"missing_business_outputs\",\n      \"expected_outputs\": [\n        \"metadata_json\",\n        \"source_url_txt\",\n        \"result_json\"\n      ],\n      \"required_outputs\": [],\n      \"present_outputs\": [],\n      \"missing_required_outputs\": [],\n      \"business_outputs\": {},\n      \"business_artifact_count\": 0\n    },\n    \"success_evidence\": {\n      \"passed\": false,\n      \"signals\": [],\n      \"failures\": []\n    }\n  },\n  \"business_output_status\": {\n    \"status\": \"missing_business_outputs\",\n    \"expected_outputs\": [\n      \"metadata_json\",\n      \"source_url_txt\",\n      \"result_json\"\n    ],\n    \"required_outputs\": [],\n    \"present_outputs\": [],\n    \"missing_required_outputs\": [],\n    \"business_outputs\": {},\n    \"business_artifact_count\": 0\n  },\n  \"input_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources/manifest.json\",\n  \"output_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json\",\n  \"started_at\": \"2026-07-02T13:44:13.605776+00:00\",\n  \"finished_at\": \"2026-07-02T13:44:13.608658+00:00\",\n  \"legacy_fallback\": false,\n  \"error\": \"[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\\\n{\\\"run_id\\\": \\\"youtube-research-a2a-flow-run-real-1782999845\\\", \\\"workflow_id\\\": \\\"youtube-research-a2a-flow\\\", \\\"workflow_version_id\\\": \\\"youtube-research-a2a-flow-v1782996873047\\\", \\\"node_ref\\\": \\\"metadata\\\", \\\"node_id\\\": \\\"youtube-metadata-fetch-a2a\\\", \\\"input\\\": {\\\"source_url\\\": \\\"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\\\", \\\"instruction\\\": \\\"Auto gateway real-with-fallback smoke.\\\"}}'\"\n}\n",
+              "preview_truncated": false
+            },
+            {
+              "id": "d4da660cf3afff18",
+              "producer": "youtube-metadata-fetch-a2a",
+              "output": "executor_log",
+              "type": "file",
+              "format": "log",
+              "path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/executor.log",
+              "title": "Executor Log",
+              "size": 539,
+              "mime_type": "application/octet-stream",
+              "tags": [],
+              "metadata": {},
+              "resolution": "execution-evidence",
+              "preview": "[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"metadata\", \"node_id\": \"youtube-metadata-fetch-a2a\", \"input\": {\"source_url\": \"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}'",
+              "preview_truncated": false
+            }
+          ],
+          "count": 2
+        },
+        "output_categories": {
+          "core_outputs": {
+            "title": "核心输出",
+            "description": "节点声明 outputs 对应的业务结果。",
+            "files": [],
+            "count": 0
+          },
+          "raw_files": {
+            "title": "节点原始文件",
+            "description": "节点 Skill/Worker 产生的原始响应、字幕和中间文件。",
+            "files": [],
+            "count": 0
+          },
+          "run_records": {
+            "title": "运行记录",
+            "description": "Node Run 工作台、事件、状态和 capability 记录。",
+            "files": [
+              "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/executor.log"
+            ],
+            "count": 1
+          },
+          "node_run_outputs": {
+            "title": "统一输出目录",
+            "description": "本次 Node Run 写入标准 outputs 目录的可中继产物，供下游节点作为目录输入。",
+            "files": [],
+            "count": 0
+          }
+        },
+        "node_run_result": {
+          "schema": "node-run-result/v1",
+          "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf",
+          "node_id": "youtube-metadata-fetch-a2a",
+          "status": "unknown",
+          "success_evidence": {
+            "passed": false,
+            "signals": [],
+            "failures": []
+          },
+          "output_space": {
+            "outputs_dir": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs",
+            "manifest_path": ""
+          },
+          "named_outputs": {},
+          "actual_outputs": {
+            "metadata_json": [],
+            "source_url_txt": [],
+            "result_json": []
+          },
+          "artifacts": [
+            {
+              "id": "85299a7648ecca28",
+              "producer": "youtube-metadata-fetch-a2a",
+              "output": "agent_receipt",
+              "type": "node-run.agent.receipt",
+              "format": "json",
+              "path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/agent/receipt.json",
+              "title": "Agent Execution Receipt",
+              "size": 2283,
+              "mime_type": "application/json",
+              "tags": [],
+              "metadata": {},
+              "resolution": "node-run-agent",
+              "preview": "{\n  \"version\": 1,\n  \"executor\": \"codex\",\n  \"selected_agent_runtime\": \"codex\",\n  \"requested_skill\": \"youtube-metadata-fetch\",\n  \"executed_skill\": \"youtube-metadata-fetch\",\n  \"node_id\": \"youtube-metadata-fetch-a2a\",\n  \"node_run_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"request_id\": \"node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf\",\n  \"status\": \"failed\",\n  \"returncode\": 1,\n  \"timed_out\": false,\n  \"validation\": {\n    \"status\": \"passed\",\n    \"missing_outputs\": [],\n    \"unexpected_outputs\": [],\n    \"business_output_status\": {\n      \"status\": \"missing_business_outputs\",\n      \"expected_outputs\": [\n        \"metadata_json\",\n        \"source_url_txt\",\n        \"result_json\"\n      ],\n      \"required_outputs\": [],\n      \"present_outputs\": [],\n      \"missing_required_outputs\": [],\n      \"business_outputs\": {},\n      \"business_artifact_count\": 0\n    },\n    \"success_evidence\": {\n      \"passed\": false,\n      \"signals\": [],\n      \"failures\": []\n    }\n  },\n  \"business_output_status\": {\n    \"status\": \"missing_business_outputs\",\n    \"expected_outputs\": [\n      \"metadata_json\",\n      \"source_url_txt\",\n      \"result_json\"\n    ],\n    \"required_outputs\": [],\n    \"present_outputs\": [],\n    \"missing_required_outputs\": [],\n    \"business_outputs\": {},\n    \"business_artifact_count\": 0\n  },\n  \"input_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/inputs/sources/manifest.json\",\n  \"output_manifest\": \"raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T134411-894aaf/outputs/manifest.json\",\n  \"started_at\": \"2026-07-02T13:44:13.605776+00:00\",\n  \"finished_at\": \"2026-07-02T13:44:13.608658+00:00\",\n  \"legacy_fallback\": false,\n  \"error\": \"[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Metadata Fetch.\\\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\\\n{\\\"run_id\\\": \\\"youtube-research-a2a-flow-run-real-1782999845\\\", \\\"workflow_id\\\": \\\"youtube-research-a2a-flow\\\", \\\"workflow_version_id\\\": \\\"youtube-research-a2a-flow-v1782996873047\\\", \\\"node_ref\\\": \\\"metadata\\\", \\\"node_id\\\": \\\"youtube-metadata-fetch-a2a\\\", \\\"input\\\": {\\\"source_url\\\": \\\"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\\\", \\\"instruction\\\": \\\"Auto gateway real-with-fallback smoke.\\\"}}'\"\n}\n",
+              "preview_truncated": false
+            }
+          ],
+          "diagnostics": {
+            "manifest_has_outputs": false,
+            "manifest_item_count": 0,
+            "manifest_output_file_count": 0,
+            "declared_output_count": 3
+          }
+        },
+        "validation": {
+          "status": "passed",
+          "missing_outputs": [],
+          "unexpected_outputs": [],
+          "business_output_status": {
+            "status": "missing_business_outputs",
+            "expected_outputs": [
+              "metadata_json",
+              "source_url_txt",
+              "result_json"
+            ],
+            "required_outputs": [],
+            "present_outputs": [],
+            "missing_required_outputs": [],
+            "business_outputs": {},
+            "business_artifact_count": 0
+          },
+          "success_evidence": {
+            "passed": false,
+            "signals": [],
+            "failures": []
+          }
+        },
+        "business_output_status": {
+          "status": "missing_business_outputs",
+          "expected_outputs": [
+            "metadata_json",
+            "source_url_txt",
+            "result_json"
+          ],
+          "required_outputs": [],
+          "present_outputs": [],
+          "missing_required_outputs": [],
+          "business_outputs": {},
+          "business_artifact_count": 0
+        }
+      }
+    }
+  }
+}
