@@ -1,0 +1,89 @@
+{
+  "mode": "real-node",
+  "input_source": "manual",
+  "manual_inputs": {
+    "prompt": "写一篇中文分析文章。"
+  },
+  "source_node_run_id": "",
+  "relay_mode": "",
+  "selected_outputs": [],
+  "relay_mappings": [],
+  "relay_instruction": "",
+  "sync": true,
+  "a2a": {
+    "protocol_version": "1.0",
+    "message": {
+      "messageId": "msg-article-2",
+      "role": "user",
+      "parts": [
+        {
+          "content": {
+            "$case": "text",
+            "value": "Write an article from this material."
+          },
+          "text": "Write an article from this material.",
+          "mediaType": "text/plain",
+          "filename": "instruction.txt"
+        },
+        {
+          "content": {
+            "$case": "data",
+            "value": {
+              "input": {
+                "prompt": "写一篇中文分析文章。"
+              }
+            }
+          },
+          "data": {
+            "input": {
+              "prompt": "写一篇中文分析文章。"
+            }
+          },
+          "mediaType": "application/json",
+          "filename": "workflow-context.json"
+        },
+        {
+          "content": {
+            "$case": "text",
+            "value": "# 研究材料\n这里是测试材料。"
+          },
+          "text": "# 研究材料\n这里是测试材料。",
+          "mediaType": "text/markdown",
+          "filename": "materials.md"
+        }
+      ]
+    },
+    "metadata": {},
+    "relay": {
+      "source_node_run_id": "",
+      "relay_mode": "",
+      "selected_outputs": [],
+      "relay_mappings": [],
+      "relay_instruction": ""
+    }
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run",
+      "paths": []
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run"
+    }
+  },
+  "_definition_scope_reports": {
+    "instance_override": {
+      "status": "unchanged",
+      "changed": {}
+    },
+    "project_default_request": {
+      "status": "skipped"
+    }
+  }
+}
