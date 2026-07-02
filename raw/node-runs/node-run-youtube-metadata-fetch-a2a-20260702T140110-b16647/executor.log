@@ -1,0 +1,76 @@
+Reading additional input from stdin...
+2026-07-02T14:01:14.557451Z ERROR codex_models_manager::manager: failed to refresh available models: unexpected status 401 Unauthorized: Your authentication token has been invalidated. Please try signing in again., url: https://chatgpt.com/backend-api/codex/models?client_version=0.142.4, cf-ray: a14e2e695a5e49aa-EWR, auth error: 401, auth error code: token_invalidated
+2026-07-02T14:01:14.623541Z ERROR codex_models_manager::manager: failed to refresh available models: unexpected status 401 Unauthorized: Your authentication token has been invalidated. Please try signing in again., url: https://chatgpt.com/backend-api/codex/models?client_version=0.142.4, cf-ray: a14e2e6a1b378186-EWR, auth error: 401, auth error code: token_invalidated
+OpenAI Codex v0.142.4
+--------
+workdir: /root/wiki/wiki-sop-new-instance
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: danger-full-access
+reasoning effort: xhigh
+reasoning summaries: none
+session id: 019f2322-3e85-7c10-a6b5-b5f6a5acbd31
+--------
+user
+Use skill youtube-metadata-fetch to execute this Node Execution Request.
+
+# Node Execution Request
+
+Runtime context:
+- runtime_id: runtime-206-189-196-65
+- instance_id: agent-runtime-codex-smoke
+- workflow_id: youtube-research-wiki
+- node_id: youtube-metadata-fetch-a2a
+- node_run_id: node-run-youtube-metadata-fetch-a2a-20260702T140110-b16647
+
+Input contract:
+- entry_inputs: {
+  "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc"
+}
+- input_manifest_path: raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T140110-b16647/inputs/sources/manifest.json
+- input_directory: raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T140110-b16647/inputs/sources
+- source_url: https://www.youtube.com/watch?v=Ahfe-BW1cFc
+- Only use files listed in the input manifest unless the selected skill already has a stricter rule.
+
+Relay context:
+No upstream relay context was provided for this run.
+
+Approved Edge Handoff Guide:
+No approved Edge Handoff Guide was resolved for this run.
+
+Output contract:
+- output_directory: raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T140110-b16647/outputs
+- output_manifest_path: raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T140110-b16647/outputs/manifest.json
+- receipt_path: raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T140110-b16647/agent/receipt.json
+- Do not report success unless the declared output manifest and receipt are written or the runtime wrapper writes equivalent state that the adapter can verify.
+
+Execution command:
+```bash
+
+```
+If the execution command is empty, execute the selected skill directly from this request: read entry_inputs, input_directory, input_manifest and the approved handoff guide, then write outputs to output_directory and output_manifest_path.
+
+
+Execution rules:
+- Use the selected skill only: youtube-metadata-fetch.
+- Run the command from the Instance workspace unless the skill has an equivalent deterministic wrapper.
+- Preserve the provided environment variables.
+- Do not invent paths.
+- If execution fails, return the failure and include stderr/log guidance.
+
+2026-07-02T14:01:15.055190Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when UnexpectedServerResponse("HTTP 401: {\n  \"error\": {\n    \"message\": \"Your authentication token has been invalidated. Please try signing in again.\",\n    \"type\": \"invalid_request_error\",\n    \"code\": \"token_invalidated\",\n    \"param\": null\n  },\n  \"status\": 401\n}")
+2026-07-02T14:01:15.411659Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 401 Unauthorized, url: wss://chatgpt.com/backend-api/codex/responses
+2026-07-02T14:01:15.640575Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 401 Unauthorized, url: wss://chatgpt.com/backend-api/codex/responses
+2026-07-02T14:01:15.720101Z ERROR codex_login::auth::manager: Failed to refresh token: 401 Unauthorized: {
+  "error": {
+    "message": "Your session has ended. Please log in again.",
+    "type": "invalid_request_error",
+    "param": null,
+    "code": "refresh_token_invalidated"
+  }
+}
+2026-07-02T14:01:15.916514Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 401 Unauthorized, url: wss://chatgpt.com/backend-api/codex/responses
+2026-07-02T14:01:16.143898Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 401 Unauthorized, url: wss://chatgpt.com/backend-api/codex/responses
+ERROR: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
+ERROR: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.
