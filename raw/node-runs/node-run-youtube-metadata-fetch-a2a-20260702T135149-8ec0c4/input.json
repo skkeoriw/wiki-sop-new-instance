@@ -1,0 +1,82 @@
+{
+  "mode": "real-node",
+  "input_source": "manual",
+  "manual_inputs": {
+    "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc"
+  },
+  "source_node_run_id": "",
+  "relay_mode": "",
+  "selected_outputs": [],
+  "relay_mappings": [],
+  "relay_instruction": "",
+  "sync": true,
+  "a2a": {
+    "protocol_version": "1.0",
+    "message": {
+      "messageId": "msg-metadata-2",
+      "role": "user",
+      "parts": [
+        {
+          "content": {
+            "$case": "text",
+            "value": "Fetch metadata for the provided video."
+          },
+          "text": "Fetch metadata for the provided video.",
+          "mediaType": "text/plain",
+          "filename": "instruction.txt"
+        },
+        {
+          "content": {
+            "$case": "data",
+            "value": {
+              "input": {
+                "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+                "instruction": "A2A input mapping smoke."
+              }
+            }
+          },
+          "data": {
+            "input": {
+              "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+              "instruction": "A2A input mapping smoke."
+            }
+          },
+          "mediaType": "application/json",
+          "filename": "workflow-context.json"
+        }
+      ]
+    },
+    "metadata": {},
+    "relay": {
+      "source_node_run_id": "",
+      "relay_mode": "",
+      "selected_outputs": [],
+      "relay_mappings": [],
+      "relay_instruction": ""
+    }
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run",
+      "paths": []
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run"
+    }
+  },
+  "_definition_scope_reports": {
+    "instance_override": {
+      "status": "unchanged",
+      "changed": {}
+    },
+    "project_default_request": {
+      "status": "skipped"
+    }
+  }
+}

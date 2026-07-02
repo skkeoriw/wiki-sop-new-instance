@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "executor": "codex",
+  "selected_agent_runtime": "codex",
+  "requested_skill": "youtube-metadata-fetch",
+  "executed_skill": "youtube-metadata-fetch",
+  "node_id": "youtube-metadata-fetch-a2a",
+  "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T135149-8ec0c4",
+  "request_id": "node-run-youtube-metadata-fetch-a2a-20260702T135149-8ec0c4",
+  "status": "failed",
+  "returncode": 1,
+  "timed_out": false,
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "missing_business_outputs",
+      "expected_outputs": [
+        "metadata_json",
+        "source_url_txt",
+        "result_json"
+      ],
+      "required_outputs": [],
+      "present_outputs": [],
+      "missing_required_outputs": [],
+      "business_outputs": {},
+      "business_artifact_count": 0
+    },
+    "success_evidence": {
+      "passed": false,
+      "signals": [],
+      "failures": []
+    }
+  },
+  "business_output_status": {
+    "status": "missing_business_outputs",
+    "expected_outputs": [
+      "metadata_json",
+      "source_url_txt",
+      "result_json"
+    ],
+    "required_outputs": [],
+    "present_outputs": [],
+    "missing_required_outputs": [],
+    "business_outputs": {},
+    "business_artifact_count": 0
+  },
+  "input_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T135149-8ec0c4/inputs/sources/manifest.json",
+  "output_manifest": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T135149-8ec0c4/outputs/manifest.json",
+  "started_at": "2026-07-02T13:51:51.916464+00:00",
+  "finished_at": "2026-07-02T13:51:55.054425+00:00",
+  "legacy_fallback": false,
+  "error": " websocket: HTTP error: 401 Unauthorized, url: wss://chatgpt.com/backend-api/codex/responses\n2026-07-02T13:51:54.581566Z ERROR codex_login::auth::manager: Failed to refresh token: 401 Unauthorized: {\n  \"error\": {\n    \"message\": \"Your session has ended. Please log in again.\",\n    \"type\": \"invalid_request_error\",\n    \"param\": null,\n    \"code\": \"refresh_token_invalidated\"\n  }\n}\n2026-07-02T13:51:54.770553Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 401 Unauthorized, url: wss://chatgpt.com/backend-api/codex/responses\n2026-07-02T13:51:54.999186Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 401 Unauthorized, url: wss://chatgpt.com/backend-api/codex/responses\nERROR: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.\nERROR: Your access token could not be refreshed because your refresh token was revoked. Please log out and sign in again.\n"
+}
