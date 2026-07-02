@@ -1,0 +1,59 @@
+{
+  "mode": "real-node",
+  "input_source": "manual",
+  "manual_inputs": {
+    "prompt": "写一篇中文分析文章。"
+  },
+  "source_node_run_id": "",
+  "relay_mode": "",
+  "selected_outputs": [],
+  "relay_mappings": [],
+  "relay_instruction": "",
+  "sync": true,
+  "a2a": {
+    "protocol_version": "1.0",
+    "message": {
+      "messageId": "msg-article-debug",
+      "role": "user",
+      "parts": [
+        {
+          "text": "写一篇中文分析文章。",
+          "mediaType": "text/plain",
+          "filename": "instruction.txt"
+        }
+      ]
+    },
+    "metadata": {},
+    "relay": {
+      "source_node_run_id": "",
+      "relay_mode": "",
+      "selected_outputs": [],
+      "relay_mappings": [],
+      "relay_instruction": ""
+    }
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run",
+      "paths": []
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run"
+    }
+  },
+  "_definition_scope_reports": {
+    "instance_override": {
+      "status": "unchanged",
+      "changed": {}
+    },
+    "project_default_request": {
+      "status": "skipped"
+    }
+  }
+}
