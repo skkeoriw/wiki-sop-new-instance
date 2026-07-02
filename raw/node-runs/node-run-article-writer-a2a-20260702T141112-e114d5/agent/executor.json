@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "executor": "codex",
+  "requested_skill": "article-writer",
+  "node_id": "article-writer-a2a",
+  "node_run_id": "node-run-article-writer-a2a-20260702T141112-e114d5",
+  "runtime_id": "runtime-206-189-196-65",
+  "instance_id": "agent-runtime-codex-smoke",
+  "workflow_id": "youtube-research-wiki",
+  "template_source": "default",
+  "template_version": "agent-runtime-executor.v1",
+  "selected_agent_runtime": "codex",
+  "request_path": "raw/node-runs/node-run-article-writer-a2a-20260702T141112-e114d5/agent/request.md",
+  "response_path": "raw/node-runs/node-run-article-writer-a2a-20260702T141112-e114d5/agent/response.txt",
+  "receipt_path": "raw/node-runs/node-run-article-writer-a2a-20260702T141112-e114d5/agent/receipt.json",
+  "input_manifest_path": "raw/node-runs/node-run-article-writer-a2a-20260702T141112-e114d5/inputs/sources/manifest.json",
+  "output_manifest_path": "raw/node-runs/node-run-article-writer-a2a-20260702T141112-e114d5/outputs/manifest.json",
+  "node_execution_guide": {},
+  "stage_command": [],
+  "stage_command_preview": "",
+  "created_at": "2026-07-02T14:11:15.570037+00:00"
+}
