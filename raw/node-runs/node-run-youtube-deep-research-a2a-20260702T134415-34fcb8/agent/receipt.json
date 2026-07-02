@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "executor": "codex",
+  "selected_agent_runtime": "codex",
+  "requested_skill": "youtube-deep-research",
+  "executed_skill": "youtube-deep-research",
+  "node_id": "youtube-deep-research-a2a",
+  "node_run_id": "node-run-youtube-deep-research-a2a-20260702T134415-34fcb8",
+  "request_id": "node-run-youtube-deep-research-a2a-20260702T134415-34fcb8",
+  "status": "failed",
+  "returncode": 1,
+  "timed_out": false,
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "missing_business_outputs",
+      "expected_outputs": [
+        "analysis_md",
+        "transcript_txt",
+        "result_json",
+        "status_json",
+        "worker_analysis_md"
+      ],
+      "required_outputs": [],
+      "present_outputs": [],
+      "missing_required_outputs": [],
+      "business_outputs": {},
+      "business_artifact_count": 0
+    },
+    "success_evidence": {
+      "passed": false,
+      "signals": [],
+      "failures": []
+    }
+  },
+  "business_output_status": {
+    "status": "missing_business_outputs",
+    "expected_outputs": [
+      "analysis_md",
+      "transcript_txt",
+      "result_json",
+      "status_json",
+      "worker_analysis_md"
+    ],
+    "required_outputs": [],
+    "present_outputs": [],
+    "missing_required_outputs": [],
+    "business_outputs": {},
+    "business_artifact_count": 0
+  },
+  "input_manifest": "raw/node-runs/node-run-youtube-deep-research-a2a-20260702T134415-34fcb8/inputs/sources/manifest.json",
+  "output_manifest": "raw/node-runs/node-run-youtube-deep-research-a2a-20260702T134415-34fcb8/outputs/manifest.json",
+  "started_at": "2026-07-02T13:44:18.097305+00:00",
+  "finished_at": "2026-07-02T13:44:18.099373+00:00",
+  "legacy_fallback": false,
+  "error": "[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/Execute workflow node: YouTube Deep Research.\\nWorkflow instruction: Auto gateway real-with-fallback smoke.\\n{\"run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"workflow_id\": \"youtube-research-a2a-flow\", \"workflow_version_id\": \"youtube-research-a2a-flow-v1782996873047\", \"node_ref\": \"research\", \"node_id\": \"youtube-deep-research-a2a\", \"input\": {\"source_url\": \"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\", \"instruction\": \"Auto gateway real-with-fallback smoke.\"}}\\n{\"node_id\": \"youtube-metadata-fetch-a2a\", \"node_ref\": \"metadata\", \"workflow_run_id\": \"youtube-research-a2a-flow-run-real-1782999845\", \"generated_at\": \"2026-07-02T13:44:15.136Z\", \"upstream_artifacts\": [], \"title\": \"A2A Workflow Smoke Video\", \"source_url\": \"https:/www.youtube.com/watch?v=Ahfe-BW1cFc\", \"status\": \"succeeded\"}\\nhttps:/www.youtube.com/watch?v=Ahfe-BW1cFc'"
+}
