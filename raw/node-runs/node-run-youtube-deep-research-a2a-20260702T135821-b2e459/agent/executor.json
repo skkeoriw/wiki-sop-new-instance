@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "executor": "codex",
+  "requested_skill": "youtube-deep-research",
+  "node_id": "youtube-deep-research-a2a",
+  "node_run_id": "node-run-youtube-deep-research-a2a-20260702T135821-b2e459",
+  "runtime_id": "runtime-206-189-196-65",
+  "instance_id": "agent-runtime-codex-smoke",
+  "workflow_id": "youtube-research-wiki",
+  "template_source": "default",
+  "template_version": "agent-runtime-executor.v1",
+  "selected_agent_runtime": "codex",
+  "request_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260702T135821-b2e459/agent/request.md",
+  "response_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260702T135821-b2e459/agent/response.txt",
+  "receipt_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260702T135821-b2e459/agent/receipt.json",
+  "input_manifest_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260702T135821-b2e459/inputs/sources/manifest.json",
+  "output_manifest_path": "raw/node-runs/node-run-youtube-deep-research-a2a-20260702T135821-b2e459/outputs/manifest.json",
+  "node_execution_guide": {},
+  "stage_command": [],
+  "stage_command_preview": "",
+  "created_at": "2026-07-02T13:58:25.250735+00:00"
+}
