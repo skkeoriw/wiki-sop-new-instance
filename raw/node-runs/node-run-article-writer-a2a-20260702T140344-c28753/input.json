@@ -1,0 +1,165 @@
+{
+  "mode": "real-node",
+  "input_source": "manual",
+  "manual_inputs": {
+    "prompt": "根据上游 YouTube 元数据和深度研究材料，写一篇结构清晰的中文分析文章。"
+  },
+  "source_node_run_id": "",
+  "relay_mode": "",
+  "selected_outputs": [],
+  "relay_mappings": [],
+  "relay_instruction": "",
+  "sync": true,
+  "a2a": {
+    "protocol_version": "1.0",
+    "message": {
+      "messageId": "msg-youtube-research-a2a-flow-run-95check-1783001004-article",
+      "role": "user",
+      "parts": [
+        {
+          "content": {
+            "$case": "text",
+            "value": "Execute workflow node: Article Writer.\nWorkflow instruction: 根据上游 YouTube 元数据和深度研究材料，写一篇结构清晰的中文分析文章。"
+          },
+          "text": "Execute workflow node: Article Writer.\nWorkflow instruction: 根据上游 YouTube 元数据和深度研究材料，写一篇结构清晰的中文分析文章。",
+          "mediaType": "text/plain",
+          "media_type": "text/plain",
+          "filename": "workflow-instruction.txt",
+          "metadata": {}
+        },
+        {
+          "content": {
+            "$case": "data",
+            "value": {
+              "run_id": "youtube-research-a2a-flow-run-95check-1783001004",
+              "workflow_id": "youtube-research-a2a-flow",
+              "workflow_version_id": "youtube-research-a2a-flow-v1782996873047",
+              "node_ref": "article",
+              "node_id": "article-writer-a2a",
+              "input": {
+                "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+                "instruction": "根据上游 YouTube 元数据和深度研究材料，写一篇结构清晰的中文分析文章。"
+              },
+              "manual_inputs": {
+                "prompt": "根据上游 YouTube 元数据和深度研究材料，写一篇结构清晰的中文分析文章。"
+              }
+            }
+          },
+          "data": {
+            "run_id": "youtube-research-a2a-flow-run-95check-1783001004",
+            "workflow_id": "youtube-research-a2a-flow",
+            "workflow_version_id": "youtube-research-a2a-flow-v1782996873047",
+            "node_ref": "article",
+            "node_id": "article-writer-a2a",
+            "input": {
+              "source_url": "https://www.youtube.com/watch?v=Ahfe-BW1cFc",
+              "instruction": "根据上游 YouTube 元数据和深度研究材料，写一篇结构清晰的中文分析文章。"
+            },
+            "manual_inputs": {
+              "prompt": "根据上游 YouTube 元数据和深度研究材料，写一篇结构清晰的中文分析文章。"
+            }
+          },
+          "mediaType": "application/json",
+          "media_type": "application/json",
+          "filename": "workflow-context.json",
+          "metadata": {}
+        },
+        {
+          "content": {
+            "$case": "text",
+            "value": "# YouTube Deep Research\n\nSynthetic A2A Gateway consumed 2 upstream artifact(s) and produced research notes."
+          },
+          "text": "# YouTube Deep Research\n\nSynthetic A2A Gateway consumed 2 upstream artifact(s) and produced research notes.",
+          "mediaType": "text/plain",
+          "media_type": "text/plain",
+          "filename": "analysis.md",
+          "metadata": {}
+        },
+        {
+          "content": {
+            "$case": "data",
+            "value": {
+              "node_id": "youtube-deep-research-a2a",
+              "node_ref": "research",
+              "workflow_run_id": "youtube-research-a2a-flow-run-95check-1783001004",
+              "generated_at": "2026-07-02T14:03:44.197Z",
+              "upstream_artifacts": [
+                "metadata.json",
+                "source-url.txt"
+              ],
+              "status": "succeeded",
+              "confidence": 0.91
+            }
+          },
+          "data": {
+            "node_id": "youtube-deep-research-a2a",
+            "node_ref": "research",
+            "workflow_run_id": "youtube-research-a2a-flow-run-95check-1783001004",
+            "generated_at": "2026-07-02T14:03:44.197Z",
+            "upstream_artifacts": [
+              "metadata.json",
+              "source-url.txt"
+            ],
+            "status": "succeeded",
+            "confidence": 0.91
+          },
+          "mediaType": "application/json",
+          "media_type": "application/json",
+          "filename": "status.json",
+          "metadata": {}
+        }
+      ],
+      "metadata": {
+        "run_id": "youtube-research-a2a-flow-run-95check-1783001004",
+        "workflow_id": "youtube-research-a2a-flow",
+        "node_ref": "article",
+        "node_id": "article-writer-a2a",
+        "gateway_executor_id": "runtime-206-a2a-gateway",
+        "manual_inputs": {
+          "prompt": "根据上游 YouTube 元数据和深度研究材料，写一篇结构清晰的中文分析文章。"
+        }
+      }
+    },
+    "metadata": {
+      "gateway_executor_id": "runtime-206-a2a-gateway",
+      "run_id": "youtube-research-a2a-flow-run-95check-1783001004",
+      "workflow_id": "youtube-research-a2a-flow",
+      "manual_inputs": {
+        "prompt": "根据上游 YouTube 元数据和深度研究材料，写一篇结构清晰的中文分析文章。"
+      },
+      "node_ref": "article",
+      "node_id": "article-writer-a2a"
+    },
+    "relay": {
+      "source_node_run_id": "",
+      "relay_mode": "",
+      "selected_outputs": [],
+      "relay_mappings": [],
+      "relay_instruction": ""
+    }
+  },
+  "capability_overrides": {
+    "git": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run",
+      "paths": []
+    },
+    "telegram": {
+      "enabled": false,
+      "required": false,
+      "managed_by": "runtime-harness",
+      "save_scope": "run"
+    }
+  },
+  "_definition_scope_reports": {
+    "instance_override": {
+      "status": "unchanged",
+      "changed": {}
+    },
+    "project_default_request": {
+      "status": "skipped"
+    }
+  }
+}
