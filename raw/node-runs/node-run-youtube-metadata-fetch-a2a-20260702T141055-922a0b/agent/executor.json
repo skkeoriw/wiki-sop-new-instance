@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "executor": "codex",
+  "requested_skill": "youtube-metadata-fetch",
+  "node_id": "youtube-metadata-fetch-a2a",
+  "node_run_id": "node-run-youtube-metadata-fetch-a2a-20260702T141055-922a0b",
+  "runtime_id": "runtime-206-189-196-65",
+  "instance_id": "agent-runtime-codex-smoke",
+  "workflow_id": "youtube-research-wiki",
+  "template_source": "default",
+  "template_version": "agent-runtime-executor.v1",
+  "selected_agent_runtime": "codex",
+  "request_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T141055-922a0b/agent/request.md",
+  "response_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T141055-922a0b/agent/response.txt",
+  "receipt_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T141055-922a0b/agent/receipt.json",
+  "input_manifest_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T141055-922a0b/inputs/sources/manifest.json",
+  "output_manifest_path": "raw/node-runs/node-run-youtube-metadata-fetch-a2a-20260702T141055-922a0b/outputs/manifest.json",
+  "node_execution_guide": {},
+  "stage_command": [],
+  "stage_command_preview": "",
+  "created_at": "2026-07-02T14:10:58.702191+00:00"
+}
