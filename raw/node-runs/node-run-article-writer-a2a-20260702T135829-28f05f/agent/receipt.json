@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "executor": "codex",
+  "selected_agent_runtime": "codex",
+  "requested_skill": "article-writer",
+  "executed_skill": "article-writer",
+  "node_id": "article-writer-a2a",
+  "node_run_id": "node-run-article-writer-a2a-20260702T135829-28f05f",
+  "request_id": "node-run-article-writer-a2a-20260702T135829-28f05f",
+  "status": "failed",
+  "returncode": 1,
+  "timed_out": false,
+  "validation": {
+    "status": "passed",
+    "missing_outputs": [],
+    "unexpected_outputs": [],
+    "business_output_status": {
+      "status": "missing_business_outputs",
+      "expected_outputs": [
+        "article_md",
+        "outline_json",
+        "result_json"
+      ],
+      "required_outputs": [],
+      "present_outputs": [],
+      "missing_required_outputs": [],
+      "business_outputs": {},
+      "business_artifact_count": 0
+    },
+    "success_evidence": {
+      "passed": false,
+      "signals": [],
+      "failures": []
+    }
+  },
+  "business_output_status": {
+    "status": "missing_business_outputs",
+    "expected_outputs": [
+      "article_md",
+      "outline_json",
+      "result_json"
+    ],
+    "required_outputs": [],
+    "present_outputs": [],
+    "missing_required_outputs": [],
+    "business_outputs": {},
+    "business_artifact_count": 0
+  },
+  "input_manifest": "raw/node-runs/node-run-article-writer-a2a-20260702T135829-28f05f/inputs/sources/manifest.json",
+  "output_manifest": "raw/node-runs/node-run-article-writer-a2a-20260702T135829-28f05f/outputs/manifest.json",
+  "started_at": "2026-07-02T13:58:31.786525+00:00",
+  "finished_at": "2026-07-02T13:58:31.788401+00:00",
+  "legacy_fallback": false,
+  "error": "[Errno 36] File name too long: '/root/wiki/wiki-sop-new-instance/analysis.md:\\n{\\n  \"text\": \"# YouTube Deep Research\\\\n\\\\nSynthetic A2A Gateway consumed 2 upstream artifact(s) and produced research notes.\"\\n}\\n\\n---\\n\\nanalysis.md:\\n# YouTube Deep Research\\n\\nSynthetic A2A Gateway consumed 2 upstream artifact(s) and produced research notes.\\n\\n---\\n\\nstatus.json:\\n{\\n  \"node_id\": \"youtube-deep-research-a2a\",\\n  \"node_ref\": \"research\",\\n  \"workflow_run_id\": \"youtube-research-a2a-flow-run-article-1783000689\",\\n  \"generated_at\": \"2026-07-02T13:58:28.869Z\",\\n  \"upstream_artifacts\": [\\n    \"metadata.json\",\\n    \"source-url.txt\"\\n  ],\\n  \"status\": \"succeeded\",\\n  \"confidence\": 0.91\\n}'"
+}
